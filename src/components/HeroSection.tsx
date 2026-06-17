@@ -101,11 +101,26 @@ export default function HeroSection() {
         </div>
       ))}
 
-      {/* ═══ Vignette — darker in corners, clear in center ═══ */}
+      {/* ═══ Beautiful multi-layer overlay ═══ */}
+      {/* Layer 1: Bottom-to-top gradient for text readability */}
       <div
         className="absolute inset-0 z-[3]"
         style={{
-          background: 'radial-gradient(ellipse 80% 80% at 50% 40%, transparent 30%, rgba(44,44,44,0.5) 100%)',
+          background: 'linear-gradient(to top, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.25) 40%, rgba(44,44,44,0.1) 60%, rgba(44,44,44,0.3) 100%)',
+        }}
+      />
+      {/* Layer 2: Left-to-right subtle warm tint */}
+      <div
+        className="absolute inset-0 z-[3]"
+        style={{
+          background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 50%)',
+        }}
+      />
+      {/* Layer 3: Vignette — darker corners for depth */}
+      <div
+        className="absolute inset-0 z-[3]"
+        style={{
+          background: 'radial-gradient(ellipse 90% 90% at 50% 50%, transparent 40%, rgba(44,44,44,0.4) 100%)',
         }}
       />
 
