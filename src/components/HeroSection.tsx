@@ -8,10 +8,9 @@ import {
   useGsapFadeIn,
   useGsapScaleIn,
   gsap,
-  ScrollTrigger,
+  
 } from '@/hooks/useGsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
   const setPage = useStore((state) => state.setPage);

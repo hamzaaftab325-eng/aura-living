@@ -7,7 +7,6 @@ import { Instagram, Facebook, Twitter, Send, ArrowRight } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { GoldDivider } from '@/components/SVGDecorations';
 
-gsap.registerPlugin(ScrollTrigger);
 
 /* ═══════════════════════════════════════════════════════════
    PinterestIcon — custom SVG

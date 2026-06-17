@@ -5,7 +5,6 @@ import Lenis from 'lenis';
 import { gsap } from '@/hooks/useGsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export function useLenis() {
   const lenisRef = useRef<Lenis | null>(null);

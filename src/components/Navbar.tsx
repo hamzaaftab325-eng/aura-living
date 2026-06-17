@@ -10,7 +10,7 @@ import {
   User,
   Menu,
   X,
-  ChevronRight,
+  
   ChevronDown,
   ShoppingBag,
   Sparkles,

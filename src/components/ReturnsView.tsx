@@ -1,12 +1,11 @@
 'use client';
 
-import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import { useGsapFadeIn, useGsapStagger,  gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { RotateCcw, CheckCircle, ChevronRight, MessageCircle, XCircle, CreditCard, AlertTriangle, ArrowRight } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 
-gsap.registerPlugin(ScrollTrigger);
 
 const returnSteps = [
   {

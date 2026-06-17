@@ -1,13 +1,12 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Camera, ArrowRight, Sun, UtensilsCrossed, Moon, Flower2 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 
-gsap.registerPlugin(ScrollTrigger);
 
 const scenes = [
   {
@@ -16,8 +15,6 @@ const scenes = [
     description:
       'Warm brass lighting, cream textures, and gold accents create a sanctuary of warmth. Style this space with layered cushions in ivory and champagne, drape a cashmere throw over an accent chair, and let the soft glow of a gold-finished table lamp cast dancing shadows across handwoven rugs. Complete the look with our signature brass candleholders and a curated stack of art books.',
     image: '/images/pages/lookbook-scene-1.webp',
-    icon: Sun,
-    accentColor: 'rgba(212,175,55,0.18)',
   },
   {
     number: '02',
@@ -25,8 +22,6 @@ const scenes = [
     description:
       'Handcrafted ceramics, gold-rimmed glassware, and linen runners set the stage for memorable gatherings. Lay a natural linen runner down the centre of your table, arrange our hand-thrown ceramic serving bowls alongside gold-rimmed crystal glasses, and finish with a woven placemat at each setting. A statement centrepiece of dried pampas grass in a hand-painted vase completes this effortlessly elegant table.',
     image: '/images/pages/lookbook-scene-2.webp',
-    icon: UtensilsCrossed,
-    accentColor: 'rgba(212,175,55,0.14)',
   },
   {
     number: '03',
@@ -34,8 +29,6 @@ const scenes = [
     description:
       'Soft candlelight, delicate vases, and warm textiles transform your bedroom into a peaceful retreat. Layer crisp white sheets with a warm cream quilt, place a cluster of our hand-poured soy candles on the nightstand, and add a single stem in a porcelain bud vase. A textured throw at the foot of the bed and soft gold-framed artwork above create a space that invites rest and reflection.',
     image: '/images/pages/lookbook-scene-3.webp',
-    icon: Moon,
-    accentColor: 'rgba(212,175,55,0.12)',
   },
   {
     number: '04',
@@ -43,8 +36,6 @@ const scenes = [
     description:
       'Lush greenery in gold-rimmed planters brings life and freshness to any corner of your home. Pair our gold-rimmed ceramic planters with trailing pothos and structural snake plants, add a brass watering can as a sculptural accent, and place a natural jute mat beneath. A floating shelf displaying air plants in geometric terrariums adds height and visual interest to this living vignette.',
     image: '/images/pages/lookbook-scene-4.webp',
-    icon: Flower2,
-    accentColor: 'rgba(212,175,55,0.16)',
   },
 ];
 
@@ -170,7 +161,6 @@ export default function LookbookView() {
       <div ref={scenesRef} className="flex flex-col">
         {scenes.map((scene, index) => {
           const isLeft = index % 2 === 0;
-          const SceneIcon = scene.icon;
 
           return (
             <div key={scene.number} className="lookbook-scene">

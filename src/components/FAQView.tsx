@@ -1,13 +1,12 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import { useGsapFadeIn, useGsapStagger,  gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { HelpCircle, ChevronDown, ChevronRight, MessageCircle, ArrowRight } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 
-gsap.registerPlugin(ScrollTrigger);
 
 type FAQCategory = 'all' | 'orders' | 'returns' | 'products' | 'payment';
 

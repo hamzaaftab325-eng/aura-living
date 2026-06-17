@@ -7,7 +7,7 @@ import {
   useGsapBlurText,
   useGsapScaleIn,
   gsap,
-  ScrollTrigger,
+  
 } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
@@ -24,7 +24,6 @@ import {
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 
-gsap.registerPlugin(ScrollTrigger);
 
 /* ═══════════════════════════════════════════════════════════
    Care category data

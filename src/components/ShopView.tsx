@@ -6,7 +6,7 @@ import {
   useGsapBlurText,
   useGsapScaleIn,
   gsap,
-  ScrollTrigger,
+  
 } from '@/hooks/useGsap';
 import {
   ChevronRight,
@@ -20,7 +20,6 @@ import {
 import { useStore, Product, badgeColors } from '@/store/useStore';
 import { products, categories, formatPKR } from '@/data/products';
 
-gsap.registerPlugin(ScrollTrigger);
 
 type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'newest' | 'best-selling';
 

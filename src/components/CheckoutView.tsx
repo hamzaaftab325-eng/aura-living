@@ -1,16 +1,16 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   ChevronRight,
   CreditCard,
   Banknote,
   ShieldCheck,
-  Minus,
-  Plus,
-  Trash2,
+  
+  
+  
   CheckCircle2,
   ArrowRight,
   Truck,
@@ -20,7 +20,6 @@ import { formatPKR } from '@/data/products';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
 
-gsap.registerPlugin(ScrollTrigger);
 
 /* ─── Form Data Types ─── */
 interface CheckoutForm {

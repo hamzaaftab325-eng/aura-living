@@ -1,12 +1,11 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useGsapFadeIn, useGsapStagger, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import { useGsapFadeIn, useGsapStagger, gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { MapPin, Phone, Mail, Clock, MessageCircle, ChevronRight, Send } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 
-gsap.registerPlugin(ScrollTrigger);
 
 /* ═══════════════════════════════════════════════════════════
    AnimatedSection — uses useGsapStagger for children reveal

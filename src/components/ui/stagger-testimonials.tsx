@@ -311,7 +311,6 @@ export const StaggerTestimonials: React.FC = () => {
   // SSR + first client render use a stable default; useLayoutEffect updates before paint
   // so the user never sees the 240px → 365px jump that useEffect caused.
   const [cardSize, setCardSize] = useState(240);
-  const [mounted, setMounted] = useState(false);
   const [testimonialsList, setTestimonialsList] = useState(testimonials);
 
   const handleMove = (steps: number) => {
@@ -364,8 +363,6 @@ export const StaggerTestimonials: React.FC = () => {
     };
 
     updateSize();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
     let resizeTimer: ReturnType<typeof setTimeout>;
     const debouncedResize = () => {
       clearTimeout(resizeTimer);

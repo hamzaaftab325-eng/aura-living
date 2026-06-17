@@ -4,7 +4,6 @@ import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
 
 // GoldDivider — elegant single-line divider with centered diamond
 // Now includes GSAP draw-in animation (scaleX from 0 to 1)

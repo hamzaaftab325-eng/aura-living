@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Minus,
@@ -19,7 +19,6 @@ import { useStore } from '@/store/useStore';
 import { formatPKR } from '@/data/products';
 import PremiumButton from '@/components/ui/PremiumButton';
 
-gsap.registerPlugin(ScrollTrigger);
 
 const paymentMethods = [
   { icon: Banknote, label: 'Cash on Delivery' },

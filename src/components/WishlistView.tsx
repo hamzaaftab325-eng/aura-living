@@ -7,7 +7,7 @@ import {
   useGsapBlurText,
   useGsapScaleIn,
   gsap,
-  ScrollTrigger,
+  
 } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Heart, ShoppingCart, Star, ChevronRight, ShoppingBag } from 'lucide-react';
@@ -15,7 +15,6 @@ import { useStore, badgeColors } from '@/store/useStore';
 import { products, formatPKR } from '@/data/products';
 import PremiumButton from '@/components/ui/PremiumButton';
 
-gsap.registerPlugin(ScrollTrigger);
 
 /* ═══════════════════════════════════════════════════════════
    AnimatedSection — uses useGsapStagger for children reveal

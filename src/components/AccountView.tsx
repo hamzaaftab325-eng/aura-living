@@ -8,7 +8,7 @@ import {
   useGsapScaleIn,
   useGsapCountUp,
   gsap,
-  ScrollTrigger,
+  
 } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
@@ -29,7 +29,6 @@ import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
 
-gsap.registerPlugin(ScrollTrigger);
 
 /* ═══════════════════════════════════════════════════════════
    AnimatedSection — uses useGsapStagger for children reveal

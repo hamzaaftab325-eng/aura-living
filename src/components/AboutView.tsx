@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   useGsapFadeIn,
   useGsapStagger,
-  useGsapBlurText,
+  
   gsap,
   ScrollTrigger,
 } from '@/hooks/useGsap';
@@ -13,7 +13,6 @@ import { Leaf, Hammer, Heart, ArrowRight, Sparkles, Package, Users, Truck, Store
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 
-gsap.registerPlugin(ScrollTrigger);
 
 const values = [
   {

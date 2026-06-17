@@ -9,7 +9,6 @@ import { GoldDivider } from '@/components/SVGDecorations';
 import { useGsapFadeIn, useGsapBlurText } from '@/hooks/useGsap';
 import PremiumButton from '@/components/ui/PremiumButton';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function TrendingCollection() {
   const setPage = useStore((state) => state.setPage);

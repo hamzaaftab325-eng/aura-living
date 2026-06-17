@@ -126,10 +126,6 @@
 }
 
 /* Floating label animation for newsletter */
-@keyframes floatLabel {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
 
 /* Unified shimmer keyframe — replaces btnShimmerSlide + btnShimmer + avatarShimmer */
 @keyframes shimmer {
@@ -138,10 +134,6 @@
 }
 
 /* Gold border slide-in from left */
-@keyframes goldBorderSlide {
-  0% { transform: scaleX(0); transform-origin: left; }
-  100% { transform: scaleX(1); transform-origin: left; }
-}
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
@@ -190,16 +182,8 @@ html {
 }
 
 /* Hero progress bar — CSS-only, no GSAP */
-@keyframes heroProgress {
-  from { width: 0%; }
-  to { width: 100%; }
-}
 
 /* Marquee — kept for backwards compat (unused in new hero) */
-.animate-marquee {
-  will-change: transform;
-  animation: marquee 20s linear infinite;
-}
 
 /* Corner ornament (CSS only) */
 .corner-ornament {
@@ -316,14 +300,7 @@ html {
 }
 
 /* Input gold glow pulse */
-@keyframes inputGoldGlow {
-  0%, 100% { box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15); }
-  50% { box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.25), 0 0 15px rgba(212, 175, 55, 0.1); }
-}
 
-.animate-input-glow {
-  animation: inputGoldGlow 2s ease-in-out infinite;
-}
 
 /* Error shake */
 @keyframes errorShake {
@@ -339,21 +316,9 @@ html {
 }
 
 /* Quantity button press */
-@keyframes qtyPress {
-  0% { transform: scale(1); }
-  50% { transform: scale(0.85); }
-  100% { transform: scale(1); }
-}
 
-.animate-qty-press {
-  animation: qtyPress 0.2s ease-in-out;
-}
 
 /* Gold divider scale-in on scroll */
-@keyframes goldDividerScale {
-  0% { transform: scaleX(0); opacity: 0; }
-  100% { transform: scaleX(1); opacity: 1; }
-}
 
 /* Menu item ripple glow */
 @keyframes menuRippleGlow {
@@ -462,10 +427,6 @@ body {
 
 /* Dvh-with-fallback helper. Browsers that don't understand dvh ignore the second
    declaration and use vh. */
-.dvh-fallback {
-  height: 100vh;
-  height: 100dvh;
-}
 
 /* Loading spinner — used during hydration */
 @keyframes spin {
