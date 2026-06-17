@@ -106,21 +106,21 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 z-[3]"
         style={{
-          background: 'linear-gradient(to top, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.25) 40%, rgba(44,44,44,0.1) 60%, rgba(44,44,44,0.3) 100%)',
+          background: 'linear-gradient(to top, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.3) 35%, rgba(44,44,44,0.05) 55%, rgba(44,44,44,0.2) 100%)',
         }}
       />
-      {/* Layer 2: Left-to-right subtle warm tint */}
+      {/* Layer 2: Warm gold tint from top-left */}
       <div
         className="absolute inset-0 z-[3]"
         style={{
-          background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 50%)',
+          background: 'linear-gradient(135deg, rgba(212,175,55,0.12) 0%, transparent 40%)',
         }}
       />
-      {/* Layer 3: Vignette — darker corners for depth */}
+      {/* Layer 3: Vignette for cinematic depth */}
       <div
         className="absolute inset-0 z-[3]"
         style={{
-          background: 'radial-gradient(ellipse 90% 90% at 50% 50%, transparent 40%, rgba(44,44,44,0.4) 100%)',
+          background: 'radial-gradient(ellipse 100% 100% at 50% 45%, transparent 35%, rgba(44,44,44,0.45) 100%)',
         }}
       />
 
