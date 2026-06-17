@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { gsap } from '@/hooks/useGsap';
 import {
   Search,
@@ -85,6 +86,9 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [mobileShopExpanded, setMobileShopExpanded] = useState(false);
+  // Animated cursor for pill nav
+  const [cursorPos, setCursorPos] = useState({ left: 0, width: 0, opacity: 0 });
+  const navItemRefs = useRef<Map<string, HTMLLIElement>>(new Map());
   const searchInputRef = useRef<HTMLInputElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -285,128 +289,147 @@ export default function Navbar() {
               <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: 'clamp(40px, 9vw, 64px)', width: 'auto', objectFit: 'contain' }} />
             </div>
 
-            {/* Desktop Nav Links */}
-            <div className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => {
-                const isActive = isLinkActive(link.page, link.label);
-                const isHovered = hoveredLink === link.label;
-                return (
-                  <div
-                    key={link.label}
-                    className="relative"
-                    onMouseEnter={() => {
-                      setHoveredLink(link.label);
-                      if (link.hasMegaMenu) handleMegaMenuEnter();
-                    }}
-                    onMouseLeave={() => {
-                      setHoveredLink(null);
-                      if (link.hasMegaMenu) handleMegaMenuLeave();
-                    }}
-                  >
-                    <button
-                      className="relative py-2 text-sm font-medium transition-all duration-300 flex items-center gap-1"
+            {/* Desktop Nav Links — Pill-style with animated cursor */}
+            <div className="hidden lg:flex items-center">
+              <ul
+                className="relative mx-auto flex w-fit rounded-full border p-1"
+                style={{
+                  borderColor: 'rgba(212, 175, 55, 0.3)',
+                  backgroundColor: 'rgba(255, 253, 247, 0.6)',
+                  backdropFilter: 'blur(8px)',
+                }}
+                onMouseLeave={() => {
+                  setHoveredLink(null);
+                  setCursorPos((pv) => ({ ...pv, opacity: 0 }));
+                }}
+              >
+                {navLinks.map((link) => {
+                  const isActive = isLinkActive(link.page, link.label);
+                  return (
+                    <li
+                      key={link.label}
+                      ref={(el) => {
+                        if (el) navItemRefs.current.set(link.label, el);
+                      }}
+                      className="relative z-10 block cursor-pointer px-4 py-2 text-xs uppercase font-medium transition-colors duration-200"
                       style={{
                         fontFamily: "'Poppins', sans-serif",
                         color: isActive ? '#D4AF37' : '#5A5A5A',
+                        mixBlendMode: 'normal',
                       }}
-                      onClick={() => {
-                        if (link.hasMegaMenu) {
-                          handleNavClick(link.page);
-                        } else {
-                          handleNavClick(link.page);
+                      onMouseEnter={() => {
+                        setHoveredLink(link.label);
+                        if (link.hasMegaMenu) handleMegaMenuEnter();
+                        // Animate cursor
+                        const el = navItemRefs.current.get(link.label);
+                        if (el) {
+                          setCursorPos({
+                            left: el.offsetLeft,
+                            width: el.offsetWidth,
+                            opacity: 1,
+                          });
                         }
                       }}
+                      onClick={() => handleNavClick(link.page)}
                     >
                       {link.label}
                       {link.hasMegaMenu && (
                         <ChevronDown
-                          className="h-3.5 w-3.5 transition-transform duration-300"
+                          className="inline ml-1 h-3 w-3 transition-transform duration-300"
                           style={{
                             transform: megaMenuOpen && hoveredLink === link.label ? 'rotate(180deg)' : 'rotate(0deg)',
                           }}
                         />
                       )}
-                      <span
-                        className="absolute bottom-0 left-0 h-[2px] rounded-full bg-[#D4AF37] transition-all duration-300"
-                        style={{ width: isActive || isHovered ? '100%' : '0%' }}
-                      />
-                    </button>
+                    </li>
+                  );
+                })}
 
-                    {/* Desktop Mega Menu */}
-                    {link.hasMegaMenu && megaMenuOpen && hoveredLink === link.label && (
-                      <div
-                        ref={megaMenuRef}
-                        className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
-                        style={{ zIndex: 60 }}
-                        onMouseEnter={handleMegaMenuEnter}
-                        onMouseLeave={handleMegaMenuLeave}
-                      >
-                        <div
-                          className="rounded-lg overflow-hidden"
-                          style={{
-                            background: 'rgba(250, 248, 245, 0.98)',
-                            borderTop: '2px solid #D4AF37',
-                            boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
-                            minWidth: '280px',
-                          }}
-                        >
-                          <div className="py-3">
-                            {megaMenuItems.map((item) => {
-                              const itemActive = isMegaItemActive(item.page);
-                              return (
-                                <button
-                                  key={item.label}
-                                  className="w-full flex items-center gap-4 px-5 py-3 text-left transition-colors duration-200 group"
+                {/* Animated cursor pill */}
+                <motion.li
+                  animate={cursorPos}
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  className="absolute z-0 h-8 rounded-full"
+                  style={{
+                    backgroundColor: 'rgba(212, 175, 55, 0.15)',
+                    top: '50%',
+                    translateY: '-50%',
+                  }}
+                />
+
+                {/* Desktop Mega Menu */}
+                {megaMenuOpen && hoveredLink === 'Shop' && (
+                  <div
+                    ref={megaMenuRef}
+                    className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
+                    style={{ zIndex: 60 }}
+                    onMouseEnter={handleMegaMenuEnter}
+                    onMouseLeave={handleMegaMenuLeave}
+                  >
+                    <div
+                      className="rounded-lg overflow-hidden"
+                      style={{
+                        background: 'rgba(250, 248, 245, 0.98)',
+                        borderTop: '2px solid #D4AF37',
+                        boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
+                        minWidth: '280px',
+                      }}
+                    >
+                      <div className="py-3">
+                        {megaMenuItems.map((item) => {
+                          const itemActive = isMegaItemActive(item.page);
+                          return (
+                            <button
+                              key={item.label}
+                              className="w-full flex items-center gap-4 px-5 py-3 text-left transition-colors duration-200 group"
+                              style={{
+                                backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent';
+                              }}
+                              onClick={() => handleNavClick(item.page)}
+                            >
+                              <div
+                                className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-colors duration-200"
+                                style={{
+                                  backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.15)' : 'rgba(232, 213, 163, 0.2)',
+                                  color: itemActive ? '#D4AF37' : '#8A8A8A',
+                                }}
+                              >
+                                {item.icon}
+                              </div>
+                              <div className="min-w-0">
+                                <p
+                                  className="text-sm font-medium transition-colors duration-200"
                                   style={{
-                                    backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+                                    fontFamily: "'Poppins', sans-serif",
+                                    color: itemActive ? '#D4AF37' : '#2C2C2C',
                                   }}
-                                  onMouseEnter={(e) => {
-                                    e.currentTarget.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
-                                  }}
-                                  onMouseLeave={(e) => {
-                                    e.currentTarget.style.backgroundColor = itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent';
-                                  }}
-                                  onClick={() => handleNavClick(item.page)}
                                 >
-                                  <div
-                                    className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-colors duration-200"
-                                    style={{
-                                      backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.15)' : 'rgba(232, 213, 163, 0.2)',
-                                      color: itemActive ? '#D4AF37' : '#8A8A8A',
-                                    }}
-                                  >
-                                    {item.icon}
-                                  </div>
-                                  <div className="min-w-0">
-                                    <p
-                                      className="text-sm font-medium transition-colors duration-200"
-                                      style={{
-                                        fontFamily: "'Poppins', sans-serif",
-                                        color: itemActive ? '#D4AF37' : '#2C2C2C',
-                                      }}
-                                    >
-                                      {item.label}
-                                    </p>
-                                    <p
-                                      className="text-xs mt-0.5"
-                                      style={{
-                                        fontFamily: "'Poppins', sans-serif",
-                                        color: '#8A8A8A',
-                                      }}
-                                    >
-                                      {item.description}
-                                    </p>
-                                  </div>
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </div>
+                                  {item.label}
+                                </p>
+                                <p
+                                  className="text-xs mt-0.5"
+                                  style={{
+                                    fontFamily: "'Poppins', sans-serif",
+                                    color: '#8A8A8A',
+                                  }}
+                                >
+                                  {item.description}
+                                </p>
+                              </div>
+                            </button>
+                          );
+                        })}
                       </div>
-                    )}
+                    </div>
                   </div>
-                );
-              })}
+                )}
+              </ul>
             </div>
 
             {/* Desktop Action Icons */}
