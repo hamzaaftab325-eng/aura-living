@@ -15,7 +15,7 @@ const slides = [
     heading: 'Elevate Your Living Space',
     subtitle: 'Discover handpicked home decor that turns houses into homes',
     image: '/images/hero/hero-slide-1.webp',
-    overlay: 'linear-gradient(135deg, rgba(44,44,44,0.75), rgba(212,175,55,0.15))',
+    overlay: 'linear-gradient(to right, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.5) 50%, rgba(44,44,44,0.2) 100%)',
     primaryBtn: { label: 'Shop Now', page: 'shop' as const, variant: 'gold' as const },
     secondaryBtn: { label: 'Explore Collections', page: 'shop' as const, variant: 'outline' as const },
   },
@@ -24,7 +24,7 @@ const slides = [
     heading: 'Handcrafted with Love',
     subtitle: 'Every piece tells a story of dedication, skill, and cultural heritage',
     image: '/images/hero/hero-slide-2.webp',
-    overlay: 'linear-gradient(135deg, rgba(44,44,44,0.8), rgba(168,181,160,0.2))',
+    overlay: 'linear-gradient(to right, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.5) 50%, rgba(44,44,44,0.2) 100%)',
     primaryBtn: { label: 'Meet Our Artisans', page: 'about' as const, variant: 'gold' as const },
     secondaryBtn: { label: 'Shop Handcrafted', page: 'shop' as const, variant: 'outline' as const },
   },
@@ -33,7 +33,7 @@ const slides = [
     heading: 'Set the Perfect Table',
     subtitle: 'Gold-rimmed glassware and handcrafted ceramics for memorable gatherings',
     image: '/images/hero/hero-slide-3.webp',
-    overlay: 'linear-gradient(135deg, rgba(44,44,44,0.7), rgba(232,206,193,0.2))',
+    overlay: 'linear-gradient(to right, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.5) 50%, rgba(44,44,44,0.2) 100%)',
     primaryBtn: { label: 'Shop Dining', page: 'shop' as const, variant: 'gold' as const },
     secondaryBtn: { label: 'View Lookbook', page: 'lookbook' as const, variant: 'outline' as const },
   },
@@ -42,7 +42,7 @@ const slides = [
     heading: 'Find Your Sanctuary',
     subtitle: 'Soft candlelight, delicate vases, and warm textiles for peaceful retreats',
     image: '/images/hero/hero-slide-4.webp',
-    overlay: 'linear-gradient(135deg, rgba(44,44,44,0.75), rgba(212,175,55,0.18))',
+    overlay: 'linear-gradient(to right, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.5) 50%, rgba(44,44,44,0.2) 100%)',
     primaryBtn: { label: 'Shop Bedroom', page: 'shop' as const, variant: 'gold' as const },
     secondaryBtn: { label: 'New Arrivals', page: 'new-arrivals' as const, variant: 'outline' as const },
   },
@@ -51,59 +51,17 @@ const slides = [
     heading: 'The Botanical Corner',
     subtitle: 'Lush greenery in gold-rimmed planters brings life to any space',
     image: '/images/hero/hero-slide-5.webp',
-    overlay: 'linear-gradient(135deg, rgba(44,44,44,0.7), rgba(168,181,160,0.25))',
+    overlay: 'linear-gradient(to right, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.5) 50%, rgba(44,44,44,0.2) 100%)',
     primaryBtn: { label: 'Shop Plants', page: 'shop' as const, variant: 'gold' as const },
     secondaryBtn: { label: 'Care Guide', page: 'care-guide' as const, variant: 'outline' as const },
   },
 ];
 
-const SLIDE_DURATION = 6000; // 6 seconds per slide
+const SLIDE_DURATION = 6000;
 const TOTAL_SLIDES = slides.length;
 
 /* ═══════════════════════════════════════════════════════════
-   GOLD ORB — CSS-only floating divs with GSAP-enhanced motion
-   ═══════════════════════════════════════════════════════════ */
-
-function GoldOrb({ size, top, left, opacity = 0.15 }: {
-  size: number; top: string; left: string; opacity?: number;
-}) {
-  return (
-    <div
-      className="absolute pointer-events-none hidden md:block"
-      style={{
-        width: size,
-        height: size,
-        top,
-        left,
-        background: `radial-gradient(circle, rgba(212, 175, 55, ${opacity}) 0%, rgba(212, 175, 55, ${opacity * 0.3}) 40%, transparent 70%)`,
-        borderRadius: '50%',
-        filter: 'blur(30px)',
-        // willChange removed — GPU-layer promotion handled by GSAP force3D
-      }}
-    />
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════
-   MARQUEE STRIP — CSS-only marquee
-   ═══════════════════════════════════════════════════════════ */
-
-function MarqueeStrip() {
-  const text = 'AURA LIVING \u2022 HOME DECOR \u2022 PAKISTAN \u2022 HANDCRAFTED \u2022 LUXURY \u2022 ';
-  const repeated = text.repeat(6);
-  return (
-    <div className="absolute bottom-0 left-0 w-full z-20 overflow-hidden bg-[#2C2C2C]/70 backdrop-blur-sm border-t border-[#D4AF37]/20">
-      <div className="animate-marquee whitespace-nowrap py-2.5">
-        <span className="text-[#D4AF37]/80 text-xs tracking-[4px] uppercase" style={{ fontFamily: "'Archivo Narrow', sans-serif" }}>
-          {repeated}
-        </span>
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════
-   HERO SECTION — 5-Slide Slider with GSAP Crossfade & Ken Burns
+   HERO SECTION — Modern Editorial Slider with GSAP Crossfade
    ═══════════════════════════════════════════════════════════ */
 
 export default function HeroSection() {
@@ -166,8 +124,6 @@ export default function HeroSection() {
   }, []);
 
   // ─── Animate slide content entrance ───────────────────────
-  // All animations use ONLY opacity + transform (GPU-composited).
-  // No filter:blur(), no clipPath — those cause repaints and jank.
   const animateSlideIn = useCallback(() => {
     if (slideTlRef.current) {
       slideTlRef.current.kill();
@@ -176,16 +132,14 @@ export default function HeroSection() {
     const tl = gsap.timeline({ delay: 0.12 });
     slideTlRef.current = tl;
 
-    // Tag: slide down + scale (no blur — GPU only)
     if (tagRef.current) {
-      gsap.set(tagRef.current, { opacity: 0, y: -20, scale: 0.9, force3D: true });
+      gsap.set(tagRef.current, { opacity: 0, y: -20, force3D: true });
       tl.to(tagRef.current, {
-        opacity: 1, y: 0, scale: 1,
+        opacity: 1, y: 0,
         duration: 0.6, ease: 'power3.out',
       });
     }
 
-    // Heading: slide up + fade (no clipPath — causes layout thrash)
     if (headingRef.current) {
       gsap.set(headingRef.current, { opacity: 0, y: 35, force3D: true });
       tl.to(headingRef.current, {
@@ -194,7 +148,6 @@ export default function HeroSection() {
       }, '-=0.3');
     }
 
-    // Divider: scale + fade
     if (dividerRef.current) {
       gsap.set(dividerRef.current, { opacity: 0, scaleX: 0, force3D: true });
       tl.to(dividerRef.current, {
@@ -203,7 +156,6 @@ export default function HeroSection() {
       }, '-=0.2');
     }
 
-    // Subtitle: slide up + fade (no blur — GPU only)
     if (subtitleRef.current) {
       gsap.set(subtitleRef.current, { opacity: 0, y: 25, force3D: true });
       tl.to(subtitleRef.current, {
@@ -212,7 +164,6 @@ export default function HeroSection() {
       }, '-=0.2');
     }
 
-    // Buttons: stagger reveal — parent must be set visible first
     if (buttonsRef.current) {
       gsap.set(buttonsRef.current, { opacity: 1, y: 0 });
       const btns = buttonsRef.current.children;
@@ -223,7 +174,6 @@ export default function HeroSection() {
       }, '-=0.2');
     }
 
-    // Safety: force all slide-content-el visible at timeline end
     tl.call(() => {
       if (contentRef.current) {
         const allEls = contentRef.current.querySelectorAll('.slide-content-el');
@@ -248,7 +198,6 @@ export default function HeroSection() {
     const nextOverlay = slides[slideIndex].overlay;
 
     if (activeBgRef.current === 'A') {
-      // Fade out A, fade in B
       if (bgBLayerRef.current) {
         const img = bgBLayerRef.current.querySelector('.hero-bg-img') as HTMLElement;
         const overlayEl = bgBLayerRef.current.querySelector('.bg-overlay') as HTMLElement;
@@ -262,7 +211,6 @@ export default function HeroSection() {
       }
       activeBgRef.current = 'B';
     } else {
-      // Fade out B, fade in A
       if (bgALayerRef.current) {
         const img = bgALayerRef.current.querySelector('.hero-bg-img') as HTMLElement;
         const overlayEl = bgALayerRef.current.querySelector('.bg-overlay') as HTMLElement;
@@ -279,26 +227,20 @@ export default function HeroSection() {
   }, []);
 
   // ─── Handle slide transitions ─────────────────────────────
-  // Background crossfade takes 1.2s. We want the new slide image to be
-  // visible BEFORE the new text appears, so we delay text animation by ~0.9s
-  // after the background starts transitioning.
-  const BG_CROSSFADE_DURATION = 1.2; // seconds — matches crossfadeBackground()
-  const TEXT_DELAY_AFTER_BG_START = 0.9; // seconds — wait for bg to mostly finish
+  const BG_CROSSFADE_DURATION = 1.2;
+  const TEXT_DELAY_AFTER_BG_START = 0.9;
 
   useEffect(() => {
     if (isTransitioningRef.current && currentSlide !== 0) return;
 
-    // Skip transition guard on first mount
     const isFirstMount = currentSlide === 0 && !isTransitioningRef.current && !autoPlayTimerRef.current;
 
     if (!isFirstMount) {
       isTransitioningRef.current = true;
     }
 
-    // Start crossfade background immediately
     crossfadeBackground(currentSlide);
 
-    // Animate out current content FIRST (quick fade-out)
     const contentElements = contentRef.current?.querySelectorAll('.slide-content-el');
     if (contentElements && contentElements.length > 0 && !isFirstMount) {
       gsap.to(contentElements, {
@@ -308,8 +250,6 @@ export default function HeroSection() {
         ease: 'power2.in',
         stagger: 0.04,
         onComplete: () => {
-          // Now WAIT for the background crossfade to be mostly done
-          // before bringing in the new text
           const remainingWait = Math.max(0, (TEXT_DELAY_AFTER_BG_START - 0.3) * 1000);
           setTimeout(() => {
             animateSlideIn();
@@ -318,14 +258,12 @@ export default function HeroSection() {
         },
       });
     } else {
-      // First load — animate in immediately (no bg crossfade on first load)
       animateSlideIn();
       if (!isFirstMount) {
         setTimeout(() => { isTransitioningRef.current = false; }, 1500);
       }
     }
 
-    // Update active dot
     if (dotsRef.current) {
       const dots = dotsRef.current.children;
       Array.from(dots).forEach((dot, i) => {
@@ -340,7 +278,6 @@ export default function HeroSection() {
 
   // ─── Initial setup ────────────────────────────────────────
   useEffect(() => {
-    // Set initial background on layer A
     if (bgALayerRef.current) {
       const img = bgALayerRef.current.querySelector('.hero-bg-img') as HTMLElement;
       const overlayEl = bgALayerRef.current.querySelector('.bg-overlay') as HTMLElement;
@@ -352,10 +289,8 @@ export default function HeroSection() {
       gsap.set(bgBLayerRef.current, { opacity: 0 });
     }
 
-    // Initial content animation
     animateSlideIn();
 
-    // Scroll indicator: fade in
     if (scrollIndicatorRef.current) {
       gsap.set(scrollIndicatorRef.current, { opacity: 0, y: -10 });
       gsap.to(scrollIndicatorRef.current, {
@@ -365,7 +300,6 @@ export default function HeroSection() {
       });
     }
 
-    // Animate dots
     if (dotsRef.current) {
       const dots = dotsRef.current.children;
       Array.from(dots).forEach((dot, i) => {
@@ -386,18 +320,14 @@ export default function HeroSection() {
     };
   }, []);
 
-  // ─── Parallax: GSAP ScrollTrigger (DESKTOP ONLY — no scroll animations on mobile) ─────
+  // ─── Parallax: GSAP ScrollTrigger (DESKTOP ONLY) ─────
   useEffect(() => {
     if (!sectionRef.current) return;
 
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
-    // Skip ALL scroll-triggered animations on mobile for buttery performance
     if (isMobile) return;
 
     const ctx = gsap.context(() => {
-      // Desktop: smooth parallax + content fade
-      // scrub: 2 = 2-second smoothing buffer for buttery feel
       const bgContainer = sectionRef.current?.querySelector('.bg-parallax-container') as HTMLElement;
       if (bgContainer) {
         gsap.to(bgContainer, {
@@ -437,7 +367,6 @@ export default function HeroSection() {
     if (isTransitioningRef.current || index === currentSlide) return;
     stopAutoPlay();
     setCurrentSlide(index);
-    // Restart autoplay after transition
     setTimeout(() => { startAutoPlay(); }, 1600);
   }, [currentSlide, startAutoPlay, stopAutoPlay]);
 
@@ -453,9 +382,6 @@ export default function HeroSection() {
 
   const slide = slides[currentSlide];
 
-  // ─── Format slide number ──────────────────────────────────
-  const formatSlideNum = (n: number) => String(n + 1).padStart(2, '0');
-
   // ─── Touch swipe handlers ─────────────────────────────────
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
@@ -467,7 +393,6 @@ export default function HeroSection() {
     if (touchStartX.current === null || touchStartY.current === null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
     const dy = e.changedTouches[0].clientY - touchStartY.current;
-    // Only register horizontal swipes (ignore vertical scroll)
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
       if (dx > 0) prevSlide();
       else nextSlide();
@@ -479,11 +404,8 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden flex items-center justify-center group h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-5rem)] lg:h-[calc(100dvh-7rem)]"
+      className="relative w-full overflow-hidden flex items-center group h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-5rem)] lg:h-[calc(100dvh-7rem)]"
       style={{ minHeight: '500px' }}
-      onMouseEnter={() => {
-        // Show arrows on hover via CSS group
-      }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -532,43 +454,19 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ═══ Animated grain texture overlay ═══ */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03] z-10"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* ═══ Vignette ═══ */}
-      <div
-        className="absolute inset-0 pointer-events-none z-10"
-        style={{
-          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(44,44,44,0.4) 100%)',
-        }}
-      />
-
-      {/* ═══ Corner ornaments ═══ */}
-      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-9 h-9 sm:w-[100px] sm:h-[100px] border-t border-l border-[#D4AF37]/50 pointer-events-none z-20" />
-      <div className="absolute bottom-16 right-4 sm:bottom-24 sm:right-6 w-9 h-9 sm:w-[100px] sm:h-[100px] border-b border-r border-[#D4AF37]/50 pointer-events-none z-20" />
-
-      {/* ═══ Floating Gold Orbs — GSAP-enhanced ═══ */}
-      <GoldOrb size={200} top="8%" left="5%" opacity={0.12} />
-      <GoldOrb size={140} top="50%" left="85%" opacity={0.08} />
-      <GoldOrb size={170} top="65%" left="12%" opacity={0.10} />
-
-      {/* ═══ Main Content ═══ */}
+      {/* ═══ Main Content — Left-aligned, editorial style ═══ */}
       <div
         ref={contentRef}
-        className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto"
+        className="relative z-10 flex flex-col justify-center items-start text-left px-6 sm:px-10 lg:px-16 xl:px-20 max-w-2xl ml-0 lg:ml-8 w-full"
       >
-        <div className="flex flex-col items-center gap-5 sm:gap-7">
+        <div className="flex flex-col items-start gap-4 sm:gap-6">
           {/* Tag */}
           <span
             ref={tagRef}
-            className="slide-content-el inline-block text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium"
+            className="slide-content-el inline-flex items-center gap-2 text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
+            <span className="w-8 h-px bg-[#D4AF37]" />
             {slide.tag}
           </span>
 
@@ -578,30 +476,26 @@ export default function HeroSection() {
             className="slide-content-el text-white font-bold leading-[1.1] cursor-default select-none"
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(38px, 6vw, 72px)',
+              fontSize: 'clamp(32px, 5vw, 64px)',
             }}
           >
             {slide.heading}
           </h1>
 
-          {/* Divider */}
-          <div ref={dividerRef} className="slide-content-el flex items-center gap-3" style={{ transformOrigin: 'center' }}>
-            <div className="w-8 sm:w-14 h-px bg-gradient-to-r from-transparent to-[#D4AF37]/60" />
-            <div className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
-            <div className="w-8 sm:w-14 h-px bg-gradient-to-l from-transparent to-[#D4AF37]/60" />
-          </div>
+          {/* Gold accent line */}
+          <div ref={dividerRef} className="slide-content-el h-[2px] bg-[#D4AF37]" style={{ width: '60px', transformOrigin: 'left center' }} />
 
           {/* Subtitle */}
           <p
             ref={subtitleRef}
-            className="slide-content-el text-[#E8D5A3] text-sm sm:text-base md:text-lg max-w-lg leading-relaxed"
+            className="slide-content-el text-white/80 text-sm sm:text-base md:text-lg max-w-md leading-relaxed"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             {slide.subtitle}
           </p>
 
           {/* Buttons */}
-          <div ref={buttonsRef} className="slide-content-el flex flex-col sm:flex-row items-center gap-4 mt-2 sm:mt-4">
+          <div ref={buttonsRef} className="slide-content-el flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mt-2">
             <PremiumButton variant={slide.primaryBtn.variant} onClick={() => setPage(slide.primaryBtn.page)}>
               {slide.primaryBtn.label}
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -615,46 +509,29 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ═══ Slide Number Indicator ═══ */}
-      <div className="absolute top-20 sm:top-24 lg:top-32 right-6 sm:right-8 z-20 flex items-center gap-2">
-        <span
-          className="text-[#D4AF37] text-sm sm:text-base font-light tracking-widest"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-        >
-          {formatSlideNum(currentSlide)}
-        </span>
-        <span className="text-white/30 text-sm sm:text-base">/</span>
-        <span
-          className="text-white/40 text-sm sm:text-base font-light tracking-widest"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-        >
-          {formatSlideNum(TOTAL_SLIDES - 1)}
-        </span>
-      </div>
-
       {/* ═══ Arrow Navigation ═══ */}
       <button
         onClick={prevSlide}
-        className="touch-visible absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-[#D4AF37]/30 bg-[#2C2C2C]/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/60"
+        className="touch-visible absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-black/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer hover:bg-white/10 hover:border-white/40"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="w-5 h-5 text-[#D4AF37]" />
+        <ChevronLeft className="w-5 h-5 text-white" />
       </button>
       <button
         onClick={nextSlide}
-        className="touch-visible absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-[#D4AF37]/30 bg-[#2C2C2C]/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/60"
+        className="touch-visible absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-black/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer hover:bg-white/10 hover:border-white/40"
         aria-label="Next slide"
       >
-        <ChevronRight className="w-5 h-5 text-[#D4AF37]" />
+        <ChevronRight className="w-5 h-5 text-white" />
       </button>
 
       {/* ═══ Navigation Dots ═══ */}
-      <div ref={dotsRef} className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
+      <div ref={dotsRef} className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => goToSlide(i)}
-            className="w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300"
+            className="w-2 h-2 rounded-full cursor-pointer transition-all duration-300"
             style={{
               backgroundColor: i === currentSlide ? '#D4AF37' : 'rgba(255,255,255,0.4)',
               transform: i === currentSlide ? 'scale(1.4)' : 'scale(1)',
@@ -665,17 +542,17 @@ export default function HeroSection() {
       </div>
 
       {/* ═══ Scroll Indicator ═══ */}
-      <div ref={scrollIndicatorRef} className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 sm:gap-2">
-        <span className="text-white/40 text-[9px] sm:text-[10px] tracking-[4px] uppercase" style={{ fontFamily: "'Poppins', sans-serif" }}>
+      <div ref={scrollIndicatorRef} className="absolute bottom-8 right-6 sm:right-10 z-20 hidden sm:flex flex-col items-center gap-1">
+        <span className="text-white/40 text-[9px] tracking-[3px] uppercase" style={{ fontFamily: "'Poppins', sans-serif" }}>
           Scroll
         </span>
-        <ChevronDown className="w-5 h-5 text-white/60 animate-bounce" />
+        <ChevronDown className="w-4 h-4 text-white/60 animate-bounce" />
       </div>
 
       {/* ═══ Progress Bar ═══ */}
       <div
         ref={progressBarRef}
-        className="absolute bottom-0 left-0 w-full z-30 h-[2px] bg-transparent"
+        className="absolute bottom-0 left-0 w-full z-30 h-[2px] bg-white/10"
       >
         <div
           ref={progressFillRef}
@@ -683,9 +560,6 @@ export default function HeroSection() {
           style={{ width: '0%' }}
         />
       </div>
-
-      {/* ═══ Marquee ═══ */}
-      <MarqueeStrip />
     </section>
   );
 }
