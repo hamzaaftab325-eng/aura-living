@@ -193,6 +193,18 @@ export default function Home() {
     }
   };
 
+  // Loading state — render ONLY a blank cream background. No Navbar, no Footer,
+  // no orbs, no ornaments. This prevents the user from seeing home-page chrome
+  // (active Home link, corner ornaments) flash before the correct page loads.
+  if (!hydrated) {
+    return (
+      <div
+        className="min-h-screen"
+        style={{ backgroundColor: '#FAF8F5' }}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8F5] relative grain-overlay w-full overflow-x-hidden">
       <FloatingOrb size={90} top="15%" left="3%" delay={0} />
@@ -200,7 +212,7 @@ export default function Home() {
       <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />
       <Navbar />
       <main ref={contentRef} className="flex-1 w-full">
-        {hydrated ? renderPage() : null}
+        {renderPage()}
       </main>
       <div className="flex justify-center py-8 px-4 sm:px-6 w-full">
         <div className="w-full max-w-xs sm:max-w-sm">

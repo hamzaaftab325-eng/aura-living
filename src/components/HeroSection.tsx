@@ -479,8 +479,8 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden flex items-center justify-center group"
-      style={{ height: '100vh', height: '100dvh', minHeight: '600px' }}
+      className="relative w-full overflow-hidden flex items-center justify-center group h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-5rem)] lg:h-[calc(100dvh-7rem)]"
+      style={{ minHeight: '500px' }}
       onMouseEnter={() => {
         // Show arrows on hover via CSS group
       }}
@@ -616,7 +616,7 @@ export default function HeroSection() {
       </div>
 
       {/* ═══ Slide Number Indicator ═══ */}
-      <div className="absolute top-6 right-6 sm:top-8 sm:right-8 z-20 flex items-center gap-2">
+      <div className="absolute top-20 sm:top-24 lg:top-32 right-6 sm:right-8 z-20 flex items-center gap-2">
         <span
           className="text-[#D4AF37] text-sm sm:text-base font-light tracking-widest"
           style={{ fontFamily: "'Poppins', sans-serif" }}
