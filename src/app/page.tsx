@@ -207,6 +207,26 @@ export default function Home() {
     }
   };
 
+  // Loading state — show ONLY the branded spinner, nothing else
+  if (!mounted) {
+    return (
+      <div
+        className="min-h-screen flex flex-col items-center justify-center"
+        style={{ backgroundColor: '#FAF8F5' }}
+      >
+        <img
+          src="/logo/default-monochrome-gold-black.svg"
+          alt="Aura Living"
+          style={{ height: '48px', width: 'auto', objectFit: 'contain', marginBottom: '32px' }}
+        />
+        <div
+          className="w-10 h-10 rounded-full border-2 border-[#E8D5A3] border-t-[#D4AF37]"
+          style={{ animation: 'spin 0.8s linear infinite' }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8F5] relative grain-overlay w-full overflow-x-hidden">
       <FloatingOrb size={90} top="15%" left="3%" delay={0} />
@@ -214,23 +234,7 @@ export default function Home() {
       <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />
       <Navbar />
       <main ref={contentRef} className="flex-1 w-full">
-        {/* Render page content only after mount so SSR and first client render
-            match. While waiting for hydration, show a branded loading spinner
-            instead of empty space. */}
-        {mounted ? renderPage() : (
-          <div className="flex flex-col items-center justify-center py-32" style={{ backgroundColor: '#FAF8F5' }}>
-            <img
-              src="/logo/default-monochrome-gold-black.svg"
-              alt="Aura Living"
-              className="mb-8"
-              style={{ height: '48px', width: 'auto', objectFit: 'contain' }}
-            />
-            <div
-              className="w-10 h-10 rounded-full border-2 border-[#E8D5A3] border-t-[#D4AF37]"
-              style={{ animation: 'spin 0.8s linear infinite' }}
-            />
-          </div>
-        )}
+        {renderPage()}
       </main>
       <div className="flex justify-center py-8 px-4 sm:px-6 w-full">
         <div className="w-full max-w-xs sm:max-w-sm">
@@ -240,7 +244,7 @@ export default function Home() {
       <Footer />
       <CartDrawer />
       <BackToTop />
-      {mounted && currentPage === 'home' && (
+      {currentPage === 'home' && (
         <div className="hidden md:block fixed inset-0 pointer-events-none z-[5]">
           <CornerOrnament position="top-left" size={80} />
           <CornerOrnament position="top-right" size={80} />
