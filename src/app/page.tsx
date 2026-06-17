@@ -70,14 +70,25 @@ function BackToTop() {
 export default function Home() {
   const currentPage = useStore((s) => s.currentPage);
   const contentRef = useRef<HTMLDivElement>(null);
+  // hydrated = false during SSR + first client render, true after mount.
+  // This prevents the server from rendering home content into the HTML
+  // (which the browser would display before React hydrates and corrects
+  // to the hash-based page). SSR and first client render both render null
+  // for <main>, so they match — no hydration error. After mount, the store
+  // already has the correct page from the URL hash, so the right page
+  // appears immediately.
+  const [hydrated, setHydrated] = useState(false);
 
   useLenis();
 
-  // Single effect: seed history + register popstate listener. Runs once after hydration.
-  // The store already initialized currentPage from the URL hash synchronously, so we
-  // don't need to read the hash here anymore.
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
+    // Read URL hash and sync store to the correct page
+    const hash = window.location.hash.replace('#', '');
+    if (hash && hash !== 'home' && hash !== currentPage) {
+      useStore.setState({ currentPage: hash as typeof currentPage });
+    }
 
     // Seed history so back button works from the first navigation
     if (!window.history.state) {
@@ -93,6 +104,9 @@ export default function Home() {
     };
     window.addEventListener('popstate', handlePopState);
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHydrated(true);
+
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
@@ -103,13 +117,9 @@ export default function Home() {
     }
   }, [currentPage]);
 
-  // GSAP page transition — skip on initial render to avoid animating first paint
-  const isFirstRender = useRef(true);
+  // GSAP page transition — skip on initial render
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    if (!hydrated) return;
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     if (contentRef.current) {
       gsap.fromTo(
@@ -118,7 +128,7 @@ export default function Home() {
         { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', force3D: true }
       );
     }
-  }, [currentPage]);
+  }, [currentPage, hydrated]);
 
   const renderPage = () => {
     switch (currentPage) {
@@ -189,8 +199,8 @@ export default function Home() {
       <FloatingOrb size={70} top="55%" left="88%" delay={1.0} />
       <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />
       <Navbar />
-      <main ref={contentRef} className="flex-1 w-full" suppressHydrationWarning>
-        {renderPage()}
+      <main ref={contentRef} className="flex-1 w-full">
+        {hydrated ? renderPage() : null}
       </main>
       <div className="flex justify-center py-8 px-4 sm:px-6 w-full">
         <div className="w-full max-w-xs sm:max-w-sm">
