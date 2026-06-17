@@ -205,8 +205,16 @@ export const useStore = create<StoreState>()(
       },
       logout: () => set({ user: null }),
 
-      // UI State
-      currentPage: 'home',
+      // UI State — currentPage reads the URL hash synchronously on the client so
+      // refresh renders the correct page immediately (no flash of home). On the
+      // server, there is no window so it defaults to 'home'. The <main> element
+      // in page.tsx uses suppressHydrationWarning to allow this divergence.
+      currentPage: (typeof window !== 'undefined' && typeof window.location !== 'undefined'
+        ? (() => {
+            const hash = window.location.hash.replace('#', '');
+            return (hash && validPages.includes(hash) ? hash : 'home') as PageType;
+          })()
+        : 'home'),
       selectedProduct: null,
       selectedCategory: 'all',
       searchQuery: '',

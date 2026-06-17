@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useStore, pageTitles, validPages } from '@/store/useStore';
+import { useStore, pageTitles } from '@/store/useStore';
 import { gsap } from '@/hooks/useGsap';
 import { useLenis } from '@/hooks/useLenis';
 import Navbar from '@/components/Navbar';
@@ -73,24 +73,19 @@ export default function Home() {
 
   useLenis();
 
-  // Single effect: read URL hash, sync store, seed history, register popstate.
-  // Runs once after hydration.
+  // Single effect: seed history + register popstate listener. Runs once after hydration.
+  // The store already initialized currentPage from the URL hash synchronously, so we
+  // don't need to read the hash here anymore.
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // 1. Read hash and sync store to the correct page
-    const hash = window.location.hash.replace('#', '');
-    if (hash && validPages.includes(hash) && hash !== currentPage) {
-      useStore.setState({ currentPage: hash as typeof currentPage });
-    }
-
-    // 2. Seed history so back button works from the first navigation
+    // Seed history so back button works from the first navigation
     if (!window.history.state) {
       const current = useStore.getState().currentPage;
       window.history.replaceState({ page: current }, '', `#${current}`);
     }
 
-    // 3. Listen for back/forward
+    // Listen for back/forward
     const handlePopState = (event: PopStateEvent) => {
       const page = (event.state?.page as typeof currentPage) || 'home';
       useStore.setState({ currentPage: page });
@@ -194,7 +189,7 @@ export default function Home() {
       <FloatingOrb size={70} top="55%" left="88%" delay={1.0} />
       <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />
       <Navbar />
-      <main ref={contentRef} className="flex-1 w-full">
+      <main ref={contentRef} className="flex-1 w-full" suppressHydrationWarning>
         {renderPage()}
       </main>
       <div className="flex justify-center py-8 px-4 sm:px-6 w-full">

@@ -802,17 +802,6 @@ export default function AboutView() {
     start: 'top 90%',
   });
 
-  // Opening quote blur text
-  const quoteRef = useGsapBlurText<HTMLQuoteElement>({
-    duration: 0.9,
-    stagger: 0.05,
-    delay: 0.2,
-    blur: 10,
-    ease: 'power3.out',
-    start: 'top 85%',
-    splitBy: 'words',
-  });
-
   // CTA section fade-in
   const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
 
@@ -1041,7 +1030,6 @@ export default function AboutView() {
             &ldquo;
           </div>
           <blockquote
-            ref={quoteRef}
             className="text-[#2C2C2C] leading-relaxed"
             style={{
               fontFamily: "'Playfair Display', serif",
