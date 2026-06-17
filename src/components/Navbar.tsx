@@ -282,7 +282,7 @@ export default function Navbar() {
           <div
             className="flex items-center justify-between rounded-full px-4 sm:px-5 py-2.5 sm:py-3"
             style={{
-              backgroundColor: 'rgba(255, 253, 247, 0.85)',
+              backgroundColor: 'rgba(255, 253, 247, 0.35)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
               border: '1px solid rgba(212, 175, 55, 0.3)',
@@ -298,7 +298,7 @@ export default function Navbar() {
               tabIndex={0}
               aria-label="Aura Living home"
             >
-              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
+              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: 'clamp(50px, 8vw, 80px)', width: 'auto', objectFit: 'contain' }} />
             </div>
 
             {/* Desktop Nav Links — inside pill */}
@@ -519,124 +519,98 @@ export default function Navbar() {
             onKeyDown={(e) => { if (e.key === 'Escape') { e.preventDefault(); closeMobileMenu(); } }}
           >
             {/* Mobile Menu Header */}
-            <div className="flex items-center justify-between px-6 shrink-0" style={{ height: '72px', borderBottom: '1px solid rgba(212, 175, 55, 0.12)' }}>
-              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
-              <button className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A', border: '1px solid rgba(212, 175, 55, 0.2)' }} onClick={closeMobileMenu} aria-label="Close menu">
-                <X className="h-4 w-4" />
+            <div className="flex items-center justify-between px-6 shrink-0" style={{ height: '72px', borderBottom: '1px solid rgba(212, 175, 55, 0.15)' }}>
+              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: '50px', width: 'auto', objectFit: 'contain' }} />
+              <button className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A', border: '1px solid rgba(212, 175, 55, 0.2)' }} onClick={closeMobileMenu} aria-label="Close menu">
+                <X className="h-5 w-5" />
               </button>
             </div>
 
-            {/* Mobile Menu Content */}
+            {/* Mobile Menu Content — Modern clean design */}
             <div className="flex flex-col py-5 px-5 flex-1 overflow-y-auto">
               {/* Main Navigation Links */}
               <div className="space-y-1">
+                <p className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-3" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>Menu</p>
                 {navLinks.map((link) => {
                   const isActive = isLinkActive(link.page, link.label);
-
-                  if (link.hasMegaMenu) {
-                    return (
-                      <div key={link.label} className="mobile-nav-item">
-                        <button
-                          className="flex items-center justify-between py-3 text-left w-full transition-colors duration-200 rounded-xl px-3 hover:bg-[#F5EDDA]"
-                          style={{ fontFamily: "'Poppins', sans-serif", color: isActive ? '#D4AF37' : '#2C2C2C' }}
-                          onClick={() => setMobileShopExpanded((prev) => !prev)}
-                          aria-expanded={mobileShopExpanded}
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: isActive ? 'rgba(212,175,55,0.12)' : 'rgba(232,213,163,0.15)' }}>
-                              <ShoppingBag className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} />
-                            </div>
-                            <span className="text-[15px] font-medium">{link.label}</span>
-                          </div>
-                          <ChevronDown
-                            className="h-4 w-4 transition-transform duration-300"
-                            style={{
-                              color: isActive ? '#D4AF37' : '#8A8A8A',
-                              transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-                            }}
-                          />
-                        </button>
-                        <div
-                          ref={mobileShopContentRef}
-                          className="overflow-hidden"
-                          style={{ height: mobileShopExpanded ? 'auto' : 0, opacity: mobileShopExpanded ? 1 : 0 }}
-                        >
-                          <div className="pb-2 pl-6 flex flex-col gap-0.5">
-                            {megaMenuItems.map((item) => {
-                              const itemActive = isMegaItemActive(item.page);
-                              return (
-                                <button
-                                  key={item.label}
-                                  className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-[#F5EDDA]"
-                                  style={{
-                                    fontFamily: "'Poppins', sans-serif",
-                                    color: itemActive ? '#D4AF37' : '#5A5A5A',
-                                    backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
-                                  }}
-                                  onClick={() => handleNavClick(item.page)}
-                                >
-                                  <div
-                                    className="flex items-center justify-center w-8 h-8 rounded-lg shrink-0 transition-colors duration-200"
-                                    style={{
-                                      backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.15)' : 'rgba(232, 213, 163, 0.15)',
-                                      color: itemActive ? '#D4AF37' : '#8A8A8A',
-                                    }}
-                                  >
-                                    {item.icon}
-                                  </div>
-                                  <div className="min-w-0">
-                                    <p className="text-sm font-medium">{item.label}</p>
-                                    <p className="text-[11px] mt-0.5" style={{ color: '#8A8A8A' }}>{item.description}</p>
-                                  </div>
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  }
-
                   return (
                     <button
                       key={link.label}
-                      className="mobile-nav-item flex items-center justify-between py-3 text-left transition-colors duration-200 rounded-xl px-3 hover:bg-[#F5EDDA] w-full"
-                      style={{ fontFamily: "'Poppins', sans-serif", color: isActive ? '#D4AF37' : '#2C2C2C' }}
-                      onClick={() => handleNavClick(link.page)}
+                      className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
+                      style={{
+                        fontFamily: "'Poppins', sans-serif",
+                        color: isActive ? '#D4AF37' : '#2C2C2C',
+                        backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+                      }}
+                      onClick={() => {
+                        if (link.label === 'Shop' && !mobileShopExpanded) {
+                          setMobileShopExpanded(true);
+                        } else {
+                          handleNavClick(link.page);
+                        }
+                      }}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: isActive ? 'rgba(212,175,55,0.12)' : 'rgba(232,213,163,0.15)' }}>
-                          {link.label === 'Home' && <svg className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4" /></svg>}
-                          {link.label === 'About' && <svg className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
-                          {link.label === 'Contact' && <svg className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
-                        </div>
-                        <span className="text-[15px] font-medium">{link.label}</span>
-                      </div>
-                      <ChevronRight className="h-4 w-4" style={{ color: '#D4AF37', opacity: 0.5 }} />
+                      <span className="text-base font-medium">{link.label}</span>
+                      {link.hasMegaMenu && (
+                        <ChevronDown
+                          className="h-4 w-4 transition-transform duration-300"
+                          style={{ transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)', color: '#D4AF37' }}
+                        />
+                      )}
                     </button>
                   );
                 })}
               </div>
 
+              {/* Shop Sub-menu */}
+              {mobileShopExpanded && (
+                <div ref={mobileShopContentRef} className="overflow-hidden pb-2">
+                  <div className="pl-6 flex flex-col gap-0.5">
+                    {megaMenuItems.map((item) => {
+                      const itemActive = isMegaItemActive(item.page);
+                      return (
+                        <button
+                          key={item.label}
+                          className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-[#F5EDDA]"
+                          style={{
+                            fontFamily: "'Poppins', sans-serif",
+                            color: itemActive ? '#D4AF37' : '#5A5A5A',
+                          }}
+                          onClick={() => handleNavClick(item.page)}
+                        >
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
+                            {item.icon}
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium">{item.label}</p>
+                            <p className="text-[11px]" style={{ color: '#8A8A8A' }}>{item.description}</p>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
               {/* Divider */}
               <div className="my-5 h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent)' }} />
 
               {/* Quick Actions */}
-              <div className="space-y-0.5">
-                <p className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-2.5" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>Quick Actions</p>
+              <div className="space-y-1">
+                <p className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-3" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>Quick Actions</p>
                 {[
-                  { icon: <Search className="h-4 w-4" />, label: 'Search', page: 'shop' as PageType },
-                  { icon: <Heart className="h-4 w-4" />, label: 'Wishlist', page: 'wishlist' as PageType, count: wishlistCount },
-                  { icon: <ShoppingCart className="h-4 w-4" />, label: 'Cart', page: 'cart' as PageType, count: cartCount },
-                  { icon: <User className="h-4 w-4" />, label: 'Account', page: 'account' as PageType },
+                  { icon: <Search className="h-5 w-5" />, label: 'Search', page: 'shop' as PageType },
+                  { icon: <Heart className="h-5 w-5" />, label: 'Wishlist', page: 'wishlist' as PageType, count: wishlistCount },
+                  { icon: <ShoppingCart className="h-5 w-5" />, label: 'Cart', page: 'cart' as PageType, count: cartCount },
+                  { icon: <User className="h-5 w-5" />, label: 'Account', page: 'account' as PageType },
                 ].map((item) => (
                   <button
                     key={item.label}
-                    className="mobile-quick-item flex items-center gap-3 py-2.5 text-left transition-colors duration-200 hover:bg-[#F5EDDA] rounded-xl px-3 w-full"
-                    style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}
+                    className="mobile-quick-item flex items-center gap-3 py-3.5 px-3 text-left transition-colors duration-200 hover:bg-[#F5EDDA] rounded-xl w-full"
+                    style={{ color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}
                     onClick={() => { closeMobileMenu(); if (item.label === 'Cart') setCartOpen(true); if (item.label === 'Wishlist') handleNavClick('wishlist'); if (item.label === 'Search') { setSearchOpen(true); } if (item.label === 'Account') handleNavClick('account'); }}
                   >
-                    <div className="w-9 h-9 rounded-lg flex items-center justify-center relative" style={{ backgroundColor: 'rgba(232,213,163,0.15)' }}>
+                    <div className="w-9 h-9 rounded-lg flex items-center justify-center relative" style={{ backgroundColor: 'rgba(232, 213, 163, 0.15)' }}>
                       {item.icon}
                       {item.count && item.count > 0 ? (
                         <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[#D4AF37]">
@@ -651,7 +625,7 @@ export default function Navbar() {
 
               {/* Bottom CTA */}
               <div className="mt-auto pt-6">
-                <div className="mobile-cta-card rounded-2xl p-5" style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(232,213,163,0.08) 100%)', border: '1px solid rgba(212,175,55,0.2)' }}>
+                <div className="rounded-2xl p-5" style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(232,213,163,0.12) 100%)', border: '1px solid rgba(212,175,55,0.2)' }}>
                   <p className="text-[11px] uppercase tracking-[3px] font-semibold mb-1.5" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>New Collection 2026</p>
                   <p className="text-xs mb-4 leading-relaxed" style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}>Explore our latest arrivals and handcrafted luxury pieces</p>
                   <button

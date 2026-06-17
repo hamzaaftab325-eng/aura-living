@@ -16,6 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function HeroSection() {
   const setPage = useStore((state) => state.setPage);
   const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
 
   // Text animation — same hooks used in AboutView, ShopView, etc.
@@ -77,37 +78,29 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden bg-[#2C2C2C] flex items-center justify-center"
       style={{ height: '100vh', height: '100dvh' }}
     >
-      {/* ═══ Single background image ═══ */}
+      {/* ═══ Background video ═══ */}
       <div ref={bgRef} className="absolute inset-0 w-full h-[120%] -top-[10%]">
-        <img
-          src="/images/hero/hero-slide-1.webp"
-          alt="Aura Living — Premium Home Decor"
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
           className="w-full h-full object-cover"
-          loading="eager"
-          fetchPriority="high"
-        />
+          poster="/images/hero/hero-slide-1.webp"
+        >
+          <source
+            src="https://res.cloudinary.com/diometfe9/video/upload/v1781723179/Working_on_ecommerce_store_backg__202606172346_tmnmz0.mp4"
+            type="video/mp4"
+          />
+        </video>
       </div>
 
-      {/* ═══ Overlay — multi-layer for depth ═══ */}
-      {/* Layer 1: Vertical gradient for text readability */}
+      {/* ═══ Black overlay for text readability ═══ */}
       <div
         className="absolute inset-0 z-[3]"
         style={{
-          background: 'linear-gradient(180deg, rgba(44,44,44,0.6) 0%, rgba(44,44,44,0.2) 35%, rgba(44,44,44,0.15) 55%, rgba(44,44,44,0.7) 100%)',
-        }}
-      />
-      {/* Layer 2: Warm gold tint */}
-      <div
-        className="absolute inset-0 z-[3]"
-        style={{
-          background: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(212,175,55,0.08) 0%, transparent 70%)',
-        }}
-      />
-      {/* Layer 3: Vignette */}
-      <div
-        className="absolute inset-0 z-[3]"
-        style={{
-          background: 'radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(44,44,44,0.4) 100%)',
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.7) 100%)',
         }}
       />
 
@@ -117,20 +110,20 @@ export default function HeroSection() {
         {/* Tag */}
         <span
           ref={tagRef}
-          className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-5 block"
+          className="text-[#D4AF37] text-xs sm:text-sm md:text-base tracking-[4px] uppercase font-medium mb-4 sm:mb-5 block"
           style={{ fontFamily: "'Poppins', sans-serif" }}
         >
           Premium Home Decor Pakistan
         </span>
 
-        {/* Heading */}
+        {/* Heading — responsive clamp */}
         <h1
           ref={headingRef}
           className="text-white font-bold leading-[1.1] mb-4 select-none"
           style={{
             fontFamily: "'Playfair Display', serif",
-            fontSize: 'clamp(38px, 8vw, 84px)',
-            textShadow: '0 2px 30px rgba(0,0,0,0.4)',
+            fontSize: 'clamp(28px, 6vw, 72px)',
+            textShadow: '0 2px 30px rgba(0,0,0,0.5)',
           }}
         >
           Where Comfort Meets Style
@@ -146,7 +139,7 @@ export default function HeroSection() {
         {/* Subtitle */}
         <p
           ref={subtitleRef}
-          className="text-white/80 text-sm sm:text-lg md:text-xl max-w-xl mb-8 leading-relaxed"
+          className="text-white/80 text-xs sm:text-base md:text-lg max-w-xs sm:max-w-xl mb-6 sm:mb-8 leading-relaxed"
           style={{ fontFamily: "'Poppins', sans-serif" }}
         >
           Discover handcrafted home decor, elegant lamps, indoor plants, ceramic vases & more. Premium quality delivered across Pakistan.
@@ -156,7 +149,7 @@ export default function HeroSection() {
         <button
           ref={ctaRef}
           onClick={() => setPage('shop')}
-          className="group inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer hover:gap-3 hover:shadow-[0_8px_40px_rgba(212,175,55,0.5)]"
+          className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer hover:gap-3 hover:shadow-[0_8px_40px_rgba(212,175,55,0.5)]"
           style={{
             backgroundColor: '#D4AF37',
             color: '#FFFFFF',
@@ -175,12 +168,12 @@ export default function HeroSection() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[4] flex flex-col items-center gap-2"
       >
         <span
-          className="text-white/40 text-[10px] tracking-[3px] uppercase"
+          className="text-white/40 text-[9px] sm:text-[10px] tracking-[3px] uppercase"
           style={{ fontFamily: "'Poppins', sans-serif" }}
         >
           Scroll
         </span>
-        <ChevronDown className="w-5 h-5 text-white/60 animate-bounce" />
+        <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-white/60 animate-bounce" />
       </div>
     </section>
   );
