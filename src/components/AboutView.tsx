@@ -9,7 +9,7 @@ import {
   ScrollTrigger,
 } from '@/hooks/useGsap';
 import { GoldDivider, FloatingOrb } from '@/components/SVGDecorations';
-import { Leaf, Hammer, Heart, ArrowRight } from 'lucide-react';
+import { Leaf, Hammer, Heart, ArrowRight, Sparkles, Package, Users, Truck, Store, Globe, Rocket, type LucideIcon } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 
@@ -43,42 +43,72 @@ const statsData = [
   { number: 4.8, suffix: '', label: 'Average Rating' },
 ];
 
-const timeline = [
+interface TimelineEntry {
+  year: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  highlight?: string; // optional stat or achievement callout
+  isFuture?: boolean;
+}
+
+const timeline: TimelineEntry[] = [
   {
     year: '2020',
-    title: 'The Dream Begins',
+    title: 'The Seed is Planted',
     description:
-      'A small workshop in Lahore, a big dream of bringing artisan home decor to every Pakistani home',
+      'Founded in a small Lahore workshop with three artisans, a borrowed kiln, and a vision to bring handcrafted Pakistani decor to every home.',
+    icon: Sparkles,
+    highlight: '3 artisans · 1 workshop',
   },
   {
     year: '2021',
-    title: 'First Collection',
+    title: 'First Collection Launches',
     description:
-      'Our debut collection of 50 handcrafted pieces launches online',
+      'Our debut collection of 50 handcrafted pieces goes live online. Within the first month, we fulfil 100 orders across Lahore and Karachi.',
+    icon: Package,
+    highlight: '50 pieces · 100 orders in 30 days',
   },
   {
     year: '2022',
-    title: 'Artisan Network',
+    title: 'Artisan Network Grows',
     description:
-      'Growing to 100+ artisan partners across Punjab, Sindh, and KPK',
+      'We partner with 100+ artisans across Punjab, Sindh, and KPK, preserving centuries-old techniques and providing fair-trade income to craft communities.',
+    icon: Users,
+    highlight: '100+ artisan partners',
   },
   {
     year: '2023',
-    title: 'Nationwide Delivery',
+    title: 'Nationwide Reach',
     description:
-      'Expanding delivery to 50+ cities across Pakistan',
+      'Delivery expands to 50+ cities across Pakistan. We cross 2,000 homes served and launch our signature gold-rim planter that becomes a bestseller.',
+    icon: Truck,
+    highlight: '50+ cities · 2,000+ homes',
   },
   {
     year: '2024',
-    title: 'Flagship Store',
+    title: 'Flagship Experience Center',
     description:
-      'Opening our first experience center in Gulberg, Lahore',
+      'We open our first physical experience center in Gulberg, Lahore — a 2,000 sq ft space where customers can touch, feel, and experience every piece in person.',
+    icon: Store,
+    highlight: '2,000 sq ft · Gulberg, Lahore',
+  },
+  {
+    year: '2025',
+    title: 'Digital Transformation',
+    description:
+      'We launch our redesigned online platform with 500+ products, AI-powered search, and same-day delivery within Lahore. Mobile app goes live on iOS and Android.',
+    icon: Globe,
+    highlight: '500+ products · Mobile app launch',
   },
   {
     year: '2026',
-    title: 'The Future',
+    title: 'Going Global',
     description:
-      'Expanding our collection and launching international shipping',
+      'Expanding our collection with international shipping to the UAE, UK, and US. Launching the Aura Artisan Fund to support the next generation of Pakistani craftspeople.',
+    icon: Rocket,
+    highlight: 'International shipping · Artisan Fund',
+    isFuture: true,
   },
 ];
 
@@ -555,36 +585,41 @@ function ValueCard({
 }
 
 /* ═══════════════════════════════════════════════════════════
-   TimelineItem — single timeline milestone
+   TimelineItem — single milestone card
+   Unified layout: connector on left, card on right (all breakpoints)
+   No DOM duplication — card rendered once, CSS handles spacing
    ═══════════════════════════════════════════════════════════ */
 function TimelineItem({
   item,
   index,
   isLast,
 }: {
-  item: { year: string; title: string; description: string };
+  item: TimelineEntry;
   index: number;
   isLast: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const Icon = item.icon;
 
   useEffect(() => {
-    if (!ref.current) return;
-    const el = ref.current;
-    const dot = el.querySelector('.tl-dot') as HTMLElement;
-    const line = el.querySelector('.tl-line') as HTMLElement;
-    const content = el.querySelector('.tl-content') as HTMLElement;
+    if (!ref.current || !cardRef.current || !badgeRef.current) return;
+    const badge = badgeRef.current;
+    const card = cardRef.current;
+    const line = lineRef.current;
 
-    gsap.set([dot, content], { opacity: 0 });
-    gsap.set(dot, { scale: 0 });
-    gsap.set(content, { x: index % 2 === 0 ? -30 : 30, opacity: 0 });
+    gsap.set([badge, card], { opacity: 0 });
+    gsap.set(badge, { scale: 0 });
+    gsap.set(card, { y: 30, opacity: 0 });
     if (line) gsap.set(line, { scaleY: 0, transformOrigin: 'top center' });
 
     const trigger = ScrollTrigger.create({
-      trigger: el,
-      start: 'top 82%',
+      trigger: ref.current,
+      start: 'top 85%',
       onEnter: () => {
-        gsap.to(dot, {
+        gsap.to(badge, {
           scale: 1,
           opacity: 1,
           duration: 0.5,
@@ -599,8 +634,8 @@ function TimelineItem({
             delay: 0.2,
           });
         }
-        gsap.to(content, {
-          x: 0,
+        gsap.to(card, {
+          y: 0,
           opacity: 1,
           duration: 0.7,
           delay: 0.3,
@@ -613,100 +648,103 @@ function TimelineItem({
   }, [index]);
 
   return (
-    <div ref={ref} className="relative flex items-start gap-6 sm:gap-8">
-      {/* Left content (visible on md+) */}
-      <div className="hidden md:block md:w-1/2 text-right">
-        {index % 2 === 0 ? (
-          <div className="tl-content pr-4">
-            <span
-              className="text-[#D4AF37] text-2xl sm:text-3xl font-bold"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              {item.year}
-            </span>
-            <h4
-              className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mt-1"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              {item.title}
-            </h4>
-            <p
-              className="text-[#5A5A5A] text-sm mt-2 leading-relaxed"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
-            >
-              {item.description}
-            </p>
-          </div>
-        ) : (
-          <div className="pr-4" />
-        )}
-      </div>
-
-      {/* Center line & dot */}
-      <div className="flex flex-col items-center relative">
+    <div ref={ref} className="relative flex items-stretch gap-4 sm:gap-6 lg:gap-8">
+      {/* Center connector with icon badge */}
+      <div className="flex flex-col items-center relative shrink-0">
         <div
-          className="tl-dot w-4 h-4 rounded-full border-2 z-10 shrink-0"
+          ref={badgeRef}
+          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center z-10 shrink-0 transition-all duration-300 hover:scale-110"
           style={{
-            backgroundColor: '#FAF8F5',
-            borderColor: '#D4AF37',
+            backgroundColor: item.isFuture ? '#FAF8F5' : '#D4AF37',
+            border: item.isFuture
+              ? '2px dashed #D4AF37'
+              : '2px solid #D4AF37',
+            boxShadow: item.isFuture
+              ? 'none'
+              : '0 4px 14px rgba(212,175,55,0.25)',
           }}
-        />
+        >
+          <Icon
+            className="w-5 h-5 sm:w-6 sm:h-6"
+            style={{ color: item.isFuture ? '#D4AF37' : '#FFFDF7' }}
+          />
+        </div>
         {!isLast && (
           <div
-            className="tl-line w-px flex-1 min-h-[80px]"
-            style={{ backgroundColor: '#D4AF37', opacity: 0.3 }}
+            ref={lineRef}
+            className="w-0.5 flex-1 min-h-[40px] sm:min-h-[60px]"
+            style={{
+              background: item.isFuture
+                ? 'repeating-linear-gradient(to bottom, rgba(212,175,55,0.5) 0, rgba(212,175,55,0.5) 4px, transparent 4px, transparent 8px)'
+                : 'linear-gradient(to bottom, rgba(212,175,55,0.4), rgba(212,175,55,0.12))',
+            }}
           />
         )}
       </div>
 
-      {/* Right content (visible on md+) */}
-      <div className="hidden md:block md:w-1/2">
-        {index % 2 !== 0 ? (
-          <div className="tl-content pl-4">
+      {/* Card — single instance, no duplication */}
+      <div
+        ref={cardRef}
+        className="tl-card group flex-1 rounded-lg p-5 sm:p-6 mb-4 sm:mb-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] hover:-translate-y-1"
+        style={{
+          backgroundColor: item.isFuture ? 'rgba(212,175,55,0.04)' : '#FFFDF7',
+          border: item.isFuture
+            ? '1px dashed rgba(212,175,55,0.4)'
+            : '1px solid rgba(232,213,163,0.4)',
+        }}
+      >
+        {/* Year + Upcoming badge */}
+        <div className="flex items-center gap-3 mb-2 flex-wrap">
+          <span
+            className="text-[#D4AF37] text-2xl sm:text-3xl font-bold leading-none"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            {item.year}
+          </span>
+          {item.isFuture && (
             <span
-              className="text-[#D4AF37] text-2xl sm:text-3xl font-bold"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              className="text-[9px] uppercase tracking-[2px] font-semibold px-2 py-0.5 rounded-full"
+              style={{
+                backgroundColor: 'rgba(212,175,55,0.12)',
+                color: '#D4AF37',
+                fontFamily: "'Poppins', sans-serif",
+              }}
             >
-              {item.year}
+              Upcoming
             </span>
-            <h4
-              className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mt-1"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              {item.title}
-            </h4>
-            <p
-              className="text-[#5A5A5A] text-sm mt-2 leading-relaxed"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
-            >
-              {item.description}
-            </p>
-          </div>
-        ) : (
-          <div className="pl-4" />
-        )}
-      </div>
+          )}
+        </div>
 
-      {/* Mobile layout (single column) */}
-      <div className="md:hidden tl-content flex-1 pb-8">
-        <span
-          className="text-[#D4AF37] text-xl font-bold"
-          style={{ fontFamily: "'Playfair Display', serif" }}
-        >
-          {item.year}
-        </span>
+        {/* Title */}
         <h4
-          className="text-[#2C2C2C] text-base font-semibold mt-1"
+          className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-2"
           style={{ fontFamily: "'Playfair Display', serif" }}
         >
           {item.title}
         </h4>
+
+        {/* Description */}
         <p
-          className="text-[#5A5A5A] text-sm mt-1.5 leading-relaxed"
+          className="text-[#5A5A5A] text-xs sm:text-sm leading-relaxed mb-3"
           style={{ fontFamily: "'Poppins', sans-serif" }}
         >
           {item.description}
         </p>
+
+        {/* Highlight stat badge */}
+        {item.highlight && (
+          <div
+            className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-sm"
+            style={{
+              backgroundColor: 'rgba(212,175,55,0.08)',
+              color: '#D4AF37',
+              fontFamily: "'Poppins', sans-serif",
+            }}
+          >
+            <Icon className="w-3 h-3" />
+            {item.highlight}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -1273,8 +1311,8 @@ export default function AboutView() {
       <DecorativeGoldLine />
 
       {/* ═══════════════════ TIMELINE ═══════════════════ */}
-      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#FAF8F5' }}>
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
             <span
               className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium"
@@ -1288,6 +1326,13 @@ export default function AboutView() {
             >
               Milestones
             </h2>
+            <p
+              className="text-[#5A5A5A] text-sm sm:text-base mt-3 max-w-lg mx-auto leading-relaxed"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              From a single workshop to a nationwide brand — every milestone
+              represents a step closer to our vision.
+            </p>
             <div className="mt-4 flex justify-center">
               <GoldDivider />
             </div>
