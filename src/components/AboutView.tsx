@@ -1031,15 +1031,22 @@ export default function AboutView() {
 
       {/* ═══════════════════ OPENING QUOTE ═══════════════════ */}
       <section className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-2xl mx-auto text-center">
+          {/* Decorative opening quote mark */}
           <div
+            className="text-[#D4AF37] text-6xl sm:text-7xl leading-none mb-4 select-none"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+            aria-hidden="true"
+          >
+            &ldquo;
+          </div>
+          <blockquote
             ref={quoteRef}
-            className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl lg:text-[40px] leading-snug md:leading-snug italic"
+            className="text-[#2C2C2C] text-xl sm:text-2xl md:text-3xl lg:text-[34px] leading-relaxed md:leading-relaxed italic"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            We believe every home tells a story. Ours begins with the hands of
-            artisans.
-          </div>
+            We believe every home tells a story. Ours begins with the hands of artisans.
+          </blockquote>
           <div className="mt-8 flex justify-center">
             <GoldDivider />
           </div>
