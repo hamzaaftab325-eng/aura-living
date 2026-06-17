@@ -1030,11 +1030,11 @@ export default function AboutView() {
       </section>
 
       {/* ═══════════════════ OPENING QUOTE ═══════════════════ */}
-      <section className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto text-center">
+      <section className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center">
           {/* Decorative opening quote mark */}
           <div
-            className="text-[#D4AF37] text-6xl sm:text-7xl leading-none mb-4 select-none"
+            className="text-[#D4AF37] text-5xl sm:text-6xl md:text-7xl leading-none mb-2 sm:mb-4 select-none"
             style={{ fontFamily: "'Playfair Display', serif" }}
             aria-hidden="true"
           >
@@ -1042,12 +1042,12 @@ export default function AboutView() {
           </div>
           <blockquote
             ref={quoteRef}
-            className="text-[#2C2C2C] text-xl sm:text-2xl md:text-3xl lg:text-[34px] leading-relaxed md:leading-relaxed italic"
+            className="text-[#2C2C2C] text-lg sm:text-2xl md:text-3xl lg:text-[34px] leading-relaxed md:leading-snug italic mx-auto"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             We believe every home tells a story. Ours begins with the hands of artisans.
           </blockquote>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-6 sm:mt-8 flex justify-center">
             <GoldDivider />
           </div>
         </div>

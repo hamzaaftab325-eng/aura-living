@@ -207,26 +207,6 @@ export default function Home() {
     }
   };
 
-  // Loading state — show ONLY the branded spinner, nothing else
-  if (!mounted) {
-    return (
-      <div
-        className="min-h-screen flex flex-col items-center justify-center"
-        style={{ backgroundColor: '#FAF8F5' }}
-      >
-        <img
-          src="/logo/default-monochrome-gold-black.svg"
-          alt="Aura Living"
-          style={{ height: '48px', width: 'auto', objectFit: 'contain', marginBottom: '32px' }}
-        />
-        <div
-          className="w-10 h-10 rounded-full border-2 border-[#E8D5A3] border-t-[#D4AF37]"
-          style={{ animation: 'spin 0.8s linear infinite' }}
-        />
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8F5] relative grain-overlay w-full overflow-x-hidden">
       <FloatingOrb size={90} top="15%" left="3%" delay={0} />
