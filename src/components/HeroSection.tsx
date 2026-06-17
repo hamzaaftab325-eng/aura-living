@@ -90,7 +90,7 @@ export default function HeroSection() {
           poster="/images/hero/hero-slide-1.webp"
         >
           <source
-            src="https://res.cloudinary.com/diometfe9/video/upload/v1781723179/Working_on_ecommerce_store_backg__202606172346_tmnmz0.mp4"
+            src="https://res.cloudinary.com/diometfe9/video/upload/v1781723540/Working_on_ecommerce_store_backg__202606180012_pm2rtf.mp4"
             type="video/mp4"
           />
         </video>

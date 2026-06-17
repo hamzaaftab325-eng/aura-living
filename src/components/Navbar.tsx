@@ -269,7 +269,7 @@ export default function Navbar() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          background: scrolled ? 'rgba(250, 248, 245, 0.85)' : 'transparent',
+          background: scrolled ? 'rgba(44, 44, 44, 0.6)' : 'transparent',
           backdropFilter: scrolled ? 'blur(12px)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
           borderBottom: scrolled ? '1px solid rgba(212, 175, 55, 0.15)' : '1px solid transparent',
@@ -282,7 +282,7 @@ export default function Navbar() {
           <div
             className="flex items-center justify-between rounded-full px-4 sm:px-5 py-2.5 sm:py-3"
             style={{
-              backgroundColor: 'rgba(255, 253, 247, 0.35)',
+              backgroundColor: 'rgba(44, 44, 44, 0.4)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
               border: '1px solid rgba(212, 175, 55, 0.3)',
@@ -298,7 +298,7 @@ export default function Navbar() {
               tabIndex={0}
               aria-label="Aura Living home"
             >
-              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: 'clamp(50px, 8vw, 80px)', width: 'auto', objectFit: 'contain' }} />
+              <img src="/logo/default-monochrome-gold-white.svg" alt="Aura Living" style={{ height: 'clamp(50px, 8vw, 80px)', width: 'auto', objectFit: 'contain' }} />
             </div>
 
             {/* Desktop Nav Links — inside pill */}
@@ -318,10 +318,10 @@ export default function Navbar() {
                       ref={(el) => {
                         if (el) navItemRefs.current.set(link.label, el);
                       }}
-                      className="relative z-10 block cursor-pointer px-5 py-2.5 text-sm uppercase font-medium transition-colors duration-200"
+                      className="relative z-10 block cursor-pointer px-6 py-3 text-base uppercase font-medium transition-colors duration-200"
                       style={{
                         fontFamily: "'Poppins', sans-serif",
-                        color: isActive ? '#D4AF37' : '#5A5A5A',
+                        color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.7)',
                       }}
                       onMouseEnter={() => {
                         setHoveredLink(link.label);
@@ -368,8 +368,8 @@ export default function Navbar() {
             <div className="flex items-center gap-1 sm:gap-1.5">
               {/* Search */}
               <button
-                className="p-2.5 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]"
-                style={{ color: '#5A5A5A' }}
+                className="p-3 rounded-full transition-colors duration-200 hover:bg-white/10"
+                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
                 aria-label="Search"
                 onClick={() => setSearchOpen(true)}
               >
@@ -378,8 +378,8 @@ export default function Navbar() {
 
               {/* Wishlist — desktop/tablet */}
               <button
-                className="relative hidden sm:flex p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]"
-                style={{ color: '#5A5A5A' }}
+                className="relative hidden sm:flex p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
+                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
                 aria-label="Wishlist"
                 onClick={() => handleNavClick('wishlist')}
               >
@@ -393,8 +393,8 @@ export default function Navbar() {
 
               {/* Cart */}
               <button
-                className="relative p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]"
-                style={{ color: '#5A5A5A' }}
+                className="relative p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
+                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
                 aria-label="Cart"
                 onClick={() => setCartOpen(true)}
               >
@@ -408,8 +408,8 @@ export default function Navbar() {
 
               {/* Account — desktop/tablet */}
               <button
-                className="hidden sm:flex p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]"
-                style={{ color: '#5A5A5A' }}
+                className="hidden sm:flex p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
+                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
                 aria-label="Account"
                 onClick={() => handleNavClick('account')}
               >
@@ -418,8 +418,8 @@ export default function Navbar() {
 
               {/* Hamburger — mobile/tablet */}
               <button
-                className="lg:hidden p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]"
-                style={{ color: '#5A5A5A' }}
+                className="lg:hidden p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
+                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
                 aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
               >
@@ -440,7 +440,7 @@ export default function Navbar() {
               <div
                 className="rounded-lg overflow-hidden"
                 style={{
-                  background: 'rgba(255, 253, 247, 0.98)',
+                  background: 'rgba(44, 44, 44, 0.85)',
                   backdropFilter: 'blur(16px)',
                   WebkitBackdropFilter: 'blur(16px)',
                   borderTop: '2px solid #D4AF37',
@@ -470,7 +470,7 @@ export default function Navbar() {
                           className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0"
                           style={{
                             backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.2)' : 'rgba(232, 213, 163, 0.1)',
-                            color: itemActive ? '#D4AF37' : '#8A8A8A',
+                            color: itemActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.5)',
                           }}
                         >
                           {item.icon}
@@ -480,7 +480,7 @@ export default function Navbar() {
                             className="text-sm font-medium"
                             style={{
                               fontFamily: "'Poppins', sans-serif",
-                              color: itemActive ? '#D4AF37' : '#2C2C2C',
+                              color: itemActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.9)',
                             }}
                           >
                             {item.label}
@@ -489,7 +489,7 @@ export default function Navbar() {
                             className="text-xs mt-0.5"
                             style={{
                               fontFamily: "'Poppins', sans-serif",
-                              color: '#8A8A8A',
+                              color: 'rgba(255, 255, 255, 0.4)',
                             }}
                           >
                             {item.description}
@@ -512,7 +512,7 @@ export default function Navbar() {
           <div
             ref={mobileMenuRef}
             className="fixed top-0 right-0 bottom-0 z-[52] flex flex-col w-full sm:w-[420px] sm:max-w-[92vw]"
-            style={{ backgroundColor: 'rgba(250, 248, 245, 0.97)', backdropFilter: 'blur(20px)', borderLeft: '1px solid rgba(212, 175, 55, 0.2)' }}
+            style={{ backgroundColor: 'rgba(44, 44, 44, 0.92)', backdropFilter: 'blur(20px)', borderLeft: '1px solid rgba(212, 175, 55, 0.2)' }}
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation menu"
@@ -520,8 +520,8 @@ export default function Navbar() {
           >
             {/* Mobile Menu Header */}
             <div className="flex items-center justify-between px-6 shrink-0" style={{ height: '72px', borderBottom: '1px solid rgba(212, 175, 55, 0.15)' }}>
-              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: '50px', width: 'auto', objectFit: 'contain' }} />
-              <button className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A', border: '1px solid rgba(212, 175, 55, 0.2)' }} onClick={closeMobileMenu} aria-label="Close menu">
+              <img src="/logo/default-monochrome-gold-white.svg" alt="Aura Living" style={{ height: '50px', width: 'auto', objectFit: 'contain' }} />
+              <button className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/10" style={{ color: 'rgba(255, 255, 255, 0.7)', border: '1px solid rgba(212, 175, 55, 0.2)' }} onClick={closeMobileMenu} aria-label="Close menu">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -571,19 +571,19 @@ export default function Navbar() {
                       return (
                         <button
                           key={item.label}
-                          className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-[#F5EDDA]"
+                          className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-white/10"
                           style={{
                             fontFamily: "'Poppins', sans-serif",
                             color: itemActive ? '#D4AF37' : '#5A5A5A',
                           }}
                           onClick={() => handleNavClick(item.page)}
                         >
-                          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
                             {item.icon}
                           </div>
                           <div>
                             <p className="text-sm font-medium">{item.label}</p>
-                            <p className="text-[11px]" style={{ color: '#8A8A8A' }}>{item.description}</p>
+                            <p className="text-[11px]" style={{ color: 'rgba(255, 255, 255, 0.4)' }}>{item.description}</p>
                           </div>
                         </button>
                       );
@@ -606,11 +606,11 @@ export default function Navbar() {
                 ].map((item) => (
                   <button
                     key={item.label}
-                    className="mobile-quick-item flex items-center gap-3 py-3.5 px-3 text-left transition-colors duration-200 hover:bg-[#F5EDDA] rounded-xl w-full"
-                    style={{ color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}
+                    className="mobile-quick-item flex items-center gap-3 py-3.5 px-3 text-left transition-colors duration-200 hover:bg-white/10 rounded-xl w-full"
+                    style={{ color: 'rgba(255, 255, 255, 0.9)', fontFamily: "'Poppins', sans-serif" }}
                     onClick={() => { closeMobileMenu(); if (item.label === 'Cart') setCartOpen(true); if (item.label === 'Wishlist') handleNavClick('wishlist'); if (item.label === 'Search') { setSearchOpen(true); } if (item.label === 'Account') handleNavClick('account'); }}
                   >
-                    <div className="w-9 h-9 rounded-lg flex items-center justify-center relative" style={{ backgroundColor: 'rgba(232, 213, 163, 0.15)' }}>
+                    <div className="w-9 h-9 rounded-lg flex items-center justify-center relative" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
                       {item.icon}
                       {item.count && item.count > 0 ? (
                         <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[#D4AF37]">
@@ -627,7 +627,7 @@ export default function Navbar() {
               <div className="mt-auto pt-6">
                 <div className="rounded-2xl p-5" style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(232,213,163,0.12) 100%)', border: '1px solid rgba(212,175,55,0.2)' }}>
                   <p className="text-[11px] uppercase tracking-[3px] font-semibold mb-1.5" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>New Collection 2026</p>
-                  <p className="text-xs mb-4 leading-relaxed" style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}>Explore our latest arrivals and handcrafted luxury pieces</p>
+                  <p className="text-xs mb-4 leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.7)', fontFamily: "'Poppins', sans-serif" }}>Explore our latest arrivals and handcrafted luxury pieces</p>
                   <button
                     className="premium-btn btn-gold px-5 py-2.5 text-xs w-full rounded-sm"
                     style={{ fontFamily: "'Poppins', sans-serif" }}
@@ -648,7 +648,7 @@ export default function Navbar() {
           <div className="fixed inset-0 z-[55] bg-black/30" onClick={() => { setSearchOpen(false); setSearchQuery(''); }} />
           <div
             className="fixed top-0 left-0 right-0 z-[56] py-6 px-4 sm:px-6"
-            style={{ backgroundColor: 'rgba(250, 248, 245, 0.98)', borderBottom: '1px solid rgba(212,175,55,0.2)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)', backdropFilter: 'blur(12px)' }}
+            style={{ backgroundColor: 'rgba(44, 44, 44, 0.95)', borderBottom: '1px solid rgba(212,175,55,0.2)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)', backdropFilter: 'blur(12px)' }}
           >
             <div className="mx-auto max-w-2xl">
               <div className="flex items-center gap-3">
@@ -660,7 +660,7 @@ export default function Navbar() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search products..."
                   className="flex-1 bg-transparent outline-none text-base"
-                  style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                  style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.9)' }}
                   onKeyDown={(e) => {
                     if (e.key === 'Escape') { setSearchOpen(false); setSearchQuery(''); }
                     if (e.key === 'Enter' && searchQuery.trim()) {
@@ -670,7 +670,7 @@ export default function Navbar() {
                     }
                   }}
                 />
-                <button onClick={() => { setSearchOpen(false); setSearchQuery(''); }} className="p-2 rounded-full hover:bg-[#F5EDDA] transition-colors" style={{ color: '#5A5A5A' }} aria-label="Close search">
+                <button onClick={() => { setSearchOpen(false); setSearchQuery(''); }} className="p-2 rounded-full hover:bg-white/10 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} aria-label="Close search">
                   <X className="h-5 w-5" />
                 </button>
               </div>
@@ -683,24 +683,24 @@ export default function Navbar() {
                     .map((p) => (
                       <button
                         key={p.id}
-                        className="w-full flex items-center gap-3 py-3 px-2 text-left rounded-lg transition-colors hover:bg-[#F5EDDA]"
+                        className="w-full flex items-center gap-3 py-3 px-2 text-left rounded-lg transition-colors hover:bg-white/10"
                         onClick={() => {
                           useStore.getState().setSelectedProduct(p);
                           setSearchOpen(false); setSearchQuery('');
                           handleNavClick('product');
                         }}
                       >
-                        <div className="w-10 h-10 rounded-md overflow-hidden shrink-0" style={{ backgroundColor: '#FFFDF7', border: '1px solid rgba(212, 175, 55, 0.2)' }}>
+                        <div className="w-10 h-10 rounded-md overflow-hidden shrink-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(212, 175, 55, 0.2)' }}>
                           <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-sm font-medium truncate" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>{p.name}</p>
+                          <p className="text-sm font-medium truncate" style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.9)' }}>{p.name}</p>
                           <p className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>{formatPKR(p.price)}</p>
                         </div>
                       </button>
                     ))}
                   {products.filter((p) => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.category.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
-                    <p className="text-sm py-4 text-center" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>No products found for &quot;{searchQuery}&quot;</p>
+                    <p className="text-sm py-4 text-center" style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.4)' }}>No products found for &quot;{searchQuery}&quot;</p>
                   )}
                 </div>
               )}
