@@ -83,22 +83,14 @@ export default function Home() {
     }
   }, [currentPage]);
 
-  // Browser back/forward support — listen to popstate
+  // Browser back/forward support — listen to popstate (run once on mount)
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // On first mount, if URL has a #hash that matches a PageType, navigate there
-    const hash = window.location.hash.replace('#', '');
-    const validPages: readonly string[] = [
-      'home', 'shop', 'product', 'cart', 'checkout', 'wishlist', 'account',
-      'about', 'contact', 'login', 'signup', 'faq', 'shipping', 'returns',
-      'care-guide', 'new-arrivals', 'sale', 'lookbook', 'terms', 'privacy', 'forgot-password',
-    ];
-    if (hash && validPages.includes(hash)) {
-      // Use the in-store setPage WITHOUT pushing history (history already has it)
-      useStore.setState({ currentPage: hash as typeof currentPage });
-    } else if (!window.history.state) {
-      // Seed history with current page so back button works from the first navigation
+    // Seed history with the current page so back button works from the first navigation.
+    // The store already initialized currentPage from the URL hash synchronously on mount,
+    // so we don't need to read it again here.
+    if (!window.history.state) {
       window.history.replaceState({ page: currentPage }, '', `#${currentPage}`);
     }
 
@@ -110,7 +102,7 @@ export default function Home() {
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, [currentPage]);
+  }, []);
 
   // GSAP page transition — GPU-accelerated slide + fade
   useEffect(() => {
