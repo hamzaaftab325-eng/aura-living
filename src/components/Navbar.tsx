@@ -137,17 +137,11 @@ export default function Navbar() {
 
   // Mobile menu animation — staggered entrance with delay, GPU-accelerated
   useEffect(() => {
-    if (mobileMenuOpen) {
-      // Backdrop fade in
-      if (mobileBackdropRef.current) {
-        gsap.fromTo(mobileBackdropRef.current, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' });
-      }
-      // Menu slide in from right
-      if (mobileMenuRef.current) {
-        gsap.fromTo(mobileMenuRef.current,
-          { opacity: 0, x: 60 },
-          { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out', delay: 0.1, force3D: true }
-        );
+    if (mobileMenuOpen && mobileMenuRef.current) {
+      gsap.fromTo(mobileMenuRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: 'power2.out' }
+      );
         // Stagger nav items after menu slides in
         const navItems = mobileMenuRef.current.querySelectorAll('.mobile-nav-item');
         const quickItems = mobileMenuRef.current.querySelectorAll('.mobile-quick-item');
@@ -170,7 +164,6 @@ export default function Navbar() {
             { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', delay: 0.75, force3D: true }
           );
         }
-      }
     }
   }, [mobileMenuOpen]);
 
@@ -211,17 +204,13 @@ export default function Navbar() {
   }, [setPage]);
 
   const closeMobileMenu = useCallback(() => {
-    const onComplete = () => { setMobileMenuOpen(false); setMobileShopExpanded(false); };
-    if (mobileBackdropRef.current) {
-      gsap.to(mobileBackdropRef.current, { opacity: 0, duration: 0.3, ease: 'power2.in' });
-    }
     if (mobileMenuRef.current) {
       gsap.to(mobileMenuRef.current, {
-        opacity: 0, x: 60, duration: 0.3, ease: 'power3.in', force3D: true,
-        onComplete,
+        opacity: 0, duration: 0.2, ease: 'power2.in',
+        onComplete: () => { setMobileMenuOpen(false); setMobileShopExpanded(false); },
       });
     } else {
-      onComplete();
+      setMobileMenuOpen(false); setMobileShopExpanded(false);
     }
   }, []);
 
@@ -269,11 +258,11 @@ export default function Navbar() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          background: scrolled ? 'rgba(44, 44, 44, 0.6)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(212, 175, 55, 0.15)' : '1px solid transparent',
-          boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.08)' : 'none',
+          background: 'transparent',
+          backdropFilter: 'none',
+          WebkitBackdropFilter: 'none',
+          borderBottom: 'none',
+          boxShadow: 'none',
         }}
       >
         <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-6 pt-3 sm:pt-4">
@@ -282,7 +271,7 @@ export default function Navbar() {
           <div
             className="flex items-center justify-between rounded-full px-4 sm:px-5 py-2.5 sm:py-3"
             style={{
-              backgroundColor: 'rgba(44, 44, 44, 0.4)',
+              backgroundColor: '#2C2C2C', border: '1px solid rgba(212, 175, 55, 0.3)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
               border: '1px solid rgba(212, 175, 55, 0.3)',
@@ -507,12 +496,10 @@ export default function Navbar() {
 
       {/* Mobile Menu — Elegant Slide-In from Right */}
       {mobileMenuOpen && (
-        <>
-          <div ref={mobileBackdropRef} className="fixed inset-0 z-[51] bg-black/50 backdrop-blur-sm" onClick={closeMobileMenu} aria-hidden="true" />
-          <div
+        <div
             ref={mobileMenuRef}
-            className="fixed top-0 right-0 bottom-0 z-[52] flex flex-col w-full sm:w-[420px] sm:max-w-[92vw]"
-            style={{ backgroundColor: 'rgba(44, 44, 44, 0.92)', backdropFilter: 'blur(20px)', borderLeft: '1px solid rgba(212, 175, 55, 0.2)' }}
+            className="fixed inset-0 z-[52] flex flex-col"
+            style={{ backgroundColor: 'rgba(20, 20, 20, 0.97)', backdropFilter: 'blur(20px)' }}
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation menu"
@@ -543,8 +530,8 @@ export default function Navbar() {
                         backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
                       }}
                       onClick={() => {
-                        if (link.label === 'Shop' && !mobileShopExpanded) {
-                          setMobileShopExpanded(true);
+                        if (link.hasMegaMenu) {
+                          setMobileShopExpanded(!mobileShopExpanded);
                         } else {
                           handleNavClick(link.page);
                         }
@@ -638,8 +625,7 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-          </div>
-        </>
+        </div>
       )}
 
       {/* Search Modal */}
