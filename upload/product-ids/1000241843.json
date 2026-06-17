@@ -1,0 +1,28 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "Lamp | Golden Arc Floor Lamp | lighting | Brass & Marble | 15999 | modern, arc design, premium, marble base, elegant",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1781680266,
+  "id": "20260617151104ee4438d888804894",
+  "model": "glm-4.6v",
+  "object": "chat.completion",
+  "request_id": "20260617151104ee4438d888804894",
+  "usage": {
+    "completion_tokens": 32,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens": 2279,
+    "prompt_tokens_details": {
+      "cached_tokens": 244
+    },
+    "total_tokens": 2311
+  }
+}

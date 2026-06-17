@@ -1,0 +1,28 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "Planter | Golden Wire Cage Planter | plants | Brass & Ceramic | 5999 | modern, decorative, indoor, gold, minimalist",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1781680299,
+  "id": "202606171511359b27565d81f24aa9",
+  "model": "glm-4.6v",
+  "object": "chat.completion",
+  "request_id": "202606171511359b27565d81f24aa9",
+  "usage": {
+    "completion_tokens": 32,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens": 3464,
+    "prompt_tokens_details": {
+      "cached_tokens": 46
+    },
+    "total_tokens": 3496
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "Lamp | Brass & Fabric Pleated Shade Table Lamp | lighting | Brass & Fabric | 12999 | elegant, modern, ambient, bedroom, living-room",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1781680234,
+  "id": "202606171510293391e93b3bbc4054",
+  "model": "glm-4.6v",
+  "object": "chat.completion",
+  "request_id": "202606171510293391e93b3bbc4054",
+  "usage": {
+    "completion_tokens": 35,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens": 2279,
+    "prompt_tokens_details": {
+      "cached_tokens": 6
+    },
+    "total_tokens": 2314
+  }
+}

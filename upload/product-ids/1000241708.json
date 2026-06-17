@@ -1,0 +1,28 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "Planter | Golden Cage Planter with Succulent | plants | Brass & Ceramic | 3999 | luxury, modern, decorative, home-accessory, gold",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1781680286,
+  "id": "20260617151124e2b2c908433b4dc0",
+  "model": "glm-4.6v",
+  "object": "chat.completion",
+  "request_id": "20260617151124e2b2c908433b4dc0",
+  "usage": {
+    "completion_tokens": 36,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens": 2251,
+    "prompt_tokens_details": {
+      "cached_tokens": 244
+    },
+    "total_tokens": 2287
+  }
+}

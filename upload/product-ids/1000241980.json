@@ -1,0 +1,28 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "Lamp | Marble Arch Ceramic Table Lamp | lighting | Ceramic & Brass | 8999 | elegant, marble, ceramic, brass, bedside",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1781680307,
+  "id": "20260617151145189ac820ba6d4805",
+  "model": "glm-4.6v",
+  "object": "chat.completion",
+  "request_id": "20260617151145189ac820ba6d4805",
+  "usage": {
+    "completion_tokens": 32,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens": 2251,
+    "prompt_tokens_details": {
+      "cached_tokens": 7
+    },
+    "total_tokens": 2283
+  }
+}

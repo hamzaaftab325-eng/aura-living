@@ -1,0 +1,28 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "Lamp | Elegant Ceramic Table Lamp | lighting | Ceramic & Brass | 8999 | modern, bedside, white, gold, ceramic",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1781680279,
+  "id": "202606171511156e5c5c641f9847b7",
+  "model": "glm-4.6v",
+  "object": "chat.completion",
+  "request_id": "202606171511156e5c5c641f9847b7",
+  "usage": {
+    "completion_tokens": 31,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens": 2279,
+    "prompt_tokens_details": {
+      "cached_tokens": 7
+    },
+    "total_tokens": 2310
+  }
+}
