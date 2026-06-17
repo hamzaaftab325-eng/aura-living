@@ -1,0 +1,688 @@
+[
+  {
+    "slug": "hammered-brass-table-lamp",
+    "name": "Hammered Brass Table Lamp",
+    "category": "lighting",
+    "material": "Hand-Hammered Brass & Linen",
+    "price": 9999,
+    "badge": "NEW",
+    "rating": 4.7,
+    "reviews": 88,
+    "description": "A hand-hammered brass table lamp with a textured surface that catches light beautifully. Topped with a natural linen shade for warm, diffused illumination. Each lamp is individually crafted by Pakistani artisans, making every piece subtly unique.",
+    "tags": [
+      "handcrafted",
+      "textured",
+      "ambient",
+      "bedside",
+      "warm-glow"
+    ],
+    "angles": [
+      "A hand-hammered brass table lamp with a rounded body and natural linen shade, front view",
+      "A hand-hammered brass table lamp shown from a 3/4 angle revealing the textured surface",
+      "A close-up detail shot of a hand-hammered brass lamp base showing the dimpled texture"
+    ]
+  },
+  {
+    "slug": "smoked-glass-pendant-light",
+    "name": "Smoked Glass Pendant Light",
+    "category": "lighting",
+    "material": "Smoked Glass & Brass",
+    "price": 14499,
+    "badge": "BESTSELLER",
+    "rating": 4.8,
+    "reviews": 142,
+    "description": "A smoked glass dome pendant light suspended from a slim brass canopy. The tinted glass softens the bulb glow into a moody, atmospheric wash. Perfect over kitchen islands, dining tables, or entry foyers.",
+    "tags": [
+      "modern",
+      "pendant",
+      "smoked-glass",
+      "dining",
+      "ambient"
+    ],
+    "angles": [
+      "A smoked glass dome pendant light with brass canopy, full view from below",
+      "A smoked glass pendant light shown from the side at 3/4 angle",
+      "A smoked glass pendant light detail showing the brass connection and glass edge"
+    ]
+  },
+  {
+    "slug": "crystal-drop-chandelier",
+    "name": "Crystal Drop Chandelier",
+    "category": "lighting",
+    "material": "Crystal & Brass",
+    "price": 24999,
+    "originalPrice": 29999,
+    "badge": "SALE",
+    "rating": 4.9,
+    "reviews": 67,
+    "description": "A cascading crystal drop chandelier with a brushed brass frame. Each crystal is hand-strung to catch and refract light, creating a sparkling display. A statement piece for entryways and formal dining rooms.",
+    "tags": [
+      "luxury",
+      "crystal",
+      "chandelier",
+      "statement",
+      "sparkle"
+    ],
+    "angles": [
+      "A cascading crystal drop chandelier with brass frame, full front view",
+      "A crystal chandelier shown at a 3/4 angle revealing the depth of crystal drops",
+      "A detail close-up of crystal drops on a brass chandelier catching the light"
+    ]
+  },
+  {
+    "slug": "handpainted-ceramic-lamp",
+    "name": "Hand-Painted Ceramic Lamp",
+    "category": "lighting",
+    "material": "Hand-Painted Ceramic",
+    "price": 7999,
+    "rating": 4.6,
+    "reviews": 94,
+    "description": "A hand-painted ceramic table lamp featuring delicate floral motifs in cobalt blue and gold. The curvy bottle silhouette is topped with a crisp white shade. A artisanal accent that brings character to consoles and side tables.",
+    "tags": [
+      "handpainted",
+      "ceramic",
+      "floral",
+      "decorative",
+      "artisan"
+    ],
+    "angles": [
+      "A hand-painted ceramic table lamp with blue floral motifs and white shade, front view",
+      "A hand-painted ceramic lamp at 3/4 angle showing the curved silhouette",
+      "A close-up detail of the hand-painted blue and gold floral pattern on ceramic"
+    ]
+  },
+  {
+    "slug": "industrial-wall-sconce",
+    "name": "Industrial Wall Sconce",
+    "category": "lighting",
+    "material": "Aged Brass & Black Metal",
+    "price": 6499,
+    "badge": "NEW",
+    "rating": 4.5,
+    "reviews": 53,
+    "description": "An industrial-style wall sconce combining aged brass and matte black metal. The adjustable arm lets you direct light exactly where needed. Ideal for reading nooks, hallways, and bedside flanking.",
+    "tags": [
+      "industrial",
+      "wall-sconce",
+      "adjustable",
+      "modern",
+      "reading"
+    ],
+    "angles": [
+      "An industrial wall sconce with aged brass and black metal adjustable arm, front view",
+      "An industrial wall sconce at 3/4 angle showing the adjustable arm mechanism",
+      "A detail shot of the aged brass and black metal joint on an industrial wall sconce"
+    ]
+  },
+  {
+    "slug": "frosted-glass-globe-lamp",
+    "name": "Frosted Glass Globe Lamp",
+    "category": "lighting",
+    "material": "Frosted Glass & Brass",
+    "price": 8999,
+    "rating": 4.7,
+    "reviews": 79,
+    "description": "A frosted glass globe table lamp on a slim brass base. The opaque globe diffuses light into a soft, even glow without harsh shadows. A minimalist accent that pairs well with Scandinavian and modern interiors.",
+    "tags": [
+      "minimalist",
+      "globe",
+      "frosted",
+      "diffused",
+      "scandinavian"
+    ],
+    "angles": [
+      "A frosted glass globe table lamp on a slim brass base, front view",
+      "A frosted glass globe lamp at 3/4 angle showing the spherical form",
+      "A detail shot of the frosted glass globe meeting the brass base"
+    ]
+  },
+  {
+    "slug": "adjustable-brass-reading-lamp",
+    "name": "Adjustable Brass Reading Lamp",
+    "category": "lighting",
+    "material": "Polished Brass",
+    "price": 11499,
+    "badge": "BESTSELLER",
+    "rating": 4.8,
+    "reviews": 167,
+    "description": "An adjustable brass reading lamp with a pivoting shade and articulating arm. The weighted marble base keeps it stable in any position. A timeless design for desk, bedside, or reading chair.",
+    "tags": [
+      "adjustable",
+      "reading",
+      "brass",
+      "marble-base",
+      "functional"
+    ],
+    "angles": [
+      "An adjustable brass reading lamp with articulating arm and marble base, front view",
+      "An adjustable brass reading lamp at 3/4 angle showing the articulating arm",
+      "A detail shot of the pivoting brass shade and adjustment knobs"
+    ]
+  },
+  {
+    "slug": "stained-glass-table-lamp",
+    "name": "Stained Glass Table Lamp",
+    "category": "lighting",
+    "material": "Stained Glass & Brass",
+    "price": 13499,
+    "originalPrice": 16499,
+    "badge": "SALE",
+    "rating": 4.6,
+    "reviews": 41,
+    "description": "A stained glass table lamp in jewel-toned amber and emerald, with brass leading. When lit, the colored glass casts a warm mosaic glow. A Tiffany-inspired accent for traditional and eclectic interiors.",
+    "tags": [
+      "stained-glass",
+      "tiffany",
+      "colorful",
+      "traditional",
+      "accent"
+    ],
+    "angles": [
+      "A stained glass table lamp with amber and emerald geometric pattern, front view",
+      "A stained glass table lamp at 3/4 angle showing the dome shade",
+      "A detail close-up of the stained glass pattern with brass leading"
+    ]
+  },
+  {
+    "slug": "terracotta-herb-pot-set",
+    "name": "Terracotta Herb Pot Set",
+    "category": "plants",
+    "material": "Glazed Terracotta",
+    "price": 2999,
+    "badge": "NEW",
+    "rating": 4.7,
+    "reviews": 112,
+    "description": "A set of three glazed terracotta herb pots in graduated sizes with matching saucers. The warm earthy tone and matte glaze bring rustic charm to kitchen windowsills. Each pot has a drainage hole for healthy plants.",
+    "tags": [
+      "terracotta",
+      "herb-pots",
+      "kitchen",
+      "rustic",
+      "set-of-3"
+    ],
+    "angles": [
+      "A set of three glazed terracotta herb pots in graduated sizes, front view",
+      "A terracotta herb pot set arranged at 3/4 angle showing all three sizes",
+      "A detail shot of the glazed terracotta texture and drainage hole"
+    ]
+  },
+  {
+    "slug": "hanging-glass-terrarium",
+    "name": "Hanging Glass Terrarium",
+    "category": "plants",
+    "material": "Glass & Brass",
+    "price": 3499,
+    "rating": 4.5,
+    "reviews": 86,
+    "description": "A geometric hanging glass terrarium with a brass frame and rope hanger. The diamond-shaped vessel is perfect for air plants, succulents, or tiny ferns. Creates a floating garden in any sunny corner.",
+    "tags": [
+      "hanging",
+      "terrarium",
+      "geometric",
+      "air-plants",
+      "modern"
+    ],
+    "angles": [
+      "A geometric hanging glass terrarium with brass frame, full front view",
+      "A hanging glass terrarium at 3/4 angle showing the geometric form",
+      "A detail shot of the brass frame joints and glass panels"
+    ]
+  },
+  {
+    "slug": "handpainted-ceramic-planter-tall",
+    "name": "Hand-Painted Tall Ceramic Planter",
+    "category": "plants",
+    "material": "Hand-Painted Ceramic",
+    "price": 5499,
+    "badge": "BESTSELLER",
+    "rating": 4.8,
+    "reviews": 178,
+    "description": "A tall hand-painted ceramic planter with intricate blue and white arabesque patterns. The cylindrical form is perfect for tall plants like snake plants or dracaenas. A functional piece of art for living rooms and entryways.",
+    "tags": [
+      "handpainted",
+      "tall",
+      "arabesque",
+      "blue-white",
+      "statement"
+    ],
+    "angles": [
+      "A tall hand-painted ceramic planter with blue arabesque pattern, front view",
+      "A tall ceramic planter at 3/4 angle showing the cylindrical form",
+      "A close-up detail of the hand-painted blue and white arabesque pattern"
+    ]
+  },
+  {
+    "slug": "macrame-hanging-planter-tri",
+    "name": "Macrame Hanging Planter Trio",
+    "category": "plants",
+    "material": "Cotton Rope & Wood",
+    "price": 2499,
+    "rating": 4.4,
+    "reviews": 64,
+    "description": "A set of three macrame hanging planters hand-knotted from natural cotton rope with wooden ring hangers. Each holds a 4-inch pot. Boho-chic decor that brings greenery to windows, corners, and porches.",
+    "tags": [
+      "macrame",
+      "hanging",
+      "boho",
+      "cotton",
+      "set-of-3"
+    ],
+    "angles": [
+      "Three macrame hanging planters hand-knotted from cotton rope, front view",
+      "A macrame hanging planter at 3/4 angle showing the knot pattern detail",
+      "A close-up detail of the macrame knot work and wooden ring"
+    ]
+  },
+  {
+    "slug": "concrete-geometric-planter",
+    "name": "Concrete Geometric Planter",
+    "category": "plants",
+    "material": "Hand-Cast Concrete",
+    "price": 1999,
+    "badge": "NEW",
+    "rating": 4.6,
+    "reviews": 47,
+    "description": "A hand-cast concrete planter with a faceted geometric form. The raw industrial texture contrasts beautifully with lush greenery. A modern minimalist accent for desks, shelves, and tabletops.",
+    "tags": [
+      "concrete",
+      "geometric",
+      "minimalist",
+      "industrial",
+      "modern"
+    ],
+    "angles": [
+      "A hand-cast concrete planter with faceted geometric form, front view",
+      "A concrete geometric planter at 3/4 angle showing the faceted surfaces",
+      "A detail shot of the raw concrete texture and faceted edge"
+    ]
+  },
+  {
+    "slug": "bamboo-plant-stand-trio",
+    "name": "Bamboo Plant Stand Trio",
+    "category": "plants",
+    "material": "Natural Bamboo",
+    "price": 4999,
+    "originalPrice": 6499,
+    "badge": "SALE",
+    "rating": 4.7,
+    "reviews": 73,
+    "description": "A trio of graduated bamboo plant stands in three heights. The natural bamboo brings warmth and texture while elevating plants to varying levels for visual interest. Folds flat for storage.",
+    "tags": [
+      "bamboo",
+      "plant-stand",
+      "natural",
+      "tiered",
+      "folding"
+    ],
+    "angles": [
+      "Three graduated bamboo plant stands in different heights, front view",
+      "A bamboo plant stand trio arranged at 3/4 angle showing the heights",
+      "A detail shot of the natural bamboo construction and joints"
+    ]
+  },
+  {
+    "slug": "handblown-glass-vase-amber",
+    "name": "Hand-Blown Amber Glass Vase",
+    "category": "vases",
+    "material": "Hand-Blown Glass",
+    "price": 4499,
+    "badge": "NEW",
+    "rating": 4.8,
+    "reviews": 95,
+    "description": "A hand-blown amber glass vase with organic curves and subtle bubble inclusions. Each piece is unique — no two are exactly alike. The warm amber tone glows beautifully when backlit, making it a statement centerpiece with or without flowers.",
+    "tags": [
+      "handblown",
+      "amber",
+      "organic",
+      "unique",
+      "centerpiece"
+    ],
+    "angles": [
+      "A hand-blown amber glass vase with organic curves, front view",
+      "An amber glass vase at 3/4 angle showing the asymmetric form",
+      "A detail shot of the hand-blown glass surface with subtle bubbles"
+    ]
+  },
+  {
+    "slug": "marble-bookend-set",
+    "name": "Marble Bookend Set",
+    "category": "vases",
+    "material": "White Marble & Brass",
+    "price": 5999,
+    "rating": 4.6,
+    "reviews": 58,
+    "description": "A pair of white marble bookends with brass accent strips. The substantial weight keeps books perfectly upright while adding sculptural interest to shelves. Felted bottoms protect surfaces.",
+    "tags": [
+      "marble",
+      "bookends",
+      "brass",
+      "sculptural",
+      "pair"
+    ],
+    "angles": [
+      "A pair of white marble bookends with brass accents holding books, front view",
+      "Marble bookends at 3/4 angle showing the architectural form",
+      "A detail shot of the brass strip inlay on the marble bookend"
+    ]
+  },
+  {
+    "slug": "geometric-crystal-sculpture",
+    "name": "Geometric Crystal Sculpture",
+    "category": "vases",
+    "material": "Natural Crystal & Brass",
+    "price": 7999,
+    "badge": "BESTSELLER",
+    "rating": 4.9,
+    "reviews": 124,
+    "description": "A geometric crystal sculpture on a brushed brass base. The natural amethyst point catches light from every angle. A modern art object for consoles, coffee tables, or office desks.",
+    "tags": [
+      "crystal",
+      "amethyst",
+      "sculpture",
+      "art-object",
+      "statement"
+    ],
+    "angles": [
+      "A geometric amethyst crystal sculpture on a brass base, front view",
+      "A crystal sculpture at 3/4 angle showing the natural crystal facets",
+      "A detail close-up of the amethyst crystal point meeting the brass base"
+    ]
+  },
+  {
+    "slug": "brass-decorative-bowl-hammered",
+    "name": "Hammered Brass Decorative Bowl",
+    "category": "vases",
+    "material": "Hand-Hammered Brass",
+    "price": 4999,
+    "rating": 4.7,
+    "reviews": 81,
+    "description": "A hand-hammered brass decorative bowl with a dimpled surface that catches light. Perfect as a catchall by the entry, a fruit bowl on the counter, or a sculptural object on a coffee table. Develops a beautiful patina over time.",
+    "tags": [
+      "brass",
+      "hammered",
+      "bowl",
+      "catchall",
+      "patina"
+    ],
+    "angles": [
+      "A hand-hammered brass decorative bowl, top-down view",
+      "A hammered brass bowl at 3/4 angle showing the dimpled texture",
+      "A detail close-up of the hand-hammered brass surface texture"
+    ]
+  },
+  {
+    "slug": "carved-wooden-elephant",
+    "name": "Carved Wooden Elephant Statuette",
+    "category": "vases",
+    "material": "Hand-Carved Mango Wood",
+    "price": 3499,
+    "badge": "NEW",
+    "rating": 4.5,
+    "reviews": 67,
+    "description": "A hand-carved mango wood elephant statuette with a warm natural finish. Each piece is carved by Pakistani artisans, making every elephant subtly unique. A symbol of wisdom and good fortune for shelves and tabletops.",
+    "tags": [
+      "handcarved",
+      "wooden",
+      "elephant",
+      "mango-wood",
+      "artisan"
+    ],
+    "angles": [
+      "A hand-carved wooden elephant statuette, side profile view",
+      "A carved wooden elephant at 3/4 angle from the front",
+      "A detail close-up of the hand-carved wood grain and texture"
+    ]
+  },
+  {
+    "slug": "marble-candle-holder-pillar",
+    "name": "Marble Pillar Candle Holder",
+    "category": "candles",
+    "material": "White Marble & Brass",
+    "price": 3799,
+    "badge": "NEW",
+    "rating": 4.7,
+    "reviews": 89,
+    "description": "A white marble pillar candle holder with a brushed brass collar. The cool marble contrasts beautifully with warm candlelight. Sized for standard 3-inch pillar candles. Felted base protects surfaces.",
+    "tags": [
+      "marble",
+      "pillar",
+      "candle-holder",
+      "brass",
+      "modern"
+    ],
+    "angles": [
+      "A white marble pillar candle holder with brass collar, front view",
+      "A marble candle holder at 3/4 angle showing the cylindrical form",
+      "A detail shot of the brass collar meeting the marble top"
+    ]
+  },
+  {
+    "slug": "reed-diffuser-luxe-set",
+    "name": "Luxe Reed Diffuser Set",
+    "category": "candles",
+    "material": "Glass & Essential Oils",
+    "price": 3299,
+    "badge": "BESTSELLER",
+    "rating": 4.8,
+    "reviews": 203,
+    "description": "A luxe reed diffuser set in an amber glass bottle with brass cap and 10 natural rattan reeds. The oud & rose scent fills rooms for 8-12 weeks without flame. A flameless fragrance option for bedrooms and entryways.",
+    "tags": [
+      "diffuser",
+      "oud-rose",
+      "flameless",
+      "amber-glass",
+      "long-lasting"
+    ],
+    "angles": [
+      "An amber glass reed diffuser bottle with brass cap and rattan reeds, front view",
+      "A reed diffuser at 3/4 angle showing the reeds in the bottle",
+      "A detail shot of the brass cap and amber glass neck with reeds"
+    ]
+  },
+  {
+    "slug": "carved-wooden-candle-stand",
+    "name": "Carved Wooden Candle Stand",
+    "category": "candles",
+    "material": "Hand-Carved Sheesham Wood",
+    "price": 2499,
+    "rating": 4.6,
+    "reviews": 52,
+    "description": "A hand-carved sheesham wood candle stand with intricate lattice work. Holds a single tealight or taper candle. The warm wood tone and traditional carving bring old-world craftsmanship to mantels and tables.",
+    "tags": [
+      "handcarved",
+      "wood",
+      "sheesham",
+      "lattice",
+      "traditional"
+    ],
+    "angles": [
+      "A hand-carved sheesham wood candle stand with lattice work, front view",
+      "A carved wooden candle stand at 3/4 angle showing the lattice detail",
+      "A close-up detail of the hand-carved lattice pattern in sheesham wood"
+    ]
+  },
+  {
+    "slug": "scented-wax-melt-trio",
+    "name": "Scented Wax Melt Trio",
+    "category": "candles",
+    "material": "Soy Wax & Essential Oils",
+    "price": 1799,
+    "originalPrice": 2299,
+    "badge": "SALE",
+    "rating": 4.7,
+    "reviews": 138,
+    "description": "A trio of scented soy wax melts in vanilla, sandalwood, and jasmine. Each melt is hand-poured in a decorative ceramic dish. Simply place on a warmer for 8+ hours of fragrance per cube. A perfect gift set.",
+    "tags": [
+      "wax-melts",
+      "trio",
+      "soy",
+      "gift-set",
+      "fragrance"
+    ],
+    "angles": [
+      "Three scented soy wax melts in a ceramic dish, top view",
+      "A wax melt trio at 3/4 angle showing the three scents",
+      "A detail close-up of the soy wax melts texture in the ceramic dish"
+    ]
+  },
+  {
+    "slug": "sunburst-wall-mirror",
+    "name": "Sunburst Wall Mirror",
+    "category": "wall-art",
+    "material": "Brass & Glass",
+    "price": 10999,
+    "badge": "BESTSELLER",
+    "rating": 4.8,
+    "reviews": 187,
+    "description": "A sunburst wall mirror with radiating brass rays around a central round mirror. The mid-century inspired design adds instant glamour to entryways, living rooms, and above mantels. A timeless statement piece.",
+    "tags": [
+      "sunburst",
+      "mirror",
+      "brass",
+      "mid-century",
+      "statement"
+    ],
+    "angles": [
+      "A sunburst wall mirror with brass rays around a round central mirror, front view",
+      "A sunburst mirror at 3/4 angle showing the depth of the rays",
+      "A detail shot of the brass rays and mirror edge"
+    ]
+  },
+  {
+    "slug": "handpainted-canvas-art-floral",
+    "name": "Hand-Painted Floral Canvas Art",
+    "category": "wall-art",
+    "material": "Hand-Painted Canvas",
+    "price": 8999,
+    "badge": "NEW",
+    "rating": 4.6,
+    "reviews": 64,
+    "description": "A hand-painted canvas art piece featuring blush peonies and gold leaf accents on a cream background. Stretched on a wooden frame and ready to hang. A soft romantic focal point for bedrooms and living rooms.",
+    "tags": [
+      "handpainted",
+      "canvas",
+      "floral",
+      "peonies",
+      "gold-leaf"
+    ],
+    "angles": [
+      "A hand-painted canvas art with blush peonies and gold accents, front view",
+      "A floral canvas painting at 3/4 angle showing the stretched canvas depth",
+      "A close-up detail of the painted peonies and gold leaf accents"
+    ]
+  },
+  {
+    "slug": "woven-wall-hanging-neutral",
+    "name": "Woven Neutral Wall Hanging",
+    "category": "wall-art",
+    "material": "Wool & Cotton",
+    "price": 4999,
+    "rating": 4.5,
+    "reviews": 71,
+    "description": "A hand-woven wall hanging in natural wool and cotton with subtle gold thread accents. The organic texture brings warmth to blank walls. hangs from a driftwood branch for a boho-luxe finish.",
+    "tags": [
+      "woven",
+      "wall-hanging",
+      "boho",
+      "natural",
+      "texture"
+    ],
+    "angles": [
+      "A hand-woven wall hanging in natural wool on a driftwood branch, front view",
+      "A woven wall hanging at 3/4 angle showing the texture depth",
+      "A close-up detail of the woven texture and gold thread accents"
+    ]
+  },
+  {
+    "slug": "geometric-metal-wall-art",
+    "name": "Geometric Metal Wall Art",
+    "category": "wall-art",
+    "material": "Brushed Brass",
+    "price": 7499,
+    "originalPrice": 9499,
+    "badge": "SALE",
+    "rating": 4.7,
+    "reviews": 48,
+    "description": "A geometric brushed brass wall art piece with interlocking circles and triangles. The sculptural 3D form casts beautiful shadows that change throughout the day. A modern art object for contemporary interiors.",
+    "tags": [
+      "geometric",
+      "metal",
+      "brass",
+      "modern",
+      "sculptural"
+    ],
+    "angles": [
+      "A geometric brushed brass wall art with interlocking circles and triangles, front view",
+      "Geometric metal wall art at 3/4 angle showing the 3D depth",
+      "A detail shot of the brushed brass geometric forms and shadows"
+    ]
+  },
+  {
+    "slug": "handpainted-ceramic-plates-set",
+    "name": "Hand-Painted Ceramic Plates Set",
+    "category": "dining",
+    "material": "Hand-Painted Ceramic",
+    "price": 6999,
+    "badge": "NEW",
+    "rating": 4.8,
+    "reviews": 102,
+    "description": "A set of four hand-painted ceramic plates with blue and white botanical motifs. Each plate is a slightly different pattern, adding artisanal charm. Food-safe and dishwasher safe. Perfect for everyday dining or display.",
+    "tags": [
+      "handpainted",
+      "plates",
+      "set-of-4",
+      "blue-white",
+      "botanical"
+    ],
+    "angles": [
+      "A stack of four hand-painted ceramic plates with botanical patterns, top view",
+      "Hand-painted ceramic plates arranged at 3/4 angle showing the four designs",
+      "A detail close-up of the hand-painted blue and white botanical pattern"
+    ]
+  },
+  {
+    "slug": "marble-coaster-set-gold",
+    "name": "Marble Coaster Set with Gold Edge",
+    "category": "dining",
+    "material": "White Marble & Brass",
+    "price": 2799,
+    "badge": "BESTSELLER",
+    "rating": 4.7,
+    "reviews": 156,
+    "description": "A set of four white marble coasters with brass gold-edge detailing and a matching holder. The cool marble protects surfaces from hot and cold drinks. Felted bottoms prevent scratching. A luxe everyday essential.",
+    "tags": [
+      "marble",
+      "coasters",
+      "set-of-4",
+      "gold-edge",
+      "everyday"
+    ],
+    "angles": [
+      "A set of four white marble coasters with brass edge in a holder, front view",
+      "Marble coasters arranged at 3/4 angle showing the four pieces",
+      "A detail shot of the brass gold edge on the marble coaster"
+    ]
+  },
+  {
+    "slug": "brass-serving-bowl-engraved",
+    "name": "Engraved Brass Serving Bowl",
+    "category": "dining",
+    "material": "Hand-Engraved Brass",
+    "price": 6499,
+    "rating": 4.6,
+    "reviews": 47,
+    "description": "A hand-engraved brass serving bowl with intricate floral patterns around the exterior. The traditional engraving technique has been practiced by Pakistani artisans for generations. Perfect for serving dry snacks or as a decorative centerpiece.",
+    "tags": [
+      "brass",
+      "engraved",
+      "serving-bowl",
+      "handcrafted",
+      "traditional"
+    ],
+    "angles": [
+      "A hand-engraved brass serving bowl with floral patterns, 3/4 angle view",
+      "An engraved brass bowl from the top showing the interior",
+      "A close-up detail of the hand-engraved floral pattern on the brass exterior"
+    ]
+  }
+]
