@@ -1,0 +1,702 @@
+     1→     1→'use client';
+     2→     2→
+     3→     3→import { useState, useEffect, useRef } from 'react';
+     4→     4→import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap, ScrollTrigger } from '@/hooks/useGsap';
+     5→     5→import { GoldDivider } from '@/components/SVGDecorations';
+     6→     6→import {
+     7→     7→  ChevronRight,
+     8→     8→  CreditCard,
+     9→     9→  Banknote,
+    10→    10→  ShieldCheck,
+    11→    11→  Minus,
+    12→    12→  Plus,
+    13→    13→  Trash2,
+    14→    14→  CheckCircle2,
+    15→    15→  ArrowRight,
+    16→    16→  Truck,
+    17→    17→} from 'lucide-react';
+    18→    18→import { useStore } from '@/store/useStore';
+    19→    19→import { formatPKR } from '@/data/products';
+    20→    20→import PremiumButton from '@/components/ui/PremiumButton';
+    21→    21→import { useToast } from '@/hooks/use-toast';
+    22→    22→
+    23→    23→gsap.registerPlugin(ScrollTrigger);
+    24→    24→
+    25→    25→/* ─── Form Data Types ─── */
+    26→    26→interface CheckoutForm {
+    27→    27→  email: string;
+    28→    28→  phone: string;
+    29→    29→  fullName: string;
+    30→    30→  address1: string;
+    31→    31→  address2: string;
+    32→    32→  city: string;
+    33→    33→  province: string;
+    34→    34→  postalCode: string;
+    35→    35→  paymentMethod: 'cod' | 'jazzcash' | 'easypaisa';
+    36→    36→  orderNotes: string;
+    37→    37→}
+    38→    38→
+    39→    39→interface FormErrors {
+    40→    40→  [key: string]: boolean;
+    41→    41→}
+    42→    42→
+    43→    43→const paymentOptions = [
+    44→    44→  { id: 'cod' as const, icon: Banknote, label: 'Cash on Delivery', description: 'Pay when your order arrives at your doorstep' },
+    45→    45→  { id: 'jazzcash' as const, icon: ShieldCheck, label: 'JazzCash', description: 'Pay securely via JazzCash mobile wallet' },
+    46→    46→  { id: 'easypaisa' as const, icon: CreditCard, label: 'EasyPaisa', description: 'Pay securely via EasyPaisa mobile wallet' },
+    47→    47→];
+    48→    48→
+    49→    49→const requiredFields: (keyof CheckoutForm)[] = ['email', 'phone', 'fullName', 'address1', 'city', 'province', 'postalCode'];
+    50→    50→
+    51→    51→const initialForm: CheckoutForm = {
+    52→    52→  email: '',
+    53→    53→  phone: '',
+    54→    54→  fullName: '',
+    55→    55→  address1: '',
+    56→    56→  address2: '',
+    57→    57→  city: '',
+    58→    58→  province: '',
+    59→    59→  postalCode: '',
+    60→    60→  paymentMethod: 'cod',
+    61→    61→  orderNotes: '',
+    62→    62→};
+    63→    63→
+    64→    64→/* ─── Input Field Component ─── */
+    65→    65→function FormInput({
+    66→    66→  id,
+    67→    67→  label,
+    68→    68→  type = 'text',
+    69→    69→  placeholder,
+    70→    70→  value,
+    71→    71→  onChange,
+    72→    72→  required = false,
+    73→    73→  error = false,
+    74→    74→}: {
+    75→    75→  id: string;
+    76→    76→  label: string;
+    77→    77→  type?: string;
+    78→    78→  placeholder: string;
+    79→    79→  value: string;
+    80→    80→  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    81→    81→  required?: boolean;
+    82→    82→  error?: boolean;
+    83→    83→}) {
+    84→    84→  return (
+    85→    85→    <div className="flex flex-col gap-1.5">
+    86→    86→      <label
+    87→    87→        htmlFor={id}
+    88→    88→        className="text-sm font-medium transition-all duration-200"
+    89→    89→        style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+    90→    90→      >
+    91→    91→        {label}
+    92→    92→        {required && <span style={{ color: '#D4AF37' }}> *</span>}
+    93→    93→      </label>
+    94→    94→      <input
+    95→    95→        id={id}
+    96→    96→        name={id}
+    97→    97→        type={type}
+    98→    98→        required={required}
+    99→    99→        value={value}
+   100→   100→        onChange={onChange}
+   101→   101→        placeholder={placeholder}
+   102→   102→        className={`w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200 input-gold-glow ${error ? 'animate-error-shake' : ''}`}
+   103→   103→        style={{
+   104→   104→          fontFamily: "'Poppins', sans-serif",
+   105→   105→          backgroundColor: '#FFFDF7',
+   106→   106→          border: error ? '1.5px solid #E53E3E' : '1px solid #E8D5A3',
+   107→   107→          color: '#2C2C2C',
+   108→   108→        }}
+   109→   109→        onFocus={(e) => {
+   110→   110→          e.target.style.borderColor = '#D4AF37';
+   111→   111→          e.target.style.boxShadow = '0 0 0 3px rgba(212, 175, 55, 0.2)';
+   112→   112→        }}
+   113→   113→        onBlur={(e) => {
+   114→   114→          e.target.style.borderColor = error ? '#E53E3E' : '#E8D5A3';
+   115→   115→          e.target.style.boxShadow = 'none';
+   116→   116→        }}
+   117→   117→      />
+   118→   118→      {error && (
+   119→   119→        <span className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: '#E53E3E' }}>
+   120→   120→          {label} is required
+   121→   121→        </span>
+   122→   122→      )}
+   123→   123→    </div>
+   124→   124→  );
+   125→   125→}
+   126→   126→
+   127→   127→/* ═══════════════════════════════════════════════════════════
+   128→   128→   CheckoutView
+   129→   129→   ═══════════════════════════════════════════════════════════ */
+   130→   130→export default function CheckoutView() {
+   131→   131→  const {
+   132→   132→    cart,
+   133→   133→    getCartTotal,
+   134→   134→    getCartCount,
+   135→   135→    clearCart,
+   136→   136→    setPage,
+   137→   137→  } = useStore();
+   138→   138→
+   139→   139→  const { toast } = useToast();
+   140→   140→
+   141→   141→  const cartCount = getCartCount();
+   142→   142→  const subtotal = getCartTotal();
+   143→   143→  const shipping = subtotal >= 2999 ? 0 : 250;
+   144→   144→  const estimatedTotal = subtotal + shipping;
+   145→   145→
+   146→   146→  const [formData, setFormData] = useState<CheckoutForm>(initialForm);
+   147→   147→  const [errors, setErrors] = useState<FormErrors>({});
+   148→   148→  const [isSubmitting, setIsSubmitting] = useState(false);
+   149→   149→
+   150→   150→  const heroSectionRef = useRef<HTMLElement>(null);
+   151→   151→  const heroBgRef = useRef<HTMLDivElement>(null);
+   152→   152→
+   153→   153→  // GSAP animations
+   154→   154→  const heroRef = useGsapStagger<HTMLDivElement>({
+   155→   155→    y: 40,
+   156→   156→    duration: 0.7,
+   157→   157→    stagger: 0.15,
+   158→   158→    ease: 'power3.out',
+   159→   159→    start: 'top 90%',
+   160→   160→  });
+   161→   161→
+   162→   162→  const contentRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
+   163→   163→  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
+   164→   164→
+   165→   165→  // Enhanced parallax for hero background — 0.5x speed + zoom 1→1.1
+   166→   166→  useEffect(() => {
+   167→   167→    if (!heroBgRef.current) return;
+   168→   168→    const ctx = gsap.context(() => {
+   169→   169→      gsap.to(heroBgRef.current, {
+   170→   170→        backgroundPositionY: '50%',
+   171→   171→        ease: 'none',
+   172→   172→        scrollTrigger: {
+   173→   173→          trigger: heroSectionRef.current,
+   174→   174→          start: 'top bottom',
+   175→   175→          end: 'bottom top',
+   176→   176→          scrub: 0.5,
+   177→   177→        },
+   178→   178→      });
+   179→   179→      gsap.fromTo(heroBgRef.current,
+   180→   180→        { scale: 1 },
+   181→   181→        {
+   182→   182→          scale: 1.1,
+   183→   183→          ease: 'none',
+   184→   184→          scrollTrigger: {
+   185→   185→            trigger: heroSectionRef.current,
+   186→   186→            start: 'top bottom',
+   187→   187→            end: 'bottom top',
+   188→   188→            scrub: true,
+   189→   189→          },
+   190→   190→        }
+   191→   191→      );
+   192→   192→    }, heroSectionRef);
+   193→   193→    return () => ctx.revert();
+   194→   194→  }, []);
+   195→   195→
+   196→   196→  // Redirect if cart is empty
+   197→   197→  useEffect(() => {
+   198→   198→    if (cart.length === 0) {
+   199→   199→      const timer = setTimeout(() => {
+   200→   200→        setPage('shop');
+   201→   201→        window.scrollTo({ top: 0, behavior: 'smooth' });
+   202→   202→      }, 1500);
+   203→   203→      return () => clearTimeout(timer);
+   204→   204→    }
+   205→   205→  }, [cart.length, setPage]);
+   206→   206→
+   207→   207→  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+   208→   208→    const { name, value } = e.target;
+   209→   209→    setFormData((prev) => ({ ...prev, [name]: value }));
+   210→   210→    // Clear error when user types
+   211→   211→    if (errors[name]) {
+   212→   212→      setErrors((prev) => ({ ...prev, [name]: false }));
+   213→   213→    }
+   214→   214→  };
+   215→   215→
+   216→   216→  const validateForm = (): boolean => {
+   217→   217→    const newErrors: FormErrors = {};
+   218→   218→    requiredFields.forEach((field) => {
+   219→   219→      if (!formData[field].trim()) {
+   220→   220→        newErrors[field] = true;
+   221→   221→      }
+   222→   222→    });
+   223→   223→    // Basic email validation
+   224→   224→    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+   225→   225→      newErrors.email = true;
+   226→   226→    }
+   227→   227→    setErrors(newErrors);
+   228→   228→    return Object.keys(newErrors).length === 0;
+   229→   229→  };
+   230→   230→
+   231→   231→  const handleSubmit = (e: React.FormEvent) => {
+   232→   232→    e.preventDefault();
+   233→   233→    if (!validateForm()) return;
+   234→   234→
+   235→   235→    setIsSubmitting(true);
+   236→   236→    // Simulate order processing
+   237→   237→    setTimeout(() => {
+   238→   238→      setIsSubmitting(false);
+   239→   239→      clearCart();
+   240→   240→      toast({
+   241→   241→        title: 'Order Placed Successfully!',
+   242→   242→        description: 'Thank you for your order. You will receive a confirmation email shortly.',
+   243→   243→        duration: 5000,
+   244→   244→      });
+   245→   245→      setPage('home');
+   246→   246→      window.scrollTo({ top: 0, behavior: 'smooth' });
+   247→   247→    }, 2000);
+   248→   248→  };
+   249→   249→
+   250→   250→  /* ─────────────── Empty Cart Redirect State ─────────────── */
+   251→   251→  if (cart.length === 0) {
+   252→   252→    return (
+   253→   253→      <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+   254→   254→        {/* Hero */}
+   255→   255→        <section
+   256→   256→          ref={heroSectionRef}
+   257→   257→          className="relative w-full h-[40vh] sm:h-[50vh] overflow-hidden flex items-center justify-center"
+   258→   258→        >
+   259→   259→          {/* Background Image */}
+   260→   260→          <div
+   261→   261→            ref={heroBgRef}
+   262→   262→            className="absolute inset-0"
+   263→   263→            style={{
+   264→   264→              backgroundImage: "url('/images/pages/checkout-hero.webp')",
+   265→   265→              backgroundSize: 'cover',
+   266→   266→              backgroundPosition: 'center',
+   267→   267→              backgroundRepeat: 'no-repeat',
+   268→   268→            }}
+   269→   269→          />
+   270→   270→          {/* Gradient Overlay */}
+   271→   271→          <div
+   272→   272→            className="absolute inset-0"
+   273→   273→            style={{
+   274→   274→              background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)',
+   275→   275→            }}
+   276→   276→          />
+   277→   277→          <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
+   278→   278→            <span
+   279→   279→              className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
+   280→   280→              style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+   281→   281→            >
+   282→   282→              AURA LIVING
+   283→   283→            </span>
+   284→   284→            <h1
+   285→   285→              className="text-white text-[32px] sm:text-[42px] md:text-[50px] font-bold leading-tight"
+   286→   286→              style={{ fontFamily: "'Playfair Display', serif" }}
+   287→   287→            >
+   288→   288→              Checkout
+   289→   289→            </h1>
+   290→   290→            <div className="flex items-center gap-3 mt-6">
+   291→   291→              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+   292→   292→              <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+   293→   293→              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+   294→   294→            </div>
+   295→   295→          </div>
+   296→   296→        </section>
+   297→   297→
+   298→   298→        {/* Redirect Message */}
+   299→   299→        <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8">
+   300→   300→          <div className="max-w-lg mx-auto text-center">
+   301→   301→            <div
+   302→   302→              className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6"
+   303→   303→              style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
+   304→   304→            >
+   305→   305→              <CheckCircle2 className="h-9 w-9" style={{ color: '#D4AF37' }} />
+   306→   306→            </div>
+   307→   307→            <h2
+   308→   308→              className="text-2xl sm:text-3xl font-bold mb-3"
+   309→   309→              style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   310→   310→            >
+   311→   311→              Your Cart is Empty
+   312→   312→            </h2>
+   313→   313→            <p
+   314→   314→              className="text-base mb-8 leading-relaxed"
+   315→   315→              style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+   316→   316→            >
+   317→   317→              Add items to your cart before proceeding to checkout. Redirecting you to the shop...
+   318→   318→            </p>
+   319→   319→            <PremiumButton
+   320→   320→              variant="gold"
+   321→   321→              size="lg"
+   322→   322→              onClick={() => { setPage('shop'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+   323→   323→            >
+   324→   324→              Go to Shop
+   325→   325→              <ArrowRight className="w-4 h-4" />
+   326→   326→            </PremiumButton>
+   327→   327→          </div>
+   328→   328→        </section>
+   329→   329→      </div>
+   330→   330→    );
+   331→   331→  }
+   332→   332→
+   333→   333→  /* ─────────────── Checkout with Cart Items ─────────────── */
+   334→   334→  return (
+   335→   335→    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+   336→   336→      {/* Hero */}
+   337→   337→      <section
+   338→   338→        ref={heroSectionRef}
+   339→   339→        className="relative w-full h-[35vh] sm:h-[45vh] overflow-hidden flex items-center justify-center"
+   340→   340→      >
+   341→   341→        {/* Background Image */}
+   342→   342→        <div
+   343→   343→          ref={heroBgRef}
+   344→   344→          className="absolute inset-0"
+   345→   345→          style={{
+   346→   346→            backgroundImage: "url('/images/pages/checkout-hero.webp')",
+   347→   347→            backgroundSize: 'cover',
+   348→   348→            backgroundPosition: 'center',
+   349→   349→            backgroundRepeat: 'no-repeat',
+   350→   350→          }}
+   351→   351→        />
+   352→   352→        {/* Gradient Overlay */}
+   353→   353→        <div
+   354→   354→          className="absolute inset-0"
+   355→   355→          style={{
+   356→   356→            background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)',
+   357→   357→          }}
+   358→   358→        />
+   359→   359→        <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
+   360→   360→          {/* Breadcrumb */}
+   361→   361→          <nav className="flex items-center justify-center gap-2 mb-6 breadcrumb-animate">
+   362→   362→            <button
+   363→   363→              onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+   364→   364→              className="text-sm transition-colors duration-200 hover:text-[#D4AF37]"
+   365→   365→              style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255,255,255,0.6)' }}
+   366→   366→            >
+   367→   367→              Home
+   368→   368→            </button>
+   369→   369→            <ChevronRight className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.4)' }} />
+   370→   370→            <button
+   371→   371→              onClick={() => { setPage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+   372→   372→              className="text-sm transition-colors duration-200 hover:text-[#D4AF37]"
+   373→   373→              style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255,255,255,0.6)' }}
+   374→   374→            >
+   375→   375→              Cart
+   376→   376→            </button>
+   377→   377→            <ChevronRight className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.4)' }} />
+   378→   378→            <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+   379→   379→              Checkout
+   380→   380→            </span>
+   381→   381→          </nav>
+   382→   382→
+   383→   383→          <span
+   384→   384→            className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
+   385→   385→            style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+   386→   386→          >
+   387→   387→            AURA LIVING
+   388→   388→          </span>
+   389→   389→          <h1
+   390→   390→            className="text-white text-[32px] sm:text-[42px] md:text-[50px] font-bold leading-tight"
+   391→   391→            style={{ fontFamily: "'Playfair Display', serif" }}
+   392→   392→          >
+   393→   393→            Checkout
+   394→   394→          </h1>
+   395→   395→          <div className="flex items-center gap-3 mt-5">
+   396→   396→            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+   397→   397→            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+   398→   398→            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+   399→   399→          </div>
+   400→   400→        </div>
+   401→   401→      </section>
+   402→   402→
+   403→   403→      {/* Checkout Content */}
+   404→   404→      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+   405→   405→        <div ref={contentRef} className="max-w-7xl mx-auto">
+   406→   406→          <form onSubmit={handleSubmit}>
+   407→   407→            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+   408→   408→              {/* ─── Checkout Form (Left Column) ─── */}
+   409→   409→              <div className="lg:col-span-2 flex flex-col gap-8">
+   410→   410→                {/* ─── Contact Information ─── */}
+   411→   411→                <div
+   412→   412→                  className="rounded-sm p-6 sm:p-8"
+   413→   413→                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+   414→   414→                >
+   415→   415→                  <h2
+   416→   416→                    className="text-xl sm:text-2xl font-semibold mb-2"
+   417→   417→                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   418→   418→                  >
+   419→   419→                    Contact Information
+   420→   420→                  </h2>
+   421→   421→                  <div className="mb-6">
+   422→   422→                    <GoldDivider />
+   423→   423→                  </div>
+   424→   424→                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+   425→   425→                    <FormInput
+   426→   426→                      id="email"
+   427→   427→                      label="Email Address"
+   428→   428→                      type="email"
+   429→   429→                      placeholder="your@email.com"
+   430→   430→                      value={formData.email}
+   431→   431→                      onChange={handleChange}
+   432→   432→                      required
+   433→   433→                      error={errors.email}
+   434→   434→                    />
+   435→   435→                    <FormInput
+   436→   436→                      id="phone"
+   437→   437→                      label="Phone Number"
+   438→   438→                      type="tel"
+   439→   439→                      placeholder="+92 300 1234567"
+   440→   440→                      value={formData.phone}
+   441→   441→                      onChange={handleChange}
+   442→   442→                      required
+   443→   443→                      error={errors.phone}
+   444→   444→                    />
+   445→   445→                  </div>
+   446→   446→                </div>
+   447→   447→
+   448→   448→                {/* ─── Shipping Address ─── */}
+   449→   449→                <div
+   450→   450→                  className="rounded-sm p-6 sm:p-8"
+   451→   451→                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+   452→   452→                >
+   453→   453→                  <h2
+   454→   454→                    className="text-xl sm:text-2xl font-semibold mb-2"
+   455→   455→                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   456→   456→                  >
+   457→   457→                    Shipping Address
+   458→   458→                  </h2>
+   459→   459→                  <div className="mb-6">
+   460→   460→                    <GoldDivider />
+   461→   461→                  </div>
+   462→   462→                  <div className="flex flex-col gap-5">
+   463→   463→                    <FormInput
+   464→   464→                      id="fullName"
+   465→   465→                      label="Full Name"
+   466→   466→                      placeholder="Muhammad Ali"
+   467→   467→                      value={formData.fullName}
+   468→   468→                      onChange={handleChange}
+   469→   469→                      required
+   470→   470→                      error={errors.fullName}
+   471→   471→                    />
+   472→   472→                    <FormInput
+   473→   473→                      id="address1"
+   474→   474→                      label="Address Line 1"
+   475→   475→                      placeholder="House #, Street #, Area"
+   476→   476→                      value={formData.address1}
+   477→   477→                      onChange={handleChange}
+   478→   478→                      required
+   479→   479→                      error={errors.address1}
+   480→   480→                    />
+   481→   481→                    <FormInput
+   482→   482→                      id="address2"
+   483→   483→                      label="Address Line 2"
+   484→   484→                      placeholder="Apartment, suite, landmark (optional)"
+   485→   485→                      value={formData.address2}
+   486→   486→                      onChange={handleChange}
+   487→   487→                    />
+   488→   488→                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+   489→   489→                      <FormInput
+   490→   490→                        id="city"
+   491→   491→                        label="City"
+   492→   492→                        placeholder="Lahore"
+   493→   493→                        value={formData.city}
+   494→   494→                        onChange={handleChange}
+   495→   495→                        required
+   496→   496→                        error={errors.city}
+   497→   497→                      />
+   498→   498→                      <FormInput
+   499→   499→                        id="province"
+   500→   500→                        label="Province"
+   501→   501→                        placeholder="Punjab"
+   502→   502→                        value={formData.province}
+   503→   503→                        onChange={handleChange}
+   504→   504→                        required
+   505→   505→                        error={errors.province}
+   506→   506→                      />
+   507→   507→                      <FormInput
+   508→   508→                        id="postalCode"
+   509→   509→                        label="Postal Code"
+   510→   510→                        placeholder="54000"
+   511→   511→                        value={formData.postalCode}
+   512→   512→                        onChange={handleChange}
+   513→   513→                        required
+   514→   514→                        error={errors.postalCode}
+   515→   515→                      />
+   516→   516→                    </div>
+   517→   517→                  </div>
+   518→   518→                </div>
+   519→   519→
+   520→   520→                {/* ─── Payment Method ─── */}
+   521→   521→                <div
+   522→   522→                  className="rounded-sm p-6 sm:p-8"
+   523→   523→                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+   524→   524→                >
+   525→   525→                  <h2
+   526→   526→                    className="text-xl sm:text-2xl font-semibold mb-2"
+   527→   527→                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   528→   528→                  >
+   529→   529→                    Payment Method
+   530→   530→                  </h2>
+   531→   531→                  <div className="mb-6">
+   532→   532→                    <GoldDivider />
+   533→   533→                  </div>
+   534→   534→                  <div className="flex flex-col gap-3">
+   535→   535→                    {paymentOptions.map((option) => {
+   536→   536→                      const isSelected = formData.paymentMethod === option.id;
+   537→   537→                      return (
+   538→   538→                        <label
+   539→   539→                          key={option.id}
+   540→   540→                          className="flex items-center gap-4 p-4 rounded-sm cursor-pointer transition-all duration-200"
+   541→   541→                          style={{
+   542→   542→                            border: isSelected ? '2px solid #D4AF37' : '1px solid #E8D5A3',
+   543→   543→                            backgroundColor: isSelected ? 'rgba(212,175,55,0.04)' : '#FFFDF7',
+   544→   544→                          }}
+   545→   545→                        >
+   546→   546→                          {/* Custom Radio */}
+   547→   547→                          <div
+   548→   548→                            className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-200"
+   549→   549→                            style={{
+   550→   550→                              border: isSelected ? '2px solid #D4AF37' : '2px solid #E8D5A3',
+   551→   551→                              backgroundColor: isSelected ? '#D4AF37' : 'transparent',
+   552→   552→                            }}
+   553→   553→                          >
+   554→   554→                            {isSelected && (
+   555→   555→                              <div className="w-2 h-2 rounded-full bg-white" />
+   556→   556→                            )}
+   557→   557→                          </div>
+   558→   558→                          <input
+   559→   559→                            type="radio"
+   560→   560→                            name="paymentMethod"
+   561→   561→                            value={option.id}
+   562→   562→                            checked={isSelected}
+   563→   563→                            onChange={handleChange}
+   564→   564→                            className="sr-only"
+   565→   565→                          />
+   566→   566→                          <div
+   567→   567→                            className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
+   568→   568→                            style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
+   569→   569→                          >
+   570→   570→                            <option.icon className="w-4.5 h-4.5" style={{ color: '#D4AF37' }} />
+   571→   571→                          </div>
+   572→   572→                          <div className="flex-1 min-w-0">
+   573→   573→                            <p
+   574→   574→                              className="text-sm font-semibold"
+   575→   575→                              style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   576→   576→                            >
+   577→   577→                              {option.label}
+   578→   578→                            </p>
+   579→   579→                            <p
+   580→   580→                              className="text-xs mt-0.5"
+   581→   581→                              style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+   582→   582→                            >
+   583→   583→                              {option.description}
+   584→   584→                            </p>
+   585→   585→                          </div>
+   586→   586→                          {isSelected && (
+   587→   587→                            <CheckCircle2 className="w-5 h-5 shrink-0" style={{ color: '#D4AF37' }} />
+   588→   588→                          )}
+   589→   589→                        </label>
+   590→   590→                      );
+   591→   591→                    })}
+   592→   592→                  </div>
+   593→   593→                </div>
+   594→   594→
+   595→   595→                {/* ─── Order Notes ─── */}
+   596→   596→                <div
+   597→   597→                  className="rounded-sm p-6 sm:p-8"
+   598→   598→                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+   599→   599→                >
+   600→   600→                  <h2
+   601→   601→                    className="text-xl sm:text-2xl font-semibold mb-2"
+   602→   602→                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   603→   603→                  >
+   604→   604→                    Order Notes
+   605→   605→                  </h2>
+   606→   606→                  <div className="mb-6">
+   607→   607→                    <GoldDivider />
+   608→   608→                  </div>
+   609→   609→                  <div className="flex flex-col gap-1.5">
+   610→   610→                    <label
+   611→   611→                      htmlFor="orderNotes"
+   612→   612→                      className="text-sm font-medium"
+   613→   613→                      style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   614→   614→                    >
+   615→   615→                      Special Instructions (Optional)
+   616→   616→                    </label>
+   617→   617→                    <textarea
+   618→   618→                      id="orderNotes"
+   619→   619→                      name="orderNotes"
+   620→   620→                      rows={4}
+   621→   621→                      value={formData.orderNotes}
+   622→   622→                      onChange={handleChange}
+   623→   623→                      placeholder="Any special delivery instructions, gift wrapping requests, or notes for our team..."
+   624→   624→                      className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200 resize-none"
+   625→   625→                      style={{
+   626→   626→                        fontFamily: "'Poppins', sans-serif",
+   627→   627→                        backgroundColor: '#FFFDF7',
+   628→   628→                        border: '1px solid #E8D5A3',
+   629→   629→                        color: '#2C2C2C',
+   630→   630→                      }}
+   631→   631→                      onFocus={(e) => {
+   632→   632→                        e.target.style.borderColor = '#D4AF37';
+   633→   633→                        e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)';
+   634→   634→                      }}
+   635→   635→                      onBlur={(e) => {
+   636→   636→                        e.target.style.borderColor = '#E8D5A3';
+   637→   637→                        e.target.style.boxShadow = 'none';
+   638→   638→                      }}
+   639→   639→                    />
+   640→   640→                  </div>
+   641→   641→                </div>
+   642→   642→              </div>
+   643→   643→
+   644→   644→              {/* ─── Order Summary Sidebar (Right Column) ─── */}
+   645→   645→              <div className="lg:col-span-1">
+   646→   646→                <div
+   647→   647→                  className="rounded-sm p-6 sm:p-8 sticky top-8"
+   648→   648→                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+   649→   649→                >
+   650→   650→                  <h2
+   651→   651→                    className="text-xl sm:text-2xl font-semibold mb-2"
+   652→   652→                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   653→   653→                  >
+   654→   654→                    Order Summary
+   655→   655→                  </h2>
+   656→   656→                  <div className="mb-6">
+   657→   657→                    <GoldDivider />
+   658→   658→                  </div>
+   659→   659→
+   660→   660→                  {/* Cart Items Preview */}
+   661→   661→                  <div
+   662→   662→                    className="flex flex-col gap-4 mb-6 max-h-72 overflow-y-auto pr-1"
+   663→   663→                    style={{ scrollbarWidth: 'thin' }}
+   664→   664→                  >
+   665→   665→                    {cart.map((item) => (
+   666→   666→                      <div
+   667→   667→                        key={item.product.id}
+   668→   668→                        className="flex items-center gap-3"
+   669→   669→                      >
+   670→   670→                        <div
+   671→   671→                          className="shrink-0 w-14 h-14 rounded-lg overflow-hidden relative"
+   672→   672→                          style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7' }}
+   673→   673→                        >
+   674→   674→                          <img
+   675→   675→                            src={item.product.image}
+   676→   676→                            alt={item.product.name}
+   677→   677→                            className="w-full h-full object-contain"
+   678→   678→                          />
+   679→   679→                          <div
+   680→   680→                            className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+   681→   681→                            style={{ backgroundColor: '#D4AF37' }}
+   682→   682→                          >
+   683→   683→                            {item.quantity}
+   684→   684→                          </div>
+   685→   685→                        </div>
+   686→   686→                        <div className="flex-1 min-w-0">
+   687→   687→                          <p
+   688→   688→                            className="text-sm font-medium truncate"
+   689→   689→                            style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   690→   690→                          >
+   691→   691→                            {item.product.name}
+   692→   692→                          </p>
+   693→   693→                          <p
+   694→   694→                            className="text-xs capitalize"
+   695→   695→                            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+   696→   696→                          >
+   697→   697→                            {item.product.category.replace('-', ' ')}
+   698→   698→                          </p>
+   699→   699→                        </div>
+   700→   700→                        <span
+
+[showing lines 1-700 of 855; use offset=701 with limit to continue reading]
