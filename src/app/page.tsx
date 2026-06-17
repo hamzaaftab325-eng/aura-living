@@ -215,9 +215,22 @@ export default function Home() {
       <Navbar />
       <main ref={contentRef} className="flex-1 w-full">
         {/* Render page content only after mount so SSR and first client render
-            match (both null). This prevents hydration mismatches when the URL
-            hash points to a non-home page. */}
-        {mounted ? renderPage() : null}
+            match. While waiting for hydration, show a branded loading spinner
+            instead of empty space. */}
+        {mounted ? renderPage() : (
+          <div className="flex flex-col items-center justify-center py-32" style={{ backgroundColor: '#FAF8F5' }}>
+            <img
+              src="/logo/default-monochrome-gold-black.svg"
+              alt="Aura Living"
+              className="mb-8"
+              style={{ height: '48px', width: 'auto', objectFit: 'contain' }}
+            />
+            <div
+              className="w-10 h-10 rounded-full border-2 border-[#E8D5A3] border-t-[#D4AF37]"
+              style={{ animation: 'spin 0.8s linear infinite' }}
+            />
+          </div>
+        )}
       </main>
       <div className="flex justify-center py-8 px-4 sm:px-6 w-full">
         <div className="w-full max-w-xs sm:max-w-sm">

@@ -460,6 +460,11 @@ body {
   height: 100dvh;
 }
 
+/* Loading spinner — used during hydration */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 /* Pulsing gold glow for WhyChooseUs cards */
 @keyframes pulseGoldGlow {
   0%, 100% {
