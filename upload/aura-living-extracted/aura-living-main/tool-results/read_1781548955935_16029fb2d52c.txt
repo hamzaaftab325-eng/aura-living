@@ -1,0 +1,423 @@
+    80→   129→   129→   129→  // Mobile menu animation
+    81→   130→   130→   130→  useEffect(() => {
+    82→   131→   131→   131→    if (mobileMenuOpen) {
+    83→   132→   132→   132→      if (mobileBackdropRef.current) gsap.fromTo(mobileBackdropRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+    84→   133→   133→   133→      if (mobileMenuRef.current) gsap.fromTo(mobileMenuRef.current, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' });
+    85→   134→   134→   134→    }
+    86→   135→   135→   135→  }, [mobileMenuOpen]);
+    87→   136→   136→   136→
+    88→   137→   137→   137→  // Mega menu animation
+    89→   138→   138→   138→  useEffect(() => {
+    90→   139→   139→   139→    if (megaMenuOpen && megaMenuRef.current) {
+    91→   140→   140→   140→      gsap.fromTo(
+    92→   141→   141→   141→        megaMenuRef.current,
+    93→   142→   142→   142→        { opacity: 0, y: -10 },
+    94→   143→   143→   143→        { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
+    95→   144→   144→   144→      );
+    96→   145→   145→   145→    }
+    97→   146→   146→   146→  }, [megaMenuOpen]);
+    98→   147→   147→   147→
+    99→   148→   148→   148→  // Mobile shop expand/collapse animation
+   100→   149→   149→   149→  useEffect(() => {
+   101→   150→   150→   150→    if (mobileShopContentRef.current) {
+   102→   151→   151→   151→      if (mobileShopExpanded) {
+   103→   152→   152→   152→        gsap.fromTo(
+   104→   153→   153→   153→          mobileShopContentRef.current,
+   105→   154→   154→   154→          { height: 0, opacity: 0 },
+   106→   155→   155→   155→          { height: 'auto', opacity: 1, duration: 0.3, ease: 'power2.out' }
+   107→   156→   156→   156→        );
+   108→   157→   157→   157→      } else {
+   109→   158→   158→   158→        gsap.to(mobileShopContentRef.current, {
+   110→   159→   159→   159→          height: 0, opacity: 0, duration: 0.2, ease: 'power2.in',
+   111→   160→   160→   160→        });
+   112→   161→   161→   161→      }
+   113→   162→   162→   162→    }
+   114→   163→   163→   163→  }, [mobileShopExpanded]);
+   115→   164→   164→   164→
+   116→   165→   165→   165→  const handleNavClick = useCallback((page: PageType) => {
+   117→   166→   166→   166→    setPage(page);
+   118→   167→   167→   167→    setMobileMenuOpen(false);
+   119→   168→   168→   168→    setMegaMenuOpen(false);
+   120→   169→   169→   169→    setMobileShopExpanded(false);
+   121→   170→   170→   170→    window.scrollTo({ top: 0, behavior: 'smooth' });
+   122→   171→   171→   171→  }, [setPage]);
+   123→   172→   172→   172→
+   124→   173→   173→   173→  const closeMobileMenu = useCallback(() => {
+   125→   174→   174→   174→    if (mobileMenuRef.current) {
+   126→   175→   175→   175→      gsap.to(mobileMenuRef.current, {
+   127→   176→   176→   176→        opacity: 0, y: -20, duration: 0.3, ease: 'power3.in',
+   128→   177→   177→   177→        onComplete: () => { setMobileMenuOpen(false); setMobileShopExpanded(false); },
+   129→   178→   178→   178→      });
+   130→   179→   179→   179→    } else {
+   131→   180→   180→   180→      setMobileMenuOpen(false);
+   132→   181→   181→   181→      setMobileShopExpanded(false);
+   133→   182→   182→   182→    }
+   134→   183→   183→   183→  }, []);
+   135→   184→   184→   184→
+   136→   185→   185→   185→  // Mega menu hover handlers with delay
+   137→   186→   186→   186→  const handleMegaMenuEnter = useCallback(() => {
+   138→   187→   187→   187→    if (megaMenuTimeoutRef.current) {
+   139→   188→   188→   188→      clearTimeout(megaMenuTimeoutRef.current);
+   140→   189→   189→   189→      megaMenuTimeoutRef.current = null;
+   141→   190→   190→   190→    }
+   142→   191→   191→   191→    megaMenuTimeoutRef.current = setTimeout(() => {
+   143→   192→   192→   192→      setMegaMenuOpen(true);
+   144→   193→   193→   193→    }, 100);
+   145→   194→   194→   194→  }, []);
+   146→   195→   195→   195→
+   147→   196→   196→   196→  const handleMegaMenuLeave = useCallback(() => {
+   148→   197→   197→   197→    if (megaMenuTimeoutRef.current) {
+   149→   198→   198→   198→      clearTimeout(megaMenuTimeoutRef.current);
+   150→   199→   199→   199→      megaMenuTimeoutRef.current = null;
+   151→   200→   200→   200→    }
+   152→   201→   201→   201→    megaMenuTimeoutRef.current = setTimeout(() => {
+   153→   202→   202→   202→      setMegaMenuOpen(false);
+   154→   203→   203→   203→    }, 200);
+   155→   204→   204→   204→  }, []);
+   156→   205→   205→   205→
+   157→   206→   206→   206→  // Cleanup timeout on unmount
+   158→   207→   207→   207→  useEffect(() => {
+   159→   208→   208→   208→    return () => {
+   160→   209→   209→   209→      if (megaMenuTimeoutRef.current) {
+   161→   210→   210→   210→        clearTimeout(megaMenuTimeoutRef.current);
+   162→   211→   211→   211→      }
+   163→   212→   212→   212→    };
+   164→   213→   213→   213→  }, []);
+   165→   214→   214→   214→
+   166→   215→   215→   215→  const isLinkActive = (page: PageType, label: string) => {
+   167→   216→   216→   216→    if (label === 'Shop') return shopFamilyPages.includes(currentPage);
+   168→   217→   217→   217→    return currentPage === page;
+   169→   218→   218→   218→  };
+   170→   219→   219→   219→
+   171→   220→   220→   220→  const isMegaItemActive = (page: PageType) => {
+   172→   221→   221→   221→    return currentPage === page;
+   173→   222→   222→   222→  };
+   174→   223→   223→   223→
+   175→   224→   224→   224→  return (
+   176→   225→   225→   225→    <>
+   177→   226→   226→   226→      <nav
+   178→   227→   227→   227→        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+   179→   228→   228→   228→        style={{
+   180→   229→   229→   229→          background: 'rgba(250, 248, 245, 0.97)',
+   181→   230→   230→   230→          borderBottom: scrolled ? '1px solid rgba(212, 175, 55, 0.2)' : '1px solid rgba(232, 213, 163, 0.4)',
+   182→   231→   231→   231→          boxShadow: scrolled ? '0 1px 0 0 rgba(212, 175, 55, 0.1), 0 4px 20px rgba(0,0,0,0.04)' : '0 1px 0 0 rgba(232, 213, 163, 0.3)',
+   183→   232→   232→   232→        }}
+   184→   233→   233→   233→      >
+   185→   234→   234→   234→        <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+   186→   235→   235→   235→          <div className="flex h-16 sm:h-20 lg:h-28 items-center justify-between">
+   187→   236→   236→   236→            {/* Logo — Gold + Black gradient, same across all screens */}
+   188→   237→   237→   237→            <div ref={logoRef} className="cursor-pointer shrink-0 py-1 sm:py-2" onClick={() => handleNavClick('home')}>
+   189→   238→   238→   238→              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: 'clamp(48px, 14vw, 85px)', width: 'auto', objectFit: 'contain' }} />
+   190→   239→   239→   239→            </div>
+   191→   240→   240→   240→
+   192→   241→   241→   241→            {/* Desktop Nav Links */}
+   193→   242→   242→   242→            <div className="hidden lg:flex items-center gap-8">
+   194→   243→   243→   243→              {navLinks.map((link) => {
+   195→   244→   244→   244→                const isActive = isLinkActive(link.page, link.label);
+   196→   245→   245→   245→                const isHovered = hoveredLink === link.label;
+   197→   246→   246→   246→                return (
+   198→   247→   247→   247→                  <div
+   199→   248→   248→   248→                    key={link.label}
+   200→   249→   249→   249→                    className="relative"
+   201→   250→   250→   250→                    onMouseEnter={() => {
+   202→   251→   251→   251→                      setHoveredLink(link.label);
+   203→   252→   252→   252→                      if (link.hasMegaMenu) handleMegaMenuEnter();
+   204→   253→   253→   253→                    }}
+   205→   254→   254→   254→                    onMouseLeave={() => {
+   206→   255→   255→   255→                      setHoveredLink(null);
+   207→   256→   256→   256→                      if (link.hasMegaMenu) handleMegaMenuLeave();
+   208→   257→   257→   257→                    }}
+   209→   258→   258→   258→                  >
+   210→   259→   259→   259→                    <button
+   211→   260→   260→   260→                      className="relative py-2 text-sm font-medium transition-all duration-300 flex items-center gap-1"
+   212→   261→   261→   261→                      style={{
+   213→   262→   262→   262→                        fontFamily: "'Poppins', sans-serif",
+   214→   263→   263→   263→                        color: isActive ? '#D4AF37' : '#5A5A5A',
+   215→   264→   264→   264→                      }}
+   216→   265→   265→   265→                      onClick={() => {
+   217→   266→   266→   266→                        if (link.hasMegaMenu) {
+   218→   267→   267→   267→                          handleNavClick(link.page);
+   219→   268→   268→   268→                        } else {
+   220→   269→   269→   269→                          handleNavClick(link.page);
+   221→   270→   270→   270→                        }
+   222→   271→   271→   271→                      }}
+   223→   272→   272→   272→                    >
+   224→   273→   273→   273→                      {link.label}
+   225→   274→   274→   274→                      {link.hasMegaMenu && (
+   226→   275→   275→   275→                        <ChevronDown
+   227→   276→   276→   276→                          className="h-3.5 w-3.5 transition-transform duration-300"
+   228→   277→   277→   277→                          style={{
+   229→   278→   278→   278→                            transform: megaMenuOpen && hoveredLink === link.label ? 'rotate(180deg)' : 'rotate(0deg)',
+   230→   279→   279→   279→                          }}
+   231→   280→   280→   280→                        />
+   232→   281→   281→   281→                      )}
+   233→   282→   282→   282→                      <span
+   234→   283→   283→   283→                        className="absolute bottom-0 left-0 h-[2px] rounded-full bg-[#D4AF37] transition-all duration-300"
+   235→   284→   284→   284→                        style={{ width: isActive || isHovered ? '100%' : '0%' }}
+   236→   285→   285→   285→                      />
+   237→   286→   286→   286→                    </button>
+   238→   287→   287→   287→
+   239→   288→   288→   288→                    {/* Desktop Mega Menu */}
+   240→   289→   289→   289→                    {link.hasMegaMenu && megaMenuOpen && hoveredLink === link.label && (
+   241→   290→   290→   290→                      <div
+   242→   291→   291→   291→                        ref={megaMenuRef}
+   243→   292→   292→   292→                        className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
+   244→   293→   293→   293→                        style={{ zIndex: 60 }}
+   245→   294→   294→   294→                        onMouseEnter={handleMegaMenuEnter}
+   246→   295→   295→   295→                        onMouseLeave={handleMegaMenuLeave}
+   247→   296→   296→   296→                      >
+   248→   297→   297→   297→                        <div
+   249→   298→   298→   298→                          className="rounded-lg overflow-hidden"
+   250→   299→   299→   299→                          style={{
+   251→   300→   300→   300→                            background: 'rgba(250, 248, 245, 0.98)',
+   252→   301→   301→   301→                            borderTop: '2px solid #D4AF37',
+   253→   302→   302→   302→                            boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
+   254→   303→   303→   303→                            minWidth: '280px',
+   255→   304→   304→   304→                          }}
+   256→   305→   305→   305→                        >
+   257→   306→   306→   306→                          <div className="py-3">
+   258→   307→   307→   307→                            {megaMenuItems.map((item) => {
+   259→   308→   308→   308→                              const itemActive = isMegaItemActive(item.page);
+   260→   309→   309→   309→                              return (
+   261→   310→   310→   310→                                <button
+   262→   311→   311→   311→                                  key={item.label}
+   263→   312→   312→   312→                                  className="w-full flex items-center gap-4 px-5 py-3 text-left transition-colors duration-200 group"
+   264→   313→   313→   313→                                  style={{
+   265→   314→   314→   314→                                    backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+   266→   315→   315→   315→                                  }}
+   267→   316→   316→   316→                                  onMouseEnter={(e) => {
+   268→   317→   317→   317→                                    e.currentTarget.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+   269→   318→   318→   318→                                  }}
+   270→   319→   319→   319→                                  onMouseLeave={(e) => {
+   271→   320→   320→   320→                                    e.currentTarget.style.backgroundColor = itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent';
+   272→   321→   321→   321→                                  }}
+   273→   322→   322→   322→                                  onClick={() => handleNavClick(item.page)}
+   274→   323→   323→   323→                                >
+   275→   324→   324→   324→                                  <div
+   276→   325→   325→   325→                                    className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-colors duration-200"
+   277→   326→   326→   326→                                    style={{
+   278→   327→   327→   327→                                      backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.15)' : 'rgba(232, 213, 163, 0.2)',
+   279→   328→   328→   328→                                      color: itemActive ? '#D4AF37' : '#8A8A8A',
+   280→   329→   329→   329→                                    }}
+   281→   330→   330→   330→                                  >
+   282→   331→   331→   331→                                    {item.icon}
+   283→   332→   332→   332→                                  </div>
+   284→   333→   333→   333→                                  <div className="min-w-0">
+   285→   334→   334→   334→                                    <p
+   286→   335→   335→   335→                                      className="text-sm font-medium transition-colors duration-200"
+   287→   336→   336→   336→                                      style={{
+   288→   337→   337→   337→                                        fontFamily: "'Poppins', sans-serif",
+   289→   338→   338→   338→                                        color: itemActive ? '#D4AF37' : '#2C2C2C',
+   290→   339→   339→   339→                                      }}
+   291→   340→   340→   340→                                    >
+   292→   341→   341→   341→                                      {item.label}
+   293→   342→   342→   342→                                    </p>
+   294→   343→   343→   343→                                    <p
+   295→   344→   344→   344→                                      className="text-xs mt-0.5"
+   296→   345→   345→   345→                                      style={{
+   297→   346→   346→   346→                                        fontFamily: "'Poppins', sans-serif",
+   298→   347→   347→   347→                                        color: '#8A8A8A',
+   299→   348→   348→   348→                                      }}
+   300→   349→   349→   349→                                    >
+   301→   350→   350→   350→                                      {item.description}
+   302→   351→   351→   351→                                    </p>
+   303→   352→   352→   352→                                  </div>
+   304→   353→   353→   353→                                </button>
+   305→   354→   354→   354→                              );
+   306→   355→   355→   355→                            })}
+   307→   356→   356→   356→                          </div>
+   308→   357→   357→   357→                        </div>
+   309→   358→   358→   358→                      </div>
+   310→   359→   359→   359→                    )}
+   311→   360→   360→   360→                  </div>
+   312→   361→   361→   361→                );
+   313→   362→   362→   362→              })}
+   314→   363→   363→   363→            </div>
+   315→   364→   364→   364→
+   316→   365→   365→   365→            {/* Desktop Action Icons */}
+   317→   366→   366→   366→            <div className="hidden lg:flex items-center gap-5">
+   318→   367→   367→   367→              <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Search" onClick={() => setSearchOpen(true)}>
+   319→   368→   368→   368→                <Search className="h-5 w-5" />
+   320→   369→   369→   369→              </button>
+   321→   370→   370→   370→              <button className="relative p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Wishlist" onClick={() => handleNavClick('wishlist')}>
+   322→   371→   371→   371→                <Heart className="h-5 w-5" />
+   323→   372→   372→   372→                {wishlistCount > 0 && (
+   324→   373→   373→   373→                  <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[10px] font-bold text-white px-1 bg-[#D4AF37]">
+   325→   374→   374→   374→                    {wishlistCount}
+   326→   375→   375→   375→                  </span>
+   327→   376→   376→   376→                )}
+   328→   377→   377→   377→              </button>
+   329→   378→   378→   378→              <button className="relative p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Cart" onClick={() => setCartOpen(true)}>
+   330→   379→   379→   379→                <ShoppingCart className="h-5 w-5" />
+   331→   380→   380→   380→                {cartCount > 0 && (
+   332→   381→   381→   381→                  <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[10px] font-bold text-white px-1 bg-[#D4AF37]">
+   333→   382→   382→   382→                    {cartCount}
+   334→   383→   383→   383→                  </span>
+   335→   384→   384→   384→                )}
+   336→   385→   385→   385→              </button>
+   337→   386→   386→   386→              <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Account" onClick={() => handleNavClick('account')}>
+   338→   387→   387→   387→                <User className="h-5 w-5" />
+   339→   388→   388→   388→              </button>
+   340→   389→   389→   389→            </div>
+   341→   390→   390→   390→
+   342→   391→   391→   391→            {/* Mobile: Cart + Hamburger */}
+   343→   392→   392→   392→            <div className="flex lg:hidden items-center gap-2">
+   344→   393→   393→   393→              <button className="relative p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Cart" onClick={() => setCartOpen(true)}>
+   345→   394→   394→   394→                <ShoppingCart className="h-5 w-5" />
+   346→   395→   395→   395→                {cartCount > 0 && (
+   347→   396→   396→   396→                  <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[10px] font-bold text-white px-1 bg-[#D4AF37]">
+   348→   397→   397→   397→                    {cartCount}
+   349→   398→   398→   398→                  </span>
+   350→   399→   399→   399→                )}
+   351→   400→   400→   400→              </button>
+   352→   401→   401→   401→              <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMobileMenuOpen((prev) => !prev)}>
+   353→   402→   402→   402→                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+   354→   403→   403→   403→              </button>
+   355→   404→   404→   404→            </div>
+   356→   405→   405→   405→          </div>
+   357→   406→   406→   406→        </div>
+   358→   407→   407→   407→      </nav>
+   359→   408→   408→   408→
+   360→   409→   409→   409→      {/* Mobile Menu — Modern Slide-In */}
+   361→   410→   410→   410→      {mobileMenuOpen && (
+   362→   411→   411→   411→        <>
+   363→   412→   412→   412→          <div ref={mobileBackdropRef} className="fixed inset-0 z-[51] bg-black/40 backdrop-blur-sm" onClick={closeMobileMenu} />
+   364→   413→   413→   413→          <div ref={mobileMenuRef} className="fixed inset-0 z-[52] flex flex-col" style={{ backgroundColor: 'rgba(250, 248, 245, 0.98)' }}>
+   365→   414→   414→   414→            {/* Mobile Menu Header */}
+   366→   415→   415→   415→            <div className="flex items-center justify-between px-5 shrink-0" style={{ height: '72px', borderBottom: '1px solid rgba(212, 175, 55, 0.15)' }}>
+   367→   416→   416→   416→              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: '44px', width: 'auto', objectFit: 'contain' }} />
+   368→   417→   417→   417→              <button className="w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} onClick={closeMobileMenu} aria-label="Close menu">
+   369→   418→   418→   418→                <X className="h-5 w-5" />
+   370→   419→   419→   419→              </button>
+   371→   420→   420→   420→            </div>
+   372→   421→   421→   421→
+   373→   422→   422→   422→            {/* Mobile Menu Content */}
+   374→   423→   423→   423→            <div className="flex flex-col py-4 px-5 flex-1 overflow-y-auto">
+   375→   424→   424→   424→              {/* Main Navigation Links */}
+   376→   425→   425→   425→              <div className="space-y-0.5">
+   377→   426→   426→   426→                {navLinks.map((link) => {
+   378→   427→   427→   427→                  const isActive = isLinkActive(link.page, link.label);
+   379→   428→   428→   428→
+   380→   429→   429→   429→                  if (link.hasMegaMenu) {
+   381→   430→   430→   430→                    return (
+   382→   431→   431→   431→                      <div key={link.label}>
+   383→   432→   432→   432→                        <button
+   384→   433→   433→   433→                          className="flex items-center justify-between py-3.5 text-left w-full transition-colors duration-200 rounded-xl px-3 hover:bg-[#F5EDDA]/60"
+   385→   434→   434→   434→                          style={{ fontFamily: "'Poppins', sans-serif", color: isActive ? '#D4AF37' : '#2C2C2C' }}
+   386→   435→   435→   435→                          onClick={() => setMobileShopExpanded((prev) => !prev)}
+   387→   436→   436→   436→                          aria-expanded={mobileShopExpanded}
+   388→   437→   437→   437→                        >
+   389→   438→   438→   438→                          <div className="flex items-center gap-3">
+   390→   439→   439→   439→                            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: isActive ? 'rgba(212,175,55,0.12)' : 'rgba(232,213,163,0.15)' }}>
+   391→   440→   440→   440→                              <ShoppingBag className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} />
+   392→   441→   441→   441→                            </div>
+   393→   442→   442→   442→                            <span className="text-base font-medium">{link.label}</span>
+   394→   443→   443→   443→                          </div>
+   395→   444→   444→   444→                          <ChevronDown
+   396→   445→   445→   445→                            className="h-4 w-4 transition-transform duration-300"
+   397→   446→   446→   446→                            style={{
+   398→   447→   447→   447→                              color: isActive ? '#D4AF37' : '#8A8A8A',
+   399→   448→   448→   448→                              transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+   400→   449→   449→   449→                            }}
+   401→   450→   450→   450→                          />
+   402→   451→   451→   451→                        </button>
+   403→   452→   452→   452→                        <div
+   404→   453→   453→   453→                          ref={mobileShopContentRef}
+   405→   454→   454→   454→                          className="overflow-hidden"
+   406→   455→   455→   455→                          style={{ height: mobileShopExpanded ? 'auto' : 0, opacity: mobileShopExpanded ? 1 : 0 }}
+   407→   456→   456→   456→                        >
+   408→   457→   457→   457→                          <div className="pb-2 pl-4 flex flex-col gap-0.5">
+   409→   458→   458→   458→                            {megaMenuItems.map((item) => {
+   410→   459→   459→   459→                              const itemActive = isMegaItemActive(item.page);
+   411→   460→   460→   460→                              return (
+   412→   461→   461→   461→                                <button
+   413→   462→   462→   462→                                  key={item.label}
+   414→   463→   463→   463→                                  className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-[#F5EDDA]/60"
+   415→   464→   464→   464→                                  style={{
+   416→   465→   465→   465→                                    fontFamily: "'Poppins', sans-serif",
+   417→   466→   466→   466→                                    color: itemActive ? '#D4AF37' : '#5A5A5A',
+   418→   467→   467→   467→                                    backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+   419→   468→   468→   468→                                  }}
+   420→   469→   469→   469→                                  onClick={() => handleNavClick(item.page)}
+   421→   470→   470→   470→                                >
+   422→   471→   471→   471→                                  <div
+   423→   472→   472→   472→                                    className="flex items-center justify-center w-9 h-9 rounded-lg shrink-0 transition-colors duration-200"
+   424→   473→   473→   473→                                    style={{
+   425→   474→   474→   474→                                      backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.15)' : 'rgba(232, 213, 163, 0.15)',
+   426→   475→   475→   475→                                      color: itemActive ? '#D4AF37' : '#8A8A8A',
+   427→   476→   476→   476→                                    }}
+   428→   477→   477→   477→                                  >
+   429→   478→   478→   478→                                    {item.icon}
+   430→   479→   479→   479→                                  </div>
+   431→   480→   480→   480→                                  <div className="min-w-0">
+   432→   481→   481→   481→                                    <p className="text-sm font-medium">{item.label}</p>
+   433→   482→   482→   482→                                    <p className="text-[11px] mt-0.5" style={{ color: '#8A8A8A' }}>{item.description}</p>
+   434→   483→   483→   483→                                  </div>
+   435→   484→   484→   484→                                </button>
+   436→   485→   485→   485→                              );
+   437→   486→   486→   486→                            })}
+   438→   487→   487→   487→                          </div>
+   439→   488→   488→   488→                        </div>
+   440→   489→   489→   489→                      </div>
+   441→   490→   490→   490→                    );
+   442→   491→   491→   491→                  }
+   443→   492→   492→   492→
+   444→   493→   493→   493→                  return (
+   445→   494→   494→   494→                    <button
+   446→   495→   495→   495→                      key={link.label}
+   447→   496→   496→   496→                      className="flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 hover:bg-[#F5EDDA]/60 w-full"
+   448→   497→   497→   497→                      style={{ fontFamily: "'Poppins', sans-serif", color: isActive ? '#D4AF37' : '#2C2C2C' }}
+   449→   498→   498→   498→                      onClick={() => handleNavClick(link.page)}
+   450→   499→   499→   499→                    >
+   451→   500→   500→   500→                      <div className="flex items-center gap-3">
+   452→   501→   501→   501→                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: isActive ? 'rgba(212,175,55,0.12)' : 'rgba(232,213,163,0.15)' }}>
+   453→   502→   502→   502→                          {link.label === 'Home' && <svg className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4" /></svg>}
+   454→   503→   503→   503→                          {link.label === 'About' && <svg className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+   455→   504→   504→   504→                          {link.label === 'Contact' && <svg className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
+   456→   505→   505→   505→                        </div>
+   457→   506→   506→   506→                        <span className="text-base font-medium">{link.label}</span>
+   458→   507→   507→   507→                      </div>
+   459→   508→   508→   508→                      <ChevronRight className="h-4 w-4" style={{ color: '#8A8A8A' }} />
+   460→   509→   509→   509→                    </button>
+   461→   510→   510→   510→                  );
+   462→   511→   511→   511→                })}
+   463→   512→   512→   512→              </div>
+   464→   513→   513→   513→
+   465→   514→   514→   514→              {/* Divider */}
+   466→   515→   515→   515→              <div className="my-5 h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent)' }} />
+   467→   516→   516→   516→
+   468→   517→   517→   517→              {/* Quick Actions */}
+   469→   518→   518→   518→              <div className="space-y-0.5">
+   470→   519→   519→   519→                <p className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-2" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>Quick Actions</p>
+   471→   520→   520→   520→                {[
+   472→   521→   521→   521→                  { icon: <Search className="h-4 w-4" />, label: 'Search', page: 'search' },
+   473→   522→   522→   522→                  { icon: <Heart className="h-4 w-4" />, label: 'Wishlist', page: 'wishlist', count: wishlistCount },
+   474→   523→   523→   523→                  { icon: <ShoppingCart className="h-4 w-4" />, label: 'Cart', page: 'cart', count: cartCount },
+   475→   524→   524→   524→                  { icon: <User className="h-4 w-4" />, label: 'Account', page: 'account' },
+   476→   525→   525→   525→                ].map((item) => (
+   477→   526→   526→   526→                  <button
+   478→   527→   527→   527→                    key={item.label}
+   479→   528→   528→   528→                    className="flex items-center gap-3 py-2.5 text-left transition-colors duration-200 hover:bg-[#F5EDDA]/60 rounded-xl px-3 w-full"
+   480→   529→   529→   529→                    style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}
+   481→   530→   530→   530→                    onClick={() => { closeMobileMenu(); if (item.label === 'Cart') setCartOpen(true); if (item.label === 'Wishlist') handleNavClick('wishlist'); if (item.label === 'Search') { setSearchOpen(true); } if (item.label === 'Account') handleNavClick('account'); }}
+   482→   531→   531→   531→                  >
+   483→   532→   532→   532→                    <div className="w-8 h-8 rounded-lg flex items-center justify-center relative" style={{ backgroundColor: 'rgba(232,213,163,0.15)' }}>
+   484→   533→   533→   533→                      {item.icon}
+   485→   534→   534→   534→                      {item.count && item.count > 0 ? (
+   486→   535→   535→   535→                        <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[#D4AF37]">
+   487→   536→   536→   536→                          {item.count}
+   488→   537→   537→   537→                        </span>
+   489→   538→   538→   538→                      ) : null}
+   490→   539→   539→   539→                    </div>
+   491→   540→   540→   540→                    <span className="text-sm font-medium">{item.label}</span>
+   492→   541→   541→   541→                  </button>
+   493→   542→   542→   542→                ))}
+   494→   543→   543→   543→              </div>
+   495→   544→   544→   544→
+   496→   545→   545→   545→              {/* Bottom CTA */}
+   497→   546→   546→   546→              <div className="mt-auto pt-6">
+   498→   547→   547→   547→                <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(212,175,55,0.06)', border: '1px solid rgba(212,175,55,0.15)' }}>
+   499→   548→   548→   548→                  <p className="text-xs font-medium mb-2" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>NEW COLLECTION 2026</p>
+   500→   549→   549→   549→                  <p className="text-xs mb-3" style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}>Explore our latest arrivals and handcrafted luxury pieces</p>
+   501→
+   502→[showing lines 50-549 of 635; use offset=550 with limit to continue reading]

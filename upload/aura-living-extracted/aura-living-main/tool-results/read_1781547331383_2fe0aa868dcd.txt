@@ -1,0 +1,716 @@
+     1→'use client';
+     2→
+     3→import { useEffect, useRef, useCallback, useState } from 'react';
+     4→import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+     5→import { useStore } from '@/store/useStore';
+     6→import { gsap, ScrollTrigger } from '@/hooks/useGsap';
+     7→import PremiumButton from '@/components/ui/PremiumButton';
+     8→
+     9→/* ═══════════════════════════════════════════════════════════
+    10→   SLIDE DATA — 5 Premium Slides
+    11→   ═══════════════════════════════════════════════════════════ */
+    12→const slides = [
+    13→  {
+    14→    tag: 'NEW COLLECTION 2026',
+    15→    heading: 'Elevate Your Living Space',
+    16→    subtitle: 'Discover handpicked home decor that turns houses into homes',
+    17→    image: '/images/hero/hero-slide-1.png',
+    18→    overlay: 'linear-gradient(135deg, rgba(44,44,44,0.75), rgba(212,175,55,0.15))',
+    19→    primaryBtn: { label: 'Shop Now', page: 'shop' as const, variant: 'gold' as const },
+    20→    secondaryBtn: { label: 'Explore Collections', page: 'shop' as const, variant: 'outline' as const },
+    21→  },
+    22→  {
+    23→    tag: 'ARTISAN CRAFTSMANSHIP',
+    24→    heading: 'Handcrafted with Love',
+    25→    subtitle: 'Every piece tells a story of dedication, skill, and cultural heritage',
+    26→    image: '/images/hero/hero-slide-2.png',
+    27→    overlay: 'linear-gradient(135deg, rgba(44,44,44,0.8), rgba(168,181,160,0.2))',
+    28→    primaryBtn: { label: 'Meet Our Artisans', page: 'about' as const, variant: 'gold' as const },
+    29→    secondaryBtn: { label: 'Shop Handcrafted', page: 'shop' as const, variant: 'outline' as const },
+    30→  },
+    31→  {
+    32→    tag: 'DINING COLLECTION',
+    33→    heading: 'Set the Perfect Table',
+    34→    subtitle: 'Gold-rimmed glassware and handcrafted ceramics for memorable gatherings',
+    35→    image: '/images/hero/hero-slide-3.png',
+    36→    overlay: 'linear-gradient(135deg, rgba(44,44,44,0.7), rgba(232,206,193,0.2))',
+    37→    primaryBtn: { label: 'Shop Dining', page: 'shop' as const, variant: 'gold' as const },
+    38→    secondaryBtn: { label: 'View Lookbook', page: 'lookbook' as const, variant: 'outline' as const },
+    39→  },
+    40→  {
+    41→    tag: 'SERENE SPACES',
+    42→    heading: 'Find Your Sanctuary',
+    43→    subtitle: 'Soft candlelight, delicate vases, and warm textiles for peaceful retreats',
+    44→    image: '/images/hero/hero-slide-4.png',
+    45→    overlay: 'linear-gradient(135deg, rgba(44,44,44,0.75), rgba(212,175,55,0.18))',
+    46→    primaryBtn: { label: 'Shop Bedroom', page: 'shop' as const, variant: 'gold' as const },
+    47→    secondaryBtn: { label: 'New Arrivals', page: 'new-arrivals' as const, variant: 'outline' as const },
+    48→  },
+    49→  {
+    50→    tag: 'BRING NATURE HOME',
+    51→    heading: 'The Botanical Corner',
+    52→    subtitle: 'Lush greenery in gold-rimmed planters brings life to any space',
+    53→    image: '/images/hero/hero-slide-5.png',
+    54→    overlay: 'linear-gradient(135deg, rgba(44,44,44,0.7), rgba(168,181,160,0.25))',
+    55→    primaryBtn: { label: 'Shop Plants', page: 'shop' as const, variant: 'gold' as const },
+    56→    secondaryBtn: { label: 'Care Guide', page: 'care-guide' as const, variant: 'outline' as const },
+    57→  },
+    58→];
+    59→
+    60→const SLIDE_DURATION = 6000; // 6 seconds per slide
+    61→const TOTAL_SLIDES = slides.length;
+    62→
+    63→/* ═══════════════════════════════════════════════════════════
+    64→   GOLD ORB — CSS-only floating divs with GSAP-enhanced motion
+    65→   ═══════════════════════════════════════════════════════════ */
+    66→
+    67→function GoldOrb({ size, top, left, delay = 0, opacity = 0.15 }: {
+    68→  size: number; top: string; left: string; delay?: number; opacity?: number;
+    69→}) {
+    70→  const orbRef = useRef<HTMLDivElement>(null);
+    71→
+    72→  useEffect(() => {
+    73→    const el = orbRef.current;
+    74→    if (!el) return;
+    75→
+    76→    const tl = gsap.timeline({ repeat: -1, yoyo: true, delay });
+    77→    tl.to(el, {
+    78→      x: `random(-20, 20)`,
+    79→      y: `random(-30, 30)`,
+    80→      scale: `random(0.95, 1.1)`,
+    81→      duration: `random(4, 7)`,
+    82→      ease: 'sine.inOut',
+    83→    });
+    84→
+    85→    return () => { tl.kill(); };
+    86→  }, [delay]);
+    87→
+    88→  return (
+    89→    <div
+    90→      ref={orbRef}
+    91→      className="absolute pointer-events-none"
+    92→      style={{
+    93→        width: size,
+    94→        height: size,
+    95→        top,
+    96→        left,
+    97→        background: `radial-gradient(circle, rgba(212, 175, 55, ${opacity}) 0%, rgba(212, 175, 55, ${opacity * 0.3}) 40%, transparent 70%)`,
+    98→        borderRadius: '50%',
+    99→        filter: 'blur(40px)',
+   100→      }}
+   101→    />
+   102→  );
+   103→}
+   104→
+   105→/* ═══════════════════════════════════════════════════════════
+   106→   MARQUEE STRIP — CSS-only marquee
+   107→   ═══════════════════════════════════════════════════════════ */
+   108→
+   109→function MarqueeStrip() {
+   110→  const text = 'AURA LIVING \u2022 HOME DECOR \u2022 PAKISTAN \u2022 HANDCRAFTED \u2022 LUXURY \u2022 ';
+   111→  const repeated = text.repeat(6);
+   112→  return (
+   113→    <div className="absolute bottom-0 left-0 w-full z-20 overflow-hidden bg-[#2C2C2C]/70 backdrop-blur-sm border-t border-[#D4AF37]/20">
+   114→      <div className="animate-marquee whitespace-nowrap py-2.5">
+   115→        <span className="text-[#D4AF37]/80 text-xs tracking-[4px] uppercase" style={{ fontFamily: "'Archivo Narrow', sans-serif" }}>
+   116→          {repeated}
+   117→        </span>
+   118→      </div>
+   119→    </div>
+   120→  );
+   121→}
+   122→
+   123→/* ═══════════════════════════════════════════════════════════
+   124→   HERO SECTION — 5-Slide Slider with GSAP Crossfade & Ken Burns
+   125→   ═══════════════════════════════════════════════════════════ */
+   126→
+   127→export default function HeroSection() {
+   128→  const setPage = useStore((state) => state.setPage);
+   129→  const sectionRef = useRef<HTMLDivElement>(null);
+   130→  const bgALayerRef = useRef<HTMLDivElement>(null);
+   131→  const bgBLayerRef = useRef<HTMLDivElement>(null);
+   132→  const contentRef = useRef<HTMLDivElement>(null);
+   133→  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+   134→  const dotsRef = useRef<HTMLDivElement>(null);
+   135→  const progressBarRef = useRef<HTMLDivElement>(null);
+   136→  const progressFillRef = useRef<HTMLDivElement>(null);
+   137→
+   138→  const [currentSlide, setCurrentSlide] = useState(0);
+   139→  const isTransitioningRef = useRef(false);
+   140→  const autoPlayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+   141→  const progressAnimRef = useRef<gsap.core.Tween | null>(null);
+   142→  const kenBurnsTlRef = useRef<gsap.core.Timeline | null>(null);
+   143→  const activeBgRef = useRef<'A' | 'B'>('A');
+   144→  const slideTlRef = useRef<gsap.core.Timeline | null>(null);
+   145→
+   146→  // Slide content refs for animation
+   147→  const tagRef = useRef<HTMLSpanElement>(null);
+   148→  const headingRef = useRef<HTMLHeadingElement>(null);
+   149→  const dividerRef = useRef<HTMLDivElement>(null);
+   150→  const subtitleRef = useRef<HTMLParagraphElement>(null);
+   151→  const buttonsRef = useRef<HTMLDivElement>(null);
+   152→
+   153→  // ─── Progress bar animation ───────────────────────────────
+   154→  const animateProgress = useCallback(() => {
+   155→    if (progressAnimRef.current) {
+   156→      progressAnimRef.current.kill();
+   157→    }
+   158→    if (progressFillRef.current) {
+   159→      gsap.set(progressFillRef.current, { width: '0%' });
+   160→      progressAnimRef.current = gsap.to(progressFillRef.current, {
+   161→        width: '100%',
+   162→        duration: SLIDE_DURATION / 1000,
+   163→        ease: 'none',
+   164→      });
+   165→    }
+   166→  }, []);
+   167→
+   168→  // ─── Ken Burns animation on active background ─────────────
+   169→  const animateKenBurns = useCallback((bgElement: HTMLDivElement | null) => {
+   170→    if (kenBurnsTlRef.current) {
+   171→      kenBurnsTlRef.current.kill();
+   172→    }
+   173→    if (!bgElement) return;
+   174→
+   175→    // Reset the image position
+   176→    const img = bgElement.querySelector('.ken-burns-img') as HTMLElement | null;
+   177→    if (!img) return;
+   178→
+   179→    gsap.set(img, { scale: 1, x: 0, y: 0 });
+   180→
+   181→    kenBurnsTlRef.current = gsap.timeline({
+   182→      repeat: 0,
+   183→    });
+   184→
+   185→    // Subtle zoom + slight pan over the slide duration
+   186→    const panX = (Math.random() > 0.5 ? 1 : -1) * 15;
+   187→    const panY = (Math.random() > 0.5 ? 1 : -1) * 10;
+   188→
+   189→    kenBurnsTlRef.current.to(img, {
+   190→      scale: 1.08,
+   191→      x: panX,
+   192→      y: panY,
+   193→      duration: SLIDE_DURATION / 1000,
+   194→      ease: 'none',
+   195→    });
+   196→  }, []);
+   197→
+   198→  // ─── Auto-play logic ──────────────────────────────────────
+   199→  const startAutoPlay = useCallback(() => {
+   200→    if (autoPlayTimerRef.current) clearTimeout(autoPlayTimerRef.current);
+   201→    animateProgress();
+   202→    autoPlayTimerRef.current = setTimeout(() => {
+   203→      setCurrentSlide((prev) => (prev + 1) % TOTAL_SLIDES);
+   204→    }, SLIDE_DURATION);
+   205→  }, [animateProgress]);
+   206→
+   207→  const stopAutoPlay = useCallback(() => {
+   208→    if (autoPlayTimerRef.current) {
+   209→      clearTimeout(autoPlayTimerRef.current);
+   210→      autoPlayTimerRef.current = null;
+   211→    }
+   212→    if (progressAnimRef.current) {
+   213→      progressAnimRef.current.kill();
+   214→    }
+   215→  }, []);
+   216→
+   217→  // ─── Animate slide content entrance ───────────────────────
+   218→  const animateSlideIn = useCallback(() => {
+   219→    if (slideTlRef.current) {
+   220→      slideTlRef.current.kill();
+   221→    }
+   222→
+   223→    const tl = gsap.timeline({ delay: 0.1 });
+   224→    slideTlRef.current = tl;
+   225→
+   226→    // Tag: slide down + scale + blur
+   227→    if (tagRef.current) {
+   228→      gsap.set(tagRef.current, { opacity: 0, y: -30, scale: 0.8, filter: 'blur(8px)' });
+   229→      tl.to(tagRef.current, {
+   230→        opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
+   231→        duration: 0.7, ease: 'power3.out',
+   232→      });
+   233→    }
+   234→
+   235→    // Heading: reveal with clip + fade + slide
+   236→    if (headingRef.current) {
+   237→      gsap.set(headingRef.current, {
+   238→        opacity: 0,
+   239→        y: 40,
+   240→        clipPath: 'inset(0 0 100% 0)',
+   241→      });
+   242→      tl.to(headingRef.current, {
+   243→        opacity: 1,
+   244→        y: 0,
+   245→        clipPath: 'inset(0 0 0% 0)',
+   246→        duration: 0.8,
+   247→        ease: 'power3.out',
+   248→      }, '-=0.3');
+   249→    }
+   250→
+   251→    // Divider: draw animation
+   252→    if (dividerRef.current) {
+   253→      gsap.set(dividerRef.current, { opacity: 0, scaleX: 0 });
+   254→      tl.to(dividerRef.current, {
+   255→        opacity: 1, scaleX: 1,
+   256→        duration: 0.5, ease: 'power3.out',
+   257→      }, '-=0.2');
+   258→    }
+   259→
+   260→    // Subtitle: slide up with blur
+   261→    if (subtitleRef.current) {
+   262→      gsap.set(subtitleRef.current, { opacity: 0, y: 30, filter: 'blur(8px)' });
+   263→      tl.to(subtitleRef.current, {
+   264→        opacity: 1, y: 0, filter: 'blur(0px)',
+   265→        duration: 0.6, ease: 'power3.out',
+   266→      }, '-=0.2');
+   267→    }
+   268→
+   269→    // Buttons: stagger reveal
+   270→    if (buttonsRef.current) {
+   271→      const btns = buttonsRef.current.children;
+   272→      gsap.set(btns, { opacity: 0, y: 25, scale: 0.9 });
+   273→      tl.to(btns, {
+   274→        opacity: 1, y: 0, scale: 1,
+   275→        duration: 0.5, stagger: 0.12, ease: 'back.out(1.5)',
+   276→      }, '-=0.2');
+   277→    }
+   278→
+   279→    return tl;
+   280→  }, []);
+   281→
+   282→  // ─── Crossfade background transition ──────────────────────
+   283→  const crossfadeBackground = useCallback((slideIndex: number) => {
+   284→    const nextImage = slides[slideIndex].image;
+   285→    const nextOverlay = slides[slideIndex].overlay;
+   286→
+   287→    if (activeBgRef.current === 'A') {
+   288→      // Fade out A, fade in B
+   289→      if (bgBLayerRef.current) {
+   290→        const img = bgBLayerRef.current.querySelector('.ken-burns-img') as HTMLElement;
+   291→        const overlayEl = bgBLayerRef.current.querySelector('.bg-overlay') as HTMLElement;
+   292→        if (img) img.style.backgroundImage = `url(${nextImage})`;
+   293→        if (overlayEl) overlayEl.style.background = nextOverlay;
+   294→        gsap.set(bgBLayerRef.current, { opacity: 0, zIndex: 2 });
+   295→        gsap.to(bgBLayerRef.current, { opacity: 1, duration: 1.2, ease: 'power2.inOut' });
+   296→        animateKenBurns(bgBLayerRef.current);
+   297→      }
+   298→      if (bgALayerRef.current) {
+   299→        gsap.to(bgALayerRef.current, { opacity: 0, duration: 1.2, ease: 'power2.inOut', delay: 0.1 });
+   300→      }
+   301→      activeBgRef.current = 'B';
+   302→    } else {
+   303→      // Fade out B, fade in A
+   304→      if (bgALayerRef.current) {
+   305→        const img = bgALayerRef.current.querySelector('.ken-burns-img') as HTMLElement;
+   306→        const overlayEl = bgALayerRef.current.querySelector('.bg-overlay') as HTMLElement;
+   307→        if (img) img.style.backgroundImage = `url(${nextImage})`;
+   308→        if (overlayEl) overlayEl.style.background = nextOverlay;
+   309→        gsap.set(bgALayerRef.current, { opacity: 0, zIndex: 2 });
+   310→        gsap.to(bgALayerRef.current, { opacity: 1, duration: 1.2, ease: 'power2.inOut' });
+   311→        animateKenBurns(bgALayerRef.current);
+   312→      }
+   313→      if (bgBLayerRef.current) {
+   314→        gsap.to(bgBLayerRef.current, { opacity: 0, duration: 1.2, ease: 'power2.inOut', delay: 0.1 });
+   315→      }
+   316→      activeBgRef.current = 'A';
+   317→    }
+   318→  }, [animateKenBurns]);
+   319→
+   320→  // ─── Handle slide transitions ─────────────────────────────
+   321→  useEffect(() => {
+   322→    if (isTransitioningRef.current && currentSlide !== 0) return;
+   323→
+   324→    // Skip transition guard on first mount
+   325→    const isFirstMount = currentSlide === 0 && !isTransitioningRef.current && !autoPlayTimerRef.current;
+   326→
+   327→    if (!isFirstMount) {
+   328→      isTransitioningRef.current = true;
+   329→    }
+   330→
+   331→    // Crossfade background
+   332→    crossfadeBackground(currentSlide);
+   333→
+   334→    // Animate out current content
+   335→    const contentElements = contentRef.current?.querySelectorAll('.slide-content-el');
+   336→    if (contentElements && contentElements.length > 0 && !isFirstMount) {
+   337→      gsap.to(contentElements, {
+   338→        opacity: 0,
+   339→        y: -20,
+   340→        duration: 0.3,
+   341→        ease: 'power2.in',
+   342→        stagger: 0.05,
+   343→        onComplete: () => {
+   344→          animateSlideIn();
+   345→          setTimeout(() => { isTransitioningRef.current = false; }, 1500);
+   346→        },
+   347→      });
+   348→    } else {
+   349→      // First load or no content elements — just animate in
+   350→      animateSlideIn();
+   351→      if (!isFirstMount) {
+   352→        setTimeout(() => { isTransitioningRef.current = false; }, 1500);
+   353→      }
+   354→    }
+   355→
+   356→    // Update active dot
+   357→    if (dotsRef.current) {
+   358→      const dots = dotsRef.current.children;
+   359→      Array.from(dots).forEach((dot, i) => {
+   360→        if (i === currentSlide) {
+   361→          gsap.to(dot, { scale: 1.4, backgroundColor: '#D4AF37', duration: 0.4, ease: 'power2.out' });
+   362→        } else {
+   363→          gsap.to(dot, { scale: 1, backgroundColor: 'rgba(255,255,255,0.4)', duration: 0.4, ease: 'power2.out' });
+   364→        }
+   365→      });
+   366→    }
+   367→  }, [currentSlide]);
+   368→
+   369→  // ─── Initial setup ────────────────────────────────────────
+   370→  useEffect(() => {
+   371→    // Set initial background on layer A
+   372→    if (bgALayerRef.current) {
+   373→      const img = bgALayerRef.current.querySelector('.ken-burns-img') as HTMLElement;
+   374→      const overlayEl = bgALayerRef.current.querySelector('.bg-overlay') as HTMLElement;
+   375→      if (img) img.style.backgroundImage = `url(${slides[0].image})`;
+   376→      if (overlayEl) overlayEl.style.background = slides[0].overlay;
+   377→      gsap.set(bgALayerRef.current, { opacity: 1 });
+   378→    }
+   379→    if (bgBLayerRef.current) {
+   380→      gsap.set(bgBLayerRef.current, { opacity: 0 });
+   381→    }
+   382→
+   383→    // Start Ken Burns on initial slide
+   384→    animateKenBurns(bgALayerRef.current);
+   385→
+   386→    // Initial content animation
+   387→    animateSlideIn();
+   388→
+   389→    // Scroll indicator: fade in
+   390→    if (scrollIndicatorRef.current) {
+   391→      gsap.set(scrollIndicatorRef.current, { opacity: 0, y: -10 });
+   392→      gsap.to(scrollIndicatorRef.current, {
+   393→        opacity: 1, y: 0,
+   394→        duration: 0.5, ease: 'power2.out',
+   395→        delay: 2,
+   396→      });
+   397→    }
+   398→
+   399→    // Animate dots
+   400→    if (dotsRef.current) {
+   401→      const dots = dotsRef.current.children;
+   402→      Array.from(dots).forEach((dot, i) => {
+   403→        if (i === 0) {
+   404→          gsap.set(dot, { scale: 1.4, backgroundColor: '#D4AF37' });
+   405→        } else {
+   406→          gsap.set(dot, { scale: 1, backgroundColor: 'rgba(255,255,255,0.4)' });
+   407→        }
+   408→      });
+   409→    }
+   410→
+   411→    startAutoPlay();
+   412→
+   413→    return () => {
+   414→      stopAutoPlay();
+   415→      if (kenBurnsTlRef.current) kenBurnsTlRef.current.kill();
+   416→      if (slideTlRef.current) slideTlRef.current.kill();
+   417→      if (progressAnimRef.current) progressAnimRef.current.kill();
+   418→    };
+   419→  }, []);
+   420→
+   421→  // ─── Parallax: GSAP ScrollTrigger ─────────────────────────
+   422→  useEffect(() => {
+   423→    if (!sectionRef.current) return;
+   424→
+   425→    const bgContainer = sectionRef.current.querySelector('.bg-parallax-container') as HTMLElement;
+   426→    if (!bgContainer) return;
+   427→
+   428→    ScrollTrigger.create({
+   429→      trigger: sectionRef.current,
+   430→      start: 'top top',
+   431→      end: 'bottom top',
+   432→      scrub: true,
+   433→      onUpdate: (self) => {
+   434→        if (bgContainer) {
+   435→          gsap.set(bgContainer, { y: self.progress * 150 });
+   436→        }
+   437→        if (contentRef.current) {
+   438→          gsap.set(contentRef.current, {
+   439→            opacity: 1 - self.progress * 2,
+   440→            y: -self.progress * 60,
+   441→          });
+   442→        }
+   443→      },
+   444→    });
+   445→  }, []);
+   446→
+   447→  // ─── Mouse parallax on content ────────────────────────────
+   448→  useEffect(() => {
+   449→    const section = sectionRef.current;
+   450→    const content = contentRef.current;
+   451→    if (!section || !content) return;
+   452→
+   453→    const handleMouseMove = (e: MouseEvent) => {
+   454→      const rect = section.getBoundingClientRect();
+   455→      const x = (e.clientX - rect.left) / rect.width - 0.5;
+   456→      const y = (e.clientY - rect.top) / rect.height - 0.5;
+   457→
+   458→      gsap.to(content, {
+   459→        x: x * 15,
+   460→        y: y * 10,
+   461→        duration: 0.8,
+   462→        ease: 'power2.out',
+   463→      });
+   464→    };
+   465→
+   466→    const handleMouseLeave = () => {
+   467→      gsap.to(content, { x: 0, y: 0, duration: 0.8, ease: 'power2.out' });
+   468→    };
+   469→
+   470→    section.addEventListener('mousemove', handleMouseMove);
+   471→    section.addEventListener('mouseleave', handleMouseLeave);
+   472→
+   473→    return () => {
+   474→      section.removeEventListener('mousemove', handleMouseMove);
+   475→      section.removeEventListener('mouseleave', handleMouseLeave);
+   476→    };
+   477→  }, []);
+   478→
+   479→  // ─── Navigation helpers ───────────────────────────────────
+   480→  const goToSlide = useCallback((index: number) => {
+   481→    if (isTransitioningRef.current || index === currentSlide) return;
+   482→    stopAutoPlay();
+   483→    setCurrentSlide(index);
+   484→    // Restart autoplay after transition
+   485→    setTimeout(() => { startAutoPlay(); }, 1600);
+   486→  }, [currentSlide, startAutoPlay, stopAutoPlay]);
+   487→
+   488→  const prevSlide = useCallback(() => {
+   489→    const newIndex = (currentSlide - 1 + TOTAL_SLIDES) % TOTAL_SLIDES;
+   490→    goToSlide(newIndex);
+   491→  }, [currentSlide, goToSlide]);
+   492→
+   493→  const nextSlide = useCallback(() => {
+   494→    const newIndex = (currentSlide + 1) % TOTAL_SLIDES;
+   495→    goToSlide(newIndex);
+   496→  }, [currentSlide, goToSlide]);
+   497→
+   498→  const slide = slides[currentSlide];
+   499→
+   500→  // ─── Format slide number ──────────────────────────────────
+   501→  const formatSlideNum = (n: number) => String(n + 1).padStart(2, '0');
+   502→
+   503→  return (
+   504→    <section
+   505→      ref={sectionRef}
+   506→      className="relative w-full overflow-hidden flex items-center justify-center group"
+   507→      style={{ height: '100vh', minHeight: '600px' }}
+   508→      onMouseEnter={() => {
+   509→        // Show arrows on hover via CSS group
+   510→      }}
+   511→    >
+   512→      {/* ═══ Parallax Background Container ═══ */}
+   513→      <div className="bg-parallax-container absolute inset-0 w-full h-[130%] -top-[15%]">
+   514→        {/* Background Layer A */}
+   515→        <div
+   516→          ref={bgALayerRef}
+   517→          className="absolute inset-0 w-full h-full"
+   518→          style={{ opacity: 1, zIndex: 1 }}
+   519→        >
+   520→          <div
+   521→            className="ken-burns-img absolute inset-0 w-full h-full"
+   522→            style={{
+   523→              backgroundImage: `url(${slides[0].image})`,
+   524→              backgroundSize: 'cover',
+   525→              backgroundPosition: 'center',
+   526→              backgroundRepeat: 'no-repeat',
+   527→              willChange: 'transform',
+   528→            }}
+   529→          />
+   530→          <div
+   531→            className="bg-overlay absolute inset-0"
+   532→            style={{ background: slides[0].overlay }}
+   533→          />
+   534→        </div>
+   535→
+   536→        {/* Background Layer B */}
+   537→        <div
+   538→          ref={bgBLayerRef}
+   539→          className="absolute inset-0 w-full h-full"
+   540→          style={{ opacity: 0, zIndex: 2 }}
+   541→        >
+   542→          <div
+   543→            className="ken-burns-img absolute inset-0 w-full h-full"
+   544→            style={{
+   545→              backgroundImage: `url(${slides[0].image})`,
+   546→              backgroundSize: 'cover',
+   547→              backgroundPosition: 'center',
+   548→              backgroundRepeat: 'no-repeat',
+   549→              willChange: 'transform',
+   550→            }}
+   551→          />
+   552→          <div
+   553→            className="bg-overlay absolute inset-0"
+   554→            style={{ background: slides[0].overlay }}
+   555→          />
+   556→        </div>
+   557→      </div>
+   558→
+   559→      {/* ═══ Animated grain texture overlay ═══ */}
+   560→      <div
+   561→        className="absolute inset-0 pointer-events-none opacity-[0.03] z-10"
+   562→        style={{
+   563→          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+   564→        }}
+   565→      />
+   566→
+   567→      {/* ═══ Vignette ═══ */}
+   568→      <div
+   569→        className="absolute inset-0 pointer-events-none z-10"
+   570→        style={{
+   571→          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(44,44,44,0.4) 100%)',
+   572→        }}
+   573→      />
+   574→
+   575→      {/* ═══ Corner ornaments ═══ */}
+   576→      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-12 h-12 sm:w-[100px] sm:h-[100px] border-t border-l border-[#D4AF37]/50 pointer-events-none z-20" />
+   577→      <div className="absolute bottom-16 right-4 sm:bottom-24 sm:right-6 w-12 h-12 sm:w-[100px] sm:h-[100px] border-b border-r border-[#D4AF37]/50 pointer-events-none z-20" />
+   578→
+   579→      {/* ═══ Floating Gold Orbs — GSAP-enhanced ═══ */}
+   580→      <GoldOrb size={200} top="8%" left="5%" delay={0.3} opacity={0.12} />
+   581→      <GoldOrb size={140} top="50%" left="85%" delay={1.2} opacity={0.08} />
+   582→      <GoldOrb size={170} top="65%" left="12%" delay={2.0} opacity={0.10} />
+   583→
+   584→      {/* ═══ Main Content ═══ */}
+   585→      <div
+   586→        ref={contentRef}
+   587→        className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto"
+   588→      >
+   589→        <div className="flex flex-col items-center gap-5 sm:gap-7">
+   590→          {/* Tag */}
+   591→          <span
+   592→            ref={tagRef}
+   593→            className="slide-content-el inline-block text-[#D4AF37] text-[10px] sm:text-xs tracking-[4px] uppercase font-medium"
+   594→            style={{ fontFamily: "'Poppins', sans-serif" }}
+   595→          >
+   596→            {slide.tag}
+   597→          </span>
+   598→
+   599→          {/* Main Heading */}
+   600→          <h1
+   601→            ref={headingRef}
+   602→            className="slide-content-el text-white font-bold leading-[1.1] cursor-default select-none"
+   603→            style={{
+   604→              fontFamily: "'Playfair Display', serif",
+   605→              fontSize: 'clamp(38px, 6vw, 72px)',
+   606→            }}
+   607→          >
+   608→            {slide.heading}
+   609→          </h1>
+   610→
+   611→          {/* Divider */}
+   612→          <div ref={dividerRef} className="slide-content-el flex items-center gap-3" style={{ transformOrigin: 'center' }}>
+   613→            <div className="w-8 sm:w-14 h-px bg-gradient-to-r from-transparent to-[#D4AF37]/60" />
+   614→            <div className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
+   615→            <div className="w-8 sm:w-14 h-px bg-gradient-to-l from-transparent to-[#D4AF37]/60" />
+   616→          </div>
+   617→
+   618→          {/* Subtitle */}
+   619→          <p
+   620→            ref={subtitleRef}
+   621→            className="slide-content-el text-[#E8D5A3] text-sm sm:text-base md:text-lg max-w-lg leading-relaxed"
+   622→            style={{ fontFamily: "'Poppins', sans-serif" }}
+   623→          >
+   624→            {slide.subtitle}
+   625→          </p>
+   626→
+   627→          {/* Buttons */}
+   628→          <div ref={buttonsRef} className="slide-content-el flex flex-col sm:flex-row items-center gap-4 mt-2 sm:mt-4">
+   629→            <PremiumButton variant={slide.primaryBtn.variant} onClick={() => setPage(slide.primaryBtn.page)}>
+   630→              {slide.primaryBtn.label}
+   631→              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+   632→                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+   633→              </svg>
+   634→            </PremiumButton>
+   635→            <PremiumButton variant={slide.secondaryBtn.variant} onClick={() => setPage(slide.secondaryBtn.page)}>
+   636→              {slide.secondaryBtn.label}
+   637→            </PremiumButton>
+   638→          </div>
+   639→        </div>
+   640→      </div>
+   641→
+   642→      {/* ═══ Slide Number Indicator ═══ */}
+   643→      <div className="absolute top-6 right-6 sm:top-8 sm:right-8 z-20 flex items-center gap-2">
+   644→        <span
+   645→          className="text-[#D4AF37] text-sm sm:text-base font-light tracking-widest"
+   646→          style={{ fontFamily: "'Poppins', sans-serif" }}
+   647→        >
+   648→          {formatSlideNum(currentSlide)}
+   649→        </span>
+   650→        <span className="text-white/30 text-sm sm:text-base">/</span>
+   651→        <span
+   652→          className="text-white/40 text-sm sm:text-base font-light tracking-widest"
+   653→          style={{ fontFamily: "'Poppins', sans-serif" }}
+   654→        >
+   655→          {formatSlideNum(TOTAL_SLIDES - 1)}
+   656→        </span>
+   657→      </div>
+   658→
+   659→      {/* ═══ Arrow Navigation ═══ */}
+   660→      <button
+   661→        onClick={prevSlide}
+   662→        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-[#D4AF37]/30 bg-[#2C2C2C]/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/60"
+   663→        aria-label="Previous slide"
+   664→      >
+   665→        <ChevronLeft className="w-5 h-5 text-[#D4AF37]" />
+   666→      </button>
+   667→      <button
+   668→        onClick={nextSlide}
+   669→        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-[#D4AF37]/30 bg-[#2C2C2C]/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/60"
+   670→        aria-label="Next slide"
+   671→      >
+   672→        <ChevronRight className="w-5 h-5 text-[#D4AF37]" />
+   673→      </button>
+   674→
+   675→      {/* ═══ Navigation Dots ═══ */}
+   676→      <div ref={dotsRef} className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
+   677→        {slides.map((_, i) => (
+   678→          <button
+   679→            key={i}
+   680→            onClick={() => goToSlide(i)}
+   681→            className="w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300"
+   682→            style={{
+   683→              backgroundColor: i === currentSlide ? '#D4AF37' : 'rgba(255,255,255,0.4)',
+   684→              transform: i === currentSlide ? 'scale(1.4)' : 'scale(1)',
+   685→            }}
+   686→            aria-label={`Go to slide ${i + 1}`}
+   687→          />
+   688→        ))}
+   689→      </div>
+   690→
+   691→      {/* ═══ Scroll Indicator ═══ */}
+   692→      <div ref={scrollIndicatorRef} className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 sm:gap-2">
+   693→        <span className="text-white/40 text-[9px] sm:text-[10px] tracking-[4px] uppercase" style={{ fontFamily: "'Poppins', sans-serif" }}>
+   694→          Scroll
+   695→        </span>
+   696→        <ChevronDown className="w-5 h-5 text-white/60 animate-bounce" />
+   697→      </div>
+   698→
+   699→      {/* ═══ Progress Bar ═══ */}
+   700→      <div
+   701→        ref={progressBarRef}
+   702→        className="absolute bottom-0 left-0 w-full z-30 h-[2px] bg-transparent"
+   703→      >
+   704→        <div
+   705→          ref={progressFillRef}
+   706→          className="h-full bg-[#D4AF37]"
+   707→          style={{ width: '0%' }}
+   708→        />
+   709→      </div>
+   710→
+   711→      {/* ═══ Marquee ═══ */}
+   712→      <MarqueeStrip />
+   713→    </section>
+   714→  );
+   715→}
+   716→

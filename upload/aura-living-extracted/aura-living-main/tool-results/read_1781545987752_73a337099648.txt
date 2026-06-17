@@ -1,0 +1,694 @@
+     1→'use client';
+     2→
+     3→import { useState, useMemo, useEffect, useRef } from 'react';
+     4→import {
+     5→  useGsapStagger,
+     6→  gsap,
+     7→  ScrollTrigger,
+     8→} from '@/hooks/useGsap';
+     9→import {
+    10→  ChevronRight,
+    11→  Star,
+    12→  Eye,
+    13→  Heart,
+    14→  ShoppingCart,
+    15→  SlidersHorizontal,
+    16→  X,
+    17→} from 'lucide-react';
+    18→import { useStore, Product } from '@/store/useStore';
+    19→import { products, categories, formatPKR } from '@/data/products';
+    20→
+    21→gsap.registerPlugin(ScrollTrigger);
+    22→
+    23→const badgeColors: Record<string, { bg: string; text: string }> = {
+    24→  NEW: { bg: '#A8B5A0', text: '#FFFFFF' },
+    25→  SALE: { bg: '#D4AF37', text: '#FFFFFF' },
+    26→  BESTSELLER: { bg: '#2C2C2C', text: '#D4AF37' },
+    27→};
+    28→
+    29→type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'newest' | 'best-selling';
+    30→
+    31→const sortOptions: { value: SortOption; label: string }[] = [
+    32→  { value: 'featured', label: 'Featured' },
+    33→  { value: 'price-asc', label: 'Price: Low to High' },
+    34→  { value: 'price-desc', label: 'Price: High to Low' },
+    35→  { value: 'newest', label: 'Newest' },
+    36→  { value: 'best-selling', label: 'Best Selling' },
+    37→];
+    38→
+    39→/* ═══════════════════════════════════════════════════════════
+    40→   FilterSidebar
+    41→   ═══════════════════════════════════════════════════════════ */
+    42→interface FilterSidebarProps {
+    43→  selectedCategory: string;
+    44→  onCategoryChange: (catId: string) => void;
+    45→  sortBy: SortOption;
+    46→  onSortChange: (sort: SortOption) => void;
+    47→  priceMin: string;
+    48→  priceMax: string;
+    49→  onPriceMinChange: (v: string) => void;
+    50→  onPriceMaxChange: (v: string) => void;
+    51→  hasActiveFilters: boolean;
+    52→  onClearFilters: () => void;
+    53→}
+    54→
+    55→function FilterSidebar({
+    56→  selectedCategory,
+    57→  onCategoryChange,
+    58→  sortBy,
+    59→  onSortChange,
+    60→  priceMin,
+    61→  priceMax,
+    62→  onPriceMinChange,
+    63→  onPriceMaxChange,
+    64→  hasActiveFilters,
+    65→  onClearFilters,
+    66→}: FilterSidebarProps) {
+    67→  return (
+    68→    <div className="space-y-8">
+    69→      <div>
+    70→        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}>
+    71→          Categories
+    72→        </h3>
+    73→        <div className="space-y-3">
+    74→          {categories.map((cat) => (
+    75→            <label key={cat.id} className="flex items-center gap-3 cursor-pointer group">
+    76→              <div
+    77→                className="w-5 h-5 rounded flex items-center justify-center transition-all duration-200"
+    78→                style={{
+    79→                  border: selectedCategory === cat.id ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
+    80→                  backgroundColor: selectedCategory === cat.id ? '#D4AF37' : 'transparent',
+    81→                }}
+    82→              >
+    83→                {selectedCategory === cat.id && (
+    84→                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+    85→                    <path d="M2 6L5 9L10 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    86→                  </svg>
+    87→                )}
+    88→              </div>
+    89→              <span
+    90→                className="text-sm transition-colors duration-200 group-hover:text-[#D4AF37]"
+    91→                style={{ color: selectedCategory === cat.id ? '#D4AF37' : '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}
+    92→                onClick={() => onCategoryChange(cat.id)}
+    93→              >
+    94→                {cat.name}
+    95→              </span>
+    96→            </label>
+    97→          ))}
+    98→        </div>
+    99→      </div>
+   100→
+   101→      <div>
+   102→        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}>
+   103→          Price Range
+   104→        </h3>
+   105→        <div className="flex items-center gap-3">
+   106→          <div className="flex-1">
+   107→            <input
+   108→              type="number"
+   109→              placeholder="Min"
+   110→              value={priceMin}
+   111→              onChange={(e) => onPriceMinChange(e.target.value)}
+   112→              className="w-full h-10 px-3 rounded-sm text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/40"
+   113→              style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7', fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   114→            />
+   115→          </div>
+   116→          <span style={{ color: '#8A8A8A' }}>-</span>
+   117→          <div className="flex-1">
+   118→            <input
+   119→              type="number"
+   120→              placeholder="Max"
+   121→              value={priceMax}
+   122→              onChange={(e) => onPriceMaxChange(e.target.value)}
+   123→              className="w-full h-10 px-3 rounded-sm text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/40"
+   124→              style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7', fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   125→            />
+   126→          </div>
+   127→        </div>
+   128→      </div>
+   129→
+   130→      <div>
+   131→        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}>
+   132→          Sort By
+   133→        </h3>
+   134→        <div className="relative">
+   135→          <select
+   136→            value={sortBy}
+   137→            onChange={(e) => onSortChange(e.target.value as SortOption)}
+   138→            className="w-full h-10 px-3 rounded-sm text-sm outline-none appearance-none cursor-pointer transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/50"
+   139→            style={{ border: '1px solid #E8D5A3', backgroundColor: 'rgba(255,253,247,0.8)', fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   140→          >
+   141→            {sortOptions.map((opt) => (
+   142→              <option key={opt.value} value={opt.value}>{opt.label}</option>
+   143→            ))}
+   144→          </select>
+   145→          <ChevronRight size={16} className="absolute right-3 top-1/2 -translate-y-1/2 rotate-90 pointer-events-none" style={{ color: '#8A8A8A' }} />
+   146→        </div>
+   147→      </div>
+   148→
+   149→      {hasActiveFilters && (
+   150→        <button
+   151→          onClick={onClearFilters}
+   152→          className="text-sm font-medium underline transition-colors hover:text-[#C9A22E]"
+   153→          style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+   154→        >
+   155→          Clear All Filters
+   156→        </button>
+   157→      )}
+   158→    </div>
+   159→  );
+   160→}
+   161→
+   162→/* ═══════════════════════════════════════════════════════════
+   163→   ProductCard — CSS hover transitions only
+   164→   ═══════════════════════════════════════════════════════════ */
+   165→function ProductCard({
+   166→  product,
+   167→  onProductClick,
+   168→  onAddToCart,
+   169→  onToggleWishlist,
+   170→  isInWishlist: checkWishlist,
+   171→}: {
+   172→  product: Product;
+   173→  onProductClick: (product: Product) => void;
+   174→  onAddToCart: (product: Product) => void;
+   175→  onToggleWishlist: (id: string) => void;
+   176→  isInWishlist: (id: string) => boolean;
+   177→}) {
+   178→  const [isHovered, setIsHovered] = useState(false);
+   179→  const wishlisted = checkWishlist(product.id);
+   180→
+   181→  const handleAddToCart = (e: React.MouseEvent) => {
+   182→    e.stopPropagation();
+   183→    onAddToCart(product);
+   184→  };
+   185→
+   186→  const handleToggleWishlist = (e: React.MouseEvent) => {
+   187→    e.stopPropagation();
+   188→    onToggleWishlist(product.id);
+   189→  };
+   190→
+   191→  const handleQuickView = (e: React.MouseEvent) => {
+   192→    e.stopPropagation();
+   193→    onProductClick(product);
+   194→  };
+   195→
+   196→  return (
+   197→    <div className="group">
+   198→      <div
+   199→        className="relative rounded-xl overflow-hidden cursor-pointer"
+   200→        style={{
+   201→          aspectRatio: '4/5',
+   202→          border: isHovered ? '1px solid rgba(212,175,55,0.6)' : '1px solid rgba(232,213,163,0.25)',
+   203→          boxShadow: isHovered ? '0 0 30px rgba(212,175,55,0.2), 0 8px 32px rgba(0,0,0,0.08)' : '0 2px 8px rgba(0,0,0,0.04)',
+   204→          transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
+   205→          transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+   206→        }}
+   207→        onMouseEnter={() => setIsHovered(true)}
+   208→        onMouseLeave={() => setIsHovered(false)}
+   209→        onClick={() => onProductClick(product)}
+   210→      >
+   211→        {/* Image with zoom */}
+   212→        <div className="absolute inset-0 overflow-hidden" style={{ backgroundColor: '#FFFDF7' }}>
+   213→          <img
+   214→            src={product.image}
+   215→            alt={product.name}
+   216→            className="w-full h-full object-contain"
+   217→            style={{
+   218→              transition: 'transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+   219→              transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+   220→            }}
+   221→          />
+   222→        </div>
+   223→
+   224→        {/* Badge */}
+   225→        {product.badge && (
+   226→          <div className="absolute top-3 left-3 z-30">
+   227→            <span
+   228→              className="inline-block px-2.5 py-1 rounded-sm text-[10px] font-bold tracking-wider uppercase"
+   229→              style={{
+   230→                backgroundColor: badgeColors[product.badge]?.bg,
+   231→                color: badgeColors[product.badge]?.text,
+   232→                fontFamily: "'Poppins', sans-serif",
+   233→              }}
+   234→            >
+   235→              {product.badge}
+   236→            </span>
+   237→          </div>
+   238→        )}
+   239→
+   240→        {/* Quick action buttons — always visible on mobile, hover-reveal on desktop */}
+   241→        <div className="absolute top-3 right-3 z-30 flex flex-col gap-2">
+   242→          {[
+   243→            { icon: <Eye className="w-5 h-5" strokeWidth={2} />, onClick: handleQuickView, label: 'Quick view', title: 'Preview' },
+   244→            { icon: <Heart className={`w-5 h-5 ${wishlisted ? 'fill-current' : ''}`} strokeWidth={2} />, onClick: handleToggleWishlist, label: 'Toggle wishlist', active: wishlisted, title: 'Wishlist' },
+   245→            { icon: <ShoppingCart className="w-5 h-5" strokeWidth={2} />, onClick: handleAddToCart, label: 'Add to cart', title: 'Add to Cart' },
+   246→          ].map((btn, i) => (
+   247→            <button
+   248→              key={i}
+   249→              onClick={btn.onClick}
+   250→              title={btn.title}
+   251→              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center cursor-pointer"
+   252→              style={{
+   253→                backgroundColor: isHovered
+   254→                  ? (wishlisted && btn.active ? '#D4AF37' : '#FFFDF7')
+   255→                  : 'transparent',
+   256→                color: wishlisted && btn.active ? '#FFFFFF' : '#2C2C2C',
+   257→                border: wishlisted && btn.active
+   258→                  ? '2px solid #D4AF37'
+   259→                  : (isHovered ? '2px solid rgba(212,175,55,0.3)' : '2px solid transparent'),
+   260→                boxShadow: isHovered ? '0 2px 10px rgba(0,0,0,0.1)' : 'none',
+   261→                opacity: isHovered ? 1 : 0,
+   262→                transform: isHovered ? 'translateX(0)' : 'translateX(12px)',
+   263→                transition: 'all 0.3s ease',
+   264→                transitionDelay: isHovered ? `${0.05 + i * 0.07}s` : '0s',
+   265→              }}
+   266→              onMouseEnter={(e) => {
+   267→                (e.currentTarget as HTMLElement).style.backgroundColor = '#D4AF37';
+   268→                (e.currentTarget as HTMLElement).style.color = '#FFFFFF';
+   269→                (e.currentTarget as HTMLElement).style.borderColor = '#D4AF37';
+   270→                (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px rgba(212,175,55,0.4)';
+   271→              }}
+   272→              onMouseLeave={(e) => {
+   273→                (e.currentTarget as HTMLElement).style.backgroundColor = wishlisted && btn.active ? '#D4AF37' : '#FFFDF7';
+   274→                (e.currentTarget as HTMLElement).style.color = wishlisted && btn.active ? '#FFFFFF' : '#2C2C2C';
+   275→                (e.currentTarget as HTMLElement).style.borderColor = wishlisted && btn.active ? '#D4AF37' : 'rgba(212,175,55,0.3)';
+   276→                (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+   277→              }}
+   278→              aria-label={btn.label}
+   279→            >
+   280→              {btn.icon}
+   281→            </button>
+   282→          ))}
+   283→        </div>
+   284→
+   285→        {/* Add to Cart bar — CSS transition */}
+   286→        <div
+   287→          className="absolute bottom-0 left-0 right-0 z-30 px-4 pb-4"
+   288→          style={{
+   289→            opacity: isHovered ? 1 : 0,
+   290→            transform: isHovered ? 'translateY(0)' : 'translateY(30px)',
+   291→            transition: 'all 0.35s ease',
+   292→            transitionDelay: isHovered ? '0.1s' : '0s',
+   293→          }}
+   294→        >
+   295→          <button
+   296→            onClick={handleAddToCart}
+   297→            className="w-full py-2.5 rounded-lg text-xs font-semibold tracking-[0.12em] uppercase flex items-center justify-center gap-2 cursor-pointer transition-colors duration-300 hover:bg-[#C9A22E]"
+   298→            style={{
+   299→              backgroundColor: 'rgba(212,175,55,0.9)',
+   300→              color: '#FFFFFF',
+   301→              fontFamily: "'Poppins', sans-serif",
+   302→              border: '1px solid rgba(212,175,55,0.6)',
+   303→            }}
+   304→          >
+   305→            <ShoppingCart className="w-3.5 h-3.5" />
+   306→            Add to Cart
+   307→          </button>
+   308→        </div>
+   309→      </div>
+   310→
+   311→      {/* Product Info */}
+   312→      <div className="mt-3 flex flex-col gap-1 px-1">
+   313→        <h3
+   314→          className="text-sm font-medium leading-snug cursor-pointer transition-colors duration-300 line-clamp-1"
+   315→          style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   316→          onMouseEnter={(e) => (e.currentTarget.style.color = '#D4AF37')}
+   317→          onMouseLeave={(e) => (e.currentTarget.style.color = '#2C2C2C')}
+   318→          onClick={() => onProductClick(product)}
+   319→        >
+   320→          {product.name}
+   321→        </h3>
+   322→
+   323→        <div className="flex items-center gap-1.5">
+   324→          <div className="flex items-center gap-0.5">
+   325→            {[...Array(5)].map((_, i) => (
+   326→              <Star
+   327→                key={i}
+   328→                size={12}
+   329→                className={
+   330→                  i < Math.round(product.rating)
+   331→                    ? 'fill-[#D4AF37] text-[#D4AF37]'
+   332→                    : 'text-gray-300'
+   333→                }
+   334→              />
+   335→            ))}
+   336→          </div>
+   337→          <span className="text-[11px]" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>
+   338→            ({product.reviews})
+   339→          </span>
+   340→        </div>
+   341→
+   342→        <div className="flex items-center gap-2">
+   343→          <span className="text-sm font-bold" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>
+   344→            {formatPKR(product.price)}
+   345→          </span>
+   346→          {product.originalPrice && (
+   347→            <span className="text-xs line-through" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>
+   348→              {formatPKR(product.originalPrice)}
+   349→            </span>
+   350→          )}
+   351→        </div>
+   352→      </div>
+   353→    </div>
+   354→  );
+   355→}
+   356→
+   357→/* ═══════════════════════════════════════════════════════════
+   358→   Main ShopView
+   359→   ═══════════════════════════════════════════════════════════ */
+   360→export default function ShopView() {
+   361→  const { selectedCategory, setSelectedCategory, setPage, setSelectedProduct, addToCart, toggleWishlist, isInWishlist } = useStore();
+   362→  const [sortBy, setSortBy] = useState<SortOption>('featured');
+   363→  const [priceMin, setPriceMin] = useState('');
+   364→  const [priceMax, setPriceMax] = useState('');
+   365→  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+   366→  const heroSectionRef = useRef<HTMLElement>(null);
+   367→  const heroBgRef = useRef<HTMLDivElement>(null);
+   368→
+   369→  // GSAP stagger for product grid
+   370→  const gridRef = useGsapStagger<HTMLDivElement>({
+   371→    selector: ':scope > div',
+   372→    y: 30,
+   373→    duration: 0.6,
+   374→    stagger: 0.08,
+   375→    ease: 'power3.out',
+   376→    start: 'top 85%',
+   377→  });
+   378→
+   379→  // GSAP stagger for hero content
+   380→  const heroRef = useGsapStagger<HTMLDivElement>({
+   381→    y: 40,
+   382→    duration: 0.7,
+   383→    stagger: 0.15,
+   384→    ease: 'power3.out',
+   385→    start: 'top 90%',
+   386→  });
+   387→
+   388→  // Parallax for hero background image
+   389→  useEffect(() => {
+   390→    if (!heroBgRef.current || !heroSectionRef.current) return;
+   391→    const ctx = gsap.context(() => {
+   392→      gsap.to(heroBgRef.current, {
+   393→        backgroundPositionY: '40%',
+   394→        ease: 'none',
+   395→        scrollTrigger: {
+   396→          trigger: heroSectionRef.current,
+   397→          start: 'top bottom',
+   398→          end: 'bottom top',
+   399→          scrub: true,
+   400→        },
+   401→      });
+   402→    }, heroSectionRef);
+   403→    return () => ctx.revert();
+   404→  }, []);
+   405→
+   406→  const filteredProducts = useMemo(() => {
+   407→    let result = [...products];
+   408→    if (selectedCategory && selectedCategory !== 'all') {
+   409→      result = result.filter((p) => p.category === selectedCategory);
+   410→    }
+   411→    if (priceMin) {
+   412→      const min = parseInt(priceMin, 10);
+   413→      if (!isNaN(min)) result = result.filter((p) => p.price >= min);
+   414→    }
+   415→    if (priceMax) {
+   416→      const max = parseInt(priceMax, 10);
+   417→      if (!isNaN(max)) result = result.filter((p) => p.price <= max);
+   418→    }
+   419→    switch (sortBy) {
+   420→      case 'price-asc': result.sort((a, b) => a.price - b.price); break;
+   421→      case 'price-desc': result.sort((a, b) => b.price - a.price); break;
+   422→      case 'newest': result.sort((a, b) => (a.badge === 'NEW' ? -1 : b.badge === 'NEW' ? 1 : 0)); break;
+   423→      case 'best-selling': result.sort((a, b) => (a.badge === 'BESTSELLER' ? -1 : b.badge === 'BESTSELLER' ? 1 : b.reviews - a.reviews)); break;
+   424→    }
+   425→    return result;
+   426→  }, [selectedCategory, sortBy, priceMin, priceMax]);
+   427→
+   428→  const handleCategoryChange = (catId: string) => {
+   429→    if (selectedCategory === catId) {
+   430→      setSelectedCategory('all');
+   431→    } else {
+   432→      setSelectedCategory(catId);
+   433→    }
+   434→  };
+   435→
+   436→  const clearFilters = () => {
+   437→    setSelectedCategory('all');
+   438→    setPriceMin('');
+   439→    setPriceMax('');
+   440→    setSortBy('featured');
+   441→  };
+   442→
+   443→  const hasActiveFilters = selectedCategory !== 'all' || !!priceMin || !!priceMax || sortBy !== 'featured';
+   444→
+   445→  const handleProductClick = (product: Product) => {
+   446→    setSelectedProduct(product);
+   447→    setPage('product');
+   448→    window.scrollTo({ top: 0, behavior: 'smooth' });
+   449→  };
+   450→
+   451→  // Lock body scroll when mobile filters are open
+   452→  useEffect(() => {
+   453→    if (mobileFiltersOpen) {
+   454→      document.body.style.overflow = 'hidden';
+   455→    } else {
+   456→      document.body.style.overflow = '';
+   457→    }
+   458→    return () => {
+   459→      document.body.style.overflow = '';
+   460→    };
+   461→  }, [mobileFiltersOpen]);
+   462→
+   463→  const filterSidebarProps: FilterSidebarProps = {
+   464→    selectedCategory,
+   465→    onCategoryChange: handleCategoryChange,
+   466→    sortBy,
+   467→    onSortChange: setSortBy,
+   468→    priceMin,
+   469→    priceMax,
+   470→    onPriceMinChange: setPriceMin,
+   471→    onPriceMaxChange: setPriceMax,
+   472→    hasActiveFilters,
+   473→    onClearFilters: clearFilters,
+   474→  };
+   475→
+   476→  return (
+   477→    <div className="w-full" style={{ backgroundColor: '#FAF8F5' }}>
+   478→      {/* Hero Banner */}
+   479→      <section
+   480→        ref={heroSectionRef}
+   481→        className="relative w-full h-[40vh] sm:h-[50vh] md:h-[55vh] overflow-hidden flex items-center justify-center"
+   482→      >
+   483→        {/* Background image */}
+   484→        <div
+   485→          ref={heroBgRef}
+   486→          className="absolute inset-0"
+   487→          style={{
+   488→            backgroundImage: 'url(/images/pages/shop-hero.png)',
+   489→            backgroundSize: 'cover',
+   490→            backgroundPosition: 'center',
+   491→            backgroundRepeat: 'no-repeat',
+   492→          }}
+   493→        />
+   494→        {/* Gradient overlay */}
+   495→        <div
+   496→          className="absolute inset-0"
+   497→          style={{
+   498→            background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.18) 100%)',
+   499→          }}
+   500→        />
+   501→
+   502→        {/* Decorative floating orbs */}
+   503→        <div
+   504→          className="absolute top-10 left-10 w-32 h-32 rounded-full"
+   505→          style={{
+   506→            filter: 'blur(60px)',
+   507→            background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
+   508→          }}
+   509→        />
+   510→        <div
+   511→          className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
+   512→          style={{
+   513→            filter: 'blur(70px)',
+   514→            background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
+   515→          }}
+   516→        />
+   517→
+   518→        <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
+   519→          {/* Breadcrumb */}
+   520→          <nav className="flex items-center gap-2 mb-6">
+   521→            <button
+   522→              onClick={() => setPage('home')}
+   523→              className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
+   524→              style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255,255,255,0.7)' }}
+   525→            >
+   526→              Home
+   527→            </button>
+   528→            <ChevronRight className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.5)' }} />
+   529→            <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>Shop</span>
+   530→          </nav>
+   531→
+   532→          <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>Our Collection</h1>
+   533→
+   534→          <div className="flex items-center gap-3 mt-5">
+   535→            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+   536→            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+   537→            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+   538→          </div>
+   539→
+   540→          <p className="text-white/70 text-base sm:text-lg max-w-lg mx-auto mt-4 leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+   541→            Discover handcrafted home decor curated for the modern Pakistani home
+   542→          </p>
+   543→        </div>
+   544→      </section>
+   545→
+   546→      {/* Main Content */}
+   547→      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+   548→        {/* Mobile Filter Button */}
+   549→        <div className="lg:hidden mb-6">
+   550→          <button
+   551→            onClick={() => setMobileFiltersOpen(true)}
+   552→            className="flex items-center gap-2 px-5 py-3 rounded-sm text-sm font-medium transition-all duration-300 hover:bg-[#F5EDDA]"
+   553→            style={{ border: '1px solid #D4AF37', color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+   554→          >
+   555→            <SlidersHorizontal size={16} />
+   556→            Filters
+   557→            {hasActiveFilters && (
+   558→              <span className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style={{ backgroundColor: '#D4AF37' }}>!</span>
+   559→            )}
+   560→          </button>
+   561→        </div>
+   562→
+   563→        <div className="flex gap-8">
+   564→          {/* Desktop Sidebar */}
+   565→          <aside className="hidden lg:block w-[250px] shrink-0">
+   566→            <div
+   567→              className="sticky top-28 p-6 rounded-lg"
+   568→              style={{
+   569→                backgroundColor: 'rgba(255,253,247,0.7)',
+   570→                backdropFilter: 'blur(12px)',
+   571→                WebkitBackdropFilter: 'blur(12px)',
+   572→                border: '1px solid rgba(212,175,55,0.15)',
+   573→                boxShadow: '0 4px 20px rgba(212,175,55,0.06)',
+   574→              }}
+   575→            >
+   576→              <FilterSidebar {...filterSidebarProps} />
+   577→            </div>
+   578→          </aside>
+   579→
+   580→          {/* Product Grid */}
+   581→          <div className="flex-1">
+   582→            {/* Active filters */}
+   583→            {hasActiveFilters && (
+   584→              <div className="flex flex-wrap items-center gap-2 mb-6">
+   585→                {selectedCategory !== 'all' && (
+   586→                  <span
+   587→                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
+   588→                    style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif", border: '1px solid rgba(212,175,55,0.25)' }}
+   589→                  >
+   590→                    {categories.find((c) => c.id === selectedCategory)?.name}
+   591→                    <button onClick={() => setSelectedCategory('all')} className="hover:text-[#C9A22E]"><X size={12} /></button>
+   592→                  </span>
+   593→                )}
+   594→                {priceMin && (
+   595→                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif", border: '1px solid rgba(212,175,55,0.25)' }}>
+   596→                    Min: {formatPKR(parseInt(priceMin, 10))}
+   597→                    <button onClick={() => setPriceMin('')} className="hover:text-[#C9A22E]"><X size={12} /></button>
+   598→                  </span>
+   599→                )}
+   600→                {priceMax && (
+   601→                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif", border: '1px solid rgba(212,175,55,0.25)' }}>
+   602→                    Max: {formatPKR(parseInt(priceMax, 10))}
+   603→                    <button onClick={() => setPriceMax('')} className="hover:text-[#C9A22E]"><X size={12} /></button>
+   604→                  </span>
+   605→                )}
+   606→                {sortBy !== 'featured' && (
+   607→                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif", border: '1px solid rgba(212,175,55,0.25)' }}>
+   608→                    {sortOptions.find((o) => o.value === sortBy)?.label}
+   609→                    <button onClick={() => setSortBy('featured')} className="hover:text-[#C9A22E]"><X size={12} /></button>
+   610→                  </span>
+   611→                )}
+   612→              </div>
+   613→            )}
+   614→
+   615→            {filteredProducts.length === 0 ? (
+   616→              <div className="flex flex-col items-center justify-center py-20">
+   617→                <p className="text-lg mb-2" style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}>No products found</p>
+   618→                <p className="text-sm mb-6" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>Try adjusting your filters</p>
+   619→                <button
+   620→                  onClick={clearFilters}
+   621→                  className="px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors duration-300 hover:bg-[#C9A22E]"
+   622→                  style={{ backgroundColor: '#D4AF37', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}
+   623→                >
+   624→                  Clear Filters
+   625→                </button>
+   626→              </div>
+   627→            ) : (
+   628→              <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+   629→                {filteredProducts.map((product) => (
+   630→                  <ProductCard
+   631→                    key={product.id}
+   632→                    product={product}
+   633→                    onProductClick={handleProductClick}
+   634→                    onAddToCart={addToCart}
+   635→                    onToggleWishlist={toggleWishlist}
+   636→                    isInWishlist={isInWishlist}
+   637→                  />
+   638→                ))}
+   639→              </div>
+   640→            )}
+   641→          </div>
+   642→        </div>
+   643→      </div>
+   644→
+   645→      {/* Mobile Filter Drawer — CSS transitions for slide in/out */}
+   646→      <>
+   647→        {/* Overlay */}
+   648→        <div
+   649→          className="fixed inset-0 z-50 transition-opacity duration-300"
+   650→          style={{
+   651→            backgroundColor: 'rgba(0,0,0,0.25)',
+   652→            backdropFilter: 'blur(4px)',
+   653→            WebkitBackdropFilter: 'blur(4px)',
+   654→            opacity: mobileFiltersOpen ? 1 : 0,
+   655→            pointerEvents: mobileFiltersOpen ? 'auto' : 'none',
+   656→          }}
+   657→          onClick={() => setMobileFiltersOpen(false)}
+   658→        />
+   659→
+   660→        {/* Drawer */}
+   661→        <div
+   662→          className="fixed top-0 left-0 bottom-0 z-50 w-[300px] max-w-[85vw] shadow-2xl overflow-y-auto transition-transform duration-400 ease-out"
+   663→          style={{
+   664→            backgroundColor: 'rgba(250,248,245,0.85)',
+   665→            backdropFilter: 'blur(20px)',
+   666→            WebkitBackdropFilter: 'blur(20px)',
+   667→            borderRight: '1px solid rgba(212,175,55,0.15)',
+   668→            transform: mobileFiltersOpen ? 'translateX(0)' : 'translateX(-100%)',
+   669→          }}
+   670→        >
+   671→          <div className="flex items-center justify-between px-6 h-16" style={{ borderBottom: '1px solid rgba(212,175,55,0.15)' }}>
+   672→            <span className="text-lg font-semibold tracking-wide" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>Filters</span>
+   673→            <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} onClick={() => setMobileFiltersOpen(false)} aria-label="Close filters">
+   674→              <X className="h-5 w-5" />
+   675→            </button>
+   676→          </div>
+   677→          <div className="p-6">
+   678→            <FilterSidebar {...filterSidebarProps} />
+   679→          </div>
+   680→          <div className="p-6 pt-0">
+   681→            <button
+   682→              onClick={() => setMobileFiltersOpen(false)}
+   683→              className="w-full py-3 rounded-sm text-white font-semibold uppercase tracking-wider text-sm transition-colors duration-300 hover:bg-[#C9A22E]"
+   684→              style={{ backgroundColor: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+   685→            >
+   686→              Apply Filters
+   687→            </button>
+   688→          </div>
+   689→        </div>
+   690→      </>
+   691→    </div>
+   692→  );
+   693→}
+   694→

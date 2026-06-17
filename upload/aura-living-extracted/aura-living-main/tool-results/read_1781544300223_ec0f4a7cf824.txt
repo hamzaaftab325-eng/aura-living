@@ -1,0 +1,810 @@
+     1→'use client';
+     2→
+     3→import { useState, useEffect, useRef } from 'react';
+     4→import { useGsapFadeIn, useGsapStagger, gsap, ScrollTrigger } from '@/hooks/useGsap';
+     5→import { GoldDivider } from '@/components/SVGDecorations';
+     6→import {
+     7→  ChevronRight,
+     8→  CreditCard,
+     9→  Banknote,
+    10→  ShieldCheck,
+    11→  Minus,
+    12→  Plus,
+    13→  Trash2,
+    14→  CheckCircle2,
+    15→  ArrowRight,
+    16→  Truck,
+    17→} from 'lucide-react';
+    18→import { useStore } from '@/store/useStore';
+    19→import { formatPKR } from '@/data/products';
+    20→import PremiumButton from '@/components/ui/PremiumButton';
+    21→import { useToast } from '@/hooks/use-toast';
+    22→
+    23→gsap.registerPlugin(ScrollTrigger);
+    24→
+    25→/* ─── Form Data Types ─── */
+    26→interface CheckoutForm {
+    27→  email: string;
+    28→  phone: string;
+    29→  fullName: string;
+    30→  address1: string;
+    31→  address2: string;
+    32→  city: string;
+    33→  province: string;
+    34→  postalCode: string;
+    35→  paymentMethod: 'cod' | 'jazzcash' | 'easypaisa';
+    36→  orderNotes: string;
+    37→}
+    38→
+    39→interface FormErrors {
+    40→  [key: string]: boolean;
+    41→}
+    42→
+    43→const paymentOptions = [
+    44→  { id: 'cod' as const, icon: Banknote, label: 'Cash on Delivery', description: 'Pay when your order arrives at your doorstep' },
+    45→  { id: 'jazzcash' as const, icon: ShieldCheck, label: 'JazzCash', description: 'Pay securely via JazzCash mobile wallet' },
+    46→  { id: 'easypaisa' as const, icon: CreditCard, label: 'EasyPaisa', description: 'Pay securely via EasyPaisa mobile wallet' },
+    47→];
+    48→
+    49→const requiredFields: (keyof CheckoutForm)[] = ['email', 'phone', 'fullName', 'address1', 'city', 'province', 'postalCode'];
+    50→
+    51→const initialForm: CheckoutForm = {
+    52→  email: '',
+    53→  phone: '',
+    54→  fullName: '',
+    55→  address1: '',
+    56→  address2: '',
+    57→  city: '',
+    58→  province: '',
+    59→  postalCode: '',
+    60→  paymentMethod: 'cod',
+    61→  orderNotes: '',
+    62→};
+    63→
+    64→/* ─── Input Field Component ─── */
+    65→function FormInput({
+    66→  id,
+    67→  label,
+    68→  type = 'text',
+    69→  placeholder,
+    70→  value,
+    71→  onChange,
+    72→  required = false,
+    73→  error = false,
+    74→}: {
+    75→  id: string;
+    76→  label: string;
+    77→  type?: string;
+    78→  placeholder: string;
+    79→  value: string;
+    80→  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    81→  required?: boolean;
+    82→  error?: boolean;
+    83→}) {
+    84→  return (
+    85→    <div className="flex flex-col gap-1.5">
+    86→      <label
+    87→        htmlFor={id}
+    88→        className="text-sm font-medium"
+    89→        style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+    90→      >
+    91→        {label}
+    92→        {required && <span style={{ color: '#D4AF37' }}> *</span>}
+    93→      </label>
+    94→      <input
+    95→        id={id}
+    96→        name={id}
+    97→        type={type}
+    98→        required={required}
+    99→        value={value}
+   100→        onChange={onChange}
+   101→        placeholder={placeholder}
+   102→        className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200"
+   103→        style={{
+   104→          fontFamily: "'Poppins', sans-serif",
+   105→          backgroundColor: '#FFFDF7',
+   106→          border: error ? '1.5px solid #E53E3E' : '1px solid #E8D5A3',
+   107→          color: '#2C2C2C',
+   108→        }}
+   109→        onFocus={(e) => {
+   110→          e.target.style.borderColor = '#D4AF37';
+   111→          e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)';
+   112→        }}
+   113→        onBlur={(e) => {
+   114→          e.target.style.borderColor = error ? '#E53E3E' : '#E8D5A3';
+   115→          e.target.style.boxShadow = 'none';
+   116→        }}
+   117→      />
+   118→      {error && (
+   119→        <span className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: '#E53E3E' }}>
+   120→          {label} is required
+   121→        </span>
+   122→      )}
+   123→    </div>
+   124→  );
+   125→}
+   126→
+   127→/* ═══════════════════════════════════════════════════════════
+   128→   CheckoutView
+   129→   ═══════════════════════════════════════════════════════════ */
+   130→export default function CheckoutView() {
+   131→  const {
+   132→    cart,
+   133→    getCartTotal,
+   134→    getCartCount,
+   135→    clearCart,
+   136→    setPage,
+   137→  } = useStore();
+   138→
+   139→  const { toast } = useToast();
+   140→
+   141→  const cartCount = getCartCount();
+   142→  const subtotal = getCartTotal();
+   143→  const shipping = subtotal >= 2999 ? 0 : 250;
+   144→  const estimatedTotal = subtotal + shipping;
+   145→
+   146→  const [formData, setFormData] = useState<CheckoutForm>(initialForm);
+   147→  const [errors, setErrors] = useState<FormErrors>({});
+   148→  const [isSubmitting, setIsSubmitting] = useState(false);
+   149→
+   150→  const heroSectionRef = useRef<HTMLElement>(null);
+   151→
+   152→  // GSAP animations
+   153→  const heroRef = useGsapStagger<HTMLDivElement>({
+   154→    y: 40,
+   155→    duration: 0.7,
+   156→    stagger: 0.15,
+   157→    ease: 'power3.out',
+   158→    start: 'top 90%',
+   159→  });
+   160→
+   161→  const contentRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
+   162→
+   163→  // Parallax for hero background
+   164→  useEffect(() => {
+   165→    if (!heroSectionRef.current) return;
+   166→    const ctx = gsap.context(() => {
+   167→      gsap.to(heroSectionRef.current, {
+   168→        backgroundPositionY: '40%',
+   169→        ease: 'none',
+   170→        scrollTrigger: {
+   171→          trigger: heroSectionRef.current,
+   172→          start: 'top bottom',
+   173→          end: 'bottom top',
+   174→          scrub: true,
+   175→        },
+   176→      });
+   177→    }, heroSectionRef);
+   178→    return () => ctx.revert();
+   179→  }, []);
+   180→
+   181→  // Redirect if cart is empty
+   182→  useEffect(() => {
+   183→    if (cart.length === 0) {
+   184→      const timer = setTimeout(() => {
+   185→        setPage('shop');
+   186→        window.scrollTo({ top: 0, behavior: 'smooth' });
+   187→      }, 1500);
+   188→      return () => clearTimeout(timer);
+   189→    }
+   190→  }, [cart.length, setPage]);
+   191→
+   192→  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+   193→    const { name, value } = e.target;
+   194→    setFormData((prev) => ({ ...prev, [name]: value }));
+   195→    // Clear error when user types
+   196→    if (errors[name]) {
+   197→      setErrors((prev) => ({ ...prev, [name]: false }));
+   198→    }
+   199→  };
+   200→
+   201→  const validateForm = (): boolean => {
+   202→    const newErrors: FormErrors = {};
+   203→    requiredFields.forEach((field) => {
+   204→      if (!formData[field].trim()) {
+   205→        newErrors[field] = true;
+   206→      }
+   207→    });
+   208→    // Basic email validation
+   209→    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+   210→      newErrors.email = true;
+   211→    }
+   212→    setErrors(newErrors);
+   213→    return Object.keys(newErrors).length === 0;
+   214→  };
+   215→
+   216→  const handleSubmit = (e: React.FormEvent) => {
+   217→    e.preventDefault();
+   218→    if (!validateForm()) return;
+   219→
+   220→    setIsSubmitting(true);
+   221→    // Simulate order processing
+   222→    setTimeout(() => {
+   223→      setIsSubmitting(false);
+   224→      clearCart();
+   225→      toast({
+   226→        title: 'Order Placed Successfully!',
+   227→        description: 'Thank you for your order. You will receive a confirmation email shortly.',
+   228→        duration: 5000,
+   229→      });
+   230→      setPage('home');
+   231→      window.scrollTo({ top: 0, behavior: 'smooth' });
+   232→    }, 2000);
+   233→  };
+   234→
+   235→  /* ─────────────── Empty Cart Redirect State ─────────────── */
+   236→  if (cart.length === 0) {
+   237→    return (
+   238→      <div className="w-full" style={{ backgroundColor: '#FAF8F5' }}>
+   239→        {/* Hero */}
+   240→        <section
+   241→          ref={heroSectionRef}
+   242→          className="relative w-full h-[40vh] sm:h-[50vh] overflow-hidden flex items-center justify-center"
+   243→          style={{
+   244→            background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)',
+   245→          }}
+   246→        >
+   247→          <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
+   248→            <span
+   249→              className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
+   250→              style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+   251→            >
+   252→              AURA LIVING
+   253→            </span>
+   254→            <h1
+   255→              className="text-white text-[32px] sm:text-[42px] md:text-[50px] font-bold leading-tight"
+   256→              style={{ fontFamily: "'Playfair Display', serif" }}
+   257→            >
+   258→              Checkout
+   259→            </h1>
+   260→            <div className="flex items-center gap-3 mt-6">
+   261→              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+   262→              <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+   263→              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+   264→            </div>
+   265→          </div>
+   266→        </section>
+   267→
+   268→        {/* Redirect Message */}
+   269→        <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8">
+   270→          <div className="max-w-lg mx-auto text-center">
+   271→            <div
+   272→              className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6"
+   273→              style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
+   274→            >
+   275→              <CheckCircle2 className="h-9 w-9" style={{ color: '#D4AF37' }} />
+   276→            </div>
+   277→            <h2
+   278→              className="text-2xl sm:text-3xl font-bold mb-3"
+   279→              style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   280→            >
+   281→              Your Cart is Empty
+   282→            </h2>
+   283→            <p
+   284→              className="text-base mb-8 leading-relaxed"
+   285→              style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+   286→            >
+   287→              Add items to your cart before proceeding to checkout. Redirecting you to the shop...
+   288→            </p>
+   289→            <PremiumButton
+   290→              variant="gold"
+   291→              size="lg"
+   292→              onClick={() => { setPage('shop'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+   293→            >
+   294→              Go to Shop
+   295→              <ArrowRight className="w-4 h-4" />
+   296→            </PremiumButton>
+   297→          </div>
+   298→        </section>
+   299→      </div>
+   300→    );
+   301→  }
+   302→
+   303→  /* ─────────────── Checkout with Cart Items ─────────────── */
+   304→  return (
+   305→    <div className="w-full" style={{ backgroundColor: '#FAF8F5' }}>
+   306→      {/* Hero */}
+   307→      <section
+   308→        ref={heroSectionRef}
+   309→        className="relative w-full h-[35vh] sm:h-[45vh] overflow-hidden flex items-center justify-center"
+   310→        style={{
+   311→          background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)',
+   312→        }}
+   313→      >
+   314→        <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
+   315→          {/* Breadcrumb */}
+   316→          <nav className="flex items-center justify-center gap-2 mb-6">
+   317→            <button
+   318→              onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+   319→              className="text-sm transition-colors duration-200 hover:text-[#D4AF37]"
+   320→              style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255,255,255,0.6)' }}
+   321→            >
+   322→              Home
+   323→            </button>
+   324→            <ChevronRight className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.4)' }} />
+   325→            <button
+   326→              onClick={() => { setPage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+   327→              className="text-sm transition-colors duration-200 hover:text-[#D4AF37]"
+   328→              style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255,255,255,0.6)' }}
+   329→            >
+   330→              Cart
+   331→            </button>
+   332→            <ChevronRight className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.4)' }} />
+   333→            <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+   334→              Checkout
+   335→            </span>
+   336→          </nav>
+   337→
+   338→          <span
+   339→            className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
+   340→            style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+   341→          >
+   342→            AURA LIVING
+   343→          </span>
+   344→          <h1
+   345→            className="text-white text-[32px] sm:text-[42px] md:text-[50px] font-bold leading-tight"
+   346→            style={{ fontFamily: "'Playfair Display', serif" }}
+   347→          >
+   348→            Checkout
+   349→          </h1>
+   350→          <div className="flex items-center gap-3 mt-5">
+   351→            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+   352→            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+   353→            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+   354→          </div>
+   355→        </div>
+   356→      </section>
+   357→
+   358→      {/* Checkout Content */}
+   359→      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+   360→        <div ref={contentRef} className="max-w-7xl mx-auto">
+   361→          <form onSubmit={handleSubmit}>
+   362→            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+   363→              {/* ─── Checkout Form (Left Column) ─── */}
+   364→              <div className="lg:col-span-2 flex flex-col gap-8">
+   365→                {/* ─── Contact Information ─── */}
+   366→                <div
+   367→                  className="rounded-sm p-6 sm:p-8"
+   368→                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+   369→                >
+   370→                  <h2
+   371→                    className="text-xl sm:text-2xl font-semibold mb-2"
+   372→                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   373→                  >
+   374→                    Contact Information
+   375→                  </h2>
+   376→                  <div className="mb-6">
+   377→                    <GoldDivider />
+   378→                  </div>
+   379→                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+   380→                    <FormInput
+   381→                      id="email"
+   382→                      label="Email Address"
+   383→                      type="email"
+   384→                      placeholder="your@email.com"
+   385→                      value={formData.email}
+   386→                      onChange={handleChange}
+   387→                      required
+   388→                      error={errors.email}
+   389→                    />
+   390→                    <FormInput
+   391→                      id="phone"
+   392→                      label="Phone Number"
+   393→                      type="tel"
+   394→                      placeholder="+92 300 1234567"
+   395→                      value={formData.phone}
+   396→                      onChange={handleChange}
+   397→                      required
+   398→                      error={errors.phone}
+   399→                    />
+   400→                  </div>
+   401→                </div>
+   402→
+   403→                {/* ─── Shipping Address ─── */}
+   404→                <div
+   405→                  className="rounded-sm p-6 sm:p-8"
+   406→                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+   407→                >
+   408→                  <h2
+   409→                    className="text-xl sm:text-2xl font-semibold mb-2"
+   410→                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   411→                  >
+   412→                    Shipping Address
+   413→                  </h2>
+   414→                  <div className="mb-6">
+   415→                    <GoldDivider />
+   416→                  </div>
+   417→                  <div className="flex flex-col gap-5">
+   418→                    <FormInput
+   419→                      id="fullName"
+   420→                      label="Full Name"
+   421→                      placeholder="Muhammad Ali"
+   422→                      value={formData.fullName}
+   423→                      onChange={handleChange}
+   424→                      required
+   425→                      error={errors.fullName}
+   426→                    />
+   427→                    <FormInput
+   428→                      id="address1"
+   429→                      label="Address Line 1"
+   430→                      placeholder="House #, Street #, Area"
+   431→                      value={formData.address1}
+   432→                      onChange={handleChange}
+   433→                      required
+   434→                      error={errors.address1}
+   435→                    />
+   436→                    <FormInput
+   437→                      id="address2"
+   438→                      label="Address Line 2"
+   439→                      placeholder="Apartment, suite, landmark (optional)"
+   440→                      value={formData.address2}
+   441→                      onChange={handleChange}
+   442→                    />
+   443→                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+   444→                      <FormInput
+   445→                        id="city"
+   446→                        label="City"
+   447→                        placeholder="Lahore"
+   448→                        value={formData.city}
+   449→                        onChange={handleChange}
+   450→                        required
+   451→                        error={errors.city}
+   452→                      />
+   453→                      <FormInput
+   454→                        id="province"
+   455→                        label="Province"
+   456→                        placeholder="Punjab"
+   457→                        value={formData.province}
+   458→                        onChange={handleChange}
+   459→                        required
+   460→                        error={errors.province}
+   461→                      />
+   462→                      <FormInput
+   463→                        id="postalCode"
+   464→                        label="Postal Code"
+   465→                        placeholder="54000"
+   466→                        value={formData.postalCode}
+   467→                        onChange={handleChange}
+   468→                        required
+   469→                        error={errors.postalCode}
+   470→                      />
+   471→                    </div>
+   472→                  </div>
+   473→                </div>
+   474→
+   475→                {/* ─── Payment Method ─── */}
+   476→                <div
+   477→                  className="rounded-sm p-6 sm:p-8"
+   478→                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+   479→                >
+   480→                  <h2
+   481→                    className="text-xl sm:text-2xl font-semibold mb-2"
+   482→                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   483→                  >
+   484→                    Payment Method
+   485→                  </h2>
+   486→                  <div className="mb-6">
+   487→                    <GoldDivider />
+   488→                  </div>
+   489→                  <div className="flex flex-col gap-3">
+   490→                    {paymentOptions.map((option) => {
+   491→                      const isSelected = formData.paymentMethod === option.id;
+   492→                      return (
+   493→                        <label
+   494→                          key={option.id}
+   495→                          className="flex items-center gap-4 p-4 rounded-sm cursor-pointer transition-all duration-200"
+   496→                          style={{
+   497→                            border: isSelected ? '2px solid #D4AF37' : '1px solid #E8D5A3',
+   498→                            backgroundColor: isSelected ? 'rgba(212,175,55,0.04)' : '#FFFDF7',
+   499→                          }}
+   500→                        >
+   501→                          {/* Custom Radio */}
+   502→                          <div
+   503→                            className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-200"
+   504→                            style={{
+   505→                              border: isSelected ? '2px solid #D4AF37' : '2px solid #E8D5A3',
+   506→                              backgroundColor: isSelected ? '#D4AF37' : 'transparent',
+   507→                            }}
+   508→                          >
+   509→                            {isSelected && (
+   510→                              <div className="w-2 h-2 rounded-full bg-white" />
+   511→                            )}
+   512→                          </div>
+   513→                          <input
+   514→                            type="radio"
+   515→                            name="paymentMethod"
+   516→                            value={option.id}
+   517→                            checked={isSelected}
+   518→                            onChange={handleChange}
+   519→                            className="sr-only"
+   520→                          />
+   521→                          <div
+   522→                            className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
+   523→                            style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
+   524→                          >
+   525→                            <option.icon className="w-4.5 h-4.5" style={{ color: '#D4AF37' }} />
+   526→                          </div>
+   527→                          <div className="flex-1 min-w-0">
+   528→                            <p
+   529→                              className="text-sm font-semibold"
+   530→                              style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   531→                            >
+   532→                              {option.label}
+   533→                            </p>
+   534→                            <p
+   535→                              className="text-xs mt-0.5"
+   536→                              style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+   537→                            >
+   538→                              {option.description}
+   539→                            </p>
+   540→                          </div>
+   541→                          {isSelected && (
+   542→                            <CheckCircle2 className="w-5 h-5 shrink-0" style={{ color: '#D4AF37' }} />
+   543→                          )}
+   544→                        </label>
+   545→                      );
+   546→                    })}
+   547→                  </div>
+   548→                </div>
+   549→
+   550→                {/* ─── Order Notes ─── */}
+   551→                <div
+   552→                  className="rounded-sm p-6 sm:p-8"
+   553→                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+   554→                >
+   555→                  <h2
+   556→                    className="text-xl sm:text-2xl font-semibold mb-2"
+   557→                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   558→                  >
+   559→                    Order Notes
+   560→                  </h2>
+   561→                  <div className="mb-6">
+   562→                    <GoldDivider />
+   563→                  </div>
+   564→                  <div className="flex flex-col gap-1.5">
+   565→                    <label
+   566→                      htmlFor="orderNotes"
+   567→                      className="text-sm font-medium"
+   568→                      style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   569→                    >
+   570→                      Special Instructions (Optional)
+   571→                    </label>
+   572→                    <textarea
+   573→                      id="orderNotes"
+   574→                      name="orderNotes"
+   575→                      rows={4}
+   576→                      value={formData.orderNotes}
+   577→                      onChange={handleChange}
+   578→                      placeholder="Any special delivery instructions, gift wrapping requests, or notes for our team..."
+   579→                      className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200 resize-none"
+   580→                      style={{
+   581→                        fontFamily: "'Poppins', sans-serif",
+   582→                        backgroundColor: '#FFFDF7',
+   583→                        border: '1px solid #E8D5A3',
+   584→                        color: '#2C2C2C',
+   585→                      }}
+   586→                      onFocus={(e) => {
+   587→                        e.target.style.borderColor = '#D4AF37';
+   588→                        e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)';
+   589→                      }}
+   590→                      onBlur={(e) => {
+   591→                        e.target.style.borderColor = '#E8D5A3';
+   592→                        e.target.style.boxShadow = 'none';
+   593→                      }}
+   594→                    />
+   595→                  </div>
+   596→                </div>
+   597→              </div>
+   598→
+   599→              {/* ─── Order Summary Sidebar (Right Column) ─── */}
+   600→              <div className="lg:col-span-1">
+   601→                <div
+   602→                  className="rounded-sm p-6 sm:p-8 sticky top-8"
+   603→                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+   604→                >
+   605→                  <h2
+   606→                    className="text-xl sm:text-2xl font-semibold mb-2"
+   607→                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+   608→                  >
+   609→                    Order Summary
+   610→                  </h2>
+   611→                  <div className="mb-6">
+   612→                    <GoldDivider />
+   613→                  </div>
+   614→
+   615→                  {/* Cart Items Preview */}
+   616→                  <div
+   617→                    className="flex flex-col gap-4 mb-6 max-h-72 overflow-y-auto pr-1"
+   618→                    style={{ scrollbarWidth: 'thin' }}
+   619→                  >
+   620→                    {cart.map((item) => (
+   621→                      <div
+   622→                        key={item.product.id}
+   623→                        className="flex items-center gap-3"
+   624→                      >
+   625→                        <div
+   626→                          className="shrink-0 w-14 h-14 rounded-lg overflow-hidden relative"
+   627→                          style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7' }}
+   628→                        >
+   629→                          <img
+   630→                            src={item.product.image}
+   631→                            alt={item.product.name}
+   632→                            className="w-full h-full object-contain"
+   633→                          />
+   634→                          <div
+   635→                            className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+   636→                            style={{ backgroundColor: '#D4AF37' }}
+   637→                          >
+   638→                            {item.quantity}
+   639→                          </div>
+   640→                        </div>
+   641→                        <div className="flex-1 min-w-0">
+   642→                          <p
+   643→                            className="text-sm font-medium truncate"
+   644→                            style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   645→                          >
+   646→                            {item.product.name}
+   647→                          </p>
+   648→                          <p
+   649→                            className="text-xs capitalize"
+   650→                            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+   651→                          >
+   652→                            {item.product.category.replace('-', ' ')}
+   653→                          </p>
+   654→                        </div>
+   655→                        <span
+   656→                          className="text-sm font-semibold shrink-0"
+   657→                          style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   658→                        >
+   659→                          {formatPKR(item.product.price * item.quantity)}
+   660→                        </span>
+   661→                      </div>
+   662→                    ))}
+   663→                  </div>
+   664→
+   665→                  <div className="h-px" style={{ backgroundColor: 'rgba(212,175,55,0.3)' }} />
+   666→
+   667→                  {/* Summary Lines */}
+   668→                  <div className="flex flex-col gap-3 mt-5">
+   669→                    <div className="flex items-center justify-between">
+   670→                      <span
+   671→                        className="text-sm"
+   672→                        style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+   673→                      >
+   674→                        Subtotal ({cartCount} {cartCount === 1 ? 'item' : 'items'})
+   675→                      </span>
+   676→                      <span
+   677→                        className="text-sm font-semibold"
+   678→                        style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   679→                      >
+   680→                        {formatPKR(subtotal)}
+   681→                      </span>
+   682→                    </div>
+   683→
+   684→                    <div className="flex items-center justify-between">
+   685→                      <span
+   686→                        className="text-sm"
+   687→                        style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+   688→                      >
+   689→                        Shipping
+   690→                      </span>
+   691→                      {shipping === 0 ? (
+   692→                        <span
+   693→                          className="text-sm font-semibold"
+   694→                          style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+   695→                        >
+   696→                          Free
+   697→                        </span>
+   698→                      ) : (
+   699→                        <span
+   700→                          className="text-sm font-semibold"
+   701→                          style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   702→                        >
+   703→                          {formatPKR(shipping)}
+   704→                        </span>
+   705→                      )}
+   706→                    </div>
+   707→
+   708→                    {shipping > 0 && (
+   709→                      <p
+   710→                        className="text-[11px]"
+   711→                        style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+   712→                      >
+   713→                        Free shipping on orders above PKR 2,999
+   714→                      </p>
+   715→                    )}
+   716→                    {shipping === 0 && (
+   717→                      <div className="flex items-center gap-1.5">
+   718→                        <Truck className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
+   719→                        <p
+   720→                          className="text-[11px]"
+   721→                          style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+   722→                        >
+   723→                          You qualify for free shipping!
+   724→                        </p>
+   725→                      </div>
+   726→                    )}
+   727→                  </div>
+   728→
+   729→                  <div className="h-px my-5" style={{ backgroundColor: 'rgba(212,175,55,0.3)' }} />
+   730→
+   731→                  <div className="flex items-center justify-between mb-6">
+   732→                    <span
+   733→                      className="text-base font-semibold"
+   734→                      style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   735→                    >
+   736→                      Total
+   737→                    </span>
+   738→                    <span
+   739→                      className="text-lg font-bold"
+   740→                      style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   741→                    >
+   742→                      {formatPKR(estimatedTotal)}
+   743→                    </span>
+   744→                  </div>
+   745→
+   746→                  {/* Place Order Button */}
+   747→                  <PremiumButton
+   748→                    variant="gold"
+   749→                    size="lg"
+   750→                    fullWidth
+   751→                    type="submit"
+   752→                    disabled={isSubmitting}
+   753→                  >
+   754→                    {isSubmitting ? (
+   755→                      <>
+   756→                        <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+   757→                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+   758→                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+   759→                        </svg>
+   760→                        Processing...
+   761→                      </>
+   762→                    ) : (
+   763→                      <>
+   764→                        <CheckCircle2 className="w-4 h-4" />
+   765→                        Place Order
+   766→                      </>
+   767→                    )}
+   768→                  </PremiumButton>
+   769→
+   770→                  {/* Back to Cart */}
+   771→                  <button
+   772→                    type="button"
+   773→                    onClick={() => { setPage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+   774→                    className="w-full text-center text-sm font-medium py-3 mt-2 transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
+   775→                    style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+   776→                  >
+   777→                    &larr; Back to Cart
+   778→                  </button>
+   779→
+   780→                  {/* Security Note */}
+   781→                  <div
+   782→                    className="mt-6 pt-5 text-center"
+   783→                    style={{ borderTop: '1px solid #E8D5A3' }}
+   784→                  >
+   785→                    <div className="flex items-center justify-center gap-2 mb-2">
+   786→                      <ShieldCheck className="w-4 h-4" style={{ color: '#D4AF37' }} />
+   787→                      <span
+   788→                        className="text-xs font-medium tracking-wide uppercase"
+   789→                        style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+   790→                      >
+   791→                        Secure Checkout
+   792→                      </span>
+   793→                    </div>
+   794→                    <p
+   795→                      className="text-[11px] leading-relaxed"
+   796→                      style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+   797→                    >
+   798→                      Your personal information is encrypted and secure. We never store your payment details.
+   799→                    </p>
+   800→                  </div>
+   801→                </div>
+   802→              </div>
+   803→            </div>
+   804→          </form>
+   805→        </div>
+   806→      </section>
+   807→    </div>
+   808→  );
+   809→}
+   810→

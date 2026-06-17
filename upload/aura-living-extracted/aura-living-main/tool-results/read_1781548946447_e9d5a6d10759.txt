@@ -1,0 +1,635 @@
+     1→     1→'use client';
+     2→     2→
+     3→     3→import { useState, useEffect, useCallback, useRef } from 'react';
+     4→     4→import { gsap } from '@/hooks/useGsap';
+     5→     5→import {
+     6→     6→  Search,
+     7→     7→  Heart,
+     8→     8→  ShoppingCart,
+     9→     9→  User,
+    10→    10→  Menu,
+    11→    11→  X,
+    12→    12→  ChevronRight,
+    13→    13→  ChevronDown,
+    14→    14→  ShoppingBag,
+    15→    15→  Sparkles,
+    16→    16→  Tag,
+    17→    17→  Camera,
+    18→    18→} from 'lucide-react';
+    19→    19→import { useStore } from '@/store/useStore';
+    20→    20→import { products, formatPKR } from '@/data/products';
+    21→    21→
+    22→    22→type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password';
+    23→    23→
+    24→    24→interface NavLink {
+    25→    25→  label: string;
+    26→    26→  page: PageType;
+    27→    27→  hasMegaMenu?: boolean;
+    28→    28→}
+    29→    29→
+    30→    30→const navLinks: NavLink[] = [
+    31→    31→  { label: 'Home', page: 'home' },
+    32→    32→  { label: 'Shop', page: 'shop', hasMegaMenu: true },
+    33→    33→  { label: 'About', page: 'about' },
+    34→    34→  { label: 'Contact', page: 'contact' },
+    35→    35→];
+    36→    36→
+    37→    37→interface MegaMenuItem {
+    38→    38→  label: string;
+    39→    39→  page: PageType;
+    40→    40→  icon: React.ReactNode;
+    41→    41→  description: string;
+    42→    42→}
+    43→    43→
+    44→    44→const megaMenuItems: MegaMenuItem[] = [
+    45→    45→  {
+    46→    46→    label: 'All Products',
+    47→    47→    page: 'shop',
+    48→    48→    icon: <ShoppingBag className="h-5 w-5" />,
+    49→    49→    description: 'Browse our complete collection',
+    50→    50→  },
+    51→    51→  {
+    52→    52→    label: 'New Arrivals',
+    53→    53→    page: 'new-arrivals',
+    54→    54→    icon: <Sparkles className="h-5 w-5" />,
+    55→    55→    description: 'The latest additions to our store',
+    56→    56→  },
+    57→    57→  {
+    58→    58→    label: 'Sale',
+    59→    59→    page: 'sale',
+    60→    60→    icon: <Tag className="h-5 w-5" />,
+    61→    61→    description: 'Exclusive offers & discounts',
+    62→    62→  },
+    63→    63→  {
+    64→    64→    label: 'Lookbook',
+    65→    65→    page: 'lookbook',
+    66→    66→    icon: <Camera className="h-5 w-5" />,
+    67→    67→    description: 'Curated style inspirations',
+    68→    68→  },
+    69→    69→  {
+    70→    70→    label: 'Care Guide',
+    71→    71→    page: 'care-guide',
+    72→    72→    icon: <Heart className="h-5 w-5" />,
+    73→    73→    description: 'Tips to preserve your luxury pieces',
+    74→    74→  },
+    75→    75→];
+    76→    76→
+    77→    77→// Pages that belong to the Shop mega-menu family
+    78→    78→const shopFamilyPages: PageType[] = ['shop', 'new-arrivals', 'sale', 'lookbook', 'care-guide'];
+    79→    79→
+    80→    80→export default function Navbar() {
+    81→    81→  const [scrolled, setScrolled] = useState(false);
+    82→    82→  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    83→    83→  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+    84→    84→  const [searchOpen, setSearchOpen] = useState(false);
+    85→    85→  const [searchQuery, setSearchQuery] = useState('');
+    86→    86→  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+    87→    87→  const [mobileShopExpanded, setMobileShopExpanded] = useState(false);
+    88→    88→  const searchInputRef = useRef<HTMLInputElement>(null);
+    89→    89→  const logoRef = useRef<HTMLDivElement>(null);
+    90→    90→  const mobileMenuRef = useRef<HTMLDivElement>(null);
+    91→    91→  const mobileBackdropRef = useRef<HTMLDivElement>(null);
+    92→    92→  const megaMenuRef = useRef<HTMLDivElement>(null);
+    93→    93→  const megaMenuTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    94→    94→  const mobileShopContentRef = useRef<HTMLDivElement>(null);
+    95→    95→
+    96→    96→  const { currentPage, setPage, getCartCount, cartOpen, setCartOpen, wishlist } = useStore();
+    97→    97→  const cartCount = getCartCount();
+    98→    98→  const wishlistCount = wishlist.length;
+    99→    99→
+   100→   100→  useEffect(() => {
+   101→   101→    const handleScroll = () => setScrolled(window.scrollY > 50);
+   102→   102→    window.addEventListener('scroll', handleScroll, { passive: true });
+   103→   103→    return () => window.removeEventListener('scroll', handleScroll);
+   104→   104→  }, []);
+   105→   105→
+   106→   106→  // Logo animation on mount
+   107→   107→  useEffect(() => {
+   108→   108→    if (logoRef.current) {
+   109→   109→      gsap.fromTo(logoRef.current, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'power3.out' });
+   110→   110→    }
+   111→   111→  }, []);
+   112→   112→
+   113→   113→  // Lock body scroll when mobile menu is open
+   114→   114→  useEffect(() => {
+   115→   115→    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+   116→   116→    return () => { document.body.style.overflow = ''; };
+   117→   117→  }, [mobileMenuOpen]);
+   118→   118→
+   119→   119→  // Focus search input when search opens
+   120→   120→  useEffect(() => {
+   121→   121→    if (searchOpen && searchInputRef.current) {
+   122→   122→      searchInputRef.current.focus();
+   123→   123→    }
+   124→   124→    if (!searchOpen) {
+   125→   125→      setSearchQuery('');
+   126→   126→    }
+   127→   127→  }, [searchOpen]);
+   128→   128→
+   129→   129→  // Mobile menu animation
+   130→   130→  useEffect(() => {
+   131→   131→    if (mobileMenuOpen) {
+   132→   132→      if (mobileBackdropRef.current) gsap.fromTo(mobileBackdropRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+   133→   133→      if (mobileMenuRef.current) gsap.fromTo(mobileMenuRef.current, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' });
+   134→   134→    }
+   135→   135→  }, [mobileMenuOpen]);
+   136→   136→
+   137→   137→  // Mega menu animation
+   138→   138→  useEffect(() => {
+   139→   139→    if (megaMenuOpen && megaMenuRef.current) {
+   140→   140→      gsap.fromTo(
+   141→   141→        megaMenuRef.current,
+   142→   142→        { opacity: 0, y: -10 },
+   143→   143→        { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
+   144→   144→      );
+   145→   145→    }
+   146→   146→  }, [megaMenuOpen]);
+   147→   147→
+   148→   148→  // Mobile shop expand/collapse animation
+   149→   149→  useEffect(() => {
+   150→   150→    if (mobileShopContentRef.current) {
+   151→   151→      if (mobileShopExpanded) {
+   152→   152→        gsap.fromTo(
+   153→   153→          mobileShopContentRef.current,
+   154→   154→          { height: 0, opacity: 0 },
+   155→   155→          { height: 'auto', opacity: 1, duration: 0.3, ease: 'power2.out' }
+   156→   156→        );
+   157→   157→      } else {
+   158→   158→        gsap.to(mobileShopContentRef.current, {
+   159→   159→          height: 0, opacity: 0, duration: 0.2, ease: 'power2.in',
+   160→   160→        });
+   161→   161→      }
+   162→   162→    }
+   163→   163→  }, [mobileShopExpanded]);
+   164→   164→
+   165→   165→  const handleNavClick = useCallback((page: PageType) => {
+   166→   166→    setPage(page);
+   167→   167→    setMobileMenuOpen(false);
+   168→   168→    setMegaMenuOpen(false);
+   169→   169→    setMobileShopExpanded(false);
+   170→   170→    window.scrollTo({ top: 0, behavior: 'smooth' });
+   171→   171→  }, [setPage]);
+   172→   172→
+   173→   173→  const closeMobileMenu = useCallback(() => {
+   174→   174→    if (mobileMenuRef.current) {
+   175→   175→      gsap.to(mobileMenuRef.current, {
+   176→   176→        opacity: 0, y: -20, duration: 0.3, ease: 'power3.in',
+   177→   177→        onComplete: () => { setMobileMenuOpen(false); setMobileShopExpanded(false); },
+   178→   178→      });
+   179→   179→    } else {
+   180→   180→      setMobileMenuOpen(false);
+   181→   181→      setMobileShopExpanded(false);
+   182→   182→    }
+   183→   183→  }, []);
+   184→   184→
+   185→   185→  // Mega menu hover handlers with delay
+   186→   186→  const handleMegaMenuEnter = useCallback(() => {
+   187→   187→    if (megaMenuTimeoutRef.current) {
+   188→   188→      clearTimeout(megaMenuTimeoutRef.current);
+   189→   189→      megaMenuTimeoutRef.current = null;
+   190→   190→    }
+   191→   191→    megaMenuTimeoutRef.current = setTimeout(() => {
+   192→   192→      setMegaMenuOpen(true);
+   193→   193→    }, 100);
+   194→   194→  }, []);
+   195→   195→
+   196→   196→  const handleMegaMenuLeave = useCallback(() => {
+   197→   197→    if (megaMenuTimeoutRef.current) {
+   198→   198→      clearTimeout(megaMenuTimeoutRef.current);
+   199→   199→      megaMenuTimeoutRef.current = null;
+   200→   200→    }
+   201→   201→    megaMenuTimeoutRef.current = setTimeout(() => {
+   202→   202→      setMegaMenuOpen(false);
+   203→   203→    }, 200);
+   204→   204→  }, []);
+   205→   205→
+   206→   206→  // Cleanup timeout on unmount
+   207→   207→  useEffect(() => {
+   208→   208→    return () => {
+   209→   209→      if (megaMenuTimeoutRef.current) {
+   210→   210→        clearTimeout(megaMenuTimeoutRef.current);
+   211→   211→      }
+   212→   212→    };
+   213→   213→  }, []);
+   214→   214→
+   215→   215→  const isLinkActive = (page: PageType, label: string) => {
+   216→   216→    if (label === 'Shop') return shopFamilyPages.includes(currentPage);
+   217→   217→    return currentPage === page;
+   218→   218→  };
+   219→   219→
+   220→   220→  const isMegaItemActive = (page: PageType) => {
+   221→   221→    return currentPage === page;
+   222→   222→  };
+   223→   223→
+   224→   224→  return (
+   225→   225→    <>
+   226→   226→      <nav
+   227→   227→        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+   228→   228→        style={{
+   229→   229→          background: 'rgba(250, 248, 245, 0.97)',
+   230→   230→          borderBottom: scrolled ? '1px solid rgba(212, 175, 55, 0.2)' : '1px solid rgba(232, 213, 163, 0.4)',
+   231→   231→          boxShadow: scrolled ? '0 1px 0 0 rgba(212, 175, 55, 0.1), 0 4px 20px rgba(0,0,0,0.04)' : '0 1px 0 0 rgba(232, 213, 163, 0.3)',
+   232→   232→        }}
+   233→   233→      >
+   234→   234→        <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+   235→   235→          <div className="flex h-16 sm:h-20 lg:h-28 items-center justify-between">
+   236→   236→            {/* Logo — Gold + Black gradient, same across all screens */}
+   237→   237→            <div ref={logoRef} className="cursor-pointer shrink-0 py-1 sm:py-2" onClick={() => handleNavClick('home')}>
+   238→   238→              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: 'clamp(48px, 14vw, 85px)', width: 'auto', objectFit: 'contain' }} />
+   239→   239→            </div>
+   240→   240→
+   241→   241→            {/* Desktop Nav Links */}
+   242→   242→            <div className="hidden lg:flex items-center gap-8">
+   243→   243→              {navLinks.map((link) => {
+   244→   244→                const isActive = isLinkActive(link.page, link.label);
+   245→   245→                const isHovered = hoveredLink === link.label;
+   246→   246→                return (
+   247→   247→                  <div
+   248→   248→                    key={link.label}
+   249→   249→                    className="relative"
+   250→   250→                    onMouseEnter={() => {
+   251→   251→                      setHoveredLink(link.label);
+   252→   252→                      if (link.hasMegaMenu) handleMegaMenuEnter();
+   253→   253→                    }}
+   254→   254→                    onMouseLeave={() => {
+   255→   255→                      setHoveredLink(null);
+   256→   256→                      if (link.hasMegaMenu) handleMegaMenuLeave();
+   257→   257→                    }}
+   258→   258→                  >
+   259→   259→                    <button
+   260→   260→                      className="relative py-2 text-sm font-medium transition-all duration-300 flex items-center gap-1"
+   261→   261→                      style={{
+   262→   262→                        fontFamily: "'Poppins', sans-serif",
+   263→   263→                        color: isActive ? '#D4AF37' : '#5A5A5A',
+   264→   264→                      }}
+   265→   265→                      onClick={() => {
+   266→   266→                        if (link.hasMegaMenu) {
+   267→   267→                          handleNavClick(link.page);
+   268→   268→                        } else {
+   269→   269→                          handleNavClick(link.page);
+   270→   270→                        }
+   271→   271→                      }}
+   272→   272→                    >
+   273→   273→                      {link.label}
+   274→   274→                      {link.hasMegaMenu && (
+   275→   275→                        <ChevronDown
+   276→   276→                          className="h-3.5 w-3.5 transition-transform duration-300"
+   277→   277→                          style={{
+   278→   278→                            transform: megaMenuOpen && hoveredLink === link.label ? 'rotate(180deg)' : 'rotate(0deg)',
+   279→   279→                          }}
+   280→   280→                        />
+   281→   281→                      )}
+   282→   282→                      <span
+   283→   283→                        className="absolute bottom-0 left-0 h-[2px] rounded-full bg-[#D4AF37] transition-all duration-300"
+   284→   284→                        style={{ width: isActive || isHovered ? '100%' : '0%' }}
+   285→   285→                      />
+   286→   286→                    </button>
+   287→   287→
+   288→   288→                    {/* Desktop Mega Menu */}
+   289→   289→                    {link.hasMegaMenu && megaMenuOpen && hoveredLink === link.label && (
+   290→   290→                      <div
+   291→   291→                        ref={megaMenuRef}
+   292→   292→                        className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
+   293→   293→                        style={{ zIndex: 60 }}
+   294→   294→                        onMouseEnter={handleMegaMenuEnter}
+   295→   295→                        onMouseLeave={handleMegaMenuLeave}
+   296→   296→                      >
+   297→   297→                        <div
+   298→   298→                          className="rounded-lg overflow-hidden"
+   299→   299→                          style={{
+   300→   300→                            background: 'rgba(250, 248, 245, 0.98)',
+   301→   301→                            borderTop: '2px solid #D4AF37',
+   302→   302→                            boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
+   303→   303→                            minWidth: '280px',
+   304→   304→                          }}
+   305→   305→                        >
+   306→   306→                          <div className="py-3">
+   307→   307→                            {megaMenuItems.map((item) => {
+   308→   308→                              const itemActive = isMegaItemActive(item.page);
+   309→   309→                              return (
+   310→   310→                                <button
+   311→   311→                                  key={item.label}
+   312→   312→                                  className="w-full flex items-center gap-4 px-5 py-3 text-left transition-colors duration-200 group"
+   313→   313→                                  style={{
+   314→   314→                                    backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+   315→   315→                                  }}
+   316→   316→                                  onMouseEnter={(e) => {
+   317→   317→                                    e.currentTarget.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+   318→   318→                                  }}
+   319→   319→                                  onMouseLeave={(e) => {
+   320→   320→                                    e.currentTarget.style.backgroundColor = itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent';
+   321→   321→                                  }}
+   322→   322→                                  onClick={() => handleNavClick(item.page)}
+   323→   323→                                >
+   324→   324→                                  <div
+   325→   325→                                    className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-colors duration-200"
+   326→   326→                                    style={{
+   327→   327→                                      backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.15)' : 'rgba(232, 213, 163, 0.2)',
+   328→   328→                                      color: itemActive ? '#D4AF37' : '#8A8A8A',
+   329→   329→                                    }}
+   330→   330→                                  >
+   331→   331→                                    {item.icon}
+   332→   332→                                  </div>
+   333→   333→                                  <div className="min-w-0">
+   334→   334→                                    <p
+   335→   335→                                      className="text-sm font-medium transition-colors duration-200"
+   336→   336→                                      style={{
+   337→   337→                                        fontFamily: "'Poppins', sans-serif",
+   338→   338→                                        color: itemActive ? '#D4AF37' : '#2C2C2C',
+   339→   339→                                      }}
+   340→   340→                                    >
+   341→   341→                                      {item.label}
+   342→   342→                                    </p>
+   343→   343→                                    <p
+   344→   344→                                      className="text-xs mt-0.5"
+   345→   345→                                      style={{
+   346→   346→                                        fontFamily: "'Poppins', sans-serif",
+   347→   347→                                        color: '#8A8A8A',
+   348→   348→                                      }}
+   349→   349→                                    >
+   350→   350→                                      {item.description}
+   351→   351→                                    </p>
+   352→   352→                                  </div>
+   353→   353→                                </button>
+   354→   354→                              );
+   355→   355→                            })}
+   356→   356→                          </div>
+   357→   357→                        </div>
+   358→   358→                      </div>
+   359→   359→                    )}
+   360→   360→                  </div>
+   361→   361→                );
+   362→   362→              })}
+   363→   363→            </div>
+   364→   364→
+   365→   365→            {/* Desktop Action Icons */}
+   366→   366→            <div className="hidden lg:flex items-center gap-5">
+   367→   367→              <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Search" onClick={() => setSearchOpen(true)}>
+   368→   368→                <Search className="h-5 w-5" />
+   369→   369→              </button>
+   370→   370→              <button className="relative p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Wishlist" onClick={() => handleNavClick('wishlist')}>
+   371→   371→                <Heart className="h-5 w-5" />
+   372→   372→                {wishlistCount > 0 && (
+   373→   373→                  <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[10px] font-bold text-white px-1 bg-[#D4AF37]">
+   374→   374→                    {wishlistCount}
+   375→   375→                  </span>
+   376→   376→                )}
+   377→   377→              </button>
+   378→   378→              <button className="relative p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Cart" onClick={() => setCartOpen(true)}>
+   379→   379→                <ShoppingCart className="h-5 w-5" />
+   380→   380→                {cartCount > 0 && (
+   381→   381→                  <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[10px] font-bold text-white px-1 bg-[#D4AF37]">
+   382→   382→                    {cartCount}
+   383→   383→                  </span>
+   384→   384→                )}
+   385→   385→              </button>
+   386→   386→              <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Account" onClick={() => handleNavClick('account')}>
+   387→   387→                <User className="h-5 w-5" />
+   388→   388→              </button>
+   389→   389→            </div>
+   390→   390→
+   391→   391→            {/* Mobile: Cart + Hamburger */}
+   392→   392→            <div className="flex lg:hidden items-center gap-2">
+   393→   393→              <button className="relative p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Cart" onClick={() => setCartOpen(true)}>
+   394→   394→                <ShoppingCart className="h-5 w-5" />
+   395→   395→                {cartCount > 0 && (
+   396→   396→                  <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[10px] font-bold text-white px-1 bg-[#D4AF37]">
+   397→   397→                    {cartCount}
+   398→   398→                  </span>
+   399→   399→                )}
+   400→   400→              </button>
+   401→   401→              <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMobileMenuOpen((prev) => !prev)}>
+   402→   402→                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+   403→   403→              </button>
+   404→   404→            </div>
+   405→   405→          </div>
+   406→   406→        </div>
+   407→   407→      </nav>
+   408→   408→
+   409→   409→      {/* Mobile Menu — Modern Slide-In */}
+   410→   410→      {mobileMenuOpen && (
+   411→   411→        <>
+   412→   412→          <div ref={mobileBackdropRef} className="fixed inset-0 z-[51] bg-black/40 backdrop-blur-sm" onClick={closeMobileMenu} />
+   413→   413→          <div ref={mobileMenuRef} className="fixed inset-0 z-[52] flex flex-col" style={{ backgroundColor: 'rgba(250, 248, 245, 0.98)' }}>
+   414→   414→            {/* Mobile Menu Header */}
+   415→   415→            <div className="flex items-center justify-between px-5 shrink-0" style={{ height: '72px', borderBottom: '1px solid rgba(212, 175, 55, 0.15)' }}>
+   416→   416→              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: '44px', width: 'auto', objectFit: 'contain' }} />
+   417→   417→              <button className="w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} onClick={closeMobileMenu} aria-label="Close menu">
+   418→   418→                <X className="h-5 w-5" />
+   419→   419→              </button>
+   420→   420→            </div>
+   421→   421→
+   422→   422→            {/* Mobile Menu Content */}
+   423→   423→            <div className="flex flex-col py-4 px-5 flex-1 overflow-y-auto">
+   424→   424→              {/* Main Navigation Links */}
+   425→   425→              <div className="space-y-0.5">
+   426→   426→                {navLinks.map((link) => {
+   427→   427→                  const isActive = isLinkActive(link.page, link.label);
+   428→   428→
+   429→   429→                  if (link.hasMegaMenu) {
+   430→   430→                    return (
+   431→   431→                      <div key={link.label}>
+   432→   432→                        <button
+   433→   433→                          className="flex items-center justify-between py-3.5 text-left w-full transition-colors duration-200 rounded-xl px-3 hover:bg-[#F5EDDA]/60"
+   434→   434→                          style={{ fontFamily: "'Poppins', sans-serif", color: isActive ? '#D4AF37' : '#2C2C2C' }}
+   435→   435→                          onClick={() => setMobileShopExpanded((prev) => !prev)}
+   436→   436→                          aria-expanded={mobileShopExpanded}
+   437→   437→                        >
+   438→   438→                          <div className="flex items-center gap-3">
+   439→   439→                            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: isActive ? 'rgba(212,175,55,0.12)' : 'rgba(232,213,163,0.15)' }}>
+   440→   440→                              <ShoppingBag className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} />
+   441→   441→                            </div>
+   442→   442→                            <span className="text-base font-medium">{link.label}</span>
+   443→   443→                          </div>
+   444→   444→                          <ChevronDown
+   445→   445→                            className="h-4 w-4 transition-transform duration-300"
+   446→   446→                            style={{
+   447→   447→                              color: isActive ? '#D4AF37' : '#8A8A8A',
+   448→   448→                              transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+   449→   449→                            }}
+   450→   450→                          />
+   451→   451→                        </button>
+   452→   452→                        <div
+   453→   453→                          ref={mobileShopContentRef}
+   454→   454→                          className="overflow-hidden"
+   455→   455→                          style={{ height: mobileShopExpanded ? 'auto' : 0, opacity: mobileShopExpanded ? 1 : 0 }}
+   456→   456→                        >
+   457→   457→                          <div className="pb-2 pl-4 flex flex-col gap-0.5">
+   458→   458→                            {megaMenuItems.map((item) => {
+   459→   459→                              const itemActive = isMegaItemActive(item.page);
+   460→   460→                              return (
+   461→   461→                                <button
+   462→   462→                                  key={item.label}
+   463→   463→                                  className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-[#F5EDDA]/60"
+   464→   464→                                  style={{
+   465→   465→                                    fontFamily: "'Poppins', sans-serif",
+   466→   466→                                    color: itemActive ? '#D4AF37' : '#5A5A5A',
+   467→   467→                                    backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+   468→   468→                                  }}
+   469→   469→                                  onClick={() => handleNavClick(item.page)}
+   470→   470→                                >
+   471→   471→                                  <div
+   472→   472→                                    className="flex items-center justify-center w-9 h-9 rounded-lg shrink-0 transition-colors duration-200"
+   473→   473→                                    style={{
+   474→   474→                                      backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.15)' : 'rgba(232, 213, 163, 0.15)',
+   475→   475→                                      color: itemActive ? '#D4AF37' : '#8A8A8A',
+   476→   476→                                    }}
+   477→   477→                                  >
+   478→   478→                                    {item.icon}
+   479→   479→                                  </div>
+   480→   480→                                  <div className="min-w-0">
+   481→   481→                                    <p className="text-sm font-medium">{item.label}</p>
+   482→   482→                                    <p className="text-[11px] mt-0.5" style={{ color: '#8A8A8A' }}>{item.description}</p>
+   483→   483→                                  </div>
+   484→   484→                                </button>
+   485→   485→                              );
+   486→   486→                            })}
+   487→   487→                          </div>
+   488→   488→                        </div>
+   489→   489→                      </div>
+   490→   490→                    );
+   491→   491→                  }
+   492→   492→
+   493→   493→                  return (
+   494→   494→                    <button
+   495→   495→                      key={link.label}
+   496→   496→                      className="flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 hover:bg-[#F5EDDA]/60 w-full"
+   497→   497→                      style={{ fontFamily: "'Poppins', sans-serif", color: isActive ? '#D4AF37' : '#2C2C2C' }}
+   498→   498→                      onClick={() => handleNavClick(link.page)}
+   499→   499→                    >
+   500→   500→                      <div className="flex items-center gap-3">
+   501→   501→                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: isActive ? 'rgba(212,175,55,0.12)' : 'rgba(232,213,163,0.15)' }}>
+   502→   502→                          {link.label === 'Home' && <svg className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4" /></svg>}
+   503→   503→                          {link.label === 'About' && <svg className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+   504→   504→                          {link.label === 'Contact' && <svg className="h-4 w-4" style={{ color: isActive ? '#D4AF37' : '#8A8A8A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
+   505→   505→                        </div>
+   506→   506→                        <span className="text-base font-medium">{link.label}</span>
+   507→   507→                      </div>
+   508→   508→                      <ChevronRight className="h-4 w-4" style={{ color: '#8A8A8A' }} />
+   509→   509→                    </button>
+   510→   510→                  );
+   511→   511→                })}
+   512→   512→              </div>
+   513→   513→
+   514→   514→              {/* Divider */}
+   515→   515→              <div className="my-5 h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent)' }} />
+   516→   516→
+   517→   517→              {/* Quick Actions */}
+   518→   518→              <div className="space-y-0.5">
+   519→   519→                <p className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-2" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>Quick Actions</p>
+   520→   520→                {[
+   521→   521→                  { icon: <Search className="h-4 w-4" />, label: 'Search', page: 'search' },
+   522→   522→                  { icon: <Heart className="h-4 w-4" />, label: 'Wishlist', page: 'wishlist', count: wishlistCount },
+   523→   523→                  { icon: <ShoppingCart className="h-4 w-4" />, label: 'Cart', page: 'cart', count: cartCount },
+   524→   524→                  { icon: <User className="h-4 w-4" />, label: 'Account', page: 'account' },
+   525→   525→                ].map((item) => (
+   526→   526→                  <button
+   527→   527→                    key={item.label}
+   528→   528→                    className="flex items-center gap-3 py-2.5 text-left transition-colors duration-200 hover:bg-[#F5EDDA]/60 rounded-xl px-3 w-full"
+   529→   529→                    style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}
+   530→   530→                    onClick={() => { closeMobileMenu(); if (item.label === 'Cart') setCartOpen(true); if (item.label === 'Wishlist') handleNavClick('wishlist'); if (item.label === 'Search') { setSearchOpen(true); } if (item.label === 'Account') handleNavClick('account'); }}
+   531→   531→                  >
+   532→   532→                    <div className="w-8 h-8 rounded-lg flex items-center justify-center relative" style={{ backgroundColor: 'rgba(232,213,163,0.15)' }}>
+   533→   533→                      {item.icon}
+   534→   534→                      {item.count && item.count > 0 ? (
+   535→   535→                        <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[#D4AF37]">
+   536→   536→                          {item.count}
+   537→   537→                        </span>
+   538→   538→                      ) : null}
+   539→   539→                    </div>
+   540→   540→                    <span className="text-sm font-medium">{item.label}</span>
+   541→   541→                  </button>
+   542→   542→                ))}
+   543→   543→              </div>
+   544→   544→
+   545→   545→              {/* Bottom CTA */}
+   546→   546→              <div className="mt-auto pt-6">
+   547→   547→                <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(212,175,55,0.06)', border: '1px solid rgba(212,175,55,0.15)' }}>
+   548→   548→                  <p className="text-xs font-medium mb-2" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>NEW COLLECTION 2026</p>
+   549→   549→                  <p className="text-xs mb-3" style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}>Explore our latest arrivals and handcrafted luxury pieces</p>
+   550→   550→                  <button
+   551→   551→                    className="premium-btn btn-gold px-5 py-2 text-xs w-full"
+   552→   552→                    style={{ fontFamily: "'Poppins', sans-serif" }}
+   553→   553→                    onClick={() => handleNavClick('new-arrivals')}
+   554→   554→                  >
+   555→   555→                    Explore Now
+   556→   556→                  </button>
+   557→   557→                </div>
+   558→   558→              </div>
+   559→   559→            </div>
+   560→   560→          </div>
+   561→   561→        </>
+   562→   562→      )}
+   563→   563→
+   564→   564→      <div className="h-16 sm:h-20 lg:h-28" />
+   565→   565→
+   566→   566→      {/* Search Modal */}
+   567→   567→      {searchOpen && (
+   568→   568→        <>
+   569→   569→          <div className="fixed inset-0 z-[55] bg-black/30" onClick={() => setSearchOpen(false)} />
+   570→   570→          <div
+   571→   571→            className="fixed top-0 left-0 right-0 z-[56] py-6 px-4 sm:px-6"
+   572→   572→            style={{ backgroundColor: 'rgba(250, 248, 245, 0.98)', borderBottom: '1px solid rgba(212,175,55,0.2)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}
+   573→   573→          >
+   574→   574→            <div className="mx-auto max-w-2xl">
+   575→   575→              <div className="flex items-center gap-3">
+   576→   576→                <Search className="h-5 w-5 shrink-0" style={{ color: '#D4AF37' }} />
+   577→   577→                <input
+   578→   578→                  ref={searchInputRef}
+   579→   579→                  type="text"
+   580→   580→                  value={searchQuery}
+   581→   581→                  onChange={(e) => setSearchQuery(e.target.value)}
+   582→   582→                  placeholder="Search products..."
+   583→   583→                  className="flex-1 bg-transparent outline-none text-base"
+   584→   584→                  style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+   585→   585→                  onKeyDown={(e) => {
+   586→   586→                    if (e.key === 'Escape') setSearchOpen(false);
+   587→   587→                    if (e.key === 'Enter' && searchQuery.trim()) {
+   588→   588→                      useStore.getState().setSearchQuery(searchQuery.trim());
+   589→   589→                      setSearchOpen(false);
+   590→   590→                      handleNavClick('shop');
+   591→   591→                    }
+   592→   592→                  }}
+   593→   593→                />
+   594→   594→                <button onClick={() => setSearchOpen(false)} className="p-2 rounded-full hover:bg-[#F5EDDA] transition-colors" style={{ color: '#5A5A5A' }} aria-label="Close search">
+   595→   595→                  <X className="h-5 w-5" />
+   596→   596→                </button>
+   597→   597→              </div>
+   598→   598→              {/* Search Results */}
+   599→   599→              {searchQuery.trim().length > 1 && (
+   600→   600→                <div className="mt-4 max-h-64 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+   601→   601→                  {products
+   602→   602→                    .filter((p) => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.category.toLowerCase().includes(searchQuery.toLowerCase()))
+   603→   603→                    .slice(0, 5)
+   604→   604→                    .map((p) => (
+   605→   605→                      <button
+   606→   606→                        key={p.id}
+   607→   607→                        className="w-full flex items-center gap-3 py-3 px-2 text-left rounded-lg transition-colors hover:bg-[#F5EDDA]"
+   608→   608→                        onClick={() => {
+   609→   609→                          useStore.getState().setSelectedProduct(p);
+   610→   610→                          setSearchOpen(false);
+   611→   611→                          handleNavClick('product');
+   612→   612→                        }}
+   613→   613→                      >
+   614→   614→                        <div className="w-10 h-10 rounded-md overflow-hidden shrink-0" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+   615→   615→                          <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
+   616→   616→                        </div>
+   617→   617→                        <div className="min-w-0">
+   618→   618→                          <p className="text-sm font-medium truncate" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>{p.name}</p>
+   619→   619→                          <p className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>{formatPKR(p.price)}</p>
+   620→   620→                        </div>
+   621→   621→                      </button>
+   622→   622→                    ))}
+   623→   623→                  {products.filter((p) => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.category.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
+   624→   624→                    <p className="text-sm py-4 text-center" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>No products found for &quot;{searchQuery}&quot;</p>
+   625→   625→                  )}
+   626→   626→                </div>
+   627→   627→              )}
+   628→   628→            </div>
+   629→   629→          </div>
+   630→   630→        </>
+   631→   631→      )}
+   632→   632→    </>
+   633→   633→  );
+   634→   634→}
+   635→   635→
