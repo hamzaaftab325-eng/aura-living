@@ -189,6 +189,13 @@ html {
   100% { transform: translate3d(-50%, 0, 0); }
 }
 
+/* Hero progress bar — CSS-only, no GSAP */
+@keyframes heroProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* Marquee — kept for backwards compat (unused in new hero) */
 .animate-marquee {
   will-change: transform;
   animation: marquee 20s linear infinite;
