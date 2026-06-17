@@ -70,15 +70,11 @@ function BackToTop() {
 export default function Home() {
   const currentPage = useStore((s) => s.currentPage);
   const contentRef = useRef<HTMLDivElement>(null);
-  // ready = false during SSR + first client render, true after hash is read.
-  // While !ready, main content is visibility:hidden so user never sees a flash
-  // of the wrong page. SSR and client render the same HTML (no hydration mismatch).
-  const [ready, setReady] = useState(false);
 
   useLenis();
 
   // Single effect: read URL hash, sync store, seed history, register popstate.
-  // Runs once after hydration. Merges the previous two separate effects.
+  // Runs once after hydration.
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -102,10 +98,6 @@ export default function Home() {
     };
     window.addEventListener('popstate', handlePopState);
 
-    // 4. Reveal content
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setReady(true);
-
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
@@ -117,8 +109,12 @@ export default function Home() {
   }, [currentPage]);
 
   // GSAP page transition — skip on initial render to avoid animating first paint
+  const isFirstRender = useRef(true);
   useEffect(() => {
-    if (!ready) return;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     if (contentRef.current) {
       gsap.fromTo(
@@ -127,7 +123,7 @@ export default function Home() {
         { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', force3D: true }
       );
     }
-  }, [currentPage, ready]);
+  }, [currentPage]);
 
   const renderPage = () => {
     switch (currentPage) {
@@ -198,11 +194,7 @@ export default function Home() {
       <FloatingOrb size={70} top="55%" left="88%" delay={1.0} />
       <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />
       <Navbar />
-      <main
-        ref={contentRef}
-        className="flex-1 w-full"
-        style={{ visibility: ready ? 'visible' : 'hidden' }}
-      >
+      <main ref={contentRef} className="flex-1 w-full">
         {renderPage()}
       </main>
       <div className="flex justify-center py-8 px-4 sm:px-6 w-full">
