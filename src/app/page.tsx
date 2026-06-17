@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useStore, pageTitles } from '@/store/useStore';
+import { useStore, pageTitles, validPages } from '@/store/useStore';
 import { gsap } from '@/hooks/useGsap';
 import { useLenis } from '@/hooks/useLenis';
 import Navbar from '@/components/Navbar';
@@ -37,7 +37,6 @@ import { GoldDivider, CornerOrnament, FloatingOrb, FloatingGoldDots } from '@/co
 
 function BackToTop() {
   const [visible, setVisible] = useState(false);
-  // Hide BackToTop when cart drawer is open so it doesn't sit behind the drawer overlay
   const cartOpen = useStore((s) => s.cartOpen);
 
   useEffect(() => {
@@ -70,36 +69,44 @@ function BackToTop() {
 
 export default function Home() {
   const currentPage = useStore((s) => s.currentPage);
-  const setPage = useStore((s) => s.setPage);
   const contentRef = useRef<HTMLDivElement>(null);
+  // ready = false during SSR + first client render, true after hash is read.
+  // While !ready, main content is visibility:hidden so user never sees a flash
+  // of the wrong page. SSR and client render the same HTML (no hydration mismatch).
+  const [ready, setReady] = useState(false);
 
-  // mounted flag stays false during SSR and the first client render, then flips
-  // to true in useEffect (which runs only AFTER hydration completes). This lets
-  // us read window.location.hash and update the store before rendering any page
-  // content, eliminating the home-page flash on refresh without causing a
-  // hydration mismatch (SSR renders null for <main>, client first render also
-  // renders null, then we update the store and render the correct page).
-  const [mounted, setMounted] = useState(false);
-
-  // Initialize Lenis smooth scroll
   useLenis();
 
-  // On mount: read URL hash and sync the store to it (so refresh stays on the
-  // current page). This runs after hydration so it cannot cause a mismatch.
+  // Single effect: read URL hash, sync store, seed history, register popstate.
+  // Runs once after hydration. Merges the previous two separate effects.
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const validPages: readonly string[] = [
-      'home', 'shop', 'product', 'cart', 'checkout', 'wishlist', 'account',
-      'about', 'contact', 'login', 'signup', 'faq', 'shipping', 'returns',
-      'care-guide', 'new-arrivals', 'sale', 'lookbook', 'terms', 'privacy', 'forgot-password',
-    ];
+
+    // 1. Read hash and sync store to the correct page
     const hash = window.location.hash.replace('#', '');
     if (hash && validPages.includes(hash) && hash !== currentPage) {
       useStore.setState({ currentPage: hash as typeof currentPage });
     }
-    // Mark mounted so page content can render
+
+    // 2. Seed history so back button works from the first navigation
+    if (!window.history.state) {
+      const current = useStore.getState().currentPage;
+      window.history.replaceState({ page: current }, '', `#${current}`);
+    }
+
+    // 3. Listen for back/forward
+    const handlePopState = (event: PopStateEvent) => {
+      const page = (event.state?.page as typeof currentPage) || 'home';
+      useStore.setState({ currentPage: page });
+      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    };
+    window.addEventListener('popstate', handlePopState);
+
+    // 4. Reveal content
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
+    setReady(true);
+
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   // Update document title per SPA page
@@ -109,32 +116,10 @@ export default function Home() {
     }
   }, [currentPage]);
 
-  // Browser back/forward support — listen to popstate (run once on mount)
+  // GSAP page transition — skip on initial render to avoid animating first paint
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    // Seed history with the current page so back button works from the first navigation.
-    if (!window.history.state) {
-      window.history.replaceState({ page: currentPage }, '', `#${currentPage}`);
-    }
-
-    const handlePopState = (event: PopStateEvent) => {
-      const page = (event.state?.page as typeof currentPage) || 'home';
-      useStore.setState({ currentPage: page });
-      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
-  // GSAP page transition — GPU-accelerated slide + fade (skip on initial mount
-  // to avoid animating the first paint)
-  useEffect(() => {
-    if (!mounted) return;
-    // Scroll to the top (hero section) whenever the page changes
+    if (!ready) return;
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-
     if (contentRef.current) {
       gsap.fromTo(
         contentRef.current,
@@ -142,7 +127,7 @@ export default function Home() {
         { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', force3D: true }
       );
     }
-  }, [currentPage, mounted]);
+  }, [currentPage, ready]);
 
   const renderPage = () => {
     switch (currentPage) {
@@ -213,7 +198,11 @@ export default function Home() {
       <FloatingOrb size={70} top="55%" left="88%" delay={1.0} />
       <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />
       <Navbar />
-      <main ref={contentRef} className="flex-1 w-full">
+      <main
+        ref={contentRef}
+        className="flex-1 w-full"
+        style={{ visibility: ready ? 'visible' : 'hidden' }}
+      >
         {renderPage()}
       </main>
       <div className="flex justify-center py-8 px-4 sm:px-6 w-full">

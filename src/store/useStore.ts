@@ -31,6 +31,13 @@ export interface User {
 
 export type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password';
 
+// Single source of truth for valid page slugs — used by page.tsx hash-sync
+export const validPages: readonly string[] = [
+  'home', 'shop', 'product', 'cart', 'checkout', 'wishlist', 'account',
+  'about', 'contact', 'login', 'signup', 'faq', 'shipping', 'returns',
+  'care-guide', 'new-arrivals', 'sale', 'lookbook', 'terms', 'privacy', 'forgot-password',
+];
+
 // Shared badge color mapping — used by ProductDetailView, ShopView, WishlistView, FeaturedProducts
 export const badgeColors: Record<string, { bg: string; text: string }> = {
   NEW: { bg: '#A8B5A0', text: '#FFFFFF' },

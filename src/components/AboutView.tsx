@@ -803,7 +803,7 @@ export default function AboutView() {
   });
 
   // Opening quote blur text
-  const quoteRef = useGsapBlurText<HTMLDivElement>({
+  const quoteRef = useGsapBlurText<HTMLQuoteElement>({
     duration: 0.9,
     stagger: 0.05,
     delay: 0.2,
@@ -1042,8 +1042,11 @@ export default function AboutView() {
           </div>
           <blockquote
             ref={quoteRef}
-            className="text-[#2C2C2C] text-lg sm:text-2xl md:text-3xl lg:text-[34px] leading-relaxed md:leading-snug italic mx-auto"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            className="text-[#2C2C2C] leading-relaxed"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: 'clamp(18px, 3vw, 32px)',
+            }}
           >
             We believe every home tells a story. Ours begins with the hands of artisans.
           </blockquote>
