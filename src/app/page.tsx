@@ -73,10 +73,36 @@ export default function Home() {
   const setPage = useStore((s) => s.setPage);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  // mounted flag stays false during SSR and the first client render, then flips
+  // to true in useEffect (which runs only AFTER hydration completes). This lets
+  // us read window.location.hash and update the store before rendering any page
+  // content, eliminating the home-page flash on refresh without causing a
+  // hydration mismatch (SSR renders null for <main>, client first render also
+  // renders null, then we update the store and render the correct page).
+  const [mounted, setMounted] = useState(false);
+
   // Initialize Lenis smooth scroll
   useLenis();
 
-  // Update document title per SPA page + sync browser history on mount
+  // On mount: read URL hash and sync the store to it (so refresh stays on the
+  // current page). This runs after hydration so it cannot cause a mismatch.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const validPages: readonly string[] = [
+      'home', 'shop', 'product', 'cart', 'checkout', 'wishlist', 'account',
+      'about', 'contact', 'login', 'signup', 'faq', 'shipping', 'returns',
+      'care-guide', 'new-arrivals', 'sale', 'lookbook', 'terms', 'privacy', 'forgot-password',
+    ];
+    const hash = window.location.hash.replace('#', '');
+    if (hash && validPages.includes(hash) && hash !== currentPage) {
+      useStore.setState({ currentPage: hash as typeof currentPage });
+    }
+    // Mark mounted so page content can render
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
+  // Update document title per SPA page
   useEffect(() => {
     if (typeof document !== 'undefined') {
       document.title = pageTitles[currentPage] || 'Aura Living';
@@ -88,8 +114,6 @@ export default function Home() {
     if (typeof window === 'undefined') return;
 
     // Seed history with the current page so back button works from the first navigation.
-    // The store already initialized currentPage from the URL hash synchronously on mount,
-    // so we don't need to read it again here.
     if (!window.history.state) {
       window.history.replaceState({ page: currentPage }, '', `#${currentPage}`);
     }
@@ -104,8 +128,10 @@ export default function Home() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // GSAP page transition — GPU-accelerated slide + fade
+  // GSAP page transition — GPU-accelerated slide + fade (skip on initial mount
+  // to avoid animating the first paint)
   useEffect(() => {
+    if (!mounted) return;
     // Scroll to the top (hero section) whenever the page changes
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
 
@@ -116,7 +142,7 @@ export default function Home() {
         { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', force3D: true }
       );
     }
-  }, [currentPage]);
+  }, [currentPage, mounted]);
 
   const renderPage = () => {
     switch (currentPage) {
@@ -188,7 +214,10 @@ export default function Home() {
       <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />
       <Navbar />
       <main ref={contentRef} className="flex-1 w-full">
-        {renderPage()}
+        {/* Render page content only after mount so SSR and first client render
+            match (both null). This prevents hydration mismatches when the URL
+            hash points to a non-home page. */}
+        {mounted ? renderPage() : null}
       </main>
       <div className="flex justify-center py-8 px-4 sm:px-6 w-full">
         <div className="w-full max-w-xs sm:max-w-sm">
@@ -198,7 +227,7 @@ export default function Home() {
       <Footer />
       <CartDrawer />
       <BackToTop />
-      {currentPage === 'home' && (
+      {mounted && currentPage === 'home' && (
         <div className="hidden md:block fixed inset-0 pointer-events-none z-[5]">
           <CornerOrnament position="top-left" size={80} />
           <CornerOrnament position="top-right" size={80} />

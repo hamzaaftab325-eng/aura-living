@@ -198,19 +198,8 @@ export const useStore = create<StoreState>()(
       },
       logout: () => set({ user: null }),
 
-      // UI State — currentPage is initialized from URL hash on client so refresh
-      // doesn't flash the home page before navigating to the correct view.
-      currentPage: (typeof window !== 'undefined' && typeof window.location !== 'undefined'
-        ? (() => {
-            const validPages: readonly string[] = [
-              'home', 'shop', 'product', 'cart', 'checkout', 'wishlist', 'account',
-              'about', 'contact', 'login', 'signup', 'faq', 'shipping', 'returns',
-              'care-guide', 'new-arrivals', 'sale', 'lookbook', 'terms', 'privacy', 'forgot-password',
-            ];
-            const hash = window.location.hash.replace('#', '');
-            return (hash && validPages.includes(hash) ? hash : 'home') as PageType;
-          })()
-        : 'home'),
+      // UI State
+      currentPage: 'home',
       selectedProduct: null,
       selectedCategory: 'all',
       searchQuery: '',
