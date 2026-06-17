@@ -199,7 +199,7 @@ export default function LookbookView() {
 
                         {/* Scene number watermark */}
                         <div
-                          className="absolute bottom-6 right-6 text-[72px] sm:text-[96px] font-bold leading-none select-none"
+                          className="absolute bottom-6 right-6 text-[60px] sm:text-[80px] lg:text-[96px] font-bold leading-none select-none"
                           style={{ fontFamily: "'Playfair Display', serif", color: 'rgba(212,175,55,0.12)' }}
                         >
                           {scene.number}

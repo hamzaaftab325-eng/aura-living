@@ -277,12 +277,12 @@ export default function ProductDetailView() {
             </div>
 
             {/* Thumbnail Row — CSS transition for selection ring */}
-            <div className="flex gap-3">
+            <div className="flex gap-2 sm:gap-3 flex-wrap">
               {galleryImages.map((img, i) => (
                 <button
                   key={i}
                   onClick={() => setSelectedImage(i)}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-md overflow-hidden transition-all duration-300"
+                  className="w-14 h-14 sm:w-20 sm:h-20 rounded-md overflow-hidden transition-all duration-300"
                   style={{
                     border: selectedImage === i ? '2px solid #D4AF37' : '1px solid rgba(232,213,163,0.3)',
                     opacity: selectedImage === i ? 1 : 0.7,
@@ -348,7 +348,7 @@ export default function ProductDetailView() {
                   <button
                     key={swatch.name}
                     onClick={() => setSelectedColor(swatch.name)}
-                    className="w-8 h-8 rounded-full transition-all duration-300 hover:scale-110"
+                    className="w-11 h-11 rounded-full transition-all duration-300 hover:scale-110"
                     style={{
                       backgroundColor: swatch.hex,
                       border: selectedColor === swatch.name ? '2px solid #D4AF37' : '1px solid #E8D5A3',
@@ -405,15 +405,15 @@ export default function ProductDetailView() {
             </div>
 
             {/* Trust Badges */}
-            <div className="grid grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8">
               {[
-                { icon: <Truck className="w-5 h-5" />, label: 'Free Shipping' },
-                { icon: <Shield className="w-5 h-5" />, label: 'Secure Payment' },
-                { icon: <RotateCcw className="w-5 h-5" />, label: 'Easy Returns' },
+                { icon: <Truck className="w-4 h-4 sm:w-5 sm:h-5" />, label: 'Free Shipping' },
+                { icon: <Shield className="w-4 h-4 sm:w-5 sm:h-5" />, label: 'Secure Payment' },
+                { icon: <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />, label: 'Easy Returns' },
               ].map((badge) => (
-                <div key={badge.label} className="flex flex-col items-center gap-2 text-center p-3 rounded-sm" style={{ backgroundColor: 'rgba(245,237,218,0.3)', border: '1px solid rgba(232,213,163,0.3)' }}>
+                <div key={badge.label} className="flex flex-col items-center gap-1.5 sm:gap-2 text-center p-2 sm:p-3 rounded-sm" style={{ backgroundColor: 'rgba(245,237,218,0.3)', border: '1px solid rgba(232,213,163,0.3)' }}>
                   <div style={{ color: '#D4AF37' }}>{badge.icon}</div>
-                  <span className="text-[11px] font-medium" style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}>{badge.label}</span>
+                  <span className="text-[10px] sm:text-[11px] font-medium leading-tight" style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}>{badge.label}</span>
                 </div>
               ))}
             </div>

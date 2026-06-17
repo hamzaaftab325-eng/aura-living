@@ -37,6 +37,8 @@ import { GoldDivider, CornerOrnament, FloatingOrb, FloatingGoldDots } from '@/co
 
 function BackToTop() {
   const [visible, setVisible] = useState(false);
+  // Hide BackToTop when cart drawer is open so it doesn't sit behind the drawer overlay
+  const cartOpen = useStore((s) => s.cartOpen);
 
   useEffect(() => {
     const handleScroll = () => setVisible(window.scrollY > 400);
@@ -44,18 +46,20 @@ function BackToTop() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const shouldShow = visible && !cartOpen;
+
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-[#D4AF37] text-white flex items-center justify-center shadow-lg hover:bg-[#C9A22E] transition-all duration-300 cursor-pointer"
       style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(16px)',
-        pointerEvents: visible ? 'auto' : 'none',
-        visibility: visible ? 'visible' : 'hidden',
+        opacity: shouldShow ? 1 : 0,
+        transform: shouldShow ? 'translateY(0)' : 'translateY(16px)',
+        pointerEvents: shouldShow ? 'auto' : 'none',
+        visibility: shouldShow ? 'visible' : 'hidden',
       }}
       aria-label="Back to top"
-      tabIndex={visible ? 0 : -1}
+      tabIndex={shouldShow ? 0 : -1}
     >
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="18 15 12 9 6 15" />
@@ -188,7 +192,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8F5] relative grain-overlay w-full overflow-x-hidden">
       <FloatingOrb size={90} top="15%" left="3%" delay={0} />
-      <FloatingOrb size={70} top="55%" left="92%" delay={1.0} />
+      <FloatingOrb size={70} top="55%" left="88%" delay={1.0} />
       <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />
       <Navbar />
       <main ref={contentRef} className="flex-1 w-full">

@@ -330,7 +330,7 @@ export default function CartView() {
                         >
                           <button
                             onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                            className="flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200 hover:bg-[#F5EDDA] active:scale-[0.85] cursor-pointer"
+                            className="flex items-center justify-center w-11 h-11 rounded-full transition-all duration-200 hover:bg-[#F5EDDA] active:scale-[0.85] cursor-pointer"
                             style={{ color: '#5A5A5A' }}
                             aria-label="Decrease quantity"
                           >
@@ -344,7 +344,7 @@ export default function CartView() {
                           </span>
                           <button
                             onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                            className="flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200 hover:bg-[#F5EDDA] active:scale-[0.85] cursor-pointer"
+                            className="flex items-center justify-center w-11 h-11 rounded-full transition-all duration-200 hover:bg-[#F5EDDA] active:scale-[0.85] cursor-pointer"
                             style={{ color: '#5A5A5A' }}
                             aria-label="Increase quantity"
                           >

@@ -125,10 +125,9 @@ export default function TrendingCollection() {
           {/* ── Vertical CSS divider line ── */}
           <div className="hidden lg:flex items-center px-0">
             <div
-              className="flex-shrink-0"
+              className="flex-shrink-0 self-stretch"
               style={{
                 width: '1px',
-                height: '580px',
                 backgroundColor: 'rgba(212,175,55,0.25)',
                 marginLeft: '-1px',
                 marginRight: '-1px',

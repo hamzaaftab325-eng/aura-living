@@ -130,7 +130,7 @@ export default function NewsletterSection() {
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
       >
         <span
-          className="text-[12rem] sm:text-[16rem] md:text-[20rem] lg:text-[24rem] font-black leading-none tracking-tighter whitespace-nowrap"
+          className="text-[8rem] sm:text-[16rem] md:text-[20rem] lg:text-[24rem] font-black leading-none tracking-tighter whitespace-nowrap"
           style={{
             fontFamily: "'Playfair Display', serif",
             color: 'rgba(212, 175, 55, 0.06)',
@@ -169,7 +169,7 @@ export default function NewsletterSection() {
             {/* Gold underline for "Aura Family" */}
             <div
               className="mt-2 h-[3px] bg-[#D4AF37]/40 rounded-full"
-              style={{ width: '200px', maxWidth: '40%' }}
+              style={{ width: 'min(200px, 60%)' }}
             />
 
             {/* Decorative divider */}

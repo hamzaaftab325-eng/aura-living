@@ -738,7 +738,7 @@ function ScrollProgressIndicator() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-[2px] z-50">
+    <div className="fixed top-0 left-0 w-full h-[2px] z-40 pointer-events-none">
       <div
         ref={lineRef}
         className="h-full w-full"

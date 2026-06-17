@@ -418,9 +418,14 @@ html {
    Mobile Responsiveness — Critical Fixes
    ═══════════════════════════════════════════════════════════ */
 
-/* Ensure full width on all mobile devices */
-html, body {
-  max-width: 100vw;
+/* Use 100% instead of 100vw on body to avoid scrollbar-width miscalculation on desktop.
+   Keep overflow-x: hidden only on body (not html) so it acts as a safety net without
+   breaking nested position: sticky. */
+html {
+  max-width: 100%;
+}
+body {
+  max-width: 100%;
   overflow-x: hidden;
 }
 
@@ -429,6 +434,30 @@ html, body {
   .floating-orb {
     display: none !important;
   }
+}
+
+/* Touch device support — make hover-dependent UI visible on touch devices.
+   Applies to: product card quick actions, hero arrows, add-to-cart bars.
+   Browsers that don't support hover correctly report hover: none. */
+@media (hover: none) {
+  /* touch-visible makes the element AND its children visible (overrides inline opacity/transform) */
+  .touch-visible,
+  .touch-visible * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .touch-visible-translate,
+  .touch-visible-translate * {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+}
+
+/* Dvh-with-fallback helper. Browsers that don't understand dvh ignore the second
+   declaration and use vh. */
+.dvh-fallback {
+  height: 100vh;
+  height: 100dvh;
 }
 
 /* Pulsing gold glow for WhyChooseUs cards */

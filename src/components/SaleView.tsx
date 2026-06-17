@@ -394,7 +394,7 @@ export default function SaleView() {
 
               <div
                 ref={gridRef}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8"
               >
                 {saleProducts.map((product) => {
                   const wishlisted = isInWishlist(product.id);
@@ -435,10 +435,10 @@ export default function SaleView() {
                           SALE
                         </div>
 
-                        {/* Savings Badge */}
+                        {/* Savings Badge — positioned bottom-left to avoid overlap with SALE (top-left) and wishlist heart (top-right) */}
                         {product.originalPrice && (
                           <div
-                            className="absolute top-3 right-12 px-2 py-1 rounded-sm text-xs font-bold"
+                            className="absolute bottom-3 left-3 px-2 py-1 rounded-sm text-xs font-bold"
                             style={{
                               backgroundColor: '#D4AF37',
                               color: '#FFFFFF',
@@ -455,7 +455,7 @@ export default function SaleView() {
                             e.stopPropagation();
                             toggleWishlist(product.id);
                           }}
-                          className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
+                          className="absolute top-3 right-3 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
                           style={{ backgroundColor: 'rgba(255,255,255,0.9)', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
                           aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
                         >
@@ -537,7 +537,7 @@ export default function SaleView() {
                           </button>
                           <button
                             onClick={() => toggleWishlist(product.id)}
-                            className="w-10 h-10 rounded-sm flex items-center justify-center transition-all duration-200 cursor-pointer"
+                            className="w-11 h-11 rounded-sm flex items-center justify-center transition-all duration-200 cursor-pointer"
                             style={{
                               border: '1px solid #E8D5A3',
                               backgroundColor: wishlisted ? 'rgba(220, 38, 38, 0.06)' : 'transparent',

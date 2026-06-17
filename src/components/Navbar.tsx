@@ -282,7 +282,7 @@ export default function Navbar() {
               tabIndex={0}
               aria-label="Aura Living home"
             >
-              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: 'clamp(48px, 14vw, 85px)', width: 'auto', objectFit: 'contain' }} />
+              <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: 'clamp(40px, 9vw, 64px)', width: 'auto', objectFit: 'contain' }} />
             </div>
 
             {/* Desktop Nav Links */}
@@ -410,11 +410,11 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Action Icons */}
-            <div className="hidden lg:flex items-center gap-5">
-              <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Search" onClick={() => setSearchOpen(true)}>
+            <div className="hidden lg:flex items-center gap-4">
+              <button className="p-2.5 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Search" onClick={() => setSearchOpen(true)}>
                 <Search className="h-5 w-5" />
               </button>
-              <button className="relative p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Wishlist" onClick={() => handleNavClick('wishlist')}>
+              <button className="relative p-2.5 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Wishlist" onClick={() => handleNavClick('wishlist')}>
                 <Heart className="h-5 w-5" />
                 {wishlistCount > 0 && (
                   <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[10px] font-bold text-white px-1 bg-[#D4AF37]">
@@ -422,7 +422,7 @@ export default function Navbar() {
                   </span>
                 )}
               </button>
-              <button className="relative p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Cart" onClick={() => setCartOpen(true)}>
+              <button className="relative p-2.5 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Cart" onClick={() => setCartOpen(true)}>
                 <ShoppingCart className="h-5 w-5" />
                 {cartCount > 0 && (
                   <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[10px] font-bold text-white px-1 bg-[#D4AF37]">
@@ -430,14 +430,14 @@ export default function Navbar() {
                   </span>
                 )}
               </button>
-              <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Account" onClick={() => handleNavClick('account')}>
+              <button className="p-2.5 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Account" onClick={() => handleNavClick('account')}>
                 <User className="h-5 w-5" />
               </button>
             </div>
 
             {/* Mobile: Cart + Hamburger */}
-            <div className="flex lg:hidden items-center gap-2">
-              <button className="relative p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Cart" onClick={() => setCartOpen(true)}>
+            <div className="flex lg:hidden items-center gap-1">
+              <button className="relative p-2.5 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label="Cart" onClick={() => setCartOpen(true)}>
                 <ShoppingCart className="h-5 w-5" />
                 {cartCount > 0 && (
                   <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[10px] font-bold text-white px-1 bg-[#D4AF37]">
@@ -445,7 +445,7 @@ export default function Navbar() {
                   </span>
                 )}
               </button>
-              <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMobileMenuOpen((prev) => !prev)}>
+              <button className="p-2.5 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMobileMenuOpen((prev) => !prev)}>
                 {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
             </div>
@@ -459,7 +459,7 @@ export default function Navbar() {
           <div ref={mobileBackdropRef} className="fixed inset-0 z-[51] bg-black/50 backdrop-blur-sm" onClick={closeMobileMenu} aria-hidden="true" />
           <div
             ref={mobileMenuRef}
-            className="fixed top-0 right-0 bottom-0 z-[52] flex flex-col w-full sm:w-[380px]"
+            className="fixed top-0 right-0 bottom-0 z-[52] flex flex-col w-full sm:w-[420px] sm:max-w-[92vw]"
             style={{ backgroundColor: 'rgba(250, 248, 245, 0.97)', backdropFilter: 'blur(20px)', borderLeft: '1px solid rgba(212, 175, 55, 0.15)' }}
             role="dialog"
             aria-modal="true"

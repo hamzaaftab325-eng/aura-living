@@ -127,8 +127,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           </div>
         )}
 
-        {/* Quick action buttons — appear on hover */}
-        <div className="absolute top-3 right-3 z-30 flex flex-col gap-2">
+        {/* Quick action buttons — appear on hover (visible on touch devices via .touch-visible) */}
+        <div className="touch-visible absolute top-3 right-3 z-30 flex flex-col gap-2">
           {[
             { icon: <Eye className="w-5 h-5" strokeWidth={2} />, onClick: handleQuickView, label: 'Quick view', title: 'Preview' },
             { icon: <Heart className={`w-5 h-5 ${wishlisted ? 'fill-current' : ''}`} strokeWidth={2} />, onClick: handleToggleWishlist, label: 'Toggle wishlist', active: wishlisted, title: 'Wishlist' },
@@ -138,7 +138,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               key={i}
               onClick={btn.onClick}
               title={btn.title}
-              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center cursor-pointer"
+              className="touch-visible w-11 h-11 rounded-full flex items-center justify-center cursor-pointer"
               style={{
                 backgroundColor: isHovered
                   ? (wishlisted && btn.active ? '#D4AF37' : '#FFFDF7')
@@ -172,9 +172,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           ))}
         </div>
 
-        {/* Add to Cart bar — CSS transition from bottom */}
+        {/* Add to Cart bar — CSS transition from bottom (visible on touch via .touch-visible-translate) */}
         <div
-          className="absolute bottom-0 left-0 right-0 z-30 px-4 pb-4"
+          className="touch-visible-translate absolute bottom-0 left-0 right-0 z-30 px-4 pb-4"
           style={{
             opacity: isHovered ? 1 : 0,
             transform: isHovered ? 'translateY(0)' : 'translateY(30px)',
@@ -315,16 +315,16 @@ export default function FeaturedProducts() {
       className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
       style={{ backgroundColor: '#FAF8F5' }}
     >
-      {/* Ambient decorative blobs */}
+      {/* Ambient decorative blobs — hidden on mobile to save paint */}
       <div
-        className="absolute top-0 left-0 w-[500px] h-[500px] pointer-events-none opacity-30"
+        className="hidden sm:block absolute top-0 left-0 w-[500px] h-[500px] pointer-events-none opacity-30"
         style={{
           background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
           transform: 'translate(-30%, -30%)',
         }}
       />
       <div
-        className="absolute bottom-0 right-0 w-[400px] h-[400px] pointer-events-none opacity-25"
+        className="hidden sm:block absolute bottom-0 right-0 w-[400px] h-[400px] pointer-events-none opacity-25"
         style={{
           background: 'radial-gradient(circle, rgba(168,181,160,0.1) 0%, transparent 70%)',
           transform: 'translate(20%, 30%)',

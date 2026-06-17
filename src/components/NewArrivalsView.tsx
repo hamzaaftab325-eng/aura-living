@@ -338,7 +338,7 @@ export default function NewArrivalsView() {
                             e.stopPropagation();
                             toggleWishlist(product.id);
                           }}
-                          className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
+                          className="absolute top-3 right-3 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
                           style={{ backgroundColor: 'rgba(255,255,255,0.9)', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
                           aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
                         >
@@ -408,7 +408,7 @@ export default function NewArrivalsView() {
                           </button>
                           <button
                             onClick={() => toggleWishlist(product.id)}
-                            className="w-10 h-10 rounded-sm flex items-center justify-center transition-all duration-200 cursor-pointer"
+                            className="w-11 h-11 rounded-sm flex items-center justify-center transition-all duration-200 cursor-pointer"
                             style={{
                               border: '1px solid #E8D5A3',
                               backgroundColor: wishlisted ? 'rgba(220, 38, 38, 0.06)' : 'transparent',

@@ -456,14 +456,36 @@ export default function HeroSection() {
   // ─── Format slide number ──────────────────────────────────
   const formatSlideNum = (n: number) => String(n + 1).padStart(2, '0');
 
+  // ─── Touch swipe handlers ─────────────────────────────────
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  }, []);
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    // Only register horizontal swipes (ignore vertical scroll)
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx > 0) prevSlide();
+      else nextSlide();
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  }, [prevSlide, nextSlide]);
+
   return (
     <section
       ref={sectionRef}
       className="relative w-full overflow-hidden flex items-center justify-center group"
-      style={{ height: '100dvh', minHeight: '600px' }}
+      style={{ height: '100vh', height: '100dvh', minHeight: '600px' }}
       onMouseEnter={() => {
         // Show arrows on hover via CSS group
       }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* ═══ Parallax Background Container ═══ */}
       <div className="bg-parallax-container absolute inset-0 w-full md:h-[130%] md:-top-[15%]">
@@ -527,8 +549,8 @@ export default function HeroSection() {
       />
 
       {/* ═══ Corner ornaments ═══ */}
-      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-12 h-12 sm:w-[100px] sm:h-[100px] border-t border-l border-[#D4AF37]/50 pointer-events-none z-20" />
-      <div className="absolute bottom-16 right-4 sm:bottom-24 sm:right-6 w-12 h-12 sm:w-[100px] sm:h-[100px] border-b border-r border-[#D4AF37]/50 pointer-events-none z-20" />
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-9 h-9 sm:w-[100px] sm:h-[100px] border-t border-l border-[#D4AF37]/50 pointer-events-none z-20" />
+      <div className="absolute bottom-16 right-4 sm:bottom-24 sm:right-6 w-9 h-9 sm:w-[100px] sm:h-[100px] border-b border-r border-[#D4AF37]/50 pointer-events-none z-20" />
 
       {/* ═══ Floating Gold Orbs — GSAP-enhanced ═══ */}
       <GoldOrb size={200} top="8%" left="5%" opacity={0.12} />
@@ -544,7 +566,7 @@ export default function HeroSection() {
           {/* Tag */}
           <span
             ref={tagRef}
-            className="slide-content-el inline-block text-[#D4AF37] text-[10px] sm:text-xs tracking-[4px] uppercase font-medium"
+            className="slide-content-el inline-block text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             {slide.tag}
@@ -613,14 +635,14 @@ export default function HeroSection() {
       {/* ═══ Arrow Navigation ═══ */}
       <button
         onClick={prevSlide}
-        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-[#D4AF37]/30 bg-[#2C2C2C]/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/60"
+        className="touch-visible absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-[#D4AF37]/30 bg-[#2C2C2C]/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/60"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-5 h-5 text-[#D4AF37]" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-[#D4AF37]/30 bg-[#2C2C2C]/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/60"
+        className="touch-visible absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-[#D4AF37]/30 bg-[#2C2C2C]/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/60"
         aria-label="Next slide"
       >
         <ChevronRight className="w-5 h-5 text-[#D4AF37]" />

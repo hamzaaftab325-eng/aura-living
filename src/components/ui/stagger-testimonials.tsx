@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -307,6 +307,9 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 };
 
 export const StaggerTestimonials: React.FC = () => {
+  // Initialize cardSize with a function that runs only on the client AFTER mount.
+  // SSR + first client render use a stable default; useLayoutEffect updates before paint
+  // so the user never sees the 240px → 365px jump that useEffect caused.
   const [cardSize, setCardSize] = useState(240);
   const [mounted, setMounted] = useState(false);
   const [testimonialsList, setTestimonialsList] = useState(testimonials);
@@ -329,7 +332,29 @@ export const StaggerTestimonials: React.FC = () => {
     setTestimonialsList(newList);
   };
 
-  useEffect(() => {
+  // ─── Touch swipe handlers ─────────────────────────────────
+  const touchStartX = React.useRef<number | null>(null);
+  const touchStartY = React.useRef<number | null>(null);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx > 0) handleMove(-1);
+      else handleMove(1);
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
+
+  // useLayoutEffect runs synchronously after DOM mutation but before paint,
+  // so the user never sees the un-mounted state. This eliminates the CLS that
+  // useEffect caused (where the container would visibly jump from 240px to 365px).
+  React.useLayoutEffect(() => {
     const updateSize = () => {
       const w = window.innerWidth;
       if (w >= 1024) setCardSize(365);
@@ -363,6 +388,8 @@ export const StaggerTestimonials: React.FC = () => {
     <div
       className="relative w-full overflow-hidden bg-[#FAF8F5]"
       style={{ height: containerHeight }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Subtle background pattern */}
       <div
@@ -391,7 +418,7 @@ export const StaggerTestimonials: React.FC = () => {
         <button
           onClick={() => handleMove(-1)}
           className={cn(
-            "flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center text-base sm:text-2xl transition-all duration-300 rounded-full",
+            "flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center text-base sm:text-2xl transition-all duration-300 rounded-full",
             "bg-[#2C2C2C] border-2 border-[#D4AF37]/30 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37]",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2",
             "text-[#D4AF37]"
@@ -403,7 +430,7 @@ export const StaggerTestimonials: React.FC = () => {
         <button
           onClick={() => handleMove(1)}
           className={cn(
-            "flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center text-base sm:text-2xl transition-all duration-300 rounded-full",
+            "flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center text-base sm:text-2xl transition-all duration-300 rounded-full",
             "bg-[#2C2C2C] border-2 border-[#D4AF37]/30 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37]",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2",
             "text-[#D4AF37]"

@@ -120,7 +120,7 @@ function CategoryCard({
         </h3>
         {/* Description — appears on hover */}
         <p
-          className="text-white/70 text-sm mt-1 max-w-[240px] sm:max-w-[180px] transition-all duration-300"
+          className="text-white/70 text-sm mt-1 max-w-[200px] sm:max-w-[180px] transition-all duration-300"
           style={{
             fontFamily: "'Poppins', sans-serif",
             opacity: isHovered ? 1 : 0,

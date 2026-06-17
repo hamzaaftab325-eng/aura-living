@@ -500,7 +500,7 @@ export default function AccountView() {
               </div>
 
               {/* Orders Table - Desktop */}
-              <div className="hidden sm:block overflow-x-auto">
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full" style={{ fontFamily: "'Poppins', sans-serif" }}>
                   <thead>
                     <tr style={{ borderBottom: '1px solid #E8D5A3' }}>
@@ -569,7 +569,7 @@ export default function AccountView() {
               </div>
 
               {/* Orders Cards - Mobile */}
-              <div ref={ordersRef} className="sm:hidden flex flex-col gap-4">
+              <div ref={ordersRef} className="md:hidden flex flex-col gap-4">
                 {mockOrders.map((order) => (
                   <div
                     key={order.id}

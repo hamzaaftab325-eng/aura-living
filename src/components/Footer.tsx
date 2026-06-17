@@ -74,7 +74,7 @@ function SocialIcon({
       aria-label={label}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex h-10 w-10 items-center justify-center rounded-full border border-[#D4AF37]/25 transition-all duration-500 hover:border-[#D4AF37]/70 hover:scale-110 hover:rotate-6 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
+      className="group flex h-11 w-11 items-center justify-center rounded-full border border-[#D4AF37]/25 transition-all duration-500 hover:border-[#D4AF37]/70 hover:scale-110 hover:rotate-6 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
       style={{ color: '#D4AF37', backgroundColor: 'rgba(212,175,55,0.06)' }}
     >
       <Icon size={18} className="transition-all duration-500 group-hover:scale-110" />

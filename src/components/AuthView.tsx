@@ -258,7 +258,7 @@ export default function AuthView() {
     <div className="w-full min-h-screen flex" style={{ backgroundColor: '#FAF8F5' }}>
       {/* ═══ Left Panel — Decorative Image + Branding ═══ */}
       <div
-        className="hidden lg:flex w-[45%] relative overflow-hidden flex-col items-center justify-center"
+        className="hidden lg:flex w-[45%] xl:w-[50%] relative overflow-hidden flex-col items-center justify-center"
         style={{
           background: 'linear-gradient(135deg, rgba(44,44,44,0.85), rgba(212,175,55,0.25))',
         }}

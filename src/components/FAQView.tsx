@@ -148,11 +148,13 @@ export default function FAQView() {
   const contentRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
   const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
 
-  // GSAP-based accordion animation
+  // GSAP-based accordion animation — uses scrollHeight so long answers are not clipped
   useEffect(() => {
     accordionRefs.current.forEach((el, id) => {
       if (id === openId) {
-        gsap.to(el, { maxHeight: 500, opacity: 1, duration: 0.4, ease: 'power2.out' });
+        // Use scrollHeight to fit any answer length; fall back to 'none' if undefined
+        const targetHeight = el ? el.scrollHeight : 500;
+        gsap.to(el, { maxHeight: targetHeight || 'none', opacity: 1, duration: 0.4, ease: 'power2.out' });
       } else {
         gsap.to(el, { maxHeight: 0, opacity: 0, duration: 0.3, ease: 'power2.in' });
       }

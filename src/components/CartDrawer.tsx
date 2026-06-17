@@ -141,7 +141,7 @@ export default function CartDrawer() {
       {/* Drawer Panel */}
       <div
         ref={drawerRef}
-        className="fixed top-0 right-0 bottom-0 z-[70] w-full sm:w-[420px] shadow-2xl flex flex-col"
+        className="fixed top-0 right-0 bottom-0 z-[70] w-full sm:w-[420px] sm:max-w-[92vw] shadow-2xl flex flex-col"
         style={{ backgroundColor: '#FFFDF7', transform: 'translateX(100%)' }}
         role="dialog"
         aria-modal="true"
@@ -234,22 +234,22 @@ export default function CartDrawer() {
                       <div className="flex items-center rounded-full" style={{ border: '1px solid #E8D5A3', backgroundColor: 'rgba(245,237,218,0.3)' }}>
                         <button
                           onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                          className="flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]"
+                          className="flex items-center justify-center w-11 h-11 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]"
                           style={{ color: '#5A5A5A' }}
                           aria-label="Decrease quantity"
                         >
-                          <Minus className="h-3 w-3" />
+                          <Minus className="h-3.5 w-3.5" />
                         </button>
                         <span className="w-8 text-center text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
                           {item.quantity}
                         </span>
                         <button
                           onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                          className="flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]"
+                          className="flex items-center justify-center w-11 h-11 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]"
                           style={{ color: '#5A5A5A' }}
                           aria-label="Increase quantity"
                         >
-                          <Plus className="h-3 w-3" />
+                          <Plus className="h-3.5 w-3.5" />
                         </button>
                       </div>
                       <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
