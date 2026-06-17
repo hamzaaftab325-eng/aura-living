@@ -75,6 +75,7 @@ function AccordionItem({
 }) {
   const [isOpen, setIsOpen] = useState(item.defaultOpen);
   const contentRef = useRef<HTMLDivElement>(null);
+  const accordionId = `accordion-${item.title.replace(/\s+/g, '-').toLowerCase()}`;
 
   useEffect(() => {
     if (!contentRef.current) return;
@@ -92,6 +93,9 @@ function AccordionItem({
       <button
         className="w-full flex items-center justify-between py-4 text-left cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-controls={`${accordionId}-panel`}
+        id={`${accordionId}-button`}
       >
         <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
           {item.title}
@@ -103,6 +107,9 @@ function AccordionItem({
       </button>
       <div
         ref={contentRef}
+        id={`${accordionId}-panel`}
+        role="region"
+        aria-labelledby={`${accordionId}-button`}
         style={{
           maxHeight: item.defaultOpen ? '500px' : '0px',
           opacity: item.defaultOpen ? 1 : 0,
@@ -124,13 +131,15 @@ export default function ProductDetailView() {
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('Gold');
   const [selectedImage, setSelectedImage] = useState(0);
+  // Track previously seen product id so we can reset state synchronously when it changes (avoids set-state-in-effect lint)
+  const [lastProductId, setLastProductId] = useState<string | undefined>(selectedProduct?.id);
 
-  // Reset state when product changes — useEffect avoids render-time state updates
-  useEffect(() => {
+  if (selectedProduct?.id !== lastProductId) {
+    setLastProductId(selectedProduct?.id);
     setQuantity(1);
     setSelectedColor('Gold');
     setSelectedImage(0);
-  }, [selectedProduct?.id]);
+  }
 
   // Scroll to top when product changes
   useEffect(() => {
@@ -166,7 +175,6 @@ export default function ProductDetailView() {
 
   const product = selectedProduct;
   const wishlisted = isInWishlist(product.id);
-  const productCategory = categories.find((c) => c.id === product.category);
 
   const handleAddToCart = () => {
     addToCartWithQuantity(product, quantity);
@@ -177,10 +185,23 @@ export default function ProductDetailView() {
     toggleWishlist(product.id);
   };
 
-  // Use product images array, fallback to main image if fewer than 4
-  const galleryImages = product.images && product.images.length > 0
-    ? [...product.images, ...Array(Math.max(0, 4 - product.images.length)).fill(product.image)].slice(0, 4)
-    : [product.image, product.image, product.image, product.image];
+  // Use product images array. When fewer than 4 images are available,
+  // pad with the category hero image (if available) so each thumbnail is unique.
+  const productCategory = categories.find((c) => c.id === product.category);
+  const galleryImages = (() => {
+    const main = product.image;
+    const extras = (product.images && product.images.length > 0 ? product.images : [main]);
+    const uniqueExtras = Array.from(new Set([main, ...extras]));
+    const fillerImage = productCategory?.image;
+    const filler = fillerImage && !uniqueExtras.includes(fillerImage) ? [fillerImage] : [];
+    const combined = [...uniqueExtras, ...filler];
+    while (combined.length < 4 && combined.length > 0) {
+      // Last resort: reuse the main image only if we truly have nothing else
+      if (combined[combined.length - 1] === main && combined.length > 1) break;
+      combined.push(main);
+    }
+    return combined.slice(0, 4);
+  })();
 
   // Related products from same category
   const relatedProducts = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
@@ -419,7 +440,10 @@ export default function ProductDetailView() {
               {relatedProducts.map((rp) => (
                 <div
                   key={rp.id}
-                  className="cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)]"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedProduct(rp); setPage('product'); window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
+                  className="cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
                   style={{ border: '1px solid rgba(232,213,163,0.3)', backgroundColor: '#FFFDF7' }}
                   onClick={() => {
                     setSelectedProduct(rp);
@@ -441,6 +465,45 @@ export default function ProductDetailView() {
         </section>
       )}
 
+      {/* JSON-LD structured data for Product rich snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: product.name,
+            description: product.description,
+            image: `https://auraliving.pk${product.image}`,
+            sku: product.id,
+            brand: {
+              '@type': 'Brand',
+              name: 'Aura Living',
+            },
+            material: product.material,
+            category: productCategory?.name || product.category,
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: product.rating,
+              reviewCount: product.reviews,
+            },
+            offers: {
+              '@type': 'Offer',
+              url: 'https://auraliving.pk',
+              priceCurrency: 'PKR',
+              price: product.price,
+              availability: product.inStock
+                ? 'https://schema.org/InStock'
+                : 'https://schema.org/OutOfStock',
+              itemCondition: 'https://schema.org/NewCondition',
+              seller: {
+                '@type': 'Organization',
+                name: 'Aura Living',
+              },
+            },
+          }),
+        }}
+      />
     </div>
   );
 }

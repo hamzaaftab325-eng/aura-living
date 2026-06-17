@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useStore } from '@/store/useStore';
+import { useStore, pageTitles } from '@/store/useStore';
 import { gsap } from '@/hooks/useGsap';
 import { useLenis } from '@/hooks/useLenis';
 import Navbar from '@/components/Navbar';
@@ -52,8 +52,10 @@ function BackToTop() {
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0)' : 'translateY(16px)',
         pointerEvents: visible ? 'auto' : 'none',
+        visibility: visible ? 'visible' : 'hidden',
       }}
       aria-label="Back to top"
+      tabIndex={visible ? 0 : -1}
     >
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="18 15 12 9 6 15" />
@@ -63,11 +65,48 @@ function BackToTop() {
 }
 
 export default function Home() {
-  const { currentPage } = useStore();
+  const currentPage = useStore((s) => s.currentPage);
+  const setPage = useStore((s) => s.setPage);
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Initialize Lenis smooth scroll
   useLenis();
+
+  // Update document title per SPA page + sync browser history on mount
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.title = pageTitles[currentPage] || 'Aura Living';
+    }
+  }, [currentPage]);
+
+  // Browser back/forward support — listen to popstate
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // On first mount, if URL has a #hash that matches a PageType, navigate there
+    const hash = window.location.hash.replace('#', '');
+    const validPages: readonly string[] = [
+      'home', 'shop', 'product', 'cart', 'checkout', 'wishlist', 'account',
+      'about', 'contact', 'login', 'signup', 'faq', 'shipping', 'returns',
+      'care-guide', 'new-arrivals', 'sale', 'lookbook', 'terms', 'privacy', 'forgot-password',
+    ];
+    if (hash && validPages.includes(hash)) {
+      // Use the in-store setPage WITHOUT pushing history (history already has it)
+      useStore.setState({ currentPage: hash as typeof currentPage });
+    } else if (!window.history.state) {
+      // Seed history with current page so back button works from the first navigation
+      window.history.replaceState({ page: currentPage }, '', `#${currentPage}`);
+    }
+
+    const handlePopState = (event: PopStateEvent) => {
+      const page = (event.state?.page as typeof currentPage) || 'home';
+      useStore.setState({ currentPage: page });
+      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [currentPage]);
 
   // GSAP page transition — GPU-accelerated slide + fade
   useEffect(() => {

@@ -74,8 +74,12 @@ function CategoryCard({
         transition: 'border-color 0.4s ease',
       }}
       onClick={onClick}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      role="button"
+      tabIndex={0}
+      aria-label={`Browse ${category.name} category`}
     >
       {/* Image with parallax */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">

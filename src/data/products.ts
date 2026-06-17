@@ -202,7 +202,7 @@ export const products: Product[] = [
     price: 2999,
     image: '/images/products/pillow-1.webp',
     images: ['/images/products/pillow-1.webp'],
-    category: 'wall-art',
+    category: 'vases',
     rating: 4.5,
     reviews: 134,
     description: 'Luxurious embroidered throw pillow in cream with gold thread detailing. Soft velvet feel with a hidden zipper. Adds texture and warmth to sofas and beds.',

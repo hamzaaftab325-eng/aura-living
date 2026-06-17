@@ -92,7 +92,7 @@ export default function LookbookView() {
           }
         );
       });
-    });
+    }, containerRef);
     return () => ctx.revert();
   }, []);
 
@@ -169,7 +169,7 @@ export default function LookbookView() {
       {/* Scenes */}
       <div ref={scenesRef} className="flex flex-col">
         {scenes.map((scene, index) => {
-          const isOdd = index % 2 === 0;
+          const isLeft = index % 2 === 0;
           const SceneIcon = scene.icon;
 
           return (
@@ -188,7 +188,7 @@ export default function LookbookView() {
                 style={{ backgroundColor: index % 2 === 0 ? '#FAF8F5' : '#F5EDDA' }}
               >
                 <div className="max-w-7xl mx-auto">
-                  <div className={`flex flex-col ${isOdd ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-12 items-center`}>
+                  <div className={`flex flex-col ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-12 items-center`}>
                     {/* Scene image */}
                     <div className="w-full lg:w-1/2">
                       <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden img-zoom">

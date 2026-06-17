@@ -91,7 +91,6 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [focused, setFocused] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const footerRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -129,14 +128,15 @@ export default function Footer() {
 
   const paymentMethods = ['COD', 'JazzCash', 'EasyPaisa', 'Bank Transfer'];
 
-  // Hydration-safe mount
+  // Hydration-safe mount — using a ref so we don't trigger a cascading re-render
+  const mountedRef = useRef(false);
   useEffect(() => {
-    setMounted(true);
+    mountedRef.current = true;
   }, []);
 
   // Footer entrance animation — safe with fallback
   useEffect(() => {
-    if (!mounted || !footerRef.current || !gridRef.current) return;
+    if (!mountedRef.current || !footerRef.current || !gridRef.current) return;
 
     const columns = gridRef.current.querySelectorAll(':scope > div');
     if (!columns.length) return;
@@ -174,7 +174,7 @@ export default function Footer() {
       trigger.kill();
       clearTimeout(fallback);
     };
-  }, [mounted]);
+  }, [mountedRef]);
 
   return (
     <footer
@@ -293,7 +293,11 @@ export default function Footer() {
               </p>
               <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
                 <div className="relative">
+                  <label htmlFor="footer-newsletter-email" className="sr-only">
+                    Your email address
+                  </label>
                   <input
+                    id="footer-newsletter-email"
                     type="email"
                     required
                     placeholder="Your email address"

@@ -339,6 +339,7 @@ export const StaggerTestimonials: React.FC = () => {
     };
 
     updateSize();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     let resizeTimer: ReturnType<typeof setTimeout>;
     const debouncedResize = () => {

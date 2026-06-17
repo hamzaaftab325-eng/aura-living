@@ -460,7 +460,7 @@ export default function HeroSection() {
     <section
       ref={sectionRef}
       className="relative w-full overflow-hidden flex items-center justify-center group"
-      style={{ height: '100vh', minHeight: '600px' }}
+      style={{ height: '100dvh', minHeight: '600px' }}
       onMouseEnter={() => {
         // Show arrows on hover via CSS group
       }}

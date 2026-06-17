@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   useGsapFadeIn,
   useGsapStagger,
@@ -83,10 +83,22 @@ const mockOrders = [
 export default function AccountView() {
   const cart = useStore((state) => state.cart);
   const wishlist = useStore((state) => state.wishlist);
+  const user = useStore((state) => state.user);
   const setPage = useStore((state) => state.setPage);
+  const logout = useStore((state) => state.logout);
   const { toast } = useToast();
 
-  const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+  // Avoid hydration mismatch: persisted cart/wishlist/user read from localStorage on client only.
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHydrated(true);
+  }, []);
+  const safeCart = hydrated ? cart : [];
+  const safeWishlist = hydrated ? wishlist : [];
+  const safeUser = hydrated ? user : null;
+
+  const cartCount = safeCart.reduce((count, item) => count + item.quantity, 0);
 
   const headerSectionRef = useRef<HTMLElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
@@ -110,9 +122,9 @@ export default function AccountView() {
 
   // Count-up refs for each stat
   const orderCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: 3, duration: 1.2, start: 'top 85%' });
-  const wishlistCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: wishlist.length, duration: 1.2, delay: 0.1, start: 'top 85%' });
+  const wishlistCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: safeWishlist.length, duration: 1.2, delay: 0.1, start: 'top 85%' });
   const cartCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: cartCount, duration: 1.2, delay: 0.2, start: 'top 85%' });
-  const rewardsCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: 450, duration: 1.5, delay: 0.3, start: 'top 85%' });
+  const rewardsCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: user?.rewardsPoints ?? 0, duration: 1.5, delay: 0.3, start: 'top 85%' });
 
   // Orders stagger
   const ordersRef = useGsapStagger<HTMLDivElement>({
@@ -182,7 +194,7 @@ export default function AccountView() {
     {
       icon: Heart,
       label: 'My Wishlist',
-      description: `${wishlist.length} saved item${wishlist.length !== 1 ? 's' : ''}`,
+      description: `${safeWishlist.length} saved item${safeWishlist.length !== 1 ? 's' : ''}`,
       onClick: () => setPage('wishlist'),
     },
     {
@@ -207,7 +219,15 @@ export default function AccountView() {
       icon: LogOut,
       label: 'Sign Out',
       description: 'Sign out of account',
-      onClick: () => setPage('login'),
+      onClick: () => {
+        logout();
+        toast({
+          title: 'Signed out',
+          description: 'You have been successfully signed out.',
+        });
+        setPage('home');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
     },
   ];
 
@@ -221,7 +241,7 @@ export default function AccountView() {
     },
     {
       icon: Heart,
-      value: String(wishlist.length),
+      value: String(safeWishlist.length),
       label: 'Wishlist',
       color: '#DC2626',
       bg: 'rgba(220, 38, 38, 0.08)',
@@ -235,7 +255,7 @@ export default function AccountView() {
     },
     {
       icon: Award,
-      value: '450',
+      value: String(user?.rewardsPoints ?? 0),
       label: 'Rewards Points',
       color: '#D4AF37',
       bg: 'rgba(212, 175, 55, 0.1)',
@@ -336,60 +356,87 @@ export default function AccountView() {
               className="rounded-sm p-6 sm:p-8 mb-8 sm:mb-10"
               style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
             >
-              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6">
-                {/* Avatar */}
-                <div
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center shrink-0 avatar-shimmer"
-                  style={{
-                    background: 'linear-gradient(135deg, #D4AF37 0%, #C9A22E 50%, #B8941F 100%)',
-                    boxShadow: '0 4px 20px rgba(212, 175, 55, 0.3)',
-                  }}
-                >
-                  <span
-                    className="text-2xl sm:text-3xl font-bold text-white"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
+              {user ? (
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6">
+                  {/* Avatar */}
+                  <div
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center shrink-0 animate-avatar-shimmer"
+                    style={{
+                      boxShadow: '0 4px 20px rgba(212, 175, 55, 0.3)',
+                    }}
                   >
-                    AL
-                  </span>
-                </div>
-
-                {/* Info */}
-                <div className="flex flex-col items-center sm:items-start text-center sm:text-left flex-1">
-                  <h2
-                    className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-1"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
-                  >
-                    Aura Living Member
-                  </h2>
-                  <p
-                    className="text-[#5A5A5A] text-sm sm:text-base mb-1"
-                    style={{ fontFamily: "'Poppins', sans-serif" }}
-                  >
-                    member@auraliving.pk
-                  </p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: '#22C55E' }}
-                    />
                     <span
-                      className="text-xs tracking-wide"
-                      style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                      className="text-2xl sm:text-3xl font-bold text-white"
+                      style={{ fontFamily: "'Playfair Display', serif" }}
                     >
-                      Member Since 2026
+                      {safeUser?.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
                     </span>
                   </div>
-                </div>
 
-                {/* Edit Profile Button */}
-                <PremiumButton
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleComingSoon('Profile Editing')}
-                >
-                  Edit Profile
-                </PremiumButton>
-              </div>
+                  {/* Info */}
+                  <div className="flex flex-col items-center sm:items-start text-center sm:text-left flex-1">
+                    <h2
+                      className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-1"
+                      style={{ fontFamily: "'Playfair Display', serif" }}
+                    >
+                      {safeUser?.name}
+                    </h2>
+                    <p
+                      className="text-[#5A5A5A] text-sm sm:text-base mb-1"
+                      style={{ fontFamily: "'Poppins', sans-serif" }}
+                    >
+                      {safeUser?.email}
+                    </p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <div
+                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: '#22C55E' }}
+                      />
+                      <span
+                        className="text-xs tracking-wide"
+                        style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                      >
+                        Member Since {safeUser?.memberSince}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Edit Profile Button */}
+                  <PremiumButton
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleComingSoon('Profile Editing')}
+                  >
+                    Edit Profile
+                  </PremiumButton>
+                </div>
+              ) : (
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 text-center sm:text-left">
+                  <div
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
+                  >
+                    <LogOut className="w-8 h-8" style={{ color: '#D4AF37' }} />
+                  </div>
+                  <div className="flex-1">
+                    <h2
+                      className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-1"
+                      style={{ fontFamily: "'Playfair Display', serif" }}
+                    >
+                      You are not signed in
+                    </h2>
+                    <p
+                      className="text-[#5A5A5A] text-sm sm:text-base mb-4"
+                      style={{ fontFamily: "'Poppins', sans-serif" }}
+                    >
+                      Sign in to view your orders, wishlist, and rewards.
+                    </p>
+                    <PremiumButton variant="gold" size="sm" onClick={() => setPage('login')}>
+                      Sign In
+                    </PremiumButton>
+                  </div>
+                </div>
+              )}
             </div>
           </AnimatedSection>
 
@@ -579,7 +626,10 @@ export default function AccountView() {
               <div
                 key={item.label}
                 onClick={item.onClick}
-                className="group rounded-sm p-5 sm:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:border-[#D4AF37] cursor-pointer menu-ripple"
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.onClick(); } }}
+                role="button"
+                tabIndex={0}
+                className="group rounded-sm p-5 sm:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:border-[#D4AF37] cursor-pointer animate-menu-ripple focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
                 style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
               >
                 <div className="flex items-center gap-4">
@@ -645,7 +695,7 @@ export default function AccountView() {
                 className="text-white/60 text-sm sm:text-base mb-5 max-w-md mx-auto leading-relaxed"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                You have <span style={{ color: '#D4AF37', fontWeight: 600 }}>450 points</span> — that is PKR 450 off your next order!
+                You have <span style={{ color: '#D4AF37', fontWeight: 600 }}>{user?.rewardsPoints ?? 0} points</span> — that is PKR {user?.rewardsPoints ?? 0} off your next order!
               </p>
               <PremiumButton
                 variant="gold"

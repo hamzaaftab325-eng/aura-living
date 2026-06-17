@@ -92,6 +92,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleProductClick}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleProductClick(); } }}
+        role="button"
+        tabIndex={0}
+        aria-label={`View ${product.name} details`}
       >
         {/* Image with parallax + enhanced CSS zoom on hover */}
         <div className="absolute inset-0 overflow-hidden" style={{ backgroundColor: '#FFFDF7' }}>

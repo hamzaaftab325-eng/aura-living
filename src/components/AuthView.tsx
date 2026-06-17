@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useGsapBlurText } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
@@ -14,6 +14,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import { useToast } from '@/hooks/use-toast';
 
 /* ═══════════════════════════════════════════════════════════
    SocialButton — Google / Facebook / Apple login button
@@ -56,6 +57,7 @@ function InputField({
   showToggle = false,
   onToggle,
   isVisible,
+  ariaLabel,
 }: {
   icon: React.ReactNode;
   type?: string;
@@ -65,8 +67,10 @@ function InputField({
   showToggle?: boolean;
   onToggle?: () => void;
   isVisible?: boolean;
+  ariaLabel: string;
 }) {
   const [isFocused, setIsFocused] = useState(false);
+  const inputId = React.useId();
 
   return (
     <div
@@ -79,13 +83,16 @@ function InputField({
           : '0 2px 8px rgba(0,0,0,0.03)',
       }}
     >
+      <label htmlFor={inputId} className="sr-only">{ariaLabel}</label>
       <div
         className="flex items-center justify-center pl-4"
         style={{ color: isFocused ? '#D4AF37' : '#B8A99A' }}
+        aria-hidden="true"
       >
         {icon}
       </div>
       <input
+        id={inputId}
         type={showToggle ? (isVisible ? 'text' : 'password') : type}
         placeholder={placeholder}
         value={value}
@@ -97,6 +104,7 @@ function InputField({
           fontFamily: "'Poppins', sans-serif",
           color: '#2C2C2C',
         }}
+        aria-label={ariaLabel}
       />
       {showToggle && (
         <button
@@ -117,15 +125,17 @@ function InputField({
    Main AuthView — Login / Signup with blur animation
    ═══════════════════════════════════════════════════════════ */
 export default function AuthView() {
-  const { setPage } = useStore();
+  const { setPage, login, signup } = useStore();
+  const { toast } = useToast();
   const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Login form state
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
 
   // Signup form state
   const [signupName, setSignupName] = useState('');
@@ -144,7 +154,104 @@ export default function AuthView() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Frontend only — no backend connection
+    if (isSubmitting) return;
+
+    // Basic validation
+    if (mode === 'login') {
+      if (!loginEmail.trim() || !loginPassword.trim()) {
+        toast({
+          title: 'Missing information',
+          description: 'Please enter both email and password.',
+          variant: 'destructive',
+        });
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginEmail)) {
+        toast({
+          title: 'Invalid email',
+          description: 'Please enter a valid email address.',
+          variant: 'destructive',
+        });
+        return;
+      }
+    } else {
+      // Signup validation
+      if (!signupName.trim() || !signupEmail.trim() || !signupPassword.trim()) {
+        toast({
+          title: 'Missing information',
+          description: 'Please fill in all fields.',
+          variant: 'destructive',
+        });
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signupEmail)) {
+        toast({
+          title: 'Invalid email',
+          description: 'Please enter a valid email address.',
+          variant: 'destructive',
+        });
+        return;
+      }
+      if (signupPassword.length < 6) {
+        toast({
+          title: 'Password too short',
+          description: 'Password must be at least 6 characters.',
+          variant: 'destructive',
+        });
+        return;
+      }
+      if (signupPassword !== signupConfirmPassword) {
+        toast({
+          title: 'Passwords do not match',
+          description: 'Please make sure both passwords are identical.',
+          variant: 'destructive',
+        });
+        return;
+      }
+      if (!agreeTerms) {
+        toast({
+          title: 'Please accept terms',
+          description: 'You must agree to the Terms of Service and Privacy Policy.',
+          variant: 'destructive',
+        });
+        return;
+      }
+    }
+
+    setIsSubmitting(true);
+    // Simulate async auth (frontend-only preview)
+    setTimeout(() => {
+      if (mode === 'login') {
+        login(loginEmail.trim());
+        toast({
+          title: 'Welcome back!',
+          description: 'You have successfully signed in.',
+        });
+      } else {
+        signup(signupName.trim(), signupEmail.trim());
+        toast({
+          title: 'Account created!',
+          description: 'Welcome to Aura Living. A 100-point welcome bonus has been added to your account.',
+        });
+      }
+      setIsSubmitting(false);
+      setPage('account');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 900);
+  };
+
+  const handleSocialLogin = (provider: string) => {
+    setIsSubmitting(true);
+    setTimeout(() => {
+      login(`guest@${provider.toLowerCase()}.com`);
+      toast({
+        title: `Signed in with ${provider}`,
+        description: 'You have successfully authenticated.',
+      });
+      setIsSubmitting(false);
+      setPage('account');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 700);
   };
 
   return (
@@ -314,6 +421,7 @@ export default function AuthView() {
                 </svg>
               }
               label="Continue with Google"
+              onClick={() => handleSocialLogin('Google')}
             />
             <SocialButton
               icon={
@@ -322,6 +430,7 @@ export default function AuthView() {
                 </svg>
               }
               label="Continue with Facebook"
+              onClick={() => handleSocialLogin('Facebook')}
             />
           </div>
 
@@ -342,6 +451,7 @@ export default function AuthView() {
                 placeholder="Full Name"
                 value={signupName}
                 onChange={setSignupName}
+                ariaLabel="Full name"
               />
             )}
 
@@ -351,6 +461,7 @@ export default function AuthView() {
               placeholder="Email Address"
               value={mode === 'login' ? loginEmail : signupEmail}
               onChange={mode === 'login' ? setLoginEmail : setSignupEmail}
+              ariaLabel="Email address"
             />
 
             <InputField
@@ -361,6 +472,7 @@ export default function AuthView() {
               showToggle
               onToggle={() => setShowPassword(!showPassword)}
               isVisible={showPassword}
+              ariaLabel="Password"
             />
 
             {mode === 'signup' && (
@@ -372,6 +484,7 @@ export default function AuthView() {
                 showToggle
                 onToggle={() => setShowConfirmPassword(!showConfirmPassword)}
                 isVisible={showConfirmPassword}
+                ariaLabel="Confirm password"
               />
             )}
 
@@ -379,11 +492,16 @@ export default function AuthView() {
             {mode === 'login' && (
               <div className="flex items-center justify-between">
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <div
+                  <button
+                    type="button"
+                    role="checkbox"
+                    aria-checked={rememberMe}
+                    aria-label="Remember me on this device"
                     className="w-4 h-4 rounded flex items-center justify-center transition-all duration-200"
                     style={{
                       border: rememberMe ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
                       backgroundColor: rememberMe ? '#D4AF37' : 'transparent',
+                      padding: 0,
                     }}
                     onClick={() => setRememberMe(!rememberMe)}
                   >
@@ -392,7 +510,7 @@ export default function AuthView() {
                         <path d="M2 6L5 9L10 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     )}
-                  </div>
+                  </button>
                   <span className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
                     Remember me
                   </span>
@@ -411,11 +529,16 @@ export default function AuthView() {
             {/* Terms (signup) */}
             {mode === 'signup' && (
               <label className="flex items-start gap-2 cursor-pointer">
-                <div
+                <button
+                  type="button"
+                  role="checkbox"
+                  aria-checked={agreeTerms}
+                  aria-label="I agree to the Terms of Service and Privacy Policy"
                   className="w-4 h-4 rounded flex items-center justify-center shrink-0 mt-0.5 transition-all duration-200"
                   style={{
                     border: agreeTerms ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
                     backgroundColor: agreeTerms ? '#D4AF37' : 'transparent',
+                    padding: 0,
                   }}
                   onClick={() => setAgreeTerms(!agreeTerms)}
                 >
@@ -424,7 +547,7 @@ export default function AuthView() {
                       <path d="M2 6L5 9L10 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   )}
-                </div>
+                </button>
                 <span className="text-xs leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
                   I agree to the{' '}
                   <span className="text-[#D4AF37] font-medium cursor-pointer hover:underline" onClick={() => { setPage('terms'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Terms of Service</span>
@@ -437,7 +560,8 @@ export default function AuthView() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="group w-full flex items-center justify-center gap-2 py-4 rounded-lg text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:bg-[#C9A22E] active:scale-[0.98] cursor-pointer mt-2"
+              disabled={isSubmitting}
+              className="group w-full flex items-center justify-center gap-2 py-4 rounded-lg text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:bg-[#C9A22E] active:scale-[0.98] cursor-pointer mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
               style={{
                 backgroundColor: '#D4AF37',
                 color: '#FFFFFF',
@@ -445,8 +569,20 @@ export default function AuthView() {
                 border: 'none',
               }}
             >
-              {mode === 'login' ? 'Sign In' : 'Create Account'}
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              {isSubmitting ? (
+                <>
+                  <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                  </svg>
+                  Please wait...
+                </>
+              ) : (
+                <>
+                  {mode === 'login' ? 'Sign In' : 'Create Account'}
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </>
+              )}
             </button>
           </form>
 

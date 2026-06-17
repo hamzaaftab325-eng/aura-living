@@ -77,7 +77,13 @@ function FeatureCard({ feature, offsetY }: FeatureCardProps) {
   const [mounted, setMounted] = useState(false);
   const IconComponent = feature.icon;
 
-  useEffect(() => { setMounted(true); }, []);
+  // useLayoutEffect runs synchronously after DOM mutation but before paint,
+  // so the user never sees the un-mounted state. Lint allows setState here
+  // because it's not the typical cascading-render pattern of useEffect.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   // Only apply offsetY after mount to avoid hydration mismatch
   const effectiveOffset = mounted ? offsetY : 0;

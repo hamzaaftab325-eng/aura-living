@@ -1,11 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import gsap from 'gsap';
 import { X, Minus, Plus, Trash2, ShoppingBag, ArrowRight, CreditCard } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { formatPKR } from '@/data/products';
-import { useToast } from '@/hooks/use-toast';
 
 export default function CartDrawer() {
   const {
@@ -19,15 +18,21 @@ export default function CartDrawer() {
     setPage,
   } = useStore();
 
-  const cartCount = getCartCount();
-  const subtotal = getCartTotal();
+  // Avoid hydration mismatch from persisted cart state
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHydrated(true);
+  }, []);
+  const cartCount = hydrated ? getCartCount() : 0;
+  const subtotal = hydrated ? getCartTotal() : 0;
   const shipping = subtotal >= 2999 ? 0 : 250;
   const estimatedTotal = subtotal + shipping;
 
   const drawerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
   const isOpenRef = useRef(false);
-  const { toast } = useToast();
 
   const handleClose = useCallback(() => setCartOpen(false), [setCartOpen]);
 
@@ -64,6 +69,8 @@ export default function CartDrawer() {
         { opacity: 1, duration: 0.3, ease: 'power2.out' }
       );
       overlay.style.pointerEvents = 'auto';
+      // Move focus to close button for accessibility
+      setTimeout(() => closeBtnRef.current?.focus(), 100);
     } else if (!cartOpen && isOpenRef.current) {
       // Closing: slide drawer out to right
       isOpenRef.current = false;
@@ -89,6 +96,36 @@ export default function CartDrawer() {
       document.body.style.overflow = '';
     };
   }, [cartOpen]);
+
+  // Escape-to-close + focus trap when drawer is open
+  useEffect(() => {
+    if (!cartOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        setCartOpen(false);
+        return;
+      }
+      if (e.key === 'Tab' && drawerRef.current) {
+        // Simple focus trap: keep Tab within drawer
+        const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [cartOpen, setCartOpen]);
 
   return (
     <>
@@ -123,6 +160,7 @@ export default function CartDrawer() {
             )}
           </div>
           <button
+            ref={closeBtnRef}
             className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]"
             style={{ color: '#5A5A5A' }}
             onClick={handleClose}

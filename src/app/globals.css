@@ -64,10 +64,11 @@
   --border: #E8D5A3;
   --input: #E8D5A3;
   --ring: #D4AF37;
-  --font-playfair: 'Playfair Display', serif;
-  --font-poppins: 'Poppins', sans-serif;
-  --font-great-vibes: 'Great Vibes', cursive;
-  --font-dancing-script: 'Dancing Script', cursive;
+  --font-playfair: var(--font-playfair-display), 'Playfair Display', serif;
+  --font-poppins: var(--font-poppins), 'Poppins', sans-serif;
+  --font-great-vibes: var(--font-great-vibes), 'Great Vibes', cursive;
+  --font-dancing-script: var(--font-dancing-script), 'Dancing Script', cursive;
+  --font-archivo-narrow: var(--font-archivo-narrow), 'Archivo Narrow', sans-serif;
 }
 
 @layer base {
@@ -462,4 +463,23 @@ html, body {
   opacity: 0;
   transform: translateX(20px);
   animation: cartSlideInItem 0.4s ease forwards;
+}
+
+/* Cart drawer empty-state fade-in */
+@keyframes cartFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Visually-hidden utility (for accessibility labels) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

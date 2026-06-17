@@ -287,6 +287,10 @@ export default function WishlistView() {
                       className="relative w-full aspect-square overflow-hidden cursor-pointer"
                       style={{ backgroundColor: '#F5EDDA' }}
                       onClick={() => handleProductClick(product)}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleProductClick(product); } }}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`View ${product.name} details`}
                     >
                       <img
                         src={product.image}

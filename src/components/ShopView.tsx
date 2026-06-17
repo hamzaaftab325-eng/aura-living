@@ -203,6 +203,10 @@ function ProductCard({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => onProductClick(product)}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onProductClick(product); } }}
+        role="button"
+        tabIndex={0}
+        aria-label={`View ${product.name} details`}
       >
         {/* Image with zoom */}
         <div className="absolute inset-0 overflow-hidden" style={{ backgroundColor: '#FFFDF7' }}>
@@ -354,7 +358,7 @@ function ProductCard({
    Main ShopView
    ═══════════════════════════════════════════════════════════ */
 export default function ShopView() {
-  const { selectedCategory, setSelectedCategory, setPage, setSelectedProduct, addToCart, toggleWishlist, isInWishlist } = useStore();
+  const { selectedCategory, setSelectedCategory, setPage, setSelectedProduct, addToCart, toggleWishlist, isInWishlist, searchQuery, setSearchQuery } = useStore();
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [priceMin, setPriceMin] = useState('');
   const [priceMax, setPriceMax] = useState('');
@@ -421,6 +425,16 @@ export default function ShopView() {
 
   const filteredProducts = useMemo(() => {
     let result = [...products];
+    // Apply search query from store (set by Navbar search Enter)
+    if (searchQuery.trim()) {
+      const q = searchQuery.trim().toLowerCase();
+      result = result.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q)
+      );
+    }
     if (selectedCategory && selectedCategory !== 'all') {
       result = result.filter((p) => p.category === selectedCategory);
     }
@@ -439,7 +453,7 @@ export default function ShopView() {
       case 'best-selling': result.sort((a, b) => (a.badge === 'BESTSELLER' ? -1 : b.badge === 'BESTSELLER' ? 1 : b.reviews - a.reviews)); break;
     }
     return result;
-  }, [selectedCategory, sortBy, priceMin, priceMax]);
+  }, [selectedCategory, sortBy, priceMin, priceMax, searchQuery]);
 
   const handleCategoryChange = (catId: string) => {
     if (selectedCategory === catId) {
@@ -454,9 +468,10 @@ export default function ShopView() {
     setPriceMin('');
     setPriceMax('');
     setSortBy('featured');
+    setSearchQuery('');
   };
 
-  const hasActiveFilters = selectedCategory !== 'all' || !!priceMin || !!priceMax || sortBy !== 'featured';
+  const hasActiveFilters = selectedCategory !== 'all' || !!priceMin || !!priceMax || sortBy !== 'featured' || !!searchQuery.trim();
 
   const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
@@ -595,6 +610,27 @@ export default function ShopView() {
 
           {/* Product Grid */}
           <div className="flex-1">
+            {/* Search active banner */}
+            {searchQuery.trim() && (
+              <div className="flex flex-wrap items-center gap-2 mb-6 p-3 rounded-lg" style={{ backgroundColor: 'rgba(212,175,55,0.08)', border: '1px solid rgba(212,175,55,0.25)' }}>
+                <span className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+                  Showing results for <strong style={{ color: '#D4AF37' }}>&ldquo;{searchQuery.trim()}&rdquo;</strong>
+                </span>
+                <span className="text-xs" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>
+                  ({filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found)
+                </span>
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="ml-auto inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full transition-colors hover:bg-[#F5EDDA]"
+                  style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}
+                  aria-label="Clear search"
+                >
+                  <X size={12} />
+                  Clear search
+                </button>
+              </div>
+            )}
+
             {/* Active filters */}
             {hasActiveFilters && (
               <div className="flex flex-wrap items-center gap-2 mb-6">
@@ -675,7 +711,7 @@ export default function ShopView() {
 
         {/* Drawer */}
         <div
-          className="fixed top-0 left-0 bottom-0 z-50 w-[300px] max-w-[85vw] shadow-2xl overflow-y-auto transition-transform duration-400 ease-out"
+          className="fixed top-0 left-0 bottom-0 z-50 w-[300px] max-w-[85vw] shadow-2xl overflow-y-auto transition-transform duration-300 ease-out"
           style={{
             backgroundColor: 'rgba(250,248,245,0.85)',
             backdropFilter: 'blur(20px)',

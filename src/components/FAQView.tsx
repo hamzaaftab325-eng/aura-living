@@ -263,6 +263,9 @@ export default function FAQView() {
                   <button
                     onClick={() => toggleItem(item.id)}
                     className="w-full flex items-center justify-between gap-4 p-4 sm:p-6 text-left cursor-pointer"
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-panel-${item.id}`}
+                    id={`faq-button-${item.id}`}
                   >
                     <span
                       className="text-sm sm:text-base font-semibold leading-relaxed"
@@ -283,6 +286,9 @@ export default function FAQView() {
                   </button>
                   <div
                     ref={(el) => { if (el) accordionRefs.current.set(item.id, el); }}
+                    id={`faq-panel-${item.id}`}
+                    role="region"
+                    aria-labelledby={`faq-button-${item.id}`}
                     className="overflow-hidden"
                     style={{
                       maxHeight: 0,
@@ -341,6 +347,25 @@ export default function FAQView() {
           </div>
         </div>
       </section>
+
+      {/* JSON-LD structured data for FAQ rich snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: faqItems.map((item) => ({
+              '@type': 'Question',
+              name: item.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: item.answer,
+              },
+            })),
+          }),
+        }}
+      />
     </div>
   );
 }

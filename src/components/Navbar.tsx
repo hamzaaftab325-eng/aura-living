@@ -94,8 +94,16 @@ export default function Navbar() {
   const mobileShopContentRef = useRef<HTMLDivElement>(null);
 
   const { currentPage, setPage, getCartCount, cartOpen, setCartOpen, wishlist } = useStore();
-  const cartCount = getCartCount();
-  const wishlistCount = wishlist.length;
+  // Avoid hydration mismatch: persisted cart/wishlist load from localStorage on the client,
+  // so server render sees 0 but client render may see a non-zero count. We render 0 on the
+  // first client pass too, then update after mount.
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHydrated(true);
+  }, []);
+  const cartCount = hydrated ? getCartCount() : 0;
+  const wishlistCount = hydrated ? wishlist.length : 0;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -116,13 +124,10 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
-  // Focus search input when search opens
+  // Focus search input when search opens; reset query only when actually closing (not in effect body)
   useEffect(() => {
     if (searchOpen && searchInputRef.current) {
       searchInputRef.current.focus();
-    }
-    if (!searchOpen) {
-      setSearchQuery('');
     }
   }, [searchOpen]);
 
@@ -268,7 +273,15 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
           <div className="flex h-16 sm:h-20 lg:h-28 items-center justify-between">
             {/* Logo — Gold + Black gradient, same across all screens */}
-            <div ref={logoRef} className="cursor-pointer shrink-0 py-1 sm:py-2" onClick={() => handleNavClick('home')}>
+            <div
+              ref={logoRef}
+              className="cursor-pointer shrink-0 py-1 sm:py-2"
+              onClick={() => handleNavClick('home')}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleNavClick('home'); } }}
+              role="button"
+              tabIndex={0}
+              aria-label="Aura Living home"
+            >
               <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: 'clamp(48px, 14vw, 85px)', width: 'auto', objectFit: 'contain' }} />
             </div>
 
@@ -443,8 +456,16 @@ export default function Navbar() {
       {/* Mobile Menu — Elegant Slide-In from Right */}
       {mobileMenuOpen && (
         <>
-          <div ref={mobileBackdropRef} className="fixed inset-0 z-[51] bg-black/50 backdrop-blur-sm" onClick={closeMobileMenu} />
-          <div ref={mobileMenuRef} className="fixed top-0 right-0 bottom-0 z-[52] flex flex-col w-full sm:w-[380px]" style={{ backgroundColor: 'rgba(250, 248, 245, 0.97)', backdropFilter: 'blur(20px)', borderLeft: '1px solid rgba(212, 175, 55, 0.15)' }}>
+          <div ref={mobileBackdropRef} className="fixed inset-0 z-[51] bg-black/50 backdrop-blur-sm" onClick={closeMobileMenu} aria-hidden="true" />
+          <div
+            ref={mobileMenuRef}
+            className="fixed top-0 right-0 bottom-0 z-[52] flex flex-col w-full sm:w-[380px]"
+            style={{ backgroundColor: 'rgba(250, 248, 245, 0.97)', backdropFilter: 'blur(20px)', borderLeft: '1px solid rgba(212, 175, 55, 0.15)' }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation menu"
+            onKeyDown={(e) => { if (e.key === 'Escape') { e.preventDefault(); closeMobileMenu(); } }}
+          >
             {/* Mobile Menu Header */}
             <div className="flex items-center justify-between px-6 shrink-0" style={{ height: '72px', borderBottom: '1px solid rgba(212, 175, 55, 0.12)' }}>
               <img src="/logo/default-monochrome-gold-black.svg" alt="Aura Living" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
@@ -552,10 +573,10 @@ export default function Navbar() {
               <div className="space-y-0.5">
                 <p className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-2.5" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>Quick Actions</p>
                 {[
-                  { icon: <Search className="h-4 w-4" />, label: 'Search', page: 'search' },
-                  { icon: <Heart className="h-4 w-4" />, label: 'Wishlist', page: 'wishlist', count: wishlistCount },
-                  { icon: <ShoppingCart className="h-4 w-4" />, label: 'Cart', page: 'cart', count: cartCount },
-                  { icon: <User className="h-4 w-4" />, label: 'Account', page: 'account' },
+                  { icon: <Search className="h-4 w-4" />, label: 'Search', page: 'shop' as PageType },
+                  { icon: <Heart className="h-4 w-4" />, label: 'Wishlist', page: 'wishlist' as PageType, count: wishlistCount },
+                  { icon: <ShoppingCart className="h-4 w-4" />, label: 'Cart', page: 'cart' as PageType, count: cartCount },
+                  { icon: <User className="h-4 w-4" />, label: 'Account', page: 'account' as PageType },
                 ].map((item) => (
                   <button
                     key={item.label}
@@ -600,7 +621,7 @@ export default function Navbar() {
       {/* Search Modal */}
       {searchOpen && (
         <>
-          <div className="fixed inset-0 z-[55] bg-black/30" onClick={() => setSearchOpen(false)} />
+          <div className="fixed inset-0 z-[55] bg-black/30" onClick={() => { setSearchOpen(false); setSearchQuery(''); }} />
           <div
             className="fixed top-0 left-0 right-0 z-[56] py-6 px-4 sm:px-6"
             style={{ backgroundColor: 'rgba(250, 248, 245, 0.98)', borderBottom: '1px solid rgba(212,175,55,0.2)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}
@@ -617,15 +638,15 @@ export default function Navbar() {
                   className="flex-1 bg-transparent outline-none text-base"
                   style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
                   onKeyDown={(e) => {
-                    if (e.key === 'Escape') setSearchOpen(false);
+                    if (e.key === 'Escape') { setSearchOpen(false); setSearchQuery(''); }
                     if (e.key === 'Enter' && searchQuery.trim()) {
                       useStore.getState().setSearchQuery(searchQuery.trim());
-                      setSearchOpen(false);
+                      setSearchOpen(false); setSearchQuery('');
                       handleNavClick('shop');
                     }
                   }}
                 />
-                <button onClick={() => setSearchOpen(false)} className="p-2 rounded-full hover:bg-[#F5EDDA] transition-colors" style={{ color: '#5A5A5A' }} aria-label="Close search">
+                <button onClick={() => { setSearchOpen(false); setSearchQuery(''); }} className="p-2 rounded-full hover:bg-[#F5EDDA] transition-colors" style={{ color: '#5A5A5A' }} aria-label="Close search">
                   <X className="h-5 w-5" />
                 </button>
               </div>
@@ -641,7 +662,7 @@ export default function Navbar() {
                         className="w-full flex items-center gap-3 py-3 px-2 text-left rounded-lg transition-colors hover:bg-[#F5EDDA]"
                         onClick={() => {
                           useStore.getState().setSelectedProduct(p);
-                          setSearchOpen(false);
+                          setSearchOpen(false); setSearchQuery('');
                           handleNavClick('product');
                         }}
                       >
