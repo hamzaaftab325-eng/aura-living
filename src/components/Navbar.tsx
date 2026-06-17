@@ -275,7 +275,7 @@ export default function Navbar() {
             {/* Logo — Gold + Black gradient, same across all screens */}
             <div
               ref={logoRef}
-              className="cursor-pointer shrink-0 py-1 sm:py-2"
+              className="cursor-pointer shrink-0 py-1 sm:py-2 outline-none"
               onClick={() => handleNavClick('home')}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleNavClick('home'); } }}
               role="button"
