@@ -320,7 +320,7 @@ export default function SaleView() {
       {/* Hero Banner — cleaner overlay so busy background doesn't fight the text */}
       <section
         ref={heroBgRef}
-        className="relative w-full min-h-[60vh] sm:min-h-[65vh] md:min-h-[70vh] overflow-hidden flex items-center justify-center py-16 sm:py-20"
+        className="relative w-full min-h-[80vh] sm:min-h-[85vh] md:min-h-[90vh] overflow-hidden flex items-center justify-center pt-24 pb-16"
       >
         {/* Background image */}
         <div
@@ -382,7 +382,7 @@ export default function SaleView() {
           </div>
 
           <p
-            className="text-white/85 text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-5"
+            className="text-white/85 text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-8"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             Up to <span style={{ color: '#D4AF37', fontWeight: 600 }}>40% off</span> handcrafted lamps, ceramics, textiles, and greenery. Premium home decor, made affordable.
