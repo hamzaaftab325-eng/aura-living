@@ -998,7 +998,7 @@ export default function AboutView() {
             ABOUT AURA LIVING
           </span>
           <h1
-            className="text-white text-[36px] sm:text-[44px] md:text-[52px] lg:text-[60px] font-bold leading-tight"
+            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Our Story

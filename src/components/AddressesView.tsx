@@ -212,7 +212,7 @@ export default function AddressesView() {
           <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4">
             <h1
               ref={heroTitleRef}
-              className="text-white text-[32px] sm:text-[42px] md:text-[52px] font-bold leading-[1.15] pt-2"
+              className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Saved Addresses
@@ -273,7 +273,7 @@ export default function AddressesView() {
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <h1
             ref={heroTitleRef}
-            className="text-white text-[32px] sm:text-[42px] md:text-[52px] font-bold leading-[1.15] pt-2"
+            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Saved Addresses

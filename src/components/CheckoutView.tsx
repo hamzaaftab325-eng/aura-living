@@ -281,7 +281,7 @@ export default function CheckoutView() {
               AURA LIVING
             </span>
             <h1
-              className="text-white text-[32px] sm:text-[42px] md:text-[50px] font-bold leading-[1.15] pt-2"
+              className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Checkout
@@ -364,7 +364,7 @@ export default function CheckoutView() {
             AURA LIVING
           </span>
           <h1
-            className="text-white text-[32px] sm:text-[42px] md:text-[50px] font-bold leading-[1.15] pt-2"
+            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Checkout

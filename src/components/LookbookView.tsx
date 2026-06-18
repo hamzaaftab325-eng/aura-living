@@ -112,7 +112,7 @@ export default function LookbookView() {
           <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
             AURA LIVING
           </span>
-          <h1 className="text-white text-[32px] sm:text-[42px] md:text-[52px] font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
             The Lookbook
           </h1>
           <p className="text-[#E8D5A3] text-sm sm:text-base mt-4 max-w-md leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>

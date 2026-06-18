@@ -232,7 +232,7 @@ export default function CareGuideView() {
           </div>
           <h1
             ref={heroTitleRef}
-            className="text-white text-[36px] sm:text-[44px] md:text-[52px] font-bold leading-[1.15] pt-2"
+            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Care Guide
