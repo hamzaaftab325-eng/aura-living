@@ -271,20 +271,6 @@ export default function AddressesView() {
         />
 
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 mb-6 breadcrumb-animate">
-            <button
-              onClick={() => setPage('account')}
-              className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-              style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255,255,255,0.7)' }}
-            >
-              My Account
-            </button>
-            <ChevronRight className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.5)' }} />
-            <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
-              Saved Addresses
-            </span>
-          </nav>
-
           <h1
             ref={heroTitleRef}
             className="text-white text-[32px] sm:text-[42px] md:text-[52px] font-bold leading-tight"
@@ -307,6 +293,23 @@ export default function AddressesView() {
           </p>
         </div>
       </section>
+
+      {/* Breadcrumb strip (below hero) */}
+      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
+        <div className="max-w-7xl mx-auto flex items-center gap-2">
+          <button
+            onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
+            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+          >
+            My Account
+          </button>
+          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
+          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+            Saved Addresses
+          </span>
+        </div>
+      </div>
 
       {/* Addresses */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">

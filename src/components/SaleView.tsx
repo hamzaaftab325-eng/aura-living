@@ -1,6 +1,7 @@
 'use client';
 
-import { useMemo, useEffect, useRef, useState } from 'react';
+import { useMemo, useEffect, useRef, useState, Fragment } from 'react';
+import { createPortal } from 'react-dom';
 import {
   useGsapFadeIn,
   useGsapStagger,
@@ -107,32 +108,47 @@ function SaleCountdown() {
   ];
 
   return (
-    <div className="flex items-center gap-3 sm:gap-4">
+    <div className="flex items-stretch justify-center gap-2 sm:gap-3">
       {units.map((unit, idx) => (
-        <div key={unit.label} className="flex items-center gap-3 sm:gap-4">
-          <div className="flex flex-col items-center">
+        <Fragment key={unit.label}>
+          <div
+            className="relative flex flex-col items-center justify-center rounded-xl px-3 py-3 sm:px-5 sm:py-4 min-w-[64px] sm:min-w-[84px] transition-transform duration-300"
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              border: '1px solid rgba(212, 175, 55, 0.25)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+            }}
+          >
+            {/* Gold top corner accent */}
+            <div
+              className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px] w-8 sm:w-10"
+              style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}
+            />
             <span
-              className={`text-2xl sm:text-3xl md:text-4xl font-bold tabular-nums ${unit.label === 'Secs' ? 'animate-countdown-pulse' : ''}`}
+              className={`text-2xl sm:text-3xl md:text-4xl font-bold tabular-nums leading-none ${unit.label === 'Secs' ? 'animate-countdown-pulse' : ''}`}
               style={{ fontFamily: "'Playfair Display', serif", color: '#FFFFFF' }}
             >
               {String(unit.value).padStart(2, '0')}
             </span>
             <span
-              className="text-[10px] sm:text-xs uppercase tracking-widest mt-1"
-              style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255,255,255,0.6)' }}
+              className="text-[9px] sm:text-[10px] uppercase tracking-[2px] mt-1.5 font-semibold"
+              style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
             >
               {unit.label}
             </span>
           </div>
           {idx < units.length - 1 && (
-            <span
-              className="text-2xl sm:text-3xl font-bold -mt-4"
-              style={{ fontFamily: "'Playfair Display', serif", color: '#D4AF37' }}
-            >
-              :
-            </span>
+            <div className="flex items-center justify-center">
+              <span
+                className="text-xl sm:text-2xl font-bold"
+                style={{ fontFamily: "'Playfair Display', serif", color: 'rgba(212, 175, 55, 0.5)' }}
+              >
+                :
+              </span>
+            </div>
           )}
-        </div>
+        </Fragment>
       ))}
     </div>
   );
@@ -160,11 +176,14 @@ export default function SaleView() {
 
   // Urgency popup state — appears after mount, auto-hides after 5 seconds
   const [showUrgencyPopup, setShowUrgencyPopup] = useState(false);
+  const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    // Show popup shortly after page mount
-    const showTimer = setTimeout(() => setShowUrgencyPopup(true), 600);
-    // Auto-hide after 5 seconds of being visible
-    const hideTimer = setTimeout(() => setShowUrgencyPopup(false), 5600);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+    // Show popup after page-transition animation completes (~1.5s)
+    const showTimer = setTimeout(() => setShowUrgencyPopup(true), 1500);
+    // Auto-hide after 5 seconds of being visible (6.5s total)
+    const hideTimer = setTimeout(() => setShowUrgencyPopup(false), 6500);
     return () => {
       clearTimeout(showTimer);
       clearTimeout(hideTimer);
@@ -239,58 +258,64 @@ export default function SaleView() {
 
   return (
     <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
-      {/* Urgency Popup — auto-appears bottom-right and hides after 5 seconds */}
-      <div
-        className="fixed bottom-6 right-6 z-[80] transition-all duration-500 ease-out"
-        style={{
-          transform: showUrgencyPopup ? 'translateY(0) scale(1)' : 'translateY(120%) scale(0.9)',
-          opacity: showUrgencyPopup ? 1 : 0,
-          pointerEvents: showUrgencyPopup ? 'auto' : 'none',
-        }}
-      >
+      {/* Urgency Popup — rendered via portal at document.body so it's
+          not affected by the .page-transition ancestor's transform
+          (which would break position: fixed). Auto-appears after 1.5s
+          and auto-hides after 5 more seconds. */}
+      {mounted && createPortal(
         <div
-          className="rounded-2xl shadow-2xl overflow-hidden max-w-[300px] sm:max-w-[340px]"
+          className="fixed bottom-6 right-6 z-[80] transition-all duration-500 ease-out"
           style={{
-            background: 'linear-gradient(135deg, #DC2626 0%, #B91C1C 100%)',
-            border: '1px solid rgba(255,255,255,0.15)',
-            boxShadow: '0 12px 40px rgba(220, 38, 38, 0.35)',
+            transform: showUrgencyPopup ? 'translateY(0) scale(1)' : 'translateY(120%) scale(0.9)',
+            opacity: showUrgencyPopup ? 1 : 0,
+            pointerEvents: showUrgencyPopup ? 'auto' : 'none',
           }}
         >
-          {/* Gold top accent */}
-          <div className="h-[3px] w-full" style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }} />
+          <div
+            className="rounded-2xl shadow-2xl overflow-hidden max-w-[300px] sm:max-w-[340px]"
+            style={{
+              background: 'linear-gradient(135deg, #DC2626 0%, #B91C1C 100%)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              boxShadow: '0 12px 40px rgba(220, 38, 38, 0.35)',
+            }}
+          >
+            {/* Gold top accent */}
+            <div className="h-[3px] w-full" style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }} />
 
-          <div className="p-4 sm:p-5 flex items-start gap-3">
-            <div
-              className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
-              style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
-            >
-              <AlertTriangle className="w-5 h-5 text-white" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p
-                className="text-white text-sm font-bold mb-0.5"
-                style={{ fontFamily: "'Poppins', sans-serif" }}
+            <div className="p-4 sm:p-5 flex items-start gap-3">
+              <div
+                className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
               >
-                Hurry, limited stock!
-              </p>
-              <p
-                className="text-white/85 text-xs leading-relaxed"
-                style={{ fontFamily: "'Poppins', sans-serif" }}
+                <AlertTriangle className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p
+                  className="text-white text-sm font-bold mb-0.5"
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                >
+                  Hurry, limited stock!
+                </p>
+                <p
+                  className="text-white/85 text-xs leading-relaxed"
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                >
+                  Sale items are selling fast. Grab your favourites before they&apos;re gone.
+                </p>
+              </div>
+              <button
+                onClick={() => setShowUrgencyPopup(false)}
+                className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors hover:bg-white/20 cursor-pointer"
+                style={{ color: 'rgba(255,255,255,0.7)' }}
+                aria-label="Dismiss"
               >
-                Sale items are selling fast. Grab your favourites before they&apos;re gone.
-              </p>
+                <X className="w-3.5 h-3.5" />
+              </button>
             </div>
-            <button
-              onClick={() => setShowUrgencyPopup(false)}
-              className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors hover:bg-white/20 cursor-pointer"
-              style={{ color: 'rgba(255,255,255,0.7)' }}
-              aria-label="Dismiss"
-            >
-              <X className="w-3.5 h-3.5" />
-            </button>
           </div>
-        </div>
-      </div>
+        </div>,
+        document.body
+      )}
 
       {/* Hero Banner — cleaner overlay so busy background doesn't fight the text */}
       <section
@@ -342,23 +367,6 @@ export default function SaleView() {
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 mb-8 breadcrumb-animate">
-            <button
-              onClick={() => setPage('home')}
-              className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-              style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255,255,255,0.7)' }}
-            >
-              Home
-            </button>
-            <ChevronRight className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.5)' }} />
-            <span
-              className="text-sm font-medium"
-              style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
-            >
-              Sale
-            </span>
-          </nav>
 
           {/* Eyebrow badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', border: '1px solid rgba(212, 175, 55, 0.3)' }}>
@@ -403,6 +411,22 @@ export default function SaleView() {
           </div>
         </div>
       </section>
+      {/* Breadcrumb strip (below hero) */}
+      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
+        <div className="max-w-7xl mx-auto flex items-center gap-2">
+          <button
+            onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
+            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+          >
+            Home
+          </button>
+          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
+          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+            Sale
+          </span>
+        </div>
+      </div>
 
       {/* Products Content */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">

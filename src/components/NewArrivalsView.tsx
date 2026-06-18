@@ -193,23 +193,6 @@ export default function NewArrivalsView() {
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 mb-6 breadcrumb-animate">
-            <button
-              onClick={() => setPage('home')}
-              className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-              style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255,255,255,0.7)' }}
-            >
-              Home
-            </button>
-            <ChevronRight className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.5)' }} />
-            <span
-              className="text-sm font-medium"
-              style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
-            >
-              New Arrivals
-            </span>
-          </nav>
 
           <div className="flex items-center gap-3 mb-4">
             <Sparkles className="w-7 h-7 sm:w-8 sm:h-8" style={{ color: '#D4AF37' }} />
@@ -236,6 +219,22 @@ export default function NewArrivalsView() {
           </p>
         </div>
       </section>
+      {/* Breadcrumb strip (below hero) */}
+      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
+        <div className="max-w-7xl mx-auto flex items-center gap-2">
+          <button
+            onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
+            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+          >
+            Home
+          </button>
+          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
+          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+            New Arrivals
+          </span>
+        </div>
+      </div>
 
       {/* Products Content */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
