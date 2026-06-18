@@ -121,7 +121,7 @@ export default function ContactView() {
 
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
 
-          <h1 className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif" }}>Get in Touch</h1>
+          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Get in Touch</h1>
 
           <div className="flex items-center justify-center gap-3 mt-5">
             <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
@@ -159,7 +159,7 @@ export default function ContactView() {
               {/* Contact Form */}
               <div>
                 <div className="rounded-sm p-6 sm:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                  <h2 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Send Us a Message</h2>
+                  <h2 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Send Us a Message</h2>
                   <div className="mb-6">
                     <GoldDivider />
                   </div>
@@ -262,7 +262,7 @@ export default function ContactView() {
               {/* Contact Info */}
               <div className="flex flex-col gap-6">
                 <div className="rounded-sm p-6 sm:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                  <h2 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Contact Information</h2>
+                  <h2 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Contact Information</h2>
                   <div className="mb-6">
                     <GoldDivider />
                   </div>

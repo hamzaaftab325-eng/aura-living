@@ -139,8 +139,8 @@ export default function CartView() {
               AURA LIVING
             </span>
             <h1
-              className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              className="text-white font-bold leading-[1.15] pt-2"
+              style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
             >
               Your Shopping Cart
             </h1>
@@ -214,8 +214,8 @@ export default function CartView() {
             AURA LIVING
           </span>
           <h1
-            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            className="text-white font-bold leading-[1.15] pt-2"
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             Your Shopping Cart
           </h1>

@@ -212,8 +212,8 @@ export default function AddressesView() {
           <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4">
             <h1
               ref={heroTitleRef}
-              className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              className="text-white font-bold leading-[1.15] pt-2"
+              style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
             >
               Saved Addresses
             </h1>
@@ -229,7 +229,7 @@ export default function AddressesView() {
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
               <MapPin className="w-8 h-8" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h2 className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
               Sign in to manage addresses
             </h2>
             <p className="text-[#5A5A5A] text-sm sm:text-base mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -273,8 +273,8 @@ export default function AddressesView() {
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <h1
             ref={heroTitleRef}
-            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            className="text-white font-bold leading-[1.15] pt-2"
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             Saved Addresses
           </h1>
@@ -648,7 +648,7 @@ export default function AddressesView() {
           {addresses.length === 0 && (
             <div className="text-center py-12 rounded-sm" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <MapPin className="w-10 h-10 mx-auto mb-3" style={{ color: '#D4AF37' }} />
-              <h3 className="text-[#2C2C2C] text-lg font-semibold mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h3 className="text-[#2C2C2C] text-lg font-semibold mb-1" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                 No saved addresses yet
               </h3>
               <p className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>

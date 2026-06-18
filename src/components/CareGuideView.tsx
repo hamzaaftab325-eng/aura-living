@@ -232,8 +232,8 @@ export default function CareGuideView() {
           </div>
           <h1
             ref={heroTitleRef}
-            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            className="text-white font-bold leading-[1.15] pt-2"
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             Care Guide
           </h1>
@@ -314,7 +314,7 @@ export default function CareGuideView() {
                     <div>
                       <h3
                         className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-1"
-                        style={{ fontFamily: "'Playfair Display', serif" }}
+                        style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                       >
                         {category.title}
                       </h3>
@@ -364,7 +364,7 @@ export default function CareGuideView() {
           </div>
           <h2
             className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             Need More Help?
           </h2>

@@ -101,7 +101,7 @@ export default function ShippingView() {
           <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
             AURA LIVING
           </span>
-          <h1 className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Shipping Information
           </h1>
           <div className="flex items-center gap-3 mt-6">
@@ -134,7 +134,7 @@ export default function ShippingView() {
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
               <Truck className="w-6 h-6" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
               Shipping Overview
             </h2>
             <div className="flex justify-center mb-4">
@@ -153,7 +153,7 @@ export default function ShippingView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Delivery Options</span>
-              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>Shipping Rates</h2>
+              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Shipping Rates</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -169,7 +169,7 @@ export default function ShippingView() {
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                     <rate.icon className="w-5 h-5" style={{ color: '#D4AF37' }} />
                   </div>
-                  <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-1" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                     {rate.title}
                   </h3>
                   <span className="block text-xs sm:text-sm tracking-wider uppercase mb-3" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
@@ -198,7 +198,7 @@ export default function ShippingView() {
                   <MapPin className="w-5 h-5" style={{ color: '#D4AF37' }} />
                 </div>
                 <div>
-                  <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                     Delivery Areas
                   </h2>
                   <GoldDivider />
@@ -239,7 +239,7 @@ export default function ShippingView() {
                     <Clock className="w-5 h-5" style={{ color: '#D4AF37' }} />
                   </div>
                   <div>
-                    <h3 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    <h3 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                       Order Tracking
                     </h3>
                     <p className="text-[#5A5A5A] text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -256,7 +256,7 @@ export default function ShippingView() {
                     <Gift className="w-5 h-5" style={{ color: '#D4AF37' }} />
                   </div>
                   <div>
-                    <h3 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    <h3 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                       Packaging
                     </h3>
                     <p className="text-[#5A5A5A] text-base leading-relaxed mb-3" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -279,7 +279,7 @@ export default function ShippingView() {
                     <Globe className="w-5 h-5" style={{ color: '#D4AF37' }} />
                   </div>
                   <div>
-                    <h3 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    <h3 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                       International Shipping
                     </h3>
                     <p className="text-[#5A5A5A] text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -296,7 +296,7 @@ export default function ShippingView() {
       {/* CTA */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Need Help With Your Delivery?
           </h2>
           <div className="flex justify-center mb-4">

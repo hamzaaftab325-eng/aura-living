@@ -301,8 +301,8 @@ export default function AccountView() {
 
           <h1
             ref={heroTitleRef}
-            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            className="text-white font-bold leading-[1.15] pt-2"
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             My Account
           </h1>
@@ -358,7 +358,7 @@ export default function AccountView() {
                   >
                     <span
                       className="text-2xl sm:text-3xl font-bold text-white"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
+                      style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                     >
                       {safeUser?.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
                     </span>
@@ -368,7 +368,7 @@ export default function AccountView() {
                   <div className="flex flex-col items-center sm:items-start text-center sm:text-left flex-1">
                     <h2
                       className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-1"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
+                      style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                     >
                       {safeUser?.name}
                     </h2>
@@ -412,7 +412,7 @@ export default function AccountView() {
                   <div className="flex-1">
                     <h2
                       className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-1"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
+                      style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                     >
                       You are not signed in
                     </h2>
@@ -477,7 +477,7 @@ export default function AccountView() {
               <div className="flex items-center justify-between mb-2">
                 <h3
                   className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                 >
                   Recent Orders
                 </h3>
@@ -605,7 +605,7 @@ export default function AccountView() {
             <div className="text-center mb-8 sm:mb-10">
               <h3
                 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
               >
                 Account Menu
               </h3>
@@ -687,7 +687,7 @@ export default function AccountView() {
               <Award className="w-10 h-10 mx-auto mb-4" style={{ color: '#D4AF37' }} />
               <h3
                 className="text-white text-xl sm:text-2xl font-bold mb-2"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
               >
                 Aura Rewards
               </h3>

@@ -547,7 +547,7 @@ export default function ShopView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
 
-          <h1 ref={heroTitleRef} className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif" }}>Our Collection</h1>
+          <h1 ref={heroTitleRef} className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Our Collection</h1>
 
           <div ref={dividerRef} className="flex items-center gap-3 mt-5">
             <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />

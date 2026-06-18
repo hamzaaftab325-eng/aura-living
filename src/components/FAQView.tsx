@@ -200,7 +200,7 @@ export default function FAQView() {
           <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
             AURA LIVING
           </span>
-          <h1 className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Frequently Asked Questions
           </h1>
           <div className="flex items-center gap-3 mt-6">
@@ -321,7 +321,7 @@ export default function FAQView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <MessageCircle className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Still Have Questions?
           </h2>
           <div className="flex justify-center mb-4">

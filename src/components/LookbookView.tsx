@@ -112,7 +112,7 @@ export default function LookbookView() {
           <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
             AURA LIVING
           </span>
-          <h1 className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             The Lookbook
           </h1>
           <p className="text-[#E8D5A3] text-sm sm:text-base mt-4 max-w-md leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -147,7 +147,7 @@ export default function LookbookView() {
           <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>
             Editorial Spaces
           </span>
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mt-3 mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mt-3 mb-4" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Styled for Living
           </h2>
           <GoldDivider />
@@ -207,7 +207,7 @@ export default function LookbookView() {
                       </span>
                       <h3
                         className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
-                        style={{ fontFamily: "'Playfair Display', serif" }}
+                        style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                       >
                         {scene.title}
                       </h3>
@@ -242,7 +242,7 @@ export default function LookbookView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <Camera className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Create Your Own Story
           </h2>
           <div className="flex justify-center mb-4">

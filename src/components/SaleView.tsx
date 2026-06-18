@@ -369,8 +369,8 @@ export default function SaleView() {
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
 
           <h1
-            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] mb-4 pt-2"
-            style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 30px rgba(0,0,0,0.4)' }}
+            className="text-white font-bold leading-[1.15] mb-4 pt-2"
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             The Aura Sale
           </h1>
@@ -435,7 +435,7 @@ export default function SaleView() {
                 </div>
                 <h2
                   className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-3"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                 >
                   No sale items right now
                 </h2>
@@ -459,7 +459,7 @@ export default function SaleView() {
                   <div>
                     <h2
                       className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
+                      style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                     >
                       Sale Items
                     </h2>
@@ -558,7 +558,7 @@ export default function SaleView() {
                         {/* Name */}
                         <h3
                           className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-1.5 cursor-pointer transition-colors duration-200 hover:text-[#D4AF37] leading-snug"
-                          style={{ fontFamily: "'Playfair Display', serif" }}
+                          style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                           onClick={() => handleProductClick(product)}
                         >
                           {product.name}

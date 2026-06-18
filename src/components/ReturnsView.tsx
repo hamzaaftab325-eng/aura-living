@@ -137,7 +137,7 @@ export default function ReturnsView() {
           <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
             AURA LIVING
           </span>
-          <h1 className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Returns & Exchanges
           </h1>
           <div className="flex items-center gap-3 mt-6">
@@ -170,7 +170,7 @@ export default function ReturnsView() {
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
               <RotateCcw className="w-6 h-6" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
               Our Return Policy
             </h2>
             <div className="flex justify-center mb-4">
@@ -192,7 +192,7 @@ export default function ReturnsView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Step by Step</span>
-              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>How to Return</h2>
+              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>How to Return</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -218,7 +218,7 @@ export default function ReturnsView() {
                       <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>
                         Step {step.step}
                       </span>
-                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                         {step.title}
                       </h3>
                     </div>
@@ -239,7 +239,7 @@ export default function ReturnsView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Swap & Replace</span>
-              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>Exchange Process</h2>
+              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Exchange Process</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -268,7 +268,7 @@ export default function ReturnsView() {
                       <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>
                         Step {step.step}
                       </span>
-                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                         {step.title}
                       </h3>
                     </div>
@@ -289,7 +289,7 @@ export default function ReturnsView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Please Note</span>
-              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>Non-Returnable Items</h2>
+              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Non-Returnable Items</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -305,7 +305,7 @@ export default function ReturnsView() {
                   <div className="flex items-start gap-3">
                     <XCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: '#C44' }} />
                     <div>
-                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-1" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                         {item.item}
                       </h3>
                       <p className="text-[#5A5A5A] text-sm leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -326,7 +326,7 @@ export default function ReturnsView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Getting Your Money Back</span>
-              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>Refund Methods</h2>
+              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Refund Methods</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -340,7 +340,7 @@ export default function ReturnsView() {
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                   <CreditCard className="w-5 h-5" style={{ color: '#D4AF37' }} />
                 </div>
-                <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                   Original Payment Method
                 </h3>
                 <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -355,7 +355,7 @@ export default function ReturnsView() {
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                   <CreditCard className="w-5 h-5" style={{ color: '#D4AF37' }} />
                 </div>
-                <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                   Store Credit
                 </h3>
                 <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -377,7 +377,7 @@ export default function ReturnsView() {
                   <AlertTriangle className="w-5 h-5" style={{ color: '#C44' }} />
                 </div>
                 <div>
-                  <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                     Damaged or Defective Items
                   </h2>
                   <GoldDivider />
@@ -413,7 +413,7 @@ export default function ReturnsView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <RotateCcw className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Need to Return Something?
           </h2>
           <div className="flex justify-center mb-4">
