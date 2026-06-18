@@ -131,7 +131,6 @@ export default function Navbar() {
   const logoRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const megaMenuRef = useRef<HTMLDivElement>(null);
-  const megaMenuTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // ── Store ──
   const { currentPage, setPage, getCartCount, cartOpen, setCartOpen, wishlist } = useStore();
@@ -208,12 +207,32 @@ export default function Navbar() {
     }
   }, [megaMenuOpen]);
 
-  // Cleanup timeout on unmount
+  // Close mega menu on click outside OR Escape key
   useEffect(() => {
-    return () => {
-      if (megaMenuTimeoutRef.current) clearTimeout(megaMenuTimeoutRef.current);
+    if (!megaMenuOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      // Don't close if click is inside the mega menu panel or on the Shop link itself
+      if (megaMenuRef.current?.contains(target)) return;
+      // Also check if click is on any nav link (Shop toggles separately)
+      const shopLink = navItemRefs.current.get('Shop');
+      if (shopLink?.contains(target)) return;
+      setMegaMenuOpen(false);
+      setPreviewItem(null);
     };
-  }, []);
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMegaMenuOpen(false);
+        setPreviewItem(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [megaMenuOpen]);
 
   // ── Handlers ──
   const handleNavClick = useCallback((page: PageType) => {
@@ -237,25 +256,13 @@ export default function Navbar() {
     }
   }, []);
 
-  // Mega menu hover handlers — delayed open/close for forgiving UX
-  const handleMegaMenuEnter = useCallback(() => {
-    if (megaMenuTimeoutRef.current) {
-      clearTimeout(megaMenuTimeoutRef.current);
-      megaMenuTimeoutRef.current = null;
-    }
-    megaMenuTimeoutRef.current = setTimeout(() => setMegaMenuOpen(true), 80);
-  }, []);
-
-  const handleMegaMenuLeave = useCallback(() => {
-    if (megaMenuTimeoutRef.current) {
-      clearTimeout(megaMenuTimeoutRef.current);
-      megaMenuTimeoutRef.current = null;
-    }
-    megaMenuTimeoutRef.current = setTimeout(() => {
-      setMegaMenuOpen(false);
-      setPreviewItem(null);
-      setHoveredLink(null);
-    }, 250);
+  // Mega menu CLICK toggle (no hover). Shop link calls this instead of navigating.
+  const toggleMegaMenu = useCallback(() => {
+    setMegaMenuOpen((prev) => {
+      const next = !prev;
+      if (!next) setPreviewItem(null);
+      return next;
+    });
   }, []);
 
   // ── Helpers ──
@@ -279,9 +286,7 @@ export default function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-6 pt-3 sm:pt-4">
 
-          {/* Pill container — also hosts mega-menu hover handlers so moving mouse from
-              "Shop" link to the absolutely-positioned mega panel does NOT close it
-              (mouseleave doesn't fire when moving to a descendant). */}
+          {/* Pill container — NO hover handlers (mega menu is click-only now) */}
           <div
             className="relative flex items-center justify-between rounded-full px-4 sm:px-5 py-2.5 sm:py-3"
             style={{
@@ -290,8 +295,6 @@ export default function Navbar() {
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
             }}
-            onMouseEnter={handleMegaMenuEnter}
-            onMouseLeave={handleMegaMenuLeave}
           >
             {/* Logo */}
             <div
@@ -322,24 +325,40 @@ export default function Navbar() {
                     <li
                       key={link.label}
                       ref={(el) => { if (el) navItemRefs.current.set(link.label, el); }}
-                      className="relative z-10 block cursor-pointer px-6 py-3 text-base uppercase font-medium transition-colors duration-200"
+                      className="relative z-10 block cursor-pointer px-6 py-3 text-base uppercase font-medium transition-colors duration-200 select-none"
                       style={{
                         fontFamily: "'Poppins', sans-serif",
                         color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.85)',
                       }}
                       onMouseEnter={() => {
                         setHoveredLink(link.label);
-                        if (link.hasMegaMenu) {
-                          handleMegaMenuEnter();
-                        } else {
-                          handleMegaMenuLeave();
-                        }
                         const el = navItemRefs.current.get(link.label);
                         if (el) {
                           setCursorPos({ left: el.offsetLeft, width: el.offsetWidth, opacity: 1 });
                         }
                       }}
-                      onClick={() => handleNavClick(link.page)}
+                      onClick={() => {
+                        // Shop link ONLY toggles the dropdown — does NOT navigate to /shop
+                        if (link.hasMegaMenu) {
+                          toggleMegaMenu();
+                        } else {
+                          handleNavClick(link.page);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      aria-haspopup={link.hasMegaMenu ? 'menu' : undefined}
+                      aria-expanded={link.hasMegaMenu ? megaMenuOpen : undefined}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          if (link.hasMegaMenu) {
+                            toggleMegaMenu();
+                          } else {
+                            handleNavClick(link.page);
+                          }
+                        }
+                      }}
                     >
                       {link.label}
                       {link.hasMegaMenu && (
@@ -426,15 +445,14 @@ export default function Navbar() {
 
             {/* ═══════════════════════════════════════════════════════════
                 DESKTOP MEGA MENU — two-column panel with image preview
-                Absolutely positioned, but DOM-descendant of the pill so
-                mouseleave on pill works correctly.
+                Absolutely positioned, but DOM-descendant of the pill.
+                Opens on click (not hover) and closes on click-outside / Escape.
                 ═══════════════════════════════════════════════════════════ */}
             {megaMenuOpen && (
               <div
                 ref={megaMenuRef}
                 className="absolute left-1/2 -translate-x-1/2 pt-3"
                 style={{ top: '100%', zIndex: 60 }}
-                onMouseEnter={handleMegaMenuEnter}
               >
                 <div
                   className="rounded-2xl overflow-hidden flex"

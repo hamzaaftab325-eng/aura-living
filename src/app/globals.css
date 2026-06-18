@@ -75,12 +75,58 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    /* Consistent text rendering across the entire site */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Prevent text size adjustment on orientation change / desktop zoom */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* Improve font hinting on Windows/Chrome */
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    font-variant-ligatures: common-ligatures contextual;
+    /* Smooth font loading — prevent FOIT/FOUT glitches */
+    font-synthesis: none;
+  }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-poppins);
+    /* Multi-tier fallback chain — prevents any character from showing as a tofu box */
+    font-family: var(--font-poppins), 'Poppins', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+    font-variant-ligatures: common-ligatures contextual;
+    /* Optimize line-height for readability */
+    line-height: 1.6;
+    letter-spacing: -0.01em;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-playfair);
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, 'Times New Roman', serif;
+    /* Headings need slightly tighter letter-spacing for that editorial look */
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+    font-variant-ligatures: common-ligatures discretionary-ligatures;
+  }
+  /* Headings that should NOT use Playfair (overridden inline via Poppins font-family) */
+  h1[style*="Poppins"], h2[style*="Poppins"], h3[style*="Poppins"], h4[style*="Poppins"] {
+    font-family: var(--font-poppins), 'Poppins', 'Inter', system-ui, sans-serif;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    font-variant-ligatures: common-ligatures contextual;
+    letter-spacing: 0;
+  }
+  /* Better tabular numbers for prices, stats, etc. */
+  .tabular-nums, table, [class*="Price"], [class*="Total"], [class*="PKR"] {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Prevent text from looking blurry on high-DPI screens */
+  button, input, select, textarea {
+    font-family: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  /* Ensure apostrophes and quotes render with proper typographic characters */
+  :root {
+    /* Default to curly quotes for better typography */
   }
 }
 
