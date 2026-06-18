@@ -10,8 +10,8 @@ import {
   User,
   Menu,
   X,
-  
   ChevronDown,
+  ChevronRight,
   ShoppingBag,
   Sparkles,
   Tag,
@@ -40,6 +40,12 @@ interface MegaMenuItem {
   page: PageType;
   icon: React.ReactNode;
   description: string;
+  preview: {
+    image: string;
+    eyebrow: string;
+    headline: string;
+    cta: string;
+  };
 }
 
 const megaMenuItems: MegaMenuItem[] = [
@@ -48,59 +54,89 @@ const megaMenuItems: MegaMenuItem[] = [
     page: 'shop',
     icon: <ShoppingBag className="h-5 w-5" />,
     description: 'Browse our complete collection',
+    preview: {
+      image: '/images/pages/shop-hero.webp',
+      eyebrow: 'The Full Collection',
+      headline: 'Explore Every Piece, Curated for Pakistan',
+      cta: 'Shop Everything',
+    },
   },
   {
     label: 'New Arrivals',
     page: 'new-arrivals',
     icon: <Sparkles className="h-5 w-5" />,
     description: 'The latest additions to our store',
+    preview: {
+      image: '/images/pages/new-arrivals-hero.webp',
+      eyebrow: 'Fresh Off the Workbench',
+      headline: "New Pieces, Just Landed This Week",
+      cta: "Discover What's New",
+    },
   },
   {
     label: 'Sale',
     page: 'sale',
     icon: <Tag className="h-5 w-5" />,
     description: 'Exclusive offers & discounts',
+    preview: {
+      image: '/images/pages/sale-hero.webp',
+      eyebrow: 'Limited Time Only',
+      headline: 'Up to 40% Off Select Home Treasures',
+      cta: 'Shop the Sale',
+    },
   },
   {
     label: 'Lookbook',
     page: 'lookbook',
     icon: <Camera className="h-5 w-5" />,
     description: 'Curated style inspirations',
+    preview: {
+      image: '/images/pages/lookbook-hero.webp',
+      eyebrow: 'Styled Spaces',
+      headline: 'Real Rooms, Real Inspiration for Your Home',
+      cta: 'Browse the Lookbook',
+    },
   },
   {
     label: 'Care Guide',
     page: 'care-guide',
     icon: <Heart className="h-5 w-5" />,
     description: 'Tips to preserve your luxury pieces',
+    preview: {
+      image: '/images/pages/care-guide-hero.webp',
+      eyebrow: 'Preserve the Beauty',
+      headline: 'How to Care for Your Aura Pieces for Years',
+      cta: 'Read the Guide',
+    },
   },
 ];
 
-// Pages that belong to the Shop mega-menu family
+// Pages that belong to the Shop mega-menu family (highlight "Shop" when on any of these)
 const shopFamilyPages: PageType[] = ['shop', 'new-arrivals', 'sale', 'lookbook', 'care-guide'];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  // ── UI state ──
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [mobileShopExpanded, setMobileShopExpanded] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
-  const [mobileShopExpanded, setMobileShopExpanded] = useState(false);
-  // Animated cursor for pill nav
+  const [previewItem, setPreviewItem] = useState<MegaMenuItem | null>(null);
   const [cursorPos, setCursorPos] = useState({ left: 0, width: 0, opacity: 0 });
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+
+  // ── Refs ──
   const navItemRefs = useRef<Map<string, HTMLLIElement>>(new Map());
   const searchInputRef = useRef<HTMLInputElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const mobileBackdropRef = useRef<HTMLDivElement>(null);
   const megaMenuRef = useRef<HTMLDivElement>(null);
   const megaMenuTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const mobileShopContentRef = useRef<HTMLDivElement>(null);
 
+  // ── Store ──
   const { currentPage, setPage, getCartCount, cartOpen, setCartOpen, wishlist } = useStore();
-  // Avoid hydration mismatch: persisted cart/wishlist load from localStorage on the client,
-  // so server render sees 0 but client render may see a non-zero count. We render 0 on the
-  // first client pass too, then update after mount.
+
+  // Hydration guard — persisted cart/wishlist read from localStorage on the client only
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -109,13 +145,8 @@ export default function Navbar() {
   const cartCount = hydrated ? getCartCount() : 0;
   const wishlistCount = hydrated ? wishlist.length : 0;
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Logo animation on mount
+  // ── Effects ──
+  // Logo entrance animation
   useEffect(() => {
     if (logoRef.current) {
       gsap.fromTo(logoRef.current, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'power3.out' });
@@ -128,46 +159,45 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
-  // Focus search input when search opens; reset query only when actually closing (not in effect body)
+  // Focus search input when search opens
   useEffect(() => {
     if (searchOpen && searchInputRef.current) {
       searchInputRef.current.focus();
     }
   }, [searchOpen]);
 
-  // Mobile menu animation — staggered entrance with delay, GPU-accelerated
+  // Mobile menu entrance animation
   useEffect(() => {
     if (mobileMenuOpen && mobileMenuRef.current) {
       gsap.fromTo(mobileMenuRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.3, ease: 'power2.out' }
       );
-        // Stagger nav items after menu slides in
-        const navItems = mobileMenuRef.current.querySelectorAll('.mobile-nav-item');
-        const quickItems = mobileMenuRef.current.querySelectorAll('.mobile-quick-item');
-        const ctaCard = mobileMenuRef.current.querySelector('.mobile-cta-card');
-        if (navItems.length) {
-          gsap.fromTo(navItems,
-            { opacity: 0, x: 30 },
-            { opacity: 1, x: 0, duration: 0.35, stagger: 0.06, ease: 'power3.out', delay: 0.25, force3D: true }
-          );
-        }
-        if (quickItems.length) {
-          gsap.fromTo(quickItems,
-            { opacity: 0, x: 20 },
-            { opacity: 1, x: 0, duration: 0.3, stagger: 0.05, ease: 'power3.out', delay: 0.55, force3D: true }
-          );
-        }
-        if (ctaCard) {
-          gsap.fromTo(ctaCard,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', delay: 0.75, force3D: true }
-          );
-        }
+      const navItems = mobileMenuRef.current.querySelectorAll('.mobile-nav-item');
+      const quickItems = mobileMenuRef.current.querySelectorAll('.mobile-quick-item');
+      const ctaCard = mobileMenuRef.current.querySelector('.mobile-cta-card');
+      if (navItems.length) {
+        gsap.fromTo(navItems,
+          { opacity: 0, x: 30 },
+          { opacity: 1, x: 0, duration: 0.35, stagger: 0.06, ease: 'power3.out', delay: 0.25, force3D: true }
+        );
+      }
+      if (quickItems.length) {
+        gsap.fromTo(quickItems,
+          { opacity: 0, x: 20 },
+          { opacity: 1, x: 0, duration: 0.3, stagger: 0.05, ease: 'power3.out', delay: 0.55, force3D: true }
+        );
+      }
+      if (ctaCard) {
+        gsap.fromTo(ctaCard,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', delay: 0.75, force3D: true }
+        );
+      }
     }
   }, [mobileMenuOpen]);
 
-  // Mega menu animation — GPU-accelerated
+  // Mega menu entrance animation
   useEffect(() => {
     if (megaMenuOpen && megaMenuRef.current) {
       gsap.fromTo(
@@ -178,28 +208,20 @@ export default function Navbar() {
     }
   }, [megaMenuOpen]);
 
-  // Mobile shop expand/collapse animation
+  // Cleanup timeout on unmount
   useEffect(() => {
-    if (mobileShopContentRef.current) {
-      if (mobileShopExpanded) {
-        gsap.fromTo(
-          mobileShopContentRef.current,
-          { height: 0, opacity: 0 },
-          { height: 'auto', opacity: 1, duration: 0.3, ease: 'power2.out' }
-        );
-      } else {
-        gsap.to(mobileShopContentRef.current, {
-          height: 0, opacity: 0, duration: 0.2, ease: 'power2.in',
-        });
-      }
-    }
-  }, [mobileShopExpanded]);
+    return () => {
+      if (megaMenuTimeoutRef.current) clearTimeout(megaMenuTimeoutRef.current);
+    };
+  }, []);
 
+  // ── Handlers ──
   const handleNavClick = useCallback((page: PageType) => {
     setPage(page);
     setMobileMenuOpen(false);
     setMegaMenuOpen(false);
     setMobileShopExpanded(false);
+    setPreviewItem(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [setPage]);
 
@@ -210,19 +232,18 @@ export default function Navbar() {
         onComplete: () => { setMobileMenuOpen(false); setMobileShopExpanded(false); },
       });
     } else {
-      setMobileMenuOpen(false); setMobileShopExpanded(false);
+      setMobileMenuOpen(false);
+      setMobileShopExpanded(false);
     }
   }, []);
 
-  // Mega menu hover handlers with delay
+  // Mega menu hover handlers — delayed open/close for forgiving UX
   const handleMegaMenuEnter = useCallback(() => {
     if (megaMenuTimeoutRef.current) {
       clearTimeout(megaMenuTimeoutRef.current);
       megaMenuTimeoutRef.current = null;
     }
-    megaMenuTimeoutRef.current = setTimeout(() => {
-      setMegaMenuOpen(true);
-    }, 100);
+    megaMenuTimeoutRef.current = setTimeout(() => setMegaMenuOpen(true), 80);
   }, []);
 
   const handleMegaMenuLeave = useCallback(() => {
@@ -232,42 +253,35 @@ export default function Navbar() {
     }
     megaMenuTimeoutRef.current = setTimeout(() => {
       setMegaMenuOpen(false);
-    }, 200);
+      setPreviewItem(null);
+      setHoveredLink(null);
+    }, 250);
   }, []);
 
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (megaMenuTimeoutRef.current) {
-        clearTimeout(megaMenuTimeoutRef.current);
-      }
-    };
-  }, []);
-
+  // ── Helpers ──
   const isLinkActive = (page: PageType, label: string) => {
     if (label === 'Shop') return shopFamilyPages.includes(currentPage);
     return currentPage === page;
   };
 
-  const isMegaItemActive = (page: PageType) => {
-    return currentPage === page;
-  };
+  const isMegaItemActive = (page: PageType) => currentPage === page;
+
+  const activePreview = previewItem ?? megaMenuItems[0];
 
   return (
     <>
+      {/* ═══════════════════════════════════════════════════════════
+          DESKTOP NAV — Pill container with logo + links + actions
+          ═══════════════════════════════════════════════════════════ */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-        style={{
-          background: 'transparent',
-          backdropFilter: 'none',
-          WebkitBackdropFilter: 'none',
-          borderBottom: 'none',
-          boxShadow: 'none',
-        }}
+        style={{ background: 'transparent' }}
       >
         <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-6 pt-3 sm:pt-4">
 
-          {/* ═══ Single Pill Container — logo + links + actions ═══ */}
+          {/* Pill container — also hosts mega-menu hover handlers so moving mouse from
+              "Shop" link to the absolutely-positioned mega panel does NOT close it
+              (mouseleave doesn't fire when moving to a descendant). */}
           <div
             className="relative flex items-center justify-between rounded-full px-4 sm:px-5 py-2.5 sm:py-3"
             style={{
@@ -289,41 +303,40 @@ export default function Navbar() {
               tabIndex={0}
               aria-label="Aura Living home"
             >
-              <img src="/logo/default-monochrome-gold-white.svg" alt="Aura Living" style={{ height: 'clamp(50px, 8vw, 80px)', width: 'auto', objectFit: 'contain' }} />
+              <img
+                src="/logo/default-monochrome-gold-white.svg"
+                alt="Aura Living"
+                style={{ height: 'clamp(50px, 8vw, 80px)', width: 'auto', objectFit: 'contain' }}
+              />
             </div>
 
             {/* Desktop Nav Links — inside pill */}
             <div className="hidden lg:flex items-center">
               <ul
                 className="relative mx-auto flex w-fit rounded-full p-1"
-                onMouseLeave={() => {
-                  setHoveredLink(null);
-                  setCursorPos((pv) => ({ ...pv, opacity: 0 }));
-                }}
+                onMouseLeave={() => setCursorPos((pv) => ({ ...pv, opacity: 0 }))}
               >
                 {navLinks.map((link) => {
                   const isActive = isLinkActive(link.page, link.label);
                   return (
                     <li
                       key={link.label}
-                      ref={(el) => {
-                        if (el) navItemRefs.current.set(link.label, el);
-                      }}
+                      ref={(el) => { if (el) navItemRefs.current.set(link.label, el); }}
                       className="relative z-10 block cursor-pointer px-6 py-3 text-base uppercase font-medium transition-colors duration-200"
                       style={{
                         fontFamily: "'Poppins', sans-serif",
-                        color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.7)',
+                        color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.85)',
                       }}
                       onMouseEnter={() => {
                         setHoveredLink(link.label);
-                        if (link.hasMegaMenu) handleMegaMenuEnter();
+                        if (link.hasMegaMenu) {
+                          handleMegaMenuEnter();
+                        } else {
+                          handleMegaMenuLeave();
+                        }
                         const el = navItemRefs.current.get(link.label);
                         if (el) {
-                          setCursorPos({
-                            left: el.offsetLeft,
-                            width: el.offsetWidth,
-                            opacity: 1,
-                          });
+                          setCursorPos({ left: el.offsetLeft, width: el.offsetWidth, opacity: 1 });
                         }
                       }}
                       onClick={() => handleNavClick(link.page)}
@@ -332,16 +345,14 @@ export default function Navbar() {
                       {link.hasMegaMenu && (
                         <ChevronDown
                           className="inline ml-1 h-3 w-3 transition-transform duration-300"
-                          style={{
-                            transform: megaMenuOpen && hoveredLink === link.label ? 'rotate(180deg)' : 'rotate(0deg)',
-                          }}
+                          style={{ transform: megaMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
                         />
                       )}
                     </li>
                   );
                 })}
 
-                {/* Animated cursor */}
+                {/* Animated cursor pill */}
                 <motion.li
                   animate={cursorPos}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
@@ -357,20 +368,18 @@ export default function Navbar() {
 
             {/* Action icons — inside pill */}
             <div className="flex items-center gap-1 sm:gap-1.5">
-              {/* Search */}
               <button
                 className="p-3 rounded-full transition-colors duration-200 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
+                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
                 aria-label="Search"
                 onClick={() => setSearchOpen(true)}
               >
                 <Search className="h-4 w-4" />
               </button>
 
-              {/* Wishlist — desktop/tablet */}
               <button
                 className="relative hidden sm:flex p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
+                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
                 aria-label="Wishlist"
                 onClick={() => handleNavClick('wishlist')}
               >
@@ -382,10 +391,9 @@ export default function Navbar() {
                 )}
               </button>
 
-              {/* Cart */}
               <button
                 className="relative p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
+                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
                 aria-label="Cart"
                 onClick={() => setCartOpen(true)}
               >
@@ -397,246 +405,397 @@ export default function Navbar() {
                 )}
               </button>
 
-              {/* Account — desktop/tablet */}
               <button
                 className="hidden sm:flex p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
+                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
                 aria-label="Account"
                 onClick={() => handleNavClick('account')}
               >
                 <User className="h-4 w-4" />
               </button>
 
-              {/* Hamburger — mobile/tablet */}
               <button
                 className="lg:hidden p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
+                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
                 aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
               >
                 {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
             </div>
+
+            {/* ═══════════════════════════════════════════════════════════
+                DESKTOP MEGA MENU — two-column panel with image preview
+                Absolutely positioned, but DOM-descendant of the pill so
+                mouseleave on pill works correctly.
+                ═══════════════════════════════════════════════════════════ */}
+            {megaMenuOpen && (
+              <div
+                ref={megaMenuRef}
+                className="absolute left-1/2 -translate-x-1/2 pt-3"
+                style={{ top: '100%', zIndex: 60 }}
+                onMouseEnter={handleMegaMenuEnter}
+              >
+                <div
+                  className="rounded-2xl overflow-hidden flex"
+                  style={{
+                    background: 'rgba(28, 28, 28, 0.94)',
+                    backdropFilter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)',
+                    borderTop: '2px solid #D4AF37',
+                    boxShadow: '0 16px 50px rgba(0,0,0,0.35), 0 0 0 1px rgba(212,175,55,0.1)',
+                    width: 'min(720px, calc(100vw - 32px))',
+                  }}
+                >
+                  {/* Left column — navigation items */}
+                  <div className="flex-1 py-4" style={{ borderRight: '1px solid rgba(212,175,55,0.12)' }}>
+                    <p
+                      className="px-5 pb-2 text-[10px] uppercase tracking-[3px] font-semibold"
+                      style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+                    >
+                      Explore
+                    </p>
+                    {megaMenuItems.map((item) => {
+                      const itemActive = isMegaItemActive(item.page);
+                      const isPreviewing = activePreview.page === item.page;
+                      return (
+                        <button
+                          key={item.label}
+                          className="w-full flex items-center gap-4 px-5 py-3 text-left transition-colors duration-200"
+                          style={{
+                            backgroundColor: isPreviewing || itemActive ? 'rgba(212, 175, 55, 0.12)' : 'transparent',
+                            borderLeft: isPreviewing ? '3px solid #D4AF37' : '3px solid transparent',
+                          }}
+                          onMouseEnter={() => setPreviewItem(item)}
+                          onClick={() => handleNavClick(item.page)}
+                        >
+                          <div
+                            className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-all duration-300"
+                            style={{
+                              backgroundColor: isPreviewing || itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(232, 213, 163, 0.08)',
+                              color: isPreviewing || itemActive ? '#D4AF37' : '#FFFFFF',
+                            }}
+                          >
+                            {item.icon}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p
+                              className="text-sm font-medium flex items-center gap-2"
+                              style={{
+                                fontFamily: "'Poppins', sans-serif",
+                                color: isPreviewing || itemActive ? '#D4AF37' : '#FFFFFF',
+                              }}
+                            >
+                              {item.label}
+                              {itemActive && (
+                                <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)', color: '#D4AF37' }}>
+                                  Current
+                                </span>
+                              )}
+                            </p>
+                            <p
+                              className="text-xs mt-0.5"
+                              style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.6)' }}
+                            >
+                              {item.description}
+                            </p>
+                          </div>
+                          <ChevronRight
+                            className="w-3.5 h-3.5 transition-opacity duration-200"
+                            style={{ color: '#D4AF37', opacity: isPreviewing ? 1 : 0 }}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Right column — image preview panel */}
+                  <div className="w-[300px] shrink-0 relative overflow-hidden">
+                    <div className="absolute inset-0">
+                      <div
+                        className="absolute inset-0 transition-opacity duration-300"
+                        style={{
+                          backgroundImage: `url(${activePreview.preview.image})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                        }}
+                      />
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background: 'linear-gradient(180deg, rgba(28,28,28,0.35) 0%, rgba(28,28,28,0.85) 60%, rgba(28,28,28,0.95) 100%)',
+                        }}
+                      />
+                      <div
+                        className="absolute top-4 right-4 w-10 h-10"
+                        style={{ borderTop: '1px solid rgba(212,175,55,0.5)', borderRight: '1px solid rgba(212,175,55,0.5)' }}
+                      />
+                      <div className="relative h-full flex flex-col justify-end p-6">
+                        <p
+                          className="text-[10px] uppercase tracking-[3px] font-semibold mb-2"
+                          style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+                        >
+                          {activePreview.preview.eyebrow}
+                        </p>
+                        <h4
+                          className="text-white text-lg font-bold leading-tight mb-4"
+                          style={{ fontFamily: "'Playfair Display', serif" }}
+                        >
+                          {activePreview.preview.headline}
+                        </h4>
+                        <button
+                          onClick={() => handleNavClick(activePreview.page)}
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:gap-2.5 cursor-pointer group"
+                          style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+                        >
+                          {activePreview.preview.cta}
+                          <ChevronRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5" style={{ color: '#D4AF37' }} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
+
+      {/* ═══════════════════════════════════════════════════════════
+          MOBILE MENU — Full-screen slide-in
+          ═══════════════════════════════════════════════════════════ */}
+      {mobileMenuOpen && (
+        <div
+          ref={mobileMenuRef}
+          className="fixed inset-0 z-[52] flex flex-col"
+          style={{ backgroundColor: 'rgba(20, 20, 20, 0.97)', backdropFilter: 'blur(20px)' }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation menu"
+          onKeyDown={(e) => { if (e.key === 'Escape') { e.preventDefault(); closeMobileMenu(); } }}
+        >
+          {/* Header */}
+          <div
+            className="flex items-center justify-between px-6 shrink-0"
+            style={{ height: '72px', borderBottom: '1px solid rgba(212, 175, 55, 0.15)' }}
+          >
+            <img
+              src="/logo/default-monochrome-gold-white.svg"
+              alt="Aura Living"
+              style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
+            />
+            <button
+              className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/10"
+              style={{ color: '#FFFFFF', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+              onClick={closeMobileMenu}
+              aria-label="Close menu"
+            >
+              <X className="h-5 w-5" />
+            </button>
           </div>
 
-          {/* Desktop Mega Menu — outside pill, positioned below */}
-          {megaMenuOpen && hoveredLink === 'Shop' && (
-            <div
-              ref={megaMenuRef}
-              className="absolute left-1/2 -translate-x-1/2 pt-2"
-              style={{ top: '100%', zIndex: 60 }}
-              onMouseEnter={handleMegaMenuEnter}
-              onMouseLeave={handleMegaMenuLeave}
-            >
-              <div
-                className="rounded-lg overflow-hidden"
-                style={{
-                  background: 'rgba(44, 44, 44, 0.85)',
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
-                  borderTop: '2px solid #D4AF37',
-                  boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
-                  minWidth: '280px',
-                }}
+          {/* Content */}
+          <div className="flex flex-col py-5 px-5 flex-1 overflow-y-auto">
+            {/* Main nav links */}
+            <div className="space-y-1">
+              <p
+                className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-3"
+                style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
               >
-                <div className="py-3">
+                Menu
+              </p>
+              {navLinks.map((link) => {
+                const isActive = isLinkActive(link.page, link.label);
+                return (
+                  <button
+                    key={link.label}
+                    className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
+                    style={{
+                      fontFamily: "'Poppins', sans-serif",
+                      color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.95)',
+                      backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+                    }}
+                    onClick={() => {
+                      if (link.hasMegaMenu) {
+                        setMobileShopExpanded((prev) => !prev);
+                      } else {
+                        handleNavClick(link.page);
+                      }
+                    }}
+                  >
+                    <span className="text-base font-medium">{link.label}</span>
+                    {link.hasMegaMenu && (
+                      <ChevronDown
+                        className="h-4 w-4 transition-transform duration-300"
+                        style={{ transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)', color: '#D4AF37' }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* ═══ Shop sub-menu ═══
+                Uses CSS grid-template-rows trick (1fr ↔ 0fr) for smooth
+                height animation in BOTH directions. Container is ALWAYS
+                in the DOM (no conditional render) so transitions work. */}
+            <div
+              className="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
+              style={{
+                gridTemplateRows: mobileShopExpanded ? '1fr' : '0fr',
+                opacity: mobileShopExpanded ? 1 : 0,
+              }}
+            >
+              <div className="overflow-hidden">
+                <div className="pl-4 pr-2 py-2 flex flex-col gap-1">
+                  <p
+                    className="text-[9px] uppercase tracking-[2.5px] font-medium px-3 mb-1 mt-1"
+                    style={{ color: 'rgba(212, 175, 55, 0.7)', fontFamily: "'Poppins', sans-serif" }}
+                  >
+                    Shop Categories
+                  </p>
                   {megaMenuItems.map((item) => {
                     const itemActive = isMegaItemActive(item.page);
                     return (
                       <button
                         key={item.label}
-                        className="w-full flex items-center gap-4 px-5 py-3 text-left transition-colors duration-200 group"
+                        className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-white/10"
                         style={{
-                          backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.12)' : 'transparent',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(212, 175, 55, 0.15)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = itemActive ? 'rgba(212, 175, 55, 0.12)' : 'transparent';
+                          fontFamily: "'Poppins', sans-serif",
+                          color: itemActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.9)',
+                          backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
                         }}
                         onClick={() => handleNavClick(item.page)}
                       >
                         <div
-                          className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0"
+                          className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-200"
                           style={{
-                            backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.2)' : 'rgba(232, 213, 163, 0.1)',
-                            color: itemActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.5)',
+                            backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(212, 175, 55, 0.15)',
+                            color: '#D4AF37',
                           }}
                         >
                           {item.icon}
                         </div>
-                        <div className="min-w-0">
-                          <p
-                            className="text-sm font-medium"
-                            style={{
-                              fontFamily: "'Poppins', sans-serif",
-                              color: itemActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.9)',
-                            }}
-                          >
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-medium flex items-center gap-2">
                             {item.label}
+                            {itemActive && (
+                              <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)', color: '#D4AF37' }}>
+                                Current
+                              </span>
+                            )}
                           </p>
-                          <p
-                            className="text-xs mt-0.5"
-                            style={{
-                              fontFamily: "'Poppins', sans-serif",
-                              color: 'rgba(255, 255, 255, 0.4)',
-                            }}
-                          >
+                          <p className="text-[11px] truncate" style={{ color: 'rgba(255, 255, 255, 0.55)' }}>
                             {item.description}
                           </p>
                         </div>
+                        <ChevronRight className="w-3.5 h-3.5 shrink-0" style={{ color: 'rgba(212, 175, 55, 0.5)' }} />
                       </button>
                     );
                   })}
                 </div>
               </div>
             </div>
-          )}
-        </div>
-      </nav>
 
-      {/* Mobile Menu — Elegant Slide-In from Right */}
-      {mobileMenuOpen && (
-        <div
-            ref={mobileMenuRef}
-            className="fixed inset-0 z-[52] flex flex-col"
-            style={{ backgroundColor: 'rgba(20, 20, 20, 0.97)', backdropFilter: 'blur(20px)' }}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation menu"
-            onKeyDown={(e) => { if (e.key === 'Escape') { e.preventDefault(); closeMobileMenu(); } }}
-          >
-            {/* Mobile Menu Header */}
-            <div className="flex items-center justify-between px-6 shrink-0" style={{ height: '72px', borderBottom: '1px solid rgba(212, 175, 55, 0.15)' }}>
-              <img src="/logo/default-monochrome-gold-white.svg" alt="Aura Living" style={{ height: '50px', width: 'auto', objectFit: 'contain' }} />
-              <button className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/10" style={{ color: 'rgba(255, 255, 255, 0.7)', border: '1px solid rgba(212, 175, 55, 0.2)' }} onClick={closeMobileMenu} aria-label="Close menu">
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+            {/* Divider */}
+            <div
+              className="my-5 h-px w-full"
+              style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent)' }}
+            />
 
-            {/* Mobile Menu Content — Modern clean design */}
-            <div className="flex flex-col py-5 px-5 flex-1 overflow-y-auto">
-              {/* Main Navigation Links */}
-              <div className="space-y-1">
-                <p className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-3" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>Menu</p>
-                {navLinks.map((link) => {
-                  const isActive = isLinkActive(link.page, link.label);
-                  return (
-                    <button
-                      key={link.label}
-                      className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        color: isActive ? '#D4AF37' : '#2C2C2C',
-                        backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
-                      }}
-                      onClick={() => {
-                        if (link.hasMegaMenu) {
-                          setMobileShopExpanded(!mobileShopExpanded);
-                        } else {
-                          handleNavClick(link.page);
-                        }
-                      }}
-                    >
-                      <span className="text-base font-medium">{link.label}</span>
-                      {link.hasMegaMenu && (
-                        <ChevronDown
-                          className="h-4 w-4 transition-transform duration-300"
-                          style={{ transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)', color: '#D4AF37' }}
-                        />
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Shop Sub-menu */}
-              {mobileShopExpanded && (
-                <div ref={mobileShopContentRef} className="overflow-hidden pb-2">
-                  <div className="pl-6 flex flex-col gap-0.5">
-                    {megaMenuItems.map((item) => {
-                      const itemActive = isMegaItemActive(item.page);
-                      return (
-                        <button
-                          key={item.label}
-                          className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-white/10"
-                          style={{
-                            fontFamily: "'Poppins', sans-serif",
-                            color: itemActive ? '#D4AF37' : '#5A5A5A',
-                          }}
-                          onClick={() => handleNavClick(item.page)}
-                        >
-                          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-                            {item.icon}
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium">{item.label}</p>
-                            <p className="text-[11px]" style={{ color: 'rgba(255, 255, 255, 0.4)' }}>{item.description}</p>
-                          </div>
-                        </button>
-                      );
-                    })}
+            {/* Quick actions */}
+            <div className="space-y-1">
+              <p
+                className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-3"
+                style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+              >
+                Quick Actions
+              </p>
+              {[
+                { icon: <Search className="h-5 w-5" />, label: 'Search', page: 'shop' as PageType },
+                { icon: <Heart className="h-5 w-5" />, label: 'Wishlist', page: 'wishlist' as PageType, count: wishlistCount },
+                { icon: <ShoppingCart className="h-5 w-5" />, label: 'Cart', page: 'cart' as PageType, count: cartCount },
+                { icon: <User className="h-5 w-5" />, label: 'Account', page: 'account' as PageType },
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  className="mobile-quick-item flex items-center gap-3 py-3.5 px-3 text-left transition-colors duration-200 hover:bg-white/10 rounded-xl w-full"
+                  style={{ color: 'rgba(255, 255, 255, 0.9)', fontFamily: "'Poppins', sans-serif" }}
+                  onClick={() => {
+                    closeMobileMenu();
+                    if (item.label === 'Cart') { setCartOpen(true); return; }
+                    if (item.label === 'Search') { setSearchOpen(true); return; }
+                    handleNavClick(item.page);
+                  }}
+                >
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center relative"
+                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37' }}
+                  >
+                    {item.icon}
+                    {item.count && item.count > 0 ? (
+                      <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[#D4AF37]">
+                        {item.count}
+                      </span>
+                    ) : null}
                   </div>
-                </div>
-              )}
+                  <span className="text-sm font-medium">{item.label}</span>
+                </button>
+              ))}
+            </div>
 
-              {/* Divider */}
-              <div className="my-5 h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent)' }} />
-
-              {/* Quick Actions */}
-              <div className="space-y-1">
-                <p className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-3" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>Quick Actions</p>
-                {[
-                  { icon: <Search className="h-5 w-5" />, label: 'Search', page: 'shop' as PageType },
-                  { icon: <Heart className="h-5 w-5" />, label: 'Wishlist', page: 'wishlist' as PageType, count: wishlistCount },
-                  { icon: <ShoppingCart className="h-5 w-5" />, label: 'Cart', page: 'cart' as PageType, count: cartCount },
-                  { icon: <User className="h-5 w-5" />, label: 'Account', page: 'account' as PageType },
-                ].map((item) => (
-                  <button
-                    key={item.label}
-                    className="mobile-quick-item flex items-center gap-3 py-3.5 px-3 text-left transition-colors duration-200 hover:bg-white/10 rounded-xl w-full"
-                    style={{ color: 'rgba(255, 255, 255, 0.9)', fontFamily: "'Poppins', sans-serif" }}
-                    onClick={() => { closeMobileMenu(); if (item.label === 'Cart') setCartOpen(true); if (item.label === 'Wishlist') handleNavClick('wishlist'); if (item.label === 'Search') { setSearchOpen(true); } if (item.label === 'Account') handleNavClick('account'); }}
-                  >
-                    <div className="w-9 h-9 rounded-lg flex items-center justify-center relative" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-                      {item.icon}
-                      {item.count && item.count > 0 ? (
-                        <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[#D4AF37]">
-                          {item.count}
-                        </span>
-                      ) : null}
-                    </div>
-                    <span className="text-sm font-medium">{item.label}</span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Bottom CTA */}
-              <div className="mt-auto pt-6">
-                <div className="rounded-2xl p-5" style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(232,213,163,0.12) 100%)', border: '1px solid rgba(212,175,55,0.2)' }}>
-                  <p className="text-[11px] uppercase tracking-[3px] font-semibold mb-1.5" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>New Collection 2026</p>
-                  <p className="text-xs mb-4 leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.7)', fontFamily: "'Poppins', sans-serif" }}>Explore our latest arrivals and handcrafted luxury pieces</p>
-                  <button
-                    className="premium-btn btn-gold px-5 py-2.5 text-xs w-full rounded-sm"
-                    style={{ fontFamily: "'Poppins', sans-serif" }}
-                    onClick={() => handleNavClick('new-arrivals')}
-                  >
-                    Explore Now
-                  </button>
-                </div>
+            {/* Bottom CTA */}
+            <div className="mt-auto pt-6">
+              <div
+                className="mobile-cta-card rounded-2xl p-5"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(232,213,163,0.12) 100%)',
+                  border: '1px solid rgba(212,175,55,0.2)',
+                }}
+              >
+                <p
+                  className="text-[11px] uppercase tracking-[3px] font-semibold mb-1.5"
+                  style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+                >
+                  New Collection 2026
+                </p>
+                <p
+                  className="text-xs mb-4 leading-relaxed"
+                  style={{ color: 'rgba(255, 255, 255, 0.75)', fontFamily: "'Poppins', sans-serif" }}
+                >
+                  Explore our latest arrivals and handcrafted luxury pieces
+                </p>
+                <button
+                  className="premium-btn btn-gold px-5 py-2.5 text-xs w-full rounded-sm"
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                  onClick={() => handleNavClick('new-arrivals')}
+                >
+                  Explore Now
+                </button>
               </div>
             </div>
+          </div>
         </div>
       )}
 
-      {/* Search Modal */}
+      {/* ═══════════════════════════════════════════════════════════
+          SEARCH MODAL — top sheet with live product results
+          ═══════════════════════════════════════════════════════════ */}
       {searchOpen && (
         <>
-          <div className="fixed inset-0 z-[55] bg-black/30" onClick={() => { setSearchOpen(false); setSearchQuery(''); }} />
+          <div
+            className="fixed inset-0 z-[55] bg-black/30"
+            onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+          />
           <div
             className="fixed top-0 left-0 right-0 z-[56] py-6 px-4 sm:px-6"
-            style={{ backgroundColor: 'rgba(44, 44, 44, 0.95)', borderBottom: '1px solid rgba(212,175,55,0.2)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)', backdropFilter: 'blur(12px)' }}
+            style={{
+              backgroundColor: 'rgba(44, 44, 44, 0.95)',
+              borderBottom: '1px solid rgba(212,175,55,0.2)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+            }}
           >
             <div className="mx-auto max-w-2xl">
               <div className="flex items-center gap-3">
@@ -648,25 +807,34 @@ export default function Navbar() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search products..."
                   className="flex-1 bg-transparent outline-none text-base"
-                  style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.9)' }}
+                  style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.95)' }}
                   onKeyDown={(e) => {
                     if (e.key === 'Escape') { setSearchOpen(false); setSearchQuery(''); }
                     if (e.key === 'Enter' && searchQuery.trim()) {
                       useStore.getState().setSearchQuery(searchQuery.trim());
-                      setSearchOpen(false); setSearchQuery('');
+                      setSearchOpen(false);
+                      setSearchQuery('');
                       handleNavClick('shop');
                     }
                   }}
                 />
-                <button onClick={() => { setSearchOpen(false); setSearchQuery(''); }} className="p-2 rounded-full hover:bg-white/10 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} aria-label="Close search">
+                <button
+                  onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                  className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                  style={{ color: 'rgba(255, 255, 255, 0.7)' }}
+                  aria-label="Close search"
+                >
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              {/* Search Results */}
+
               {searchQuery.trim().length > 1 && (
                 <div className="mt-4 max-h-64 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
                   {products
-                    .filter((p) => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.category.toLowerCase().includes(searchQuery.toLowerCase()))
+                    .filter((p) =>
+                      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                      p.category.toLowerCase().includes(searchQuery.toLowerCase())
+                    )
                     .slice(0, 5)
                     .map((p) => (
                       <button
@@ -674,21 +842,43 @@ export default function Navbar() {
                         className="w-full flex items-center gap-3 py-3 px-2 text-left rounded-lg transition-colors hover:bg-white/10"
                         onClick={() => {
                           useStore.getState().setSelectedProduct(p);
-                          setSearchOpen(false); setSearchQuery('');
+                          setSearchOpen(false);
+                          setSearchQuery('');
                           handleNavClick('product');
                         }}
                       >
-                        <div className="w-10 h-10 rounded-md overflow-hidden shrink-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(212, 175, 55, 0.2)' }}>
+                        <div
+                          className="w-10 h-10 rounded-md overflow-hidden shrink-0"
+                          style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+                        >
                           <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-sm font-medium truncate" style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.9)' }}>{p.name}</p>
-                          <p className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>{formatPKR(p.price)}</p>
+                          <p
+                            className="text-sm font-medium truncate"
+                            style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.95)' }}
+                          >
+                            {p.name}
+                          </p>
+                          <p
+                            className="text-xs"
+                            style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+                          >
+                            {formatPKR(p.price)}
+                          </p>
                         </div>
                       </button>
                     ))}
-                  {products.filter((p) => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.category.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
-                    <p className="text-sm py-4 text-center" style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.4)' }}>No products found for &quot;{searchQuery}&quot;</p>
+                  {products.filter((p) =>
+                    p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    p.category.toLowerCase().includes(searchQuery.toLowerCase())
+                  ).length === 0 && (
+                    <p
+                      className="text-sm py-4 text-center"
+                      style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.5)' }}
+                    >
+                      No products found for &quot;{searchQuery}&quot;
+                    </p>
                   )}
                 </div>
               )}
