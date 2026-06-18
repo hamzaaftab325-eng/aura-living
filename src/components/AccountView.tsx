@@ -176,19 +176,12 @@ export default function AccountView() {
     return () => ctx.revert();
   }, []);
 
-  const handleComingSoon = (feature: string) => {
-    toast({
-      title: 'Coming Soon',
-      description: `${feature} will be available soon. Stay tuned!`,
-    });
-  };
-
   const accountMenuItems = [
     {
       icon: Package,
-      label: 'My Orders',
-      description: 'Track & manage orders',
-      onClick: () => handleComingSoon('Order Tracking'),
+      label: 'Track My Orders',
+      description: 'Live status, ETAs & timeline',
+      onClick: () => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
     },
     {
       icon: Heart,
@@ -198,15 +191,15 @@ export default function AccountView() {
     },
     {
       icon: MapPin,
-      label: 'My Addresses',
+      label: 'Saved Addresses',
       description: 'Manage delivery addresses',
-      onClick: () => handleComingSoon('Address Management'),
+      onClick: () => { setPage('addresses'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
     },
     {
       icon: Settings,
-      label: 'My Settings',
-      description: 'Account preferences',
-      onClick: () => handleComingSoon('Account Settings'),
+      label: 'Account Settings',
+      description: 'Notifications, privacy & more',
+      onClick: () => { setPage('settings'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
     },
     {
       icon: HelpCircle,
@@ -404,7 +397,7 @@ export default function AccountView() {
                   <PremiumButton
                     variant="outline"
                     size="sm"
-                    onClick={() => handleComingSoon('Profile Editing')}
+                    onClick={() => { setPage('settings'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   >
                     Edit Profile
                   </PremiumButton>
@@ -439,7 +432,8 @@ export default function AccountView() {
             </div>
           </AnimatedSection>
 
-          {/* Quick Stats */}
+          {/* Quick Stats — only when signed in */}
+          {safeUser && (
           <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-10 sm:mb-14">
             {quickStats.map((stat, idx) => {
               const countRef = idx === 0 ? orderCountRef : idx === 1 ? wishlistCountRef : idx === 2 ? cartCountRef : rewardsCountRef;
@@ -472,8 +466,10 @@ export default function AccountView() {
               );
             })}
           </div>
+          )}
 
-          {/* Recent Orders */}
+          {/* Recent Orders — only when signed in */}
+          {safeUser && (
           <AnimatedSection>
             <div
               className="rounded-sm p-6 sm:p-8 mb-10 sm:mb-14"
@@ -487,7 +483,7 @@ export default function AccountView() {
                   Recent Orders
                 </h3>
                 <button
-                  onClick={() => handleComingSoon('Order History')}
+                  onClick={() => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
                   style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
                 >
@@ -535,7 +531,7 @@ export default function AccountView() {
                         key={order.id}
                         className="transition-colors duration-200 hover:bg-[#FAF8F5] cursor-pointer"
                         style={{ borderBottom: '1px solid #E8D5A3' }}
-                        onClick={() => handleComingSoon('Order Details')}
+                        onClick={() => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                       >
                         <td className="py-4 px-4">
                           <span className="text-sm font-medium" style={{ color: '#2C2C2C' }}>
@@ -574,7 +570,7 @@ export default function AccountView() {
                     key={order.id}
                     className="rounded-sm p-4 transition-colors duration-200 cursor-pointer"
                     style={{ backgroundColor: '#FAF8F5', border: '1px solid #E8D5A3' }}
-                    onClick={() => handleComingSoon('Order Details')}
+                    onClick={() => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
@@ -601,8 +597,11 @@ export default function AccountView() {
               </div>
             </div>
           </AnimatedSection>
+          )}
 
-          {/* Account Menu Grid */}
+          {/* Account Menu Grid — only when signed in */}
+          {safeUser && (
+          <>
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <h3
@@ -663,8 +662,11 @@ export default function AccountView() {
               </div>
             ))}
           </div>
+          </>
+          )}
 
-          {/* Rewards Section */}
+          {/* Rewards Section — only when signed in */}
+          {safeUser && (
           <AnimatedSection>
             <div
               className="mt-10 sm:mt-14 rounded-sm p-6 sm:p-8 text-center relative overflow-hidden"
@@ -706,6 +708,7 @@ export default function AccountView() {
               </PremiumButton>
             </div>
           </AnimatedSection>
+          )}
         </div>
       </section>
     </div>

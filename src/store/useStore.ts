@@ -29,7 +29,7 @@ export interface User {
   rewardsPoints: number;
 }
 
-export type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password';
+export type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password' | 'track-orders' | 'addresses' | 'settings';
 
 
 // Shared badge color mapping — used by ProductDetailView, ShopView, WishlistView, FeaturedProducts
@@ -98,6 +98,9 @@ export const pageTitles: Record<PageType, string> = {
   terms: 'Terms of Service | Aura Living',
   privacy: 'Privacy Policy | Aura Living',
   'forgot-password': 'Reset Your Password | Aura Living',
+  'track-orders': 'Track Your Orders | Aura Living',
+  'addresses': 'Saved Addresses | Aura Living',
+  'settings': 'Account Settings | Aura Living',
 };
 
 export const useStore = create<StoreState>()(

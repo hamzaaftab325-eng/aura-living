@@ -32,6 +32,9 @@ import LookbookView from '@/components/LookbookView';
 import TermsView from '@/components/TermsView';
 import PrivacyView from '@/components/PrivacyView';
 import ForgotPasswordView from '@/components/ForgotPasswordView';
+import TrackOrdersView from '@/components/TrackOrdersView';
+import AddressesView from '@/components/AddressesView';
+import SettingsView from '@/components/SettingsView';
 import CartDrawer from '@/components/CartDrawer';
 import { GoldDivider, CornerOrnament, FloatingOrb, FloatingGoldDots } from '@/components/SVGDecorations';
 
@@ -92,7 +95,7 @@ export default function Home() {
       'home', 'shop', 'product', 'cart', 'checkout', 'wishlist', 'account',
       'about', 'contact', 'login', 'signup', 'faq', 'shipping', 'returns',
       'care-guide', 'new-arrivals', 'sale', 'lookbook', 'terms', 'privacy',
-      'forgot-password',
+      'forgot-password', 'track-orders', 'addresses', 'settings',
     ];
     const hash = window.location.hash.replace('#', '');
     if (hash && hash !== 'home' && hash !== currentPage && validPages.includes(hash as typeof currentPage)) {
@@ -178,6 +181,12 @@ export default function Home() {
         return <PrivacyView />;
       case 'forgot-password':
         return <ForgotPasswordView />;
+      case 'track-orders':
+        return <TrackOrdersView />;
+      case 'addresses':
+        return <AddressesView />;
+      case 'settings':
+        return <SettingsView />;
       case 'login':
       case 'signup':
         return <AuthView />;
