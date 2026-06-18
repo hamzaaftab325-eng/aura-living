@@ -175,7 +175,7 @@ export default function WishlistView() {
 
           <h1
             ref={heroTitleRef}
-            className="text-white text-[36px] sm:text-[44px] md:text-[52px] font-bold leading-tight"
+            className="text-white text-[36px] sm:text-[44px] md:text-[52px] font-bold leading-[1.15] pt-2"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Your Wishlist

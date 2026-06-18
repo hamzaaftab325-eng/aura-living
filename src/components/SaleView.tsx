@@ -369,7 +369,7 @@ export default function SaleView() {
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
 
           <h1
-            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.05] mb-4"
+            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.15] mb-4 pt-2"
             style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 30px rgba(0,0,0,0.4)' }}
           >
             The Aura Sale

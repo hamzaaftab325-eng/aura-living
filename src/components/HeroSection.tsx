@@ -117,7 +117,7 @@ export default function HeroSection() {
         {/* Heading — responsive clamp */}
         <h1
           ref={headingRef}
-          className="text-white font-bold leading-[1.1] mb-4 select-none"
+          className="text-white font-bold leading-[1.15] mb-4 pt-2 select-none"
           style={{
             fontFamily: "'Playfair Display', serif",
             fontSize: 'clamp(28px, 6vw, 72px)',

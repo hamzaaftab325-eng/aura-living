@@ -161,7 +161,7 @@ export default function PrivacyView() {
           <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
             AURA LIVING
           </span>
-          <h1 className="text-white text-[32px] sm:text-[42px] md:text-[52px] font-bold leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="text-white text-[32px] sm:text-[42px] md:text-[52px] font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
             Privacy Policy
           </h1>
           <div className="flex items-center gap-3 mt-6">
