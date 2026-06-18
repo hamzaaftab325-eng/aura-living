@@ -594,9 +594,18 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Content */}
-          <div className="flex flex-col py-5 px-5 flex-1 overflow-y-auto">
-            {/* Main nav links */}
+          {/* Content — custom thin scrollbar styling for dark menu */}
+          <div
+            className="flex flex-col py-5 px-5 flex-1 overflow-y-auto"
+            style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(212, 175, 55, 0.3) transparent' }}
+          >
+            <style>{`
+              .mobile-menu-scroll::-webkit-scrollbar { width: 4px; }
+              .mobile-menu-scroll::-webkit-scrollbar-track { background: transparent; }
+              .mobile-menu-scroll::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.3); border-radius: 2px; }
+            `}</style>
+
+            {/* Main nav links — Shop submenu renders INLINE right below "Shop" */}
             <div className="space-y-1">
               <p
                 className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-3"
@@ -607,106 +616,116 @@ export default function Navbar() {
               {navLinks.map((link) => {
                 const isActive = isLinkActive(link.page, link.label);
                 return (
-                  <button
-                    key={link.label}
-                    className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
-                    style={{
-                      fontFamily: "'Poppins', sans-serif",
-                      color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.95)',
-                      backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
-                    }}
-                    onClick={() => {
-                      if (link.hasMegaMenu) {
-                        setMobileShopExpanded((prev) => !prev);
-                      } else {
-                        handleNavClick(link.page);
-                      }
-                    }}
-                  >
-                    <span className="text-base font-medium">{link.label}</span>
+                  <React.Fragment key={link.label}>
+                    <button
+                      className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
+                      style={{
+                        fontFamily: "'Poppins', sans-serif",
+                        color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.95)',
+                        backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+                      }}
+                      onClick={() => {
+                        if (link.hasMegaMenu) {
+                          setMobileShopExpanded((prev) => !prev);
+                        } else {
+                          handleNavClick(link.page);
+                        }
+                      }}
+                    >
+                      <span className="text-base font-medium">{link.label}</span>
+                      {link.hasMegaMenu && (
+                        <ChevronDown
+                          className="h-4 w-4 transition-transform duration-300"
+                          style={{ transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)', color: '#D4AF37' }}
+                        />
+                      )}
+                    </button>
+
+                    {/* Inline Shop submenu — appears right below "Shop" link
+                        Uses CSS grid-template-rows trick (1fr ↔ 0fr) for smooth
+                        height animation in BOTH directions. Always in the DOM
+                        so transitions work on collapse too. */}
                     {link.hasMegaMenu && (
-                      <ChevronDown
-                        className="h-4 w-4 transition-transform duration-300"
-                        style={{ transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)', color: '#D4AF37' }}
-                      />
+                      <div
+                        className="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
+                        style={{
+                          gridTemplateRows: mobileShopExpanded ? '1fr' : '0fr',
+                          opacity: mobileShopExpanded ? 1 : 0,
+                        }}
+                      >
+                        <div className="overflow-hidden">
+                          <div className="pl-3 pr-1 py-1 flex flex-col gap-0.5">
+                            <div
+                              className="ml-3 mb-1 mt-1 h-px"
+                              style={{ background: 'linear-gradient(90deg, rgba(212,175,55,0.25), transparent)' }}
+                            />
+                            {megaMenuItems.map((item) => {
+                              const itemActive = isMegaItemActive(item.page);
+                              return (
+                                <button
+                                  key={item.label}
+                                  className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-white/10"
+                                  style={{
+                                    fontFamily: "'Poppins', sans-serif",
+                                    color: itemActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.9)',
+                                    backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+                                  }}
+                                  onClick={() => handleNavClick(item.page)}
+                                >
+                                  <div
+                                    className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-200"
+                                    style={{
+                                      backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(212, 175, 55, 0.12)',
+                                      color: '#D4AF37',
+                                    }}
+                                  >
+                                    {item.icon}
+                                  </div>
+                                  <div className="min-w-0 flex-1">
+                                    <p className="text-sm font-medium flex items-center gap-2">
+                                      {item.label}
+                                      {itemActive && (
+                                        <span
+                                          className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm"
+                                          style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)', color: '#D4AF37' }}
+                                        >
+                                          Current
+                                        </span>
+                                      )}
+                                    </p>
+                                    <p
+                                      className="text-[11px] truncate"
+                                      style={{ color: 'rgba(255, 255, 255, 0.55)' }}
+                                    >
+                                      {item.description}
+                                    </p>
+                                  </div>
+                                  <ChevronRight
+                                    className="w-3.5 h-3.5 shrink-0"
+                                    style={{ color: 'rgba(212, 175, 55, 0.5)' }}
+                                  />
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
                     )}
-                  </button>
+                  </React.Fragment>
                 );
               })}
             </div>
 
-            {/* ═══ Shop sub-menu ═══
-                Uses CSS grid-template-rows trick (1fr ↔ 0fr) for smooth
-                height animation in BOTH directions. Container is ALWAYS
-                in the DOM (no conditional render) so transitions work. */}
-            <div
-              className="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
-              style={{
-                gridTemplateRows: mobileShopExpanded ? '1fr' : '0fr',
-                opacity: mobileShopExpanded ? 1 : 0,
-              }}
-            >
-              <div className="overflow-hidden">
-                <div className="pl-4 pr-2 py-2 flex flex-col gap-1">
-                  <p
-                    className="text-[9px] uppercase tracking-[2.5px] font-medium px-3 mb-1 mt-1"
-                    style={{ color: 'rgba(212, 175, 55, 0.7)', fontFamily: "'Poppins', sans-serif" }}
-                  >
-                    Shop Categories
-                  </p>
-                  {megaMenuItems.map((item) => {
-                    const itemActive = isMegaItemActive(item.page);
-                    return (
-                      <button
-                        key={item.label}
-                        className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-white/10"
-                        style={{
-                          fontFamily: "'Poppins', sans-serif",
-                          color: itemActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.9)',
-                          backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
-                        }}
-                        onClick={() => handleNavClick(item.page)}
-                      >
-                        <div
-                          className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-200"
-                          style={{
-                            backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(212, 175, 55, 0.15)',
-                            color: '#D4AF37',
-                          }}
-                        >
-                          {item.icon}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium flex items-center gap-2">
-                            {item.label}
-                            {itemActive && (
-                              <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)', color: '#D4AF37' }}>
-                                Current
-                              </span>
-                            )}
-                          </p>
-                          <p className="text-[11px] truncate" style={{ color: 'rgba(255, 255, 255, 0.55)' }}>
-                            {item.description}
-                          </p>
-                        </div>
-                        <ChevronRight className="w-3.5 h-3.5 shrink-0" style={{ color: 'rgba(212, 175, 55, 0.5)' }} />
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-
             {/* Divider */}
             <div
-              className="my-5 h-px w-full"
+              className="my-4 h-px w-full"
               style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent)' }}
             />
 
             {/* Quick actions */}
             <div className="space-y-1">
               <p
-                className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-3"
+                className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-2"
                 style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
               >
                 Quick Actions
@@ -719,7 +738,7 @@ export default function Navbar() {
               ].map((item) => (
                 <button
                   key={item.label}
-                  className="mobile-quick-item flex items-center gap-3 py-3.5 px-3 text-left transition-colors duration-200 hover:bg-white/10 rounded-xl w-full"
+                  className="mobile-quick-item flex items-center gap-3 py-3 px-3 text-left transition-colors duration-200 hover:bg-white/10 rounded-xl w-full"
                   style={{ color: 'rgba(255, 255, 255, 0.9)', fontFamily: "'Poppins', sans-serif" }}
                   onClick={() => {
                     closeMobileMenu();
@@ -745,9 +764,9 @@ export default function Navbar() {
             </div>
 
             {/* Bottom CTA */}
-            <div className="mt-auto pt-6">
+            <div className="mt-auto pt-5">
               <div
-                className="mobile-cta-card rounded-2xl p-5"
+                className="mobile-cta-card rounded-2xl p-4"
                 style={{
                   background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(232,213,163,0.12) 100%)',
                   border: '1px solid rgba(212,175,55,0.2)',
