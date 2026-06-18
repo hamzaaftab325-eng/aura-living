@@ -52,3 +52,13 @@ prompt
 server.log
 # Skills directory
 /skills/
+# Sandbox artifacts
+/tool-results/
+/upload/
+/run-server.sh
+/prod.log
+/build.log
+/install*.log
+/dev2.log
+/install*.log
+/swc-install.log

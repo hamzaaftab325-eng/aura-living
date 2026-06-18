@@ -142,7 +142,10 @@ export default function SaleView() {
   const setSelectedProduct = useStore((state) => state.setSelectedProduct);
   const addToCart = useStore((state) => state.addToCart);
   const toggleWishlist = useStore((state) => state.toggleWishlist);
-  const isInWishlist = useStore((state) => state.isInWishlist);
+  // Subscribe to wishlist array so component re-renders when wishlist changes.
+  // (isInWishlist is a stable function reference and won't trigger re-render on its own.)
+  const wishlist = useStore((state) => state.wishlist);
+  const isInWishlist = (id: string) => wishlist.includes(id);
   const setCartOpen = useStore((state) => state.setCartOpen);
 
   const heroBgRef = useRef<HTMLElement>(null);

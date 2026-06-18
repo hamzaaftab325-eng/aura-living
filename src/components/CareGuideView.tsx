@@ -121,6 +121,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
 export default function CareGuideView() {
   const setPage = useStore((state) => state.setPage);
   const heroBgRef = useRef<HTMLDivElement>(null);
+  const heroBgDivRef = useRef<HTMLDivElement>(null);
 
   // Hero entrance with useGsapStagger
   const heroRef = useGsapStagger<HTMLDivElement>({
@@ -149,10 +150,12 @@ export default function CareGuideView() {
   const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
 
   // Enhanced parallax for hero background — 0.5x speed + zoom 1→1.1
+  // heroBgDivRef (inner div with backgroundImage) is the animation target.
+  // heroBgRef (outer section) is the ScrollTrigger anchor.
   useEffect(() => {
-    if (!heroBgRef.current) return;
+    if (!heroBgDivRef.current || !heroBgRef.current) return;
     const ctx = gsap.context(() => {
-      gsap.to(heroBgRef.current, {
+      gsap.to(heroBgDivRef.current, {
         backgroundPositionY: '50%',
         ease: 'none',
         scrollTrigger: {
@@ -162,7 +165,7 @@ export default function CareGuideView() {
           scrub: 0.5,
         },
       });
-      gsap.fromTo(heroBgRef.current,
+      gsap.fromTo(heroBgDivRef.current,
         { scale: 1 },
         {
           scale: 1.1,
@@ -186,8 +189,9 @@ export default function CareGuideView() {
         ref={heroBgRef}
         className="relative w-full h-[40vh] sm:h-[45vh] md:h-[50vh] overflow-hidden flex items-center justify-center"
       >
-        {/* Background image */}
+        {/* Background image — animated via heroBgDivRef */}
         <div
+          ref={heroBgDivRef}
           className="absolute inset-0"
           style={{
             backgroundImage: 'url(/images/pages/care-guide-hero.webp)',

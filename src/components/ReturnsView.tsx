@@ -1,6 +1,6 @@
 'use client';
 
-import { useGsapFadeIn, useGsapStagger,  gsap } from '@/hooks/useGsap';
+import { useGsapFadeIn, useGsapStagger } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { RotateCcw, CheckCircle, ChevronRight, MessageCircle, XCircle, CreditCard, AlertTriangle, ArrowRight } from 'lucide-react';
 import { useStore } from '@/store/useStore';

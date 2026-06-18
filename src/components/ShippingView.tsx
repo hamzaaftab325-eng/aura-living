@@ -1,6 +1,6 @@
 'use client';
 
-import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap } from '@/hooks/useGsap';
+import { useGsapFadeIn, useGsapStagger, useGsapScaleIn } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Truck, Package, MapPin, Clock, Gift, Globe, ChevronRight } from 'lucide-react';
 import { useStore } from '@/store/useStore';

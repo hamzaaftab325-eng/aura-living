@@ -77,7 +77,7 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden bg-[#2C2C2C] flex items-center justify-center"
       style={{ height: '100dvh' }}
     >
-      {/* ═══ Background video ═══ */}
+      {/* ═══ Background video (no poster image — video only) ═══ */}
       <div ref={bgRef} className="absolute inset-0 w-full h-[120%] -top-[10%]">
         <video
           ref={videoRef}
@@ -86,7 +86,6 @@ export default function HeroSection() {
           loop
           playsInline
           className="w-full h-full object-cover"
-          poster="/images/hero/hero-slide-1.webp"
         >
           <source
             src="https://res.cloudinary.com/diometfe9/video/upload/v1781723540/Working_on_ecommerce_store_backg__202606180012_pm2rtf.mp4"

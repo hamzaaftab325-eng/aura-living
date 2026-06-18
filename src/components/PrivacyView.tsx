@@ -1,6 +1,6 @@
 'use client';
 
-import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap } from '@/hooks/useGsap';
+import { useGsapFadeIn, useGsapStagger, useGsapScaleIn } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Shield, ChevronRight, Lock, User, Settings, Share2,  Cookie, FileText, Clock, ExternalLink, Baby, RefreshCw, Mail } from 'lucide-react';
 import { useStore } from '@/store/useStore';

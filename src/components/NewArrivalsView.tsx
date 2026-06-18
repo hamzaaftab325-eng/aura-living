@@ -64,7 +64,9 @@ export default function NewArrivalsView() {
   const setSelectedProduct = useStore((state) => state.setSelectedProduct);
   const addToCart = useStore((state) => state.addToCart);
   const toggleWishlist = useStore((state) => state.toggleWishlist);
-  const isInWishlist = useStore((state) => state.isInWishlist);
+  // Subscribe to wishlist array so component re-renders when wishlist changes.
+  const wishlist = useStore((state) => state.wishlist);
+  const isInWishlist = (id: string) => wishlist.includes(id);
   const setCartOpen = useStore((state) => state.setCartOpen);
 
   const heroBgRef = useRef<HTMLElement>(null);

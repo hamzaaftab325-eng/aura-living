@@ -84,9 +84,18 @@ export default function Home() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Read URL hash and sync store to the correct page
+    // Read URL hash and sync store to the correct page.
+    // Validate the hash against the known PageType list — ignore invalid hashes
+    // (e.g. #shop-section anchors, malformed input) instead of setting an
+    // invalid currentPage that breaks renderPage() and document.title.
+    const validPages: typeof currentPage[] = [
+      'home', 'shop', 'product', 'cart', 'checkout', 'wishlist', 'account',
+      'about', 'contact', 'login', 'signup', 'faq', 'shipping', 'returns',
+      'care-guide', 'new-arrivals', 'sale', 'lookbook', 'terms', 'privacy',
+      'forgot-password',
+    ];
     const hash = window.location.hash.replace('#', '');
-    if (hash && hash !== 'home' && hash !== currentPage) {
+    if (hash && hash !== 'home' && hash !== currentPage && validPages.includes(hash as typeof currentPage)) {
       useStore.setState({ currentPage: hash as typeof currentPage });
     }
 
@@ -96,9 +105,10 @@ export default function Home() {
       window.history.replaceState({ page: current }, '', `#${current}`);
     }
 
-    // Listen for back/forward
+    // Listen for back/forward — validate the page from history state
     const handlePopState = (event: PopStateEvent) => {
-      const page = (event.state?.page as typeof currentPage) || 'home';
+      const candidate = (event.state?.page as typeof currentPage) || 'home';
+      const page = validPages.includes(candidate) ? candidate : 'home';
       useStore.setState({ currentPage: page });
       window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     };
