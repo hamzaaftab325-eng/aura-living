@@ -25,7 +25,7 @@ export function useGsapFadeIn<T extends HTMLElement = HTMLDivElement>(
   } = {}
 ) {
   const ref = useRef<T>(null);
-  const { y = 30, duration = 0.8, delay = 0, ease = 'power3.out', start = 'top 85%' } = options;
+  const { y = 24, duration = 0.5, delay = 0, ease = 'power3.out', start = 'top 85%' } = options;
 
   useEffect(() => {
     const el = ref.current;
@@ -68,9 +68,9 @@ export function useGsapStagger<T extends HTMLElement = HTMLDivElement>(
   const ref = useRef<T>(null);
   const {
     selector = ':scope > *',
-    y = 30,
-    duration = 0.7,
-    stagger = 0.1,
+    y = 24,
+    duration = 0.5,
+    stagger = 0.06,
     delay = 0,
     ease = 'power3.out',
     start = 'top 80%',
@@ -132,8 +132,8 @@ export function useGsapBlurText<T extends HTMLElement = HTMLDivElement>(
 ) {
   const ref = useRef<T>(null);
   const {
-    duration = 0.8,
-    stagger = 0.04,
+    duration = 0.5,
+    stagger = 0.03,
     delay = 0,
     ease = 'power3.out',
     start = 'top 85%',
@@ -220,7 +220,7 @@ export function useGsapScaleIn<T extends HTMLElement = HTMLDivElement>(
   } = {}
 ) {
   const ref = useRef<T>(null);
-  const { duration = 0.6, delay = 0, ease = 'back.out(1.7)', start = 'top 85%' } = options;
+  const { duration = 0.4, delay = 0, ease = 'back.out(1.7)', start = 'top 85%' } = options;
 
   useEffect(() => {
     const el = ref.current;
@@ -259,7 +259,7 @@ export function useGsapCountUp<T extends HTMLElement = HTMLSpanElement>(
   } = {}
 ) {
   const ref = useRef<T>(null);
-  const { endValue = 0, duration = 1.5, delay = 0, ease = 'power2.out', start = 'top 85%' } = options;
+  const { endValue = 0, duration = 1.0, delay = 0, ease = 'power2.out', start = 'top 85%' } = options;
 
   useEffect(() => {
     const el = ref.current;

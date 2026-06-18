@@ -17,7 +17,7 @@ export default function TrendingCollection() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   // GSAP blur text for section heading
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.8, stagger: 0.06 });
+  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
   // GSAP fade-in for each content element
   const tagRef = useGsapFadeIn<HTMLSpanElement>({ y: 40, duration: 0.7, delay: 0 });

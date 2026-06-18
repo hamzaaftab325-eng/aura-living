@@ -7,7 +7,7 @@ import { StaggerTestimonials } from '@/components/ui/stagger-testimonials';
 
 export default function TestimonialsSection() {
   // GSAP blur text for section heading
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.8, stagger: 0.06 });
+  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
   // Scale on scroll
   const sectionContentRef = useRef<HTMLDivElement>(null);

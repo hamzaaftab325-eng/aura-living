@@ -153,7 +153,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
    ═══════════════════════════════════════════════════════════ */
 export default function WhyChooseUs() {
   // GSAP blur text for section heading
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.8, stagger: 0.06 });
+  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
   // Enhanced stagger with y:50, stagger:0.1, start:'top 85%'
   const cardsRef = useGsapStagger<HTMLDivElement>({ y: 50, stagger: 0.1, duration: 0.6, start: 'top 85%' });

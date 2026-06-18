@@ -72,7 +72,7 @@ export default function WishlistView() {
   // GSAP fade-in for header
   const headerRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
   // Hero heading blur text
-  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.8, stagger: 0.05, start: 'top 90%' });
+  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
   // GoldDivider scale-in
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 

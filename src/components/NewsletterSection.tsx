@@ -11,14 +11,14 @@ export default function NewsletterSection() {
   const [isFocused, setIsFocused] = useState(false);
 
   // ── GSAP blur text for main heading ──
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.8, stagger: 0.05 });
+  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
   // ── GSAP fade-in refs ──
   const eyebrowRef = useGsapFadeIn<HTMLDivElement>({ y: 20, duration: 0.7, delay: 0 });
   const dividerRef = useGsapFadeIn<HTMLDivElement>({ y: 0, duration: 0.6, delay: 0.5 });
   const descRef = useGsapFadeIn<HTMLParagraphElement>({ y: 25, duration: 0.7, delay: 0.6 });
   const socialProofRef = useGsapFadeIn<HTMLDivElement>({ y: 15, duration: 0.5, delay: 0.85 });
-  const cardRef = useGsapFadeIn<HTMLDivElement>({ y: 40, duration: 0.9, delay: 0.35 });
+  const cardRef = useGsapFadeIn<HTMLDivElement>({ y: 40, duration: 0.5, delay: 0.2 });
 
   // ── Scale on scroll for section content ──
   const sectionContentRef = useRef<HTMLDivElement>(null);

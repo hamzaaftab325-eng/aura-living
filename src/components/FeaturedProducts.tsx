@@ -266,7 +266,7 @@ export default function FeaturedProducts() {
   const setPage = useStore((state) => state.setPage);
 
   // GSAP blur text for section heading
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.8, stagger: 0.06 });
+  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
   // GSAP fade-in for subheading/description
   const subRef = useGsapFadeIn<HTMLParagraphElement>({ y: 20, duration: 0.7, delay: 0.4 });

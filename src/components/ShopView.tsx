@@ -366,7 +366,7 @@ export default function ShopView() {
   const heroBgRef = useRef<HTMLDivElement>(null);
 
   // Hero heading blur text reveal
-  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.8, stagger: 0.05, start: 'top 90%' });
+  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
   // GoldDivider scale-in
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.3 });
 

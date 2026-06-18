@@ -368,14 +368,6 @@ export default function SaleView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
 
-          {/* Eyebrow badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', border: '1px solid rgba(212, 175, 55, 0.3)' }}>
-            <Tag className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
-            <span className="text-[11px] font-semibold uppercase tracking-[2.5px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
-              Limited Time Event
-            </span>
-          </div>
-
           <h1
             className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.05] mb-4"
             style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 30px rgba(0,0,0,0.4)' }}

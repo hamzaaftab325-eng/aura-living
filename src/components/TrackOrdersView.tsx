@@ -127,7 +127,7 @@ export default function TrackOrdersView() {
 
   // GSAP refs
   const headerRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
-  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.8, stagger: 0.05, start: 'top 90%' });
+  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
   const ordersRef = useGsapStagger<HTMLDivElement>({
     selector: ':scope > div',

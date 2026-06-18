@@ -157,7 +157,7 @@ export default function Navbar() {
   // Logo entrance animation
   useEffect(() => {
     if (logoRef.current) {
-      gsap.fromTo(logoRef.current, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'power3.out' });
+      gsap.fromTo(logoRef.current, { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'power3.out' });
     }
   }, []);
 
@@ -174,32 +174,32 @@ export default function Navbar() {
     }
   }, [searchOpen]);
 
-  // Mobile menu entrance animation
+  // Mobile menu entrance animation — fast and snappy
   useEffect(() => {
     if (mobileMenuOpen && mobileMenuRef.current) {
       gsap.fromTo(mobileMenuRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.3, ease: 'power2.out' }
+        { opacity: 1, duration: 0.2, ease: 'power2.out' }
       );
       const navItems = mobileMenuRef.current.querySelectorAll('.mobile-nav-item');
       const quickItems = mobileMenuRef.current.querySelectorAll('.mobile-quick-item');
       const ctaCard = mobileMenuRef.current.querySelector('.mobile-cta-card');
       if (navItems.length) {
         gsap.fromTo(navItems,
-          { opacity: 0, x: 30 },
-          { opacity: 1, x: 0, duration: 0.35, stagger: 0.06, ease: 'power3.out', delay: 0.25, force3D: true }
+          { opacity: 0, x: 20 },
+          { opacity: 1, x: 0, duration: 0.25, stagger: 0.04, ease: 'power3.out', delay: 0.08, force3D: true }
         );
       }
       if (quickItems.length) {
         gsap.fromTo(quickItems,
-          { opacity: 0, x: 20 },
-          { opacity: 1, x: 0, duration: 0.3, stagger: 0.05, ease: 'power3.out', delay: 0.55, force3D: true }
+          { opacity: 0, x: 16 },
+          { opacity: 1, x: 0, duration: 0.22, stagger: 0.03, ease: 'power3.out', delay: 0.2, force3D: true }
         );
       }
       if (ctaCard) {
         gsap.fromTo(ctaCard,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', delay: 0.75, force3D: true }
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out', delay: 0.3, force3D: true }
         );
       }
     }
@@ -256,7 +256,7 @@ export default function Navbar() {
   const closeMobileMenu = useCallback(() => {
     if (mobileMenuRef.current) {
       gsap.to(mobileMenuRef.current, {
-        opacity: 0, duration: 0.2, ease: 'power2.in',
+        opacity: 0, duration: 0.15, ease: 'power2.in',
         onComplete: () => { setMobileMenuOpen(false); setMobileShopExpanded(false); },
       });
     } else {

@@ -18,35 +18,35 @@ export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
 
-  // Text animation — same hooks used in AboutView, ShopView, etc.
+  // Text animation — snappy on mobile, smooth on desktop
   const tagRef = useGsapBlurText<HTMLSpanElement>({
-    duration: 0.7,
-    stagger: 0.04,
-    delay: 0.3,
+    duration: 0.5,
+    stagger: 0.03,
+    delay: 0.15,
     start: 'top 90%',
     splitBy: 'words',
   });
 
   const headingRef = useGsapBlurText<HTMLHeadingElement>({
-    duration: 0.9,
-    stagger: 0.06,
-    delay: 0.5,
+    duration: 0.6,
+    stagger: 0.04,
+    delay: 0.25,
     start: 'top 90%',
     splitBy: 'words',
   });
 
   const subtitleRef = useGsapBlurText<HTMLParagraphElement>({
-    duration: 0.7,
-    stagger: 0.03,
-    delay: 0.9,
+    duration: 0.5,
+    stagger: 0.02,
+    delay: 0.45,
     start: 'top 90%',
     splitBy: 'words',
   });
 
   // CTA + scroll indicator — fade in
-  const ctaRef = useGsapFadeIn<HTMLButtonElement>({ y: 30, duration: 0.7, delay: 0.2 });
-  const scrollRef = useGsapFadeIn<HTMLDivElement>({ y: 20, duration: 0.6, delay: 0.5 });
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.7 });
+  const ctaRef = useGsapFadeIn<HTMLButtonElement>({ y: 20, duration: 0.4, delay: 0.1 });
+  const scrollRef = useGsapFadeIn<HTMLDivElement>({ y: 14, duration: 0.4, delay: 0.3 });
+  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.4, delay: 0.4 });
 
   // Parallax on scroll — background moves slower
   useEffect(() => {

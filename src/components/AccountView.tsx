@@ -105,7 +105,7 @@ export default function AccountView() {
   // GSAP fade-in for header
   const headerRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
   // Hero heading blur text
-  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.8, stagger: 0.05, start: 'top 90%' });
+  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
   // GoldDivider scale-in
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
@@ -120,10 +120,10 @@ export default function AccountView() {
   });
 
   // Count-up refs for each stat
-  const orderCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: 3, duration: 1.2, start: 'top 85%' });
-  const wishlistCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: safeWishlist.length, duration: 1.2, delay: 0.1, start: 'top 85%' });
-  const cartCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: cartCount, duration: 1.2, delay: 0.2, start: 'top 85%' });
-  const rewardsCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: user?.rewardsPoints ?? 0, duration: 1.5, delay: 0.3, start: 'top 85%' });
+  const orderCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: 3, duration: 0.8, start: 'top 85%' });
+  const wishlistCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: safeWishlist.length, duration: 0.8, delay: 0.1, start: 'top 85%' });
+  const cartCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: cartCount, duration: 0.8, delay: 0.2, start: 'top 85%' });
+  const rewardsCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: user?.rewardsPoints ?? 0, duration: 1.0, delay: 0.2, start: 'top 85%' });
 
   // Orders stagger
   const ordersRef = useGsapStagger<HTMLDivElement>({
