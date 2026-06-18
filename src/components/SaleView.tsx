@@ -369,20 +369,20 @@ export default function SaleView() {
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
 
           <h1
-            className="text-white font-bold leading-[1.15] mb-4 pt-2"
+            className="text-white font-bold leading-[1.15] mb-3 pt-2"
             style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             The Aura Sale
           </h1>
 
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent to-[#D4AF37]/60" />
-            <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-            <div className="w-12 sm:w-16 h-px bg-gradient-to-l from-transparent to-[#D4AF37]/60" />
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 sm:w-14 h-px bg-gradient-to-r from-transparent to-[#D4AF37]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+            <div className="w-10 sm:w-14 h-px bg-gradient-to-l from-transparent to-[#D4AF37]/60" />
           </div>
 
           <p
-            className="text-white/85 text-base sm:text-lg md:text-xl max-w-xl mx-auto leading-relaxed mb-10"
+            className="text-white/85 text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-5"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             Up to <span style={{ color: '#D4AF37', fontWeight: 600 }}>40% off</span> handcrafted lamps, ceramics, textiles, and greenery. Premium home decor, made affordable.
@@ -390,7 +390,7 @@ export default function SaleView() {
 
           {/* Countdown Timer — wrapped in a compact card for clearer separation */}
           <div className="w-full max-w-md rounded-xl p-3 sm:p-4 backdrop-blur-sm" style={{ backgroundColor: 'rgba(20,20,20,0.6)', border: '1px solid rgba(212, 175, 55, 0.25)' }}>
-            <div className="flex items-center justify-center gap-1.5 mb-2.5">
+            <div className="flex items-center justify-center gap-1.5 mb-2">
               <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" style={{ color: '#D4AF37' }} />
               <span
                 className="text-[9px] sm:text-[10px] uppercase tracking-[2.5px] font-semibold"
