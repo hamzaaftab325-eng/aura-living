@@ -508,7 +508,7 @@ export default function ShopView() {
       {/* Hero Banner */}
       <section
         ref={heroSectionRef}
-        className="relative w-full h-[40vh] sm:h-[50vh] md:h-[55vh] overflow-hidden flex items-center justify-center"
+        className="relative w-full h-[45vh] sm:h-[55vh] md:h-[60vh] overflow-hidden flex items-center justify-center"
       >
         {/* Background image */}
         <div

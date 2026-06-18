@@ -194,7 +194,7 @@ export default function AddressesView() {
   if (hydrated && !safeUser) {
     return (
       <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
-        <section className="relative w-full h-[40vh] sm:h-[45vh] overflow-hidden flex items-center justify-center">
+        <section className="relative w-full h-[45vh] sm:h-[50vh] overflow-hidden flex items-center justify-center">
           <div
             className="absolute inset-0"
             style={{
@@ -254,7 +254,7 @@ export default function AddressesView() {
   return (
     <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
       {/* Hero */}
-      <section className="relative w-full h-[40vh] sm:h-[45vh] md:h-[50vh] overflow-hidden flex items-center justify-center">
+      <section className="relative w-full h-[45vh] sm:h-[50vh] md:h-[55vh] overflow-hidden flex items-center justify-center">
         <div
           className="absolute inset-0"
           style={{

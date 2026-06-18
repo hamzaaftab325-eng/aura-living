@@ -189,7 +189,7 @@ export default function CartView() {
       {/* Hero */}
       <section
         ref={heroSectionRef}
-        className="relative w-full h-[35vh] sm:h-[45vh] overflow-hidden flex items-center justify-center"
+        className="relative w-full h-[40vh] sm:h-[50vh] overflow-hidden flex items-center justify-center"
       >
         <div
           ref={heroBgRef}

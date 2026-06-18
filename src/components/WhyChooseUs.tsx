@@ -11,26 +11,26 @@ import { GoldDivider } from '@/components/SVGDecorations';
 const features = [
   {
     icon: Truck,
-    title: 'Free Delivery',
-    description: 'On all orders above PKR 2,999 across Pakistan',
+    title: 'Complimentary Shipping',
+    description: 'Free doorstep delivery on every order above PKR 2,999, anywhere in Pakistan.',
     number: '01',
   },
   {
     icon: RotateCcw,
-    title: 'Easy Returns',
-    description: '7-day hassle-free returns & exchanges',
+    title: 'Effortless Returns',
+    description: 'Changed your mind? Enjoy 7-day no-questions-asked returns and exchanges.',
     number: '02',
   },
   {
     icon: Palette,
-    title: 'Handcrafted',
-    description: 'Artisan-made with love & attention to detail',
+    title: 'Artisan Crafted',
+    description: 'Every piece is shaped by skilled hands, carrying the soul of its maker.',
     number: '03',
   },
   {
     icon: MessageCircle,
-    title: '24/7 Support',
-    description: 'WhatsApp & phone support always available',
+    title: 'Always By Your Side',
+    description: 'Real people, real answers — reach us on WhatsApp, phone, or email, day or night.',
     number: '04',
   },
 ];
@@ -62,101 +62,67 @@ function DotPattern() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   Feature Card — Enhanced hover:
-   - Pulsing gold glow effect
-   - Icon rotates (5deg) and scales up on hover
-   - Card lifts and adds gold shadow
+   Feature Card — clean, modern, with subtle hover lift.
+   No overlapping offsets — every card sits on the same baseline.
    ═══════════════════════════════════════════════════════════ */
 interface FeatureCardProps {
   feature: (typeof features)[number];
-  offsetY: number;
 }
 
-function FeatureCard({ feature, offsetY }: FeatureCardProps) {
+function FeatureCard({ feature }: FeatureCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const IconComponent = feature.icon;
-
-  // useLayoutEffect runs synchronously after DOM mutation but before paint,
-  // so the user never sees the un-mounted state. Lint allows setState here
-  // because it's not the typical cascading-render pattern of useEffect.
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
-
-  // Only apply offsetY after mount to avoid hydration mismatch
-  const effectiveOffset = mounted ? offsetY : 0;
 
   return (
     <div
-      className="relative"
-      style={{ marginTop: `${effectiveOffset}px` }}
+      className="group relative h-full rounded-2xl overflow-hidden transition-all duration-300 cursor-default"
+      style={{
+        background: '#FFFDF7',
+        border: '1px solid #E8D5A3',
+        transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
+        boxShadow: isHovered
+          ? '0 16px 40px rgba(212, 175, 55, 0.18), 0 0 0 1px rgba(212, 175, 55, 0.25)'
+          : '0 2px 12px rgba(0, 0, 0, 0.04)',
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Floating gold number behind the card */}
+      {/* Gold top accent line that grows on hover */}
+      <div
+        className="absolute top-0 left-0 h-[3px] transition-all duration-500 ease-out"
+        style={{
+          width: isHovered ? '100%' : '0%',
+          background: 'linear-gradient(90deg, #D4AF37, #E8D5A3)',
+        }}
+      />
+
+      {/* Floating gold number in corner */}
       <span
-        className="absolute -top-6 -right-2 sm:-top-8 sm:-right-4 select-none pointer-events-none z-0"
+        className="absolute top-4 right-5 select-none pointer-events-none z-0 transition-all duration-300"
         style={{
           fontFamily: "'Playfair Display', serif",
-          fontSize: '4rem',
+          fontSize: '3.5rem',
           lineHeight: 1,
-          color: 'rgba(212, 175, 55, 0.12)',
+          color: isHovered ? 'rgba(212, 175, 55, 0.18)' : 'rgba(212, 175, 55, 0.08)',
         }}
       >
         {feature.number}
       </span>
 
-      <div
-        className="relative z-10 p-6 sm:p-8 rounded-xl cursor-default overflow-hidden transition-all duration-350"
-        style={{
-          background: 'rgba(255, 253, 247, 0.6)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(212, 175, 55, 0.15)',
-          borderLeft: '4px solid #D4AF37',
-          transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
-          boxShadow: isHovered
-            ? '0 12px 40px rgba(212, 175, 55, 0.25), 0 0 0 1px rgba(212, 175, 55, 0.3), 0 0 20px rgba(212,175,55,0.15)'
-            : '0 4px 20px rgba(0,0,0,0.05)',
-          animation: isHovered ? 'pulseGoldGlow 2s ease-in-out infinite' : 'none',
-        }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {/* Gold glow background on hover */}
-        <div
-          className="absolute inset-0 rounded-xl pointer-events-none transition-opacity duration-400"
-          style={{
-            background: 'radial-gradient(ellipse at 30% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 70%)',
-            opacity: isHovered ? 1 : 0,
-          }}
-        />
-
-        {/* Icon in gold circle — rotates 5deg and scales up on hover */}
-        <div className="relative mb-5">
+      <div className="relative z-10 p-6 sm:p-7 flex flex-col h-full">
+        {/* Icon in gold circle */}
+        <div className="mb-5">
           <div
-            className="absolute -inset-2 rounded-full pointer-events-none transition-all duration-400"
+            className="relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300"
             style={{
-              background: 'radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, transparent 70%)',
-              opacity: isHovered ? 1 : 0.4,
-              transform: isHovered ? 'scale(1.15)' : 'scale(1)',
-            }}
-          />
-          <div
-            className="relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-400"
-            style={{
-              backgroundColor: '#F5EDDA',
-              transform: isHovered
-                ? 'rotate(5deg) scale(1.1)'
-                : 'rotate(0deg) scale(1)',
+              backgroundColor: isHovered ? '#D4AF37' : '#F5EDDA',
+              transform: isHovered ? 'scale(1.08)' : 'scale(1)',
+              boxShadow: isHovered ? '0 8px 20px rgba(212, 175, 55, 0.35)' : 'none',
             }}
           >
             <IconComponent
-              className="w-5 h-5 transition-all duration-300"
-              style={{
-                color: '#D4AF37',
-                transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-              }}
+              className="w-6 h-6 transition-colors duration-300"
+              style={{ color: isHovered ? '#FFFFFF' : '#D4AF37' }}
             />
           </div>
         </div>
@@ -172,7 +138,7 @@ function FeatureCard({ feature, offsetY }: FeatureCardProps) {
         </h3>
 
         <p
-          className="text-sm leading-relaxed"
+          className="text-sm leading-relaxed flex-1"
           style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
         >
           {feature.description}
@@ -192,22 +158,13 @@ export default function WhyChooseUs() {
   // Enhanced stagger with y:50, stagger:0.1, start:'top 85%'
   const cardsRef = useGsapStagger<HTMLDivElement>({ y: 50, stagger: 0.1, duration: 0.6, start: 'top 85%' });
 
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 1024);
-    check();
-    window.addEventListener('resize', check, { passive: true });
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
   // Scale on scroll
   const sectionContentRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = sectionContentRef.current;
     if (!el) return;
 
-    gsap.set(el, { scale: 0.95 });
+    gsap.set(el, { scale: 0.97 });
     const trigger = ScrollTrigger.create({
       trigger: el,
       start: 'top 90%',
@@ -221,40 +178,52 @@ export default function WhyChooseUs() {
     };
   }, []);
 
-  const getOffsetY = (i: number): number => {
-    // Staggered offsets only on desktop — FeatureCard handles hydration safety
-    if (!isDesktop) return 0;
-    const offsets = [0, -32, 20, -24];
-    return offsets[i] ?? 0;
-  };
-
   return (
     <section
-      className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
       style={{ backgroundColor: '#F2EDE4' }}
     >
       <DotPattern />
 
       <div ref={sectionContentRef} className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-14 sm:mb-16">
+          {/* Eyebrow */}
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="w-8 h-px bg-[#D4AF37]/50" />
+            <span
+              className="text-[11px] font-semibold uppercase tracking-[0.25em]"
+              style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+            >
+              The Aura Promise
+            </span>
+            <div className="w-8 h-px bg-[#D4AF37]/50" />
+          </div>
+
           <h2
             ref={headingRef}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3"
             style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
           >
-            Why Choose Aura Living
+            Why Discerning Homes Choose Aura
           </h2>
-          <div className="mt-4">
+
+          <p
+            className="text-sm sm:text-base max-w-xl mx-auto mt-4"
+            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+          >
+            Four promises we live by, so your home can be lived in beautifully.
+          </p>
+
+          <div className="mt-6">
             <GoldDivider />
           </div>
         </div>
 
-        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-7">
           {features.map((feature, i) => (
             <FeatureCard
               key={i}
               feature={feature}
-              offsetY={getOffsetY(i)}
             />
           ))}
         </div>

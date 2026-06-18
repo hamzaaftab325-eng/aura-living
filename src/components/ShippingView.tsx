@@ -79,7 +79,7 @@ export default function ShippingView() {
   return (
     <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
       {/* Hero */}
-      <section className="relative w-full h-[40vh] sm:h-[50vh] md:h-[55vh] overflow-hidden flex items-center justify-center">
+      <section className="relative w-full h-[45vh] sm:h-[55vh] md:h-[60vh] overflow-hidden flex items-center justify-center">
         <div
           className="absolute inset-0"
           style={{

@@ -275,7 +275,7 @@ export default function CheckoutView() {
           />
           <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
             <span
-              className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
+              className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-6 mt-2"
               style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
             >
               AURA LIVING
@@ -335,7 +335,7 @@ export default function CheckoutView() {
       {/* Hero */}
       <section
         ref={heroSectionRef}
-        className="relative w-full h-[35vh] sm:h-[45vh] overflow-hidden flex items-center justify-center"
+        className="relative w-full h-[40vh] sm:h-[50vh] overflow-hidden flex items-center justify-center"
       >
         {/* Background Image */}
         <div
@@ -380,7 +380,7 @@ export default function CheckoutView() {
           </nav>
 
           <span
-            className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
+            className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-6 mt-2"
             style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
           >
             AURA LIVING
@@ -391,7 +391,7 @@ export default function CheckoutView() {
           >
             Checkout
           </h1>
-          <div className="flex items-center gap-3 mt-5">
+          <div className="flex items-center gap-3 mt-6">
             <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
             <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
             <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />

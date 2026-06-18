@@ -239,10 +239,10 @@ export default function SaleView() {
         </span>
       </div>
 
-      {/* Hero Banner */}
+      {/* Hero Banner — cleaner overlay so busy background doesn't fight the text */}
       <section
         ref={heroBgRef}
-        className="relative w-full h-[45vh] sm:h-[50vh] md:h-[55vh] overflow-hidden flex items-center justify-center"
+        className="relative w-full min-h-[60vh] sm:min-h-[65vh] md:min-h-[70vh] overflow-hidden flex items-center justify-center py-16 sm:py-20"
       >
         {/* Background image */}
         <div
@@ -255,12 +255,20 @@ export default function SaleView() {
             backgroundRepeat: 'no-repeat',
           }}
         />
-        {/* Gradient overlay */}
+        {/* Stronger dark gradient overlay so text always reads clearly */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
+              'linear-gradient(180deg, rgba(20,20,20,0.85) 0%, rgba(20,20,20,0.75) 50%, rgba(20,20,20,0.9) 100%)',
+          }}
+        />
+        {/* Subtle gold tint to make it feel premium */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%)',
           }}
         />
 
@@ -280,9 +288,9 @@ export default function SaleView() {
           }}
         />
 
-        <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
+        <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 mb-6 breadcrumb-animate">
+          <nav className="flex items-center gap-2 mb-8 breadcrumb-animate">
             <button
               onClick={() => setPage('home')}
               className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
@@ -299,36 +307,41 @@ export default function SaleView() {
             </span>
           </nav>
 
-          <div className="flex items-center gap-3 mb-4">
-            <Tag className="w-7 h-7 sm:w-8 sm:h-8" style={{ color: '#D4AF37' }} />
+          {/* Eyebrow badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', border: '1px solid rgba(212, 175, 55, 0.3)' }}>
+            <Tag className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
+            <span className="text-[11px] font-semibold uppercase tracking-[2.5px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+              Limited Time Event
+            </span>
           </div>
+
           <h1
-            className="text-white text-[36px] sm:text-[44px] md:text-[52px] font-bold leading-tight"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            className="text-white text-[44px] sm:text-[56px] md:text-[72px] font-bold leading-[1.05] mb-4"
+            style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 30px rgba(0,0,0,0.4)' }}
           >
-            Sale
+            The Aura Sale
           </h1>
 
-          <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent to-[#D4AF37]/60" />
+            <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+            <div className="w-12 sm:w-16 h-px bg-gradient-to-l from-transparent to-[#D4AF37]/60" />
           </div>
 
           <p
-            className="text-white/70 text-base sm:text-lg max-w-lg mx-auto mt-4 leading-relaxed"
+            className="text-white/85 text-base sm:text-lg md:text-xl max-w-xl mx-auto leading-relaxed mb-10"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
-            Limited time offers on premium home decor
+            Up to <span style={{ color: '#D4AF37', fontWeight: 600 }}>40% off</span> handcrafted lamps, ceramics, textiles, and greenery. Premium home decor, made affordable.
           </p>
 
-          {/* Countdown Timer */}
-          <div className="mt-8 flex flex-col items-center">
-            <div className="flex items-center gap-2 mb-3">
+          {/* Countdown Timer — wrapped in a card for clearer separation */}
+          <div className="w-full max-w-xl rounded-2xl p-5 sm:p-6 backdrop-blur-sm" style={{ backgroundColor: 'rgba(20,20,20,0.6)', border: '1px solid rgba(212, 175, 55, 0.25)' }}>
+            <div className="flex items-center justify-center gap-2 mb-4">
               <Clock className="w-4 h-4" style={{ color: '#D4AF37' }} />
               <span
-                className="text-xs sm:text-sm uppercase tracking-widest"
-                style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255,255,255,0.7)' }}
+                className="text-[11px] sm:text-xs uppercase tracking-[3px] font-semibold"
+                style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
               >
                 Sale Ends In
               </span>

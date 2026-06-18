@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, Sparkles } from 'lucide-react';
+import { Send, Sparkles, Gift, Mail, ShieldCheck } from 'lucide-react';
 import { useGsapFadeIn, useGsapBlurText, gsap, ScrollTrigger } from '@/hooks/useGsap';
 import PremiumButton from '@/components/ui/PremiumButton';
 
@@ -141,232 +141,212 @@ export default function NewsletterSection() {
         </span>
       </div>
 
-      {/* ── Main Content ── */}
-      <div ref={sectionContentRef} className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-start gap-10 md:gap-16">
-          {/* ── Left Side (60%) ── */}
-          <div className="w-full md:w-[60%] pt-4">
-            {/* Small eyebrow */}
-            <div ref={eyebrowRef} className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-              <span
-                className="text-[11px] font-semibold uppercase tracking-[0.2em]"
-                style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
-              >
-                Exclusive Offer
-              </span>
-            </div>
-
-            {/* Main heading with blur text animation */}
-            <h2
-              ref={headingRef}
-              className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-bold leading-[1.1] tracking-tight"
-              style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+      {/* ── Main Content — single centered column for cleaner look ── */}
+      <div ref={sectionContentRef} className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header — centered */}
+        <div className="text-center mb-10">
+          {/* Eyebrow badge */}
+          <div ref={eyebrowRef} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', border: '1px solid rgba(212, 175, 55, 0.3)' }}>
+            <Gift className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
+            <span
+              className="text-[11px] font-semibold uppercase tracking-[0.2em]"
+              style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
             >
-              Join the Aura Family
-            </h2>
-
-            {/* Gold underline for "Aura Family" */}
-            <div
-              className="mt-2 h-[3px] bg-[#D4AF37]/40 rounded-full"
-              style={{ width: 'min(200px, 60%)' }}
-            />
-
-            {/* Decorative divider */}
-            <div ref={dividerRef} className="flex items-center gap-2 mt-6 mb-5">
-              <div className="w-12 h-px bg-[#D4AF37]/50" />
-              <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-              <div className="w-20 h-px bg-[#D4AF37]/30" />
-            </div>
-
-            {/* Description */}
-            <p
-              ref={descRef}
-              className="text-base sm:text-lg leading-relaxed max-w-md"
-              style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
-            >
-              Get 15% off your first order plus exclusive access to new arrivals, seasonal
-              collections, and members-only styling tips delivered to your inbox.
-            </p>
-
-            {/* Social proof line */}
-            <div ref={socialProofRef} className="mt-6 flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {['#D4AF37', '#A8B5A0', '#E8CEC1', '#B8A99A'].map((bg, i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full border-2 border-[#F5EDDA] flex items-center justify-center text-[9px] font-bold text-white"
-                    style={{ backgroundColor: bg, fontFamily: "'Poppins', sans-serif" }}
-                  >
-                    {['AK', 'OF', 'SM', 'FN'][i]}
-                  </div>
-                ))}
-              </div>
-              <span
-                className="text-xs"
-                style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
-              >
-                Joined by 2,400+ members
-              </span>
-            </div>
+              Your Invitation Awaits
+            </span>
           </div>
 
-          {/* ── Right Side (40%) — Glassmorphism Card ── */}
-          <div className="w-full md:w-[40%]">
+          {/* Main heading */}
+          <h2
+            ref={headingRef}
+            className="text-[32px] sm:text-[40px] md:text-[48px] font-bold leading-[1.1] tracking-tight"
+            style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+          >
+            Become Part of the Aura Family
+          </h2>
+
+          {/* Decorative divider */}
+          <div ref={dividerRef} className="flex items-center justify-center gap-2 mt-6 mb-5">
+            <div className="w-12 h-px bg-[#D4AF37]/50" />
+            <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+            <div className="w-20 h-px bg-[#D4AF37]/30" />
+          </div>
+
+          {/* Description */}
+          <p
+            ref={descRef}
+            className="text-base sm:text-lg leading-relaxed max-w-xl mx-auto"
+            style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+          >
+            Unlock <span style={{ color: '#D4AF37', fontWeight: 600 }}>15% off</span> your first order, plus first access to new arrivals, members-only sales, and styling notes from our curators.
+          </p>
+
+          {/* Social proof */}
+          <div ref={socialProofRef} className="mt-6 flex items-center justify-center gap-3">
+            <div className="flex -space-x-2">
+              {['#D4AF37', '#A8B5A0', '#E8CEC1', '#B8A99A'].map((bg, i) => (
+                <div
+                  key={i}
+                  className="w-8 h-8 rounded-full border-2 border-[#F5EDDA] flex items-center justify-center text-[9px] font-bold text-white"
+                  style={{ backgroundColor: bg, fontFamily: "'Poppins', sans-serif" }}
+                >
+                  {['AK', 'OF', 'SM', 'FN'][i]}
+                </div>
+              ))}
+            </div>
+            <span
+              className="text-xs sm:text-sm"
+              style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+            >
+              Loved by 2,400+ Pakistani homes
+            </span>
+          </div>
+        </div>
+
+        {/* ── Email Form Card ── */}
+        <div
+          ref={cardRef}
+          className="relative rounded-2xl p-6 sm:p-8 md:p-10"
+          style={{
+            backgroundColor: 'rgba(255, 253, 247, 0.85)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(212, 175, 55, 0.25)',
+            boxShadow: '0 12px 40px rgba(212, 175, 55, 0.1), inset 0 1px 0 rgba(255,255,255,0.5)',
+          }}
+        >
+          {/* Card shimmer overlay — CSS animation */}
+          <div
+            className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden"
+            style={{
+              background:
+                'linear-gradient(105deg, transparent 40%, rgba(212,175,55,0.07) 45%, rgba(212,175,55,0.12) 50%, rgba(212,175,55,0.07) 55%, transparent 60%)',
+              backgroundSize: '200% 100%',
+              animation: 'newsletterShimmer 4s ease-in-out infinite',
+            }}
+          />
+
+          {/* Card header */}
+          <div className="text-center mb-6">
             <div
-              ref={cardRef}
-              className="relative rounded-2xl p-8 sm:p-10"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mb-4"
               style={{
-                backgroundColor: 'rgba(255, 253, 247, 0.55)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
+                backgroundColor: 'rgba(212, 175, 55, 0.12)',
                 border: '1px solid rgba(212, 175, 55, 0.2)',
-                boxShadow:
-                  '0 8px 32px rgba(212, 175, 55, 0.08), inset 0 1px 0 rgba(255,255,255,0.5)',
               }}
             >
-              {/* Card shimmer overlay — CSS animation */}
-              <div
-                className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden"
+              <span
+                className="text-[10px] font-bold uppercase tracking-widest"
+                style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+              >
+                15% Welcome Gift
+              </span>
+            </div>
+            <h3
+              className="text-xl sm:text-2xl font-bold"
+              style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+            >
+              Claim Your Discount
+            </h3>
+          </div>
+
+          {/* Email Form with floating label */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="relative">
+              <label
+                htmlFor="newsletter-email"
+                className="absolute left-5 pointer-events-none transition-all duration-300 ease-out z-10"
                 style={{
-                  background:
-                    'linear-gradient(105deg, transparent 40%, rgba(212,175,55,0.07) 45%, rgba(212,175,55,0.12) 50%, rgba(212,175,55,0.07) 55%, transparent 60%)',
-                  backgroundSize: '200% 100%',
-                  animation: 'newsletterShimmer 4s ease-in-out infinite',
+                  fontFamily: "'Poppins', sans-serif",
+                  top: shouldFloatLabel ? '6px' : '50%',
+                  transform: shouldFloatLabel ? 'translateY(0)' : 'translateY(-50%)',
+                  fontSize: shouldFloatLabel ? '10px' : '14px',
+                  color: shouldFloatLabel ? '#D4AF37' : '#B8A99A',
+                  fontWeight: shouldFloatLabel ? 600 : 400,
+                  letterSpacing: shouldFloatLabel ? '0.05em' : '0',
+                }}
+              >
+                Email address
+              </label>
+              <input
+                id="newsletter-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                placeholder={shouldFloatLabel ? '' : 'Enter your email address'}
+                required
+                className="w-full px-5 py-4 rounded-lg text-sm placeholder:text-[#B8A99A] outline-none"
+                style={{
+                  fontFamily: "'Poppins', sans-serif",
+                  color: '#2C2C2C',
+                  backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                  border: isFocused
+                    ? '2px solid #D4AF37'
+                    : '1.5px solid rgba(212, 175, 55, 0.3)',
+                  boxShadow: isFocused
+                    ? '0 0 20px rgba(212,175,55,0.3), 0 0 40px rgba(212,175,55,0.1)'
+                    : '0 2px 8px rgba(0,0,0,0.04)',
+                  backdropFilter: 'blur(4px)',
+                  WebkitBackdropFilter: 'blur(4px)',
+                  transition: 'border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease',
+                  paddingTop: shouldFloatLabel ? '26px' : '16px',
+                  paddingBottom: shouldFloatLabel ? '10px' : '16px',
                 }}
               />
+            </div>
 
-              {/* Card header */}
-              <div className="text-center mb-6">
-                <div
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mb-4"
-                  style={{
-                    backgroundColor: 'rgba(212, 175, 55, 0.12)',
-                    border: '1px solid rgba(212, 175, 55, 0.2)',
-                  }}
-                >
-                  <span
-                    className="text-[10px] font-bold uppercase tracking-widest"
-                    style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
-                  >
-                    15% Welcome Discount
-                  </span>
-                </div>
-                <h3
-                  className="text-xl font-bold"
-                  style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
-                >
-                  Subscribe & Save
-                </h3>
-              </div>
-
-              {/* Email Form with floating label */}
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="relative">
-                  {/* Floating label */}
-                  <label
-                    htmlFor="newsletter-email"
-                    className="absolute left-5 pointer-events-none transition-all duration-300 ease-out z-10"
-                    style={{
-                      fontFamily: "'Poppins', sans-serif",
-                      top: shouldFloatLabel ? '6px' : '50%',
-                      transform: shouldFloatLabel ? 'translateY(0)' : 'translateY(-50%)',
-                      fontSize: shouldFloatLabel ? '10px' : '14px',
-                      color: shouldFloatLabel ? '#D4AF37' : '#B8A99A',
-                      fontWeight: shouldFloatLabel ? 600 : 400,
-                      letterSpacing: shouldFloatLabel ? '0.05em' : '0',
-                    }}
-                  >
-                    Email address
-                  </label>
-                  <input
-                    id="newsletter-email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onFocus={() => setIsFocused(true)}
-                    onBlur={() => setIsFocused(false)}
-                    placeholder={shouldFloatLabel ? '' : 'Enter your email address'}
-                    required
-                    className="w-full px-5 py-4 rounded-lg text-sm placeholder:text-[#B8A99A] outline-none"
-                    style={{
-                      fontFamily: "'Poppins', sans-serif",
-                      color: '#2C2C2C',
-                      backgroundColor: 'rgba(255, 255, 255, 0.7)',
-                      border: isFocused
-                        ? '2px solid #D4AF37'
-                        : '1.5px solid rgba(212, 175, 55, 0.3)',
-                      boxShadow: isFocused
-                        ? '0 0 20px rgba(212,175,55,0.3), 0 0 40px rgba(212,175,55,0.1)'
-                        : '0 2px 8px rgba(0,0,0,0.04)',
-                      backdropFilter: 'blur(4px)',
-                      WebkitBackdropFilter: 'blur(4px)',
-                      transition:
-                        'border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease',
-                      paddingTop: shouldFloatLabel ? '26px' : '16px',
-                      paddingBottom: shouldFloatLabel ? '10px' : '16px',
-                    }}
-                  />
-                  {/* Focus indicator line */}
-                  <div
-                    className="absolute bottom-0 left-1/2 h-[2px] bg-[#D4AF37] rounded-full"
-                    style={{
-                      width: isFocused ? '60%' : '0%',
-                      transform: 'translateX(-50%)',
-                      transition: 'width 0.4s ease',
-                    }}
-                  />
-                </div>
-
-                {/* Subscribe Button with enhanced shimmer */}
-                <div className="relative overflow-hidden rounded-sm">
-                  <PremiumButton
-                    variant="gold"
-                    fullWidth
-                    type="submit"
-                  >
-                    <Send className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                    Subscribe
-                  </PremiumButton>
-                  {/* Extra shimmer sweep overlay on button */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background:
-                        'linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.3) 45%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.3) 55%, transparent 70%)',
-                      backgroundSize: '250% 100%',
-                      animation: 'btnShimmerSlide 2.5s ease-in-out infinite',
-                    }}
-                  />
-                </div>
-              </form>
-
-              {/* Success message */}
-              {submitted && (
-                <div
-                  className="mt-4 p-3 rounded-lg text-center"
-                  style={{
-                    backgroundColor: 'rgba(212, 175, 55, 0.1)',
-                    border: '1px solid rgba(212, 175, 55, 0.2)',
-                  }}
-                >
-                  <p
-                    className="text-sm font-medium"
-                    style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
-                  >
-                    Welcome! Check your inbox for your 15% discount code.
-                  </p>
-                </div>
-              )}
-
-              {/* Privacy text */}
-              <p
-                className="mt-4 text-center text-[11px] leading-relaxed"
-                style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+            {/* Subscribe Button */}
+            <div className="relative overflow-hidden rounded-sm">
+              <PremiumButton
+                variant="gold"
+                fullWidth
+                type="submit"
               >
-                No spam, unsubscribe anytime. We respect your privacy.
+                <Send className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                Claim My 15% Off
+              </PremiumButton>
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    'linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.3) 45%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.3) 55%, transparent 70%)',
+                  backgroundSize: '250% 100%',
+                  animation: 'btnShimmerSlide 2.5s ease-in-out infinite',
+                }}
+              />
+            </div>
+          </form>
+
+          {/* Success message */}
+          {submitted && (
+            <div
+              className="mt-4 p-3 rounded-lg text-center"
+              style={{
+                backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                border: '1px solid rgba(212, 175, 55, 0.2)',
+              }}
+            >
+              <p
+                className="text-sm font-medium"
+                style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+              >
+                Welcome to the family! Your 15% welcome code is on its way.
               </p>
             </div>
+          )}
+
+          {/* Trust signals */}
+          <div className="mt-5 pt-5 flex items-center justify-center gap-4 flex-wrap" style={{ borderTop: '1px solid rgba(232, 213, 163, 0.4)' }}>
+            <span className="inline-flex items-center gap-1 text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+              <ShieldCheck className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
+              No spam, unsubscribe anytime
+            </span>
+            <span className="inline-flex items-center gap-1 text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+              <Mail className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
+              We respect your privacy
+            </span>
           </div>
         </div>
       </div>
