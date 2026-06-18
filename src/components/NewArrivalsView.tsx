@@ -154,7 +154,7 @@ export default function NewArrivalsView() {
       {/* Hero Banner */}
       <section
         ref={heroBgRef}
-        className="relative w-full h-[45vh] sm:h-[50vh] md:h-[55vh] overflow-hidden flex items-center justify-center"
+        className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center"
       >
         {/* Background image */}
         <div

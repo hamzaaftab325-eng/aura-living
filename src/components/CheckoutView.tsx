@@ -253,7 +253,7 @@ export default function CheckoutView() {
         {/* Hero */}
         <section
           ref={heroSectionRef}
-          className="relative w-full h-[40vh] sm:h-[50vh] overflow-hidden flex items-center justify-center"
+          className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center"
         >
           {/* Background Image */}
           <div
@@ -335,7 +335,7 @@ export default function CheckoutView() {
       {/* Hero */}
       <section
         ref={heroSectionRef}
-        className="relative w-full h-[40vh] sm:h-[50vh] overflow-hidden flex items-center justify-center"
+        className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center"
       >
         {/* Background Image */}
         <div

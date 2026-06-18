@@ -18,6 +18,7 @@ import {
   ShoppingBag,
   Clock,
   AlertTriangle,
+  X,
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { products, formatPKR } from '@/data/products';
@@ -157,6 +158,19 @@ export default function SaleView() {
     []
   );
 
+  // Urgency popup state — appears after mount, auto-hides after 5 seconds
+  const [showUrgencyPopup, setShowUrgencyPopup] = useState(false);
+  useEffect(() => {
+    // Show popup shortly after page mount
+    const showTimer = setTimeout(() => setShowUrgencyPopup(true), 600);
+    // Auto-hide after 5 seconds of being visible
+    const hideTimer = setTimeout(() => setShowUrgencyPopup(false), 5600);
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
+  }, []);
+
   // Hero entrance with useGsapStagger
   const heroRef = useGsapStagger<HTMLDivElement>({
     y: 40,
@@ -225,18 +239,57 @@ export default function SaleView() {
 
   return (
     <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
-      {/* Urgency Banner */}
+      {/* Urgency Popup — auto-appears bottom-right and hides after 5 seconds */}
       <div
-        className="w-full py-2.5 px-4 flex items-center justify-center gap-2 animate-urgency-pulse"
-        style={{ backgroundColor: '#DC2626' }}
+        className="fixed bottom-6 right-6 z-[80] transition-all duration-500 ease-out"
+        style={{
+          transform: showUrgencyPopup ? 'translateY(0) scale(1)' : 'translateY(120%) scale(0.9)',
+          opacity: showUrgencyPopup ? 1 : 0,
+          pointerEvents: showUrgencyPopup ? 'auto' : 'none',
+        }}
       >
-        <AlertTriangle className="w-4 h-4 text-white flex-shrink-0" />
-        <span
-          className="text-white text-xs sm:text-sm font-semibold tracking-wide uppercase"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
+        <div
+          className="rounded-2xl shadow-2xl overflow-hidden max-w-[300px] sm:max-w-[340px]"
+          style={{
+            background: 'linear-gradient(135deg, #DC2626 0%, #B91C1C 100%)',
+            border: '1px solid rgba(255,255,255,0.15)',
+            boxShadow: '0 12px 40px rgba(220, 38, 38, 0.35)',
+          }}
         >
-          Hurry, limited stock!
-        </span>
+          {/* Gold top accent */}
+          <div className="h-[3px] w-full" style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }} />
+
+          <div className="p-4 sm:p-5 flex items-start gap-3">
+            <div
+              className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
+              style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
+            >
+              <AlertTriangle className="w-5 h-5 text-white" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p
+                className="text-white text-sm font-bold mb-0.5"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
+              >
+                Hurry, limited stock!
+              </p>
+              <p
+                className="text-white/85 text-xs leading-relaxed"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
+              >
+                Sale items are selling fast. Grab your favourites before they&apos;re gone.
+              </p>
+            </div>
+            <button
+              onClick={() => setShowUrgencyPopup(false)}
+              className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors hover:bg-white/20 cursor-pointer"
+              style={{ color: 'rgba(255,255,255,0.7)' }}
+              aria-label="Dismiss"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Hero Banner — cleaner overlay so busy background doesn't fight the text */}

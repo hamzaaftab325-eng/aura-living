@@ -124,6 +124,7 @@ export default function Navbar() {
   const [previewItem, setPreviewItem] = useState<MegaMenuItem | null>(null);
   const [cursorPos, setCursorPos] = useState({ left: 0, width: 0, opacity: 0 });
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   // ── Refs ──
   const navItemRefs = useRef<Map<string, HTMLLIElement>>(new Map());
@@ -145,6 +146,14 @@ export default function Navbar() {
   const wishlistCount = hydrated ? wishlist.length : 0;
 
   // ── Effects ──
+  // Scroll detection — shrink navbar after scrolling 60px
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 60);
+    handleScroll(); // Initialize on mount
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   // Logo entrance animation
   useEffect(() => {
     if (logoRef.current) {
@@ -281,25 +290,33 @@ export default function Navbar() {
           DESKTOP NAV — Pill container with logo + links + actions
           ═══════════════════════════════════════════════════════════ */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{ background: 'transparent' }}
       >
-        <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-6 pt-3 sm:pt-4">
+        <div
+          className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-6 transition-all duration-300"
+          style={{ paddingTop: scrolled ? '8px' : '14px', paddingBottom: scrolled ? '4px' : '8px' }}
+        >
 
           {/* Pill container — NO hover handlers (mega menu is click-only now) */}
           <div
-            className="relative flex items-center justify-between rounded-full px-4 sm:px-5 py-2.5 sm:py-3"
+            className="relative flex items-center justify-between rounded-full transition-all duration-300 ease-out"
             style={{
               backgroundColor: '#2C2C2C',
-              border: '1px solid rgba(212, 175, 55, 0.3)',
+              border: scrolled ? '1px solid rgba(212, 175, 55, 0.4)' : '1px solid rgba(212, 175, 55, 0.3)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
+              paddingLeft: scrolled ? '14px' : '16px',
+              paddingRight: scrolled ? '14px' : '16px',
+              paddingTop: scrolled ? '8px' : '10px',
+              paddingBottom: scrolled ? '8px' : '12px',
+              boxShadow: scrolled ? '0 8px 24px rgba(0,0,0,0.25)' : 'none',
             }}
           >
             {/* Logo */}
             <div
               ref={logoRef}
-              className="cursor-pointer shrink-0 outline-none"
+              className="cursor-pointer shrink-0 outline-none transition-all duration-300"
               onClick={() => handleNavClick('home')}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleNavClick('home'); } }}
               role="button"
@@ -309,7 +326,12 @@ export default function Navbar() {
               <img
                 src="/logo/default-monochrome-gold-white.svg"
                 alt="Aura Living"
-                style={{ height: 'clamp(50px, 8vw, 80px)', width: 'auto', objectFit: 'contain' }}
+                style={{
+                  height: scrolled ? 'clamp(38px, 6vw, 52px)' : 'clamp(46px, 7vw, 64px)',
+                  width: 'auto',
+                  objectFit: 'contain',
+                  transition: 'height 0.3s ease-out',
+                }}
               />
             </div>
 
@@ -325,10 +347,15 @@ export default function Navbar() {
                     <li
                       key={link.label}
                       ref={(el) => { if (el) navItemRefs.current.set(link.label, el); }}
-                      className="relative z-10 block cursor-pointer px-6 py-3 text-base uppercase font-medium transition-colors duration-200 select-none"
+                      className="relative z-10 block cursor-pointer uppercase font-medium transition-all duration-300 select-none"
                       style={{
                         fontFamily: "'Poppins', sans-serif",
                         color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.85)',
+                        paddingLeft: scrolled ? '20px' : '24px',
+                        paddingRight: scrolled ? '20px' : '24px',
+                        paddingTop: scrolled ? '8px' : '12px',
+                        paddingBottom: scrolled ? '8px' : '12px',
+                        fontSize: scrolled ? '13px' : '15px',
                       }}
                       onMouseEnter={() => {
                         setHoveredLink(link.label);
@@ -388,8 +415,8 @@ export default function Navbar() {
             {/* Action icons — inside pill */}
             <div className="flex items-center gap-1 sm:gap-1.5">
               <button
-                className="p-3 rounded-full transition-colors duration-200 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+                className="rounded-full transition-all duration-300 hover:bg-white/10"
+                style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '8px' : '12px' }}
                 aria-label="Search"
                 onClick={() => setSearchOpen(true)}
               >
@@ -397,8 +424,8 @@ export default function Navbar() {
               </button>
 
               <button
-                className="relative hidden sm:flex p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+                className="relative hidden sm:flex rounded-full transition-all duration-300 hover:bg-white/10"
+                style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '6px' : '8px' }}
                 aria-label="Wishlist"
                 onClick={() => handleNavClick('wishlist')}
               >
@@ -411,8 +438,8 @@ export default function Navbar() {
               </button>
 
               <button
-                className="relative p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+                className="relative rounded-full transition-all duration-300 hover:bg-white/10"
+                style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '6px' : '8px' }}
                 aria-label="Cart"
                 onClick={() => setCartOpen(true)}
               >
@@ -425,8 +452,8 @@ export default function Navbar() {
               </button>
 
               <button
-                className="hidden sm:flex p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+                className="hidden sm:flex rounded-full transition-all duration-300 hover:bg-white/10"
+                style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '6px' : '8px' }}
                 aria-label="Account"
                 onClick={() => handleNavClick('account')}
               >
@@ -434,8 +461,8 @@ export default function Navbar() {
               </button>
 
               <button
-                className="lg:hidden p-2 rounded-full transition-colors duration-200 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+                className="lg:hidden rounded-full transition-all duration-300 hover:bg-white/10"
+                style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '6px' : '8px' }}
                 aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
               >

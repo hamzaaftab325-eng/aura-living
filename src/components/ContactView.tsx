@@ -82,7 +82,7 @@ export default function ContactView() {
       {/* Hero Banner */}
       <section
         ref={heroSectionRef}
-        className="relative w-full h-[45vh] sm:h-[55vh] md:h-[60vh] overflow-hidden flex items-center justify-center"
+        className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center"
       >
         {/* Background image */}
         <div
