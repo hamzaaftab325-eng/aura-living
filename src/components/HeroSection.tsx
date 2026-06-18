@@ -75,7 +75,7 @@ export default function HeroSection() {
     <section
       ref={sectionRef}
       className="relative w-full overflow-hidden bg-[#2C2C2C] flex items-center justify-center"
-      style={{ height: '100vh', height: '100dvh' }}
+      style={{ height: '100dvh' }}
     >
       {/* ═══ Background video ═══ */}
       <div ref={bgRef} className="absolute inset-0 w-full h-[120%] -top-[10%]">

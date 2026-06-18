@@ -269,13 +269,15 @@ export default function Navbar() {
 
           {/* ═══ Single Pill Container — logo + links + actions ═══ */}
           <div
-            className="flex items-center justify-between rounded-full px-4 sm:px-5 py-2.5 sm:py-3"
+            className="relative flex items-center justify-between rounded-full px-4 sm:px-5 py-2.5 sm:py-3"
             style={{
-              backgroundColor: '#2C2C2C', border: '1px solid rgba(212, 175, 55, 0.3)',
+              backgroundColor: '#2C2C2C',
+              border: '1px solid rgba(212, 175, 55, 0.3)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
-              border: '1px solid rgba(212, 175, 55, 0.3)',
             }}
+            onMouseEnter={handleMegaMenuEnter}
+            onMouseLeave={handleMegaMenuLeave}
           >
             {/* Logo */}
             <div
