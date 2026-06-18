@@ -108,11 +108,11 @@ function SaleCountdown() {
   ];
 
   return (
-    <div className="flex items-stretch justify-center gap-2 sm:gap-3">
+    <div className="flex items-stretch justify-center gap-1.5 sm:gap-2">
       {units.map((unit, idx) => (
         <Fragment key={unit.label}>
           <div
-            className="relative flex flex-col items-center justify-center rounded-xl px-3 py-3 sm:px-5 sm:py-4 min-w-[64px] sm:min-w-[84px] transition-transform duration-300"
+            className="relative flex flex-col items-center justify-center rounded-lg px-2 py-1.5 sm:px-3 sm:py-2 min-w-[48px] sm:min-w-[62px] transition-transform duration-300"
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.08)',
               border: '1px solid rgba(212, 175, 55, 0.25)',
@@ -122,17 +122,17 @@ function SaleCountdown() {
           >
             {/* Gold top corner accent */}
             <div
-              className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px] w-8 sm:w-10"
+              className="absolute top-0 left-1/2 -translate-x-1/2 h-[1.5px] w-6 sm:w-8"
               style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}
             />
             <span
-              className={`text-2xl sm:text-3xl md:text-4xl font-bold tabular-nums leading-none ${unit.label === 'Secs' ? 'animate-countdown-pulse' : ''}`}
+              className={`text-base sm:text-xl md:text-2xl font-bold tabular-nums leading-none ${unit.label === 'Secs' ? 'animate-countdown-pulse' : ''}`}
               style={{ fontFamily: "'Playfair Display', serif", color: '#FFFFFF' }}
             >
               {String(unit.value).padStart(2, '0')}
             </span>
             <span
-              className="text-[9px] sm:text-[10px] uppercase tracking-[2px] mt-1.5 font-semibold"
+              className="text-[8px] sm:text-[9px] uppercase tracking-[1.5px] mt-1 font-semibold"
               style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
             >
               {unit.label}
@@ -141,7 +141,7 @@ function SaleCountdown() {
           {idx < units.length - 1 && (
             <div className="flex items-center justify-center">
               <span
-                className="text-xl sm:text-2xl font-bold"
+                className="text-sm sm:text-base font-bold"
                 style={{ fontFamily: "'Playfair Display', serif", color: 'rgba(212, 175, 55, 0.5)' }}
               >
                 :
@@ -388,12 +388,12 @@ export default function SaleView() {
             Up to <span style={{ color: '#D4AF37', fontWeight: 600 }}>40% off</span> handcrafted lamps, ceramics, textiles, and greenery. Premium home decor, made affordable.
           </p>
 
-          {/* Countdown Timer — wrapped in a card for clearer separation */}
-          <div className="w-full max-w-xl rounded-2xl p-5 sm:p-6 backdrop-blur-sm" style={{ backgroundColor: 'rgba(20,20,20,0.6)', border: '1px solid rgba(212, 175, 55, 0.25)' }}>
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Clock className="w-4 h-4" style={{ color: '#D4AF37' }} />
+          {/* Countdown Timer — wrapped in a compact card for clearer separation */}
+          <div className="w-full max-w-md rounded-xl p-3 sm:p-4 backdrop-blur-sm" style={{ backgroundColor: 'rgba(20,20,20,0.6)', border: '1px solid rgba(212, 175, 55, 0.25)' }}>
+            <div className="flex items-center justify-center gap-1.5 mb-2.5">
+              <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" style={{ color: '#D4AF37' }} />
               <span
-                className="text-[11px] sm:text-xs uppercase tracking-[3px] font-semibold"
+                className="text-[9px] sm:text-[10px] uppercase tracking-[2.5px] font-semibold"
                 style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
               >
                 Sale Ends In
