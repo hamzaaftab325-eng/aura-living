@@ -101,7 +101,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             ref={imageRef}
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+            className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
             style={{ transform: isHovered ? 'scale(1.12)' : 'scale(1)',
             }}
           loading="lazy" />
