@@ -88,7 +88,7 @@ function CategoryCard({
           alt={category.name}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           style={{ willChange: 'transform' }}
-        />
+        loading="lazy" />
       </div>
 
       {/* Dark gradient overlay — brighter on hover */}

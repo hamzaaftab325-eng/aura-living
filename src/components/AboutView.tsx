@@ -304,7 +304,7 @@ function KenBurnsImage({
         src={src}
         alt={alt}
         className="w-full h-full object-cover will-change-transform"
-      />
+      loading="lazy" />
     </div>
   );
 }
@@ -1011,7 +1011,7 @@ export default function AboutView() {
             <ChapterLabel number="01" />
             <AnimatedHeading
               text="The Beginning"
-              className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
+              className="aura-h2 text-charcoal leading-snug"
               
             />
             <ParagraphReveal
@@ -1095,7 +1095,7 @@ export default function AboutView() {
             <ChapterLabel number="02" />
             <AnimatedHeading
               text="The Artisans"
-              className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
+              className="aura-h2 text-charcoal leading-snug"
               
             />
             <ParagraphReveal
@@ -1139,7 +1139,7 @@ export default function AboutView() {
               What We Stand For
             </span>
             <h2
-              className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mt-3"
+              className="aura-h2 text-charcoal mt-3"
               
             >
               Our Core Values
@@ -1174,7 +1174,7 @@ export default function AboutView() {
             {statsData.map((stat) => (
               <div key={stat.label} className="text-center py-6">
                 <span
-                  className="text-3xl sm:text-4xl md:text-5xl font-bold block mb-2"
+                  className="aura-h2 text-charcoal block mb-2"
                   style={{ color: '#D4AF37',
                   }}
                 >
@@ -1211,7 +1211,7 @@ export default function AboutView() {
               Our Journey
             </span>
             <h2
-              className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mt-3"
+              className="aura-h2 text-charcoal mt-3"
               
             >
               Milestones
@@ -1251,7 +1251,7 @@ export default function AboutView() {
       >
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <h2
-            className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
+            className="aura-h2 text-charcoal mb-4"
             
           >
             Ready to Transform Your Space?

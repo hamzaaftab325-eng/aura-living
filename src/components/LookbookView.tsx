@@ -136,7 +136,7 @@ export default function LookbookView() {
             Home
           </button>
           <span className="text-sm" style={{ color: '#8A8A8A' }}>/</span>
-          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>Lookbook</span>
+          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>Lookbook</span>
         </div>
       </div>
 
@@ -181,7 +181,7 @@ export default function LookbookView() {
                     {/* Scene image */}
                     <div className="w-full lg:w-1/2">
                       <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden img-zoom">
-                        <img src={scene.image} alt={scene.title} className="w-full h-full object-cover lookbook-scene-image" />
+                        <img src={scene.image} alt={scene.title} className="w-full h-full object-cover lookbook-scene-image" loading="lazy" />
                         {/* Decorative corner accents */}
                         <div className="absolute top-4 left-4 w-10 h-10 border-t-2 border-l-2 border-[#D4AF37]/40" />
                         <div className="absolute bottom-4 right-4 w-10 h-10 border-b-2 border-r-2 border-[#D4AF37]/40" />

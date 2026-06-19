@@ -376,7 +376,7 @@ export default function SaleView() {
             className="text-white/85 text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-8"
             
           >
-            Up to <span style={{ color: '#D4AF37', fontWeight: 600 }}>40% off</span> handcrafted lamps, ceramics, textiles, and greenery. Premium home decor, made affordable.
+            Up to <span style={{ color: '#B8941F', fontWeight: 600 }}>40% off</span> handcrafted lamps, ceramics, textiles, and greenery. Premium home decor, made affordable.
           </p>
 
           {/* Countdown Timer — wrapped in a compact card for clearer separation */}
@@ -405,7 +405,7 @@ export default function SaleView() {
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
             Sale
           </span>
         </div>
@@ -492,8 +492,8 @@ export default function SaleView() {
                         tabIndex={0}
                         aria-label={`View ${product.name} details`}
                       >
-                        <img
-                          src={product.image}
+                        <img loading="lazy"
+        src={product.image}
                           alt={product.name}
                           className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.08] p-4"
                         />

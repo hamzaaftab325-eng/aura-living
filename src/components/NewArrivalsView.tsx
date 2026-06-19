@@ -225,7 +225,7 @@ export default function NewArrivalsView() {
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
             New Arrivals
           </span>
         </div>
@@ -309,8 +309,8 @@ export default function NewArrivalsView() {
                         tabIndex={0}
                         aria-label={`View ${product.name} details`}
                       >
-                        <img
-                          src={product.image}
+                        <img loading="lazy"
+        src={product.image}
                           alt={product.name}
                           className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.08] p-4"
                         />

@@ -207,8 +207,8 @@ function ProductCard({
       >
         {/* Image with zoom */}
         <div className="absolute inset-0 overflow-hidden" style={{ backgroundColor: '#FFFDF7' }}>
-          <img
-            src={product.image}
+          <img loading="lazy"
+        src={product.image}
             alt={product.name}
             className="w-full h-full object-contain"
             style={{ transition: 'transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
@@ -558,7 +558,7 @@ export default function ShopView() {
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
             Shop
           </span>
         </div>
@@ -626,26 +626,26 @@ export default function ShopView() {
                 {selectedCategory !== 'all' && (
                   <span
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
-                    style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.25)' }}
+                    style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#B8941F', border: '1px solid rgba(212,175,55,0.25)' }}
                   >
                     {categories.find((c) => c.id === selectedCategory)?.name}
                     <button onClick={() => setSelectedCategory('all')} className="hover:text-[#C9A22E]"><X size={12} /></button>
                   </span>
                 )}
                 {priceMin && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#B8941F', border: '1px solid rgba(212,175,55,0.25)' }}>
                     Min: {formatPKR(parseInt(priceMin, 10))}
                     <button onClick={() => setPriceMin('')} className="hover:text-[#C9A22E]"><X size={12} /></button>
                   </span>
                 )}
                 {priceMax && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#B8941F', border: '1px solid rgba(212,175,55,0.25)' }}>
                     Max: {formatPKR(parseInt(priceMax, 10))}
                     <button onClick={() => setPriceMax('')} className="hover:text-[#C9A22E]"><X size={12} /></button>
                   </span>
                 )}
                 {sortBy !== 'featured' && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#B8941F', border: '1px solid rgba(212,175,55,0.25)' }}>
                     {sortOptions.find((o) => o.value === sortBy)?.label}
                     <button onClick={() => setSortBy('featured')} className="hover:text-[#C9A22E]"><X size={12} /></button>
                   </span>

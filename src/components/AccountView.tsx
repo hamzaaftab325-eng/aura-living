@@ -328,7 +328,7 @@ export default function AccountView() {
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
             My Account
           </span>
         </div>
@@ -689,7 +689,7 @@ export default function AccountView() {
                 className="text-white/60 text-sm sm:text-base mb-5 max-w-md mx-auto leading-relaxed"
                 
               >
-                You have <span style={{ color: '#D4AF37', fontWeight: 600 }}>{user?.rewardsPoints ?? 0} points</span> — that is PKR {user?.rewardsPoints ?? 0} off your next order!
+                You have <span style={{ color: '#B8941F', fontWeight: 600 }}>{user?.rewardsPoints ?? 0} points</span> — that is PKR {user?.rewardsPoints ?? 0} off your next order!
               </p>
               <PremiumButton
                 variant="gold"

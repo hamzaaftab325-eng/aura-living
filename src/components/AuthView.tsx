@@ -336,7 +336,7 @@ export default function AuthView() {
       </div>
 
       {/* ═══ Right Panel — Form ═══ */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 sm:px-8 lg:px-16 py-8">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 sm:px-8 lg:px-16 pt-24 sm:pt-28 pb-8">
         {/* Breadcrumb */}
         <div className="w-full max-w-md mb-6">
           <nav className="flex items-center gap-1.5">
@@ -348,7 +348,7 @@ export default function AuthView() {
               Home
             </button>
             <ChevronRight size={12} style={{ color: '#8A8A8A' }} />
-            <span className="text-xs font-medium" style={{ color: '#D4AF37' }}>
+            <span className="text-xs font-medium" style={{ color: '#B8941F' }}>
               {mode === 'login' ? 'Sign In' : 'Create Account'}
             </span>
           </nav>

@@ -221,7 +221,7 @@ export default function FAQView() {
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#8A8A8A' }} />
-          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>FAQ</span>
+          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>FAQ</span>
         </div>
       </div>
 

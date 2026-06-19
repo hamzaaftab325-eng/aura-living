@@ -185,7 +185,7 @@ export default function PrivacyView() {
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#8A8A8A' }} />
-          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>Privacy Policy</span>
+          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>Privacy Policy</span>
         </div>
       </div>
 

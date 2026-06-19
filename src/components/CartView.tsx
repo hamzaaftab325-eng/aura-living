@@ -238,7 +238,7 @@ export default function CartView() {
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
             Cart
           </span>
         </div>
@@ -281,8 +281,8 @@ export default function CartView() {
                       className="shrink-0 w-24 h-24 rounded-lg overflow-hidden"
                       style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7' }}
                     >
-                      <img
-                        src={item.product.image}
+                      <img loading="lazy"
+        src={item.product.image}
                         alt={item.product.name}
                         className="w-full h-full object-contain"
                       />

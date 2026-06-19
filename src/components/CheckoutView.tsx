@@ -381,7 +381,7 @@ export default function CheckoutView() {
             Cart
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
             Checkout
           </span>
         </div>
@@ -654,8 +654,8 @@ export default function CheckoutView() {
                           className="shrink-0 w-14 h-14 rounded-lg overflow-hidden relative"
                           style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7' }}
                         >
-                          <img
-                            src={item.product.image}
+                          <img loading="lazy"
+        src={item.product.image}
                             alt={item.product.name}
                             className="w-full h-full object-contain"
                           />

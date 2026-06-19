@@ -226,7 +226,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         }}
       />
 
-      <img
+      <img loading="lazy"
         src={testimonial.imgSrc}
         alt={`${testimonial.by.split(',')[0]}`}
         className="bg-[#F5EDDA] object-cover object-top mb-3"

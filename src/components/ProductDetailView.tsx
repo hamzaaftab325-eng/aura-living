@@ -229,7 +229,7 @@ export default function ProductDetailView() {
                 <ChevronRight size={12} style={{ color: '#8A8A8A' }} />
               </>
             )}
-            <span className="text-xs font-medium" style={{ color: '#D4AF37' }}>{product.name}</span>
+            <span className="text-xs font-medium" style={{ color: '#B8941F' }}>{product.name}</span>
             </nav>
           </div>
         </div>
@@ -247,7 +247,7 @@ export default function ProductDetailView() {
                 src={galleryImages[selectedImage]}
                 alt={product.name}
                 className="w-full h-full object-contain animate-[fadeIn_0.4s_ease]"
-              />
+              loading="lazy" />
               {product.badge && (
                 <div className="absolute top-4 left-4">
                   <span
@@ -286,7 +286,7 @@ export default function ProductDetailView() {
                     backgroundColor: '#FFFDF7',
                   }}
                 >
-                  <img src={img} alt={`${product.name} view ${i + 1}`} className="w-full h-full object-contain" />
+                  <img src={img} alt={`${product.name} view ${i + 1}`} className="w-full h-full object-contain" loading="lazy" />
                 </button>
               ))}
             </div>
@@ -447,11 +447,11 @@ export default function ProductDetailView() {
                   }}
                 >
                   <div className="aspect-square overflow-hidden" style={{ backgroundColor: '#FFFDF7' }}>
-                    <img src={rp.image} alt={rp.name} className="w-full h-full object-contain transition-transform duration-500 hover:scale-105" />
+                    <img src={rp.image} alt={rp.name} className="w-full h-full object-contain transition-transform duration-500 hover:scale-105" loading="lazy" />
                   </div>
                   <div className="p-3 sm:p-4">
                     <h3 className="text-xs sm:text-sm font-medium line-clamp-1" style={{ color: '#2C2C2C' }}>{rp.name}</h3>
-                    <p className="text-xs sm:text-sm font-bold mt-1" style={{ color: '#D4AF37' }}>{formatPKR(rp.price)}</p>
+                    <p className="text-xs sm:text-sm font-bold mt-1" style={{ color: '#B8941F' }}>{formatPKR(rp.price)}</p>
                   </div>
                 </div>
               ))}

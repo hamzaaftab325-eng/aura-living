@@ -182,7 +182,7 @@ export default function CartDrawer() {
           <div className="shrink-0 px-6 py-4" style={{ borderBottom: '1px solid #F5EDDA', backgroundColor: 'rgba(245, 237, 218, 0.3)' }}>
             {amountToFreeShipping > 0 ? (
               <p className="text-xs sm:text-sm mb-2 text-center" style={{ color: '#5A5A5A' }}>
-                Add <span className="font-semibold" style={{ color: '#D4AF37' }}>{formatPKR(amountToFreeShipping)}</span> more for <span className="font-semibold" style={{ color: '#D4AF37' }}>FREE shipping</span>
+                Add <span className="font-semibold" style={{ color: '#B8941F' }}>{formatPKR(amountToFreeShipping)}</span> more for <span className="font-semibold" style={{ color: '#B8941F' }}>FREE shipping</span>
               </p>
             ) : (
               <p className="text-xs sm:text-sm mb-2 text-center flex items-center justify-center gap-1.5" style={{ color: '#22C55E' }}>
@@ -238,7 +238,7 @@ export default function CartDrawer() {
                 >
                   {/* Product Image */}
                   <div className="shrink-0 w-20 h-20 rounded-lg overflow-hidden" style={{ border: '1px solid #F5EDDA', backgroundColor: '#FFFDF7' }}>
-                    <img src={item.product.image} alt={item.product.name} className="w-full h-full object-contain" />
+                    <img src={item.product.image} alt={item.product.name} className="w-full h-full object-contain" loading="lazy" />
                   </div>
 
                   {/* Item Details */}

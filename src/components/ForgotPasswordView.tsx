@@ -42,7 +42,7 @@ export default function ForgotPasswordView() {
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-64px)] sm:min-h-[calc(100vh-80px)] lg:min-h-[calc(100vh-112px)] flex items-center justify-center px-4 sm:px-6 py-12 relative overflow-hidden" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 sm:pt-28 pb-12 relative overflow-hidden" style={{ backgroundColor: '#FAF8F5' }}>
       {/* Background decoration */}
       <div
         className="absolute inset-0 pointer-events-none overflow-hidden"

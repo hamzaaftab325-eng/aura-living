@@ -301,7 +301,7 @@ export default function AddressesView() {
             My Account
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
             Saved Addresses
           </span>
         </div>
