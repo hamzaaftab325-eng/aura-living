@@ -76,7 +76,7 @@ export default function ForgotPasswordView() {
                   </div>
                 </div>
                 <h1
-                  className="text-2xl sm:text-3xl font-bold"
+                  className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold"
                   style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
                 >
                   Reset Your Password
@@ -195,7 +195,7 @@ export default function ForgotPasswordView() {
                   </div>
                 </div>
                 <h2
-                  className="text-2xl sm:text-3xl font-bold"
+                  className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold"
                   style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
                 >
                   Check Your Email

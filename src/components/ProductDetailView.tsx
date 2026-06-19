@@ -306,7 +306,7 @@ export default function ProductDetailView() {
             )}
 
             {/* Title */}
-            <h1 className="text-2xl sm:text-3xl font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+            <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
               {product.name}
             </h1>
 
@@ -433,7 +433,7 @@ export default function ProductDetailView() {
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F5EDDA' }}>
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>You May Also Like</h2>
+              <h2 className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>You May Also Like</h2>
               <GoldDivider />
             </div>
             <div ref={relatedRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">

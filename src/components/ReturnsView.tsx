@@ -166,11 +166,11 @@ export default function ReturnsView() {
       {/* Our Return Policy */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div ref={policyRef} className="max-w-4xl mx-auto text-center">
-          <div className="rounded-sm p-6 sm:p-8 md:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+          <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
               <RotateCcw className="w-6 h-6" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
               Our Return Policy
             </h2>
             <div className="flex justify-center mb-4">
@@ -192,7 +192,7 @@ export default function ReturnsView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Step by Step</span>
-              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>How to Return</h2>
+              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>How to Return</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -202,7 +202,7 @@ export default function ReturnsView() {
               {returnSteps.map((step) => (
                 <div
                   key={step.step}
-                  className="rounded-sm p-5 sm:p-6 flex items-start gap-4 sm:gap-5 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:border-[#D4AF37]"
+                  className="rounded-xl p-5 sm:p-6 flex items-start gap-4 sm:gap-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
                   style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                 >
                   <div className="flex flex-col items-center shrink-0">
@@ -239,7 +239,7 @@ export default function ReturnsView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Swap & Replace</span>
-              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Exchange Process</h2>
+              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Exchange Process</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -252,7 +252,7 @@ export default function ReturnsView() {
               {exchangeSteps.map((step) => (
                 <div
                   key={step.step}
-                  className="rounded-sm p-5 sm:p-6 flex items-start gap-4 sm:gap-5 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:border-[#D4AF37]"
+                  className="rounded-xl p-5 sm:p-6 flex items-start gap-4 sm:gap-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
                   style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                 >
                   <div className="flex flex-col items-center shrink-0">
@@ -289,7 +289,7 @@ export default function ReturnsView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Please Note</span>
-              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Non-Returnable Items</h2>
+              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Non-Returnable Items</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -299,7 +299,7 @@ export default function ReturnsView() {
               {nonReturnableItems.map((item) => (
                 <div
                   key={item.item}
-                  className="rounded-sm p-5 sm:p-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]"
+                  className="rounded-xl p-5 sm:p-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]"
                   style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                 >
                   <div className="flex items-start gap-3">
@@ -326,7 +326,7 @@ export default function ReturnsView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Getting Your Money Back</span>
-              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Refund Methods</h2>
+              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Refund Methods</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -334,7 +334,7 @@ export default function ReturnsView() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div
-                className="rounded-sm p-5 sm:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:border-[#D4AF37]"
+                className="rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
                 style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
               >
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
@@ -349,7 +349,7 @@ export default function ReturnsView() {
               </div>
 
               <div
-                className="rounded-sm p-5 sm:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:border-[#D4AF37]"
+                className="rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
                 style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
               >
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
@@ -371,13 +371,13 @@ export default function ReturnsView() {
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F5EDDA' }}>
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="rounded-sm p-6 sm:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <div className="flex items-start gap-4 mb-5">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(204, 68, 68, 0.1)' }}>
                   <AlertTriangle className="w-5 h-5" style={{ color: '#C44' }} />
                 </div>
                 <div>
-                  <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                     Damaged or Defective Items
                   </h2>
                   <GoldDivider />

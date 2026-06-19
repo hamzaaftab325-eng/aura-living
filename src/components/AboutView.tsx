@@ -551,7 +551,7 @@ function ValueCard({
   return (
     <div
       ref={cardRef}
-      className="relative rounded-sm p-6 sm:p-8 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(212,175,55,0.15)] overflow-hidden"
+      className="relative rounded-xl p-5 sm:p-6 lg:p-8 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(212,175,55,0.15)] overflow-hidden"
       style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
     >
       {/* Animated gold left border */}
@@ -695,7 +695,7 @@ function TimelineItem({
         {/* Year + Upcoming badge */}
         <div className="flex items-center gap-3 mb-2 flex-wrap">
           <span
-            className="text-[#D4AF37] text-2xl sm:text-3xl font-bold leading-none"
+            className="text-[#D4AF37] text-[28px] sm:text-[32px] lg:text-[40px] font-bold leading-none"
             style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             {item.year}

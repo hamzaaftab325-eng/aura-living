@@ -191,11 +191,11 @@ export default function SettingsView() {
           </div>
         </section>
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md mx-auto text-center rounded-sm p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
               <Settings className="w-8 h-8" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
               Sign in to manage settings
             </h2>
             <p className="text-[#5A5A5A] text-sm sm:text-base mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -313,14 +313,14 @@ export default function SettingsView() {
         <div className="max-w-3xl mx-auto">
           {/* Profile card with inline edit */}
           <AnimatedSection>
-            <div className="rounded-sm p-5 sm:p-6 mb-8 sm:mb-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="rounded-xl p-5 sm:p-6 mb-8 sm:mb-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               {editingProfile ? (
                 <form onSubmit={handleSaveProfile}>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
                       <UserIcon className="w-5 h-5" style={{ color: '#D4AF37' }} />
                     </div>
-                    <h3 className="text-base sm:text-lg font-semibold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+                    <h3 className="text-xl sm:text-2xl font-semibold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
                       Edit Profile
                     </h3>
                   </div>
@@ -417,13 +417,13 @@ export default function SettingsView() {
             {settingSections.map((section) => {
               const SectionIcon = section.icon;
               return (
-                <div key={section.title} className="rounded-sm p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+                <div key={section.title} className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
                       <SectionIcon className="w-5 h-5" style={{ color: '#D4AF37' }} />
                     </div>
                     <div>
-                      <h3 className="text-base sm:text-lg font-semibold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+                      <h3 className="text-xl sm:text-2xl font-semibold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
                         {section.title}
                       </h3>
                       <p className="text-xs sm:text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
@@ -458,13 +458,13 @@ export default function SettingsView() {
             })}
 
             {/* Currency selector */}
-            <div className="rounded-sm p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
                   <Globe className="w-5 h-5" style={{ color: '#D4AF37' }} />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-semibold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+                  <h3 className="text-xl sm:text-2xl font-semibold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
                     Currency
                   </h3>
                   <p className="text-xs sm:text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
@@ -494,13 +494,13 @@ export default function SettingsView() {
             </div>
 
             {/* Payment methods */}
-            <div className="rounded-sm p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
                   <CreditCard className="w-5 h-5" style={{ color: '#D4AF37' }} />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base sm:text-lg font-semibold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+                  <h3 className="text-xl sm:text-2xl font-semibold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
                     Payment Methods
                   </h3>
                   <p className="text-xs sm:text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
@@ -542,7 +542,7 @@ export default function SettingsView() {
               className="rounded-sm p-5 sm:p-7"
               style={{ backgroundColor: 'rgba(220, 38, 38, 0.03)', border: '1px solid rgba(220, 38, 38, 0.2)' }}
             >
-              <h3 className="text-base sm:text-lg font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", color: '#DC2626' }}>
+              <h3 className="text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", color: '#DC2626' }}>
                 Danger Zone
               </h3>
               <p className="text-xs sm:text-sm mb-5" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
@@ -569,7 +569,7 @@ export default function SettingsView() {
           </div>
 
           {/* Save bar */}
-          <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-sm p-5" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+          <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-xl p-5" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
             <p className="text-xs sm:text-sm text-center sm:text-left" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
               <Mail className="w-3.5 h-3.5 inline mr-1" style={{ color: '#D4AF37' }} />
               Changes are saved instantly to your device.

@@ -295,7 +295,7 @@ export default function CareGuideView() {
             {careCategories.map((category) => (
               <div
                 key={category.title}
-                className="rounded-sm overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:border-[#D4AF37]"
+                className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
                 style={{
                   backgroundColor: '#FFFDF7',
                   border: '1px solid #E8D5A3',

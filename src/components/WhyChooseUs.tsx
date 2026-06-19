@@ -201,7 +201,7 @@ export default function WhyChooseUs() {
 
           <h2
             ref={headingRef}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3"
+            className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold mb-3"
             style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
           >
             Why Discerning Homes Choose Aura

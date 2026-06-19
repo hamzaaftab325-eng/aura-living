@@ -398,7 +398,7 @@ export default function AuthView() {
             </div>
             <h1
               ref={titleRef}
-              className="text-2xl sm:text-3xl font-bold"
+              className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold"
               style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
             >
               {mode === 'login' ? 'Sign In to Aura' : 'Create Account'}

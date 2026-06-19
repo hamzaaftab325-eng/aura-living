@@ -203,7 +203,7 @@ export default function CategoriesSection() {
         <div className="text-center mb-16">
           <h2
             ref={headingRef}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2"
+            className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold mb-2"
             style={{
               fontFamily: "'Playfair Display', serif",
               color: '#2C2C2C',

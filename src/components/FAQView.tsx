@@ -254,7 +254,7 @@ export default function FAQView() {
               return (
                 <div
                   key={item.id}
-                  className="rounded-sm overflow-hidden transition-all duration-300"
+                  className="rounded-xl overflow-hidden transition-all duration-300"
                   style={{
                     backgroundColor: '#FFFDF7',
                     border: `1px solid ${isOpen ? '#D4AF37' : '#E8D5A3'}`,

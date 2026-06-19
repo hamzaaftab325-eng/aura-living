@@ -343,7 +343,7 @@ export default function FeaturedProducts() {
 
           <h2
             ref={headingRef}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"
+            className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold tracking-tight"
             style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
           >
             Curated for You

@@ -250,7 +250,7 @@ export default function NewArrivalsView() {
                   <Sparkles className="w-10 h-10" style={{ color: '#D4AF37' }} />
                 </div>
                 <h2
-                  className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-3"
+                  className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
                   style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                 >
                   No new arrivals yet
@@ -301,7 +301,7 @@ export default function NewArrivalsView() {
                   return (
                     <div
                       key={product.id}
-                      className="group rounded-sm overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:border-[#D4AF37]"
+                      className="group rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
                       style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                     >
                       {/* Product Image */}

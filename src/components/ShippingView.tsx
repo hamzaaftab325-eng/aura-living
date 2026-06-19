@@ -130,11 +130,11 @@ export default function ShippingView() {
       {/* Shipping Overview */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div ref={overviewRef} className="max-w-4xl mx-auto text-center">
-          <div className="rounded-sm p-6 sm:p-8 md:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+          <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
               <Truck className="w-6 h-6" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
               Shipping Overview
             </h2>
             <div className="flex justify-center mb-4">
@@ -153,7 +153,7 @@ export default function ShippingView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Delivery Options</span>
-              <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Shipping Rates</h2>
+              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Shipping Rates</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -163,7 +163,7 @@ export default function ShippingView() {
               {shippingRates.map((rate) => (
                 <div
                   key={rate.title}
-                  className="rounded-sm p-5 sm:p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:border-[#D4AF37]"
+                  className="rounded-xl p-5 sm:p-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
                   style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                 >
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
@@ -175,7 +175,7 @@ export default function ShippingView() {
                   <span className="block text-xs sm:text-sm tracking-wider uppercase mb-3" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
                     {rate.duration}
                   </span>
-                  <span className="block text-xl sm:text-2xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", color: '#D4AF37' }}>
+                  <span className="block text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", color: '#D4AF37' }}>
                     {rate.price}
                   </span>
                   <span className="block text-xs sm:text-sm leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
@@ -192,13 +192,13 @@ export default function ShippingView() {
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="rounded-sm p-6 sm:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                   <MapPin className="w-5 h-5" style={{ color: '#D4AF37' }} />
                 </div>
                 <div>
-                  <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                     Delivery Areas
                   </h2>
                   <GoldDivider />
@@ -233,13 +233,13 @@ export default function ShippingView() {
           <AnimatedSection>
             <div className="grid grid-cols-1 gap-4 sm:gap-6">
               {/* Order Tracking */}
-              <div className="rounded-sm p-6 sm:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+              <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                     <Clock className="w-5 h-5" style={{ color: '#D4AF37' }} />
                   </div>
                   <div>
-                    <h3 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+                    <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                       Order Tracking
                     </h3>
                     <p className="text-[#5A5A5A] text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -250,13 +250,13 @@ export default function ShippingView() {
               </div>
 
               {/* Packaging */}
-              <div className="rounded-sm p-6 sm:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+              <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                     <Gift className="w-5 h-5" style={{ color: '#D4AF37' }} />
                   </div>
                   <div>
-                    <h3 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+                    <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                       Packaging
                     </h3>
                     <p className="text-[#5A5A5A] text-base leading-relaxed mb-3" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -273,13 +273,13 @@ export default function ShippingView() {
               </div>
 
               {/* International Shipping */}
-              <div className="rounded-sm p-6 sm:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+              <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                     <Globe className="w-5 h-5" style={{ color: '#D4AF37' }} />
                   </div>
                   <div>
-                    <h3 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+                    <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                       International Shipping
                     </h3>
                     <p className="text-[#5A5A5A] text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>

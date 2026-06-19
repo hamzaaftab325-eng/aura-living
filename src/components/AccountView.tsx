@@ -344,7 +344,7 @@ export default function AccountView() {
           {/* Profile Card */}
           <AnimatedSection>
             <div
-              className="rounded-sm p-6 sm:p-8 mb-8 sm:mb-10"
+              className="rounded-xl p-5 sm:p-6 lg:p-8 mb-8 sm:mb-10"
               style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
             >
               {user ? (
@@ -357,7 +357,7 @@ export default function AccountView() {
                     }}
                   >
                     <span
-                      className="text-2xl sm:text-3xl font-bold text-white"
+                      className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold text-white"
                       style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                     >
                       {safeUser?.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
@@ -367,7 +367,7 @@ export default function AccountView() {
                   {/* Info */}
                   <div className="flex flex-col items-center sm:items-start text-center sm:text-left flex-1">
                     <h2
-                      className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-1"
+                      className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2"
                       style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                     >
                       {safeUser?.name}
@@ -411,7 +411,7 @@ export default function AccountView() {
                   </div>
                   <div className="flex-1">
                     <h2
-                      className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-1"
+                      className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2"
                       style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                     >
                       You are not signed in
@@ -439,7 +439,7 @@ export default function AccountView() {
               return (
               <div
                 key={stat.label}
-                className="rounded-sm p-5 sm:p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:border-[#D4AF37]"
+                className="rounded-xl p-5 sm:p-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
                 style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
               >
                 <div
@@ -450,7 +450,7 @@ export default function AccountView() {
                 </div>
                 <span
                   ref={countRef}
-                  className="text-2xl sm:text-3xl font-bold block mb-1"
+                  className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold block mb-1"
                   style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
                 >
                   0
@@ -471,7 +471,7 @@ export default function AccountView() {
           {safeUser && (
           <AnimatedSection>
             <div
-              className="rounded-sm p-6 sm:p-8 mb-10 sm:mb-14"
+              className="rounded-xl p-5 sm:p-6 lg:p-8 mb-10 sm:mb-14"
               style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
             >
               <div className="flex items-center justify-between mb-2">
@@ -604,7 +604,7 @@ export default function AccountView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <h3
-                className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2"
+                className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
                 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
               >
                 Account Menu
@@ -626,7 +626,7 @@ export default function AccountView() {
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.onClick(); } }}
                 role="button"
                 tabIndex={0}
-                className="group rounded-sm p-5 sm:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:border-[#D4AF37] cursor-pointer animate-menu-ripple focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
+                className="group rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37] cursor-pointer animate-menu-ripple focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
                 style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
               >
                 <div className="flex items-center gap-4">
@@ -686,7 +686,7 @@ export default function AccountView() {
 
               <Award className="w-10 h-10 mx-auto mb-4" style={{ color: '#D4AF37' }} />
               <h3
-                className="text-white text-xl sm:text-2xl font-bold mb-2"
+                className="text-white text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
                 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
               >
                 Aura Rewards

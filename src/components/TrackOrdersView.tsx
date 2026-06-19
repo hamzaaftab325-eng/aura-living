@@ -202,11 +202,11 @@ export default function TrackOrdersView() {
           </div>
         </section>
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md mx-auto text-center rounded-sm p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
               <Package className="w-8 h-8" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
               Sign in to track your orders
             </h2>
             <p className="text-[#5A5A5A] text-sm sm:text-base mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -295,7 +295,7 @@ export default function TrackOrdersView() {
           {/* Search bar */}
           <AnimatedSection>
             <div
-              className="rounded-sm p-5 sm:p-6 mb-8 sm:mb-10"
+              className="rounded-xl p-5 sm:p-6 mb-8 sm:mb-10"
               style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
             >
               <div className="flex flex-col sm:flex-row items-stretch gap-3">
@@ -330,7 +330,7 @@ export default function TrackOrdersView() {
           <div ref={ordersRef} className="flex flex-col gap-5 sm:gap-6">
             {filteredOrders.length === 0 ? (
               <div
-                className="rounded-sm p-10 text-center"
+                className="rounded-xl p-10 text-center"
                 style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
               >
                 <Package className="w-10 h-10 mx-auto mb-3" style={{ color: '#D4AF37' }} />
@@ -349,7 +349,7 @@ export default function TrackOrdersView() {
                 return (
                   <div
                     key={order.id}
-                    className="rounded-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_25px_rgba(212,175,55,0.15)]"
+                    className="rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)]"
                     style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                   >
                     {/* Order header */}

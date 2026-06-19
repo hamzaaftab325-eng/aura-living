@@ -162,7 +162,7 @@ export default function CartView() {
               <ShoppingBag className="h-11 w-11" style={{ color: '#D4AF37' }} />
             </div>
             <h2
-              className="text-2xl sm:text-3xl font-bold mb-3"
+              className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
               style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
             >
               Your Cart is Empty
@@ -379,11 +379,11 @@ export default function CartView() {
             {/* ─── Order Summary Sidebar ─── */}
             <div className="lg:col-span-1">
               <div
-                className="rounded-sm p-6 sm:p-8 sticky top-8"
+                className="rounded-xl p-5 sm:p-6 lg:p-8 sticky top-8"
                 style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
               >
                 <h2
-                  className="text-xl sm:text-2xl font-semibold mb-2"
+                  className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
                   style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
                 >
                   Order Summary

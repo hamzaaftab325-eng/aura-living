@@ -158,8 +158,8 @@ export default function ContactView() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
               {/* Contact Form */}
               <div>
-                <div className="rounded-sm p-6 sm:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                  <h2 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Send Us a Message</h2>
+                <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Send Us a Message</h2>
                   <div className="mb-6">
                     <GoldDivider />
                   </div>
@@ -177,7 +177,7 @@ export default function ContactView() {
                       <input
                         id="name" name="name" type="text" required value={formData.name} onChange={handleChange}
                         placeholder="Your full name"
-                        className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200"
+                        className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
                         style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3', color: '#2C2C2C' }}
                         onFocus={(e) => { e.target.style.borderColor = '#D4AF37'; e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)'; }}
                         onBlur={(e) => { e.target.style.borderColor = '#E8D5A3'; e.target.style.boxShadow = 'none'; }}
@@ -190,7 +190,7 @@ export default function ContactView() {
                       <input
                         id="email" name="email" type="email" required value={formData.email} onChange={handleChange}
                         placeholder="your@email.com"
-                        className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200"
+                        className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
                         style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3', color: '#2C2C2C' }}
                         onFocus={(e) => { e.target.style.borderColor = '#D4AF37'; e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)'; }}
                         onBlur={(e) => { e.target.style.borderColor = '#E8D5A3'; e.target.style.boxShadow = 'none'; }}
@@ -202,7 +202,7 @@ export default function ContactView() {
                       <label htmlFor="subject" className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>Subject</label>
                       <select
                         id="subject" name="subject" required value={formData.subject} onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
+                        className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
                         style={{
                           fontFamily: "'Poppins', sans-serif",
                           backgroundColor: '#FFFDF7',
@@ -226,7 +226,7 @@ export default function ContactView() {
                       <textarea
                         id="message" name="message" required rows={5} value={formData.message} onChange={handleChange}
                         placeholder="How can we help you?"
-                        className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200 resize-none"
+                        className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
                         style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3', color: '#2C2C2C' }}
                         onFocus={(e) => { e.target.style.borderColor = '#D4AF37'; e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)'; }}
                         onBlur={(e) => { e.target.style.borderColor = '#E8D5A3'; e.target.style.boxShadow = 'none'; }}
@@ -261,8 +261,8 @@ export default function ContactView() {
 
               {/* Contact Info */}
               <div className="flex flex-col gap-6">
-                <div className="rounded-sm p-6 sm:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                  <h2 className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Contact Information</h2>
+                <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Contact Information</h2>
                   <div className="mb-6">
                     <GoldDivider />
                   </div>

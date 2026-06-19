@@ -225,11 +225,11 @@ export default function AddressesView() {
           </div>
         </section>
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md mx-auto text-center rounded-sm p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
               <MapPin className="w-8 h-8" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-xl sm:text-2xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
               Sign in to manage addresses
             </h2>
             <p className="text-[#5A5A5A] text-sm sm:text-base mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -316,7 +316,7 @@ export default function AddressesView() {
         <div className="max-w-5xl mx-auto">
           {/* Add new address CTA */}
           <AnimatedSection>
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 rounded-sm p-5 sm:p-6" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 rounded-xl p-5 sm:p-6" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <div className="flex items-center gap-3 text-center sm:text-left">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}>
                   <Plus className="w-5 h-5" style={{ color: '#D4AF37' }} />
@@ -343,7 +343,7 @@ export default function AddressesView() {
             <AnimatedSection>
               <form
                 onSubmit={handleSave}
-                className="rounded-sm p-5 sm:p-7 mb-8 sm:mb-10"
+                className="rounded-xl p-5 sm:p-7 mb-8 sm:mb-10"
                 style={{ backgroundColor: '#FFFDF7', border: '1.5px solid #D4AF37' }}
               >
                 <div className="flex items-center justify-between mb-5">
@@ -569,7 +569,7 @@ export default function AddressesView() {
               return (
                 <div
                   key={addr.id}
-                  className="relative rounded-sm p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(212,175,55,0.15)] hover:border-[#D4AF37]"
+                  className="relative rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
                   style={{
                     backgroundColor: '#FFFDF7',
                     border: addr.isDefault ? '1.5px solid #D4AF37' : '1px solid #E8D5A3',
@@ -646,7 +646,7 @@ export default function AddressesView() {
 
           {/* Empty state */}
           {addresses.length === 0 && (
-            <div className="text-center py-12 rounded-sm" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="text-center py-12 rounded-xl" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <MapPin className="w-10 h-10 mx-auto mb-3" style={{ color: '#D4AF37' }} />
               <h3 className="text-[#2C2C2C] text-lg font-semibold mb-1" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
                 No saved addresses yet

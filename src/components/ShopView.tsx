@@ -104,7 +104,7 @@ function FilterSidebar({
               placeholder="Min"
               value={priceMin}
               onChange={(e) => onPriceMinChange(e.target.value)}
-              className="w-full h-10 px-3 rounded-sm text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/40"
+              className="w-full h-10 px-3 rounded-xl text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/40"
               style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7', fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
             />
           </div>
@@ -115,7 +115,7 @@ function FilterSidebar({
               placeholder="Max"
               value={priceMax}
               onChange={(e) => onPriceMaxChange(e.target.value)}
-              className="w-full h-10 px-3 rounded-sm text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/40"
+              className="w-full h-10 px-3 rounded-xl text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/40"
               style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7', fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
             />
           </div>

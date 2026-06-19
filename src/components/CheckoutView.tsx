@@ -304,7 +304,7 @@ export default function CheckoutView() {
               <CheckCircle2 className="h-9 w-9" style={{ color: '#D4AF37' }} />
             </div>
             <h2
-              className="text-2xl sm:text-3xl font-bold mb-3"
+              className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
               style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
             >
               Your Cart is Empty
@@ -402,11 +402,11 @@ export default function CheckoutView() {
               <div className="lg:col-span-2 flex flex-col gap-8">
                 {/* ─── Contact Information ─── */}
                 <div
-                  className="rounded-sm p-6 sm:p-8"
+                  className="rounded-xl p-5 sm:p-6 lg:p-8"
                   style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                 >
                   <h2
-                    className="text-xl sm:text-2xl font-semibold mb-2"
+                    className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
                     style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
                   >
                     Contact Information
@@ -440,11 +440,11 @@ export default function CheckoutView() {
 
                 {/* ─── Shipping Address ─── */}
                 <div
-                  className="rounded-sm p-6 sm:p-8"
+                  className="rounded-xl p-5 sm:p-6 lg:p-8"
                   style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                 >
                   <h2
-                    className="text-xl sm:text-2xl font-semibold mb-2"
+                    className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
                     style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
                   >
                     Shipping Address
@@ -512,11 +512,11 @@ export default function CheckoutView() {
 
                 {/* ─── Payment Method ─── */}
                 <div
-                  className="rounded-sm p-6 sm:p-8"
+                  className="rounded-xl p-5 sm:p-6 lg:p-8"
                   style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                 >
                   <h2
-                    className="text-xl sm:text-2xl font-semibold mb-2"
+                    className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
                     style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
                   >
                     Payment Method
@@ -587,11 +587,11 @@ export default function CheckoutView() {
 
                 {/* ─── Order Notes ─── */}
                 <div
-                  className="rounded-sm p-6 sm:p-8"
+                  className="rounded-xl p-5 sm:p-6 lg:p-8"
                   style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                 >
                   <h2
-                    className="text-xl sm:text-2xl font-semibold mb-2"
+                    className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
                     style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
                   >
                     Order Notes
@@ -614,7 +614,7 @@ export default function CheckoutView() {
                       value={formData.orderNotes}
                       onChange={handleChange}
                       placeholder="Any special delivery instructions, gift wrapping requests, or notes for our team..."
-                      className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200 resize-none"
+                      className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
                       style={{
                         fontFamily: "'Poppins', sans-serif",
                         backgroundColor: '#FFFDF7',
@@ -637,11 +637,11 @@ export default function CheckoutView() {
               {/* ─── Order Summary Sidebar (Right Column) ─── */}
               <div className="lg:col-span-1">
                 <div
-                  className="rounded-sm p-6 sm:p-8 sticky top-8"
+                  className="rounded-xl p-5 sm:p-6 lg:p-8 sticky top-8"
                   style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                 >
                   <h2
-                    className="text-xl sm:text-2xl font-semibold mb-2"
+                    className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
                     style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
                   >
                     Order Summary
