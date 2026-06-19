@@ -209,7 +209,7 @@ export default function ProductDetailView() {
     <div className="w-full" style={{ backgroundColor: '#FAF8F5' }}>
       {/* Breadcrumb Header */}
       <div style={{ backgroundColor: '#F5EDDA' }} className="w-full">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-4">
             <button
               onClick={() => setPage('shop')}
@@ -237,8 +237,8 @@ export default function ProductDetailView() {
       </div>
 
       {/* Product Content */}
-      <div ref={contentRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+      <div ref={contentRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
           {/* Left: Image Gallery */}
           <div className="flex flex-col gap-4">
             {/* Main Image — CSS transition for switching */}
@@ -303,12 +303,12 @@ export default function ProductDetailView() {
             )}
 
             {/* Title */}
-            <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ color: '#2C2C2C' }}>
+            <h1 className="aura-h2 text-charcoal mb-4">
               {product.name}
             </h1>
 
             {/* Rating */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-5">
               <div className="flex items-center gap-0.5">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} size={16} className={i < Math.round(product.rating) ? 'fill-[#D4AF37] text-[#D4AF37]' : 'text-[#E8D5A3]'} />
@@ -320,7 +320,7 @@ export default function ProductDetailView() {
             </div>
 
             {/* Price */}
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-8">
               <span className="text-2xl font-bold" style={{ color: '#D4AF37' }}>
                 {formatPKR(product.price)}
               </span>
@@ -331,12 +331,12 @@ export default function ProductDetailView() {
               )}
             </div>
 
-            <div className="mb-6">
+            <div className="mb-8">
               <GoldDivider />
             </div>
 
             {/* Color Swatches — CSS transition for selection ring */}
-            <div className="mb-6">
+            <div className="mb-8">
               <span className="text-sm font-medium mb-3 block" style={{ color: '#2C2C2C' }}>
                 Color: <span style={{ color: '#D4AF37' }}>{selectedColor}</span>
               </span>
@@ -357,7 +357,7 @@ export default function ProductDetailView() {
             </div>
 
             {/* Quantity */}
-            <div className="mb-6">
+            <div className="mb-8">
               <span className="text-sm font-medium mb-3 block" style={{ color: '#2C2C2C' }}>Quantity</span>
               <div className="inline-flex items-center rounded-full" style={{ border: '1px solid #E8D5A3', backgroundColor: 'rgba(245,237,218,0.3)' }}>
                 <button
@@ -381,7 +381,7 @@ export default function ProductDetailView() {
             </div>
 
             {/* Action Buttons — CSS transitions for hover/active states */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 mb-10">
               <button
                 onClick={handleAddToCart}
                 className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[#C9A22E] hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] active:scale-[0.97]"
@@ -401,7 +401,7 @@ export default function ProductDetailView() {
             </div>
 
             {/* Trust Badges */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8">
+            <div className="grid grid-cols-3 gap-3 sm:gap-5 mb-10">
               {[
                 { icon: <Truck className="w-4 h-4 sm:w-5 sm:h-5" />, label: 'Free Shipping' },
                 { icon: <Shield className="w-4 h-4 sm:w-5 sm:h-5" />, label: 'Secure Payment' },
@@ -426,10 +426,10 @@ export default function ProductDetailView() {
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F5EDDA' }}>
+        <section className="aura-section">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" style={{ color: '#2C2C2C' }}>You May Also Like</h2>
+            <div className="text-center mb-10">
+              <h2 className="aura-h2 text-charcoal mb-3">You May Also Like</h2>
               <GoldDivider />
             </div>
             <div ref={relatedRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
