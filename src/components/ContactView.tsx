@@ -159,7 +159,7 @@ export default function ContactView() {
               {/* Contact Form */}
               <div>
                 <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Send Us a Message</h2>
+                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>Send Us a Message</h2>
                   <div className="mb-6">
                     <GoldDivider />
                   </div>
@@ -262,7 +262,7 @@ export default function ContactView() {
               {/* Contact Info */}
               <div className="flex flex-col gap-6">
                 <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Contact Information</h2>
+                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>Contact Information</h2>
                   <div className="mb-6">
                     <GoldDivider />
                   </div>

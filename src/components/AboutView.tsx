@@ -569,7 +569,7 @@ function ValueCard({
       </div>
       <h3
         className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-4"
-        style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+        style={{ fontFamily: "'Playfair Display', serif" }}
       >
         {title}
       </h3>
@@ -696,7 +696,7 @@ function TimelineItem({
         <div className="flex items-center gap-3 mb-2 flex-wrap">
           <span
             className="text-[#D4AF37] text-[28px] sm:text-[32px] lg:text-[40px] font-bold leading-none"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontFamily: "'Playfair Display', serif" }}
           >
             {item.year}
           </span>
@@ -717,7 +717,7 @@ function TimelineItem({
         {/* Title */}
         <h4
           className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-2"
-          style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+          style={{ fontFamily: "'Playfair Display', serif" }}
         >
           {item.title}
         </h4>
@@ -1023,7 +1023,7 @@ export default function AboutView() {
           {/* Decorative opening quote mark */}
           <div
             className="text-[#D4AF37] text-5xl sm:text-6xl md:text-7xl leading-none mb-2 sm:mb-4 select-none"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontFamily: "'Playfair Display', serif" }}
             aria-hidden="true"
           >
             &ldquo;
@@ -1054,7 +1054,7 @@ export default function AboutView() {
             <AnimatedHeading
               text="The Beginning"
               className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
-              style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+              style={{ fontFamily: "'Playfair Display', serif" }}
             />
             <ParagraphReveal
               className="text-[#5A5A5A] text-base leading-relaxed"
@@ -1138,7 +1138,7 @@ export default function AboutView() {
             <AnimatedHeading
               text="The Artisans"
               className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
-              style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+              style={{ fontFamily: "'Playfair Display', serif" }}
             />
             <ParagraphReveal
               className="text-[#5A5A5A] text-base leading-relaxed"
@@ -1243,7 +1243,7 @@ export default function AboutView() {
             </span>
             <h2
               className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mt-3"
-              style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+              style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Our Core Values
             </h2>
@@ -1319,7 +1319,7 @@ export default function AboutView() {
             </span>
             <h2
               className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mt-3"
-              style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+              style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Milestones
             </h2>
@@ -1359,7 +1359,7 @@ export default function AboutView() {
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <h2
             className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Ready to Transform Your Space?
           </h2>

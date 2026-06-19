@@ -201,7 +201,7 @@ export default function TermsView() {
                       >
                         {String(section.number).padStart(2, '0')}
                       </span>
-                      <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+                      <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold" style={{ fontFamily: "'Playfair Display', serif" }}>
                         {section.title}
                       </h3>
                     </div>
@@ -231,7 +231,7 @@ export default function TermsView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <Shield className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+          <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
             Questions About Our Terms?
           </h2>
           <div className="flex justify-center mb-4">

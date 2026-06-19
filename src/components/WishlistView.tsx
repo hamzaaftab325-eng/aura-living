@@ -229,7 +229,7 @@ export default function WishlistView() {
                 </div>
                 <h2
                   className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
-                  style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+                  style={{ fontFamily: "'Playfair Display', serif" }}
                 >
                   Your wishlist is empty
                 </h2>
@@ -253,7 +253,7 @@ export default function WishlistView() {
                   <div>
                     <h2
                       className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold"
-                      style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+                      style={{ fontFamily: "'Playfair Display', serif" }}
                     >
                       Saved Items
                     </h2>
@@ -329,7 +329,7 @@ export default function WishlistView() {
                       {/* Name */}
                       <h3
                         className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-1.5 cursor-pointer transition-colors duration-200 hover:text-[#D4AF37] leading-snug"
-                        style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+                        style={{ fontFamily: "'Playfair Display', serif" }}
                         onClick={() => handleProductClick(product)}
                       >
                         {product.name}
