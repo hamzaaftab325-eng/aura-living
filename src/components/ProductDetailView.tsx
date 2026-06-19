@@ -15,9 +15,11 @@ import {
   Heart,
   ShoppingCart,
   ChevronDown,
+  Package,
 } from 'lucide-react';
 import { useStore, badgeColors } from '@/store/useStore';
 import { products, categories, formatPKR } from '@/data/products';
+import PremiumButton from '@/components/ui/PremiumButton';
 
 const colorSwatches = [
   { name: 'Cream', hex: '#F2EDE4' },
@@ -159,15 +161,12 @@ export default function ProductDetailView() {
 
   if (!selectedProduct) {
     return (
-      <div className="w-full flex flex-col items-center justify-center py-32" style={{ backgroundColor: '#FAF8F5' }}>
-        <p className="text-lg mb-4" style={{ color: '#5A5A5A' }}>No product selected</p>
-        <button
-          onClick={() => setPage('shop')}
-          className="px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors duration-300 hover:bg-[#C9A22E]"
-          style={{ backgroundColor: '#D4AF37', color: '#FFFFFF' }}
-        >
+      <div className="w-full flex flex-col items-center justify-center pt-32 pb-20" style={{ backgroundColor: '#FAF8F5' }}>
+        <Package className="w-12 h-12 mb-4 text-gold" />
+        <p className="aura-body-large text-warm-gray mb-6">No product selected. Browse our collection to find your perfect piece.</p>
+        <PremiumButton variant="gold" onClick={() => setPage('shop')}>
           Browse Shop
-        </button>
+        </PremiumButton>
       </div>
     );
   }
@@ -206,9 +205,9 @@ export default function ProductDetailView() {
   const relatedProducts = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   return (
-    <div className="w-full" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full pt-20 sm:pt-24" style={{ backgroundColor: '#FAF8F5' }}>
       {/* Breadcrumb Header */}
-      <div style={{ backgroundColor: '#F5EDDA' }} className="w-full">
+      <div className="w-full" style={{ backgroundColor: '#F5EDDA' }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-4">
             <button

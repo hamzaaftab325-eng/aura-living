@@ -9,7 +9,6 @@ import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
 import CategoriesSection from '@/components/CategoriesSection';
 import FeaturedProducts from '@/components/FeaturedProducts';
-import WhyChooseUs from '@/components/WhyChooseUs';
 import TrendingCollection from '@/components/TrendingCollection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import NewsletterSection from '@/components/NewsletterSection';
@@ -199,8 +198,6 @@ export default function Home() {
             <CategoriesSection />
             <FloatingGoldDots />
             <FeaturedProducts />
-            <FloatingGoldDots />
-            <WhyChooseUs />
             <FloatingGoldDots />
             <TrendingCollection />
             <FloatingGoldDots />
