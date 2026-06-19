@@ -136,7 +136,7 @@ export default function ReturnsView() {
           <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
-          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+          <h1 className="aura-hero-title text-white" >
             Returns & Exchanges
           </h1>
           <div className="flex items-center gap-3 mt-6">

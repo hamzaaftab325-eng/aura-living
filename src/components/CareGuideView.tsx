@@ -228,8 +228,8 @@ export default function CareGuideView() {
           </div>
           <h1
             ref={heroTitleRef}
-            className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            className="aura-hero-title text-white"
+            
           >
             Care Guide
           </h1>

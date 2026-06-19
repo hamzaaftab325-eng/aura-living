@@ -138,8 +138,8 @@ export default function CartView() {
               AURA LIVING
             </span>
             <h1
-              className="text-white font-bold leading-[1.15] pt-2"
-              style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+              className="aura-hero-title text-white"
+              
             >
               Your Shopping Cart
             </h1>
@@ -212,8 +212,8 @@ export default function CartView() {
             AURA LIVING
           </span>
           <h1
-            className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            className="aura-hero-title text-white"
+            
           >
             Your Shopping Cart
           </h1>

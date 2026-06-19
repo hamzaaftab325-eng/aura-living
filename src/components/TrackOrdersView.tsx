@@ -187,8 +187,8 @@ export default function TrackOrdersView() {
           <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4">
             <h1
               ref={heroTitleRef}
-              className="text-white font-bold leading-[1.15] pt-2"
-              style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+              className="aura-hero-title text-white"
+              
             >
               Track Your Orders
             </h1>
@@ -247,8 +247,8 @@ export default function TrackOrdersView() {
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <h1
             ref={heroTitleRef}
-            className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            className="aura-hero-title text-white"
+            
           >
             Track Your Orders
           </h1>

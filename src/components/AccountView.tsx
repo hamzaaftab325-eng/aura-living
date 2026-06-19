@@ -297,8 +297,8 @@ export default function AccountView() {
 
           <h1
             ref={heroTitleRef}
-            className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            className="aura-hero-title text-white"
+            
           >
             My Account
           </h1>
@@ -353,7 +353,7 @@ export default function AccountView() {
                   >
                     <span
                       className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold text-white"
-                      style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+                      
                     >
                       {safeUser?.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
                     </span>
@@ -681,7 +681,7 @@ export default function AccountView() {
               <Award className="w-10 h-10 mx-auto mb-4" style={{ color: '#D4AF37' }} />
               <h3
                 className="text-white text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
-                style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+                
               >
                 Aura Rewards
               </h3>

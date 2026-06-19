@@ -117,9 +117,7 @@ export default function HeroSection() {
         <h1
           ref={headingRef}
           className="text-white font-bold leading-[1.15] mb-4 pt-2 select-none"
-          style={{ fontSize: 'clamp(28px, 6vw, 72px)',
-            textShadow: '0 2px 30px rgba(0,0,0,0.5)',
-          }}
+          
         >
           Where Comfort Meets Style
         </h1>

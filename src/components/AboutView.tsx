@@ -989,8 +989,8 @@ export default function AboutView() {
             ABOUT AURA LIVING
           </span>
           <h1
-            className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            className="aura-hero-title text-white"
+            
           >
             Our Story
           </h1>
@@ -1021,8 +1021,7 @@ export default function AboutView() {
           </div>
           <blockquote
             className="text-[#2C2C2C] leading-relaxed"
-            style={{ fontSize: 'clamp(18px, 3vw, 32px)',
-            }}
+            
           >
             We believe every home tells a story. Ours begins with the hands of artisans.
           </blockquote>
@@ -1183,7 +1182,7 @@ export default function AboutView() {
           <AnimatedHeading
             text="Our Promise"
             className="text-white text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-6"
-            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            
           />
           <ParagraphReveal
             className="text-white/80 text-base sm:text-lg leading-relaxed mb-6"

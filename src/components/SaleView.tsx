@@ -361,7 +361,7 @@ export default function SaleView() {
 
           <h1
             className="text-white font-bold leading-[1.15] mb-3 pt-2"
-            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            
           >
             The Aura Sale
           </h1>
