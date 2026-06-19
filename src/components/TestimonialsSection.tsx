@@ -40,7 +40,7 @@ export default function TestimonialsSection() {
           <h2
             ref={headingRef}
             className="text-[#2C2C2C] text-2xl sm:text-[34px] md:text-[40px] font-bold leading-tight"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            
           >
             What Our Customers Say
           </h2>

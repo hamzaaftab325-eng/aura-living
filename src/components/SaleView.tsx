@@ -52,8 +52,7 @@ function RatingStars({ rating }: { rating: number }) {
         <Star
           key={star}
           className="w-3.5 h-3.5"
-          style={{
-            color: star <= Math.round(rating) ? '#D4AF37' : '#E8D5A3',
+          style={{ color: star <= Math.round(rating) ? '#D4AF37' : '#E8D5A3',
             fill: star <= Math.round(rating) ? '#D4AF37' : 'none',
           }}
         />
@@ -113,8 +112,7 @@ function SaleCountdown() {
         <Fragment key={unit.label}>
           <div
             className="relative flex flex-col items-center justify-center rounded-lg px-2 py-1.5 sm:px-3 sm:py-2 min-w-[48px] sm:min-w-[62px] transition-transform duration-300"
-            style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)',
               border: '1px solid rgba(212, 175, 55, 0.25)',
               backdropFilter: 'blur(8px)',
               WebkitBackdropFilter: 'blur(8px)',
@@ -127,13 +125,13 @@ function SaleCountdown() {
             />
             <span
               className={`text-base sm:text-xl md:text-2xl font-bold tabular-nums leading-none ${unit.label === 'Secs' ? 'animate-countdown-pulse' : ''}`}
-              style={{ fontFamily: "'Playfair Display', serif", color: '#FFFFFF' }}
+              style={{ color: '#FFFFFF' }}
             >
               {String(unit.value).padStart(2, '0')}
             </span>
             <span
               className="text-[8px] sm:text-[9px] uppercase tracking-[1.5px] mt-1 font-semibold"
-              style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+              style={{ color: '#D4AF37' }}
             >
               {unit.label}
             </span>
@@ -142,7 +140,7 @@ function SaleCountdown() {
             <div className="flex items-center justify-center">
               <span
                 className="text-sm sm:text-base font-bold"
-                style={{ fontFamily: "'Playfair Display', serif", color: 'rgba(212, 175, 55, 0.5)' }}
+                style={{ color: 'rgba(212, 175, 55, 0.5)' }}
               >
                 :
               </span>
@@ -265,16 +263,14 @@ export default function SaleView() {
       {mounted && createPortal(
         <div
           className="fixed bottom-6 right-6 z-[80] transition-all duration-500 ease-out"
-          style={{
-            transform: showUrgencyPopup ? 'translateY(0) scale(1)' : 'translateY(120%) scale(0.9)',
+          style={{ transform: showUrgencyPopup ? 'translateY(0) scale(1)' : 'translateY(120%) scale(0.9)',
             opacity: showUrgencyPopup ? 1 : 0,
             pointerEvents: showUrgencyPopup ? 'auto' : 'none',
           }}
         >
           <div
             className="rounded-2xl shadow-2xl overflow-hidden max-w-[300px] sm:max-w-[340px]"
-            style={{
-              background: 'linear-gradient(135deg, #DC2626 0%, #B91C1C 100%)',
+            style={{ background: 'linear-gradient(135deg, #DC2626 0%, #B91C1C 100%)',
               border: '1px solid rgba(255,255,255,0.15)',
               boxShadow: '0 12px 40px rgba(220, 38, 38, 0.35)',
             }}
@@ -292,13 +288,13 @@ export default function SaleView() {
               <div className="flex-1 min-w-0">
                 <p
                   className="text-white text-sm font-bold mb-0.5"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                  
                 >
                   Hurry, limited stock!
                 </p>
                 <p
                   className="text-white/85 text-xs leading-relaxed"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                  
                 >
                   Sale items are selling fast. Grab your favourites before they&apos;re gone.
                 </p>
@@ -326,8 +322,7 @@ export default function SaleView() {
         <div
           ref={heroBgDivRef}
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/sale-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/sale-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -336,16 +331,14 @@ export default function SaleView() {
         {/* Stronger dark gradient overlay so text always reads clearly */}
         <div
           className="absolute inset-0"
-          style={{
-            background:
+          style={{ background:
               'linear-gradient(180deg, rgba(20,20,20,0.85) 0%, rgba(20,20,20,0.75) 50%, rgba(20,20,20,0.9) 100%)',
           }}
         />
         {/* Subtle gold tint to make it feel premium */}
         <div
           className="absolute inset-0"
-          style={{
-            background:
+          style={{ background:
               'radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%)',
           }}
         />
@@ -353,15 +346,13 @@ export default function SaleView() {
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
-          style={{
-            filter: 'blur(60px)',
+          style={{ filter: 'blur(60px)',
             background: 'radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%)',
           }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
-          style={{
-            filter: 'blur(70px)',
+          style={{ filter: 'blur(70px)',
             background: 'radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%)',
           }}
         />
@@ -370,7 +361,7 @@ export default function SaleView() {
 
           <h1
             className="text-white font-bold leading-[1.15] mb-3 pt-2"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             The Aura Sale
           </h1>
@@ -383,7 +374,7 @@ export default function SaleView() {
 
           <p
             className="text-white/85 text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-8"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             Up to <span style={{ color: '#D4AF37', fontWeight: 600 }}>40% off</span> handcrafted lamps, ceramics, textiles, and greenery. Premium home decor, made affordable.
           </p>
@@ -394,7 +385,7 @@ export default function SaleView() {
               <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" style={{ color: '#D4AF37' }} />
               <span
                 className="text-[9px] sm:text-[10px] uppercase tracking-[2.5px] font-semibold"
-                style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+                style={{ color: '#D4AF37' }}
               >
                 Sale Ends In
               </span>
@@ -409,12 +400,12 @@ export default function SaleView() {
           <button
             onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+            style={{ color: '#8A8A8A', background: 'none' }}
           >
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
             Sale
           </span>
         </div>
@@ -435,13 +426,13 @@ export default function SaleView() {
                 </div>
                 <h2
                   className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  
                 >
                   No sale items right now
                 </h2>
                 <p
                   className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-md text-center leading-relaxed"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                  
                 >
                   Our sales are always changing. Check back soon for amazing deals on premium home decor!
                 </p>
@@ -459,7 +450,7 @@ export default function SaleView() {
                   <div>
                     <h2
                       className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
+                      
                     >
                       Sale Items
                     </h2>
@@ -469,7 +460,7 @@ export default function SaleView() {
                   </div>
                   <span
                     className="text-sm"
-                    style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                    style={{ color: '#8A8A8A' }}
                   >
                     {saleProducts.length} item{saleProducts.length !== 1 ? 's' : ''}
                   </span>
@@ -510,10 +501,8 @@ export default function SaleView() {
                         {/* SALE Badge */}
                         <div
                           className="absolute top-3 left-3 px-2.5 py-1 rounded-sm text-xs font-semibold tracking-wider uppercase"
-                          style={{
-                            backgroundColor: '#E85D4A',
+                          style={{ backgroundColor: '#E85D4A',
                             color: '#FFFFFF',
-                            fontFamily: "'Poppins', sans-serif",
                           }}
                         >
                           SALE
@@ -523,10 +512,8 @@ export default function SaleView() {
                         {product.originalPrice && (
                           <div
                             className="absolute bottom-3 left-3 px-2 py-1 rounded-sm text-xs font-bold"
-                            style={{
-                              backgroundColor: '#D4AF37',
+                            style={{ backgroundColor: '#D4AF37',
                               color: '#FFFFFF',
-                              fontFamily: "'Poppins', sans-serif",
                             }}
                           >
                             -{savingsPercent}%
@@ -545,8 +532,7 @@ export default function SaleView() {
                         >
                           <Heart
                             className="w-4 h-4"
-                            style={{
-                              color: wishlisted ? '#DC2626' : '#8A8A8A',
+                            style={{ color: wishlisted ? '#DC2626' : '#8A8A8A',
                               fill: wishlisted ? '#DC2626' : 'none',
                             }}
                           />
@@ -558,7 +544,7 @@ export default function SaleView() {
                         {/* Name */}
                         <h3
                           className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-1.5 cursor-pointer transition-colors duration-200 hover:text-[#D4AF37] leading-snug"
-                          style={{ fontFamily: "'Playfair Display', serif" }}
+                          
                           onClick={() => handleProductClick(product)}
                         >
                           {product.name}
@@ -569,7 +555,7 @@ export default function SaleView() {
                           <RatingStars rating={product.rating} />
                           <span
                             className="text-xs"
-                            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                            style={{ color: '#8A8A8A' }}
                           >
                             ({product.reviews})
                           </span>
@@ -579,14 +565,14 @@ export default function SaleView() {
                         <div className="flex items-center gap-2 mb-4">
                           <span
                             className="text-lg font-bold"
-                            style={{ fontFamily: "'Poppins', sans-serif", color: '#E85D4A' }}
+                            style={{ color: '#E85D4A' }}
                           >
                             {formatPKR(product.price)}
                           </span>
                           {product.originalPrice && (
                             <span
                               className="text-sm line-through"
-                              style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                              style={{ color: '#8A8A8A' }}
                             >
                               {formatPKR(product.originalPrice)}
                             </span>
@@ -594,10 +580,8 @@ export default function SaleView() {
                           {product.originalPrice && (
                             <span
                               className="text-xs font-semibold px-1.5 py-0.5 rounded-sm"
-                              style={{
-                                backgroundColor: 'rgba(232, 93, 74, 0.1)',
+                              style={{ backgroundColor: 'rgba(232, 93, 74, 0.1)',
                                 color: '#E85D4A',
-                                fontFamily: "'Poppins', sans-serif",
                               }}
                             >
                               Save {formatPKR(product.originalPrice - product.price)}
@@ -610,10 +594,8 @@ export default function SaleView() {
                           <button
                             onClick={() => handleAddToCart(product)}
                             className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 active:scale-[0.97] cursor-pointer"
-                            style={{
-                              background: 'linear-gradient(135deg, #D4AF37 0%, #C9A22E 50%, #B8941F 100%)',
+                            style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #C9A22E 50%, #B8941F 100%)',
                               color: '#FFFFFF',
-                              fontFamily: "'Poppins', sans-serif",
                             }}
                           >
                             <ShoppingCart className="w-3.5 h-3.5" />
@@ -622,16 +604,14 @@ export default function SaleView() {
                           <button
                             onClick={() => toggleWishlist(product.id)}
                             className="w-11 h-11 rounded-sm flex items-center justify-center transition-all duration-200 cursor-pointer"
-                            style={{
-                              border: '1px solid #E8D5A3',
+                            style={{ border: '1px solid #E8D5A3',
                               backgroundColor: wishlisted ? 'rgba(220, 38, 38, 0.06)' : 'transparent',
                             }}
                             aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
                           >
                             <Heart
                               className="w-4 h-4"
-                              style={{
-                                color: wishlisted ? '#DC2626' : '#8A8A8A',
+                              style={{ color: wishlisted ? '#DC2626' : '#8A8A8A',
                                 fill: wishlisted ? '#DC2626' : 'none',
                               }}
                             />
@@ -651,7 +631,7 @@ export default function SaleView() {
                   </div>
                   <p
                     className="text-[#5A5A5A] text-base mb-6"
-                    style={{ fontFamily: "'Poppins', sans-serif" }}
+                    
                   >
                     Explore our full collection of curated home decor
                   </p>

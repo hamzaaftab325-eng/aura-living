@@ -148,7 +148,7 @@ function ChapterLabel({ number }: { number: string }) {
     <div ref={ref} className="flex items-center gap-4 mb-6">
       <span
         className="chapter-text text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium"
-        style={{ fontFamily: "'Poppins', sans-serif" }}
+        
       >
         Chapter {number}
       </span>
@@ -569,13 +569,13 @@ function ValueCard({
       </div>
       <h3
         className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-4"
-        style={{ fontFamily: "'Playfair Display', serif" }}
+        
       >
         {title}
       </h3>
       <p
         className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed"
-        style={{ fontFamily: "'Poppins', sans-serif" }}
+        
       >
         {description}
       </p>
@@ -653,8 +653,7 @@ function TimelineItem({
         <div
           ref={badgeRef}
           className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center z-10 shrink-0 transition-all duration-300 hover:scale-110"
-          style={{
-            backgroundColor: item.isFuture ? '#FAF8F5' : '#D4AF37',
+          style={{ backgroundColor: item.isFuture ? '#FAF8F5' : '#D4AF37',
             border: item.isFuture
               ? '2px dashed #D4AF37'
               : '2px solid #D4AF37',
@@ -672,8 +671,7 @@ function TimelineItem({
           <div
             ref={lineRef}
             className="w-0.5 flex-1 min-h-[40px] sm:min-h-[60px]"
-            style={{
-              background: item.isFuture
+            style={{ background: item.isFuture
                 ? 'repeating-linear-gradient(to bottom, rgba(212,175,55,0.5) 0, rgba(212,175,55,0.5) 4px, transparent 4px, transparent 8px)'
                 : 'linear-gradient(to bottom, rgba(212,175,55,0.4), rgba(212,175,55,0.12))',
             }}
@@ -685,8 +683,7 @@ function TimelineItem({
       <div
         ref={cardRef}
         className="tl-card group flex-1 rounded-lg p-5 sm:p-6 mb-4 sm:mb-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] hover:-translate-y-1"
-        style={{
-          backgroundColor: item.isFuture ? 'rgba(212,175,55,0.04)' : '#FFFDF7',
+        style={{ backgroundColor: item.isFuture ? 'rgba(212,175,55,0.04)' : '#FFFDF7',
           border: item.isFuture
             ? '1px dashed rgba(212,175,55,0.4)'
             : '1px solid rgba(232,213,163,0.4)',
@@ -696,17 +693,15 @@ function TimelineItem({
         <div className="flex items-center gap-3 mb-2 flex-wrap">
           <span
             className="text-[#D4AF37] text-[28px] sm:text-[32px] lg:text-[40px] font-bold leading-none"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            
           >
             {item.year}
           </span>
           {item.isFuture && (
             <span
               className="text-[9px] uppercase tracking-[2px] font-semibold px-2 py-0.5 rounded-full"
-              style={{
-                backgroundColor: 'rgba(212,175,55,0.12)',
+              style={{ backgroundColor: 'rgba(212,175,55,0.12)',
                 color: '#D4AF37',
-                fontFamily: "'Poppins', sans-serif",
               }}
             >
               Upcoming
@@ -717,7 +712,7 @@ function TimelineItem({
         {/* Title */}
         <h4
           className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-2"
-          style={{ fontFamily: "'Playfair Display', serif" }}
+          
         >
           {item.title}
         </h4>
@@ -725,7 +720,7 @@ function TimelineItem({
         {/* Description */}
         <p
           className="text-[#5A5A5A] text-xs sm:text-sm leading-relaxed mb-3"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
+          
         >
           {item.description}
         </p>
@@ -734,10 +729,8 @@ function TimelineItem({
         {item.highlight && (
           <div
             className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-sm"
-            style={{
-              backgroundColor: 'rgba(212,175,55,0.08)',
+            style={{ backgroundColor: 'rgba(212,175,55,0.08)',
               color: '#D4AF37',
-              fontFamily: "'Poppins', sans-serif",
             }}
           >
             <Icon className="w-3 h-3" />
@@ -968,8 +961,7 @@ export default function AboutView() {
         <div
           ref={heroBgRef}
           className="absolute inset-0 -top-[10%] -bottom-[10%]"
-          style={{
-            backgroundImage: 'url(/images/about-workshop.webp)',
+          style={{ backgroundImage: 'url(/images/about-workshop.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -977,8 +969,7 @@ export default function AboutView() {
         />
         <div
           className="absolute inset-0"
-          style={{
-            background:
+          style={{ background:
               'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.55) 50%, rgba(212,175,55,0.15) 100%)',
           }}
         />
@@ -993,13 +984,13 @@ export default function AboutView() {
         >
           <span
             className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             ABOUT AURA LIVING
           </span>
           <h1
             className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             Our Story
           </h1>
@@ -1010,7 +1001,7 @@ export default function AboutView() {
           </div>
           <p
             className="text-white/80 text-sm sm:text-base mt-6 max-w-lg leading-relaxed"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             Where heritage meets home, and every piece has a purpose.
           </p>
@@ -1023,16 +1014,14 @@ export default function AboutView() {
           {/* Decorative opening quote mark */}
           <div
             className="text-[#D4AF37] text-5xl sm:text-6xl md:text-7xl leading-none mb-2 sm:mb-4 select-none"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            
             aria-hidden="true"
           >
             &ldquo;
           </div>
           <blockquote
             className="text-[#2C2C2C] leading-relaxed"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(18px, 3vw, 32px)',
+            style={{ fontSize: 'clamp(18px, 3vw, 32px)',
             }}
           >
             We believe every home tells a story. Ours begins with the hands of artisans.
@@ -1054,11 +1043,11 @@ export default function AboutView() {
             <AnimatedHeading
               text="The Beginning"
               className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              
             />
             <ParagraphReveal
               className="text-[#5A5A5A] text-base leading-relaxed"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              
             >
               Aura Living was born from a deep-rooted passion for bringing
               warmth and elegance to every home in Pakistan. Founded in the
@@ -1068,7 +1057,7 @@ export default function AboutView() {
             </ParagraphReveal>
             <ParagraphReveal
               className="text-[#5A5A5A] text-base leading-relaxed"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              
             >
               Our journey began with a simple belief: that every home deserves
               to reflect the personality and soul of the people who live in it.
@@ -1138,11 +1127,11 @@ export default function AboutView() {
             <AnimatedHeading
               text="The Artisans"
               className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              
             />
             <ParagraphReveal
               className="text-[#5A5A5A] text-base leading-relaxed"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              
             >
               We travel across Pakistan to source the finest artisan pieces —
               from the intricate blue pottery of Multan to the delicate
@@ -1151,7 +1140,7 @@ export default function AboutView() {
             </ParagraphReveal>
             <ParagraphReveal
               className="text-[#5A5A5A] text-base leading-relaxed"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              
             >
               Each item in our collection carries the fingerprints of its maker,
               a testament to the extraordinary skill and dedication of Pakistani
@@ -1171,8 +1160,7 @@ export default function AboutView() {
         <div
           ref={chapter3BgRef}
           className="absolute inset-0 -top-[15%] -bottom-[15%]"
-          style={{
-            backgroundImage: 'url(/images/about-workshop.webp)',
+          style={{ backgroundImage: 'url(/images/about-workshop.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -1181,8 +1169,7 @@ export default function AboutView() {
         {/* Dark overlay */}
         <div
           className="absolute inset-0"
-          style={{
-            background:
+          style={{ background:
               'linear-gradient(180deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.75) 50%, rgba(44,44,44,0.85) 100%)',
           }}
         />
@@ -1196,11 +1183,11 @@ export default function AboutView() {
           <AnimatedHeading
             text="Our Promise"
             className="text-white text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-6"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           />
           <ParagraphReveal
             className="text-white/80 text-base sm:text-lg leading-relaxed mb-6"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             At Aura Living, we believe that supporting local artisans is not
             just good business — it is a responsibility. By providing fair
@@ -1210,7 +1197,7 @@ export default function AboutView() {
           </ParagraphReveal>
           <ParagraphReveal
             className="text-white/80 text-base sm:text-lg leading-relaxed"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             Every purchase you make directly contributes to sustaining these
             age-old crafts and the families behind them. Our curated collection
@@ -1237,13 +1224,13 @@ export default function AboutView() {
           <div className="text-center mb-12 md:mb-16">
             <span
               className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              
             >
               What We Stand For
             </span>
             <h2
               className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mt-3"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              
             >
               Our Core Values
             </h2>
@@ -1278,9 +1265,7 @@ export default function AboutView() {
               <div key={stat.label} className="text-center py-6">
                 <span
                   className="text-3xl sm:text-4xl md:text-5xl font-bold block mb-2"
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    color: '#D4AF37',
+                  style={{ color: '#D4AF37',
                   }}
                 >
                   <CountUp
@@ -1292,9 +1277,7 @@ export default function AboutView() {
                 </span>
                 <span
                   className="text-sm sm:text-base tracking-wide"
-                  style={{
-                    fontFamily: "'Poppins', sans-serif",
-                    color: '#8A8A8A',
+                  style={{ color: '#8A8A8A',
                   }}
                 >
                   {stat.label}
@@ -1313,19 +1296,19 @@ export default function AboutView() {
           <div className="text-center mb-12 md:mb-16">
             <span
               className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              
             >
               Our Journey
             </span>
             <h2
               className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mt-3"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              
             >
               Milestones
             </h2>
             <p
               className="text-[#5A5A5A] text-sm sm:text-base mt-3 max-w-lg mx-auto leading-relaxed"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              
             >
               From a single workshop to a nationwide brand — every milestone
               represents a step closer to our vision.
@@ -1359,13 +1342,13 @@ export default function AboutView() {
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <h2
             className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            
           >
             Ready to Transform Your Space?
           </h2>
           <p
             className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             Explore our curated collection of handcrafted home decor and bring
             the warmth of Aura Living into your home.

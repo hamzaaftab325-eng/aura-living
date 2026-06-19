@@ -49,8 +49,7 @@ function RatingStars({ rating }: { rating: number }) {
         <Star
           key={star}
           className="w-3.5 h-3.5"
-          style={{
-            color: star <= Math.round(rating) ? '#D4AF37' : '#E8D5A3',
+          style={{ color: star <= Math.round(rating) ? '#D4AF37' : '#E8D5A3',
             fill: star <= Math.round(rating) ? '#D4AF37' : 'none',
           }}
         />
@@ -160,8 +159,7 @@ export default function NewArrivalsView() {
         <div
           ref={heroBgDivRef}
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/new-arrivals-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/new-arrivals-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -170,8 +168,7 @@ export default function NewArrivalsView() {
         {/* Gradient overlay */}
         <div
           className="absolute inset-0"
-          style={{
-            background:
+          style={{ background:
               'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
           }}
         />
@@ -179,15 +176,13 @@ export default function NewArrivalsView() {
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
-          style={{
-            filter: 'blur(60px)',
+          style={{ filter: 'blur(60px)',
             background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
           }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
-          style={{
-            filter: 'blur(70px)',
+          style={{ filter: 'blur(70px)',
             background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
           }}
         />
@@ -200,7 +195,7 @@ export default function NewArrivalsView() {
           <h1
             ref={heroTitleRef}
             className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             New Arrivals
           </h1>
@@ -213,7 +208,7 @@ export default function NewArrivalsView() {
 
           <p
             className="text-white/70 text-base sm:text-lg max-w-lg mx-auto mt-4 leading-relaxed"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             Discover the latest additions to our curated collection
           </p>
@@ -225,12 +220,12 @@ export default function NewArrivalsView() {
           <button
             onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+            style={{ color: '#8A8A8A', background: 'none' }}
           >
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
             New Arrivals
           </span>
         </div>
@@ -251,13 +246,13 @@ export default function NewArrivalsView() {
                 </div>
                 <h2
                   className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  
                 >
                   No new arrivals yet
                 </h2>
                 <p
                   className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-md text-center leading-relaxed"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                  
                 >
                   We are always curating new pieces for our collection. Check back soon for exciting additions!
                 </p>
@@ -275,7 +270,7 @@ export default function NewArrivalsView() {
                   <div>
                     <h2
                       className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
+                      
                     >
                       Latest Additions
                     </h2>
@@ -285,7 +280,7 @@ export default function NewArrivalsView() {
                   </div>
                   <span
                     className="text-sm"
-                    style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                    style={{ color: '#8A8A8A' }}
                   >
                     {newProducts.length} item{newProducts.length !== 1 ? 's' : ''}
                   </span>
@@ -323,10 +318,8 @@ export default function NewArrivalsView() {
                         {/* NEW Badge */}
                         <div
                           className="absolute top-3 left-3 px-2.5 py-1 rounded-sm text-xs font-semibold tracking-wider uppercase"
-                          style={{
-                            backgroundColor: '#D4AF37',
+                          style={{ backgroundColor: '#D4AF37',
                             color: '#FFFFFF',
-                            fontFamily: "'Poppins', sans-serif",
                           }}
                         >
                           NEW
@@ -344,8 +337,7 @@ export default function NewArrivalsView() {
                         >
                           <Heart
                             className="w-4 h-4"
-                            style={{
-                              color: wishlisted ? '#DC2626' : '#8A8A8A',
+                            style={{ color: wishlisted ? '#DC2626' : '#8A8A8A',
                               fill: wishlisted ? '#DC2626' : 'none',
                             }}
                           />
@@ -357,7 +349,7 @@ export default function NewArrivalsView() {
                         {/* Name */}
                         <h3
                           className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-1.5 cursor-pointer transition-colors duration-200 hover:text-[#D4AF37] leading-snug"
-                          style={{ fontFamily: "'Playfair Display', serif" }}
+                          
                           onClick={() => handleProductClick(product)}
                         >
                           {product.name}
@@ -368,7 +360,7 @@ export default function NewArrivalsView() {
                           <RatingStars rating={product.rating} />
                           <span
                             className="text-xs"
-                            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                            style={{ color: '#8A8A8A' }}
                           >
                             ({product.reviews})
                           </span>
@@ -378,14 +370,14 @@ export default function NewArrivalsView() {
                         <div className="flex items-center gap-2 mb-4">
                           <span
                             className="text-lg font-bold"
-                            style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                            style={{ color: '#2C2C2C' }}
                           >
                             {formatPKR(product.price)}
                           </span>
                           {product.originalPrice && (
                             <span
                               className="text-sm line-through"
-                              style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                              style={{ color: '#8A8A8A' }}
                             >
                               {formatPKR(product.originalPrice)}
                             </span>
@@ -397,10 +389,8 @@ export default function NewArrivalsView() {
                           <button
                             onClick={() => handleAddToCart(product)}
                             className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 active:scale-[0.97] cursor-pointer"
-                            style={{
-                              background: 'linear-gradient(135deg, #D4AF37 0%, #C9A22E 50%, #B8941F 100%)',
+                            style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #C9A22E 50%, #B8941F 100%)',
                               color: '#FFFFFF',
-                              fontFamily: "'Poppins', sans-serif",
                             }}
                           >
                             <ShoppingCart className="w-3.5 h-3.5" />
@@ -409,16 +399,14 @@ export default function NewArrivalsView() {
                           <button
                             onClick={() => toggleWishlist(product.id)}
                             className="w-11 h-11 rounded-sm flex items-center justify-center transition-all duration-200 cursor-pointer"
-                            style={{
-                              border: '1px solid #E8D5A3',
+                            style={{ border: '1px solid #E8D5A3',
                               backgroundColor: wishlisted ? 'rgba(220, 38, 38, 0.06)' : 'transparent',
                             }}
                             aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
                           >
                             <Heart
                               className="w-4 h-4"
-                              style={{
-                                color: wishlisted ? '#DC2626' : '#8A8A8A',
+                              style={{ color: wishlisted ? '#DC2626' : '#8A8A8A',
                                 fill: wishlisted ? '#DC2626' : 'none',
                               }}
                             />
@@ -438,7 +426,7 @@ export default function NewArrivalsView() {
                   </div>
                   <p
                     className="text-[#5A5A5A] text-base mb-6"
-                    style={{ fontFamily: "'Poppins', sans-serif" }}
+                    
                   >
                     Explore our full collection of curated home decor
                   </p>

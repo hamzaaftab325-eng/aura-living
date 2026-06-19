@@ -73,14 +73,12 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
   return (
     <div
       className="relative flex flex-col transition-all duration-500"
-      style={{
-        transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
+      style={{ transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
       }}
     >
       <div
         className="relative rounded-xl overflow-hidden cursor-pointer group"
-        style={{
-          aspectRatio: '4/5',
+        style={{ aspectRatio: '4/5',
           border: isHovered
             ? '1.5px solid rgba(212,175,55,0.7)'
             : '1px solid rgba(232,213,163,0.3)',
@@ -104,8 +102,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             src={product.image}
             alt={product.name}
             className="w-full h-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
-            style={{
-              transform: isHovered ? 'scale(1.12)' : 'scale(1)',
+            style={{ transform: isHovered ? 'scale(1.12)' : 'scale(1)',
             }}
           />
         </div>
@@ -115,11 +112,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           <div className="absolute top-3 left-3 z-30">
             <span
               className="inline-block px-3 py-1 rounded-md text-[10px] font-bold tracking-[0.15em] uppercase"
-              style={{
-                backgroundColor: badgeStyles[product.badge].bg,
+              style={{ backgroundColor: badgeStyles[product.badge].bg,
                 color: badgeStyles[product.badge].text,
                 border: `1px solid ${badgeStyles[product.badge].border}`,
-                fontFamily: "'Poppins', sans-serif",
               }}
             >
               {product.badge}
@@ -139,8 +134,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               onClick={btn.onClick}
               title={btn.title}
               className="touch-visible w-11 h-11 rounded-full flex items-center justify-center cursor-pointer"
-              style={{
-                backgroundColor: isHovered
+              style={{ backgroundColor: isHovered
                   ? (wishlisted && btn.active ? '#D4AF37' : '#FFFDF7')
                   : 'transparent',
                 color: wishlisted && btn.active ? '#FFFFFF' : '#2C2C2C',
@@ -175,8 +169,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         {/* Add to Cart bar — CSS transition from bottom (visible on touch via .touch-visible-translate) */}
         <div
           className="touch-visible-translate absolute bottom-0 left-0 right-0 z-30 px-4 pb-4"
-          style={{
-            opacity: isHovered ? 1 : 0,
+          style={{ opacity: isHovered ? 1 : 0,
             transform: isHovered ? 'translateY(0)' : 'translateY(30px)',
             transition: 'all 0.35s ease',
             transitionDelay: isHovered ? '0.1s' : '0s',
@@ -185,10 +178,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           <button
             onClick={handleAddToCart}
             className="w-full py-2.5 rounded-lg text-xs font-semibold tracking-[0.12em] uppercase flex items-center justify-center gap-2 cursor-pointer transition-colors duration-200 hover:bg-[#C9A22E]"
-            style={{
-              backgroundColor: 'rgba(212,175,55,0.9)',
+            style={{ backgroundColor: 'rgba(212,175,55,0.9)',
               color: '#FFFFFF',
-              fontFamily: "'Poppins', sans-serif",
               border: '1px solid rgba(212,175,55,0.6)',
             }}
           >
@@ -202,9 +193,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       <div className="mt-4 flex flex-col gap-1.5 px-1">
         <h3
           className="text-[15px] font-semibold leading-snug cursor-pointer transition-colors duration-300 line-clamp-1 hover:text-[#D4AF37]"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            color: '#2C2C2C',
+          style={{ color: '#2C2C2C',
           }}
           onClick={handleProductClick}
         >
@@ -232,7 +221,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           </div>
           <span
             className="text-[11px]"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+            style={{ color: '#8A8A8A' }}
           >
             ({product.reviews})
           </span>
@@ -241,14 +230,14 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         <div className="flex items-center gap-2.5">
           <span
             className="text-base font-bold"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+            style={{ color: '#D4AF37' }}
           >
             {formatPKR(product.price)}
           </span>
           {product.originalPrice && (
             <span
               className="text-xs line-through"
-              style={{ fontFamily: "'Poppins', sans-serif", color: '#B8A99A' }}
+              style={{ color: '#B8A99A' }}
             >
               {formatPKR(product.originalPrice)}
             </span>
@@ -318,15 +307,13 @@ export default function FeaturedProducts() {
       {/* Ambient decorative blobs — hidden on mobile to save paint */}
       <div
         className="hidden sm:block absolute top-0 left-0 w-[500px] h-[500px] pointer-events-none opacity-30"
-        style={{
-          background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
+        style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
           transform: 'translate(-30%, -30%)',
         }}
       />
       <div
         className="hidden sm:block absolute bottom-0 right-0 w-[400px] h-[400px] pointer-events-none opacity-25"
-        style={{
-          background: 'radial-gradient(circle, rgba(168,181,160,0.1) 0%, transparent 70%)',
+        style={{ background: 'radial-gradient(circle, rgba(168,181,160,0.1) 0%, transparent 70%)',
           transform: 'translate(20%, 30%)',
         }}
       />
@@ -344,7 +331,7 @@ export default function FeaturedProducts() {
           <h2
             ref={headingRef}
             className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold tracking-tight"
-            style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+            style={{ color: '#2C2C2C' }}
           >
             Curated for You
           </h2>
@@ -356,7 +343,7 @@ export default function FeaturedProducts() {
           <p
             ref={subRef}
             className="text-sm sm:text-base max-w-md mx-auto mt-5"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+            style={{ color: '#8A8A8A' }}
           >
             Handpicked treasures that embody the Aura Living spirit
           </p>

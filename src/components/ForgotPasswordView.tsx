@@ -46,8 +46,7 @@ export default function ForgotPasswordView() {
       {/* Background decoration */}
       <div
         className="absolute inset-0 pointer-events-none overflow-hidden"
-        style={{
-          background: 'radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.03) 0%, transparent 50%)',
+        style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.03) 0%, transparent 50%)',
         }}
       />
 
@@ -55,8 +54,7 @@ export default function ForgotPasswordView() {
         {/* Card */}
         <div
           className="w-full rounded-2xl p-8 sm:p-10"
-          style={{
-            backgroundColor: 'rgba(255,253,247,0.9)',
+          style={{ backgroundColor: 'rgba(255,253,247,0.9)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
             border: '1px solid rgba(232,213,163,0.3)',
@@ -77,13 +75,13 @@ export default function ForgotPasswordView() {
                 </div>
                 <h1
                   className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold"
-                  style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+                  style={{ color: '#2C2C2C' }}
                 >
                   Reset Your Password
                 </h1>
                 <p
                   className="text-sm mt-3 leading-relaxed max-w-xs mx-auto"
-                  style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+                  style={{ color: '#5A5A5A' }}
                 >
                   Enter your email and we&apos;ll send you a link to reset your password
                 </p>
@@ -99,14 +97,13 @@ export default function ForgotPasswordView() {
                   <label
                     htmlFor="forgot-email"
                     className="text-xs font-medium tracking-wide uppercase"
-                    style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                    style={{ color: '#8A8A8A' }}
                   >
                     Email Address
                   </label>
                   <div
                     className="relative flex items-center rounded-lg transition-all duration-300"
-                    style={{
-                      border: emailError ? '2px solid #C44' : '1.5px solid #E8D5A3',
+                    style={{ border: emailError ? '2px solid #C44' : '1.5px solid #E8D5A3',
                       backgroundColor: emailError ? 'rgba(204,68,68,0.03)' : 'rgba(255,255,255,0.7)',
                       boxShadow: emailError
                         ? '0 0 12px rgba(204,68,68,0.1)'
@@ -130,9 +127,7 @@ export default function ForgotPasswordView() {
                       }}
                       onBlur={() => { if (email) validateEmail(email); }}
                       className="w-full px-2 py-4 text-sm bg-transparent outline-none"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        color: '#2C2C2C',
+                      style={{ color: '#2C2C2C',
                       }}
                       autoComplete="email"
                     />
@@ -140,7 +135,7 @@ export default function ForgotPasswordView() {
                   {emailError && (
                     <span
                       className="text-xs pl-1"
-                      style={{ fontFamily: "'Poppins', sans-serif", color: '#C44' }}
+                      style={{ color: '#C44' }}
                     >
                       {emailError}
                     </span>
@@ -175,7 +170,7 @@ export default function ForgotPasswordView() {
                 <button
                   onClick={() => setPage('login')}
                   className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                  style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+                  style={{ color: '#D4AF37', background: 'none' }}
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                   Back to Sign In
@@ -196,13 +191,13 @@ export default function ForgotPasswordView() {
                 </div>
                 <h2
                   className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold"
-                  style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+                  style={{ color: '#2C2C2C' }}
                 >
                   Check Your Email
                 </h2>
                 <p
                   className="text-sm mt-3 leading-relaxed max-w-xs mx-auto"
-                  style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+                  style={{ color: '#5A5A5A' }}
                 >
                   We&apos;ve sent a password reset link to your email address. Please check your inbox and follow the instructions.
                 </p>
@@ -218,7 +213,7 @@ export default function ForgotPasswordView() {
                     setEmailError('');
                   }}
                   className="text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                  style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+                  style={{ color: '#D4AF37', background: 'none' }}
                 >
                   Didn&apos;t receive the email? Resend
                 </button>
@@ -227,7 +222,7 @@ export default function ForgotPasswordView() {
                   <button
                     onClick={() => setPage('login')}
                     className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                    style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+                    style={{ color: '#D4AF37', background: 'none' }}
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
                     Back to Sign In
@@ -241,13 +236,13 @@ export default function ForgotPasswordView() {
         {/* Bottom info */}
         <p
           className="text-center text-[11px] mt-6 max-w-xs mx-auto leading-relaxed"
-          style={{ fontFamily: "'Poppins', sans-serif", color: '#B8A99A' }}
+          style={{ color: '#B8A99A' }}
         >
           Remember your password?{' '}
           <button
             onClick={() => setPage('login')}
             className="font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-            style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+            style={{ color: '#D4AF37', background: 'none' }}
           >
             Sign in instead
           </button>

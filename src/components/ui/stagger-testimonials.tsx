@@ -246,7 +246,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           right: padding,
           fontSize: titleSize * 2,
           lineHeight: 1,
-          fontFamily: "'Playfair Display', serif",
+          
           color: isCenter ? 'rgba(212,175,55,0.2)' : 'rgba(212,175,55,0.12)',
           transform: isHovered ? 'scale(1.3)' : 'scale(1)',
           transformOrigin: 'top right',
@@ -258,7 +258,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       <h3
         className="font-medium leading-snug"
         style={{
-          fontFamily: "'Playfair Display', serif",
+          
           fontSize: titleSize,
           color: isCenter ? '#FFFDF7' : '#2C2C2C'
         }}
@@ -292,7 +292,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       <p
         className="absolute mt-2 italic"
         style={{
-          fontFamily: "'Poppins', sans-serif",
+          
           fontSize: authorSize,
           bottom: authorBottom,
           left: authorSide,

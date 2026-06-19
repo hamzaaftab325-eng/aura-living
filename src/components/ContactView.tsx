@@ -88,8 +88,7 @@ export default function ContactView() {
         <div
           ref={heroBgRef}
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/contact-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/contact-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -98,30 +97,27 @@ export default function ContactView() {
         {/* Gradient overlay */}
         <div
           className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
           }}
         />
 
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
-          style={{
-            filter: 'blur(60px)',
+          style={{ filter: 'blur(60px)',
             background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
           }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
-          style={{
-            filter: 'blur(70px)',
+          style={{ filter: 'blur(70px)',
             background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
           }}
         />
 
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
 
-          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Get in Touch</h1>
+          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Get in Touch</h1>
 
           <div className="flex items-center justify-center gap-3 mt-5">
             <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
@@ -129,7 +125,7 @@ export default function ContactView() {
             <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
           </div>
 
-          <p className="text-white/70 text-base sm:text-lg max-w-xl mx-auto mt-4 leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <p className="text-white/70 text-base sm:text-lg max-w-xl mx-auto mt-4 leading-relaxed" >
             We would love to hear from you. Whether you have a question, feedback, or just want to say hello — drop us a line.
           </p>
         </div>
@@ -140,12 +136,12 @@ export default function ContactView() {
           <button
             onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+            style={{ color: '#8A8A8A', background: 'none' }}
           >
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
             Contact
           </span>
         </div>
@@ -159,13 +155,13 @@ export default function ContactView() {
               {/* Contact Form */}
               <div>
                 <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>Send Us a Message</h2>
+                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >Send Us a Message</h2>
                   <div className="mb-6">
                     <GoldDivider />
                   </div>
 
                   {isSubmitted && (
-                    <div className="mb-6 p-4 rounded-sm text-sm transition-all duration-300" style={{ backgroundColor: 'rgba(168, 181, 160, 0.2)', border: '1px solid #A8B5A0', color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}>
+                    <div className="mb-6 p-4 rounded-sm text-sm transition-all duration-300" style={{ backgroundColor: 'rgba(168, 181, 160, 0.2)', border: '1px solid #A8B5A0', color: '#2C2C2C' }}>
                       Thank you! Your message has been sent successfully. We will get back to you soon.
                     </div>
                   )}
@@ -173,12 +169,12 @@ export default function ContactView() {
                   <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                     {/* Name — CSS focus transitions */}
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="name" className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>Name</label>
+                      <label htmlFor="name" className="text-sm font-medium" style={{ color: '#2C2C2C' }}>Name</label>
                       <input
                         id="name" name="name" type="text" required value={formData.name} onChange={handleChange}
                         placeholder="Your full name"
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
-                        style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3', color: '#2C2C2C' }}
+                        style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3', color: '#2C2C2C' }}
                         onFocus={(e) => { e.target.style.borderColor = '#D4AF37'; e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)'; }}
                         onBlur={(e) => { e.target.style.borderColor = '#E8D5A3'; e.target.style.boxShadow = 'none'; }}
                       />
@@ -186,12 +182,12 @@ export default function ContactView() {
 
                     {/* Email — CSS focus transitions */}
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="email" className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>Email</label>
+                      <label htmlFor="email" className="text-sm font-medium" style={{ color: '#2C2C2C' }}>Email</label>
                       <input
                         id="email" name="email" type="email" required value={formData.email} onChange={handleChange}
                         placeholder="your@email.com"
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
-                        style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3', color: '#2C2C2C' }}
+                        style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3', color: '#2C2C2C' }}
                         onFocus={(e) => { e.target.style.borderColor = '#D4AF37'; e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)'; }}
                         onBlur={(e) => { e.target.style.borderColor = '#E8D5A3'; e.target.style.boxShadow = 'none'; }}
                       />
@@ -199,13 +195,11 @@ export default function ContactView() {
 
                     {/* Subject — CSS focus transitions */}
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="subject" className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>Subject</label>
+                      <label htmlFor="subject" className="text-sm font-medium" style={{ color: '#2C2C2C' }}>Subject</label>
                       <select
                         id="subject" name="subject" required value={formData.subject} onChange={handleChange}
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
-                        style={{
-                          fontFamily: "'Poppins', sans-serif",
-                          backgroundColor: '#FFFDF7',
+                        style={{ backgroundColor: '#FFFDF7',
                           border: '1px solid #E8D5A3',
                           color: formData.subject ? '#2C2C2C' : '#8A8A8A',
                           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238A8A8A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
@@ -222,12 +216,12 @@ export default function ContactView() {
 
                     {/* Message — CSS focus transitions */}
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="message" className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>Message</label>
+                      <label htmlFor="message" className="text-sm font-medium" style={{ color: '#2C2C2C' }}>Message</label>
                       <textarea
                         id="message" name="message" required rows={5} value={formData.message} onChange={handleChange}
                         placeholder="How can we help you?"
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
-                        style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3', color: '#2C2C2C' }}
+                        style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3', color: '#2C2C2C' }}
                         onFocus={(e) => { e.target.style.borderColor = '#D4AF37'; e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)'; }}
                         onBlur={(e) => { e.target.style.borderColor = '#E8D5A3'; e.target.style.boxShadow = 'none'; }}
                       />
@@ -238,7 +232,7 @@ export default function ContactView() {
                       type="submit"
                       disabled={isSubmitting}
                       className="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm sm:text-base font-semibold tracking-wider uppercase rounded-sm cursor-pointer transition-all duration-300 hover:bg-[#C9A22E] hover:shadow-[0_8px_30px_rgba(212,175,55,0.35)] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed mt-2"
-                      style={{ backgroundColor: '#D4AF37', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}
+                      style={{ backgroundColor: '#D4AF37', color: '#FFFFFF' }}
                     >
                       {isSubmitting ? (
                         <>
@@ -262,7 +256,7 @@ export default function ContactView() {
               {/* Contact Info */}
               <div className="flex flex-col gap-6">
                 <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>Contact Information</h2>
+                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >Contact Information</h2>
                   <div className="mb-6">
                     <GoldDivider />
                   </div>
@@ -274,11 +268,11 @@ export default function ContactView() {
                           <info.icon className="w-4.5 h-4.5" style={{ color: '#D4AF37' }} />
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-xs tracking-wider uppercase mb-0.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>{info.label}</span>
+                          <span className="text-xs tracking-wider uppercase mb-0.5" style={{ color: '#8A8A8A' }}>{info.label}</span>
                           {info.href ? (
-                            <a href={info.href} className="text-sm sm:text-base transition-colors duration-200 hover:text-[#D4AF37]" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>{info.value}</a>
+                            <a href={info.href} className="text-sm sm:text-base transition-colors duration-200 hover:text-[#D4AF37]" style={{ color: '#2C2C2C' }}>{info.value}</a>
                           ) : (
-                            <span className="text-sm sm:text-base" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>{info.value}</span>
+                            <span className="text-sm sm:text-base" style={{ color: '#2C2C2C' }}>{info.value}</span>
                           )}
                         </div>
                       </div>
@@ -292,7 +286,7 @@ export default function ContactView() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-sm text-sm sm:text-base font-semibold tracking-wider uppercase cursor-pointer transition-all duration-300 hover:shadow-[0_8px_25px_rgba(37,211,102,0.3)] hover:brightness-110 active:scale-[0.98]"
-                      style={{ backgroundColor: '#25D366', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}
+                      style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
                     >
                       <MessageCircle className="w-4 h-4" />
                       Chat on WhatsApp
@@ -304,8 +298,7 @@ export default function ContactView() {
                 <div className="rounded-sm overflow-hidden" style={{ border: '1px solid #E8D5A3' }}>
                   <div
                     className="relative w-full aspect-video flex items-center justify-center"
-                    style={{
-                      backgroundColor: '#E8D5A3',
+                    style={{ backgroundColor: '#E8D5A3',
                       backgroundImage: 'radial-gradient(circle at 30% 40%, rgba(212,175,55,0.1) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(168,181,160,0.15) 0%, transparent 50%), linear-gradient(135deg, #F5EDDA 25%, #E8D5A3 50%, #F5EDDA 75%)',
                     }}
                   >
@@ -324,7 +317,7 @@ export default function ContactView() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-200 hover:bg-[#C9A22E]"
-                        style={{ backgroundColor: '#D4AF37', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}
+                        style={{ backgroundColor: '#D4AF37', color: '#FFFFFF' }}
                       >
                         View on Google Maps
                         <ChevronRight className="w-3.5 h-3.5" />

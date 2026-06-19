@@ -46,7 +46,7 @@ export default function PremiumButton({
       onClick={handleClick}
       disabled={disabled}
       className={`premium-btn ${variantClasses[variant]} ${sizeClasses[size]} ${fullWidth ? 'w-full' : ''} ${disabled ? 'opacity-60 cursor-not-allowed' : ''} ${className}`}
-      style={{ fontFamily: "'Poppins', sans-serif" }}
+      
     >
       <span className="flex items-center justify-center gap-2">
         {children}

@@ -118,8 +118,7 @@ export default function ReturnsView() {
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/returns-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/returns-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -134,10 +133,10 @@ export default function ReturnsView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
             <RotateCcw className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
-          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Returns & Exchanges
           </h1>
           <div className="flex items-center gap-3 mt-6">
@@ -154,12 +153,12 @@ export default function ReturnsView() {
           <button
             onClick={() => setPage('home')}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37]"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+            style={{ color: '#8A8A8A' }}
           >
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#8A8A8A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>Returns & Exchanges</span>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>Returns & Exchanges</span>
         </div>
       </div>
 
@@ -170,16 +169,16 @@ export default function ReturnsView() {
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
               <RotateCcw className="w-6 h-6" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Our Return Policy
             </h2>
             <div className="flex justify-center mb-4">
               <GoldDivider />
             </div>
-            <p className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
+            <p className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-4" >
               We offer a <strong style={{ color: '#2C2C2C' }}>14-day return window</strong> from the date of delivery. Items must be unused, in their original packaging, and with all tags still attached.
             </p>
-            <p className="text-[#5A5A5A] text-base leading-relaxed max-w-2xl mx-auto" style={{ fontFamily: "'Poppins', sans-serif" }}>
+            <p className="text-[#5A5A5A] text-base leading-relaxed max-w-2xl mx-auto" >
               We want you to be completely satisfied with your purchase. If for any reason you are not happy with your order, we are here to make it right.
             </p>
           </div>
@@ -191,8 +190,8 @@ export default function ReturnsView() {
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
-              <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Step by Step</span>
-              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>How to Return</h2>
+              <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Step by Step</span>
+              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" >How to Return</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -215,14 +214,14 @@ export default function ReturnsView() {
                   </div>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>
+                      <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37' }}>
                         Step {step.step}
                       </span>
-                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold" >
                         {step.title}
                       </h3>
                     </div>
-                    <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                    <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" >
                       {step.description}
                     </p>
                   </div>
@@ -238,12 +237,12 @@ export default function ReturnsView() {
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
-              <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Swap & Replace</span>
-              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>Exchange Process</h2>
+              <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Swap & Replace</span>
+              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" >Exchange Process</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
-              <p className="text-[#5A5A5A] text-base leading-relaxed max-w-xl mx-auto mt-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
+              <p className="text-[#5A5A5A] text-base leading-relaxed max-w-xl mx-auto mt-4" >
                 Want a different size or color? Our exchange process is simple and hassle-free. Size and color exchanges are available for all eligible items.
               </p>
             </div>
@@ -265,14 +264,14 @@ export default function ReturnsView() {
                   </div>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>
+                      <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37' }}>
                         Step {step.step}
                       </span>
-                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold" >
                         {step.title}
                       </h3>
                     </div>
-                    <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                    <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" >
                       {step.description}
                     </p>
                   </div>
@@ -288,8 +287,8 @@ export default function ReturnsView() {
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
-              <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Please Note</span>
-              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>Non-Returnable Items</h2>
+              <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Please Note</span>
+              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" >Non-Returnable Items</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -305,10 +304,10 @@ export default function ReturnsView() {
                   <div className="flex items-start gap-3">
                     <XCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: '#C44' }} />
                     <div>
-                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      <h3 className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-1" >
                         {item.item}
                       </h3>
-                      <p className="text-[#5A5A5A] text-sm leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                      <p className="text-[#5A5A5A] text-sm leading-relaxed" >
                         {item.reason}
                       </p>
                     </div>
@@ -325,8 +324,8 @@ export default function ReturnsView() {
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
-              <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Getting Your Money Back</span>
-              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>Refund Methods</h2>
+              <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Getting Your Money Back</span>
+              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" >Refund Methods</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -340,10 +339,10 @@ export default function ReturnsView() {
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                   <CreditCard className="w-5 h-5" style={{ color: '#D4AF37' }} />
                 </div>
-                <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-2" >
                   Original Payment Method
                 </h3>
-                <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" >
                   Refunds are processed to your original payment method within 5-7 business days after we receive and inspect the returned item. This applies to credit/debit cards, JazzCash, EasyPaisa, and bank transfers.
                 </p>
               </div>
@@ -355,10 +354,10 @@ export default function ReturnsView() {
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                   <CreditCard className="w-5 h-5" style={{ color: '#D4AF37' }} />
                 </div>
-                <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-2" >
                   Store Credit
                 </h3>
-                <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" >
                   Opt for store credit and receive a <strong style={{ color: '#D4AF37' }}>10% bonus</strong> on your refund amount. Store credit never expires and can be used across our entire collection — a great way to discover something new.
                 </p>
               </div>
@@ -377,7 +376,7 @@ export default function ReturnsView() {
                   <AlertTriangle className="w-5 h-5" style={{ color: '#C44' }} />
                 </div>
                 <div>
-                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" >
                     Damaged or Defective Items
                   </h2>
                   <GoldDivider />
@@ -385,20 +384,20 @@ export default function ReturnsView() {
               </div>
 
               <div className="flex flex-col gap-4 ml-0 sm:ml-16">
-                <p className="text-[#5A5A5A] text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                <p className="text-[#5A5A5A] text-base leading-relaxed" >
                   If you receive a damaged or defective item, please contact us <strong style={{ color: '#2C2C2C' }}>within 48 hours</strong> of delivery. Photo evidence is required for all damage claims.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <div className="flex items-center gap-2 px-4 py-2.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid #E8D5A3' }}>
                     <CheckCircle className="w-4 h-4 shrink-0" style={{ color: '#D4AF37' }} />
-                    <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>Free replacement shipped immediately</span>
+                    <span className="text-sm font-medium" style={{ color: '#2C2C2C' }}>Free replacement shipped immediately</span>
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid #E8D5A3' }}>
                     <CheckCircle className="w-4 h-4 shrink-0" style={{ color: '#D4AF37' }} />
-                    <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>Full refund available</span>
+                    <span className="text-sm font-medium" style={{ color: '#2C2C2C' }}>Full refund available</span>
                   </div>
                 </div>
-                <p className="text-[#5A5A5A] text-sm leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                <p className="text-[#5A5A5A] text-sm leading-relaxed" >
                   We will cover all return shipping costs for damaged items and prioritize your case for the fastest possible resolution.
                 </p>
               </div>
@@ -413,13 +412,13 @@ export default function ReturnsView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <RotateCcw className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Need to Return Something?
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Our customer support team will guide you through the return or exchange process. We are committed to making it as smooth as possible.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -432,7 +431,7 @@ export default function ReturnsView() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase cursor-pointer transition-all duration-300 hover:shadow-[0_8px_25px_rgba(37,211,102,0.3)] hover:brightness-110 active:scale-[0.98]"
-              style={{ backgroundColor: '#25D366', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}
+              style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
             >
               <MessageCircle className="w-4 h-4" />
               WhatsApp Us

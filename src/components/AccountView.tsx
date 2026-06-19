@@ -265,8 +265,7 @@ export default function AccountView() {
         <div
           ref={heroBgRef}
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/account-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/account-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -275,8 +274,7 @@ export default function AccountView() {
         {/* Gradient overlay */}
         <div
           className="absolute inset-0"
-          style={{
-            background:
+          style={{ background:
               'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
           }}
         />
@@ -284,15 +282,13 @@ export default function AccountView() {
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 right-20 w-36 h-36 rounded-full"
-          style={{
-            filter: 'blur(60px)',
+          style={{ filter: 'blur(60px)',
             background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
           }}
         />
         <div
           className="absolute bottom-10 left-10 w-40 h-40 rounded-full"
-          style={{
-            filter: 'blur(70px)',
+          style={{ filter: 'blur(70px)',
             background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
           }}
         />
@@ -302,7 +298,7 @@ export default function AccountView() {
           <h1
             ref={heroTitleRef}
             className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             My Account
           </h1>
@@ -315,7 +311,7 @@ export default function AccountView() {
 
           <p
             className="text-white/70 text-base sm:text-lg max-w-md mx-auto mt-4 leading-relaxed"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             Manage your profile, orders, and preferences
           </p>
@@ -327,12 +323,12 @@ export default function AccountView() {
           <button
             onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+            style={{ color: '#8A8A8A', background: 'none' }}
           >
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
             My Account
           </span>
         </div>
@@ -352,13 +348,12 @@ export default function AccountView() {
                   {/* Avatar */}
                   <div
                     className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center shrink-0 animate-avatar-shimmer"
-                    style={{
-                      boxShadow: '0 4px 20px rgba(212, 175, 55, 0.3)',
+                    style={{ boxShadow: '0 4px 20px rgba(212, 175, 55, 0.3)',
                     }}
                   >
                     <span
                       className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold text-white"
-                      style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+                      style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                     >
                       {safeUser?.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
                     </span>
@@ -368,13 +363,13 @@ export default function AccountView() {
                   <div className="flex flex-col items-center sm:items-start text-center sm:text-left flex-1">
                     <h2
                       className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
+                      
                     >
                       {safeUser?.name}
                     </h2>
                     <p
                       className="text-[#5A5A5A] text-sm sm:text-base mb-1"
-                      style={{ fontFamily: "'Poppins', sans-serif" }}
+                      
                     >
                       {safeUser?.email}
                     </p>
@@ -385,7 +380,7 @@ export default function AccountView() {
                       />
                       <span
                         className="text-xs tracking-wide"
-                        style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                        style={{ color: '#8A8A8A' }}
                       >
                         Member Since {safeUser?.memberSince}
                       </span>
@@ -412,13 +407,13 @@ export default function AccountView() {
                   <div className="flex-1">
                     <h2
                       className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
+                      
                     >
                       You are not signed in
                     </h2>
                     <p
                       className="text-[#5A5A5A] text-sm sm:text-base mb-4"
-                      style={{ fontFamily: "'Poppins', sans-serif" }}
+                      
                     >
                       Sign in to view your orders, wishlist, and rewards.
                     </p>
@@ -451,13 +446,13 @@ export default function AccountView() {
                 <span
                   ref={countRef}
                   className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold block mb-1"
-                  style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+                  style={{ color: '#2C2C2C' }}
                 >
                   0
                 </span>
                 <span
                   className="text-xs sm:text-sm tracking-wide"
-                  style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                  style={{ color: '#8A8A8A' }}
                 >
                   {stat.label}
                 </span>
@@ -477,14 +472,14 @@ export default function AccountView() {
               <div className="flex items-center justify-between mb-2">
                 <h3
                   className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  
                 >
                   Recent Orders
                 </h3>
                 <button
                   onClick={() => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-                  style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+                  style={{ color: '#D4AF37' }}
                 >
                   View All
                 </button>
@@ -495,7 +490,7 @@ export default function AccountView() {
 
               {/* Orders Table - Desktop */}
               <div className="hidden md:block overflow-x-auto">
-                <table className="w-full" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                <table className="w-full" >
                   <thead>
                     <tr style={{ borderBottom: '1px solid #E8D5A3' }}>
                       <th
@@ -572,22 +567,22 @@ export default function AccountView() {
                     onClick={() => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                      <span className="text-sm font-semibold" style={{ color: '#2C2C2C' }}>
                         #{order.id}
                       </span>
                       <span
                         className="inline-flex items-center gap-1 px-2 py-0.5 rounded-sm text-xs font-semibold"
-                        style={{ backgroundColor: order.statusBg, color: order.statusColor, fontFamily: "'Poppins', sans-serif" }}
+                        style={{ backgroundColor: order.statusBg, color: order.statusColor }}
                       >
                         <order.statusIcon className="w-3 h-3" />
                         {order.status}
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                      <span className="text-xs" style={{ color: '#8A8A8A' }}>
                         {order.date}
                       </span>
-                      <span className="text-sm font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                      <span className="text-sm font-bold" style={{ color: '#2C2C2C' }}>
                         {order.total}
                       </span>
                     </div>
@@ -605,7 +600,7 @@ export default function AccountView() {
             <div className="text-center mb-8 sm:mb-10">
               <h3
                 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                
               >
                 Account Menu
               </h3>
@@ -642,13 +637,13 @@ export default function AccountView() {
                   <div className="flex-1 min-w-0">
                     <h4
                       className="text-[#2C2C2C] text-sm sm:text-base font-semibold mb-0.5"
-                      style={{ fontFamily: "'Poppins', sans-serif" }}
+                      
                     >
                       {item.label}
                     </h4>
                     <p
                       className="text-xs sm:text-sm truncate"
-                      style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                      style={{ color: '#8A8A8A' }}
                     >
                       {item.description}
                     </p>
@@ -669,8 +664,7 @@ export default function AccountView() {
           <AnimatedSection>
             <div
               className="mt-10 sm:mt-14 rounded-sm p-6 sm:p-8 text-center relative overflow-hidden"
-              style={{
-                background: 'linear-gradient(135deg, #2C2C2C 0%, #3A3A3A 50%, #2C2C2C 100%)',
+              style={{ background: 'linear-gradient(135deg, #2C2C2C 0%, #3A3A3A 50%, #2C2C2C 100%)',
                 border: '1px solid rgba(212, 175, 55, 0.3)',
               }}
             >
@@ -687,13 +681,13 @@ export default function AccountView() {
               <Award className="w-10 h-10 mx-auto mb-4" style={{ color: '#D4AF37' }} />
               <h3
                 className="text-white text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
-                style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+                style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
               >
                 Aura Rewards
               </h3>
               <p
                 className="text-white/60 text-sm sm:text-base mb-5 max-w-md mx-auto leading-relaxed"
-                style={{ fontFamily: "'Poppins', sans-serif" }}
+                
               >
                 You have <span style={{ color: '#D4AF37', fontWeight: 600 }}>{user?.rewardsPoints ?? 0} points</span> — that is PKR {user?.rewardsPoints ?? 0} off your next order!
               </p>

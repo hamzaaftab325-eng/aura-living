@@ -74,9 +74,7 @@ export default function TrendingCollection() {
       >
         <span
           className="text-[180px] sm:text-[240px] md:text-[300px] lg:text-[360px] font-bold leading-none"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            color: 'rgba(212, 175, 55, 0.06)',
+          style={{ color: 'rgba(212, 175, 55, 0.06)',
           }}
         >
           01
@@ -104,8 +102,7 @@ export default function TrendingCollection() {
               {/* Glassmorphism overlay strip at bottom */}
               <div
                 className="absolute bottom-0 left-0 right-0 px-6 py-4"
-                style={{
-                  background: 'rgba(255, 253, 247, 0.55)',
+                style={{ background: 'rgba(255, 253, 247, 0.55)',
                   backdropFilter: 'blur(20px)',
                   WebkitBackdropFilter: 'blur(20px)',
                   borderTop: '1px solid rgba(212, 175, 55, 0.2)',
@@ -113,7 +110,7 @@ export default function TrendingCollection() {
               >
                 <span
                   className="text-[#D4AF37] text-sm sm:text-base tracking-[3px] uppercase font-semibold"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                  
                 >
                   TRENDING NOW
                 </span>
@@ -125,8 +122,7 @@ export default function TrendingCollection() {
           <div className="hidden lg:flex items-center px-0">
             <div
               className="flex-shrink-0 self-stretch"
-              style={{
-                width: '1px',
+              style={{ width: '1px',
                 backgroundColor: 'rgba(212,175,55,0.25)',
                 marginLeft: '-1px',
                 marginRight: '-1px',
@@ -139,7 +135,7 @@ export default function TrendingCollection() {
             <span
               ref={tagRef}
               className="inline-block text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-semibold mb-4"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              
             >
               TRENDING NOW
             </span>
@@ -147,7 +143,7 @@ export default function TrendingCollection() {
             <h2
               ref={headingRef}
               className="text-[#2C2C2C] text-[32px] sm:text-[36px] md:text-[40px] font-bold leading-tight mb-5"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              
             >
               The Artisan Collection
             </h2>
@@ -159,7 +155,7 @@ export default function TrendingCollection() {
             <p
               ref={descRef}
               className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed mb-8"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              
             >
               Discover our curated collection of handcrafted lighting, where each piece is shaped
               by skilled artisans using time-honoured techniques. From sculptural brass pendants

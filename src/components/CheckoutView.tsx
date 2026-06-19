@@ -85,7 +85,7 @@ function FormInput({
       <label
         htmlFor={id}
         className="text-sm font-medium transition-all duration-200"
-        style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+        style={{ color: '#2C2C2C' }}
       >
         {label}
         {required && <span style={{ color: '#D4AF37' }}> *</span>}
@@ -99,9 +99,7 @@ function FormInput({
         onChange={onChange}
         placeholder={placeholder}
         className={`w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200 input-gold-glow ${error ? 'animate-error-shake' : ''}`}
-        style={{
-          fontFamily: "'Poppins', sans-serif",
-          backgroundColor: '#FFFDF7',
+        style={{ backgroundColor: '#FFFDF7',
           border: error ? '1.5px solid #E53E3E' : '1px solid #E8D5A3',
           color: '#2C2C2C',
         }}
@@ -115,7 +113,7 @@ function FormInput({
         }}
       />
       {error && (
-        <span className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: '#E53E3E' }}>
+        <span className="text-xs" style={{ color: '#E53E3E' }}>
           {label} is required
         </span>
       )}
@@ -259,8 +257,7 @@ export default function CheckoutView() {
           <div
             ref={heroBgRef}
             className="absolute inset-0"
-            style={{
-              backgroundImage: "url('/images/pages/checkout-hero.webp')",
+            style={{ backgroundImage: "url('/images/pages/checkout-hero.webp')",
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
@@ -269,20 +266,19 @@ export default function CheckoutView() {
           {/* Gradient Overlay */}
           <div
             className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)',
+            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)',
             }}
           />
           <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
             <span
               className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-6 mt-2"
-              style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+              style={{ color: '#D4AF37' }}
             >
               AURA LIVING
             </span>
             <h1
               className="text-white font-bold leading-[1.15] pt-2"
-              style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+              style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
             >
               Checkout
             </h1>
@@ -305,13 +301,13 @@ export default function CheckoutView() {
             </div>
             <h2
               className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
-              style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+              style={{ color: '#2C2C2C' }}
             >
               Your Cart is Empty
             </h2>
             <p
               className="text-base mb-8 leading-relaxed"
-              style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+              style={{ color: '#8A8A8A' }}
             >
               Add items to your cart before proceeding to checkout. Redirecting you to the shop...
             </p>
@@ -341,8 +337,7 @@ export default function CheckoutView() {
         <div
           ref={heroBgRef}
           className="absolute inset-0"
-          style={{
-            backgroundImage: "url('/images/pages/checkout-hero.webp')",
+          style={{ backgroundImage: "url('/images/pages/checkout-hero.webp')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -351,21 +346,20 @@ export default function CheckoutView() {
         {/* Gradient Overlay */}
         <div
           className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)',
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)',
           }}
         />
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
 
           <span
             className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-6 mt-2"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+            style={{ color: '#D4AF37' }}
           >
             AURA LIVING
           </span>
           <h1
             className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             Checkout
           </h1>
@@ -382,12 +376,12 @@ export default function CheckoutView() {
           <button
             onClick={() => { setPage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+            style={{ color: '#8A8A8A', background: 'none' }}
           >
             Cart
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
             Checkout
           </span>
         </div>
@@ -407,7 +401,7 @@ export default function CheckoutView() {
                 >
                   <h2
                     className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+                    style={{ color: '#2C2C2C' }}
                   >
                     Contact Information
                   </h2>
@@ -445,7 +439,7 @@ export default function CheckoutView() {
                 >
                   <h2
                     className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+                    style={{ color: '#2C2C2C' }}
                   >
                     Shipping Address
                   </h2>
@@ -517,7 +511,7 @@ export default function CheckoutView() {
                 >
                   <h2
                     className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+                    style={{ color: '#2C2C2C' }}
                   >
                     Payment Method
                   </h2>
@@ -531,16 +525,14 @@ export default function CheckoutView() {
                         <label
                           key={option.id}
                           className="flex items-center gap-4 p-4 rounded-sm cursor-pointer transition-all duration-200"
-                          style={{
-                            border: isSelected ? '2px solid #D4AF37' : '1px solid #E8D5A3',
+                          style={{ border: isSelected ? '2px solid #D4AF37' : '1px solid #E8D5A3',
                             backgroundColor: isSelected ? 'rgba(212,175,55,0.04)' : '#FFFDF7',
                           }}
                         >
                           {/* Custom Radio */}
                           <div
                             className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-200"
-                            style={{
-                              border: isSelected ? '2px solid #D4AF37' : '2px solid #E8D5A3',
+                            style={{ border: isSelected ? '2px solid #D4AF37' : '2px solid #E8D5A3',
                               backgroundColor: isSelected ? '#D4AF37' : 'transparent',
                             }}
                           >
@@ -565,13 +557,13 @@ export default function CheckoutView() {
                           <div className="flex-1 min-w-0">
                             <p
                               className="text-sm font-semibold"
-                              style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                              style={{ color: '#2C2C2C' }}
                             >
                               {option.label}
                             </p>
                             <p
                               className="text-xs mt-0.5"
-                              style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                              style={{ color: '#8A8A8A' }}
                             >
                               {option.description}
                             </p>
@@ -592,7 +584,7 @@ export default function CheckoutView() {
                 >
                   <h2
                     className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+                    style={{ color: '#2C2C2C' }}
                   >
                     Order Notes
                   </h2>
@@ -603,7 +595,7 @@ export default function CheckoutView() {
                     <label
                       htmlFor="orderNotes"
                       className="text-sm font-medium"
-                      style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                      style={{ color: '#2C2C2C' }}
                     >
                       Special Instructions (Optional)
                     </label>
@@ -615,9 +607,7 @@ export default function CheckoutView() {
                       onChange={handleChange}
                       placeholder="Any special delivery instructions, gift wrapping requests, or notes for our team..."
                       className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        backgroundColor: '#FFFDF7',
+                      style={{ backgroundColor: '#FFFDF7',
                         border: '1px solid #E8D5A3',
                         color: '#2C2C2C',
                       }}
@@ -642,7 +632,7 @@ export default function CheckoutView() {
                 >
                   <h2
                     className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                    style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+                    style={{ color: '#2C2C2C' }}
                   >
                     Order Summary
                   </h2>
@@ -679,20 +669,20 @@ export default function CheckoutView() {
                         <div className="flex-1 min-w-0">
                           <p
                             className="text-sm font-medium truncate"
-                            style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                            style={{ color: '#2C2C2C' }}
                           >
                             {item.product.name}
                           </p>
                           <p
                             className="text-xs capitalize"
-                            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                            style={{ color: '#8A8A8A' }}
                           >
                             {item.product.category.replace('-', ' ')}
                           </p>
                         </div>
                         <span
                           className="text-sm font-semibold shrink-0"
-                          style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                          style={{ color: '#2C2C2C' }}
                         >
                           {formatPKR(item.product.price * item.quantity)}
                         </span>
@@ -707,13 +697,13 @@ export default function CheckoutView() {
                     <div className="flex items-center justify-between">
                       <span
                         className="text-sm"
-                        style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+                        style={{ color: '#5A5A5A' }}
                       >
                         Subtotal ({cartCount} {cartCount === 1 ? 'item' : 'items'})
                       </span>
                       <span
                         className="text-sm font-semibold"
-                        style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                        style={{ color: '#2C2C2C' }}
                       >
                         {formatPKR(subtotal)}
                       </span>
@@ -722,21 +712,21 @@ export default function CheckoutView() {
                     <div className="flex items-center justify-between">
                       <span
                         className="text-sm"
-                        style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+                        style={{ color: '#5A5A5A' }}
                       >
                         Shipping
                       </span>
                       {shipping === 0 ? (
                         <span
                           className="text-sm font-semibold"
-                          style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+                          style={{ color: '#D4AF37' }}
                         >
                           Free
                         </span>
                       ) : (
                         <span
                           className="text-sm font-semibold"
-                          style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                          style={{ color: '#2C2C2C' }}
                         >
                           {formatPKR(shipping)}
                         </span>
@@ -746,7 +736,7 @@ export default function CheckoutView() {
                     {shipping > 0 && (
                       <p
                         className="text-[11px]"
-                        style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                        style={{ color: '#8A8A8A' }}
                       >
                         Free shipping on orders above PKR 2,999
                       </p>
@@ -756,7 +746,7 @@ export default function CheckoutView() {
                         <Truck className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
                         <p
                           className="text-[11px]"
-                          style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+                          style={{ color: '#D4AF37' }}
                         >
                           You qualify for free shipping!
                         </p>
@@ -769,13 +759,13 @@ export default function CheckoutView() {
                   <div className="flex items-center justify-between mb-6">
                     <span
                       className="text-base font-semibold"
-                      style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                      style={{ color: '#2C2C2C' }}
                     >
                       Total
                     </span>
                     <span
                       className="text-lg font-bold"
-                      style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                      style={{ color: '#2C2C2C' }}
                     >
                       {formatPKR(estimatedTotal)}
                     </span>
@@ -810,7 +800,7 @@ export default function CheckoutView() {
                     type="button"
                     onClick={() => { setPage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     className="w-full text-center text-sm font-medium py-3 mt-2 transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-                    style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+                    style={{ color: '#5A5A5A' }}
                   >
                     &larr; Back to Cart
                   </button>
@@ -824,14 +814,14 @@ export default function CheckoutView() {
                       <ShieldCheck className="w-4 h-4" style={{ color: '#D4AF37' }} />
                       <span
                         className="text-xs font-medium tracking-wide uppercase"
-                        style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+                        style={{ color: '#5A5A5A' }}
                       >
                         Secure Checkout
                       </span>
                     </div>
                     <p
                       className="text-[11px] leading-relaxed"
-                      style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                      style={{ color: '#8A8A8A' }}
                     >
                       Your personal information is encrypted and secure. We never store your payment details.
                     </p>

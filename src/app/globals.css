@@ -29,8 +29,10 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Aura Living Brand Colors */
+  /* Aura Living Brand Colors — Raw palette */
   --color-gold: #D4AF37;
+  --color-gold-hover: #C9A22E;
+  --color-gold-text: #B8941F; /* WCAG AA compliant gold for text on light backgrounds */
   --color-gold-soft: #E8D5A3;
   --color-gold-pale: #F5EDDA;
   --color-cream: #F2EDE4;
@@ -42,6 +44,11 @@
   --color-sage: #A8B5A0;
   --color-taupe: #B8A99A;
   --color-blush: #E8CEC1;
+  --color-danger: #DC2626;
+  --color-danger-bg: rgba(220, 38, 38, 0.08);
+  --color-danger-border: rgba(220, 38, 38, 0.2);
+  --color-success: #22C55E;
+  --color-info: #3B82F6;
 }
 
 :root {
@@ -69,6 +76,56 @@
   --font-great-vibes: var(--font-great-vibes), 'Great Vibes', cursive;
   --font-dancing-script: var(--font-dancing-script), 'Dancing Script', cursive;
   --font-archivo-narrow: var(--font-archivo-narrow), 'Archivo Narrow', sans-serif;
+
+  /* ── Semantic token layer ── */
+  --text-primary: #2C2C2C;
+  --text-secondary: #5A5A5A;
+  --text-muted: #8A8A8A;
+  --text-gold: #B8941F;
+  --text-on-dark: #FFFFFF;
+  --surface-page: #FAF8F5;
+  --surface-card: #FFFDF7;
+  --surface-accent: #F5EDDA;
+  --surface-dark: #2C2C2C;
+  --border-default: #E8D5A3;
+  --border-gold: #D4AF37;
+  --cta-bg: #D4AF37;
+  --cta-bg-hover: #C9A22E;
+
+  /* ── Z-index scale ── */
+  --z-base: 0;
+  --z-dropdown: 50;
+  --z-sticky: 55;
+  --z-navbar: 60;
+  --z-mega-menu: 65;
+  --z-drawer: 70;
+  --z-modal: 80;
+  --z-toast: 90;
+  --z-tooltip: 100;
+
+  /* ── Shadow tokens ── */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.10);
+  --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.14);
+  --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.15);
+
+  /* ── Radius tokens ── */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-pill: 9999px;
+
+  /* ── Animation tokens ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
 }
 
 @layer base {
@@ -76,66 +133,99 @@
     @apply border-border outline-ring/50;
   }
   html {
-    /* Consistent text rendering across the entire site */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    /* Prevent text size adjustment on orientation change / desktop zoom */
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    /* Improve font hinting on Windows/Chrome */
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
     font-variant-ligatures: common-ligatures contextual;
-    /* Smooth font loading — prevent FOIT/FOUT glitches */
     font-synthesis: none;
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-background text-foreground;
-    /* Multi-tier fallback chain — prevents any character from showing as a tofu box */
     font-family: var(--font-poppins), 'Poppins', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
     font-variant-ligatures: common-ligatures contextual;
-    /* Optimize line-height for readability */
     line-height: 1.6;
     letter-spacing: -0.01em;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-playfair), 'Playfair Display', Georgia, 'Times New Roman', serif;
-    /* Headings need slightly tighter letter-spacing for that editorial look */
     letter-spacing: -0.02em;
     line-height: 1.2;
     font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
     font-variant-ligatures: common-ligatures discretionary-ligatures;
   }
-  /* Headings that should NOT use Playfair (overridden inline via Poppins font-family) */
-  h1[style*="Poppins"], h2[style*="Poppins"], h3[style*="Poppins"], h4[style*="Poppins"] {
-    font-family: var(--font-poppins), 'Poppins', 'Inter', system-ui, sans-serif;
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
-    font-variant-ligatures: common-ligatures contextual;
-    letter-spacing: 0;
+  /* Buttons: global reset — no more inline border:none needed */
+  button {
+    border: 0;
+    background: none;
+    font-family: inherit;
+    cursor: pointer;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  /* Better tabular numbers for prices, stats, etc. */
-  .tabular-nums, table, [class*="Price"], [class*="Total"], [class*="PKR"] {
-    font-variant-numeric: tabular-nums;
-  }
-  /* Prevent text from looking blurry on high-DPI screens */
-  button, input, select, textarea {
+  input, select, textarea {
     font-family: inherit;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  /* Ensure apostrophes and quotes render with proper typographic characters */
-  :root {
-    /* Default to curly quotes for better typography */
+  /* Focus-visible: keyboard only — mouse clicks don't show rings */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  /* Remove outline for mouse users */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+  /* Tabular numbers defaults */
+  .tabular-nums, table, [class*="Price"], [class*="Total"], [class*="PKR"] {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Images: lazy-load by default, prevent layout shift */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  /* Skip link for screen readers / keyboard nav */
+  .aura-skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    z-index: var(--z-tooltip);
+    padding: 12px 24px;
+    background: var(--surface-dark);
+    color: var(--text-on-dark);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0 0 var(--radius-md) 0;
+  }
+  .aura-skip-link:focus {
+    top: 0;
+  }
+}
+
+/* ── Reduced motion: respect user preferences ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 /* ═══════════════════════════════════════════════════════════
    TYPOGRAPHY & CONTENT HIERARCHY DESIGN SYSTEM
-   Following: H1 (hero only, 36-72px), H2 (sections, 28-48px),
-   H3 (cards, 20-32px), H4 (supporting, 18-24px)
-   Body: large 16-22px, standard 16-18px, small 14-16px
-   Line-height: headings 1.2, body 1.5-1.7
+   H1 (hero only, 36-72px), H2 (sections, 28-44px),
+   H3 (cards, 20-28px), H4 (supporting, 18-22px)
+   Body: large 16-20px, standard 15-17px, small 13-15px
+   All classes use semantic tokens — change token = update all pages
    ═══════════════════════════════════════════════════════════ */
 
 /* ── H1: Hero title — one per page, hero section only ── */
@@ -145,6 +235,17 @@
   line-height: 1.2;
   letter-spacing: -0.02em;
   font-size: clamp(36px, 6vw, 72px);
+  padding-top: 0.5rem;
+}
+/* Hero h1 on dark image backgrounds — includes text shadow */
+.aura-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-size: clamp(36px, 6vw, 72px);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+  padding-top: 0.5rem;
 }
 
 /* ── H2: Section headings — major page sections ── */
@@ -154,6 +255,7 @@
   line-height: 1.2;
   letter-spacing: -0.02em;
   font-size: clamp(28px, 4vw, 44px);
+  color: var(--text-primary);
 }
 
 /* ── H3: Card & component titles ── */
@@ -163,6 +265,7 @@
   line-height: 1.3;
   letter-spacing: -0.01em;
   font-size: clamp(20px, 2.5vw, 28px);
+  color: var(--text-primary);
 }
 
 /* ── H4: Supporting headings ── */
@@ -171,6 +274,7 @@
   font-weight: 600;
   line-height: 1.3;
   font-size: clamp(18px, 2vw, 22px);
+  color: var(--text-primary);
 }
 
 /* ── Body: Large (hero descriptions, intro paragraphs) ── */
@@ -179,6 +283,7 @@
   font-weight: 400;
   line-height: 1.6;
   font-size: clamp(16px, 2vw, 20px);
+  color: var(--text-secondary);
 }
 
 /* ── Body: Standard (general content) ── */
@@ -187,6 +292,7 @@
   font-weight: 400;
   line-height: 1.6;
   font-size: clamp(15px, 1.5vw, 17px);
+  color: var(--text-secondary);
 }
 
 /* ── Body: Small (labels, metadata, captions) ── */
@@ -195,12 +301,13 @@
   font-weight: 400;
   line-height: 1.5;
   font-size: clamp(13px, 1.2vw, 15px);
+  color: var(--text-muted);
 }
 
-/* ── Eyebrow label — gold uppercase tracking ── */
+/* ── Eyebrow label — gold uppercase tracking (WCAG compliant) ── */
 .aura-eyebrow {
   font-family: 'Poppins', sans-serif;
-  color: #D4AF37;
+  color: var(--text-gold);
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -212,20 +319,64 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
+   LAYOUT SYSTEM
+   ═══════════════════════════════════════════════════════════ */
+
+/* Standard content section — mobile-first responsive padding */
+.aura-section {
+  padding: 3rem 1rem;
+}
+@media (min-width: 640px) {
+  .aura-section { padding: 4rem 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .aura-section { padding: 5rem 2rem; }
+}
+
+/* Standard content container */
+.aura-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Narrow content container (legal, FAQ, settings) */
+.aura-container-narrow {
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Breadcrumb strip — below hero, gold-pale bg */
+.aura-breadcrumb {
+  padding: 1rem 1rem;
+  background-color: var(--surface-accent);
+  border-bottom: 1px solid var(--border-default);
+}
+@media (min-width: 640px) {
+  .aura-breadcrumb { padding: 1rem 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .aura-breadcrumb { padding: 1rem 2rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════
    CARD DESIGN SYSTEM
-   Radius: 12px (rounded-xl)
-   Shadow: subtle (Y 2-8px, blur 8-30px, opacity 6-12%)
+   Radius: 12px (var(--radius-lg))
+   Shadow: subtle (var(--shadow-sm) resting, var(--shadow-lg) hover)
    Padding: 20px mobile, 24px tablet, 32px desktop
-   Hover: lift -6px + subtle shadow
+   Hover: lift -6px + shadow-lg + gold border
    ═══════════════════════════════════════════════════════════ */
 
 .aura-card {
-  background-color: #FFFDF7;
-  border: 1px solid #E8D5A3;
-  border-radius: 12px;
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
   padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out);
 }
 @media (min-width: 640px) {
   .aura-card { padding: 24px; }
@@ -235,8 +386,8 @@
 }
 .aura-card-hover:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  border-color: #D4AF37;
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-gold);
 }
 
 /* ── Badge — NEW/SALE/BESTSELLER ── */
@@ -244,13 +395,52 @@
   display: inline-flex;
   align-items: center;
   padding: 4px 10px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   font-family: 'Poppins', sans-serif;
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   line-height: 1;
+}
+
+/* ── Input field — standard form input ── */
+.aura-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-default);
+  background-color: rgba(255, 255, 255, 0.7);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+.aura-input:focus {
+  border-color: var(--cta-bg);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2), 0 0 40px rgba(212, 175, 55, 0.08);
+  background-color: rgba(255, 255, 255, 1);
+}
+.aura-input::placeholder {
+  color: var(--color-taupe);
+}
+
+/* ── Icon circle — gold icon background container ── */
+.aura-icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background-color: rgba(212, 175, 55, 0.1);
+  flex-shrink: 0;
+}
+
+/* ── Divider line — gold gradient ── */
+.aura-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
 }
 
 /* Gold Divider — elegant single diamond between lines */

@@ -69,8 +69,7 @@ function CategoryCard({
     <div
       ref={cardRef}
       className={`group relative cursor-pointer overflow-hidden rounded-xl ${aspectClass}`}
-      style={{
-        border: isHovered ? '2px solid #D4AF37' : '1px solid rgba(232, 213, 163, 0.2)',
+      style={{ border: isHovered ? '2px solid #D4AF37' : '1px solid rgba(232, 213, 163, 0.2)',
         transition: 'border-color 0.4s ease',
       }}
       onClick={onClick}
@@ -95,8 +94,7 @@ function CategoryCard({
       {/* Dark gradient overlay — brighter on hover */}
       <div
         className="absolute inset-0 transition-all duration-500"
-        style={{
-          background: isHovered
+        style={{ background: isHovered
             ? 'linear-gradient(to top, rgba(44,44,44,0.65) 0%, rgba(44,44,44,0.15) 50%, rgba(212,175,55,0.08) 100%)'
             : 'linear-gradient(to top, rgba(44,44,44,0.78) 0%, rgba(44,44,44,0.25) 50%, rgba(44,44,44,0.08) 100%)',
         }}
@@ -108,9 +106,7 @@ function CategoryCard({
       >
         <h3
           className="text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-500"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            color: isHovered ? '#D4AF37' : '#FFFFFF',
+          style={{ color: isHovered ? '#D4AF37' : '#FFFFFF',
             textShadow: isHovered
               ? '0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3)'
               : '0 2px 8px rgba(0,0,0,0.3)',
@@ -121,9 +117,7 @@ function CategoryCard({
         {/* Description — appears on hover */}
         <p
           className="text-white/70 text-sm mt-1 max-w-[200px] sm:max-w-[180px] transition-all duration-300"
-          style={{
-            fontFamily: "'Poppins', sans-serif",
-            opacity: isHovered ? 1 : 0,
+          style={{ opacity: isHovered ? 1 : 0,
             transform: isHovered ? 'translateY(0)' : 'translateY(8px)',
           }}
         >
@@ -134,8 +128,7 @@ function CategoryCard({
       {/* Gold bottom border that slides in from left on hover */}
       <div
         className="absolute bottom-0 left-0 h-[3px] z-20"
-        style={{
-          width: isHovered ? '100%' : '0%',
+        style={{ width: isHovered ? '100%' : '0%',
           background: 'linear-gradient(90deg, #D4AF37, #E8D5A3, #D4AF37)',
           transition: 'width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
           boxShadow: isHovered ? '0 0 10px rgba(212,175,55,0.4)' : 'none',
@@ -204,9 +197,7 @@ export default function CategoriesSection() {
           <h2
             ref={headingRef}
             className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold mb-2"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              color: '#2C2C2C',
+            style={{ color: '#2C2C2C',
             }}
           >
             Shop by Category

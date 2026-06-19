@@ -39,7 +39,7 @@ function FooterLink({
   const props = onClick
     ? {
         onClick,
-        style: { background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left' as const },
+        style: { background: 'none', cursor: 'pointer', padding: 0, textAlign: 'left' as const },
       }
     : { href: href || '#', onClick: href ? undefined : (e: React.MouseEvent) => e.preventDefault() };
 
@@ -184,24 +184,21 @@ export default function Footer() {
       {/* Gold accent line top edge */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[2px] z-10"
-        style={{
-          background: 'linear-gradient(90deg, transparent 0%, #D4AF37 50%, transparent 100%)',
+        style={{ background: 'linear-gradient(90deg, transparent 0%, #D4AF37 50%, transparent 100%)',
         }}
       />
 
       {/* Subtle gradient transition from page cream to footer charcoal */}
       <div
         className="absolute top-0 left-0 right-0 h-20 pointer-events-none z-10"
-        style={{
-          background: 'linear-gradient(to bottom, rgba(250,248,245,0.15) 0%, rgba(44,44,44,0) 100%)',
+        style={{ background: 'linear-gradient(to bottom, rgba(250,248,245,0.15) 0%, rgba(44,44,44,0) 100%)',
         }}
       />
 
       {/* Subtle brand pattern overlay */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }}
       />
 
@@ -234,7 +231,7 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <h3
               className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
-              style={{ color: '#D4AF37', fontFamily: "'Playfair Display', serif" }}
+              style={{ color: '#D4AF37' }}
             >
               Quick Links
               <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[#D4AF37]/50" />
@@ -252,7 +249,7 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <h3
               className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
-              style={{ color: '#D4AF37', fontFamily: "'Playfair Display', serif" }}
+              style={{ color: '#D4AF37' }}
             >
               Customer Service
               <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[#D4AF37]/50" />
@@ -270,15 +267,14 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <h3
               className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
-              style={{ color: '#D4AF37', fontFamily: "'Playfair Display', serif" }}
+              style={{ color: '#D4AF37' }}
             >
               Newsletter
               <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[#D4AF37]/50" />
             </h3>
             <div
               className="rounded-xl p-5 transition-all duration-700"
-              style={{
-                background: 'rgba(212,175,55,0.06)',
+              style={{ background: 'rgba(212,175,55,0.06)',
                 border: focused
                   ? '1px solid rgba(212,175,55,0.5)'
                   : '1px solid rgba(212,175,55,0.15)',
@@ -305,8 +301,7 @@ export default function Footer() {
                     onFocus={() => setFocused(true)}
                     onBlur={() => setFocused(false)}
                     className="h-11 w-full rounded-lg px-4 text-sm outline-none transition-all duration-500 placeholder:text-[#8A8A8A]"
-                    style={{
-                      backgroundColor: 'rgba(250,248,245,0.08)',
+                    style={{ backgroundColor: 'rgba(250,248,245,0.08)',
                       border: focused ? '1px solid rgba(212,175,55,0.6)' : '1px solid rgba(212,175,55,0.18)',
                       color: '#FAF8F5',
                       boxShadow: focused
@@ -318,8 +313,7 @@ export default function Footer() {
                   {focused && (
                     <span
                       className="absolute inset-0 rounded-lg pointer-events-none animate-[goldPulse_2s_ease-in-out_infinite]"
-                      style={{
-                        boxShadow: '0 0 15px rgba(212,175,55,0.2)',
+                      style={{ boxShadow: '0 0 15px rgba(212,175,55,0.2)',
                       }}
                     />
                   )}
@@ -327,10 +321,8 @@ export default function Footer() {
                 <button
                   type="submit"
                   className="group flex h-11 items-center justify-center gap-2 rounded-lg px-5 text-sm font-medium transition-all duration-500 hover:brightness-110 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] active:scale-[0.98]"
-                  style={{
-                    backgroundColor: '#D4AF37',
+                  style={{ backgroundColor: '#D4AF37',
                     color: '#2C2C2C',
-                    border: 'none',
                   }}
                 >
                   <Send size={14} />
@@ -363,8 +355,8 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Aura Living. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <button onClick={() => setPage('terms')} className="text-xs transition-colors duration-300 hover:text-[#D4AF37] cursor-pointer" style={{ color: '#E8D5A3', opacity: 0.7, background: 'none', border: 'none' }}>Terms of Service</button>
-            <button onClick={() => setPage('privacy')} className="text-xs transition-colors duration-300 hover:text-[#D4AF37] cursor-pointer" style={{ color: '#E8D5A3', opacity: 0.7, background: 'none', border: 'none' }}>Privacy Policy</button>
+            <button onClick={() => setPage('terms')} className="text-xs transition-colors duration-300 hover:text-[#D4AF37] cursor-pointer" style={{ color: '#E8D5A3', opacity: 0.7, background: 'none' }}>Terms of Service</button>
+            <button onClick={() => setPage('privacy')} className="text-xs transition-colors duration-300 hover:text-[#D4AF37] cursor-pointer" style={{ color: '#E8D5A3', opacity: 0.7, background: 'none' }}>Privacy Policy</button>
           </div>
           <div className="flex items-center gap-2 flex-wrap justify-center">
             <span className="text-xs" style={{ color: '#E8D5A3', opacity: 0.5 }}>We accept:</span>
@@ -388,8 +380,7 @@ export default function Footer() {
       {/* Bottom gold gradient accent */}
       <div
         className="absolute bottom-0 left-0 right-0 h-[2px] pointer-events-none z-10"
-        style={{
-          background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.4) 30%, #D4AF37 50%, rgba(212,175,55,0.4) 70%, transparent 100%)',
+        style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.4) 30%, #D4AF37 50%, rgba(212,175,55,0.4) 70%, transparent 100%)',
         }}
       />
     </footer>

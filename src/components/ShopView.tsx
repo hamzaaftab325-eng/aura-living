@@ -62,7 +62,7 @@ function FilterSidebar({
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}>
+        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C' }}>
           Categories
         </h3>
         <div className="space-y-3">
@@ -70,8 +70,7 @@ function FilterSidebar({
             <label key={cat.id} className="flex items-center gap-3 cursor-pointer group">
               <div
                 className="w-5 h-5 rounded flex items-center justify-center transition-all duration-200"
-                style={{
-                  border: selectedCategory === cat.id ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
+                style={{ border: selectedCategory === cat.id ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
                   backgroundColor: selectedCategory === cat.id ? '#D4AF37' : 'transparent',
                 }}
               >
@@ -83,7 +82,7 @@ function FilterSidebar({
               </div>
               <span
                 className="text-sm transition-colors duration-200 group-hover:text-[#D4AF37]"
-                style={{ color: selectedCategory === cat.id ? '#D4AF37' : '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}
+                style={{ color: selectedCategory === cat.id ? '#D4AF37' : '#5A5A5A' }}
                 onClick={() => onCategoryChange(cat.id)}
               >
                 {cat.name}
@@ -94,7 +93,7 @@ function FilterSidebar({
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}>
+        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C' }}>
           Price Range
         </h3>
         <div className="flex items-center gap-3">
@@ -105,7 +104,7 @@ function FilterSidebar({
               value={priceMin}
               onChange={(e) => onPriceMinChange(e.target.value)}
               className="w-full h-10 px-3 rounded-xl text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/40"
-              style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7', fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+              style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7', color: '#2C2C2C' }}
             />
           </div>
           <span style={{ color: '#8A8A8A' }}>-</span>
@@ -116,14 +115,14 @@ function FilterSidebar({
               value={priceMax}
               onChange={(e) => onPriceMaxChange(e.target.value)}
               className="w-full h-10 px-3 rounded-xl text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/40"
-              style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7', fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+              style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7', color: '#2C2C2C' }}
             />
           </div>
         </div>
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}>
+        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C' }}>
           Sort By
         </h3>
         <div className="relative">
@@ -131,7 +130,7 @@ function FilterSidebar({
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value as SortOption)}
             className="w-full h-10 px-3 rounded-sm text-sm outline-none appearance-none cursor-pointer transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/50"
-            style={{ border: '1px solid #E8D5A3', backgroundColor: 'rgba(255,253,247,0.8)', fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+            style={{ border: '1px solid #E8D5A3', backgroundColor: 'rgba(255,253,247,0.8)', color: '#2C2C2C' }}
           >
             {sortOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -145,7 +144,7 @@ function FilterSidebar({
         <button
           onClick={onClearFilters}
           className="text-sm font-medium underline transition-colors hover:text-[#C9A22E]"
-          style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+          style={{ color: '#D4AF37' }}
         >
           Clear All Filters
         </button>
@@ -192,8 +191,7 @@ function ProductCard({
     <div className="group">
       <div
         className="relative rounded-xl overflow-hidden cursor-pointer"
-        style={{
-          aspectRatio: '4/5',
+        style={{ aspectRatio: '4/5',
           border: isHovered ? '1px solid rgba(212,175,55,0.6)' : '1px solid rgba(232,213,163,0.25)',
           boxShadow: isHovered ? '0 0 25px rgba(212,175,55,0.2), 0 8px 32px rgba(0,0,0,0.08)' : '0 2px 8px rgba(0,0,0,0.04)',
           transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
@@ -213,8 +211,7 @@ function ProductCard({
             src={product.image}
             alt={product.name}
             className="w-full h-full object-contain"
-            style={{
-              transition: 'transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            style={{ transition: 'transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               transform: isHovered ? 'scale(1.08)' : 'scale(1)',
             }}
           />
@@ -225,10 +222,8 @@ function ProductCard({
           <div className="absolute top-3 left-3 z-30">
             <span
               className="inline-block px-2.5 py-1 rounded-sm text-[10px] font-bold tracking-wider uppercase"
-              style={{
-                backgroundColor: badgeColors[product.badge]?.bg,
+              style={{ backgroundColor: badgeColors[product.badge]?.bg,
                 color: badgeColors[product.badge]?.text,
-                fontFamily: "'Poppins', sans-serif",
               }}
             >
               {product.badge}
@@ -248,8 +243,7 @@ function ProductCard({
               onClick={btn.onClick}
               title={btn.title}
               className="touch-visible w-11 h-11 rounded-full flex items-center justify-center cursor-pointer"
-              style={{
-                backgroundColor: isHovered
+              style={{ backgroundColor: isHovered
                   ? (wishlisted && btn.active ? '#D4AF37' : '#FFFDF7')
                   : 'transparent',
                 color: wishlisted && btn.active ? '#FFFFFF' : '#2C2C2C',
@@ -284,8 +278,7 @@ function ProductCard({
         {/* Add to Cart bar — CSS transition (visible on touch via .touch-visible-translate) */}
         <div
           className="touch-visible-translate absolute bottom-0 left-0 right-0 z-30 px-4 pb-4"
-          style={{
-            opacity: isHovered ? 1 : 0,
+          style={{ opacity: isHovered ? 1 : 0,
             transform: isHovered ? 'translateY(0)' : 'translateY(30px)',
             transition: 'all 0.35s ease',
             transitionDelay: isHovered ? '0.1s' : '0s',
@@ -294,10 +287,8 @@ function ProductCard({
           <button
             onClick={handleAddToCart}
             className="w-full py-2.5 rounded-lg text-xs font-semibold tracking-[0.12em] uppercase flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 hover:bg-[#C9A22E] hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 active:scale-[0.97]"
-            style={{
-              backgroundColor: 'rgba(212,175,55,0.9)',
+            style={{ backgroundColor: 'rgba(212,175,55,0.9)',
               color: '#FFFFFF',
-              fontFamily: "'Poppins', sans-serif",
               border: '1px solid rgba(212,175,55,0.6)',
             }}
           >
@@ -311,7 +302,7 @@ function ProductCard({
       <div className="mt-3 flex flex-col gap-1 px-1">
         <h3
           className="text-sm font-medium leading-snug cursor-pointer transition-colors duration-300 line-clamp-1"
-          style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+          style={{ color: '#2C2C2C' }}
           onMouseEnter={(e) => (e.currentTarget.style.color = '#D4AF37')}
           onMouseLeave={(e) => (e.currentTarget.style.color = '#2C2C2C')}
           onClick={() => onProductClick(product)}
@@ -333,17 +324,17 @@ function ProductCard({
               />
             ))}
           </div>
-          <span className="text-[11px]" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>
+          <span className="text-[11px]" style={{ color: '#8A8A8A' }}>
             ({product.reviews})
           </span>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-sm font-bold" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>
+          <span className="text-sm font-bold" style={{ color: '#D4AF37' }}>
             {formatPKR(product.price)}
           </span>
           {product.originalPrice && (
-            <span className="text-xs line-through" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>
+            <span className="text-xs line-through" style={{ color: '#8A8A8A' }}>
               {formatPKR(product.originalPrice)}
             </span>
           )}
@@ -514,8 +505,7 @@ export default function ShopView() {
         <div
           ref={heroBgRef}
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/shop-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/shop-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -524,30 +514,27 @@ export default function ShopView() {
         {/* Gradient overlay */}
         <div
           className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.18) 100%)',
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.18) 100%)',
           }}
         />
 
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
-          style={{
-            filter: 'blur(60px)',
+          style={{ filter: 'blur(60px)',
             background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
           }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
-          style={{
-            filter: 'blur(70px)',
+          style={{ filter: 'blur(70px)',
             background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
           }}
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
 
-          <h1 ref={heroTitleRef} className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Our Collection</h1>
+          <h1 ref={heroTitleRef} className="text-white font-bold leading-[1.15] pt-2" style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Our Collection</h1>
 
           <div ref={dividerRef} className="flex items-center gap-3 mt-5">
             <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
@@ -555,7 +542,7 @@ export default function ShopView() {
             <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
           </div>
 
-          <p className="text-white/70 text-base sm:text-lg max-w-lg mx-auto mt-4 leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <p className="text-white/70 text-base sm:text-lg max-w-lg mx-auto mt-4 leading-relaxed" >
             Discover handcrafted home decor curated for the modern Pakistani home
           </p>
         </div>
@@ -566,12 +553,12 @@ export default function ShopView() {
           <button
             onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+            style={{ color: '#8A8A8A', background: 'none' }}
           >
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
             Shop
           </span>
         </div>
@@ -584,7 +571,7 @@ export default function ShopView() {
           <button
             onClick={() => setMobileFiltersOpen(true)}
             className="flex items-center gap-2 px-5 py-3 rounded-sm text-sm font-medium transition-all duration-300 hover:bg-[#F5EDDA]"
-            style={{ border: '1px solid #D4AF37', color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+            style={{ border: '1px solid #D4AF37', color: '#D4AF37' }}
           >
             <SlidersHorizontal size={16} />
             Filters
@@ -599,8 +586,7 @@ export default function ShopView() {
           <aside className="hidden lg:block w-[240px] xl:w-[260px] shrink-0">
             <div
               className="sticky top-28 p-6 rounded-lg"
-              style={{
-                backgroundColor: 'rgba(255,253,247,0.7)',
+              style={{ backgroundColor: 'rgba(255,253,247,0.7)',
                 backdropFilter: 'blur(12px)',
                 WebkitBackdropFilter: 'blur(12px)',
                 border: '1px solid rgba(212,175,55,0.15)',
@@ -616,16 +602,16 @@ export default function ShopView() {
             {/* Search active banner */}
             {searchQuery.trim() && (
               <div className="flex flex-wrap items-center gap-2 mb-6 p-3 rounded-lg" style={{ backgroundColor: 'rgba(212,175,55,0.08)', border: '1px solid rgba(212,175,55,0.25)' }}>
-                <span className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+                <span className="text-sm" style={{ color: '#5A5A5A' }}>
                   Showing results for <strong style={{ color: '#D4AF37' }}>&ldquo;{searchQuery.trim()}&rdquo;</strong>
                 </span>
-                <span className="text-xs" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>
+                <span className="text-xs" style={{ color: '#8A8A8A' }}>
                   ({filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found)
                 </span>
                 <button
                   onClick={() => setSearchQuery('')}
                   className="ml-auto inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full transition-colors hover:bg-[#F5EDDA]"
-                  style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}
+                  style={{ color: '#5A5A5A' }}
                   aria-label="Clear search"
                 >
                   <X size={12} />
@@ -640,26 +626,26 @@ export default function ShopView() {
                 {selectedCategory !== 'all' && (
                   <span
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
-                    style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif", border: '1px solid rgba(212,175,55,0.25)' }}
+                    style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.25)' }}
                   >
                     {categories.find((c) => c.id === selectedCategory)?.name}
                     <button onClick={() => setSelectedCategory('all')} className="hover:text-[#C9A22E]"><X size={12} /></button>
                   </span>
                 )}
                 {priceMin && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif", border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.25)' }}>
                     Min: {formatPKR(parseInt(priceMin, 10))}
                     <button onClick={() => setPriceMin('')} className="hover:text-[#C9A22E]"><X size={12} /></button>
                   </span>
                 )}
                 {priceMax && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif", border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.25)' }}>
                     Max: {formatPKR(parseInt(priceMax, 10))}
                     <button onClick={() => setPriceMax('')} className="hover:text-[#C9A22E]"><X size={12} /></button>
                   </span>
                 )}
                 {sortBy !== 'featured' && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif", border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.25)' }}>
                     {sortOptions.find((o) => o.value === sortBy)?.label}
                     <button onClick={() => setSortBy('featured')} className="hover:text-[#C9A22E]"><X size={12} /></button>
                   </span>
@@ -669,12 +655,12 @@ export default function ShopView() {
 
             {filteredProducts.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20">
-                <p className="text-lg mb-2" style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}>No products found</p>
-                <p className="text-sm mb-6" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>Try adjusting your filters</p>
+                <p className="text-lg mb-2" style={{ color: '#5A5A5A' }}>No products found</p>
+                <p className="text-sm mb-6" style={{ color: '#8A8A8A' }}>Try adjusting your filters</p>
                 <button
                   onClick={clearFilters}
                   className="px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors duration-300 hover:bg-[#C9A22E]"
-                  style={{ backgroundColor: '#D4AF37', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}
+                  style={{ backgroundColor: '#D4AF37', color: '#FFFFFF' }}
                 >
                   Clear Filters
                 </button>
@@ -702,8 +688,7 @@ export default function ShopView() {
         {/* Overlay */}
         <div
           className="fixed inset-0 z-50 transition-opacity duration-300"
-          style={{
-            backgroundColor: 'rgba(0,0,0,0.25)',
+          style={{ backgroundColor: 'rgba(0,0,0,0.25)',
             backdropFilter: 'blur(4px)',
             WebkitBackdropFilter: 'blur(4px)',
             opacity: mobileFiltersOpen ? 1 : 0,
@@ -715,8 +700,7 @@ export default function ShopView() {
         {/* Drawer */}
         <div
           className="fixed top-0 left-0 bottom-0 z-50 w-[320px] max-w-[92vw] shadow-2xl overflow-y-auto transition-transform duration-300 ease-out"
-          style={{
-            backgroundColor: 'rgba(250,248,245,0.85)',
+          style={{ backgroundColor: 'rgba(250,248,245,0.85)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
             borderRight: '1px solid rgba(212,175,55,0.15)',
@@ -724,7 +708,7 @@ export default function ShopView() {
           }}
         >
           <div className="flex items-center justify-between px-6 h-16" style={{ borderBottom: '1px solid rgba(212,175,55,0.15)' }}>
-            <span className="text-lg font-semibold tracking-wide" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>Filters</span>
+            <span className="text-lg font-semibold tracking-wide" style={{ color: '#2C2C2C' }}>Filters</span>
             <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} onClick={() => setMobileFiltersOpen(false)} aria-label="Close filters">
               <X className="h-5 w-5" />
             </button>
@@ -736,7 +720,7 @@ export default function ShopView() {
             <button
               onClick={() => setMobileFiltersOpen(false)}
               className="w-full py-3 rounded-sm text-white font-semibold uppercase tracking-wider text-sm transition-colors duration-300 hover:bg-[#C9A22E]"
-              style={{ backgroundColor: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+              style={{ backgroundColor: '#D4AF37' }}
             >
               Apply Filters
             </button>

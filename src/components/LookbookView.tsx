@@ -93,8 +93,7 @@ export default function LookbookView() {
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/lookbook-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/lookbook-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -109,13 +108,13 @@ export default function LookbookView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
             <Camera className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
-          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             The Lookbook
           </h1>
-          <p className="text-[#E8D5A3] text-sm sm:text-base mt-4 max-w-md leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <p className="text-[#E8D5A3] text-sm sm:text-base mt-4 max-w-md leading-relaxed" >
             Curated spaces, inspired living
           </p>
           <div className="flex items-center gap-3 mt-6">
@@ -132,26 +131,26 @@ export default function LookbookView() {
           <button
             onClick={() => setPage('home')}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+            style={{ color: '#8A8A8A', background: 'none' }}
           >
             Home
           </button>
           <span className="text-sm" style={{ color: '#8A8A8A' }}>/</span>
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>Lookbook</span>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>Lookbook</span>
         </div>
       </div>
 
       {/* Intro */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >
             Editorial Spaces
           </span>
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mt-3 mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mt-3 mb-4" >
             Styled for Living
           </h2>
           <GoldDivider />
-          <p className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed mt-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <p className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed mt-6" >
             Each scene is a carefully composed vision — a mood board brought to life. Discover how our pieces come together to create spaces that tell your story.
           </p>
         </div>
@@ -190,7 +189,7 @@ export default function LookbookView() {
                         {/* Scene number watermark */}
                         <div
                           className="absolute bottom-6 right-6 text-[60px] sm:text-[80px] lg:text-[96px] font-bold leading-none select-none"
-                          style={{ fontFamily: "'Playfair Display', serif", color: 'rgba(212,175,55,0.12)' }}
+                          style={{ color: 'rgba(212,175,55,0.12)' }}
                         >
                           {scene.number}
                         </div>
@@ -201,20 +200,20 @@ export default function LookbookView() {
                     <div className="w-full lg:w-1/2 flex flex-col gap-4 sm:gap-5">
                       <span
                         className="text-[#D4AF37] text-sm sm:text-base font-bold tracking-wider"
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
+                        
                       >
                         Scene {scene.number}
                       </span>
                       <h3
                         className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
-                        style={{ fontFamily: "'Playfair Display', serif" }}
+                        
                       >
                         {scene.title}
                       </h3>
                       <GoldDivider />
                       <p
                         className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed"
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
+                        
                       >
                         {scene.description}
                       </p>
@@ -242,13 +241,13 @@ export default function LookbookView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <Camera className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Create Your Own Story
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Every home has a story waiting to be told. Explore our full collection and bring your vision to life with pieces that speak to you.
           </p>
           <PremiumButton variant="gold" onClick={() => setPage('shop')}>

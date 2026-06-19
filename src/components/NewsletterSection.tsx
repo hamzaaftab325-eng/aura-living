@@ -131,9 +131,7 @@ export default function NewsletterSection() {
       >
         <span
           className="text-[8rem] sm:text-[16rem] md:text-[20rem] lg:text-[24rem] font-black leading-none tracking-tighter whitespace-nowrap"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            color: 'rgba(212, 175, 55, 0.06)',
+          style={{ color: 'rgba(212, 175, 55, 0.06)',
             transform: 'rotate(-8deg) translateX(5%)',
           }}
         >
@@ -150,7 +148,7 @@ export default function NewsletterSection() {
             <Gift className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
             <span
               className="text-[11px] font-semibold uppercase tracking-[0.2em]"
-              style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+              style={{ color: '#D4AF37' }}
             >
               Your Invitation Awaits
             </span>
@@ -160,7 +158,7 @@ export default function NewsletterSection() {
           <h2
             ref={headingRef}
             className="text-[32px] sm:text-[40px] md:text-[48px] font-bold leading-[1.1] tracking-tight"
-            style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+            style={{ color: '#2C2C2C' }}
           >
             Become Part of the Aura Family
           </h2>
@@ -176,7 +174,7 @@ export default function NewsletterSection() {
           <p
             ref={descRef}
             className="text-base sm:text-lg leading-relaxed max-w-xl mx-auto"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+            style={{ color: '#5A5A5A' }}
           >
             Unlock <span style={{ color: '#D4AF37', fontWeight: 600 }}>15% off</span> your first order, plus first access to new arrivals, members-only sales, and styling notes from our curators.
           </p>
@@ -188,7 +186,7 @@ export default function NewsletterSection() {
                 <div
                   key={i}
                   className="w-8 h-8 rounded-full border-2 border-[#F5EDDA] flex items-center justify-center text-[9px] font-bold text-white"
-                  style={{ backgroundColor: bg, fontFamily: "'Poppins', sans-serif" }}
+                  style={{ backgroundColor: bg }}
                 >
                   {['AK', 'OF', 'SM', 'FN'][i]}
                 </div>
@@ -196,7 +194,7 @@ export default function NewsletterSection() {
             </div>
             <span
               className="text-xs sm:text-sm"
-              style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+              style={{ color: '#8A8A8A' }}
             >
               Loved by 2,400+ Pakistani homes
             </span>
@@ -207,8 +205,7 @@ export default function NewsletterSection() {
         <div
           ref={cardRef}
           className="relative rounded-2xl p-6 sm:p-8 md:p-10"
-          style={{
-            backgroundColor: 'rgba(255, 253, 247, 0.85)',
+          style={{ backgroundColor: 'rgba(255, 253, 247, 0.85)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
             border: '1px solid rgba(212, 175, 55, 0.25)',
@@ -218,8 +215,7 @@ export default function NewsletterSection() {
           {/* Card shimmer overlay — CSS animation */}
           <div
             className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden"
-            style={{
-              background:
+            style={{ background:
                 'linear-gradient(105deg, transparent 40%, rgba(212,175,55,0.07) 45%, rgba(212,175,55,0.12) 50%, rgba(212,175,55,0.07) 55%, transparent 60%)',
               backgroundSize: '200% 100%',
               animation: 'newsletterShimmer 4s ease-in-out infinite',
@@ -230,21 +226,20 @@ export default function NewsletterSection() {
           <div className="text-center mb-6">
             <div
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mb-4"
-              style={{
-                backgroundColor: 'rgba(212, 175, 55, 0.12)',
+              style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)',
                 border: '1px solid rgba(212, 175, 55, 0.2)',
               }}
             >
               <span
                 className="text-[10px] font-bold uppercase tracking-widest"
-                style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+                style={{ color: '#D4AF37' }}
               >
                 15% Welcome Gift
               </span>
             </div>
             <h3
               className="text-xl sm:text-2xl font-bold"
-              style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+              style={{ color: '#2C2C2C' }}
             >
               Claim Your Discount
             </h3>
@@ -256,9 +251,7 @@ export default function NewsletterSection() {
               <label
                 htmlFor="newsletter-email"
                 className="absolute left-5 pointer-events-none transition-all duration-300 ease-out z-10"
-                style={{
-                  fontFamily: "'Poppins', sans-serif",
-                  top: shouldFloatLabel ? '6px' : '50%',
+                style={{ top: shouldFloatLabel ? '6px' : '50%',
                   transform: shouldFloatLabel ? 'translateY(0)' : 'translateY(-50%)',
                   fontSize: shouldFloatLabel ? '10px' : '14px',
                   color: shouldFloatLabel ? '#D4AF37' : '#B8A99A',
@@ -278,9 +271,7 @@ export default function NewsletterSection() {
                 placeholder={shouldFloatLabel ? '' : 'Enter your email address'}
                 required
                 className="w-full px-5 py-4 rounded-lg text-sm placeholder:text-[#B8A99A] outline-none"
-                style={{
-                  fontFamily: "'Poppins', sans-serif",
-                  color: '#2C2C2C',
+                style={{ color: '#2C2C2C',
                   backgroundColor: 'rgba(255, 255, 255, 0.85)',
                   border: isFocused
                     ? '2px solid #D4AF37'
@@ -309,8 +300,7 @@ export default function NewsletterSection() {
               </PremiumButton>
               <div
                 className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
+                style={{ background:
                     'linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.3) 45%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.3) 55%, transparent 70%)',
                   backgroundSize: '250% 100%',
                   animation: 'btnShimmerSlide 2.5s ease-in-out infinite',
@@ -323,14 +313,13 @@ export default function NewsletterSection() {
           {submitted && (
             <div
               className="mt-4 p-3 rounded-lg text-center"
-              style={{
-                backgroundColor: 'rgba(212, 175, 55, 0.1)',
+              style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)',
                 border: '1px solid rgba(212, 175, 55, 0.2)',
               }}
             >
               <p
                 className="text-sm font-medium"
-                style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+                style={{ color: '#D4AF37' }}
               >
                 Welcome to the family! Your 15% welcome code is on its way.
               </p>
@@ -339,11 +328,11 @@ export default function NewsletterSection() {
 
           {/* Trust signals */}
           <div className="mt-5 pt-5 flex items-center justify-center gap-4 flex-wrap" style={{ borderTop: '1px solid rgba(232, 213, 163, 0.4)' }}>
-            <span className="inline-flex items-center gap-1 text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+            <span className="inline-flex items-center gap-1 text-[11px]" style={{ color: '#8A8A8A' }}>
               <ShieldCheck className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
               No spam, unsubscribe anytime
             </span>
-            <span className="inline-flex items-center gap-1 text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+            <span className="inline-flex items-center gap-1 text-[11px]" style={{ color: '#8A8A8A' }}>
               <Mail className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
               We respect your privacy
             </span>

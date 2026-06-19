@@ -155,7 +155,7 @@ export default function CartDrawer() {
                 <ShoppingBag className="w-4 h-4" style={{ color: '#D4AF37' }} />
               </div>
               <div className="flex items-center gap-2">
-                <h2 className="text-xl font-semibold tracking-wide" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+                <h2 className="text-xl font-semibold tracking-wide" style={{ color: '#2C2C2C' }}>
                   Your Cart
                 </h2>
                 {cartCount > 0 && (
@@ -181,11 +181,11 @@ export default function CartDrawer() {
         {cart.length > 0 && (
           <div className="shrink-0 px-6 py-4" style={{ borderBottom: '1px solid #F5EDDA', backgroundColor: 'rgba(245, 237, 218, 0.3)' }}>
             {amountToFreeShipping > 0 ? (
-              <p className="text-xs sm:text-sm mb-2 text-center" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+              <p className="text-xs sm:text-sm mb-2 text-center" style={{ color: '#5A5A5A' }}>
                 Add <span className="font-semibold" style={{ color: '#D4AF37' }}>{formatPKR(amountToFreeShipping)}</span> more for <span className="font-semibold" style={{ color: '#D4AF37' }}>FREE shipping</span>
               </p>
             ) : (
-              <p className="text-xs sm:text-sm mb-2 text-center flex items-center justify-center gap-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#22C55E' }}>
+              <p className="text-xs sm:text-sm mb-2 text-center flex items-center justify-center gap-1.5" style={{ color: '#22C55E' }}>
                 <Truck className="w-3.5 h-3.5" />
                 <span className="font-semibold">Yay! You&apos;ve unlocked FREE shipping</span>
               </p>
@@ -193,8 +193,7 @@ export default function CartDrawer() {
             <div className="w-full h-2 rounded-full overflow-hidden" style={{ backgroundColor: '#F5EDDA' }}>
               <div
                 className="h-full rounded-full transition-all duration-500 ease-out"
-                style={{
-                  width: `${freeShippingProgress}%`,
+                style={{ width: `${freeShippingProgress}%`,
                   background: freeShippingProgress >= 100
                     ? 'linear-gradient(90deg, #22C55E, #16A34A)'
                     : 'linear-gradient(90deg, #D4AF37, #E8D5A3)',
@@ -214,16 +213,16 @@ export default function CartDrawer() {
               <div className="flex items-center justify-center w-24 h-24 rounded-full mb-6" style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}>
                 <ShoppingBag className="h-11 w-11" style={{ color: '#D4AF37' }} />
               </div>
-              <h3 className="text-2xl font-semibold mb-2" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+              <h3 className="text-2xl font-semibold mb-2" style={{ color: '#2C2C2C' }}>
                 Your cart is empty
               </h3>
-              <p className="text-sm text-center mb-8 max-w-[280px] leading-relaxed" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>
+              <p className="text-sm text-center mb-8 max-w-[280px] leading-relaxed" style={{ color: '#8A8A8A' }}>
                 Looks like you haven&apos;t added anything yet. Start exploring our handcrafted collection and find pieces you&apos;ll love.
               </p>
               <button
                 onClick={handleGoToShop}
                 className="flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-                style={{ backgroundColor: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+                style={{ backgroundColor: '#D4AF37' }}
               >
                 Start Shopping
                 <ArrowRight className="h-4 w-4" />
@@ -246,10 +245,10 @@ export default function CartDrawer() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
-                        <h4 className="text-sm font-semibold leading-tight" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                        <h4 className="text-sm font-semibold leading-tight" style={{ color: '#2C2C2C' }}>
                           {item.product.name}
                         </h4>
-                        <p className="text-xs mt-0.5 capitalize" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                        <p className="text-xs mt-0.5 capitalize" style={{ color: '#8A8A8A' }}>
                           {item.product.category.replace('-', ' ')}
                         </p>
                       </div>
@@ -274,7 +273,7 @@ export default function CartDrawer() {
                         >
                           <Minus className="h-3.5 w-3.5" />
                         </button>
-                        <span className="w-10 text-center text-sm font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                        <span className="w-10 text-center text-sm font-bold" style={{ color: '#2C2C2C' }}>
                           {item.quantity}
                         </span>
                         <button
@@ -287,11 +286,11 @@ export default function CartDrawer() {
                         </button>
                       </div>
                       <div className="text-right">
-                        <span className="text-sm font-bold block" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                        <span className="text-sm font-bold block" style={{ color: '#2C2C2C' }}>
                           {formatPKR(item.product.price * item.quantity)}
                         </span>
                         {item.quantity > 1 && (
-                          <span className="text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                          <span className="text-[11px]" style={{ color: '#8A8A8A' }}>
                             {formatPKR(item.product.price)} each
                           </span>
                         )}
@@ -308,33 +307,33 @@ export default function CartDrawer() {
         {cart.length > 0 && (
           <div className="shrink-0 px-6 pt-5 pb-6" style={{ borderTop: '2px solid #D4AF37', backgroundColor: '#FFFDF7' }}>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>Subtotal ({cartCount} item{cartCount !== 1 ? 's' : ''})</span>
-              <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>{formatPKR(subtotal)}</span>
+              <span className="text-sm" style={{ color: '#5A5A5A' }}>Subtotal ({cartCount} item{cartCount !== 1 ? 's' : ''})</span>
+              <span className="text-sm font-semibold" style={{ color: '#2C2C2C' }}>{formatPKR(subtotal)}</span>
             </div>
 
             <div className="flex items-center justify-between mb-3">
-              <span className="text-sm flex items-center gap-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+              <span className="text-sm flex items-center gap-1.5" style={{ color: '#5A5A5A' }}>
                 <Truck className="w-3.5 h-3.5" />
                 Shipping
               </span>
               {shipping === 0 ? (
-                <span className="text-sm font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: '#22C55E' }}>FREE</span>
+                <span className="text-sm font-bold" style={{ color: '#22C55E' }}>FREE</span>
               ) : (
-                <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>{formatPKR(shipping)}</span>
+                <span className="text-sm font-semibold" style={{ color: '#2C2C2C' }}>{formatPKR(shipping)}</span>
               )}
             </div>
 
             <div className="h-px my-3" style={{ backgroundColor: '#E8D5A3' }} />
 
             <div className="flex items-center justify-between mb-5">
-              <span className="text-base font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>Estimated Total</span>
-              <span className="text-xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>{formatPKR(estimatedTotal)}</span>
+              <span className="text-base font-semibold" style={{ color: '#2C2C2C' }}>Estimated Total</span>
+              <span className="text-xl font-bold" style={{ color: '#2C2C2C' }}>{formatPKR(estimatedTotal)}</span>
             </div>
 
             <button
               onClick={handleCheckout}
               className="group w-full flex items-center justify-center gap-2 py-4 rounded-full text-sm font-bold uppercase tracking-wider text-white transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] active:scale-[0.99] mb-3 cursor-pointer"
-              style={{ backgroundColor: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+              style={{ backgroundColor: '#D4AF37' }}
             >
               <CreditCard className="h-4 w-4" />
               Proceed to Checkout
@@ -344,18 +343,18 @@ export default function CartDrawer() {
             <button
               onClick={handleGoToShop}
               className="w-full text-center text-sm font-medium py-2 transition-colors duration-200 hover:underline cursor-pointer"
-              style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}
+              style={{ color: '#5A5A5A' }}
             >
               Continue Shopping
             </button>
 
             {/* Trust signals */}
             <div className="mt-4 pt-4 flex items-center justify-center gap-4 flex-wrap" style={{ borderTop: '1px solid #F5EDDA' }}>
-              <span className="inline-flex items-center gap-1 text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+              <span className="inline-flex items-center gap-1 text-[11px]" style={{ color: '#8A8A8A' }}>
                 <Shield className="w-3 h-3" style={{ color: '#D4AF37' }} />
                 Secure Checkout
               </span>
-              <span className="text-[11px] font-semibold tracking-wide" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+              <span className="text-[11px] font-semibold tracking-wide" style={{ color: '#8A8A8A' }}>
                 COD · JazzCash · EasyPaisa
               </span>
             </div>

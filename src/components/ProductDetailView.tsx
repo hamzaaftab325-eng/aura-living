@@ -33,7 +33,7 @@ const accordionItems = [
     title: 'Product Description',
     defaultOpen: true,
     getContent: (product: NonNullable<ReturnType<typeof useStore.getState>['selectedProduct']>) => (
-      <p style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }} className="text-sm leading-relaxed">
+      <p style={{ color: '#5A5A5A' }} className="text-sm leading-relaxed">
         {product.description}
       </p>
     ),
@@ -43,7 +43,7 @@ const accordionItems = [
     title: 'Materials & Care',
     defaultOpen: false,
     getContent: (product: NonNullable<ReturnType<typeof useStore.getState>['selectedProduct']>) => (
-      <div style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }} className="text-sm leading-relaxed space-y-2">
+      <div style={{ color: '#5A5A5A' }} className="text-sm leading-relaxed space-y-2">
         <p><strong>Material:</strong> {product.material}</p>
         <p><strong>Care:</strong> Wipe with a soft, dry cloth. Avoid direct sunlight and moisture.</p>
       </div>
@@ -54,7 +54,7 @@ const accordionItems = [
     title: 'Shipping & Returns',
     defaultOpen: false,
     getContent: () => (
-      <div style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }} className="text-sm leading-relaxed space-y-2">
+      <div style={{ color: '#5A5A5A' }} className="text-sm leading-relaxed space-y-2">
         <p><strong>Free Shipping:</strong> On orders above PKR 2,999</p>
         <p><strong>Delivery:</strong> 3-5 business days across Pakistan</p>
         <p><strong>Returns:</strong> 7-day hassle-free returns & exchanges</p>
@@ -97,7 +97,7 @@ function AccordionItem({
         aria-controls={`${accordionId}-panel`}
         id={`${accordionId}-button`}
       >
-        <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+        <span className="text-sm font-semibold" style={{ color: '#2C2C2C' }}>
           {item.title}
         </span>
         <ChevronDown
@@ -110,8 +110,7 @@ function AccordionItem({
         id={`${accordionId}-panel`}
         role="region"
         aria-labelledby={`${accordionId}-button`}
-        style={{
-          maxHeight: item.defaultOpen ? '500px' : '0px',
+        style={{ maxHeight: item.defaultOpen ? '500px' : '0px',
           opacity: item.defaultOpen ? 1 : 0,
           overflow: 'hidden',
           transition: 'max-height 0.35s ease, opacity 0.3s ease',
@@ -161,11 +160,11 @@ export default function ProductDetailView() {
   if (!selectedProduct) {
     return (
       <div className="w-full flex flex-col items-center justify-center py-32" style={{ backgroundColor: '#FAF8F5' }}>
-        <p className="text-lg mb-4" style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}>No product selected</p>
+        <p className="text-lg mb-4" style={{ color: '#5A5A5A' }}>No product selected</p>
         <button
           onClick={() => setPage('shop')}
           className="px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors duration-300 hover:bg-[#C9A22E]"
-          style={{ backgroundColor: '#D4AF37', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}
+          style={{ backgroundColor: '#D4AF37', color: '#FFFFFF' }}
         >
           Browse Shop
         </button>
@@ -215,23 +214,23 @@ export default function ProductDetailView() {
             <button
               onClick={() => setPage('shop')}
               className="shrink-0 flex items-center gap-1 text-xs font-medium transition-colors hover:text-[#D4AF37]"
-              style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}
+              style={{ color: '#5A5A5A' }}
             >
               <ChevronLeft size={14} />
               Back
             </button>
             <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
-            <button onClick={() => setPage('home')} className="text-xs transition-colors hover:text-[#D4AF37]" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>Home</button>
+            <button onClick={() => setPage('home')} className="text-xs transition-colors hover:text-[#D4AF37]" style={{ color: '#8A8A8A' }}>Home</button>
             <ChevronRight size={12} style={{ color: '#8A8A8A' }} />
-            <button onClick={() => setPage('shop')} className="text-xs transition-colors hover:text-[#D4AF37]" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>Shop</button>
+            <button onClick={() => setPage('shop')} className="text-xs transition-colors hover:text-[#D4AF37]" style={{ color: '#8A8A8A' }}>Shop</button>
             <ChevronRight size={12} style={{ color: '#8A8A8A' }} />
             {productCategory && (
               <>
-                <button onClick={() => setPage('shop')} className="text-xs transition-colors hover:text-[#D4AF37]" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>{productCategory.name}</button>
+                <button onClick={() => setPage('shop')} className="text-xs transition-colors hover:text-[#D4AF37]" style={{ color: '#8A8A8A' }}>{productCategory.name}</button>
                 <ChevronRight size={12} style={{ color: '#8A8A8A' }} />
               </>
             )}
-            <span className="text-xs font-medium" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>{product.name}</span>
+            <span className="text-xs font-medium" style={{ color: '#D4AF37' }}>{product.name}</span>
             </nav>
           </div>
         </div>
@@ -254,7 +253,7 @@ export default function ProductDetailView() {
                 <div className="absolute top-4 left-4">
                   <span
                     className="inline-block px-3 py-1 rounded-sm text-[10px] font-bold tracking-wider uppercase"
-                    style={{ backgroundColor: badgeColors[product.badge]?.bg, color: badgeColors[product.badge]?.text, fontFamily: "'Poppins', sans-serif" }}
+                    style={{ backgroundColor: badgeColors[product.badge]?.bg, color: badgeColors[product.badge]?.text }}
                   >
                     {product.badge}
                   </span>
@@ -264,8 +263,7 @@ export default function ProductDetailView() {
               <button
                 onClick={handleToggleWishlist}
                 className="absolute top-4 right-4 w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-                style={{
-                  backgroundColor: wishlisted ? '#D4AF37' : 'rgba(255,253,247,0.9)',
+                style={{ backgroundColor: wishlisted ? '#D4AF37' : 'rgba(255,253,247,0.9)',
                   border: wishlisted ? '2px solid #D4AF37' : '2px solid rgba(212,175,55,0.3)',
                   color: wishlisted ? '#FFFFFF' : '#2C2C2C',
                   boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
@@ -283,8 +281,7 @@ export default function ProductDetailView() {
                   key={i}
                   onClick={() => setSelectedImage(i)}
                   className="w-14 h-14 sm:w-20 sm:h-20 rounded-md overflow-hidden transition-all duration-300"
-                  style={{
-                    border: selectedImage === i ? '2px solid #D4AF37' : '1px solid rgba(232,213,163,0.3)',
+                  style={{ border: selectedImage === i ? '2px solid #D4AF37' : '1px solid rgba(232,213,163,0.3)',
                     opacity: selectedImage === i ? 1 : 0.7,
                     boxShadow: selectedImage === i ? '0 0 10px rgba(212,175,55,0.2)' : 'none',
                     backgroundColor: '#FFFDF7',
@@ -300,13 +297,13 @@ export default function ProductDetailView() {
           <div className="flex flex-col">
             {/* Category Tag */}
             {productCategory && (
-              <span className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>
+              <span className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: '#D4AF37' }}>
                 {productCategory.name}
               </span>
             )}
 
             {/* Title */}
-            <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+            <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ color: '#2C2C2C' }}>
               {product.name}
             </h1>
 
@@ -317,18 +314,18 @@ export default function ProductDetailView() {
                   <Star key={i} size={16} className={i < Math.round(product.rating) ? 'fill-[#D4AF37] text-[#D4AF37]' : 'text-[#E8D5A3]'} />
                 ))}
               </div>
-              <span className="text-sm" style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}>
+              <span className="text-sm" style={{ color: '#8A8A8A' }}>
                 ({product.reviews} reviews)
               </span>
             </div>
 
             {/* Price */}
             <div className="flex items-center gap-3 mb-6">
-              <span className="text-2xl font-bold" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>
+              <span className="text-2xl font-bold" style={{ color: '#D4AF37' }}>
                 {formatPKR(product.price)}
               </span>
               {product.originalPrice && (
-                <span className="text-base line-through" style={{ color: '#B8A99A', fontFamily: "'Poppins', sans-serif" }}>
+                <span className="text-base line-through" style={{ color: '#B8A99A' }}>
                   {formatPKR(product.originalPrice)}
                 </span>
               )}
@@ -340,7 +337,7 @@ export default function ProductDetailView() {
 
             {/* Color Swatches — CSS transition for selection ring */}
             <div className="mb-6">
-              <span className="text-sm font-medium mb-3 block" style={{ color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}>
+              <span className="text-sm font-medium mb-3 block" style={{ color: '#2C2C2C' }}>
                 Color: <span style={{ color: '#D4AF37' }}>{selectedColor}</span>
               </span>
               <div className="flex items-center gap-3">
@@ -349,8 +346,7 @@ export default function ProductDetailView() {
                     key={swatch.name}
                     onClick={() => setSelectedColor(swatch.name)}
                     className="w-11 h-11 rounded-full transition-all duration-300 hover:scale-110"
-                    style={{
-                      backgroundColor: swatch.hex,
+                    style={{ backgroundColor: swatch.hex,
                       border: selectedColor === swatch.name ? '2px solid #D4AF37' : '1px solid #E8D5A3',
                       boxShadow: selectedColor === swatch.name ? '0 0 10px rgba(212,175,55,0.3)' : 'none',
                     }}
@@ -362,7 +358,7 @@ export default function ProductDetailView() {
 
             {/* Quantity */}
             <div className="mb-6">
-              <span className="text-sm font-medium mb-3 block" style={{ color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}>Quantity</span>
+              <span className="text-sm font-medium mb-3 block" style={{ color: '#2C2C2C' }}>Quantity</span>
               <div className="inline-flex items-center rounded-full" style={{ border: '1px solid #E8D5A3', backgroundColor: 'rgba(245,237,218,0.3)' }}>
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -372,7 +368,7 @@ export default function ProductDetailView() {
                 >
                   <Minus className="h-4 w-4" />
                 </button>
-                <span className="w-10 text-center text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>{quantity}</span>
+                <span className="w-10 text-center text-sm font-semibold" style={{ color: '#2C2C2C' }}>{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
                   className="flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]"
@@ -389,7 +385,7 @@ export default function ProductDetailView() {
               <button
                 onClick={handleAddToCart}
                 className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[#C9A22E] hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] active:scale-[0.97]"
-                style={{ backgroundColor: '#D4AF37', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}
+                style={{ backgroundColor: '#D4AF37', color: '#FFFFFF' }}
               >
                 <ShoppingCart className="w-4 h-4" />
                 Add to Cart
@@ -397,7 +393,7 @@ export default function ProductDetailView() {
               <button
                 onClick={handleToggleWishlist}
                 className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[#F5EDDA] hover:text-[#D4AF37] active:scale-[0.97]"
-                style={{ border: '2px solid #D4AF37', color: wishlisted ? '#D4AF37' : '#2C2C2C', fontFamily: "'Poppins', sans-serif", backgroundColor: wishlisted ? 'rgba(212,175,55,0.08)' : 'transparent' }}
+                style={{ border: '2px solid #D4AF37', color: wishlisted ? '#D4AF37' : '#2C2C2C', backgroundColor: wishlisted ? 'rgba(212,175,55,0.08)' : 'transparent' }}
               >
                 <Heart className={`w-4 h-4 ${wishlisted ? 'fill-current' : ''}`} />
                 {wishlisted ? 'Wishlisted' : 'Wishlist'}
@@ -413,7 +409,7 @@ export default function ProductDetailView() {
               ].map((badge) => (
                 <div key={badge.label} className="flex flex-col items-center gap-1.5 sm:gap-2 text-center p-2 sm:p-3 rounded-sm" style={{ backgroundColor: 'rgba(245,237,218,0.3)', border: '1px solid rgba(232,213,163,0.3)' }}>
                   <div style={{ color: '#D4AF37' }}>{badge.icon}</div>
-                  <span className="text-[10px] sm:text-[11px] font-medium leading-tight" style={{ color: '#5A5A5A', fontFamily: "'Poppins', sans-serif" }}>{badge.label}</span>
+                  <span className="text-[10px] sm:text-[11px] font-medium leading-tight" style={{ color: '#5A5A5A' }}>{badge.label}</span>
                 </div>
               ))}
             </div>
@@ -433,7 +429,7 @@ export default function ProductDetailView() {
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F5EDDA' }}>
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>You May Also Like</h2>
+              <h2 className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" style={{ color: '#2C2C2C' }}>You May Also Like</h2>
               <GoldDivider />
             </div>
             <div ref={relatedRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
@@ -455,8 +451,8 @@ export default function ProductDetailView() {
                     <img src={rp.image} alt={rp.name} className="w-full h-full object-contain transition-transform duration-500 hover:scale-105" />
                   </div>
                   <div className="p-3 sm:p-4">
-                    <h3 className="text-xs sm:text-sm font-medium line-clamp-1" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>{rp.name}</h3>
-                    <p className="text-xs sm:text-sm font-bold mt-1" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>{formatPKR(rp.price)}</p>
+                    <h3 className="text-xs sm:text-sm font-medium line-clamp-1" style={{ color: '#2C2C2C' }}>{rp.name}</h3>
+                    <p className="text-xs sm:text-sm font-bold mt-1" style={{ color: '#D4AF37' }}>{formatPKR(rp.price)}</p>
                   </div>
                 </div>
               ))}

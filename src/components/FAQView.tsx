@@ -181,8 +181,7 @@ export default function FAQView() {
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/faq-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/faq-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -197,10 +196,10 @@ export default function FAQView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
             <HelpCircle className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
-          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Frequently Asked Questions
           </h1>
           <div className="flex items-center gap-3 mt-6">
@@ -217,12 +216,12 @@ export default function FAQView() {
           <button
             onClick={() => setPage('home')}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37]"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+            style={{ color: '#8A8A8A' }}
           >
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#8A8A8A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>FAQ</span>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>FAQ</span>
         </div>
       </div>
 
@@ -235,9 +234,7 @@ export default function FAQView() {
                 key={cat.key}
                 onClick={() => { setActiveCategory(cat.key); setOpenId(null); }}
                 className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-sm text-xs sm:text-sm font-medium tracking-wider uppercase cursor-pointer transition-all duration-300"
-                style={{
-                  fontFamily: "'Poppins', sans-serif",
-                  backgroundColor: activeCategory === cat.key ? '#D4AF37' : '#FFFDF7',
+                style={{ backgroundColor: activeCategory === cat.key ? '#D4AF37' : '#FFFDF7',
                   color: activeCategory === cat.key ? '#FFFFFF' : '#5A5A5A',
                   border: `1px solid ${activeCategory === cat.key ? '#D4AF37' : '#E8D5A3'}`,
                 }}
@@ -255,8 +252,7 @@ export default function FAQView() {
                 <div
                   key={item.id}
                   className="rounded-xl overflow-hidden transition-all duration-300"
-                  style={{
-                    backgroundColor: '#FFFDF7',
+                  style={{ backgroundColor: '#FFFDF7',
                     border: `1px solid ${isOpen ? '#D4AF37' : '#E8D5A3'}`,
                     borderLeft: isOpen ? '4px solid #D4AF37' : '4px solid transparent',
                   }}
@@ -270,9 +266,7 @@ export default function FAQView() {
                   >
                     <span
                       className="text-sm sm:text-base font-semibold leading-relaxed"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        color: isOpen ? '#D4AF37' : '#2C2C2C',
+                      style={{ color: isOpen ? '#D4AF37' : '#2C2C2C',
                       }}
                     >
                       {item.question}
@@ -280,8 +274,7 @@ export default function FAQView() {
                     <ChevronDown
                       ref={(el) => { if (el) chevronRefs.current.set(item.id, el); }}
                       className="w-5 h-5 shrink-0"
-                      style={{
-                        color: isOpen ? '#D4AF37' : '#8A8A8A',
+                      style={{ color: isOpen ? '#D4AF37' : '#8A8A8A',
                       }}
                     />
                   </button>
@@ -291,16 +284,13 @@ export default function FAQView() {
                     role="region"
                     aria-labelledby={`faq-button-${item.id}`}
                     className="overflow-hidden"
-                    style={{
-                      maxHeight: 0,
+                    style={{ maxHeight: 0,
                       opacity: 0,
                     }}
                   >
                     <div
                       className="px-4 sm:px-6 pb-4 sm:pb-6 text-sm sm:text-base leading-relaxed"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        color: '#5A5A5A',
+                      style={{ color: '#5A5A5A',
                         borderTop: isOpen ? '1px solid #E8D5A3' : 'none',
                         paddingTop: isOpen ? '16px' : '0px',
                       }}
@@ -321,13 +311,13 @@ export default function FAQView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <MessageCircle className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Still Have Questions?
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Our team is here to help. Reach out to us and we will get back to you as soon as possible.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -340,7 +330,7 @@ export default function FAQView() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase cursor-pointer transition-all duration-300 hover:shadow-[0_8px_25px_rgba(37,211,102,0.3)] hover:brightness-110 active:scale-[0.98]"
-              style={{ backgroundColor: '#25D366', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}
+              style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
             >
               <MessageCircle className="w-4 h-4" />
               WhatsApp Us

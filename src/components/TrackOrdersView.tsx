@@ -174,23 +174,21 @@ export default function TrackOrdersView() {
         <section className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center">
           <div
             className="absolute inset-0"
-            style={{
-              backgroundImage: 'url(/images/pages/account-hero.webp)',
+            style={{ backgroundImage: 'url(/images/pages/account-hero.webp)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           />
           <div
             className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
+            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
             }}
           />
           <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4">
             <h1
               ref={heroTitleRef}
               className="text-white font-bold leading-[1.15] pt-2"
-              style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+              style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
             >
               Track Your Orders
             </h1>
@@ -206,10 +204,10 @@ export default function TrackOrdersView() {
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
               <Package className="w-8 h-8" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Sign in to track your orders
             </h2>
-            <p className="text-[#5A5A5A] text-sm sm:text-base mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
+            <p className="text-[#5A5A5A] text-sm sm:text-base mb-6" >
               Sign in to view live delivery status, ETA, and full tracking history for every order.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
@@ -217,7 +215,7 @@ export default function TrackOrdersView() {
               <button
                 onClick={() => setPage('signup')}
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37', background: 'none', border: 'none' }}
+                style={{ color: '#D4AF37', background: 'none' }}
               >
                 Create a free account
               </button>
@@ -235,16 +233,14 @@ export default function TrackOrdersView() {
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/account-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/account-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
         <div
           className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
           }}
         />
 
@@ -252,7 +248,7 @@ export default function TrackOrdersView() {
           <h1
             ref={heroTitleRef}
             className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             Track Your Orders
           </h1>
@@ -265,7 +261,7 @@ export default function TrackOrdersView() {
 
           <p
             className="text-white/80 text-base sm:text-lg max-w-md mx-auto mt-4 leading-relaxed"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             Live status, ETAs, and step-by-step delivery timelines for every order.
           </p>
@@ -278,12 +274,12 @@ export default function TrackOrdersView() {
           <button
             onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+            style={{ color: '#8A8A8A', background: 'none' }}
           >
             My Account
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
             Track Orders
           </span>
         </div>
@@ -301,8 +297,7 @@ export default function TrackOrdersView() {
               <div className="flex flex-col sm:flex-row items-stretch gap-3">
                 <div
                   className="flex items-center rounded-sm flex-1"
-                  style={{
-                    border: '1.5px solid #E8D5A3',
+                  style={{ border: '1.5px solid #E8D5A3',
                     backgroundColor: 'rgba(255,255,255,0.7)',
                   }}
                 >
@@ -316,7 +311,7 @@ export default function TrackOrdersView() {
                     onKeyDown={(e) => { if (e.key === 'Enter') handleSearch(); }}
                     placeholder="Enter order ID (e.g. AL-2026-001)"
                     className="w-full px-3 py-3 text-sm bg-transparent outline-none"
-                    style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                    style={{ color: '#2C2C2C' }}
                   />
                 </div>
                 <PremiumButton variant="gold" size="sm" onClick={handleSearch}>
@@ -334,10 +329,10 @@ export default function TrackOrdersView() {
                 style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
               >
                 <Package className="w-10 h-10 mx-auto mb-3" style={{ color: '#D4AF37' }} />
-                <h3 className="text-[#2C2C2C] text-lg font-semibold mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                <h3 className="text-[#2C2C2C] text-lg font-semibold mb-1" >
                   No orders found
                 </h3>
-                <p className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                <p className="text-sm" style={{ color: '#8A8A8A' }}>
                   Try a different order ID or clear the search to see all your orders.
                 </p>
               </div>
@@ -365,10 +360,10 @@ export default function TrackOrdersView() {
                           <StatusIcon className="w-5 h-5" style={{ color: cfg.color }} />
                         </div>
                         <div>
-                          <p className="text-sm sm:text-base font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                          <p className="text-sm sm:text-base font-semibold" style={{ color: '#2C2C2C' }}>
                             #{order.id}
                           </p>
-                          <p className="text-xs sm:text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                          <p className="text-xs sm:text-sm" style={{ color: '#8A8A8A' }}>
                             Placed {order.date} · {order.items} item{order.items !== 1 ? 's' : ''}
                           </p>
                         </div>
@@ -382,12 +377,12 @@ export default function TrackOrdersView() {
                             <StatusIcon className="w-3 h-3" />
                             {order.status}
                           </span>
-                          <p className="text-xs mt-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+                          <p className="text-xs mt-1.5" style={{ color: '#5A5A5A' }}>
                             {order.eta}
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                          <p className="text-sm font-semibold" style={{ color: '#2C2C2C' }}>
                             {order.total}
                           </p>
                         </div>
@@ -416,8 +411,7 @@ export default function TrackOrdersView() {
                               <li key={i} className="relative flex items-center gap-4 py-3 pl-0">
                                 <div
                                   className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-300"
-                                  style={{
-                                    backgroundColor: stage.done ? '#D4AF37' : '#FFFDF7',
+                                  style={{ backgroundColor: stage.done ? '#D4AF37' : '#FFFDF7',
                                     border: stage.done ? '2px solid #D4AF37' : '2px dashed #E8D5A3',
                                     color: stage.done ? '#FFFFFF' : '#B8A99A',
                                   }}
@@ -427,16 +421,14 @@ export default function TrackOrdersView() {
                                 <div className="flex-1">
                                   <p
                                     className="text-sm font-semibold"
-                                    style={{
-                                      fontFamily: "'Poppins', sans-serif",
-                                      color: stage.done ? '#2C2C2C' : '#8A8A8A',
+                                    style={{ color: stage.done ? '#2C2C2C' : '#8A8A8A',
                                     }}
                                   >
                                     {stage.label}
                                   </p>
                                   <p
                                     className="text-xs mt-0.5"
-                                    style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                                    style={{ color: '#8A8A8A' }}
                                   >
                                     {stage.date}
                                   </p>
@@ -467,7 +459,7 @@ export default function TrackOrdersView() {
             <button
               onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-              style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+              style={{ color: '#D4AF37', background: 'none' }}
             >
               <ChevronRight className="w-3.5 h-3.5 rotate-180" />
               Back to My Account

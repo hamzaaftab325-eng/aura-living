@@ -119,8 +119,7 @@ export default function TermsView() {
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/terms-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/terms-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -135,10 +134,10 @@ export default function TermsView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
             <FileText className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
-          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Terms of Service
           </h1>
           <div className="flex items-center gap-3 mt-6">
@@ -146,7 +145,7 @@ export default function TermsView() {
             <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
             <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
           </div>
-          <p className="text-[#E8D5A3] text-sm mt-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <p className="text-[#E8D5A3] text-sm mt-4" >
             Last updated: June 2026
           </p>
         </div>
@@ -158,19 +157,19 @@ export default function TermsView() {
           <button
             onClick={() => setPage('home')}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+            style={{ color: '#8A8A8A', background: 'none' }}
           >
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#8A8A8A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>Terms of Service</span>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>Terms of Service</span>
         </div>
       </div>
 
       {/* Intro */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <p className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed" >
             Please read these Terms of Service carefully before using the Aura Living website. By accessing or using our site, you agree to be bound by these terms.
           </p>
         </div>
@@ -197,22 +196,22 @@ export default function TermsView() {
                     <div className="flex items-center gap-3 mb-1">
                       <span
                         className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm"
-                        style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+                        style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37' }}
                       >
                         {String(section.number).padStart(2, '0')}
                       </span>
-                      <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold" >
                         {section.title}
                       </h3>
                     </div>
-                    <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                    <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" >
                       {section.content}
                     </p>
                     {section.linkText && section.linkPage && (
                       <button
                         onClick={() => setPage(section.linkPage)}
                         className="text-sm font-semibold transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer mt-1 self-start"
-                        style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+                        style={{ color: '#D4AF37', background: 'none' }}
                       >
                         {section.linkText} →
                       </button>
@@ -231,13 +230,13 @@ export default function TermsView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <Shield className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-4" >
             Questions About Our Terms?
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             We are here to help. If you have any questions or concerns about our terms, feel free to reach out to our team at{' '}
             <a href="mailto:legal@auraliving.pk" className="font-semibold transition-colors duration-200 hover:text-[#C9A22E]" style={{ color: '#D4AF37' }}>
               legal@auraliving.pk

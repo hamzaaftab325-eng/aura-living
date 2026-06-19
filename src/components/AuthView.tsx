@@ -32,9 +32,7 @@ function SocialButton({
     <button
       onClick={onClick}
       className="flex items-center justify-center gap-3 w-full py-3.5 rounded-lg text-sm font-medium transition-all duration-300 hover:shadow-md active:scale-[0.98] cursor-pointer"
-      style={{
-        fontFamily: "'Poppins', sans-serif",
-        color: '#2C2C2C',
+      style={{ color: '#2C2C2C',
         backgroundColor: '#FFFFFF',
         border: '1px solid #E8D5A3',
       }}
@@ -75,8 +73,7 @@ function InputField({
   return (
     <div
       className="relative flex items-center rounded-lg transition-all duration-300"
-      style={{
-        border: isFocused ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
+      style={{ border: isFocused ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
         backgroundColor: isFocused ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.7)',
         boxShadow: isFocused
           ? '0 0 20px rgba(212,175,55,0.2), 0 0 40px rgba(212,175,55,0.08)'
@@ -100,9 +97,7 @@ function InputField({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className="w-full px-2 py-4 text-sm bg-transparent outline-none"
-        style={{
-          fontFamily: "'Poppins', sans-serif",
-          color: '#2C2C2C',
+        style={{ color: '#2C2C2C',
         }}
         aria-label={ariaLabel}
       />
@@ -111,7 +106,7 @@ function InputField({
           type="button"
           onClick={onToggle}
           className="pr-4 cursor-pointer transition-colors duration-200 hover:text-[#D4AF37]"
-          style={{ color: '#B8A99A', background: 'none', border: 'none' }}
+          style={{ color: '#B8A99A', background: 'none' }}
           aria-label={isVisible ? 'Hide password' : 'Show password'}
         >
           {isVisible ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -259,15 +254,13 @@ export default function AuthView() {
       {/* ═══ Left Panel — Decorative Image + Branding ═══ */}
       <div
         className="hidden lg:flex w-[45%] xl:w-[50%] relative overflow-hidden flex-col items-center justify-center"
-        style={{
-          background: 'linear-gradient(135deg, rgba(44,44,44,0.85), rgba(212,175,55,0.25))',
+        style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.85), rgba(212,175,55,0.25))',
         }}
       >
         {/* Background image */}
         <div
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/hero/hero-slide-1.webp)',
+          style={{ backgroundImage: 'url(/images/hero/hero-slide-1.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -289,7 +282,7 @@ export default function AuthView() {
           />
           <h2
             className="text-white text-3xl xl:text-4xl font-bold leading-tight mb-4"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            
           >
             Where Comfort<br />Meets Style
           </h2>
@@ -300,7 +293,7 @@ export default function AuthView() {
           </div>
           <p
             className="text-[#E8D5A3] text-sm mt-6 max-w-sm leading-relaxed"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             Discover handpicked home decor that turns houses into homes. Join our community of decor enthusiasts across Pakistan.
           </p>
@@ -312,8 +305,8 @@ export default function AuthView() {
               { number: '4.8', label: 'Rating' },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center">
-                <span className="text-[#D4AF37] text-xl font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>{stat.number}</span>
-                <span className="text-white/60 text-[10px] uppercase tracking-wider mt-1" style={{ fontFamily: "'Poppins', sans-serif" }}>{stat.label}</span>
+                <span className="text-[#D4AF37] text-xl font-bold" >{stat.number}</span>
+                <span className="text-white/60 text-[10px] uppercase tracking-wider mt-1" >{stat.label}</span>
               </div>
             ))}
           </div>
@@ -322,8 +315,7 @@ export default function AuthView() {
         {/* Gold orb decorations */}
         <div
           className="absolute pointer-events-none"
-          style={{
-            width: 180,
+          style={{ width: 180,
             height: 180,
             top: '8%',
             right: '-5%',
@@ -333,8 +325,7 @@ export default function AuthView() {
         />
         <div
           className="absolute pointer-events-none"
-          style={{
-            width: 120,
+          style={{ width: 120,
             height: 120,
             bottom: '12%',
             left: '-3%',
@@ -352,12 +343,12 @@ export default function AuthView() {
             <button
               onClick={() => setPage('home')}
               className="text-xs transition-colors hover:text-[#D4AF37]"
-              style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif" }}
+              style={{ color: '#8A8A8A' }}
             >
               Home
             </button>
             <ChevronRight size={12} style={{ color: '#8A8A8A' }} />
-            <span className="text-xs font-medium" style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}>
+            <span className="text-xs font-medium" style={{ color: '#D4AF37' }}>
               {mode === 'login' ? 'Sign In' : 'Create Account'}
             </span>
           </nav>
@@ -376,8 +367,7 @@ export default function AuthView() {
         {/* Form Card */}
         <div
           className="w-full max-w-md rounded-2xl p-8 sm:p-10"
-          style={{
-            backgroundColor: 'rgba(255,253,247,0.8)',
+          style={{ backgroundColor: 'rgba(255,253,247,0.8)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
             border: '1px solid rgba(232,213,163,0.3)',
@@ -390,7 +380,7 @@ export default function AuthView() {
               <Sparkles className="w-4 h-4 text-[#D4AF37]" />
               <span
                 className="text-[10px] font-semibold uppercase tracking-[0.2em]"
-                style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+                style={{ color: '#D4AF37' }}
               >
                 {mode === 'login' ? 'Welcome Back' : 'Join the Family'}
               </span>
@@ -399,7 +389,7 @@ export default function AuthView() {
             <h1
               ref={titleRef}
               className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold"
-              style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+              style={{ color: '#2C2C2C' }}
             >
               {mode === 'login' ? 'Sign In to Aura' : 'Create Account'}
             </h1>
@@ -437,7 +427,7 @@ export default function AuthView() {
           {/* Divider */}
           <div className="flex items-center gap-4 mb-6">
             <div className="flex-1 h-px bg-[#E8D5A3]" />
-            <span className="text-[11px] uppercase tracking-wider" style={{ color: '#B8A99A', fontFamily: "'Poppins', sans-serif" }}>
+            <span className="text-[11px] uppercase tracking-wider" style={{ color: '#B8A99A' }}>
               or
             </span>
             <div className="flex-1 h-px bg-[#E8D5A3]" />
@@ -498,8 +488,7 @@ export default function AuthView() {
                     aria-checked={rememberMe}
                     aria-label="Remember me on this device"
                     className="w-4 h-4 rounded flex items-center justify-center transition-all duration-200"
-                    style={{
-                      border: rememberMe ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
+                    style={{ border: rememberMe ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
                       backgroundColor: rememberMe ? '#D4AF37' : 'transparent',
                       padding: 0,
                     }}
@@ -511,14 +500,14 @@ export default function AuthView() {
                       </svg>
                     )}
                   </button>
-                  <span className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                  <span className="text-xs" style={{ color: '#8A8A8A' }}>
                     Remember me
                   </span>
                 </label>
                 <button
                   type="button"
                   className="text-xs font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                  style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+                  style={{ color: '#D4AF37', background: 'none' }}
                   onClick={() => { setPage('forgot-password'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 >
                   Forgot Password?
@@ -535,8 +524,7 @@ export default function AuthView() {
                   aria-checked={agreeTerms}
                   aria-label="I agree to the Terms of Service and Privacy Policy"
                   className="w-4 h-4 rounded flex items-center justify-center shrink-0 mt-0.5 transition-all duration-200"
-                  style={{
-                    border: agreeTerms ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
+                  style={{ border: agreeTerms ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
                     backgroundColor: agreeTerms ? '#D4AF37' : 'transparent',
                     padding: 0,
                   }}
@@ -548,7 +536,7 @@ export default function AuthView() {
                     </svg>
                   )}
                 </button>
-                <span className="text-xs leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                <span className="text-xs leading-relaxed" style={{ color: '#8A8A8A' }}>
                   I agree to the{' '}
                   <span className="text-[#D4AF37] font-medium cursor-pointer hover:underline" onClick={() => { setPage('terms'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Terms of Service</span>
                   {' '}and{' '}
@@ -562,11 +550,8 @@ export default function AuthView() {
               type="submit"
               disabled={isSubmitting}
               className="group w-full flex items-center justify-center gap-2 py-4 rounded-lg text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:bg-[#C9A22E] active:scale-[0.98] cursor-pointer mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
-              style={{
-                backgroundColor: '#D4AF37',
+              style={{ backgroundColor: '#D4AF37',
                 color: '#FFFFFF',
-                fontFamily: "'Poppins', sans-serif",
-                border: 'none',
               }}
             >
               {isSubmitting ? (
@@ -588,7 +573,7 @@ export default function AuthView() {
 
           {/* Switch Mode */}
           <div className="text-center mt-6 pt-5" style={{ borderTop: '1px solid rgba(232,213,163,0.3)' }}>
-            <p className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+            <p className="text-sm" style={{ color: '#8A8A8A' }}>
               {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}{' '}
               <button
                 onClick={() => {
@@ -597,7 +582,7 @@ export default function AuthView() {
                   setShowConfirmPassword(false);
                 }}
                 className="font-semibold transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                style={{ color: '#D4AF37', background: 'none', border: 'none', fontFamily: "'Poppins', sans-serif" }}
+                style={{ color: '#D4AF37', background: 'none' }}
               >
                 {mode === 'login' ? 'Sign Up' : 'Sign In'}
               </button>
@@ -608,7 +593,7 @@ export default function AuthView() {
         {/* Bottom info */}
         <p
           className="text-center text-[11px] mt-6 max-w-xs leading-relaxed"
-          style={{ fontFamily: "'Poppins', sans-serif", color: '#B8A99A' }}
+          style={{ color: '#B8A99A' }}
         >
           By continuing, you agree to Aura Living&apos;s Terms of Service and acknowledge our Privacy Policy.
         </p>

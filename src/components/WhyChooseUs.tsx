@@ -76,8 +76,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
   return (
     <div
       className="group relative h-full rounded-2xl overflow-hidden transition-all duration-300 cursor-default"
-      style={{
-        background: '#FFFDF7',
+      style={{ background: '#FFFDF7',
         border: '1px solid #E8D5A3',
         transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
         boxShadow: isHovered
@@ -90,8 +89,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
       {/* Gold top accent line that grows on hover */}
       <div
         className="absolute top-0 left-0 h-[3px] transition-all duration-500 ease-out"
-        style={{
-          width: isHovered ? '100%' : '0%',
+        style={{ width: isHovered ? '100%' : '0%',
           background: 'linear-gradient(90deg, #D4AF37, #E8D5A3)',
         }}
       />
@@ -99,9 +97,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
       {/* Floating gold number in corner */}
       <span
         className="absolute top-4 right-5 select-none pointer-events-none z-0 transition-all duration-300"
-        style={{
-          fontFamily: "'Playfair Display', serif",
-          fontSize: '3.5rem',
+        style={{ fontSize: '3.5rem',
           lineHeight: 1,
           color: isHovered ? 'rgba(212, 175, 55, 0.18)' : 'rgba(212, 175, 55, 0.08)',
         }}
@@ -114,8 +110,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
         <div className="mb-5">
           <div
             className="relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300"
-            style={{
-              backgroundColor: isHovered ? '#D4AF37' : '#F5EDDA',
+            style={{ backgroundColor: isHovered ? '#D4AF37' : '#F5EDDA',
               transform: isHovered ? 'scale(1.08)' : 'scale(1)',
               boxShadow: isHovered ? '0 8px 20px rgba(212, 175, 55, 0.35)' : 'none',
             }}
@@ -129,9 +124,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
 
         <h3
           className="text-lg sm:text-xl font-bold mb-2 transition-colors duration-300"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            color: isHovered ? '#D4AF37' : '#2C2C2C',
+          style={{ color: isHovered ? '#D4AF37' : '#2C2C2C',
           }}
         >
           {feature.title}
@@ -139,7 +132,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
 
         <p
           className="text-sm leading-relaxed flex-1"
-          style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+          style={{ color: '#8A8A8A' }}
         >
           {feature.description}
         </p>
@@ -192,7 +185,7 @@ export default function WhyChooseUs() {
             <div className="w-8 h-px bg-[#D4AF37]/50" />
             <span
               className="text-[11px] font-semibold uppercase tracking-[0.25em]"
-              style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+              style={{ color: '#D4AF37' }}
             >
               The Aura Promise
             </span>
@@ -202,14 +195,14 @@ export default function WhyChooseUs() {
           <h2
             ref={headingRef}
             className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold mb-3"
-            style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+            style={{ color: '#2C2C2C' }}
           >
             Why Discerning Homes Choose Aura
           </h2>
 
           <p
             className="text-sm sm:text-base max-w-xl mx-auto mt-4"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+            style={{ color: '#8A8A8A' }}
           >
             Four promises we live by, so your home can be lived in beautifully.
           </p>

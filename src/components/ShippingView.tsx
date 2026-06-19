@@ -82,8 +82,7 @@ export default function ShippingView() {
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/shipping-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/shipping-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -98,10 +97,10 @@ export default function ShippingView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
             <Truck className="w-8 h-8" style={{ color: '#D4AF37' }} />
           </div>
-          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
-          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
+          <h1 className="text-white font-bold leading-[1.15] pt-2" style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>
             Shipping Information
           </h1>
           <div className="flex items-center gap-3 mt-6">
@@ -118,12 +117,12 @@ export default function ShippingView() {
           <button
             onClick={() => setPage('home')}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37]"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+            style={{ color: '#8A8A8A' }}
           >
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#8A8A8A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>Shipping</span>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>Shipping</span>
         </div>
       </div>
 
@@ -134,13 +133,13 @@ export default function ShippingView() {
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
               <Truck className="w-6 h-6" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Shipping Overview
             </h2>
             <div className="flex justify-center mb-4">
               <GoldDivider />
             </div>
-            <p className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto" style={{ fontFamily: "'Poppins', sans-serif" }}>
+            <p className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto" >
               We deliver across Pakistan with care and attention to every package. Your order is handled with the same love and precision that goes into crafting each product. From our artisan workshop to your doorstep, we ensure every item arrives safely and beautifully presented.
             </p>
           </div>
@@ -152,8 +151,8 @@ export default function ShippingView() {
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
-              <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>Delivery Options</span>
-              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>Shipping Rates</h2>
+              <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Delivery Options</span>
+              <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" >Shipping Rates</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -169,16 +168,16 @@ export default function ShippingView() {
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                     <rate.icon className="w-5 h-5" style={{ color: '#D4AF37' }} />
                   </div>
-                  <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-1" >
                     {rate.title}
                   </h3>
-                  <span className="block text-xs sm:text-sm tracking-wider uppercase mb-3" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                  <span className="block text-xs sm:text-sm tracking-wider uppercase mb-3" style={{ color: '#8A8A8A' }}>
                     {rate.duration}
                   </span>
-                  <span className="block text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", color: '#D4AF37' }}>
+                  <span className="block text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ color: '#D4AF37' }}>
                     {rate.price}
                   </span>
-                  <span className="block text-xs sm:text-sm leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+                  <span className="block text-xs sm:text-sm leading-relaxed" style={{ color: '#5A5A5A' }}>
                     {rate.note}
                   </span>
                 </div>
@@ -198,13 +197,13 @@ export default function ShippingView() {
                   <MapPin className="w-5 h-5" style={{ color: '#D4AF37' }} />
                 </div>
                 <div>
-                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" >
                     Delivery Areas
                   </h2>
                   <GoldDivider />
                 </div>
               </div>
-              <p className="text-[#5A5A5A] text-base leading-relaxed mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
+              <p className="text-[#5A5A5A] text-base leading-relaxed mb-6" >
                 We deliver to all major cities across Pakistan. Our courier partners ensure timely and safe delivery to your doorstep.
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
@@ -215,11 +214,11 @@ export default function ShippingView() {
                     style={{ backgroundColor: 'rgba(212, 175, 55, 0.08)', border: '1px solid #E8D5A3' }}
                   >
                     <MapPin className="w-3.5 h-3.5 shrink-0" style={{ color: '#D4AF37' }} />
-                    <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>{city}</span>
+                    <span className="text-sm font-medium" style={{ color: '#2C2C2C' }}>{city}</span>
                   </div>
                 ))}
               </div>
-              <p className="text-[#5A5A5A] text-sm leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+              <p className="text-[#5A5A5A] text-sm leading-relaxed" >
                 ...and 50+ more cities across Pakistan. Not sure if we deliver to your area? Contact us and we will find a way.
               </p>
             </div>
@@ -239,10 +238,10 @@ export default function ShippingView() {
                     <Clock className="w-5 h-5" style={{ color: '#D4AF37' }} />
                   </div>
                   <div>
-                    <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >
                       Order Tracking
                     </h3>
-                    <p className="text-[#5A5A5A] text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                    <p className="text-[#5A5A5A] text-base leading-relaxed" >
                       Track your order with the tracking number sent via SMS and email once your order is dispatched. You can use this tracking number on our website or the courier partner&apos;s website to monitor your shipment in real time. You will also receive notifications at each stage of delivery.
                     </p>
                   </div>
@@ -256,15 +255,15 @@ export default function ShippingView() {
                     <Gift className="w-5 h-5" style={{ color: '#D4AF37' }} />
                   </div>
                   <div>
-                    <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >
                       Packaging
                     </h3>
-                    <p className="text-[#5A5A5A] text-base leading-relaxed mb-3" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                    <p className="text-[#5A5A5A] text-base leading-relaxed mb-3" >
                       Each item is carefully wrapped in premium protective materials to ensure it arrives in perfect condition. We take great pride in our unboxing experience — because the joy of receiving something beautiful should start the moment you open the package.
                     </p>
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid #E8D5A3' }}>
                       <Gift className="w-4 h-4" style={{ color: '#D4AF37' }} />
-                      <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                      <span className="text-sm font-medium" style={{ color: '#2C2C2C' }}>
                         Gift-wrap option available for PKR 299
                       </span>
                     </div>
@@ -279,10 +278,10 @@ export default function ShippingView() {
                     <Globe className="w-5 h-5" style={{ color: '#D4AF37' }} />
                   </div>
                   <div>
-                    <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >
                       International Shipping
                     </h3>
-                    <p className="text-[#5A5A5A] text-base leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                    <p className="text-[#5A5A5A] text-base leading-relaxed" >
                       Currently we only ship within Pakistan. International shipping is coming soon! Sign up for our newsletter to be the first to know when we start delivering worldwide.
                     </p>
                   </div>
@@ -296,13 +295,13 @@ export default function ShippingView() {
       {/* CTA */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Need Help With Your Delivery?
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Our customer support team is always ready to assist you with any shipping inquiries or delivery concerns.
           </p>
           <PremiumButton variant="gold" onClick={() => setPage('contact')}>

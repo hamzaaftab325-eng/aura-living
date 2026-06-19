@@ -73,8 +73,7 @@ export function FloatingOrb({ size, top, left, delay = 0 }: { size: number; top:
   return (
     <div
       className="floating-orb"
-      style={{
-        width: size,
+      style={{ width: size,
         height: size,
         top,
         left,

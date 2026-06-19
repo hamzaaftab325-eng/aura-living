@@ -301,8 +301,7 @@ export default function Navbar() {
           {/* Pill container — NO hover handlers (mega menu is click-only now) */}
           <div
             className="relative flex items-center justify-between rounded-full transition-all duration-300 ease-out"
-            style={{
-              backgroundColor: '#2C2C2C',
+            style={{ backgroundColor: '#2C2C2C',
               border: scrolled ? '1px solid rgba(212, 175, 55, 0.4)' : '1px solid rgba(212, 175, 55, 0.3)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
@@ -326,8 +325,7 @@ export default function Navbar() {
               <img
                 src="/logo/default-monochrome-gold-white.svg"
                 alt="Aura Living"
-                style={{
-                  height: scrolled ? 'clamp(38px, 6vw, 52px)' : 'clamp(46px, 7vw, 64px)',
+                style={{ height: scrolled ? 'clamp(38px, 6vw, 52px)' : 'clamp(46px, 7vw, 64px)',
                   width: 'auto',
                   objectFit: 'contain',
                   transition: 'height 0.3s ease-out',
@@ -348,9 +346,7 @@ export default function Navbar() {
                       key={link.label}
                       ref={(el) => { if (el) navItemRefs.current.set(link.label, el); }}
                       className="relative z-10 block cursor-pointer uppercase font-medium transition-all duration-300 select-none"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.85)',
+                      style={{ color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.85)',
                         paddingLeft: scrolled ? '20px' : '24px',
                         paddingRight: scrolled ? '20px' : '24px',
                         paddingTop: scrolled ? '8px' : '12px',
@@ -403,8 +399,7 @@ export default function Navbar() {
                   animate={cursorPos}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   className="absolute z-0 h-7 rounded-full"
-                  style={{
-                    backgroundColor: 'rgba(212, 175, 55, 0.25)',
+                  style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)',
                     top: '50%',
                     translateY: '-50%',
                   }}
@@ -483,8 +478,7 @@ export default function Navbar() {
               >
                 <div
                   className="rounded-2xl overflow-hidden flex"
-                  style={{
-                    background: 'rgba(28, 28, 28, 0.94)',
+                  style={{ background: 'rgba(28, 28, 28, 0.94)',
                     backdropFilter: 'blur(20px)',
                     WebkitBackdropFilter: 'blur(20px)',
                     borderTop: '2px solid #D4AF37',
@@ -496,7 +490,7 @@ export default function Navbar() {
                   <div className="flex-1 py-4" style={{ borderRight: '1px solid rgba(212,175,55,0.12)' }}>
                     <p
                       className="px-5 pb-2 text-[10px] uppercase tracking-[3px] font-semibold"
-                      style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+                      style={{ color: '#D4AF37' }}
                     >
                       Explore
                     </p>
@@ -507,8 +501,7 @@ export default function Navbar() {
                         <button
                           key={item.label}
                           className="w-full flex items-center gap-4 px-5 py-3 text-left transition-colors duration-200"
-                          style={{
-                            backgroundColor: isPreviewing || itemActive ? 'rgba(212, 175, 55, 0.12)' : 'transparent',
+                          style={{ backgroundColor: isPreviewing || itemActive ? 'rgba(212, 175, 55, 0.12)' : 'transparent',
                             borderLeft: isPreviewing ? '3px solid #D4AF37' : '3px solid transparent',
                           }}
                           onMouseEnter={() => setPreviewItem(item)}
@@ -516,8 +509,7 @@ export default function Navbar() {
                         >
                           <div
                             className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-all duration-300"
-                            style={{
-                              backgroundColor: isPreviewing || itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(232, 213, 163, 0.08)',
+                            style={{ backgroundColor: isPreviewing || itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(232, 213, 163, 0.08)',
                               color: isPreviewing || itemActive ? '#D4AF37' : '#FFFFFF',
                             }}
                           >
@@ -526,9 +518,7 @@ export default function Navbar() {
                           <div className="min-w-0 flex-1">
                             <p
                               className="text-sm font-medium flex items-center gap-2"
-                              style={{
-                                fontFamily: "'Poppins', sans-serif",
-                                color: isPreviewing || itemActive ? '#D4AF37' : '#FFFFFF',
+                              style={{ color: isPreviewing || itemActive ? '#D4AF37' : '#FFFFFF',
                               }}
                             >
                               {item.label}
@@ -540,7 +530,7 @@ export default function Navbar() {
                             </p>
                             <p
                               className="text-xs mt-0.5"
-                              style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.6)' }}
+                              style={{ color: 'rgba(255, 255, 255, 0.6)' }}
                             >
                               {item.description}
                             </p>
@@ -559,16 +549,14 @@ export default function Navbar() {
                     <div className="absolute inset-0">
                       <div
                         className="absolute inset-0 transition-opacity duration-300"
-                        style={{
-                          backgroundImage: `url(${activePreview.preview.image})`,
+                        style={{ backgroundImage: `url(${activePreview.preview.image})`,
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
                         }}
                       />
                       <div
                         className="absolute inset-0"
-                        style={{
-                          background: 'linear-gradient(180deg, rgba(28,28,28,0.35) 0%, rgba(28,28,28,0.85) 60%, rgba(28,28,28,0.95) 100%)',
+                        style={{ background: 'linear-gradient(180deg, rgba(28,28,28,0.35) 0%, rgba(28,28,28,0.85) 60%, rgba(28,28,28,0.95) 100%)',
                         }}
                       />
                       <div
@@ -578,20 +566,20 @@ export default function Navbar() {
                       <div className="relative h-full flex flex-col justify-end p-6">
                         <p
                           className="text-[10px] uppercase tracking-[3px] font-semibold mb-2"
-                          style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+                          style={{ color: '#D4AF37' }}
                         >
                           {activePreview.preview.eyebrow}
                         </p>
                         <h4
                           className="text-white text-lg font-bold leading-tight mb-4"
-                          style={{ fontFamily: "'Playfair Display', serif" }}
+                          
                         >
                           {activePreview.preview.headline}
                         </h4>
                         <button
                           onClick={() => handleNavClick(activePreview.page)}
                           className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:gap-2.5 cursor-pointer group"
-                          style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+                          style={{ color: '#D4AF37', background: 'none' }}
                         >
                           {activePreview.preview.cta}
                           <ChevronRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5" style={{ color: '#D4AF37' }} />
@@ -654,7 +642,7 @@ export default function Navbar() {
             <div className="space-y-1">
               <p
                 className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-3"
-                style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+                style={{ color: '#D4AF37' }}
               >
                 Menu
               </p>
@@ -664,9 +652,7 @@ export default function Navbar() {
                   <React.Fragment key={link.label}>
                     <button
                       className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.95)',
+                      style={{ color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.95)',
                         backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
                       }}
                       onClick={() => {
@@ -693,8 +679,7 @@ export default function Navbar() {
                     {link.hasMegaMenu && (
                       <div
                         className="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
-                        style={{
-                          gridTemplateRows: mobileShopExpanded ? '1fr' : '0fr',
+                        style={{ gridTemplateRows: mobileShopExpanded ? '1fr' : '0fr',
                           opacity: mobileShopExpanded ? 1 : 0,
                         }}
                       >
@@ -710,17 +695,14 @@ export default function Navbar() {
                                 <button
                                   key={item.label}
                                   className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-white/10"
-                                  style={{
-                                    fontFamily: "'Poppins', sans-serif",
-                                    color: itemActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.9)',
+                                  style={{ color: itemActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.9)',
                                     backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
                                   }}
                                   onClick={() => handleNavClick(item.page)}
                                 >
                                   <div
                                     className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-200"
-                                    style={{
-                                      backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(212, 175, 55, 0.12)',
+                                    style={{ backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(212, 175, 55, 0.12)',
                                       color: '#D4AF37',
                                     }}
                                   >
@@ -771,7 +753,7 @@ export default function Navbar() {
             <div className="space-y-1">
               <p
                 className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-2"
-                style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+                style={{ color: '#D4AF37' }}
               >
                 Quick Actions
               </p>
@@ -784,7 +766,7 @@ export default function Navbar() {
                 <button
                   key={item.label}
                   className="mobile-quick-item flex items-center gap-3 py-3 px-3 text-left transition-colors duration-200 hover:bg-white/10 rounded-xl w-full"
-                  style={{ color: 'rgba(255, 255, 255, 0.9)', fontFamily: "'Poppins', sans-serif" }}
+                  style={{ color: 'rgba(255, 255, 255, 0.9)' }}
                   onClick={() => {
                     closeMobileMenu();
                     if (item.label === 'Cart') { setCartOpen(true); return; }
@@ -812,26 +794,25 @@ export default function Navbar() {
             <div className="mt-auto pt-5">
               <div
                 className="mobile-cta-card rounded-2xl p-4"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(232,213,163,0.12) 100%)',
+                style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(232,213,163,0.12) 100%)',
                   border: '1px solid rgba(212,175,55,0.2)',
                 }}
               >
                 <p
                   className="text-[11px] uppercase tracking-[3px] font-semibold mb-1.5"
-                  style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+                  style={{ color: '#D4AF37' }}
                 >
                   New Collection 2026
                 </p>
                 <p
                   className="text-xs mb-4 leading-relaxed"
-                  style={{ color: 'rgba(255, 255, 255, 0.75)', fontFamily: "'Poppins', sans-serif" }}
+                  style={{ color: 'rgba(255, 255, 255, 0.75)' }}
                 >
                   Explore our latest arrivals and handcrafted luxury pieces
                 </p>
                 <button
                   className="premium-btn btn-gold px-5 py-2.5 text-xs w-full rounded-sm"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                  
                   onClick={() => handleNavClick('new-arrivals')}
                 >
                   Explore Now
@@ -853,8 +834,7 @@ export default function Navbar() {
           />
           <div
             className="fixed top-0 left-0 right-0 z-[56] py-6 px-4 sm:px-6"
-            style={{
-              backgroundColor: 'rgba(44, 44, 44, 0.95)',
+            style={{ backgroundColor: 'rgba(44, 44, 44, 0.95)',
               borderBottom: '1px solid rgba(212,175,55,0.2)',
               boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
               backdropFilter: 'blur(12px)',
@@ -871,7 +851,7 @@ export default function Navbar() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search products..."
                   className="flex-1 bg-transparent outline-none text-base"
-                  style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.95)' }}
+                  style={{ color: 'rgba(255, 255, 255, 0.95)' }}
                   onKeyDown={(e) => {
                     if (e.key === 'Escape') { setSearchOpen(false); setSearchQuery(''); }
                     if (e.key === 'Enter' && searchQuery.trim()) {
@@ -920,13 +900,13 @@ export default function Navbar() {
                         <div className="min-w-0">
                           <p
                             className="text-sm font-medium truncate"
-                            style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.95)' }}
+                            style={{ color: 'rgba(255, 255, 255, 0.95)' }}
                           >
                             {p.name}
                           </p>
                           <p
                             className="text-xs"
-                            style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}
+                            style={{ color: '#D4AF37' }}
                           >
                             {formatPKR(p.price)}
                           </p>
@@ -939,7 +919,7 @@ export default function Navbar() {
                   ).length === 0 && (
                     <p
                       className="text-sm py-4 text-center"
-                      style={{ fontFamily: "'Poppins', sans-serif", color: 'rgba(255, 255, 255, 0.5)' }}
+                      style={{ color: 'rgba(255, 255, 255, 0.5)' }}
                     >
                       No products found for &quot;{searchQuery}&quot;
                     </p>

@@ -193,8 +193,7 @@ export default function CareGuideView() {
         <div
           ref={heroBgDivRef}
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/care-guide-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/care-guide-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -203,8 +202,7 @@ export default function CareGuideView() {
         {/* Gradient overlay */}
         <div
           className="absolute inset-0"
-          style={{
-            background:
+          style={{ background:
               'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
           }}
         />
@@ -212,15 +210,13 @@ export default function CareGuideView() {
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
-          style={{
-            filter: 'blur(60px)',
+          style={{ filter: 'blur(60px)',
             background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
           }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
-          style={{
-            filter: 'blur(70px)',
+          style={{ filter: 'blur(70px)',
             background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
           }}
         />
@@ -233,7 +229,7 @@ export default function CareGuideView() {
           <h1
             ref={heroTitleRef}
             className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             Care Guide
           </h1>
@@ -246,7 +242,7 @@ export default function CareGuideView() {
 
           <p
             className="text-white/70 text-base sm:text-lg max-w-lg mx-auto mt-4 leading-relaxed"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             Preserve the beauty of your Aura Living pieces with our expert care instructions
           </p>
@@ -258,12 +254,12 @@ export default function CareGuideView() {
           <button
             onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+            style={{ color: '#8A8A8A', background: 'none' }}
           >
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
             Care Guide
           </span>
         </div>
@@ -275,7 +271,7 @@ export default function CareGuideView() {
           <AnimatedSection>
             <p
               className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              
             >
               Every piece in our collection is crafted with care and intention. To ensure your Aura Living
               treasures remain as stunning as the day you brought them home, follow our category-specific
@@ -296,8 +292,7 @@ export default function CareGuideView() {
               <div
                 key={category.title}
                 className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
-                style={{
-                  backgroundColor: '#FFFDF7',
+                style={{ backgroundColor: '#FFFDF7',
                   border: '1px solid #E8D5A3',
                   borderLeft: '4px solid #D4AF37',
                 }}
@@ -314,13 +309,13 @@ export default function CareGuideView() {
                     <div>
                       <h3
                         className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-1"
-                        style={{ fontFamily: "'Playfair Display', serif" }}
+                        
                       >
                         {category.title}
                       </h3>
                       <p
                         className="text-sm"
-                        style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+                        style={{ color: '#8A8A8A' }}
                       >
                         {category.subtitle}
                       </p>
@@ -342,7 +337,7 @@ export default function CareGuideView() {
                         />
                         <span
                           className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed"
-                          style={{ fontFamily: "'Poppins', sans-serif" }}
+                          
                         >
                           {tip}
                         </span>
@@ -364,13 +359,13 @@ export default function CareGuideView() {
           </div>
           <h2
             className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            
           >
             Need More Help?
           </h2>
           <p
             className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             Our team is always here to assist you with any questions about caring for your Aura Living
             pieces. Get in touch and we will be happy to help.

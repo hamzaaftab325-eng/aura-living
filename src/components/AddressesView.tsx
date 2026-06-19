@@ -197,23 +197,21 @@ export default function AddressesView() {
         <section className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center">
           <div
             className="absolute inset-0"
-            style={{
-              backgroundImage: 'url(/images/pages/account-hero.webp)',
+            style={{ backgroundImage: 'url(/images/pages/account-hero.webp)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           />
           <div
             className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
+            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
             }}
           />
           <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4">
             <h1
               ref={heroTitleRef}
               className="text-white font-bold leading-[1.15] pt-2"
-              style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+              style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
             >
               Saved Addresses
             </h1>
@@ -229,10 +227,10 @@ export default function AddressesView() {
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
               <MapPin className="w-8 h-8" style={{ color: '#D4AF37' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Sign in to manage addresses
             </h2>
-            <p className="text-[#5A5A5A] text-sm sm:text-base mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
+            <p className="text-[#5A5A5A] text-sm sm:text-base mb-6" >
               Save delivery addresses for faster checkout and easy reordering.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
@@ -240,7 +238,7 @@ export default function AddressesView() {
               <button
                 onClick={() => setPage('signup')}
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37', background: 'none', border: 'none' }}
+                style={{ color: '#D4AF37', background: 'none' }}
               >
                 Create a free account
               </button>
@@ -257,16 +255,14 @@ export default function AddressesView() {
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
           className="absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/pages/account-hero.webp)',
+          style={{ backgroundImage: 'url(/images/pages/account-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
         <div
           className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
           }}
         />
 
@@ -274,7 +270,7 @@ export default function AddressesView() {
           <h1
             ref={heroTitleRef}
             className="text-white font-bold leading-[1.15] pt-2"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+            style={{ fontSize: 'clamp(28px, 6vw, 72px)', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
           >
             Saved Addresses
           </h1>
@@ -287,7 +283,7 @@ export default function AddressesView() {
 
           <p
             className="text-white/80 text-base sm:text-lg max-w-md mx-auto mt-4 leading-relaxed"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
+            
           >
             Manage delivery addresses for faster, smoother checkouts.
           </p>
@@ -300,12 +296,12 @@ export default function AddressesView() {
           <button
             onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A', background: 'none', border: 'none' }}
+            style={{ color: '#8A8A8A', background: 'none' }}
           >
             My Account
           </button>
           <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ fontFamily: "'Poppins', sans-serif", color: '#D4AF37' }}>
+          <span className="text-sm font-medium" style={{ color: '#D4AF37' }}>
             Saved Addresses
           </span>
         </div>
@@ -322,10 +318,10 @@ export default function AddressesView() {
                   <Plus className="w-5 h-5" style={{ color: '#D4AF37' }} />
                 </div>
                 <div>
-                  <p className="text-sm sm:text-base font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                  <p className="text-sm sm:text-base font-semibold" style={{ color: '#2C2C2C' }}>
                     {editingId ? 'Edit address' : 'Add a new address'}
                   </p>
-                  <p className="text-xs sm:text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                  <p className="text-xs sm:text-sm" style={{ color: '#8A8A8A' }}>
                     Save home, work, or other delivery locations.
                   </p>
                 </div>
@@ -347,7 +343,7 @@ export default function AddressesView() {
                 style={{ backgroundColor: '#FFFDF7', border: '1.5px solid #D4AF37' }}
               >
                 <div className="flex items-center justify-between mb-5">
-                  <h3 className="text-lg sm:text-xl font-semibold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+                  <h3 className="text-lg sm:text-xl font-semibold" style={{ color: '#2C2C2C' }}>
                     {editingId ? 'Edit Address' : 'New Address'}
                   </h3>
                   <button
@@ -364,7 +360,7 @@ export default function AddressesView() {
 
                 {/* Label selector */}
                 <div className="mb-5">
-                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
                     Address Type
                   </label>
                   <div className="flex gap-2">
@@ -378,9 +374,7 @@ export default function AddressesView() {
                           type="button"
                           onClick={() => setForm({ ...form, label: lbl })}
                           className="flex items-center gap-2 py-2 px-4 rounded-sm text-sm font-medium transition-all duration-200 cursor-pointer"
-                          style={{
-                            fontFamily: "'Poppins', sans-serif",
-                            border: selected ? `1.5px solid ${cfg.color}` : '1px solid #E8D5A3',
+                          style={{ border: selected ? `1.5px solid ${cfg.color}` : '1px solid #E8D5A3',
                             backgroundColor: selected ? cfg.bg : 'transparent',
                             color: selected ? cfg.color : '#5A5A5A',
                           }}
@@ -396,7 +390,7 @@ export default function AddressesView() {
                 {/* Name + Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
                       Full Name *
                     </label>
                     <input
@@ -406,16 +400,14 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="e.g. Ayesha Khan"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        color: '#2C2C2C',
+                      style={{ color: '#2C2C2C',
                         backgroundColor: 'rgba(255,255,255,0.7)',
                         border: '1px solid #E8D5A3',
                       }}
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
                       Phone *
                     </label>
                     <input
@@ -425,9 +417,7 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       placeholder="+92 300 1234567"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        color: '#2C2C2C',
+                      style={{ color: '#2C2C2C',
                         backgroundColor: 'rgba(255,255,255,0.7)',
                         border: '1px solid #E8D5A3',
                       }}
@@ -437,7 +427,7 @@ export default function AddressesView() {
 
                 {/* Address line 1 */}
                 <div className="mb-4">
-                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
                     Street Address *
                   </label>
                   <input
@@ -447,9 +437,7 @@ export default function AddressesView() {
                     onChange={(e) => setForm({ ...form, line1: e.target.value })}
                     placeholder="House #, Block, Street"
                     className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                    style={{
-                      fontFamily: "'Poppins', sans-serif",
-                      color: '#2C2C2C',
+                    style={{ color: '#2C2C2C',
                       backgroundColor: 'rgba(255,255,255,0.7)',
                       border: '1px solid #E8D5A3',
                     }}
@@ -458,7 +446,7 @@ export default function AddressesView() {
 
                 {/* Address line 2 */}
                 <div className="mb-4">
-                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
                     Apartment / Suite / Landmark (optional)
                   </label>
                   <input
@@ -467,9 +455,7 @@ export default function AddressesView() {
                     onChange={(e) => setForm({ ...form, line2: e.target.value })}
                     placeholder="Near Central Park"
                     className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                    style={{
-                      fontFamily: "'Poppins', sans-serif",
-                      color: '#2C2C2C',
+                    style={{ color: '#2C2C2C',
                       backgroundColor: 'rgba(255,255,255,0.7)',
                       border: '1px solid #E8D5A3',
                     }}
@@ -479,7 +465,7 @@ export default function AddressesView() {
                 {/* City + Province + Postal */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
                       City *
                     </label>
                     <input
@@ -489,16 +475,14 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, city: e.target.value })}
                       placeholder="Lahore"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        color: '#2C2C2C',
+                      style={{ color: '#2C2C2C',
                         backgroundColor: 'rgba(255,255,255,0.7)',
                         border: '1px solid #E8D5A3',
                       }}
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
                       Province *
                     </label>
                     <select
@@ -506,9 +490,7 @@ export default function AddressesView() {
                       value={form.province}
                       onChange={(e) => setForm({ ...form, province: e.target.value })}
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        color: '#2C2C2C',
+                      style={{ color: '#2C2C2C',
                         backgroundColor: 'rgba(255,255,255,0.7)',
                         border: '1px solid #E8D5A3',
                       }}
@@ -524,7 +506,7 @@ export default function AddressesView() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
                       Postal Code *
                     </label>
                     <input
@@ -534,9 +516,7 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, postal: e.target.value })}
                       placeholder="54000"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{
-                        fontFamily: "'Poppins', sans-serif",
-                        color: '#2C2C2C',
+                      style={{ color: '#2C2C2C',
                         backgroundColor: 'rgba(255,255,255,0.7)',
                         border: '1px solid #E8D5A3',
                       }}
@@ -552,7 +532,7 @@ export default function AddressesView() {
                     type="button"
                     onClick={resetForm}
                     className="text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                    style={{ color: '#8A8A8A', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+                    style={{ color: '#8A8A8A', background: 'none' }}
                   >
                     Cancel
                   </button>
@@ -570,15 +550,14 @@ export default function AddressesView() {
                 <div
                   key={addr.id}
                   className="relative rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
-                  style={{
-                    backgroundColor: '#FFFDF7',
+                  style={{ backgroundColor: '#FFFDF7',
                     border: addr.isDefault ? '1.5px solid #D4AF37' : '1px solid #E8D5A3',
                   }}
                 >
                   {addr.isDefault && (
                     <span
                       className="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-wider"
-                      style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37', fontFamily: "'Poppins', sans-serif" }}
+                      style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37' }}
                     >
                       <Check className="w-3 h-3" />
                       Default
@@ -590,19 +569,19 @@ export default function AddressesView() {
                     </div>
                     <span
                       className="text-xs font-bold uppercase tracking-wider"
-                      style={{ fontFamily: "'Poppins', sans-serif", color: cfg.color }}
+                      style={{ color: cfg.color }}
                     >
                       {addr.label}
                     </span>
                   </div>
 
-                  <p className="text-sm sm:text-base font-semibold mb-1" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                  <p className="text-sm sm:text-base font-semibold mb-1" style={{ color: '#2C2C2C' }}>
                     {addr.name}
                   </p>
-                  <p className="text-xs sm:text-sm mb-3" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                  <p className="text-xs sm:text-sm mb-3" style={{ color: '#8A8A8A' }}>
                     {addr.phone}
                   </p>
-                  <p className="text-xs sm:text-sm leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+                  <p className="text-xs sm:text-sm leading-relaxed" style={{ color: '#5A5A5A' }}>
                     {addr.line1}{addr.line2 ? `, ${addr.line2}` : ''}<br />
                     {addr.city}, {addr.province} — {addr.postal}
                   </p>
@@ -611,7 +590,7 @@ export default function AddressesView() {
                     <button
                       onClick={() => handleOpenEdit(addr)}
                       className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                      style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+                      style={{ color: '#D4AF37', background: 'none' }}
                     >
                       <Edit2 className="w-3 h-3" />
                       Edit
@@ -622,7 +601,7 @@ export default function AddressesView() {
                         <button
                           onClick={() => handleSetDefault(addr.id)}
                           className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                          style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+                          style={{ color: '#D4AF37', background: 'none' }}
                         >
                           <Check className="w-3 h-3" />
                           Set Default
@@ -633,7 +612,7 @@ export default function AddressesView() {
                     <button
                       onClick={() => handleDelete(addr.id)}
                       className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-red-600 cursor-pointer ml-auto"
-                      style={{ color: '#DC2626', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+                      style={{ color: '#DC2626', background: 'none' }}
                     >
                       <Trash2 className="w-3 h-3" />
                       Delete
@@ -648,10 +627,10 @@ export default function AddressesView() {
           {addresses.length === 0 && (
             <div className="text-center py-12 rounded-xl" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <MapPin className="w-10 h-10 mx-auto mb-3" style={{ color: '#D4AF37' }} />
-              <h3 className="text-[#2C2C2C] text-lg font-semibold mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h3 className="text-[#2C2C2C] text-lg font-semibold mb-1" >
                 No saved addresses yet
               </h3>
-              <p className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+              <p className="text-sm" style={{ color: '#8A8A8A' }}>
                 Add an address to speed up your next checkout.
               </p>
             </div>
@@ -662,7 +641,7 @@ export default function AddressesView() {
             <button
               onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-              style={{ color: '#D4AF37', fontFamily: "'Poppins', sans-serif", background: 'none', border: 'none' }}
+              style={{ color: '#D4AF37', background: 'none' }}
             >
               <ChevronRight className="w-3.5 h-3.5 rotate-180" />
               Back to My Account
