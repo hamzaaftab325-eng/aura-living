@@ -277,7 +277,7 @@ export default function WishlistView() {
                   >
                     {/* Product Image */}
                     <div
-                      className="relative w-full aspect-square overflow-hidden cursor-pointer"
+                      className="relative w-full aspect-[3/4] overflow-hidden cursor-pointer"
                       style={{ backgroundColor: '#F5EDDA' }}
                       onClick={() => handleProductClick(product)}
                       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleProductClick(product); } }}

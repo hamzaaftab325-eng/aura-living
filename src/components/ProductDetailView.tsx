@@ -241,7 +241,7 @@ export default function ProductDetailView() {
           {/* Left: Image Gallery */}
           <div className="flex flex-col gap-4">
             {/* Main Image — CSS transition for switching */}
-            <div className="relative rounded-lg overflow-hidden" style={{ aspectRatio: '1/1', border: '1px solid rgba(232,213,163,0.3)', backgroundColor: '#FFFDF7' }}>
+            <div className="relative rounded-lg overflow-hidden" style={{ aspectRatio: '3/4', border: '1px solid rgba(232,213,163,0.3)', backgroundColor: '#FFFDF7' }}>
               <img
                 key={selectedImage}
                 src={galleryImages[selectedImage]}

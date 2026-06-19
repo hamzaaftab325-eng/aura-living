@@ -78,7 +78,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
     >
       <div
         className="relative rounded-xl overflow-hidden cursor-pointer group"
-        style={{ aspectRatio: '1/1',
+        style={{ aspectRatio: '3/4',
           border: isHovered
             ? '1.5px solid rgba(212,175,55,0.7)'
             : '1px solid rgba(232,213,163,0.3)',
