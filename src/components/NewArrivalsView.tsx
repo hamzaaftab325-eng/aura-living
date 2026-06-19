@@ -312,7 +312,7 @@ export default function NewArrivalsView() {
                         <img loading="lazy"
         src={product.image}
                           alt={product.name}
-                          className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.08]"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.08]"
                         />
 
                         {/* NEW Badge */}
