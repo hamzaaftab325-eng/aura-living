@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useStore, pageTitles } from '@/store/useStore';
+import { products } from '@/data/products';
 import { gsap } from '@/hooks/useGsap';
 import { useLenis } from '@/hooks/useLenis';
 import Navbar from '@/components/Navbar';
@@ -97,15 +98,29 @@ export default function Home() {
       'forgot-password', 'track-orders', 'addresses', 'settings',
     ];
     const hash = window.location.hash.replace('#', '');
-    if (hash && hash !== 'home' && hash !== currentPage && validPages.includes(hash as typeof currentPage)) {
-      // If the page is 'product' but no product is selected (e.g. after refresh),
-      // redirect to 'shop' instead of showing the empty product page
-      if (hash === 'product' && !useStore.getState().selectedProduct) {
+    // Check if it's a product page with an ID (e.g. #product/pendant-lamp)
+    if (hash.startsWith('product/') || hash === 'product') {
+      const productId = hash.includes('/') ? hash.split('/')[1] : null;
+      if (productId) {
+        // Find the product by ID and set it in the store
+        const product = products.find((p) => p.id === productId);
+        if (product) {
+          useStore.getState().setSelectedProduct(product);
+          useStore.setState({ currentPage: 'product' });
+        } else {
+          // Product not found — go to shop
+          useStore.setState({ currentPage: 'shop' });
+          window.history.replaceState({ page: 'shop' }, '', '#shop');
+        }
+      } else if (hash === 'product' && !useStore.getState().selectedProduct) {
+        // #product with no ID and no selected product — go to shop
         useStore.setState({ currentPage: 'shop' });
         window.history.replaceState({ page: 'shop' }, '', '#shop');
       } else {
-        useStore.setState({ currentPage: hash as typeof currentPage });
+        useStore.setState({ currentPage: 'product' as typeof currentPage });
       }
+    } else if (hash && hash !== 'home' && hash !== currentPage && validPages.includes(hash as typeof currentPage)) {
+      useStore.setState({ currentPage: hash as typeof currentPage });
     }
 
     // Seed history so back button works from the first navigation
@@ -118,6 +133,17 @@ export default function Home() {
     const handlePopState = (event: PopStateEvent) => {
       const candidate = (event.state?.page as typeof currentPage) || 'home';
       const page = validPages.includes(candidate) ? candidate : 'home';
+      // If going back to product page, check if we need to restore the product
+      if (page === 'product') {
+        const hash = window.location.hash.replace('#', '');
+        const productId = hash.includes('/') ? hash.split('/')[1] : null;
+        if (productId) {
+          const product = products.find((p) => p.id === productId);
+          if (product) {
+            useStore.getState().setSelectedProduct(product);
+          }
+        }
+      }
       useStore.setState({ currentPage: page });
       window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     };

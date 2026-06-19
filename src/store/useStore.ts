@@ -212,15 +212,24 @@ export const useStore = create<StoreState>()(
       setPage: (page) => {
         // Push to browser history so back button works
         if (typeof window !== 'undefined' && window.history && window.history.pushState) {
-          // Avoid pushing the same page twice in a row
+          // For product pages, include the product ID in the URL
+          const hash = page === 'product' && get().selectedProduct
+            ? `#product/${get().selectedProduct!.id}`
+            : `#${page}`;
           const current = window.history.state;
           if (!current || current.page !== page) {
-            window.history.pushState({ page }, '', `#${page}`);
+            window.history.pushState({ page }, '', hash);
           }
         }
         set({ currentPage: page });
       },
-      setSelectedProduct: (product) => set({ selectedProduct: product }),
+      setSelectedProduct: (product) => {
+        // If we're already on the product page, update the URL to include the product ID
+        if (typeof window !== 'undefined' && product && get().currentPage === 'product') {
+          window.history.replaceState({ page: 'product' }, '', `#product/${product.id}`);
+        }
+        set({ selectedProduct: product });
+      },
       setSelectedCategory: (category) => set({ selectedCategory: category }),
       setSearchQuery: (query) => set({ searchQuery: query }),
       setCartOpen: (open) => set({ cartOpen: open }),
