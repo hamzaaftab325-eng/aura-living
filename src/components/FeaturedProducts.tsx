@@ -78,7 +78,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
     >
       <div
         className="relative rounded-xl overflow-hidden cursor-pointer group"
-        style={{ aspectRatio: '4/5',
+        style={{ aspectRatio: '1/1',
           border: isHovered
             ? '1.5px solid rgba(212,175,55,0.7)'
             : '1px solid rgba(232,213,163,0.3)',
@@ -101,7 +101,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             ref={imageRef}
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+            className="w-full h-full object-contain object-center transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
             style={{ transform: isHovered ? 'scale(1.12)' : 'scale(1)',
             }}
           loading="lazy" />
