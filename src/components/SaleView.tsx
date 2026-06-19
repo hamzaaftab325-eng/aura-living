@@ -360,8 +360,7 @@ export default function SaleView() {
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
 
           <h1
-            className="text-white font-bold leading-[1.15] mb-3 pt-2"
-            
+            className="aura-hero-title text-white mb-3"
           >
             The Aura Sale
           </h1>
