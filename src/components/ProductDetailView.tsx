@@ -246,7 +246,7 @@ export default function ProductDetailView() {
                 key={selectedImage}
                 src={galleryImages[selectedImage]}
                 alt={product.name}
-                className="w-full h-full object-contain animate-[fadeIn_0.4s_ease]"
+                className="w-full h-full object-contain"
               loading="lazy" />
               {product.badge && (
                 <div className="absolute top-4 left-4">
@@ -447,7 +447,7 @@ export default function ProductDetailView() {
                   }}
                 >
                   <div className="aspect-square overflow-hidden" style={{ backgroundColor: '#FFFDF7' }}>
-                    <img src={rp.image} alt={rp.name} className="w-full h-full object-contain transition-transform duration-500 hover:scale-105" loading="lazy" />
+                    <img src={rp.image} alt={rp.name} className="w-full h-full object-contain" loading="lazy" />
                   </div>
                   <div className="p-3 sm:p-4">
                     <h3 className="text-xs sm:text-sm font-medium line-clamp-1" style={{ color: '#2C2C2C' }}>{rp.name}</h3>
