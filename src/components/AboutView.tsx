@@ -855,26 +855,6 @@ export default function AboutView() {
     return () => ctx.revert();
   }, []);
 
-  // Chapter 3 - parallax background
-  const chapter3BgRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!chapter3BgRef.current) return;
-    const el = chapter3BgRef.current;
-    const ctx = gsap.context(() => {
-      gsap.to(el, {
-        y: '15%',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: el.parentElement,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }, el);
-    return () => ctx.revert();
-  }, []);
-
   // Chapter 1 text reveal
   const chapter1TextRef = useGsapStagger<HTMLDivElement>({
     selector: ':scope > *',
@@ -887,16 +867,6 @@ export default function AboutView() {
 
   // Chapter 2 text reveal
   const chapter2TextRef = useGsapStagger<HTMLDivElement>({
-    selector: ':scope > *',
-    y: 30,
-    duration: 0.6,
-    stagger: 0.1,
-    ease: 'power3.out',
-    start: 'top 80%',
-  });
-
-  // Chapter 3 text reveal
-  const chapter3TextRef = useGsapStagger<HTMLDivElement>({
     selector: ':scope > *',
     y: 30,
     duration: 0.6,
@@ -1152,65 +1122,6 @@ export default function AboutView() {
       </section>
 
       <DecorativeGoldLine />
-
-      {/* ═══════════════════ CHAPTER 3 — OUR PROMISE ═══════════════════ */}
-      <section className="relative py-24 sm:py-32 md:py-40 overflow-hidden">
-        {/* Parallax background */}
-        <div
-          ref={chapter3BgRef}
-          className="absolute inset-0 -top-[15%] -bottom-[15%]"
-          style={{ backgroundImage: 'url(/images/about-workshop.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-        {/* Dark overlay */}
-        <div
-          className="absolute inset-0"
-          style={{ background:
-              'linear-gradient(180deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.75) 50%, rgba(44,44,44,0.85) 100%)',
-          }}
-        />
-
-        {/* Content */}
-        <div
-          ref={chapter3TextRef}
-          className="relative z-10 max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8"
-        >
-          <ChapterLabel number="03" />
-          <AnimatedHeading
-            text="Our Promise"
-            className="text-white text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-6"
-            
-          />
-          <ParagraphReveal
-            className="text-white/80 text-base sm:text-lg leading-relaxed mb-6"
-            
-          >
-            At Aura Living, we believe that supporting local artisans is not
-            just good business — it is a responsibility. By providing fair
-            wages and a platform for these talented individuals, we help
-            preserve traditional Pakistani craftsmanship while empowering
-            communities across the country.
-          </ParagraphReveal>
-          <ParagraphReveal
-            className="text-white/80 text-base sm:text-lg leading-relaxed"
-            
-          >
-            Every purchase you make directly contributes to sustaining these
-            age-old crafts and the families behind them. Our curated collection
-            is a harmonious blend of modern aesthetics and traditional Pakistani
-            craftsmanship — a bridge between the old and the new, creating
-            something truly timeless for your home.
-          </ParagraphReveal>
-          <div className="mt-8 flex justify-center">
-            <div className="w-16 h-px bg-[#D4AF37]/60" />
-            <div className="mx-3 w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-16 h-px bg-[#D4AF37]/60" />
-          </div>
-        </div>
-      </section>
 
       <FloatingDots />
 

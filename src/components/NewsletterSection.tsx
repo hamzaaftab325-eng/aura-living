@@ -161,7 +161,7 @@ export default function NewsletterSection() {
                   onChange={(e) => setEmail(e.target.value)}
                   onFocus={() => setIsFocused(true)}
                   onBlur={() => setIsFocused(false)}
-                  placeholder={shouldFloatLabel ? '' : 'Enter your email address'}
+                  placeholder=""
                   required
                   className="w-full px-4 py-3.5 rounded-lg text-sm outline-none transition-all duration-300"
                   style={{
