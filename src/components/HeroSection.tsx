@@ -8,9 +8,7 @@ import {
   useGsapFadeIn,
   useGsapScaleIn,
   gsap,
-  
 } from '@/hooks/useGsap';
-
 
 export default function HeroSection() {
   const setPage = useStore((state) => state.setPage);
@@ -48,7 +46,7 @@ export default function HeroSection() {
   const scrollRef = useGsapFadeIn<HTMLDivElement>({ y: 14, duration: 0.4, delay: 0.3 });
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.4, delay: 0.4 });
 
-  // Parallax on scroll — background moves slower
+  // Parallax on scroll — background moves slower (desktop only)
   useEffect(() => {
     if (!sectionRef.current || !bgRef.current) return;
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -74,10 +72,9 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#2C2C2C] flex items-center justify-center"
-      style={{ height: '100dvh' }}
+      className="relative w-full h-[100dvh] overflow-hidden bg-charcoal flex items-center justify-center"
     >
-      {/* ═══ Background video (no poster image — video only) ═══ */}
+      {/* ═══ Background video ═══ */}
       <div ref={bgRef} className="absolute inset-0 w-full h-[120%] -top-[10%]">
         <video
           ref={videoRef}
@@ -95,45 +92,38 @@ export default function HeroSection() {
       </div>
 
       {/* ═══ Black overlay for text readability ═══ */}
-      <div
-        className="absolute inset-0 z-[3]"
-        style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.7) 100%)',
-        }}
-      />
+      <div className="absolute inset-0 z-[3] bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
 
       {/* ═══ Center content ═══ */}
       <div className="relative z-[4] flex flex-col items-center justify-center text-center px-4 sm:px-6 max-w-4xl mx-auto">
 
-        {/* Tag */}
+        {/* Eyebrow tag */}
         <span
           ref={tagRef}
-          className="text-[#D4AF37] text-xs sm:text-sm md:text-base tracking-[4px] uppercase font-medium mb-4 sm:mb-5 block"
-          
+          className="aura-eyebrow text-gold mb-4 sm:mb-5 block"
         >
           Premium Home Decor Pakistan
         </span>
 
-        {/* Heading — responsive clamp */}
+        {/* Hero H1 — uses .aura-hero-title for clamp(36px, 6vw, 72px) + text-shadow */}
         <h1
           ref={headingRef}
-          className="text-white font-bold leading-[1.15] mb-4 pt-2 select-none"
-          
+          className="aura-hero-title text-white mb-4 select-none"
         >
           Where Comfort Meets Style
         </h1>
 
         {/* Gold divider */}
         <div ref={dividerRef} className="flex items-center gap-3 mb-5" style={{ transformOrigin: 'center' }}>
-          <div className="w-10 sm:w-16 h-px bg-gradient-to-r from-transparent to-[#D4AF37]/60" />
-          <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-          <div className="w-10 sm:w-16 h-px bg-gradient-to-l from-transparent to-[#D4AF37]/60" />
+          <div className="w-10 sm:w-16 h-px bg-gradient-to-r from-transparent to-gold/60" />
+          <div className="w-2 h-2 rounded-full bg-gold" />
+          <div className="w-10 sm:w-16 h-px bg-gradient-to-l from-transparent to-gold/60" />
         </div>
 
         {/* Subtitle */}
         <p
           ref={subtitleRef}
-          className="text-white/80 text-xs sm:text-base md:text-lg max-w-xs sm:max-w-xl mb-6 sm:mb-8 leading-relaxed"
-          
+          className="aura-body-large text-white/80 max-w-xs sm:max-w-xl mb-6 sm:mb-8"
         >
           Discover handcrafted home decor, elegant lamps, indoor plants, ceramic vases & more. Premium quality delivered across Pakistan.
         </p>
@@ -142,11 +132,7 @@ export default function HeroSection() {
         <button
           ref={ctaRef}
           onClick={() => setPage('shop')}
-          className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer hover:gap-3 hover:shadow-[0_8px_40px_rgba(212,175,55,0.5)]"
-          style={{ backgroundColor: '#D4AF37',
-            color: '#FFFFFF',
-            borderRadius: '50px',
-          }}
+          className="premium-btn btn-gold group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm rounded-full hover:gap-3 hover:shadow-[0_8px_40px_rgba(212,175,55,0.5)]"
         >
           Shop Collection
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -158,10 +144,7 @@ export default function HeroSection() {
         ref={scrollRef}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[4] flex flex-col items-center gap-2"
       >
-        <span
-          className="text-white/40 text-[9px] sm:text-[10px] tracking-[3px] uppercase"
-          
-        >
+        <span className="aura-body-small text-white/40 tracking-[0.2em] uppercase">
           Scroll
         </span>
         <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-white/60 animate-bounce" />
