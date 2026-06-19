@@ -205,7 +205,7 @@ export default function ProductDetailView() {
   const relatedProducts = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   return (
-    <div className="w-full pt-20 sm:pt-24" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full pt-28 sm:pt-32" style={{ backgroundColor: '#FAF8F5' }}>
       {/* Breadcrumb Header */}
       <div className="w-full" style={{ backgroundColor: '#F5EDDA' }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
