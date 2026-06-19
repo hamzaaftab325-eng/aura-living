@@ -98,7 +98,14 @@ export default function Home() {
     ];
     const hash = window.location.hash.replace('#', '');
     if (hash && hash !== 'home' && hash !== currentPage && validPages.includes(hash as typeof currentPage)) {
-      useStore.setState({ currentPage: hash as typeof currentPage });
+      // If the page is 'product' but no product is selected (e.g. after refresh),
+      // redirect to 'shop' instead of showing the empty product page
+      if (hash === 'product' && !useStore.getState().selectedProduct) {
+        useStore.setState({ currentPage: 'shop' });
+        window.history.replaceState({ page: 'shop' }, '', '#shop');
+      } else {
+        useStore.setState({ currentPage: hash as typeof currentPage });
+      }
     }
 
     // Seed history so back button works from the first navigation
