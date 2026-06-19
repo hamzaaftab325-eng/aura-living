@@ -15,6 +15,12 @@ export interface Product {
   description: string;
   material: string;
   inStock: boolean;
+  sku?: string;
+  dimensions?: string;
+  weight?: string;
+  careInstructions?: string;
+  warranty?: string;
+  origin?: string;
 }
 
 export interface CartItem {
@@ -29,7 +35,7 @@ export interface User {
   rewardsPoints: number;
 }
 
-export type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password' | 'track-orders' | 'addresses' | 'settings';
+export type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password' | 'track-orders' | 'addresses' | 'settings' | 'admin';
 
 
 // Shared badge color mapping — used by ProductDetailView, ShopView, WishlistView, FeaturedProducts
@@ -101,6 +107,7 @@ export const pageTitles: Record<PageType, string> = {
   'track-orders': 'Track Your Orders | Aura Living',
   'addresses': 'Saved Addresses | Aura Living',
   'settings': 'Account Settings | Aura Living',
+  'admin': 'Admin Dashboard | Aura Living',
 };
 
 export const useStore = create<StoreState>()(

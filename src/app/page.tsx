@@ -35,6 +35,7 @@ import ForgotPasswordView from '@/components/ForgotPasswordView';
 import TrackOrdersView from '@/components/TrackOrdersView';
 import AddressesView from '@/components/AddressesView';
 import SettingsView from '@/components/SettingsView';
+import AdminDashboard from '@/components/AdminDashboard';
 import CartDrawer from '@/components/CartDrawer';
 import { GoldDivider, CornerOrnament, FloatingOrb, FloatingGoldDots } from '@/components/SVGDecorations';
 
@@ -95,7 +96,7 @@ export default function Home() {
       'home', 'shop', 'product', 'cart', 'checkout', 'wishlist', 'account',
       'about', 'contact', 'login', 'signup', 'faq', 'shipping', 'returns',
       'care-guide', 'new-arrivals', 'sale', 'lookbook', 'terms', 'privacy',
-      'forgot-password', 'track-orders', 'addresses', 'settings',
+      'forgot-password', 'track-orders', 'addresses', 'settings', 'admin',
     ];
     const hash = window.location.hash.replace('#', '');
     // Check if it's a product page with an ID (e.g. #product/pendant-lamp)
@@ -219,6 +220,8 @@ export default function Home() {
         return <AddressesView />;
       case 'settings':
         return <SettingsView />;
+      case 'admin':
+        return <AdminDashboard />;
       case 'login':
       case 'signup':
         return <AuthView />;

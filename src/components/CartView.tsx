@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap } from '@/hooks/useGsap';
+import { useEffect, useRef, useState } from 'react';
+import { useGsapFadeIn, useGsapStagger, gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Minus,
@@ -14,16 +14,19 @@ import {
   Truck,
   ShieldCheck,
   Banknote,
+  ShoppingBag as BagIcon,
+  ArrowLeft,
+  Tag,
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { formatPKR } from '@/data/products';
 import PremiumButton from '@/components/ui/PremiumButton';
-
+import { useToast } from '@/hooks/use-toast';
 
 const paymentMethods = [
-  { icon: Banknote, label: 'Cash on Delivery' },
-  { icon: ShieldCheck, label: 'JazzCash' },
-  { icon: CreditCard, label: 'EasyPaisa' },
+  { icon: Banknote, label: 'Cash on Delivery', desc: 'Pay when you receive' },
+  { icon: ShieldCheck, label: 'JazzCash', desc: 'Instant mobile payment' },
+  { icon: CreditCard, label: 'EasyPaisa', desc: 'Digital wallet' },
 ];
 
 export default function CartView() {
@@ -36,494 +39,388 @@ export default function CartView() {
     setPage,
     clearCart,
   } = useStore();
+  const { toast } = useToast();
 
   const cartCount = getCartCount();
   const subtotal = getCartTotal();
-  const shipping = subtotal >= 2999 ? 0 : 250;
+  const FREE_SHIPPING_THRESHOLD = 2999;
+  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 250;
   const estimatedTotal = subtotal + shipping;
+  const amountToFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
+  const freeShippingProgress = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
+  const [couponCode, setCouponCode] = useState('');
+  const [discount, setDiscount] = useState(0);
 
-  const heroSectionRef = useRef<HTMLElement>(null);
-  const heroBgRef = useRef<HTMLDivElement>(null);
+  // Hydration guard
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHydrated(true);
+  }, []);
+  const safeCart = hydrated ? cart : [];
+  const safeCount = hydrated ? cartCount : 0;
+  const safeSubtotal = hydrated ? subtotal : 0;
 
-  // GSAP animations
-  const heroRef = useGsapStagger<HTMLDivElement>({
-    y: 40,
-    duration: 0.7,
-    stagger: 0.15,
-    ease: 'power3.out',
-    start: 'top 90%',
-  });
-
-  const contentRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
-  // Cart items slide-from-left with stagger
+  // GSAP
+  const headerRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.5 });
   const itemsRef = useGsapStagger<HTMLDivElement>({
     selector: ':scope > div',
-    y: 25,
-    duration: 0.6,
+    y: 30,
+    duration: 0.4,
     stagger: 0.08,
     ease: 'power3.out',
-    start: 'top 88%',
+    start: 'top 85%',
   });
-  // GoldDivider scale-in
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
+  const summaryRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.5, delay: 0.2 });
 
-  // Enhanced parallax for hero background — 0.5x speed + zoom 1→1.1
-  useEffect(() => {
-    if (!heroBgRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.to(heroBgRef.current, {
-        backgroundPositionY: '50%',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroSectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 0.5,
-        },
-      });
-      gsap.fromTo(heroBgRef.current,
-        { scale: 1 },
-        {
-          scale: 1.1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: heroSectionRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        }
-      );
-    }, heroSectionRef);
-    return () => ctx.revert();
-  }, []);
-
-  const handleGoToShop = () => {
-    setPage('shop');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handleApplyCoupon = () => {
+    if (couponCode.trim().toUpperCase() === 'AURA15') {
+      setDiscount(Math.round(safeSubtotal * 0.15));
+      toast({ title: 'Coupon applied!', description: '15% discount applied to your order.' });
+    } else if (couponCode.trim().toUpperCase() === 'WELCOME10') {
+      setDiscount(Math.round(safeSubtotal * 0.10));
+      toast({ title: 'Coupon applied!', description: '10% discount applied to your order.' });
+    } else {
+      toast({ title: 'Invalid coupon', description: 'This coupon code is not valid.', variant: 'destructive' });
+    }
   };
 
-  const handleProceedToCheckout = () => {
+  const finalTotal = estimatedTotal - discount;
+
+  const handleCheckout = () => {
     setPage('checkout');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  /* ─────────────────── Empty Cart State ─────────────────── */
-  if (cart.length === 0) {
-    return (
-      <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
-        {/* Hero */}
-        <section
-          ref={heroSectionRef}
-          className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center"
-        >
-          <div
-            ref={heroBgRef}
-            className="absolute inset-0"
-            style={{ backgroundImage: 'url(/images/pages/cart-hero.webp)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)' }}
-          />
-          <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-            <span
-              className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
-              style={{ color: '#D4AF37' }}
-            >
-              AURA LIVING
-            </span>
-            <h1
-              className="aura-hero-title text-white"
-              
-            >
-              Your Shopping Cart
-            </h1>
-            <div className="flex items-center gap-3 mt-6">
-              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-              <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            </div>
-          </div>
-        </section>
+  const handleContinueShopping = () => {
+    setPage('shop');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-        {/* Empty State */}
-        <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8">
-          <div ref={contentRef} className="max-w-lg mx-auto text-center">
-            <div
-              className="mx-auto w-24 h-24 rounded-full flex items-center justify-center mb-8"
-              style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
-            >
-              <ShoppingBag className="h-11 w-11" style={{ color: '#D4AF37' }} />
-            </div>
-            <h2
-              className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
-              style={{ color: '#2C2C2C' }}
-            >
-              Your Cart is Empty
-            </h2>
-            <p
-              className="text-base mb-10 leading-relaxed"
-              style={{ color: '#8A8A8A' }}
-            >
-              Looks like you haven&apos;t added anything to your cart yet. Explore our curated collection of handcrafted home decor and find something you love.
-            </p>
-            <PremiumButton variant="gold" size="lg" onClick={handleGoToShop}>
-              Start Shopping
-              <ArrowRight className="w-4 h-4" />
-            </PremiumButton>
+  const handleClearCart = () => {
+    clearCart();
+    setDiscount(0);
+    setCouponCode('');
+    toast({ title: 'Cart cleared', description: 'All items have been removed.' });
+  };
+
+  // Empty cart state
+  if (hydrated && safeCart.length === 0) {
+    return (
+      <div className="w-full pt-28 sm:pt-32 min-h-screen" style={{ backgroundColor: '#FAF8F5' }}>
+        <div className="max-w-md mx-auto text-center px-4 py-16">
+          <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
+            <BagIcon className="w-12 h-12 text-gold" />
           </div>
-        </section>
+          <h1 className="aura-h2 text-charcoal mb-3">Your Cart is Empty</h1>
+          <p className="aura-body text-muted-gray mb-8 max-w-sm mx-auto">
+            Looks like you haven&apos;t added anything yet. Explore our handcrafted collection
+            and find pieces you&apos;ll love for your home.
+          </p>
+          <PremiumButton variant="gold" onClick={handleContinueShopping}>
+            <ShoppingBag className="w-4 h-4" />
+            Start Shopping
+          </PremiumButton>
+        </div>
       </div>
     );
   }
 
-  /* ─────────────────── Cart with Items ─────────────────── */
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
-      {/* Hero */}
-      <section
-        ref={heroSectionRef}
-        className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center"
-      >
-        <div
-          ref={heroBgRef}
-          className="absolute inset-0"
-          style={{ backgroundImage: 'url(/images/pages/cart-hero.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)' }}
-        />
-        <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-
-          <span
-            className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
-            style={{ color: '#D4AF37' }}
-          >
-            AURA LIVING
-          </span>
-          <h1
-            className="aura-hero-title text-white"
-            
-          >
-            Your Shopping Cart
-          </h1>
-          <p className="text-white/70 text-sm sm:text-base mt-3" >
-            {cartCount} {cartCount === 1 ? 'item' : 'items'} in your cart
-          </p>
-          <div className="flex items-center gap-3 mt-5">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-          </div>
-        </div>
-      </section>
-      {/* Breadcrumb strip (below hero) */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            Home
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
-            Cart
-          </span>
-        </div>
-      </div>
-
-      {/* Cart Content */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
-        <div ref={contentRef} className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-            {/* ─── Cart Items Column ─── */}
-            <div className="lg:col-span-2">
-              <div className="flex items-center justify-between mb-6">
-                <h2
-                  className="text-xl sm:text-2xl font-semibold"
-                  style={{ color: '#2C2C2C' }}
-                >
-                  Cart Items
-                </h2>
-                <button
-                  onClick={clearCart}
-                  className="text-xs sm:text-sm font-medium tracking-wide uppercase transition-colors duration-200 hover:text-red-500 cursor-pointer"
-                  style={{ color: '#8A8A8A' }}
-                >
-                  Clear All
-                </button>
-              </div>
-              <div ref={dividerRef} className="mb-4">
-                <GoldDivider />
-              </div>
-
-              <div ref={itemsRef} className="flex flex-col">
-                {cart.map((item) => (
-                  <div
-                    key={item.product.id}
-                    className="flex gap-4 sm:gap-6 py-6"
-                    style={{ borderBottom: '1px solid #E8D5A3' }}
-                  >
-                    {/* Product Image */}
-                    <div
-                      className="shrink-0 w-24 h-24 rounded-lg overflow-hidden"
-                      style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7' }}
-                    >
-                      <img loading="lazy"
-        src={item.product.image}
-                        alt={item.product.name}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-
-                    {/* Item Details */}
-                    <div className="flex-1 min-w-0 flex flex-col justify-between">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="min-w-0">
-                          <h3
-                            className="text-base sm:text-lg font-semibold leading-tight truncate"
-                            style={{ color: '#2C2C2C' }}
-                          >
-                            {item.product.name}
-                          </h3>
-                          <p
-                            className="text-xs sm:text-sm mt-0.5 capitalize"
-                            style={{ color: '#8A8A8A' }}
-                          >
-                            {item.product.category.replace('-', ' ')}
-                          </p>
-                          <p
-                            className="text-sm mt-1"
-                            style={{ color: '#5A5A5A' }}
-                          >
-                            {formatPKR(item.product.price)} each
-                          </p>
-                        </div>
-                        <button
-                          onClick={() => removeFromCart(item.product.id)}
-                          className="shrink-0 p-2 rounded-full transition-all duration-200 hover:bg-red-50 hover:text-red-400 cursor-pointer"
-                          style={{ color: '#B0B0B0' }}
-                          aria-label={`Remove ${item.product.name} from cart`}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-
-                      {/* Quantity Controls & Item Total */}
-                      <div className="flex items-center justify-between mt-3">
-                        <div
-                          className="flex items-center rounded-full"
-                          style={{ border: '1px solid #E8D5A3', backgroundColor: 'rgba(245,237,218,0.3)' }}
-                        >
-                          <button
-                            onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                            className="flex items-center justify-center w-11 h-11 rounded-full transition-all duration-200 hover:bg-[#F5EDDA] active:scale-[0.85] cursor-pointer"
-                            style={{ color: '#5A5A5A' }}
-                            aria-label="Decrease quantity"
-                          >
-                            <Minus className="h-3.5 w-3.5" />
-                          </button>
-                          <span
-                            className="w-9 text-center text-sm font-semibold"
-                            style={{ color: '#2C2C2C' }}
-                          >
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                            className="flex items-center justify-center w-11 h-11 rounded-full transition-all duration-200 hover:bg-[#F5EDDA] active:scale-[0.85] cursor-pointer"
-                            style={{ color: '#5A5A5A' }}
-                            aria-label="Increase quantity"
-                          >
-                            <Plus className="h-3.5 w-3.5" />
-                          </button>
-                        </div>
-                        <span
-                          className="text-base sm:text-lg font-bold"
-                          style={{ color: '#2C2C2C' }}
-                        >
-                          {formatPKR(item.product.price * item.quantity)}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Continue Shopping */}
-              <div className="mt-6">
-                <button
-                  onClick={handleGoToShop}
-                  className="text-sm font-medium transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-                  style={{ color: '#5A5A5A' }}
-                >
-                  &larr; Continue Shopping
-                </button>
-              </div>
+    <div className="w-full pt-28 sm:pt-32 pb-16" style={{ backgroundColor: '#FAF8F5' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div ref={headerRef} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => { setPage('shop'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gold/10 cursor-pointer"
+              aria-label="Back to shop"
+            >
+              <ArrowLeft className="w-5 h-5 text-gold" />
+            </button>
+            <div>
+              <h1 className="aura-h2 text-charcoal">Shopping Cart</h1>
+              <p className="aura-body-small text-muted-gray">{safeCount} item{safeCount !== 1 ? 's' : ''} in your cart</p>
             </div>
+          </div>
+          {safeCart.length > 0 && (
+            <button
+              onClick={handleClearCart}
+              className="text-sm font-medium transition-colors hover:text-red-500 cursor-pointer text-muted-gray"
+            >
+              Clear all
+            </button>
+          )}
+        </div>
 
-            {/* ─── Order Summary Sidebar ─── */}
-            <div className="lg:col-span-1">
+        {/* Free shipping progress */}
+        {safeSubtotal > 0 && (
+          <div className="mb-8 rounded-lg p-4" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            {amountToFreeShipping > 0 ? (
+              <p className="text-sm mb-2 text-center" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+                Add <span className="font-semibold text-gold">{formatPKR(amountToFreeShipping)}</span> more for{' '}
+                <span className="font-semibold text-gold">FREE shipping</span>
+              </p>
+            ) : (
+              <p className="text-sm mb-2 text-center flex items-center justify-center gap-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#22C55E' }}>
+                <Truck className="w-4 h-4" />
+                <span className="font-semibold">You&apos;ve unlocked FREE shipping!</span>
+              </p>
+            )}
+            <div className="w-full h-2 rounded-full overflow-hidden" style={{ backgroundColor: '#F5EDDA' }}>
               <div
-                className="rounded-xl p-5 sm:p-6 lg:p-8 sticky top-8"
+                className="h-full rounded-full transition-all duration-500"
+                style={{
+                  width: `${freeShippingProgress}%`,
+                  background: freeShippingProgress >= 100
+                    ? 'linear-gradient(90deg, #22C55E, #16A34A)'
+                    : 'linear-gradient(90deg, #D4AF37, #E8D5A3)',
+                }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Two-column layout: items + summary */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* ═══ Cart Items (2/3 width) ═══ */}
+          <div ref={itemsRef} className="lg:col-span-2 flex flex-col gap-4">
+            {safeCart.map((item, index) => (
+              <div
+                key={`${item.product.id}-${index}`}
+                className="rounded-lg p-4 sm:p-5 flex gap-4 sm:gap-6 transition-all duration-300"
                 style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
               >
-                <h2
-                  className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                  style={{ color: '#2C2C2C' }}
+                {/* Image */}
+                <div
+                  className="shrink-0 w-20 h-20 sm:w-28 sm:h-28 rounded-lg overflow-hidden cursor-pointer"
+                  style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7' }}
+                  onClick={() => {
+                    useStore.getState().setSelectedProduct(item.product);
+                    setPage('product');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                 >
-                  Order Summary
-                </h2>
-                <div className="mb-6">
-                  <GoldDivider />
+                  <img
+                    src={item.product.image}
+                    alt={item.product.name}
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
                 </div>
 
-                {/* Summary Lines */}
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-center justify-between">
-                    <span
-                      className="text-sm"
-                      style={{ color: '#5A5A5A' }}
-                    >
-                      Subtotal ({cartCount} {cartCount === 1 ? 'item' : 'items'})
-                    </span>
-                    <span
-                      className="text-sm font-semibold"
-                      style={{ color: '#2C2C2C' }}
-                    >
-                      {formatPKR(subtotal)}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span
-                      className="text-sm"
-                      style={{ color: '#5A5A5A' }}
-                    >
-                      Shipping
-                    </span>
-                    {shipping === 0 ? (
-                      <span
-                        className="text-sm font-semibold"
-                        style={{ color: '#D4AF37' }}
+                {/* Details */}
+                <div className="flex-1 min-w-0 flex flex-col">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <h3
+                        className="text-sm sm:text-base font-semibold truncate cursor-pointer hover:text-gold transition-colors"
+                        style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                        onClick={() => {
+                          useStore.getState().setSelectedProduct(item.product);
+                          setPage('product');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
                       >
-                        Free
-                      </span>
-                    ) : (
-                      <span
-                        className="text-sm font-semibold"
-                        style={{ color: '#2C2C2C' }}
-                      >
-                        {formatPKR(shipping)}
-                      </span>
-                    )}
-                  </div>
-
-                  {shipping > 0 && (
-                    <p
-                      className="text-[11px]"
-                      style={{ color: '#8A8A8A' }}
-                    >
-                      Free shipping on orders above PKR 2,999
-                    </p>
-                  )}
-                  {shipping === 0 && (
-                    <div className="flex items-center gap-1.5">
-                      <Truck className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
-                      <p
-                        className="text-[11px]"
-                        style={{ color: '#D4AF37' }}
-                      >
-                        You qualify for free shipping!
+                        {item.product.name}
+                      </h3>
+                      <p className="text-xs mt-0.5 capitalize" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                        {item.product.category.replace('-', ' ')}
                       </p>
                     </div>
-                  )}
-                </div>
+                    <button
+                      onClick={() => {
+                        removeFromCart(item.product.id);
+                        toast({ title: 'Removed', description: `${item.product.name} removed from cart.` });
+                      }}
+                      className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-red-50 hover:text-red-500 cursor-pointer"
+                      style={{ color: '#B0B0B0' }}
+                      aria-label={`Remove ${item.product.name}`}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
 
-                <div className="h-px my-5" style={{ backgroundColor: 'rgba(212,175,55,0.3)' }} />
-
-                <div className="flex items-center justify-between mb-6">
-                  <span
-                    className="text-base font-semibold"
-                    style={{ color: '#2C2C2C' }}
-                  >
-                    Estimated Total
-                  </span>
-                  <span
-                    className="text-lg font-bold"
-                    style={{ color: '#2C2C2C' }}
-                  >
-                    {formatPKR(estimatedTotal)}
-                  </span>
-                </div>
-
-                {/* Checkout Button */}
-                <PremiumButton
-                  variant="gold"
-                  size="lg"
-                  fullWidth
-                  onClick={handleProceedToCheckout}
-                >
-                  <CreditCard className="w-4 h-4" />
-                  Proceed to Checkout
-                </PremiumButton>
-
-                {/* Continue Shopping Link */}
-                <button
-                  onClick={handleGoToShop}
-                  className="w-full text-center text-sm font-medium py-3 mt-2 transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-                  style={{ color: '#5A5A5A' }}
-                >
-                  Continue Shopping
-                </button>
-
-                {/* Payment Methods */}
-                <div className="mt-6 pt-5" style={{ borderTop: '1px solid #E8D5A3' }}>
-                  <p
-                    className="text-xs tracking-wider uppercase mb-3 text-center"
-                    style={{ color: '#8A8A8A' }}
-                  >
-                    Accepted Payment Methods
-                  </p>
-                  <div className="flex items-center justify-center gap-4">
-                    {paymentMethods.map((method) => (
-                      <div
-                        key={method.label}
-                        className="flex flex-col items-center gap-1.5"
+                  {/* Quantity + Price */}
+                  <div className="flex items-end justify-between mt-auto pt-3 gap-3">
+                    <div className="flex items-center rounded-full" style={{ border: '1.5px solid #E8D5A3', backgroundColor: '#FFFDF7' }}>
+                      <button
+                        onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                        className="flex items-center justify-center w-9 h-9 rounded-full transition-colors hover:bg-gold/10"
+                        style={{ color: '#5A5A5A' }}
+                        aria-label="Decrease quantity"
                       >
-                        <div
-                          className="w-10 h-10 rounded-full flex items-center justify-center"
-                          style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
-                        >
-                          <method.icon className="w-4 h-4" style={{ color: '#D4AF37' }} />
-                        </div>
-                        <span
-                          className="text-[10px] text-center leading-tight"
-                          style={{ color: '#8A8A8A' }}
-                        >
-                          {method.label}
+                        <Minus className="h-3.5 w-3.5" />
+                      </button>
+                      <span className="w-10 text-center text-sm font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                        className="flex items-center justify-center w-9 h-9 rounded-full transition-colors hover:bg-gold/10"
+                        style={{ color: '#5A5A5A' }}
+                        aria-label="Increase quantity"
+                      >
+                        <Plus className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-base sm:text-lg font-bold block" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                        {formatPKR(item.product.price * item.quantity)}
+                      </span>
+                      {item.quantity > 1 && (
+                        <span className="text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                          {formatPKR(item.product.price)} each
                         </span>
-                      </div>
-                    ))}
+                      )}
+                    </div>
                   </div>
                 </div>
+              </div>
+            ))}
+
+            {/* Continue shopping */}
+            <button
+              onClick={handleContinueShopping}
+              className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-gold cursor-pointer text-muted-gray mt-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Continue Shopping
+            </button>
+          </div>
+
+          {/* ═══ Order Summary (1/3 width, sticky) ═══ */}
+          <div ref={summaryRef} className="lg:col-span-1">
+            <div
+              className="rounded-lg p-6 lg:sticky lg:top-28"
+              style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}
+            >
+              <h2 className="text-xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+                Order Summary
+              </h2>
+              <div className="mb-4"><GoldDivider /></div>
+
+              {/* Coupon */}
+              <div className="mb-5">
+                <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                  Promo Code
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value)}
+                    placeholder="Enter code"
+                    className="flex-1 px-3 py-2.5 rounded-md text-sm outline-none"
+                    style={{
+                      fontFamily: "'Poppins', sans-serif",
+                      color: '#2C2C2C',
+                      backgroundColor: 'rgba(255,255,255,0.7)',
+                      border: '1.5px solid #E8D5A3',
+                    }}
+                  />
+                  <button
+                    onClick={handleApplyCoupon}
+                    className="px-4 py-2.5 rounded-md text-xs font-semibold uppercase tracking-wider transition-all hover:bg-gold/80 cursor-pointer"
+                    style={{ backgroundColor: '#D4AF37', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}
+                  >
+                    Apply
+                  </button>
+                </div>
+                <p className="text-[11px] mt-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#B8A99A' }}>
+                  Try: AURA15 or WELCOME10
+                </p>
+              </div>
+
+              {/* Summary lines */}
+              <div className="space-y-3 mb-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+                    Subtotal ({safeCount} item{safeCount !== 1 ? 's' : ''})
+                  </span>
+                  <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                    {formatPKR(safeSubtotal)}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm flex items-center gap-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+                    <Truck className="w-3.5 h-3.5" />
+                    Shipping
+                  </span>
+                  {shipping === 0 ? (
+                    <span className="text-sm font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: '#22C55E' }}>FREE</span>
+                  ) : (
+                    <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                      {formatPKR(shipping)}
+                    </span>
+                  )}
+                </div>
+                {discount > 0 && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm flex items-center gap-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#22C55E' }}>
+                      <Tag className="w-3.5 h-3.5" />
+                      Discount
+                    </span>
+                    <span className="text-sm font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: '#22C55E' }}>
+                      -{formatPKR(discount)}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Divider */}
+              <div className="h-px my-3" style={{ backgroundColor: '#E8D5A3' }} />
+
+              {/* Total */}
+              <div className="flex items-center justify-between mb-6">
+                <span className="text-base font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                  Total
+                </span>
+                <span className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+                  {formatPKR(finalTotal)}
+                </span>
+              </div>
+
+              {/* Checkout button */}
+              <PremiumButton variant="gold" fullWidth onClick={handleCheckout}>
+                <CreditCard className="w-4 h-4" />
+                Proceed to Checkout
+                <ArrowRight className="w-4 h-4" />
+              </PremiumButton>
+
+              {/* Payment methods */}
+              <div className="mt-5 pt-5" style={{ borderTop: '1px solid #E8D5A3' }}>
+                <p className="text-[10px] uppercase tracking-widest font-semibold mb-3" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                  We Accept
+                </p>
+                <div className="flex items-center justify-center gap-4 flex-wrap">
+                  {paymentMethods.map((method) => (
+                    <div key={method.label} className="flex flex-col items-center gap-1">
+                      <method.icon className="w-5 h-5 text-gold" />
+                      <span className="text-[10px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                        {method.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Trust badges */}
+              <div className="mt-4 pt-4 flex items-center justify-center gap-4" style={{ borderTop: '1px solid #E8D5A3' }}>
+                <span className="inline-flex items-center gap-1 text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                  <ShieldCheck className="w-3.5 h-3.5 text-gold" />
+                  Secure Checkout
+                </span>
+                <span className="inline-flex items-center gap-1 text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                  <Truck className="w-3.5 h-3.5 text-gold" />
+                  Fast Delivery
+                </span>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
