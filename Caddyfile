@@ -9,6 +9,9 @@
 			header_up X-Forwarded-For {remote_host}
 			header_up X-Forwarded-Proto {scheme}
 			header_up X-Real-IP {remote_host}
+			header_down Cache-Control "no-cache, no-store, must-revalidate"
+			header_down Pragma "no-cache"
+			header_down Expires "0"
 		}
 	}
 
@@ -18,6 +21,9 @@
 			header_up X-Forwarded-For {remote_host}
 			header_up X-Forwarded-Proto {scheme}
 			header_up X-Real-IP {remote_host}
+			header_down Cache-Control "no-cache, no-store, must-revalidate"
+			header_down Pragma "no-cache"
+			header_down Expires "0"
 		}
 	}
 }
