@@ -2,14 +2,6 @@
 
 /**
  * Focus trap utility for modals, drawers, and menus.
- *
- * Usage:
- *   import { trapFocus, releaseFocus } from '@/lib/focusTrap';
- *   useEffect(() => {
- *     if (!open) return;
- *     const release = trapFocus(containerRef.current);
- *     return release;
- *   }, [open]);
  */
 
 const FOCUSABLE_SELECTOR = [
@@ -33,7 +25,7 @@ export function trapFocus(container: HTMLElement | null): () => void {
 
     const focusables = Array.from(
       container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
-    ).filter((el) => el.offsetParent !== null); // visible only
+    ).filter((el) => el.offsetParent !== null);
 
     if (focusables.length === 0) {
       e.preventDefault();
@@ -55,7 +47,6 @@ export function trapFocus(container: HTMLElement | null): () => void {
 
   container.addEventListener('keydown', handleKeydown);
 
-  // Make container programmatically focusable
   if (!container.hasAttribute('tabindex')) {
     container.setAttribute('tabindex', '-1');
   }
