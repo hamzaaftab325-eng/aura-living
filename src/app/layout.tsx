@@ -48,7 +48,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const siteUrl = "https://auraliving.com";
+// Use the actual deployment URL for metadataBase so OG images resolve correctly.
+// When you move to a custom domain (auraliving.com), update this to "https://auraliving.com".
+const siteUrl = "https://aura-living-two.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
