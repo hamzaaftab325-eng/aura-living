@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import AccountView from '@/components/AccountView';
 
 export const metadata: Metadata = {
-  title: 'My Account',
+  title: 'My Account | Aura Living',
   description: 'Your account overview, rewards, recent orders, and saved addresses.',
   alternates: { canonical: '/account' },
   robots: { index: false, follow: false },

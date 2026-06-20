@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import AdminDashboard from '@/components/AdminDashboard';
 
 export const metadata: Metadata = {
-  title: 'Admin Dashboard',
+  title: 'Admin Dashboard | Aura Living',
   description: 'Internal admin tools — inventory, orders, analytics, and store settings.',
   alternates: { canonical: '/admin' },
   robots: { index: false, follow: false },

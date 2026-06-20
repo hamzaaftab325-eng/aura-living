@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import AuthView from '@/components/AuthView';
 
 export const metadata: Metadata = {
-  title: 'Sign In',
+  title: 'Sign In | Aura Living',
   description: 'Sign in to your Aura Living account.',
   alternates: { canonical: '/auth/login' },
   robots: { index: false, follow: false },

@@ -32,13 +32,7 @@ const siteUrl = "https://auraliving.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: {
-    default: "Aura Living | Premium Home Decor Pakistan — Where Comfort Meets Style",
-    template: "%s | Aura Living",
-  },
-  // Note: title.template applies the suffix automatically.
-  // Child pages should set title to just the page name (e.g. "Get in Touch")
-  // and the template will append " | Aura Living".
+  title: "Aura Living | Premium Home Decor Pakistan — Where Comfort Meets Style",
   description: "Discover handcrafted home decor, elegant lamps, indoor plants, ceramic vases, candles & more. Premium quality home decoration items delivered across Pakistan. Shop PKR.",
   keywords: ["home decor Pakistan", "luxury home decoration", "lamps online Pakistan", "indoor plants Karachi", "ceramic vases", "candles", "wall art", "Aura Living", "home accessories PKR"],
   authors: [{ name: "Aura Living" }],

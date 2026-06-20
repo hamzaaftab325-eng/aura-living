@@ -19,7 +19,7 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: 'Product Not Found',
+      title: 'Product Not Found | Aura Living',
       robots: { index: false, follow: true },
     };
   }

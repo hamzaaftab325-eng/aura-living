@@ -19,7 +19,7 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: 'Article Not Found',
+      title: 'Article Not Found | Aura Living',
       robots: { index: false, follow: true },
     };
   }

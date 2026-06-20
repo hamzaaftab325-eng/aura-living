@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import TrackOrdersView from '@/components/TrackOrdersView';
 
 export const metadata: Metadata = {
-  title: 'Track Your Orders',
+  title: 'Track Your Orders | Aura Living',
   description: 'View and track your Aura Living orders.',
   alternates: { canonical: '/account/orders' },
   robots: { index: false, follow: false },
