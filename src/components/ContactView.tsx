@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useGsapFadeIn, useGsapStagger, gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { MapPin, Phone, Mail, Clock, MessageCircle, ChevronRight, Send } from 'lucide-react';
-import { useStore } from '@/store/useStore';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
@@ -34,7 +33,6 @@ const contactInfo = [
 const subjectOptions = ['General Inquiry', 'Order Support', 'Returns', 'Wholesale', 'Custom Orders'];
 
 export default function ContactView() {
-  const setPage = useStore((state) => state.setPage);
   const heroSectionRef = useRef<HTMLElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
 
@@ -134,7 +132,7 @@ export default function ContactView() {
       {/* Breadcrumb strip (below hero) */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Home', href: '/' },
           { label: 'Contact' },
         ]}
       />

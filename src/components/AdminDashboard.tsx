@@ -8,7 +8,7 @@ import {
   Filter, Download, Plus, Edit2, Trash2, AlertTriangle, CheckCircle,
   Clock, XCircle, ChevronRight, Menu, X, Package2, Star, ShoppingCart as CartIcon,
 } from 'lucide-react';
-import { useStore } from '@/store/useStore';
+import Link from 'next/link';
 import { products, formatPKR, categories } from '@/data/products';
 import { useGsapFadeIn, useGsapStagger } from '@/hooks/useGsap';
 
@@ -52,7 +52,6 @@ const statusConfig: Record<string, { color: string; bg: string; icon: typeof Che
 };
 
 export default function AdminDashboard() {
-  const setPage = useStore((state) => state.setPage);
   const [activeTab, setActiveTab] = useState<Tab>('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -132,14 +131,15 @@ export default function AdminDashboard() {
           </nav>
 
           {/* Back to site */}
-          <button
-            onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          <Link
+            href="/"
+            onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-white/40 hover:text-white hover:bg-white/5 cursor-pointer"
             style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px', borderTop: '1px solid rgba(212,175,55,0.2)' }}
           >
             <ArrowUpRight className="w-4 h-4" />
             Back to Site
-          </button>
+          </Link>
         </div>
       </aside>
 

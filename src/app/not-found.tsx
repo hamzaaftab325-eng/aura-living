@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { Home, ShoppingBag } from 'lucide-react';
 import { gsap } from '@/hooks/useGsap';
-import { useStore } from '@/store/useStore';
 
 export default function NotFound() {
   const numberRef = useRef<HTMLDivElement>(null);
@@ -38,18 +38,6 @@ export default function NotFound() {
       }, '-=0.2');
     }
   }, []);
-
-  const setPage = useStore((s) => s.setPage);
-
-  const handleGoHome = () => {
-    setPage('home');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleGoShop = () => {
-    setPage('shop');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <div
@@ -114,22 +102,22 @@ export default function NotFound() {
 
         {/* Buttons */}
         <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button
-            onClick={handleGoHome}
+          <Link
+            href="/"
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-hover)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.35)] active:scale-[0.97] cursor-pointer"
             style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)', fontFamily: "'Poppins', sans-serif" }}
           >
             <Home className="w-4 h-4" />
             Back to Home
-          </button>
-          <button
-            onClick={handleGoShop}
+          </Link>
+          <Link
+            href="/shop"
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-pale)] hover:text-[var(--color-gold)] active:scale-[0.97] cursor-pointer"
             style={{ border: '2px solid var(--color-gold)', color: 'var(--color-gold)', fontFamily: "'Poppins', sans-serif", backgroundColor: 'transparent' }}
           >
             <ShoppingBag className="w-4 h-4" />
             Browse Shop
-          </button>
+          </Link>
         </div>
       </div>
     </div>

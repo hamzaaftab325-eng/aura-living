@@ -15,6 +15,7 @@ import { Heart, ShoppingCart, Star, ShoppingBag } from 'lucide-react';
 import { useStore, badgeColors } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
 import { products, formatPKR } from '@/data/products';
+import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
@@ -57,8 +58,6 @@ function RatingStars({ rating }: { rating: number }) {
 export default function WishlistView() {
   const wishlist = useStore((state) => state.wishlist);
   const { handleToggleWishlist: toggleWishlist, handleAddToCart: addToCart } = useCartActions();
-  const setPage = useStore((state) => state.setPage);
-  const setSelectedProduct = useStore((state) => state.setSelectedProduct);
 
   const headerSectionRef = useRef<HTMLElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
@@ -116,12 +115,6 @@ export default function WishlistView() {
     }, headerSectionRef);
     return () => ctx.revert();
   }, []);
-
-  const handleProductClick = (product: typeof products[0]) => {
-    setSelectedProduct(product);
-    setPage('product');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   const handleAddToCart = (product: typeof products[0]) => {
     addToCart(product, { openCart: true });
@@ -195,7 +188,7 @@ export default function WishlistView() {
       {/* Breadcrumb strip (below hero) */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Home', href: '/' },
           { label: 'Wishlist' },
         ]}
       />
@@ -225,7 +218,7 @@ export default function WishlistView() {
                 >
                   Start adding items you love by tapping the heart icon on any product. Your favorite pieces will appear here.
                 </p>
-                <PremiumButton variant="gold" onClick={() => setPage('shop')}>
+                <PremiumButton variant="gold" href="/shop">
                   <ShoppingBag className="w-4 h-4" />
                   Explore Our Collection
                 </PremiumButton>
@@ -267,13 +260,11 @@ export default function WishlistView() {
                     style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
                   >
                     {/* Product Image */}
-                    <div
-                      className="relative w-full aspect-[3/4] overflow-hidden cursor-pointer"
+                    <Link
+                      href={`/product/${product.slug}`}
+                      className="relative w-full aspect-[3/4] overflow-hidden block"
                       style={{ backgroundColor: 'var(--color-gold-pale)' }}
-                      onClick={() => handleProductClick(product)}
-                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleProductClick(product); } }}
-                      role="button"
-                      tabIndex={0}
+                      onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                       aria-label={`View ${product.name} details`}
                     >
                       <Image
@@ -300,6 +291,7 @@ export default function WishlistView() {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
+                          e.preventDefault();
                           toggleWishlist(product.id, product.name);
                         }}
                         className="absolute top-3 right-3 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer animate-heartbeat"
@@ -308,18 +300,18 @@ export default function WishlistView() {
                       >
                         <Heart className="w-4.5 h-4.5" style={{ color: 'var(--color-danger)', fill: 'var(--color-danger)' }} />
                       </button>
-                    </div>
+                    </Link>
 
                     {/* Product Info */}
                     <div className="p-4 sm:p-5">
                       {/* Name */}
-                      <h3
-                        className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold mb-1.5 cursor-pointer transition-colors duration-200 hover:text-[var(--color-gold)] leading-snug"
-                        
-                        onClick={() => handleProductClick(product)}
+                      <Link
+                        href={`/product/${product.slug}`}
+                        onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold mb-1.5 transition-colors duration-200 hover:text-[var(--color-gold)] leading-snug block"
                       >
                         {product.name}
-                      </h3>
+                      </Link>
 
                       {/* Rating */}
                       <div className="flex items-center gap-2 mb-3">
@@ -398,7 +390,7 @@ export default function WishlistView() {
                   >
                     Discover more pieces to add to your wishlist
                   </p>
-                  <PremiumButton variant="outline" onClick={() => setPage('shop')}>
+                  <PremiumButton variant="outline" href="/shop">
                     <ShoppingBag className="w-4 h-4" />
                     Continue Shopping
                   </PremiumButton>

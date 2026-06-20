@@ -13,6 +13,8 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useToast } from '@/hooks/use-toast';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
@@ -119,10 +121,11 @@ function InputField({
 /* ═══════════════════════════════════════════════════════════
    Main AuthView — Login / Signup with blur animation
    ═══════════════════════════════════════════════════════════ */
-export default function AuthView() {
-  const { setPage, login, signup } = useStore();
+export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' | 'signup' }) {
+  const { login, signup } = useStore();
+  const router = useRouter();
   const { toast } = useToast();
-  const [mode, setMode] = useState<'login' | 'signup'>('login');
+  const [mode, setMode] = useState<'login' | 'signup'>(modeProp);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -230,7 +233,7 @@ export default function AuthView() {
         });
       }
       setIsSubmitting(false);
-      setPage('account');
+      router.push('/account');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 900);
   };
@@ -244,7 +247,7 @@ export default function AuthView() {
         description: 'You have successfully authenticated.',
       });
       setIsSubmitting(false);
-      setPage('account');
+      router.push('/account');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 700);
   };
@@ -340,7 +343,7 @@ export default function AuthView() {
         {/* Breadcrumb */}
         <Breadcrumb
           items={[
-            { label: 'Home', onClick: () => setPage('home') },
+            { label: 'Home', href: '/' },
             { label: mode === 'login' ? 'Sign In' : 'Create Account' },
           ]}
         />
@@ -495,14 +498,14 @@ export default function AuthView() {
                     Remember me
                   </span>
                 </label>
-                <button
-                  type="button"
+                <Link
+                  href="/auth/forgot-password"
+                  onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="text-xs font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
                   style={{ color: 'var(--color-gold)', background: 'none' }}
-                  onClick={() => { setPage('forgot-password'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 >
                   Forgot Password?
-                </button>
+                </Link>
               </div>
             )}
 
@@ -529,9 +532,9 @@ export default function AuthView() {
                 </button>
                 <span className="text-xs leading-relaxed" style={{ color: 'var(--color-muted-gray)' }}>
                   I agree to the{' '}
-                  <span className="text-[var(--color-gold)] font-medium cursor-pointer hover:underline" onClick={() => { setPage('terms'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Terms of Service</span>
+                  <Link href="/terms" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-[var(--color-gold)] font-medium cursor-pointer hover:underline">Terms of Service</Link>
                   {' '}and{' '}
-                  <span className="text-[var(--color-gold)] font-medium cursor-pointer hover:underline" onClick={() => { setPage('privacy'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Privacy Policy</span>
+                  <Link href="/privacy" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-[var(--color-gold)] font-medium cursor-pointer hover:underline">Privacy Policy</Link>
                 </span>
               </label>
             )}
@@ -566,17 +569,19 @@ export default function AuthView() {
           <div className="text-center mt-6 pt-5" style={{ borderTop: '1px solid rgba(232,213,163,0.3)' }}>
             <p className="text-sm" style={{ color: 'var(--color-muted-gray)' }}>
               {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}{' '}
-              <button
+              <Link
+                href={mode === 'login' ? '/auth/signup' : '/auth/login'}
                 onClick={() => {
                   setMode(mode === 'login' ? 'signup' : 'login');
                   setShowPassword(false);
                   setShowConfirmPassword(false);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 className="font-semibold transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
                 style={{ color: 'var(--color-gold)', background: 'none' }}
               >
                 {mode === 'login' ? 'Sign Up' : 'Sign In'}
-              </button>
+              </Link>
             </p>
           </div>
         </div>

@@ -20,6 +20,8 @@ import {
   Tag,
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { formatPKR } from '@/data/products';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
@@ -31,15 +33,8 @@ const paymentMethods = [
 ];
 
 export default function CartView() {
-  const {
-    cart,
-    removeFromCart,
-    updateQuantity,
-    getCartTotal,
-    getCartCount,
-    setPage,
-    clearCart,
-  } = useStore();
+  const router = useRouter();
+  const { cart, removeFromCart, updateQuantity, getCartTotal, getCartCount, clearCart } = useStore();
   const { toast } = useToast();
 
   const cartCount = getCartCount();
@@ -89,12 +84,7 @@ export default function CartView() {
   const finalTotal = estimatedTotal - discount;
 
   const handleCheckout = () => {
-    setPage('checkout');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleContinueShopping = () => {
-    setPage('shop');
+    router.push('/checkout');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -118,7 +108,7 @@ export default function CartView() {
             Looks like you haven&apos;t added anything yet. Explore our handcrafted collection
             and find pieces you&apos;ll love for your home.
           </p>
-          <PremiumButton variant="gold" onClick={handleContinueShopping}>
+          <PremiumButton variant="gold" href="/shop">
             <ShoppingBag className="w-4 h-4" />
             Start Shopping
           </PremiumButton>
@@ -134,7 +124,7 @@ export default function CartView() {
         <div ref={headerRef} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div className="flex items-center gap-3">
             <button
-              onClick={() => { setPage('shop'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              onClick={() => { router.push('/shop'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gold/10 cursor-pointer"
               aria-label="Back to shop"
             >
@@ -194,14 +184,11 @@ export default function CartView() {
                 style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
               >
                 {/* Image */}
-                <div
-                  className="shrink-0 relative w-20 h-20 sm:w-28 sm:h-28 rounded-lg overflow-hidden cursor-pointer"
+                <Link
+                  href={`/product/${item.product.slug}`}
+                  className="shrink-0 relative w-20 h-20 sm:w-28 sm:h-28 rounded-lg overflow-hidden"
                   style={{ border: '1px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)' }}
-                  onClick={() => {
-                    useStore.getState().setSelectedProduct(item.product);
-                    setPage('product');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
+                  onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 >
                   <Image
                     src={item.product.image}
@@ -210,23 +197,20 @@ export default function CartView() {
                     className="w-full h-full object-contain"
                     sizes="112px"
                   />
-                </div>
+                </Link>
 
                 {/* Details */}
                 <div className="flex-1 min-w-0 flex flex-col">
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
-                      <h3
-                        className="text-sm sm:text-base font-semibold truncate cursor-pointer hover:text-gold-text transition-colors"
+                      <Link
+                        href={`/product/${item.product.slug}`}
+                        onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        className="text-sm sm:text-base font-semibold truncate hover:text-gold-text transition-colors"
                         style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}
-                        onClick={() => {
-                          useStore.getState().setSelectedProduct(item.product);
-                          setPage('product');
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
                       >
                         {item.product.name}
-                      </h3>
+                      </Link>
                       <p className="text-xs mt-0.5 capitalize" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>
                         {item.product.category.replace('-', ' ')}
                       </p>
@@ -302,13 +286,14 @@ export default function CartView() {
             ))}
 
             {/* Continue shopping */}
-            <button
-              onClick={handleContinueShopping}
+            <Link
+              href="/shop"
+              onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-gold-text cursor-pointer text-muted-gray mt-2"
             >
               <ArrowLeft className="w-4 h-4" />
               Continue Shopping
-            </button>
+            </Link>
           </div>
 
           {/* ═══ Order Summary (1/3 width, sticky) ═══ */}

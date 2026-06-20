@@ -20,6 +20,8 @@ import {
   Box,
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
 import Breadcrumb from '@/components/ui/Breadcrumb';
@@ -114,7 +116,7 @@ const statusConfig: Record<TrackedOrder['status'], { color: string; bg: string; 
 };
 
 export default function TrackOrdersView() {
-  const setPage = useStore((state) => state.setPage);
+  const router = useRouter();
   const user = useStore((state) => state.user);
   const { toast } = useToast();
 
@@ -212,14 +214,14 @@ export default function TrackOrdersView() {
               Sign in to view live delivery status, ETA, and full tracking history for every order.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <PremiumButton variant="gold" size="sm" onClick={() => setPage('login')}>Sign In</PremiumButton>
-              <button
-                onClick={() => setPage('signup')}
+              <PremiumButton variant="gold" size="sm" href="/auth/login">Sign In</PremiumButton>
+              <Link
+                href="/auth/signup"
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
                 style={{ color: 'var(--color-gold)', background: 'none' }}
               >
                 Create a free account
-              </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -272,7 +274,7 @@ export default function TrackOrdersView() {
       {/* Breadcrumb strip (below hero) */}
       <Breadcrumb
         items={[
-          { label: 'My Account', onClick: () => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'My Account', href: '/account' },
           { label: 'Track Orders' },
         ]}
       />
@@ -434,7 +436,7 @@ export default function TrackOrdersView() {
                           <PremiumButton variant="outline" size="sm" onClick={() => toast({ title: 'Invoice', description: `Invoice for #${order.id} downloaded.`, })}>
                             Download Invoice
                           </PremiumButton>
-                          <PremiumButton variant="gold" size="sm" onClick={() => setPage('contact')}>
+                          <PremiumButton variant="gold" size="sm" href="/contact">
                             Get Help with this Order
                           </PremiumButton>
                         </div>
@@ -448,14 +450,15 @@ export default function TrackOrdersView() {
 
           {/* Back to account */}
           <div className="text-center mt-10 sm:mt-14">
-            <button
-              onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            <Link
+              href="/account"
+              onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
               style={{ color: 'var(--color-gold)', background: 'none' }}
             >
               <ChevronRight className="w-3.5 h-3.5 rotate-180" />
               Back to My Account
-            </button>
+            </Link>
           </div>
           <div ref={dividerRef} className="hidden" />
         </div>

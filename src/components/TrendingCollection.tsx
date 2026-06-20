@@ -5,13 +5,11 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
-import { useStore } from '@/store/useStore';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { useGsapFadeIn, useGsapBlurText } from '@/hooks/useGsap';
 import PremiumButton from '@/components/ui/PremiumButton';
 
 export default function TrendingCollection() {
-  const setPage = useStore((state) => state.setPage);
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -98,7 +96,7 @@ export default function TrendingCollection() {
             </p>
 
             <div ref={btnWrapperRef}>
-              <PremiumButton variant="gold" onClick={() => setPage('shop')}>
+              <PremiumButton variant="gold" href="/shop">
                 Shop This Collection
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </PremiumButton>

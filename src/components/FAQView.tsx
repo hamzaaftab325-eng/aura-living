@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react';
 import { useGsapFadeIn, useGsapStagger,  gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { HelpCircle, ChevronDown, MessageCircle, ArrowRight } from 'lucide-react';
-import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
@@ -130,7 +129,6 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
 }
 
 export default function FAQView() {
-  const setPage = useStore((state) => state.setPage);
   const [activeCategory, setActiveCategory] = useState<FAQCategory>('all');
   const [openId, setOpenId] = useState<number | null>(null);
   const accordionRefs = useRef<Map<number, HTMLDivElement>>(new Map());
@@ -214,7 +212,7 @@ export default function FAQView() {
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => setPage('home') },
+          { label: 'Home', href: '/' },
           { label: 'FAQ' },
         ]}
       />
@@ -315,7 +313,7 @@ export default function FAQView() {
             Our team is here to help. Reach out to us and we will get back to you as soon as possible.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <PremiumButton variant="gold" onClick={() => setPage('contact')}>
+            <PremiumButton variant="gold" href="/contact">
               Contact Us
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </PremiumButton>

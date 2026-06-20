@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { gsap } from '@/hooks/useGsap';
 import {
   Search,
@@ -20,25 +22,23 @@ import {
 import { useStore } from '@/store/useStore';
 import { products, formatPKR } from '@/data/products';
 
-type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password' | 'track-orders' | 'addresses' | 'settings' | 'admin' | 'blog' | 'article';
-
 interface NavLink {
   label: string;
-  page: PageType;
+  href: string;
   hasMegaMenu?: boolean;
 }
 
 const navLinks: NavLink[] = [
-  { label: 'Home', page: 'home' },
-  { label: 'Shop', page: 'shop', hasMegaMenu: true },
-  { label: 'Journal', page: 'blog' },
-  { label: 'About', page: 'about' },
-  { label: 'Contact', page: 'contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Shop', href: '/shop', hasMegaMenu: true },
+  { label: 'Journal', href: '/blog' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 interface MegaMenuItem {
   label: string;
-  page: PageType;
+  href: string;
   icon: React.ReactNode;
   description: string;
   preview: {
@@ -52,7 +52,7 @@ interface MegaMenuItem {
 const megaMenuItems: MegaMenuItem[] = [
   {
     label: 'All Products',
-    page: 'shop',
+    href: '/shop',
     icon: <ShoppingBag className="h-5 w-5" />,
     description: 'Browse our complete collection',
     preview: {
@@ -64,7 +64,7 @@ const megaMenuItems: MegaMenuItem[] = [
   },
   {
     label: 'New Arrivals',
-    page: 'new-arrivals',
+    href: '/new-arrivals',
     icon: <Sparkles className="h-5 w-5" />,
     description: 'The latest additions to our store',
     preview: {
@@ -76,7 +76,7 @@ const megaMenuItems: MegaMenuItem[] = [
   },
   {
     label: 'Sale',
-    page: 'sale',
+    href: '/sale',
     icon: <Tag className="h-5 w-5" />,
     description: 'Exclusive offers & discounts',
     preview: {
@@ -88,7 +88,7 @@ const megaMenuItems: MegaMenuItem[] = [
   },
   {
     label: 'Lookbook',
-    page: 'lookbook',
+    href: '/lookbook',
     icon: <Camera className="h-5 w-5" />,
     description: 'Curated style inspirations',
     preview: {
@@ -100,7 +100,7 @@ const megaMenuItems: MegaMenuItem[] = [
   },
   {
     label: 'Care Guide',
-    page: 'care-guide',
+    href: '/care-guide',
     icon: <Heart className="h-5 w-5" />,
     description: 'Tips to preserve your luxury pieces',
     preview: {
@@ -112,11 +112,11 @@ const megaMenuItems: MegaMenuItem[] = [
   },
 ];
 
-// Pages that belong to the Shop mega-menu family (highlight "Shop" when on any of these)
-const shopFamilyPages: PageType[] = ['shop', 'new-arrivals', 'sale', 'lookbook', 'care-guide'];
+// Routes that belong to the Shop mega-menu family (highlight "Shop" when on any of these)
+const shopFamilyRoutes = ['/shop', '/new-arrivals', '/sale', '/lookbook', '/care-guide'];
 
-// Pages that belong to the Journal family (highlight "Journal" when on any of these)
-const journalFamilyPages: PageType[] = ['blog', 'article'];
+// Routes that belong to the Journal family (highlight "Journal" when on any of these)
+const journalFamilyRoutes = ['/blog'];
 
 export default function Navbar() {
   // ── UI state ──
@@ -138,7 +138,9 @@ export default function Navbar() {
   const megaMenuRef = useRef<HTMLDivElement>(null);
 
   // ── Store ──
-  const { currentPage, setPage, getCartCount, cartOpen, setCartOpen, wishlist } = useStore();
+  const { getCartCount, cartOpen, setCartOpen, wishlist } = useStore();
+  const pathname = usePathname();
+  const router = useRouter();
 
   // Hydration guard — persisted cart/wishlist read from localStorage on the client only
   const [hydrated, setHydrated] = useState(false);
@@ -248,14 +250,15 @@ export default function Navbar() {
   }, [megaMenuOpen]);
 
   // ── Handlers ──
-  const handleNavClick = useCallback((page: PageType) => {
-    setPage(page);
+  // Closes any open menus + scrolls to top — used as onClick on <Link> elements
+  // (Link handles the navigation itself).
+  const closeMenusAndScroll = useCallback(() => {
     setMobileMenuOpen(false);
     setMegaMenuOpen(false);
     setMobileShopExpanded(false);
     setPreviewItem(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [setPage]);
+  }, []);
 
   const closeMobileMenu = useCallback(() => {
     if (mobileMenuRef.current) {
@@ -279,13 +282,13 @@ export default function Navbar() {
   }, []);
 
   // ── Helpers ──
-  const isLinkActive = (page: PageType, label: string) => {
-    if (label === 'Shop') return shopFamilyPages.includes(currentPage);
-    if (label === 'Journal') return journalFamilyPages.includes(currentPage);
-    return currentPage === page;
+  const isLinkActive = (href: string, label: string) => {
+    if (label === 'Shop') return shopFamilyRoutes.some((r) => pathname === r || pathname.startsWith(r + '/'));
+    if (label === 'Journal') return journalFamilyRoutes.some((r) => pathname === r || pathname.startsWith(r + '/'));
+    return pathname === href;
   };
 
-  const isMegaItemActive = (page: PageType) => currentPage === page;
+  const isMegaItemActive = (href: string) => pathname === href;
 
   const activePreview = previewItem ?? megaMenuItems[0];
 
@@ -318,25 +321,24 @@ export default function Navbar() {
             }}
           >
             {/* Logo */}
-            <div
-              ref={logoRef}
-              className="cursor-pointer shrink-0 outline-none transition-all duration-300"
-              onClick={() => handleNavClick('home')}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleNavClick('home'); } }}
-              role="button"
-              tabIndex={0}
+            <Link
+              href="/"
               aria-label="Aura Living home"
+              className="cursor-pointer shrink-0 outline-none transition-all duration-300"
+              onClick={closeMenusAndScroll}
             >
-              <img
-                src="/logo/default-monochrome-gold-white.svg"
-                alt="Aura Living"
-                style={{ height: scrolled ? 'clamp(38px, 6vw, 52px)' : 'clamp(46px, 7vw, 64px)',
-                  width: 'auto',
-                  objectFit: 'contain',
-                  transition: 'height 0.3s ease-out',
-                }}
-              />
-            </div>
+              <span ref={logoRef} className="block">
+                <img
+                  src="/logo/default-monochrome-gold-white.svg"
+                  alt="Aura Living"
+                  style={{ height: scrolled ? 'clamp(38px, 6vw, 52px)' : 'clamp(46px, 7vw, 64px)',
+                    width: 'auto',
+                    objectFit: 'contain',
+                    transition: 'height 0.3s ease-out',
+                  }}
+                />
+              </span>
+            </Link>
 
             {/* Desktop Nav Links — inside pill */}
             <div className="hidden lg:flex items-center">
@@ -345,7 +347,18 @@ export default function Navbar() {
                 onMouseLeave={() => setCursorPos((pv) => ({ ...pv, opacity: 0 }))}
               >
                 {navLinks.map((link) => {
-                  const isActive = isLinkActive(link.page, link.label);
+                  const isActive = isLinkActive(link.href, link.label);
+                  const labelContent = (
+                    <>
+                      {link.label}
+                      {link.hasMegaMenu && (
+                        <ChevronDown
+                          className="inline ml-1 h-3 w-3 transition-transform duration-300"
+                          style={{ transform: megaMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                        />
+                      )}
+                    </>
+                  );
                   return (
                     <li
                       key={link.label}
@@ -365,35 +378,27 @@ export default function Navbar() {
                           setCursorPos({ left: el.offsetLeft, width: el.offsetWidth, opacity: 1 });
                         }
                       }}
-                      onClick={() => {
-                        // Shop link ONLY toggles the dropdown — does NOT navigate to /shop
-                        if (link.hasMegaMenu) {
-                          toggleMegaMenu();
-                        } else {
-                          handleNavClick(link.page);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      aria-haspopup={link.hasMegaMenu ? 'menu' : undefined}
-                      aria-expanded={link.hasMegaMenu ? megaMenuOpen : undefined}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          if (link.hasMegaMenu) {
-                            toggleMegaMenu();
-                          } else {
-                            handleNavClick(link.page);
-                          }
-                        }
-                      }}
                     >
-                      {link.label}
-                      {link.hasMegaMenu && (
-                        <ChevronDown
-                          className="inline ml-1 h-3 w-3 transition-transform duration-300"
-                          style={{ transform: megaMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                        />
+                      {link.hasMegaMenu ? (
+                        <button
+                          type="button"
+                          onClick={toggleMegaMenu}
+                          aria-haspopup="menu"
+                          aria-expanded={megaMenuOpen}
+                          className="block uppercase font-medium"
+                          style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'inherit' }}
+                        >
+                          {labelContent}
+                        </button>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          onClick={closeMenusAndScroll}
+                          className="block uppercase font-medium"
+                          style={{ color: 'inherit' }}
+                        >
+                          {labelContent}
+                        </Link>
                       )}
                     </li>
                   );
@@ -424,11 +429,12 @@ export default function Navbar() {
                 <Search className="h-4 w-4" />
               </button>
 
-              <button
+              <Link
+                href="/wishlist"
                 className="relative hidden sm:flex rounded-full transition-all duration-300 hover:bg-white/10"
                 style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '6px' : '8px' }}
                 aria-label="Wishlist"
-                onClick={() => handleNavClick('wishlist')}
+                onClick={closeMenusAndScroll}
               >
                 <Heart className="h-4 w-4" />
                 {wishlistCount > 0 && (
@@ -436,7 +442,7 @@ export default function Navbar() {
                     {wishlistCount}
                   </span>
                 )}
-              </button>
+              </Link>
 
               <button
                 className="relative rounded-full transition-all duration-300 hover:bg-white/10"
@@ -461,14 +467,15 @@ export default function Navbar() {
                   : `${cartCount} ${cartCount === 1 ? 'item' : 'items'} in cart`}
               </span>
 
-              <button
+              <Link
+                href="/account"
                 className="hidden sm:flex rounded-full transition-all duration-300 hover:bg-white/10"
                 style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '6px' : '8px' }}
                 aria-label="Account"
-                onClick={() => handleNavClick('account')}
+                onClick={closeMenusAndScroll}
               >
                 <User className="h-4 w-4" />
-              </button>
+              </Link>
 
               <button
                 className="lg:hidden rounded-full transition-all duration-300 hover:bg-white/10"
@@ -510,17 +517,18 @@ export default function Navbar() {
                       Explore
                     </p>
                     {megaMenuItems.map((item) => {
-                      const itemActive = isMegaItemActive(item.page);
-                      const isPreviewing = activePreview.page === item.page;
+                      const itemActive = isMegaItemActive(item.href);
+                      const isPreviewing = activePreview.href === item.href;
                       return (
-                        <button
+                        <Link
                           key={item.label}
+                          href={item.href}
+                          onClick={closeMenusAndScroll}
                           className="w-full flex items-center gap-4 px-5 py-3 text-left transition-colors duration-200"
                           style={{ backgroundColor: isPreviewing || itemActive ? 'rgba(212, 175, 55, 0.12)' : 'transparent',
                             borderLeft: isPreviewing ? '3px solid var(--color-gold)' : '3px solid transparent',
                           }}
                           onMouseEnter={() => setPreviewItem(item)}
-                          onClick={() => handleNavClick(item.page)}
                         >
                           <div
                             className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-all duration-300"
@@ -554,7 +562,7 @@ export default function Navbar() {
                             className="w-3.5 h-3.5 transition-opacity duration-200"
                             style={{ color: 'var(--color-gold)', opacity: isPreviewing ? 1 : 0 }}
                           />
-                        </button>
+                        </Link>
                       );
                     })}
                   </div>
@@ -591,14 +599,15 @@ export default function Navbar() {
                         >
                           {activePreview.preview.headline}
                         </h4>
-                        <button
-                          onClick={() => handleNavClick(activePreview.page)}
+                        <Link
+                          href={activePreview.href}
+                          onClick={closeMenusAndScroll}
                           className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:gap-2.5 cursor-pointer group"
                           style={{ color: 'var(--color-gold)', background: 'none' }}
                         >
                           {activePreview.preview.cta}
                           <ChevronRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5" style={{ color: 'var(--color-gold)' }} />
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -662,30 +671,49 @@ export default function Navbar() {
                 Menu
               </p>
               {navLinks.map((link) => {
-                const isActive = isLinkActive(link.page, link.label);
+                const isActive = isLinkActive(link.href, link.label);
+                const labelInner = (
+                  <>
+                    <span className="text-base font-medium">{link.label}</span>
+                    {link.hasMegaMenu && (
+                      <ChevronDown
+                        className="h-4 w-4 transition-transform duration-300"
+                        style={{ transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)', color: 'var(--color-gold)' }}
+                      />
+                    )}
+                  </>
+                );
                 return (
                   <React.Fragment key={link.label}>
-                    <button
-                      className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
-                      style={{ color: isActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.95)',
-                        backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
-                      }}
-                      onClick={() => {
-                        if (link.hasMegaMenu) {
-                          setMobileShopExpanded((prev) => !prev);
-                        } else {
-                          handleNavClick(link.page);
-                        }
-                      }}
-                    >
-                      <span className="text-base font-medium">{link.label}</span>
-                      {link.hasMegaMenu && (
-                        <ChevronDown
-                          className="h-4 w-4 transition-transform duration-300"
-                          style={{ transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)', color: 'var(--color-gold)' }}
-                        />
-                      )}
-                    </button>
+                    {link.hasMegaMenu ? (
+                      <button
+                        type="button"
+                        className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
+                        style={{ color: isActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.95)',
+                          backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+                          background: 'none',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => setMobileShopExpanded((prev) => !prev)}
+                        aria-expanded={mobileShopExpanded}
+                      >
+                        {labelInner}
+                      </button>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={() => {
+                          closeMobileMenu();
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
+                        style={{ color: isActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.95)',
+                          backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
+                        }}
+                      >
+                        {labelInner}
+                      </Link>
+                    )}
 
                     {/* Inline Shop submenu — appears right below "Shop" link
                         Uses CSS grid-template-rows trick (1fr ↔ 0fr) for smooth
@@ -705,15 +733,19 @@ export default function Navbar() {
                               style={{ background: 'linear-gradient(90deg, rgba(212,175,55,0.25), transparent)' }}
                             />
                             {megaMenuItems.map((item) => {
-                              const itemActive = isMegaItemActive(item.page);
+                              const itemActive = isMegaItemActive(item.href);
                               return (
-                                <button
+                                <Link
                                   key={item.label}
+                                  href={item.href}
+                                  onClick={() => {
+                                    closeMobileMenu();
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                  }}
                                   className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-white/10"
                                   style={{ color: itemActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.9)',
                                     backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
                                   }}
-                                  onClick={() => handleNavClick(item.page)}
                                 >
                                   <div
                                     className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-200"
@@ -746,7 +778,7 @@ export default function Navbar() {
                                     className="w-3.5 h-3.5 shrink-0"
                                     style={{ color: 'rgba(212, 175, 55, 0.5)' }}
                                   />
-                                </button>
+                                </Link>
                               );
                             })}
                           </div>
@@ -773,36 +805,49 @@ export default function Navbar() {
                 Quick Actions
               </p>
               {[
-                { icon: <Search className="h-5 w-5" />, label: 'Search', page: 'shop' as PageType },
-                { icon: <Heart className="h-5 w-5" />, label: 'Wishlist', page: 'wishlist' as PageType, count: wishlistCount },
-                { icon: <ShoppingCart className="h-5 w-5" />, label: 'Cart', page: 'cart' as PageType, count: cartCount },
-                { icon: <User className="h-5 w-5" />, label: 'Account', page: 'account' as PageType },
-              ].map((item) => (
-                <button
-                  key={item.label}
-                  className="mobile-quick-item flex items-center gap-3 py-3 px-3 text-left transition-colors duration-200 hover:bg-white/10 rounded-xl w-full"
-                  style={{ color: 'rgba(255, 255, 255, 0.9)' }}
-                  onClick={() => {
-                    closeMobileMenu();
-                    if (item.label === 'Cart') { setCartOpen(true); return; }
-                    if (item.label === 'Search') { setSearchOpen(true); return; }
-                    handleNavClick(item.page);
-                  }}
-                >
-                  <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center relative"
-                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}
-                  >
-                    {item.icon}
-                    {item.count && item.count > 0 ? (
-                      <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[var(--color-gold)]">
-                        {item.count}
-                      </span>
-                    ) : null}
-                  </div>
-                  <span className="text-sm font-medium">{item.label}</span>
-                </button>
-              ))}
+                { icon: <Search className="h-5 w-5" />, label: 'Search', href: null as string | null },
+                { icon: <Heart className="h-5 w-5" />, label: 'Wishlist', href: '/wishlist', count: wishlistCount },
+                { icon: <ShoppingCart className="h-5 w-5" />, label: 'Cart', href: null as string | null, count: cartCount },
+                { icon: <User className="h-5 w-5" />, label: 'Account', href: '/account' },
+              ].map((item) => {
+                const inner = (
+                  <>
+                    <div
+                      className="w-9 h-9 rounded-lg flex items-center justify-center relative"
+                      style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}
+                    >
+                      {item.icon}
+                      {item.count && item.count > 0 ? (
+                        <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[var(--color-gold)]">
+                          {item.count}
+                        </span>
+                      ) : null}
+                    </div>
+                    <span className="text-sm font-medium">{item.label}</span>
+                  </>
+                );
+                const baseClass =
+                  'mobile-quick-item flex items-center gap-3 py-3 px-3 text-left transition-colors duration-200 hover:bg-white/10 rounded-xl w-full';
+                const baseStyle = { color: 'rgba(255, 255, 255, 0.9)' } as const;
+                const handleClick = () => {
+                  closeMobileMenu();
+                  if (item.label === 'Cart') { setCartOpen(true); return; }
+                  if (item.label === 'Search') { setSearchOpen(true); return; }
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+                if (item.href) {
+                  return (
+                    <Link key={item.label} href={item.href} onClick={handleClick} className={baseClass} style={baseStyle}>
+                      {inner}
+                    </Link>
+                  );
+                }
+                return (
+                  <button key={item.label} type="button" onClick={handleClick} className={baseClass} style={{ ...baseStyle, background: 'none', cursor: 'pointer' }}>
+                    {inner}
+                  </button>
+                );
+              })}
             </div>
 
             {/* Bottom CTA */}
@@ -825,13 +870,16 @@ export default function Navbar() {
                 >
                   Explore our latest arrivals and handcrafted luxury pieces
                 </p>
-                <button
+                <Link
+                  href="/new-arrivals"
+                  onClick={() => {
+                    closeMobileMenu();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                   className="premium-btn btn-gold px-5 py-2.5 text-xs w-full rounded-sm"
-                  
-                  onClick={() => handleNavClick('new-arrivals')}
                 >
                   Explore Now
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -870,10 +918,11 @@ export default function Navbar() {
                   onKeyDown={(e) => {
                     if (e.key === 'Escape') { setSearchOpen(false); setSearchQuery(''); }
                     if (e.key === 'Enter' && searchQuery.trim()) {
-                      useStore.getState().setSearchQuery(searchQuery.trim());
+                      const q = searchQuery.trim();
                       setSearchOpen(false);
                       setSearchQuery('');
-                      handleNavClick('shop');
+                      router.push(`/shop?search=${encodeURIComponent(q)}`);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                   }}
                 />
@@ -900,10 +949,10 @@ export default function Navbar() {
                         key={p.id}
                         className="w-full flex items-center gap-3 py-3 px-2 text-left rounded-lg transition-colors hover:bg-white/10"
                         onClick={() => {
-                          useStore.getState().setSelectedProduct(p);
                           setSearchOpen(false);
                           setSearchQuery('');
-                          handleNavClick('product');
+                          router.push(`/product/${p.slug}`);
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
                       >
                         <div

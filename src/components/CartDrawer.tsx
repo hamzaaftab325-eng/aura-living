@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { X, Minus, Plus, Trash2, ShoppingBag, ArrowRight, CreditCard, Truck, Shield, CheckCircle, Tag, Lock } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { formatPKR } from '@/data/products';
@@ -15,16 +16,8 @@ const VALID_COUPONS: Record<CouponCode, { discount: number; label: string }> = {
 };
 
 export default function CartDrawer() {
-  const {
-    cart,
-    removeFromCart,
-    updateQuantity,
-    getCartTotal,
-    getCartCount,
-    cartOpen,
-    setCartOpen,
-    setPage,
-  } = useStore();
+  const { cart, removeFromCart, updateQuantity, getCartTotal, getCartCount, cartOpen, setCartOpen } = useStore();
+  const router = useRouter();
   const { toast } = useToast();
 
   const [hydrated, setHydrated] = useState(false);
@@ -56,21 +49,21 @@ export default function CartDrawer() {
 
   const handleCheckout = () => {
     handleClose();
-    setPage('checkout');
+    router.push('/checkout');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleViewCart = () => {
     handleClose();
-    setPage('cart');
+    router.push('/cart');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleGoToShop = useCallback(() => {
     handleClose();
-    setPage('shop');
+    router.push('/shop');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [handleClose, setPage]);
+  }, [handleClose, router]);
 
   const handleApplyCoupon = () => {
     const code = couponInput.trim().toUpperCase() as CouponCode;

@@ -15,12 +15,42 @@ const nextConfig: NextConfig = {
   // Disable static page caching so new builds always serve fresh HTML
   // (prevents "Failed to load chunk" errors when chunks get new hashed names)
   async headers() {
+    const securityHeaders = [
+      { key: 'X-Content-Type-Options', value: 'nosniff' },
+      { key: 'X-Frame-Options', value: 'DENY' },
+      { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+      {
+        key: 'Permissions-Policy',
+        value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
+      },
+      {
+        key: 'Strict-Transport-Security',
+        value: 'max-age=31536000; includeSubDomains; preload',
+      },
+      // CSP — permissive enough for Vercel analytics + Next.js inline scripts
+      // Tighten in production after auditing all third-party scripts
+      {
+        key: 'Content-Security-Policy',
+        value: [
+          "default-src 'self'",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://plausible.io",
+          "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+          "font-src 'self' data:",
+          "img-src 'self' data: blob: https:",
+          "connect-src 'self' https://vitals.vercel-insights.com https://plausible.io",
+          "frame-ancestors 'none'",
+          "base-uri 'self'",
+          "form-action 'self'",
+        ].join('; '),
+      },
+    ];
+
     return [
       {
         source: '/:path*',
         headers: [
           { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate' },
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          ...securityHeaders,
         ],
       },
       {
@@ -31,7 +61,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  // Force dynamic rendering to avoid prerender cache
   experimental: {
     // Prevent Next.js from setting s-maxage on prerendered pages
   },

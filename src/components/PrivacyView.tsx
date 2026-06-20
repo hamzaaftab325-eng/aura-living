@@ -3,7 +3,7 @@
 import { useGsapFadeIn, useGsapStagger, useGsapScaleIn } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Shield, Lock, User, Settings, Share2,  Cookie, FileText, Clock, ExternalLink, Baby, RefreshCw, Mail } from 'lucide-react';
-import { useStore } from '@/store/useStore';
+import Link from 'next/link';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
@@ -115,7 +115,6 @@ const sections = [
 ];
 
 export default function PrivacyView() {
-  const setPage = useStore((state) => state.setPage);
 
   const heroRef = useGsapStagger<HTMLDivElement>({
     y: 40,
@@ -178,7 +177,7 @@ export default function PrivacyView() {
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => setPage('home') },
+          { label: 'Home', href: '/' },
           { label: 'Privacy Policy' },
         ]}
       />
@@ -252,13 +251,13 @@ export default function PrivacyView() {
               privacy@auraliving.pk
             </a>
           </p>
-          <button
-            onClick={() => setPage('terms')}
+          <Link
+            href="/terms"
             className="text-sm font-semibold transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
             style={{ color: 'var(--color-gold)', background: 'none' }}
           >
             View our Terms of Service →
-          </button>
+          </Link>
         </div>
       </section>
     </div>

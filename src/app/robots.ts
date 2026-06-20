@@ -6,10 +6,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin', '/api/', '/_next/', '/static/'],
+        disallow: ['/admin', '/account', '/auth', '/checkout', '/cart', '/api/', '/_next/', '/static/'],
       },
     ],
-    sitemap: 'https://auraliving.pk/sitemap.xml',
-    host: 'https://auraliving.pk',
+    sitemap: 'https://auraliving.com/sitemap.xml',
+    host: 'https://auraliving.com',
   };
 }

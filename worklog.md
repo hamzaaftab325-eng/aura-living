@@ -187,3 +187,49 @@ Stage Summary:
 - Sitemap: 77 URLs
 - JSON-LD: Organization, WebSite, Store, BreadcrumbList, Product (with Review + AggregateRating), ItemList, BlogPosting, FAQPage
 - All 6 audit areas (Frontend Structure, Design System, Accessibility, Performance, SEO, Content) brought to ~100%
+
+---
+Task ID: P1-7
+Agent: Navbar/Footer/Breadcrumb migration agent
+Task: Migrate Navbar, Footer, CartDrawer, Breadcrumb, PremiumButton from SPA routing to Next.js App Router
+
+Work Log:
+- Updated src/components/Navbar.tsx (~950 lines)
+  - Removed `currentPage` + `setPage` from useStore destructure; removed local `PageType` type union
+  - Added `import Link from 'next/link'` + `import { usePathname, useRouter } from 'next/navigation'`
+  - `navLinks`/`megaMenuItems`/`shopFamilyRoutes`/`journalFamilyRoutes` arrays: `page: PageType` → `href: string` with App Router paths
+  - `isLinkActive`/`isMegaItemActive`: now use `pathname === href` (with `pathname.startsWith(href + '/')` for Shop/Journal family detection)
+  - Desktop nav links: non-mega-menu items render `<Link>` inside the `<li>` (cursor animation preserved on the `<li>`); Shop link renders a `<button>` that toggles the mega menu
+  - Logo: replaced `<div role="button">` with `<Link href="/">` (kept `logoRef` on an inner `<span>` so the GSAP entrance animation still works)
+  - Wishlist + Account icon buttons → `<Link href="/wishlist">` + `<Link href="/account">` (Cart + Search remain buttons — they open the drawer/modal, not navigate)
+  - Mega-menu items (desktop + mobile submenu): `<button onClick={handleNavClick}>` → `<Link href onClick={closeMenusAndScroll}>`
+  - Mega-menu preview CTA + mobile CTA "Explore Now" → `<Link>`
+  - Mobile menu nav links: non-mega-menu → `<Link>`; Shop link → `<button>` that expands the inline submenu
+  - Mobile "Quick Actions" row: Wishlist + Account → `<Link>`; Search + Cart → `<button>` (open modal/drawer)
+  - Search modal Enter handler: replaced `useStore.getState().setSearchQuery(...)` + `handleNavClick('shop')` with `router.push('/shop?search=' + encodeURIComponent(q))`
+  - Search result click: replaced `useStore.getState().setSelectedProduct(p)` + `handleNavClick('product')` with `router.push('/product/' + p.slug)`
+  - Removed unused `handleNavClick` callback (no remaining callers); kept `closeMenusAndScroll` helper used as `onClick` on `<Link>` elements
+- Updated src/components/Footer.tsx
+  - Removed `useStore` import + `setPage` destructure; added `import Link from 'next/link'`
+  - `FooterLink` component: now renders `<Link>` when `href` provided (preferred), falls back to `<button>` for onClick-only callers (backward compat)
+  - `quickLinks`/`customerLinks` arrays: `page: 'foo' as const` → `href: '/foo'`
+  - Bottom-bar Terms/Privacy buttons → `<Link href="/terms">` + `<Link href="/privacy">`
+- Updated src/components/CartDrawer.tsx
+  - Removed `setPage` from useStore destructure; added `import { useRouter } from 'next/navigation'` + `const router = useRouter()`
+  - `handleCheckout`/`handleViewCart`/`handleGoToShop`: `setPage('checkout'|'cart'|'shop')` → `router.push('/checkout'|'/cart'|'/shop')`
+- Updated src/components/ui/Breadcrumb.tsx
+  - Added optional `href?: string` to `BreadcrumbItem`
+  - When `href` is provided AND item is not the last: renders `<Link>` (preserves `onClick` if also passed)
+  - When `onClick` is provided (no href) AND not last: renders `<button>` (backward compat)
+  - Otherwise: renders the existing `<span>`
+  - JSON-LD `item` URL now uses `href` when provided (falls back to the old `#label-slug` heuristic)
+- Updated src/components/ui/PremiumButton.tsx
+  - Added optional `href?: string` prop
+  - When `href` is provided AND not disabled AND not loading: renders a `<Link>` with the same `premium-btn` className + variant/size classes (passes `onClick` through too)
+  - Otherwise: renders the existing `<button>` (no behavior change for current callers)
+- Bonus: src/components/SiteShell.tsx — added the same `// eslint-disable-next-line react-hooks/set-state-in-effect` comment that 5 other files use for the mount-flag pattern, so the whole project passes `eslint .` cleanly (this file was created by the prior App Router migration agent and was missing the disable comment)
+
+Stage Summary:
+- tsc: 0 errors in modified files (Navbar, Footer, CartDrawer, Breadcrumb, PremiumButton, SiteShell). The remaining ~56 tsc errors are all in view components (ShopView, ProductDetailView, HeroSection, FeaturedProducts, CategoriesSection, etc.) that still reference the old `setPage`/`selectedProduct`/`setSelectedCategory`/`searchQuery` store fields — those are explicitly out of scope for P1-7 and will be migrated in a follow-up task.
+- eslint: 0 errors across the whole project (`npx eslint .` clean)
+- next build: NOT run — per task instructions, view components will cause build errors until they're migrated

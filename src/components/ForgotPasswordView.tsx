@@ -4,11 +4,10 @@ import { useState } from 'react';
 import { useGsapFadeIn } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Lock, Mail, ArrowRight, ArrowLeft } from 'lucide-react';
-import { useStore } from '@/store/useStore';
+import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';
 
 export default function ForgotPasswordView() {
-  const setPage = useStore((state) => state.setPage);
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -167,14 +166,14 @@ export default function ForgotPasswordView() {
 
               {/* Back to Sign In */}
               <div className="text-center mt-6 pt-5" style={{ borderTop: '1px solid rgba(232,213,163,0.3)' }}>
-                <button
-                  onClick={() => setPage('login')}
+                <Link
+                  href="/auth/login"
                   className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
                   style={{ color: 'var(--color-gold)', background: 'none' }}
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                   Back to Sign In
-                </button>
+                </Link>
               </div>
             </>
           ) : (
@@ -219,14 +218,14 @@ export default function ForgotPasswordView() {
                 </button>
 
                 <div className="mt-6 pt-5" style={{ borderTop: '1px solid rgba(232,213,163,0.3)' }}>
-                  <button
-                    onClick={() => setPage('login')}
+                  <Link
+                    href="/auth/login"
                     className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
                     style={{ color: 'var(--color-gold)', background: 'none' }}
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
                     Back to Sign In
-                  </button>
+                  </Link>
                 </div>
               </div>
             </>
@@ -239,13 +238,13 @@ export default function ForgotPasswordView() {
           style={{ color: 'var(--color-taupe)' }}
         >
           Remember your password?{' '}
-          <button
-            onClick={() => setPage('login')}
+          <Link
+            href="/auth/login"
             className="font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
             style={{ color: 'var(--color-gold)', background: 'none' }}
           >
             Sign in instead
-          </button>
+          </Link>
         </p>
       </div>
     </div>

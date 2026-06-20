@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Camera, ArrowRight, Sun, UtensilsCrossed, Moon, Flower2 } from 'lucide-react';
-import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
@@ -42,7 +41,6 @@ const scenes = [
 ];
 
 export default function LookbookView() {
-  const setPage = useStore((state) => state.setPage);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const heroRef = useGsapStagger<HTMLDivElement>({
@@ -130,7 +128,7 @@ export default function LookbookView() {
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => setPage('home') },
+          { label: 'Home', href: '/' },
           { label: 'Lookbook' },
         ]}
       />
@@ -215,7 +213,7 @@ export default function LookbookView() {
                       <div className="mt-2">
                         <PremiumButton
                           variant="outline"
-                          onClick={() => setPage('shop')}
+                          href="/shop"
                         >
                           Shop This Look
                           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -245,7 +243,7 @@ export default function LookbookView() {
           <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Every home has a story waiting to be told. Explore our full collection and bring your vision to life with pieces that speak to you.
           </p>
-          <PremiumButton variant="gold" onClick={() => setPage('shop')}>
+          <PremiumButton variant="gold" href="/shop">
             Shop the Collection
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </PremiumButton>

@@ -11,7 +11,6 @@ import {
 } from '@/hooks/useGsap';
 import { GoldDivider, FloatingOrb } from '@/components/SVGDecorations';
 import { Leaf, Hammer, Heart, ArrowRight, Sparkles, Package, Users, Truck, Store, Globe, Rocket, type LucideIcon } from 'lucide-react';
-import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 
 
@@ -785,7 +784,6 @@ function ScrollProgressIndicator() {
    Main AboutView Component
    ═══════════════════════════════════════════════════════════ */
 export default function AboutView() {
-  const setPage = useStore((state) => state.setPage);
   const heroBgRef = useRef<HTMLDivElement>(null);
 
   // Hero entrance with useGsapStagger
@@ -1266,7 +1264,7 @@ export default function AboutView() {
             Explore our curated collection of handcrafted home decor and bring
             the warmth of Aura Living into your home.
           </p>
-          <PremiumButton variant="gold" onClick={() => setPage('shop')}>
+          <PremiumButton variant="gold" href="/shop">
             Shop Now
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </PremiumButton>

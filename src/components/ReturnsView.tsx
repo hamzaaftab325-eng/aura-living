@@ -3,7 +3,6 @@
 import { useGsapFadeIn, useGsapStagger } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { RotateCcw, CheckCircle, MessageCircle, XCircle, CreditCard, AlertTriangle, ArrowRight } from 'lucide-react';
-import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
@@ -83,7 +82,6 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
 }
 
 export default function ReturnsView() {
-  const setPage = useStore((state) => state.setPage);
 
   // GSAP refs
   const heroRef = useGsapStagger<HTMLDivElement>({
@@ -151,7 +149,7 @@ export default function ReturnsView() {
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => setPage('home') },
+          { label: 'Home', href: '/' },
           { label: 'Returns & Exchanges' },
         ]}
       />
@@ -416,7 +414,7 @@ export default function ReturnsView() {
             Our customer support team will guide you through the return or exchange process. We are committed to making it as smooth as possible.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <PremiumButton variant="gold" onClick={() => setPage('contact')}>
+            <PremiumButton variant="gold" href="/contact">
               Contact Us
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </PremiumButton>

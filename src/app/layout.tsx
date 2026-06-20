@@ -3,6 +3,7 @@ import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import SiteShell from "@/components/SiteShell";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -27,11 +28,14 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const siteUrl = "https://auraliving.pk";
+const siteUrl = "https://auraliving.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Aura Living | Premium Home Decor Pakistan — Where Comfort Meets Style",
+  title: {
+    default: "Aura Living | Premium Home Decor Pakistan — Where Comfort Meets Style",
+    template: "%s | Aura Living",
+  },
   description: "Discover handcrafted home decor, elegant lamps, indoor plants, ceramic vases, candles & more. Premium quality home decoration items delivered across Pakistan. Shop PKR.",
   keywords: ["home decor Pakistan", "luxury home decoration", "lamps online Pakistan", "indoor plants Karachi", "ceramic vases", "candles", "wall art", "Aura Living", "home accessories PKR"],
   authors: [{ name: "Aura Living" }],
@@ -84,6 +88,8 @@ export default function RootLayout({
       <body className="antialiased bg-background text-foreground min-h-screen flex flex-col w-full overflow-x-hidden">
         <a href="#main-content" className="aura-skip-link">Skip to main content</a>
         <link rel="preload" as="image" href="/images/hero/hero-slide-1.webp" />
+
+        {/* Organization schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -91,8 +97,8 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: 'Aura Living',
-              url: 'https://auraliving.pk',
-              logo: 'https://auraliving.pk/logo/default-monochrome-gold-black.svg',
+              url: siteUrl,
+              logo: `${siteUrl}/logo/default-monochrome-gold-black.svg`,
               description: 'Premium Home Decor Pakistan — Where Comfort Meets Style',
               address: {
                 '@type': 'PostalAddress',
@@ -105,6 +111,7 @@ export default function RootLayout({
             }),
           }}
         />
+        {/* WebSite schema with SearchAction */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -112,18 +119,19 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'Aura Living',
-              url: 'https://auraliving.pk',
+              url: siteUrl,
               potentialAction: {
                 '@type': 'SearchAction',
                 target: {
                   '@type': 'EntryPoint',
-                  urlTemplate: 'https://auraliving.pk/#shop?search={search_term_string}',
+                  urlTemplate: `${siteUrl}/shop?search={search_term_string}`,
                 },
                 'query-input': 'required name=search_term_string',
               },
             }),
           }}
         />
+        {/* Store schema with NAP + geo + hours */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -131,9 +139,9 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Store',
               name: 'Aura Living',
-              image: 'https://auraliving.pk/images/hero/hero-slide-1.webp',
-              '@id': 'https://auraliving.pk',
-              url: 'https://auraliving.pk',
+              image: `${siteUrl}/images/hero/hero-slide-1.webp`,
+              '@id': siteUrl,
+              url: siteUrl,
               telephone: '+92-300-1234567',
               priceRange: 'PKR 500 - 50,000',
               address: {
@@ -162,7 +170,9 @@ export default function RootLayout({
             }),
           }}
         />
-        {children}
+
+        <SiteShell>{children}</SiteShell>
+
         <Toaster />
         <ServiceWorkerRegister />
       </body>

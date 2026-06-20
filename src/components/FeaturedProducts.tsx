@@ -5,11 +5,13 @@ import Image from 'next/image';
 import { Eye, Heart, ShoppingCart, Star, ArrowRight } from 'lucide-react';
 import { products, formatPKR } from '@/data/products';
 import { useStore, badgeColors } from '@/store/useStore';
+import type { Product } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { useGsapFadeIn, useGsapStagger, useGsapBlurText, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import PremiumButton from '@/components/ui/PremiumButton';
-import type { Product } from '@/store/useStore';
 
 /* ═══════════════════════════════════════════════════════════════
    Badge palette
@@ -20,7 +22,8 @@ import type { Product } from '@/store/useStore';
    dramatic image zoom (1.12), more lift (-8px), gold border fade
    ═══════════════════════════════════════════════════════════════ */
 function ProductCard({ product, index }: { product: Product; index: number }) {
-  const { isInWishlist, setSelectedProduct, setPage } = useStore();
+  const { isInWishlist } = useStore();
+  const router = useRouter();
   const { handleAddToCart, handleToggleWishlist } = useCartActions();
   const [isHovered, setIsHovered] = useState(false);
   const wishlisted = isInWishlist(product.id);
@@ -47,25 +50,21 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
     };
   }, []);
 
-  const handleProductClick = () => {
-    setSelectedProduct(product);
-    setPage('product');
-  };
-
   const handleAddToCartClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     handleAddToCart(product);
   };
 
   const handleToggleWishlistClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     handleToggleWishlist(product.id, product.name);
   };
 
   const handleQuickView = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setSelectedProduct(product);
-    setPage('product');
+    e.preventDefault();
   };
 
   return (
@@ -74,8 +73,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       style={{ transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
       }}
     >
-      <div
-        className="relative rounded-xl overflow-hidden cursor-pointer group"
+      <Link
+        href={`/product/${product.slug}`}
+        className="relative rounded-xl overflow-hidden block group"
         style={{ aspectRatio: '3/4',
           border: isHovered
             ? '1.5px solid rgba(212,175,55,0.7)'
@@ -87,10 +87,6 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={handleProductClick}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleProductClick(); } }}
-        role="button"
-        tabIndex={0}
         aria-label={`View ${product.name} details`}
       >
         {/* Image with parallax + enhanced CSS zoom on hover */}
@@ -186,18 +182,17 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             Add to Cart
           </button>
         </div>
-      </div>
+      </Link>
 
       {/* ─── Product Info below card ─── */}
       <div className="mt-4 flex flex-col gap-1.5 px-1">
-        <h3
-          className="text-[15px] font-semibold leading-snug cursor-pointer transition-colors duration-300 line-clamp-1 hover:text-[var(--color-gold)]"
-          style={{ color: 'var(--surface-dark)',
-          }}
-          onClick={handleProductClick}
+        <Link
+          href={`/product/${product.slug}`}
+          className="text-[15px] font-semibold leading-snug transition-colors duration-300 line-clamp-1 hover:text-[var(--color-gold)]"
+          style={{ color: 'var(--surface-dark)' }}
         >
           {product.name}
-        </h3>
+        </Link>
 
         <div className="flex items-center gap-1.5">
           <div className="flex items-center">
@@ -251,8 +246,6 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
    FeaturedProducts — main section with enhanced animations
    ═══════════════════════════════════════════════════════════════ */
 export default function FeaturedProducts() {
-  const setPage = useStore((state) => state.setPage);
-
   // GSAP blur text for section heading
   const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
@@ -357,7 +350,7 @@ export default function FeaturedProducts() {
 
         {/* ─── View All Products ─── */}
         <div className="mt-16 text-center">
-          <PremiumButton variant="outline" onClick={() => setPage('shop')}>
+          <PremiumButton variant="outline" href="/shop">
             View All Products
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </PremiumButton>

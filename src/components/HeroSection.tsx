@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Link from 'next/link';
 import { ArrowRight, ChevronDown } from 'lucide-react';
-import { useStore } from '@/store/useStore';
 import {
   useGsapBlurText,
   useGsapFadeIn,
@@ -11,7 +11,6 @@ import {
 } from '@/hooks/useGsap';
 
 export default function HeroSection() {
-  const setPage = useStore((state) => state.setPage);
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -42,7 +41,7 @@ export default function HeroSection() {
   });
 
   // CTA + scroll indicator — fade in
-  const ctaRef = useGsapFadeIn<HTMLButtonElement>({ y: 20, duration: 0.4, delay: 0.1 });
+  const ctaRef = useGsapFadeIn<HTMLAnchorElement>({ y: 20, duration: 0.4, delay: 0.1 });
   const scrollRef = useGsapFadeIn<HTMLDivElement>({ y: 14, duration: 0.4, delay: 0.3 });
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.4, delay: 0.4 });
 
@@ -129,14 +128,14 @@ export default function HeroSection() {
         </p>
 
         {/* CTA */}
-        <button
+        <Link
           ref={ctaRef}
-          onClick={() => setPage('shop')}
+          href="/shop"
           className="premium-btn btn-gold group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm rounded-full hover:gap-3 hover:shadow-[0_8px_40px_rgba(212,175,55,0.5)]"
         >
           Shop Collection
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-        </button>
+        </Link>
       </div>
 
       {/* ═══ Scroll indicator ═══ */}

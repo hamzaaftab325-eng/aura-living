@@ -21,6 +21,7 @@ import {
 import { useStore } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
 import { products, formatPKR } from '@/data/products';
+import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
@@ -61,8 +62,6 @@ function RatingStars({ rating }: { rating: number }) {
 }
 
 export default function NewArrivalsView() {
-  const setPage = useStore((state) => state.setPage);
-  const setSelectedProduct = useStore((state) => state.setSelectedProduct);
   const { handleAddToCart: addToCart, handleToggleWishlist: toggleWishlist } = useCartActions();
   // Subscribe to wishlist array so component re-renders when wishlist changes.
   const wishlist = useStore((state) => state.wishlist);
@@ -137,12 +136,6 @@ export default function NewArrivalsView() {
     return () => ctx.revert();
   }, []);
 
-  const handleProductClick = (product: typeof products[0]) => {
-    setSelectedProduct(product);
-    setPage('product');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const handleAddToCart = (product: typeof products[0]) => {
     addToCart(product, { openCart: true });
   };
@@ -216,7 +209,7 @@ export default function NewArrivalsView() {
       {/* Breadcrumb strip (below hero) */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Home', href: '/' },
           { label: 'New Arrivals' },
         ]}
       />
@@ -246,7 +239,7 @@ export default function NewArrivalsView() {
                 >
                   We are always curating new pieces for our collection. Check back soon for exciting additions!
                 </p>
-                <PremiumButton variant="gold" onClick={() => setPage('shop')}>
+                <PremiumButton variant="gold" href="/shop">
                   <ShoppingBag className="w-4 h-4" />
                   Browse Our Collection
                 </PremiumButton>
@@ -290,13 +283,11 @@ export default function NewArrivalsView() {
                       style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
                     >
                       {/* Product Image */}
-                      <div
-                        className="relative w-full aspect-[3/4] overflow-hidden cursor-pointer"
+                      <Link
+                        href={`/product/${product.slug}`}
+                        className="relative w-full aspect-[3/4] overflow-hidden block"
                         style={{ backgroundColor: 'var(--color-gold-pale)' }}
-                        onClick={() => handleProductClick(product)}
-                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleProductClick(product); } }}
-                        role="button"
-                        tabIndex={0}
+                        onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                         aria-label={`View ${product.name} details`}
                       >
                         <Image
@@ -321,6 +312,7 @@ export default function NewArrivalsView() {
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
+                            e.preventDefault();
                             toggleWishlist(product.id, product.name);
                           }}
                           className="absolute top-3 right-3 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
@@ -334,18 +326,18 @@ export default function NewArrivalsView() {
                             }}
                           />
                         </button>
-                      </div>
+                      </Link>
 
                       {/* Product Info */}
                       <div className="p-4 sm:p-5">
                         {/* Name */}
-                        <h3
-                          className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold mb-1.5 cursor-pointer transition-colors duration-200 hover:text-[var(--color-gold)] leading-snug"
-                          
-                          onClick={() => handleProductClick(product)}
+                        <Link
+                          href={`/product/${product.slug}`}
+                          onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                          className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold mb-1.5 transition-colors duration-200 hover:text-[var(--color-gold)] leading-snug block"
                         >
                           {product.name}
-                        </h3>
+                        </Link>
 
                         {/* Rating */}
                         <div className="flex items-center gap-2 mb-3">
@@ -422,7 +414,7 @@ export default function NewArrivalsView() {
                   >
                     Explore our full collection of curated home decor
                   </p>
-                  <PremiumButton variant="outline" onClick={() => setPage('shop')}>
+                  <PremiumButton variant="outline" href="/shop">
                     <ShoppingBag className="w-4 h-4" />
                     View All Products
                   </PremiumButton>

@@ -16,6 +16,8 @@ import {
   Truck,
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { formatPKR } from '@/data/products';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
@@ -134,13 +136,8 @@ function FormInput({
    CheckoutView
    ═══════════════════════════════════════════════════════════ */
 export default function CheckoutView() {
-  const {
-    cart,
-    getCartTotal,
-    getCartCount,
-    clearCart,
-    setPage,
-  } = useStore();
+  const router = useRouter();
+  const { cart, getCartTotal, getCartCount, clearCart } = useStore();
 
   const { toast } = useToast();
 
@@ -203,12 +200,12 @@ export default function CheckoutView() {
   useEffect(() => {
     if (cart.length === 0) {
       const timer = setTimeout(() => {
-        setPage('shop');
+        router.push('/shop');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 1500);
       return () => clearTimeout(timer);
     }
-  }, [cart.length, setPage]);
+  }, [cart.length, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -248,7 +245,7 @@ export default function CheckoutView() {
         description: 'Thank you for your order. You will receive a confirmation email shortly.',
         duration: 5000,
       });
-      setPage('home');
+      router.push('/account/orders');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 2000);
   };
@@ -323,7 +320,7 @@ export default function CheckoutView() {
             <PremiumButton
               variant="gold"
               size="lg"
-              onClick={() => { setPage('shop'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              href="/shop"
             >
               Go to Shop
               <ArrowRight className="w-4 h-4" />
@@ -382,7 +379,7 @@ export default function CheckoutView() {
       {/* Breadcrumb strip (below hero) */}
       <Breadcrumb
         items={[
-          { label: 'Cart', onClick: () => { setPage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Cart', href: '/cart' },
           { label: 'Checkout' },
         ]}
       />
@@ -798,14 +795,14 @@ export default function CheckoutView() {
                   </PremiumButton>
 
                   {/* Back to Cart */}
-                  <button
-                    type="button"
-                    onClick={() => { setPage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  <Link
+                    href="/cart"
+                    onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     className="w-full text-center text-sm font-medium py-3 mt-2 transition-colors duration-200 hover:text-[var(--color-gold)] cursor-pointer"
                     style={{ color: 'var(--color-warm-gray)' }}
                   >
                     &larr; Back to Cart
-                  </button>
+                  </Link>
 
                   {/* Security Note */}
                   <div

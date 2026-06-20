@@ -3,6 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 export interface Product {
   id: string;
+  slug: string; // URL-friendly identifier (e.g. 'hammered-brass-table-lamp')
   name: string;
   price: number;
   originalPrice?: number;
@@ -34,9 +35,6 @@ export interface User {
   memberSince: string;
   rewardsPoints: number;
 }
-
-export type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password' | 'track-orders' | 'addresses' | 'settings' | 'admin' | 'blog' | 'article';
-
 
 // Shared badge color mapping — used by ProductDetailView, ShopView, WishlistView, FeaturedProducts
 export const badgeColors: Record<string, { bg: string; text: string }> = {
@@ -78,52 +76,11 @@ interface StoreState {
   signup: (name: string, email: string) => void;
   logout: () => void;
 
-  // UI State
-  currentPage: PageType;
-  selectedProduct: Product | null;
-  selectedArticleSlug: string | null;
-  selectedCategory: string;
-  searchQuery: string;
+  // UI State (cart drawer visibility is the only SPA UI state we need;
+  // all other "page state" is now derived from the URL via App Router)
   cartOpen: boolean;
-
-  setPage: (page: PageType) => void;
-  setSelectedProduct: (product: Product | null) => void;
-  setSelectedArticleSlug: (slug: string | null) => void;
-  setSelectedCategory: (category: string) => void;
-  setSearchQuery: (query: string) => void;
   setCartOpen: (open: boolean) => void;
 }
-
-// Page titles for SEO + browser tab
-export const pageTitles: Record<PageType, string> = {
-  home: 'Aura Living | Premium Home Decor Pakistan — Where Comfort Meets Style',
-  shop: 'Shop All Products | Aura Living',
-  product: 'Product Details | Aura Living',
-  cart: 'Your Cart | Aura Living',
-  checkout: 'Checkout | Aura Living',
-  wishlist: 'Your Wishlist | Aura Living',
-  account: 'My Account | Aura Living',
-  about: 'Our Story | Aura Living',
-  contact: 'Get in Touch | Aura Living',
-  login: 'Sign In | Aura Living',
-  signup: 'Create Account | Aura Living',
-  faq: 'Frequently Asked Questions | Aura Living',
-  shipping: 'Shipping Information | Aura Living',
-  returns: 'Returns & Exchanges | Aura Living',
-  'care-guide': 'Care Guide | Aura Living',
-  'new-arrivals': 'New Arrivals | Aura Living',
-  sale: 'Sale | Aura Living',
-  lookbook: 'The Lookbook | Aura Living',
-  terms: 'Terms of Service | Aura Living',
-  privacy: 'Privacy Policy | Aura Living',
-  'forgot-password': 'Reset Your Password | Aura Living',
-  'track-orders': 'Track Your Orders | Aura Living',
-  'addresses': 'Saved Addresses | Aura Living',
-  'settings': 'Account Settings | Aura Living',
-  'admin': 'Admin Dashboard | Aura Living',
-  'blog': 'Journal | Aura Living',
-  'article': 'Article | Aura Living',
-};
 
 export const useStore = create<StoreState>()(
   persist(
@@ -247,49 +204,7 @@ export const useStore = create<StoreState>()(
       logout: () => set({ user: null }),
 
       // UI State
-      currentPage: 'home',
-      selectedProduct: null,
-      selectedArticleSlug: null,
-      selectedCategory: 'all',
-      searchQuery: '',
       cartOpen: false,
-
-      setPage: (page) => {
-        // Push to browser history so back button works
-        if (typeof window !== 'undefined' && window.history && window.history.pushState) {
-          // For product pages, include the product ID in the URL
-          // For article pages, include the article slug in the URL
-          let hash: string;
-          if (page === 'product' && get().selectedProduct) {
-            hash = `#product/${get().selectedProduct!.id}`;
-          } else if (page === 'article' && get().selectedArticleSlug) {
-            hash = `#article/${get().selectedArticleSlug}`;
-          } else {
-            hash = `#${page}`;
-          }
-          const current = window.history.state;
-          if (!current || current.page !== page) {
-            window.history.pushState({ page }, '', hash);
-          }
-        }
-        set({ currentPage: page });
-      },
-      setSelectedProduct: (product) => {
-        // If we're already on the product page, update the URL to include the product ID
-        if (typeof window !== 'undefined' && product && get().currentPage === 'product') {
-          window.history.replaceState({ page: 'product' }, '', `#product/${product.id}`);
-        }
-        set({ selectedProduct: product });
-      },
-      setSelectedArticleSlug: (slug) => {
-        // If we're already on the article page, update the URL to include the slug
-        if (typeof window !== 'undefined' && slug && get().currentPage === 'article') {
-          window.history.replaceState({ page: 'article' }, '', `#article/${slug}`);
-        }
-        set({ selectedArticleSlug: slug });
-      },
-      setSelectedCategory: (category) => set({ selectedCategory: category }),
-      setSearchQuery: (query) => set({ searchQuery: query }),
       setCartOpen: (open) => set({ cartOpen: open }),
     }),
     {

@@ -29,6 +29,7 @@ import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
 import Breadcrumb from '@/components/ui/Breadcrumb';
+import { useRouter } from 'next/navigation';
 
 
 /* ═══════════════════════════════════════════════════════════
@@ -81,10 +82,10 @@ const mockOrders = [
 ];
 
 export default function AccountView() {
+  const router = useRouter();
   const cart = useStore((state) => state.cart);
   const wishlist = useStore((state) => state.wishlist);
   const user = useStore((state) => state.user);
-  const setPage = useStore((state) => state.setPage);
   const logout = useStore((state) => state.logout);
   const { toast } = useToast();
 
@@ -182,31 +183,31 @@ export default function AccountView() {
       icon: Package,
       label: 'Track My Orders',
       description: 'Live status, ETAs & timeline',
-      onClick: () => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      onClick: () => { router.push('/account/orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
     },
     {
       icon: Heart,
       label: 'My Wishlist',
       description: `${safeWishlist.length} saved item${safeWishlist.length !== 1 ? 's' : ''}`,
-      onClick: () => setPage('wishlist'),
+      onClick: () => { router.push('/wishlist'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
     },
     {
       icon: MapPin,
       label: 'Saved Addresses',
       description: 'Manage delivery addresses',
-      onClick: () => { setPage('addresses'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      onClick: () => { router.push('/account/addresses'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
     },
     {
       icon: Settings,
       label: 'Account Settings',
       description: 'Notifications, privacy & more',
-      onClick: () => { setPage('settings'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      onClick: () => { router.push('/account/settings'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
     },
     {
       icon: HelpCircle,
       label: 'Help & Support',
       description: 'Get assistance',
-      onClick: () => setPage('contact'),
+      onClick: () => { router.push('/contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
     },
     {
       icon: LogOut,
@@ -218,7 +219,7 @@ export default function AccountView() {
           title: 'Signed out',
           description: 'You have been successfully signed out.',
         });
-        setPage('home');
+        router.push('/');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       },
     },
@@ -321,7 +322,7 @@ export default function AccountView() {
       {/* Breadcrumb strip (below hero) */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Home', href: '/' },
           { label: 'My Account' },
         ]}
       />
@@ -383,7 +384,7 @@ export default function AccountView() {
                   <PremiumButton
                     variant="outline"
                     size="sm"
-                    onClick={() => { setPage('settings'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    href="/account/settings"
                   >
                     Edit Profile
                   </PremiumButton>
@@ -409,7 +410,7 @@ export default function AccountView() {
                     >
                       Sign in to view your orders, wishlist, and rewards.
                     </p>
-                    <PremiumButton variant="gold" size="sm" onClick={() => setPage('login')}>
+                    <PremiumButton variant="gold" size="sm" href="/auth/login">
                       Sign In
                     </PremiumButton>
                   </div>
@@ -469,7 +470,7 @@ export default function AccountView() {
                   Recent Orders
                 </h3>
                 <button
-                  onClick={() => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  onClick={() => { router.push('/account/orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold)] cursor-pointer"
                   style={{ color: 'var(--color-gold)' }}
                 >
@@ -517,7 +518,7 @@ export default function AccountView() {
                         key={order.id}
                         className="transition-colors duration-200 hover:bg-[var(--surface-page)] cursor-pointer"
                         style={{ borderBottom: '1px solid var(--color-gold-soft)' }}
-                        onClick={() => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        onClick={() => { router.push('/account/orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                       >
                         <td className="py-4 px-4">
                           <span className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>
@@ -556,7 +557,7 @@ export default function AccountView() {
                     key={order.id}
                     className="rounded-sm p-4 transition-colors duration-200 cursor-pointer"
                     style={{ backgroundColor: 'var(--surface-page)', border: '1px solid var(--color-gold-soft)' }}
-                    onClick={() => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    onClick={() => { router.push('/account/orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-semibold" style={{ color: 'var(--surface-dark)' }}>
@@ -686,7 +687,7 @@ export default function AccountView() {
               <PremiumButton
                 variant="gold"
                 size="sm"
-                onClick={() => setPage('shop')}
+                href="/shop"
               >
                 <ShoppingBag className="w-4 h-4" />
                 Redeem on Next Order

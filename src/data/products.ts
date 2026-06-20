@@ -42,6 +42,7 @@ export const categories = [
 export const products: Product[] = [
   {
     id: '1',
+    slug: 'hammered-brass-table-lamp',
     name: "Hammered Brass Table Lamp",
     price: 9999,
     badge: 'NEW',
@@ -62,6 +63,7 @@ export const products: Product[] = [
   },
   {
     id: '2',
+    slug: 'smoked-glass-pendant-light',
     name: "Smoked Glass Pendant Light",
     price: 14499,
     badge: 'BESTSELLER',
@@ -82,6 +84,7 @@ export const products: Product[] = [
   },
   {
     id: '3',
+    slug: 'crystal-drop-chandelier',
     name: "Crystal Drop Chandelier",
     price: 24999,
     originalPrice: 29999,
@@ -103,6 +106,7 @@ export const products: Product[] = [
   },
   {
     id: '4',
+    slug: 'hand-painted-ceramic-lamp',
     name: "Hand-Painted Ceramic Lamp",
     price: 7999,
     image: '/images/products/handpainted-ceramic-lamp-1.webp',
@@ -122,6 +126,7 @@ export const products: Product[] = [
   },
   {
     id: '5',
+    slug: 'industrial-wall-sconce',
     name: "Industrial Wall Sconce",
     price: 6499,
     badge: 'NEW',
@@ -142,6 +147,7 @@ export const products: Product[] = [
   },
   {
     id: '6',
+    slug: 'frosted-glass-globe-lamp',
     name: "Frosted Glass Globe Lamp",
     price: 8999,
     image: '/images/products/frosted-glass-globe-lamp-1.webp',
@@ -161,6 +167,7 @@ export const products: Product[] = [
   },
   {
     id: '7',
+    slug: 'adjustable-brass-reading-lamp',
     name: "Adjustable Brass Reading Lamp",
     price: 11499,
     badge: 'BESTSELLER',
@@ -181,6 +188,7 @@ export const products: Product[] = [
   },
   {
     id: '8',
+    slug: 'stained-glass-table-lamp',
     name: "Stained Glass Table Lamp",
     price: 13499,
     originalPrice: 16499,
@@ -202,6 +210,7 @@ export const products: Product[] = [
   },
   {
     id: '9',
+    slug: 'terracotta-herb-pot-set',
     name: "Terracotta Herb Pot Set",
     price: 2999,
     badge: 'NEW',
@@ -222,6 +231,7 @@ export const products: Product[] = [
   },
   {
     id: '10',
+    slug: 'hanging-glass-terrarium',
     name: "Hanging Glass Terrarium",
     price: 3499,
     image: '/images/products/hanging-glass-terrarium-1.webp',
@@ -241,6 +251,7 @@ export const products: Product[] = [
   },
   {
     id: '11',
+    slug: 'hand-painted-tall-ceramic-planter',
     name: "Hand-Painted Tall Ceramic Planter",
     price: 5499,
     badge: 'BESTSELLER',
@@ -261,6 +272,7 @@ export const products: Product[] = [
   },
   {
     id: '12',
+    slug: 'macrame-hanging-planter-trio',
     name: "Macrame Hanging Planter Trio",
     price: 2499,
     image: '/images/products/macrame-hanging-planter-tri-1.webp',
@@ -280,6 +292,7 @@ export const products: Product[] = [
   },
   {
     id: '13',
+    slug: 'concrete-geometric-planter',
     name: "Concrete Geometric Planter",
     price: 1999,
     badge: 'NEW',
@@ -300,6 +313,7 @@ export const products: Product[] = [
   },
   {
     id: '14',
+    slug: 'bamboo-plant-stand-trio',
     name: "Bamboo Plant Stand Trio",
     price: 4999,
     originalPrice: 6499,
@@ -321,6 +335,7 @@ export const products: Product[] = [
   },
   {
     id: '15',
+    slug: 'hand-blown-amber-glass-vase',
     name: "Hand-Blown Amber Glass Vase",
     price: 4499,
     badge: 'NEW',
@@ -341,6 +356,7 @@ export const products: Product[] = [
   },
   {
     id: '16',
+    slug: 'marble-bookend-set',
     name: "Marble Bookend Set",
     price: 5999,
     image: '/images/products/marble-bookend-set-1.webp',
@@ -360,6 +376,7 @@ export const products: Product[] = [
   },
   {
     id: '17',
+    slug: 'geometric-crystal-sculpture',
     name: "Geometric Crystal Sculpture",
     price: 7999,
     badge: 'BESTSELLER',
@@ -380,6 +397,7 @@ export const products: Product[] = [
   },
   {
     id: '18',
+    slug: 'hammered-brass-decorative-bowl',
     name: "Hammered Brass Decorative Bowl",
     price: 4999,
     image: '/images/products/brass-decorative-bowl-hammered-1.webp',
@@ -399,6 +417,7 @@ export const products: Product[] = [
   },
   {
     id: '19',
+    slug: 'carved-wooden-elephant-statuette',
     name: "Carved Wooden Elephant Statuette",
     price: 3499,
     badge: 'NEW',
@@ -419,6 +438,7 @@ export const products: Product[] = [
   },
   {
     id: '20',
+    slug: 'marble-pillar-candle-holder',
     name: "Marble Pillar Candle Holder",
     price: 3799,
     badge: 'NEW',
@@ -439,6 +459,7 @@ export const products: Product[] = [
   },
   {
     id: '21',
+    slug: 'luxe-reed-diffuser-set',
     name: "Luxe Reed Diffuser Set",
     price: 3299,
     badge: 'BESTSELLER',
@@ -459,6 +480,7 @@ export const products: Product[] = [
   },
   {
     id: '22',
+    slug: 'carved-wooden-candle-stand',
     name: "Carved Wooden Candle Stand",
     price: 2499,
     image: '/images/products/carved-wooden-candle-stand-1.webp',
@@ -478,6 +500,7 @@ export const products: Product[] = [
   },
   {
     id: '23',
+    slug: 'scented-wax-melt-trio',
     name: "Scented Wax Melt Trio",
     price: 1799,
     originalPrice: 2299,
@@ -499,6 +522,7 @@ export const products: Product[] = [
   },
   {
     id: '24',
+    slug: 'sunburst-wall-mirror',
     name: "Sunburst Wall Mirror",
     price: 10999,
     badge: 'BESTSELLER',
@@ -519,6 +543,7 @@ export const products: Product[] = [
   },
   {
     id: '25',
+    slug: 'hand-painted-floral-canvas-art',
     name: "Hand-Painted Floral Canvas Art",
     price: 8999,
     badge: 'NEW',
@@ -539,6 +564,7 @@ export const products: Product[] = [
   },
   {
     id: '26',
+    slug: 'woven-neutral-wall-hanging',
     name: "Woven Neutral Wall Hanging",
     price: 4999,
     image: '/images/products/woven-wall-hanging-neutral-1.webp',
@@ -558,6 +584,7 @@ export const products: Product[] = [
   },
   {
     id: '27',
+    slug: 'geometric-metal-wall-art',
     name: "Geometric Metal Wall Art",
     price: 7499,
     originalPrice: 9499,
@@ -579,6 +606,7 @@ export const products: Product[] = [
   },
   {
     id: '28',
+    slug: 'hand-painted-ceramic-plates-set',
     name: "Hand-Painted Ceramic Plates Set",
     price: 6999,
     badge: 'NEW',
@@ -599,6 +627,7 @@ export const products: Product[] = [
   },
   {
     id: '29',
+    slug: 'marble-coaster-set-with-gold-edge',
     name: "Marble Coaster Set with Gold Edge",
     price: 2799,
     badge: 'BESTSELLER',
@@ -619,6 +648,7 @@ export const products: Product[] = [
   },
   {
     id: '30',
+    slug: 'engraved-brass-serving-bowl',
     name: "Engraved Brass Serving Bowl",
     price: 6499,
     image: '/images/products/brass-serving-bowl-engraved-1.webp',
@@ -638,6 +668,7 @@ export const products: Product[] = [
   },
 {
     id: '31',
+    slug: 'golden-aura-table-lamp',
     name: 'Golden Aura Table Lamp',
     price: 8499,
     originalPrice: 11999,
@@ -659,6 +690,7 @@ export const products: Product[] = [
   },
 {
     id: '32',
+    slug: 'artisan-ceramic-vase-set',
     name: 'Artisan Ceramic Vase Set',
     price: 5999,
     image: '/images/products/vase-1.webp',
@@ -679,6 +711,7 @@ export const products: Product[] = [
   },
 {
     id: '33',
+    slug: 'monstera-in-gold-rim-planter',
     name: 'Monstera in Gold-Rim Planter',
     price: 3499,
     image: '/images/products/plant-1.webp',
@@ -699,6 +732,7 @@ export const products: Product[] = [
   },
 {
     id: '34',
+    slug: 'brass-candle-holder-trio',
     name: 'Brass Candle Holder Trio',
     price: 4299,
     originalPrice: 5999,
@@ -720,6 +754,7 @@ export const products: Product[] = [
   },
 {
     id: '35',
+    slug: 'handwoven-wall-tapestry',
     name: 'Handwoven Wall Tapestry',
     price: 7499,
     image: '/images/products/tapestry-1.webp',
@@ -740,6 +775,7 @@ export const products: Product[] = [
   },
 {
     id: '36',
+    slug: 'marble-tray-with-gold-edge',
     name: 'Marble Tray with Gold Edge',
     price: 6299,
     image: '/images/products/tray-1.webp',
@@ -759,6 +795,7 @@ export const products: Product[] = [
   },
 {
     id: '37',
+    slug: 'vintage-gold-frame-mirror',
     name: 'Vintage Gold Frame Mirror',
     price: 9999,
     originalPrice: 13999,
@@ -780,6 +817,7 @@ export const products: Product[] = [
   },
 {
     id: '38',
+    slug: 'scented-soy-candle-vanilla',
     name: 'Scented Soy Candle — Vanilla',
     price: 1999,
     image: '/images/products/candle-2.webp',
@@ -800,6 +838,7 @@ export const products: Product[] = [
   },
 {
     id: '39',
+    slug: 'ceramic-planter-set',
     name: 'Ceramic Planter Set',
     price: 3999,
     image: '/images/products/pots-1.webp',
@@ -820,6 +859,7 @@ export const products: Product[] = [
   },
 {
     id: '40',
+    slug: 'modern-pendant-lamp',
     name: 'Modern Pendant Lamp',
     price: 12999,
     originalPrice: 16999,
@@ -841,6 +881,7 @@ export const products: Product[] = [
   },
 {
     id: '41',
+    slug: 'boho-macrame-plant-hanger',
     name: 'Boho Macrame Plant Hanger',
     price: 1499,
     image: '/images/products/macrame-1.webp',
@@ -860,6 +901,7 @@ export const products: Product[] = [
   },
 {
     id: '42',
+    slug: 'embroidered-throw-pillow',
     name: 'Embroidered Throw Pillow',
     price: 2999,
     image: '/images/products/pillow-1.webp',
@@ -879,6 +921,7 @@ export const products: Product[] = [
   },
 {
     id: '43',
+    slug: 'crystal-wine-glasses-set',
     name: 'Crystal Wine Glasses Set',
     price: 5499,
     image: '/images/products/glasses-1.webp',
@@ -899,6 +942,7 @@ export const products: Product[] = [
   },
 {
     id: '44',
+    slug: 'linen-table-runner',
     name: 'Linen Table Runner',
     price: 2499,
     image: '/images/products/runner-1.webp',
@@ -918,6 +962,7 @@ export const products: Product[] = [
   },
 {
     id: '45',
+    slug: 'marble-arch-table-lamp',
     name: 'Marble Arch Table Lamp',
     price: 9499,
     image: '/images/products/lamp-2.webp',
@@ -941,3 +986,30 @@ export const products: Product[] = [
 export const formatPKR = (amount: number): string => {
   return `PKR ${new Intl.NumberFormat('en-PK').format(amount)}`;
 };
+
+// ─── Product lookup helpers ────────────────────────────────────────────────
+
+/** Find a product by its slug. Returns undefined if not found. */
+export function getProductBySlug(slug: string): Product | undefined {
+  return products.find((p) => p.slug === slug);
+}
+
+/** Find a product by its numeric ID. Returns undefined if not found. */
+export function getProductById(id: string): Product | undefined {
+  return products.find((p) => p.id === id);
+}
+
+/** Get all unique category IDs from the product catalog. */
+export function getAllCategoryIds(): string[] {
+  return Array.from(new Set(products.map((p) => p.category)));
+}
+
+/** Get related products (same category, excluding current). */
+export function getRelatedProducts(productId: string, count = 4): Product[] {
+  const current = products.find((p) => p.id === productId);
+  if (!current) return [];
+  return products
+    .filter((p) => p.id !== productId && p.category === current.category)
+    .slice(0, count);
+}
+

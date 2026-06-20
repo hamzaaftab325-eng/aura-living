@@ -20,7 +20,6 @@ import {
   UtensilsCrossed,
   ArrowRight,
 } from 'lucide-react';
-import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
@@ -119,7 +118,6 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
 }
 
 export default function CareGuideView() {
-  const setPage = useStore((state) => state.setPage);
   const heroBgRef = useRef<HTMLDivElement>(null);
   const heroBgDivRef = useRef<HTMLDivElement>(null);
 
@@ -251,7 +249,7 @@ export default function CareGuideView() {
       {/* Breadcrumb strip (below hero) */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Home', href: '/' },
           { label: 'Care Guide' },
         ]}
       />
@@ -361,7 +359,7 @@ export default function CareGuideView() {
             Our team is always here to assist you with any questions about caring for your Aura Living
             pieces. Get in touch and we will be happy to help.
           </p>
-          <PremiumButton variant="gold" onClick={() => setPage('contact')}>
+          <PremiumButton variant="gold" href="/contact">
             Contact Us
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </PremiumButton>

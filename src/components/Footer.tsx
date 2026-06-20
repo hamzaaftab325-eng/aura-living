@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Instagram, Facebook, Twitter, Send, ArrowRight } from 'lucide-react';
-import { useStore } from '@/store/useStore';
 import { GoldDivider } from '@/components/SVGDecorations';
 
 
@@ -24,7 +24,9 @@ const PinterestIcon = ({ size = 20, className = '' }: { size?: number; className
 );
 
 /* ═══════════════════════════════════════════════════════════
-   FooterLink — CSS hover with gold glow + translateX + underline
+   FooterLink — CSS hover with gold glow + translateX + underline.
+   Renders a Next.js <Link> when href is provided, otherwise a <button>
+   (kept for backward compatibility with onClick callers).
    ═══════════════════════════════════════════════════════════ */
 function FooterLink({
   children,
@@ -35,23 +37,33 @@ function FooterLink({
   onClick?: () => void;
   href?: string;
 }) {
-  const Component = onClick ? 'button' : 'a';
-  const props = onClick
-    ? {
-        onClick,
-        style: { background: 'none', cursor: 'pointer', padding: 0, textAlign: 'left' as const },
-      }
-    : { href: href || '#', onClick: href ? undefined : (e: React.MouseEvent) => e.preventDefault() };
-
-  return (
-    <Component
-      {...props}
-      className="group relative inline-block text-sm transition-all duration-500 hover:text-[var(--color-gold)] hover:translate-x-1.5 hover:drop-shadow-[0_0_6px_rgba(212,175,55,0.3)]"
-      style={{ color: 'var(--surface-page)' }}
-    >
+  const className =
+    'group relative inline-block text-sm transition-all duration-500 hover:text-[var(--color-gold)] hover:translate-x-1.5 hover:drop-shadow-[0_0_6px_rgba(212,175,55,0.3)]';
+  const style = { color: 'var(--surface-page)' } as const;
+  const inner = (
+    <>
       <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[var(--color-gold)] transition-all duration-500 group-hover:w-full" />
       <span className="relative">{children}</span>
-    </Component>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className={className} style={style}>
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={className}
+      style={{ ...style, background: 'none', cursor: 'pointer', padding: 0, textAlign: 'left' as const }}
+    >
+      {inner}
+    </button>
   );
 }
 
@@ -86,7 +98,6 @@ function SocialIcon({
    ═══════════════════════════════════════════════════════════ */
 
 export default function Footer() {
-  const { setPage } = useStore();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [focused, setFocused] = useState(false);
@@ -103,19 +114,19 @@ export default function Footer() {
   };
 
   const quickLinks = [
-    { label: 'Home', page: 'home' as const },
-    { label: 'Shop', page: 'shop' as const },
-    { label: 'New Arrivals', page: 'new-arrivals' as const },
-    { label: 'Sale', page: 'sale' as const },
-    { label: 'Lookbook', page: 'lookbook' as const },
+    { label: 'Home', href: '/' },
+    { label: 'Shop', href: '/shop' },
+    { label: 'New Arrivals', href: '/new-arrivals' },
+    { label: 'Sale', href: '/sale' },
+    { label: 'Lookbook', href: '/lookbook' },
   ];
 
   const customerLinks = [
-    { label: 'Shipping Info', page: 'shipping' as const },
-    { label: 'Returns & Exchange', page: 'returns' as const },
-    { label: 'FAQ', page: 'faq' as const },
-    { label: 'Contact Us', page: 'contact' as const },
-    { label: 'Care Guide', page: 'care-guide' as const },
+    { label: 'Shipping Info', href: '/shipping' },
+    { label: 'Returns & Exchange', href: '/returns' },
+    { label: 'FAQ', href: '/faq' },
+    { label: 'Contact Us', href: '/contact' },
+    { label: 'Care Guide', href: '/care-guide' },
   ];
 
   const socialLinks = [
@@ -237,9 +248,9 @@ export default function Footer() {
               <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[var(--color-gold)]/50" />
             </h3>
             <ul className="flex flex-col gap-3.5">
-              {quickLinks.map(({ label, page }) => (
+              {quickLinks.map(({ label, href }) => (
                 <li key={label}>
-                  <FooterLink onClick={() => setPage(page)}>{label}</FooterLink>
+                  <FooterLink href={href}>{label}</FooterLink>
                 </li>
               ))}
             </ul>
@@ -255,9 +266,9 @@ export default function Footer() {
               <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[var(--color-gold)]/50" />
             </h3>
             <ul className="flex flex-col gap-3.5">
-              {customerLinks.map(({ label, page }) => (
+              {customerLinks.map(({ label, href }) => (
                 <li key={label}>
-                  <FooterLink onClick={() => setPage(page)}>{label}</FooterLink>
+                  <FooterLink href={href}>{label}</FooterLink>
                 </li>
               ))}
             </ul>
@@ -355,8 +366,8 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Aura Living. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <button onClick={() => setPage('terms')} className="text-xs transition-colors duration-300 hover:text-[var(--color-gold)] cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7, background: 'none' }}>Terms of Service</button>
-            <button onClick={() => setPage('privacy')} className="text-xs transition-colors duration-300 hover:text-[var(--color-gold)] cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7, background: 'none' }}>Privacy Policy</button>
+            <Link href="/terms" className="text-xs transition-colors duration-300 hover:text-[var(--color-gold)] cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7 }}>Terms of Service</Link>
+            <Link href="/privacy" className="text-xs transition-colors duration-300 hover:text-[var(--color-gold)] cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7 }}>Privacy Policy</Link>
           </div>
           <div className="flex items-center gap-2 flex-wrap justify-center">
             <span className="text-xs" style={{ color: 'var(--color-gold-soft)', opacity: 0.5 }}>We accept:</span>

@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect, useRef, Suspense } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   useGsapStagger,
   useGsapBlurText,
@@ -161,13 +163,11 @@ function FilterSidebar({
    ═══════════════════════════════════════════════════════════ */
 function ProductCard({
   product,
-  onProductClick,
   onAddToCart,
   onToggleWishlist,
   isInWishlist: checkWishlist,
 }: {
   product: Product;
-  onProductClick: (product: Product) => void;
   onAddToCart: (product: Product) => void;
   onToggleWishlist: (id: string, name?: string) => void;
   isInWishlist: (id: string) => boolean;
@@ -177,23 +177,27 @@ function ProductCard({
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     onAddToCart(product);
   };
 
   const handleToggleWishlist = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     onToggleWishlist(product.id, product.name);
   };
 
   const handleQuickView = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onProductClick(product);
+    e.preventDefault();
   };
 
   return (
     <div className="group">
-      <div
-        className="relative rounded-xl overflow-hidden cursor-pointer"
+      <Link
+        href={`/product/${product.slug}`}
+        onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+        className="relative rounded-xl overflow-hidden block"
         style={{ aspectRatio: '3/4',
           border: isHovered ? '1px solid rgba(212,175,55,0.6)' : '1px solid rgba(232,213,163,0.25)',
           boxShadow: isHovered ? '0 0 25px rgba(212,175,55,0.2), 0 8px 32px rgba(0,0,0,0.08)' : '0 2px 8px rgba(0,0,0,0.04)',
@@ -202,10 +206,6 @@ function ProductCard({
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={() => onProductClick(product)}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onProductClick(product); } }}
-        role="button"
-        tabIndex={0}
         aria-label={`View ${product.name} details`}
       >
         {/* Image with zoom */}
@@ -301,19 +301,20 @@ function ProductCard({
             Add to Cart
           </button>
         </div>
-      </div>
+      </Link>
 
       {/* Product Info */}
       <div className="mt-3 flex flex-col gap-1 px-1">
-        <h3
-          className="text-sm font-medium leading-snug cursor-pointer transition-colors duration-300 line-clamp-1"
+        <Link
+          href={`/product/${product.slug}`}
+          onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          className="text-sm font-medium leading-snug transition-colors duration-300 line-clamp-1 block"
           style={{ color: 'var(--surface-dark)' }}
           onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-gold)')}
           onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--surface-dark)')}
-          onClick={() => onProductClick(product)}
         >
           {product.name}
-        </h3>
+        </Link>
 
         <div className="flex items-center gap-1.5">
           <div className="flex items-center gap-0.5">
@@ -353,7 +354,23 @@ function ProductCard({
    Main ShopView
    ═══════════════════════════════════════════════════════════ */
 export default function ShopView() {
-  const { selectedCategory, setSelectedCategory, setPage, setSelectedProduct, isInWishlist, searchQuery, setSearchQuery } = useStore();
+  return (
+    <Suspense fallback={null}>
+      <ShopViewInner />
+    </Suspense>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ShopViewInner — actual implementation (wrapped in <Suspense> so
+   that `useSearchParams` works during static generation)
+   ═══════════════════════════════════════════════════════════ */
+function ShopViewInner() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedCategory = searchParams.get('category') || 'all';
+  const searchQuery = searchParams.get('search') || '';
+  const { isInWishlist } = useStore();
   const { handleAddToCart, handleToggleWishlist } = useCartActions();
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [priceMin, setPriceMin] = useState('');
@@ -486,29 +503,35 @@ export default function ShopView() {
     return result;
   }, [selectedCategory, sortBy, priceMin, priceMax, searchQuery]);
 
+  const pushShopUrl = (nextCategory: string, nextSearch: string) => {
+    const params = new URLSearchParams();
+    if (nextCategory && nextCategory !== 'all') params.set('category', nextCategory);
+    if (nextSearch) params.set('search', nextSearch);
+    const qs = params.toString();
+    router.push(qs ? `/shop?${qs}` : '/shop');
+  };
+
   const handleCategoryChange = (catId: string) => {
-    if (selectedCategory === catId) {
-      setSelectedCategory('all');
-    } else {
-      setSelectedCategory(catId);
-    }
+    const next = selectedCategory === catId ? 'all' : catId;
+    pushShopUrl(next, searchQuery);
   };
 
   const clearFilters = () => {
-    setSelectedCategory('all');
     setPriceMin('');
     setPriceMax('');
     setSortBy('featured');
-    setSearchQuery('');
+    pushShopUrl('all', '');
+  };
+
+  const clearSearch = () => {
+    pushShopUrl(selectedCategory, '');
+  };
+
+  const clearCategory = () => {
+    pushShopUrl('all', searchQuery);
   };
 
   const hasActiveFilters = selectedCategory !== 'all' || !!priceMin || !!priceMax || sortBy !== 'featured' || !!searchQuery.trim();
-
-  const handleProductClick = (product: Product) => {
-    setSelectedProduct(product);
-    setPage('product');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   // Lock body scroll when mobile filters are open
   useEffect(() => {
@@ -591,7 +614,7 @@ export default function ShopView() {
       {/* Breadcrumb strip (below hero) */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Home', href: '/' },
           { label: 'Shop' },
         ]}
       />
@@ -641,7 +664,7 @@ export default function ShopView() {
                   ({filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found)
                 </span>
                 <button
-                  onClick={() => setSearchQuery('')}
+                  onClick={clearSearch}
                   className="ml-auto inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full transition-colors hover:bg-[var(--color-gold-pale)]"
                   style={{ color: 'var(--color-warm-gray)' }}
                   aria-label="Clear search"
@@ -661,7 +684,7 @@ export default function ShopView() {
                     style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: 'var(--color-gold-text)', border: '1px solid rgba(212,175,55,0.25)' }}
                   >
                     {categories.find((c) => c.id === selectedCategory)?.name}
-                    <button onClick={() => setSelectedCategory('all')} className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
+                    <button onClick={clearCategory} className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
                   </span>
                 )}
                 {priceMin && (
@@ -703,7 +726,6 @@ export default function ShopView() {
                   <ProductCard
                     key={product.id}
                     product={product}
-                    onProductClick={handleProductClick}
                     onAddToCart={handleAddToCart}
                     onToggleWishlist={(id, name) => handleToggleWishlist(id, name)}
                     isInWishlist={isInWishlist}

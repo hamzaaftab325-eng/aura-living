@@ -17,10 +17,11 @@ import {
   Package,
   PenLine,
 } from 'lucide-react';
-import { useStore, badgeColors } from '@/store/useStore';
+import { useStore, badgeColors, type Product } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
 import { products, categories, formatPKR } from '@/data/products';
 import { getReviewsForProduct, getAverageRating } from '@/data/reviews';
+import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import ReviewList from '@/components/ReviewList';
@@ -39,7 +40,7 @@ const accordionItems = [
     id: 'description',
     title: 'Product Description',
     defaultOpen: true,
-    getContent: (product: NonNullable<ReturnType<typeof useStore.getState>['selectedProduct']>) => (
+    getContent: (product: Product) => (
       <p style={{ color: 'var(--color-warm-gray)' }} className="text-sm leading-relaxed">
         {product.description}
       </p>
@@ -49,7 +50,7 @@ const accordionItems = [
     id: 'materials',
     title: 'Materials & Care',
     defaultOpen: false,
-    getContent: (product: NonNullable<ReturnType<typeof useStore.getState>['selectedProduct']>) => (
+    getContent: (product: Product) => (
       <div style={{ color: 'var(--color-warm-gray)' }} className="text-sm leading-relaxed space-y-2">
         <p><strong>Material:</strong> {product.material}</p>
         <p><strong>Care:</strong> Wipe with a soft, dry cloth. Avoid direct sunlight and moisture.</p>
@@ -78,7 +79,7 @@ function AccordionItem({
   product,
 }: {
   item: (typeof accordionItems)[number];
-  product: NonNullable<ReturnType<typeof useStore.getState>['selectedProduct']>;
+  product: Product;
 }) {
   const [isOpen, setIsOpen] = useState(item.defaultOpen);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -132,28 +133,18 @@ function AccordionItem({
 /* ═══════════════════════════════════════════════════════════
    Main ProductDetailView
    ═══════════════════════════════════════════════════════════ */
-export default function ProductDetailView() {
-  const { selectedProduct, setSelectedProduct, setPage, isInWishlist } = useStore();
+export default function ProductDetailView({ product }: { product: Product }) {
+  const { isInWishlist } = useStore();
   const { handleAddToCartWithQuantity, handleToggleWishlist } = useCartActions();
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('Gold');
   const [selectedImage, setSelectedImage] = useState(0);
   const [showReviewForm, setShowReviewForm] = useState(false);
-  // Track previously seen product id so we can reset state synchronously when it changes (avoids set-state-in-effect lint)
-  const [lastProductId, setLastProductId] = useState<string | undefined>(selectedProduct?.id);
 
-  if (selectedProduct?.id !== lastProductId) {
-    setLastProductId(selectedProduct?.id);
-    setQuantity(1);
-    setSelectedColor('Gold');
-    setSelectedImage(0);
-    setShowReviewForm(false);
-  }
-
-  // Scroll to top when product changes
+  // Scroll to top on mount
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [selectedProduct?.id]);
+  }, [product.id]);
 
   // GSAP fade-in for main content area
   const contentRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.6 });
@@ -167,19 +158,6 @@ export default function ProductDetailView() {
     start: 'top 90%',
   });
 
-  if (!selectedProduct) {
-    return (
-      <div className="w-full flex flex-col items-center justify-center pt-32 pb-20" style={{ backgroundColor: 'var(--surface-page)' }}>
-        <Package className="w-12 h-12 mb-4 text-gold-text" />
-        <p className="aura-body-large text-warm-gray mb-6">No product selected. Browse our collection to find your perfect piece.</p>
-        <PremiumButton variant="gold" onClick={() => setPage('shop')}>
-          Browse Shop
-        </PremiumButton>
-      </div>
-    );
-  }
-
-  const product = selectedProduct;
   const wishlisted = isInWishlist(product.id);
 
   // Reviews for this product + computed average (falls back to product.rating
@@ -221,9 +199,9 @@ export default function ProductDetailView() {
       {/* Breadcrumb Header */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => setPage('home') },
-          { label: 'Shop', onClick: () => setPage('shop') },
-          ...(productCategory ? [{ label: productCategory.name, onClick: () => setPage('shop') }] : []),
+          { label: 'Home', href: '/' },
+          { label: 'Shop', href: '/shop' },
+          ...(productCategory ? [{ label: productCategory.name, href: '/shop' }] : []),
           { label: product.name },
         ]}
         productName={product.name}
@@ -459,18 +437,12 @@ export default function ProductDetailView() {
             </div>
             <div ref={relatedRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               {relatedProducts.map((rp) => (
-                <div
+                <Link
                   key={rp.id}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedProduct(rp); setPage('product'); window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
-                  className="cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)]/40"
+                  href={`/product/${rp.slug}`}
+                  onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  className="cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)]/40 block"
                   style={{ border: '1px solid rgba(232,213,163,0.3)', backgroundColor: 'var(--surface-card)' }}
-                  onClick={() => {
-                    setSelectedProduct(rp);
-                    setPage('product');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
                 >
                   <div className="relative aspect-square overflow-hidden" style={{ backgroundColor: 'var(--surface-card)' }}>
                     <Image src={rp.image} alt={rp.name} fill className="w-full h-full object-cover" sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw" />
@@ -479,7 +451,7 @@ export default function ProductDetailView() {
                     <h3 className="text-xs sm:text-sm font-medium line-clamp-1" style={{ color: 'var(--surface-dark)' }}>{rp.name}</h3>
                     <p className="text-xs sm:text-sm font-bold mt-1" style={{ color: 'var(--color-gold-text)' }}>{formatPKR(rp.price)}</p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

@@ -2,10 +2,13 @@
 
 import { ChevronRight } from 'lucide-react';
 import { useEffect } from 'react';
+import Link from 'next/link';
 
 interface BreadcrumbItem {
   label: string;
   onClick?: () => void;
+  /** Optional App Router href — when provided, renders a <Link> instead of a <button>. */
+  href?: string;
 }
 
 interface BreadcrumbProps {
@@ -29,7 +32,11 @@ export default function Breadcrumb({ items, productName, productId }: Breadcrumb
       '@type': 'ListItem',
       position: idx + 1,
       name: item.label,
-      item: idx === 0 ? `${baseUrl}/` : `${baseUrl}/#${item.label.toLowerCase().replace(/\s+/g, '-')}`,
+      item: idx === 0
+        ? `${baseUrl}/`
+        : item.href
+          ? `${baseUrl}${item.href}`
+          : `${baseUrl}/#${item.label.toLowerCase().replace(/\s+/g, '-')}`,
     }));
 
     const jsonLd = {
@@ -61,6 +68,7 @@ export default function Breadcrumb({ items, productName, productId }: Breadcrumb
       <ol className="max-w-7xl mx-auto flex items-center gap-2 flex-wrap">
         {items.map((item, idx) => {
           const isLast = idx === items.length - 1;
+          const interactive = !isLast && (item.href || item.onClick);
           return (
             <li key={idx} className="flex items-center gap-2">
               {idx > 0 && (
@@ -70,7 +78,7 @@ export default function Breadcrumb({ items, productName, productId }: Breadcrumb
                   aria-hidden="true"
                 />
               )}
-              {isLast || !item.onClick ? (
+              {!interactive ? (
                 <span
                   aria-current={isLast ? 'page' : undefined}
                   className="text-sm font-medium"
@@ -78,6 +86,15 @@ export default function Breadcrumb({ items, productName, productId }: Breadcrumb
                 >
                   {item.label}
                 </span>
+              ) : item.href ? (
+                <Link
+                  href={item.href}
+                  onClick={item.onClick}
+                  className="text-sm transition-colors duration-200 hover:opacity-80 cursor-pointer"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  {item.label}
+                </Link>
               ) : (
                 <button
                   type="button"

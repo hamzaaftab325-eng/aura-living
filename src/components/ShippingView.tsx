@@ -3,7 +3,6 @@
 import { useGsapFadeIn, useGsapStagger, useGsapScaleIn } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Truck, Package, MapPin, Clock, Gift, Globe } from 'lucide-react';
-import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
@@ -54,7 +53,6 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
 }
 
 export default function ShippingView() {
-  const setPage = useStore((state) => state.setPage);
 
   // GSAP refs
   const heroRef = useGsapStagger<HTMLDivElement>({
@@ -115,7 +113,7 @@ export default function ShippingView() {
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => setPage('home') },
+          { label: 'Home', href: '/' },
           { label: 'Shipping' },
         ]}
       />
@@ -298,7 +296,7 @@ export default function ShippingView() {
           <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Our customer support team is always ready to assist you with any shipping inquiries or delivery concerns.
           </p>
-          <PremiumButton variant="gold" onClick={() => setPage('contact')}>
+          <PremiumButton variant="gold" href="/contact">
             Contact Support
             <Truck className="w-4 h-4" />
           </PremiumButton>

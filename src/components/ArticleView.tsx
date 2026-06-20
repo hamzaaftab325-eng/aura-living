@@ -15,10 +15,10 @@ import {
   Facebook,
   Twitter,
 } from 'lucide-react';
-import { useStore } from '@/store/useStore';
+import Link from 'next/link';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import PremiumButton from '@/components/ui/PremiumButton';
-import { getArticleBySlug, getRelatedArticles, type Article } from '@/data/articles';
+import { getRelatedArticles, type Article } from '@/data/articles';
 
 /* ═══════════════════════════════════════════════════════════
    Category labels (mirrored from BlogView for the breadcrumb
@@ -226,7 +226,7 @@ function ArticleBody({ body }: { body: string }) {
    ═══════════════════════════════════════════════════════════ */
 function ShareButtons({ title, slug }: { title: string; slug: string }) {
   const [copied, setCopied] = useState(false);
-  const url = `https://auraliving.pk/#article/${slug}`;
+  const url = `https://auraliving.pk/blog/${slug}`;
 
   const handleCopy = async () => {
     try {
@@ -314,19 +314,10 @@ function ShareButtons({ title, slug }: { title: string; slug: string }) {
 /* ═══════════════════════════════════════════════════════════
    ArticleView
    ═══════════════════════════════════════════════════════════ */
-export default function ArticleView() {
-  const setPage = useStore((s) => s.setPage);
-  const selectedArticleSlug = useStore((s) => s.selectedArticleSlug);
-  const setSelectedArticleSlug = useStore((s) => s.setSelectedArticleSlug);
-
-  const article = useMemo(
-    () => (selectedArticleSlug ? getArticleBySlug(selectedArticleSlug) : undefined),
-    [selectedArticleSlug]
-  );
-
+export default function ArticleView({ article }: { article: Article }) {
   const related = useMemo(
-    () => (article ? getRelatedArticles(article.slug, 3) : []),
-    [article]
+    () => getRelatedArticles(article.slug, 3),
+    [article.slug]
   );
 
   const bodyFadeRef = useGsapFadeIn<HTMLDivElement>({ y: 20, duration: 0.7, delay: 0.1 });
@@ -356,7 +347,7 @@ export default function ArticleView() {
       keywords: article.tags.join(', '),
       mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': `${baseUrl}/#article/${article.slug}`,
+        '@id': `${baseUrl}/blog/${article.slug}`,
       },
     };
 
@@ -376,66 +367,19 @@ export default function ArticleView() {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, [article?.slug]);
 
-  // ── Not found state ──
-  if (!article) {
-    return (
-      <div
-        className="w-full page-transition min-h-[60vh] flex items-center justify-center px-4"
-        style={{ backgroundColor: 'var(--surface-page)' }}
-      >
-        <Breadcrumb
-          items={[
-            { label: 'Home', onClick: () => setPage('home') },
-            { label: 'Journal', onClick: () => setPage('blog') },
-            { label: 'Article not found' },
-          ]}
-        />
-        <div className="max-w-md text-center py-16">
-          <BookOpen
-            className="w-12 h-12 mx-auto mb-5"
-            style={{ color: 'var(--color-gold)' }}
-            aria-hidden="true"
-          />
-          <h1
-            className="text-3xl sm:text-4xl font-bold mb-4"
-            style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-playfair)' }}
-          >
-            Article not found
-          </h1>
-          <p
-            className="text-base mb-8"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            We could not find the article you were looking for. It may have been moved or removed.
-          </p>
-          <PremiumButton variant="gold" onClick={() => setPage('blog')}>
-            <ArrowLeft className="w-4 h-4" />
-            Back to Journal
-          </PremiumButton>
-        </div>
-      </div>
-    );
-  }
-
   const formattedDate = new Date(article.date).toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
   });
 
-  const handleOpenRelated = (slug: string) => {
-    setSelectedArticleSlug(slug);
-    setPage('article');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => setPage('home') },
-          { label: 'Journal', onClick: () => setPage('blog') },
+          { label: 'Home', href: '/' },
+          { label: 'Journal', href: '/blog' },
           { label: article.title },
         ]}
       />
@@ -540,7 +484,7 @@ export default function ArticleView() {
 
             {/* Back to journal */}
             <div className="mt-10">
-              <PremiumButton variant="outline" onClick={() => setPage('blog')}>
+              <PremiumButton variant="outline" href="/blog">
                 <ArrowLeft className="w-4 h-4" />
                 Back to Journal
               </PremiumButton>
@@ -610,22 +554,15 @@ export default function ArticleView() {
                   year: 'numeric',
                 });
                 return (
-                  <article
+                  <Link
                     key={rel.slug}
-                    className="group flex flex-col overflow-hidden rounded-sm border cursor-pointer transition-all duration-300 hover:shadow-lg"
+                    href={`/blog/${rel.slug}`}
+                    onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="group flex flex-col overflow-hidden rounded-sm border cursor-pointer transition-all duration-300 hover:shadow-lg block"
                     style={{
                       backgroundColor: 'var(--surface-page)',
                       borderColor: 'var(--border-default)',
                     }}
-                    onClick={() => handleOpenRelated(rel.slug)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        handleOpenRelated(rel.slug);
-                      }
-                    }}
-                    tabIndex={0}
-                    role="button"
                     aria-label={`Read related article: ${rel.title}`}
                   >
                     <div className="relative w-full aspect-[16/10] overflow-hidden">
@@ -646,42 +583,42 @@ export default function ArticleView() {
                         {categoryLabels[rel.category]}
                       </span>
                     </div>
-                    <div className="flex flex-col flex-1 p-5">
-                      <h3
-                        className="text-lg font-bold leading-snug mb-2"
-                        style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-playfair)' }}
-                      >
-                        {rel.title}
-                      </h3>
-                      <p
-                        className="text-sm leading-relaxed mb-4 line-clamp-2"
-                        style={{ color: 'var(--text-muted)' }}
-                      >
-                        {rel.excerpt}
-                      </p>
-                      <div
-                        className="mt-auto pt-3 flex items-center justify-between text-xs"
-                        style={{
-                          borderTop: '1px solid var(--border-default)',
-                          color: 'var(--text-muted)',
-                        }}
-                      >
-                        <span>{rel.author.name}</span>
-                        <span className="flex items-center gap-1.5">
-                          <span>{relDate}</span>
-                          <span aria-hidden="true">·</span>
-                          <Clock className="w-3 h-3" aria-hidden="true" />
-                          <span>{rel.readingTime} min</span>
-                        </span>
+                      <div className="flex flex-col flex-1 p-5">
+                        <h3
+                          className="text-lg font-bold leading-snug mb-2"
+                          style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-playfair)' }}
+                        >
+                          {rel.title}
+                        </h3>
+                        <p
+                          className="text-sm leading-relaxed mb-4 line-clamp-2"
+                          style={{ color: 'var(--text-muted)' }}
+                        >
+                          {rel.excerpt}
+                        </p>
+                        <div
+                          className="mt-auto pt-3 flex items-center justify-between text-xs"
+                          style={{
+                            borderTop: '1px solid var(--border-default)',
+                            color: 'var(--text-muted)',
+                          }}
+                        >
+                          <span>{rel.author.name}</span>
+                          <span className="flex items-center gap-1.5">
+                            <span>{relDate}</span>
+                            <span aria-hidden="true">·</span>
+                            <Clock className="w-3 h-3" aria-hidden="true" />
+                            <span>{rel.readingTime} min</span>
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </article>
+                    </Link>
                 );
               })}
             </div>
 
             <div className="text-center mt-10">
-              <PremiumButton variant="gold" onClick={() => setPage('blog')}>
+              <PremiumButton variant="gold" href="/blog">
                 View All Articles
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </PremiumButton>

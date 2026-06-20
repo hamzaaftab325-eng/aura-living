@@ -3,7 +3,7 @@
 import { useGsapFadeIn, useGsapStagger, useGsapScaleIn } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { FileText, CheckCircle, Shield, CreditCard, Truck, RotateCcw, Lock, AlertTriangle, Eye, Mail, RefreshCw } from 'lucide-react';
-import { useStore } from '@/store/useStore';
+import Link from 'next/link';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
@@ -50,7 +50,7 @@ const sections = [
     content:
       'We offer a 14-day return policy from the date of delivery. Items must be unused, in their original packaging, and with all tags still attached to be eligible for a return. Customized and personalized items cannot be returned unless they arrive damaged. For full details on our return and exchange process, including how to initiate a return, please visit our Returns & Exchanges page.',
     linkText: 'View Returns & Exchanges Policy',
-    linkPage: 'returns' as const,
+    linkHref: '/returns' as const,
   },
   {
     number: 7,
@@ -73,7 +73,7 @@ const sections = [
     content:
       'Your privacy is important to us. For detailed information on how we collect, use, and protect your personal data, please refer to our Privacy Policy. By using our website, you consent to the data practices described in our Privacy Policy.',
     linkText: 'View Privacy Policy',
-    linkPage: 'privacy' as const,
+    linkHref: '/privacy' as const,
   },
   {
     number: 10,
@@ -92,7 +92,6 @@ const sections = [
 ];
 
 export default function TermsView() {
-  const setPage = useStore((state) => state.setPage);
 
   const heroRef = useGsapStagger<HTMLDivElement>({
     y: 40,
@@ -155,7 +154,7 @@ export default function TermsView() {
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => setPage('home') },
+          { label: 'Home', href: '/' },
           { label: 'Terms of Service' },
         ]}
       />
@@ -201,14 +200,14 @@ export default function TermsView() {
                     <p className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed" >
                       {section.content}
                     </p>
-                    {section.linkText && section.linkPage && (
-                      <button
-                        onClick={() => setPage(section.linkPage)}
+                    {section.linkText && section.linkHref && (
+                      <Link
+                        href={section.linkHref}
                         className="text-sm font-semibold transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer mt-1 self-start"
                         style={{ color: 'var(--color-gold)', background: 'none' }}
                       >
                         {section.linkText} →
-                      </button>
+                      </Link>
                     )}
                   </div>
                 </div>

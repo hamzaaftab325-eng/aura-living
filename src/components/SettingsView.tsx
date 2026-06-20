@@ -19,6 +19,8 @@ import {
   Check,
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
 import Breadcrumb from '@/components/ui/Breadcrumb';
@@ -70,7 +72,7 @@ function Toggle({
 }
 
 export default function SettingsView() {
-  const setPage = useStore((state) => state.setPage);
+  const router = useRouter();
   const user = useStore((state) => state.user);
   const logout = useStore((state) => state.logout);
   const { toast } = useToast();
@@ -150,7 +152,7 @@ export default function SettingsView() {
       title: 'Signed out',
       description: 'You have been successfully signed out.',
     });
-    setPage('home');
+    router.push('/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -198,14 +200,14 @@ export default function SettingsView() {
               Customise notifications, privacy, appearance, and more.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <PremiumButton variant="gold" size="sm" onClick={() => setPage('login')}>Sign In</PremiumButton>
-              <button
-                onClick={() => setPage('signup')}
+              <PremiumButton variant="gold" size="sm" href="/auth/login">Sign In</PremiumButton>
+              <Link
+                href="/auth/signup"
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
                 style={{ color: 'var(--color-gold)', background: 'none' }}
               >
                 Create a free account
-              </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -288,7 +290,7 @@ export default function SettingsView() {
       {/* Breadcrumb strip (below hero) */}
       <Breadcrumb
         items={[
-          { label: 'My Account', onClick: () => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'My Account', href: '/account' },
           { label: 'Settings' },
         ]}
       />
@@ -551,13 +553,14 @@ export default function SettingsView() {
               Changes are saved instantly to your device.
             </p>
             <div className="flex items-center gap-3">
-              <button
-                onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              <Link
+                href="/account"
+                onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
                 style={{ color: 'var(--color-gold)', background: 'none' }}
               >
                 Back to Account
-              </button>
+              </Link>
               <PremiumButton variant="gold" size="sm" onClick={handleSave}>
                 Save Changes
               </PremiumButton>

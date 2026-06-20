@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useGsapFadeIn, useGsapStagger } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { ArrowRight, Clock, BookOpen } from 'lucide-react';
-import { useStore } from '@/store/useStore';
+import Link from 'next/link';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { articles, type Article, type Article as ArticleType } from '@/data/articles';
@@ -101,11 +101,9 @@ function ArticleImage({
    ═══════════════════════════════════════════════════════════ */
 function ArticleCard({
   article,
-  onOpen,
   priority = false,
 }: {
   article: ArticleType;
-  onOpen: (slug: string) => void;
   priority?: boolean;
 }) {
   const formattedDate = useMemo(
@@ -119,21 +117,14 @@ function ArticleCard({
   );
 
   return (
-    <article
-      className="group flex flex-col overflow-hidden rounded-sm border transition-all duration-300 hover:shadow-lg cursor-pointer"
+    <Link
+      href={`/blog/${article.slug}`}
+      onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+      className="group flex flex-col overflow-hidden rounded-sm border transition-all duration-300 hover:shadow-lg cursor-pointer block"
       style={{
         backgroundColor: 'var(--surface-page)',
         borderColor: 'var(--border-default)',
       }}
-      onClick={() => onOpen(article.slug)}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onOpen(article.slug);
-        }
-      }}
-      tabIndex={0}
-      role="button"
       aria-label={`Read article: ${article.title}`}
     >
       {/* Cover image */}
@@ -193,7 +184,7 @@ function ArticleCard({
           </span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -201,8 +192,6 @@ function ArticleCard({
    BlogView
    ═══════════════════════════════════════════════════════════ */
 export default function BlogView() {
-  const setPage = useStore((s) => s.setPage);
-  const setSelectedArticleSlug = useStore((s) => s.setSelectedArticleSlug);
   const [activeCategory, setActiveCategory] = useState<CategoryTab>('all');
 
   const heroRef = useGsapStagger<HTMLDivElement>({
@@ -264,12 +253,6 @@ export default function BlogView() {
     return list;
   }, [activeCategory, featured.slug]);
 
-  const handleOpenArticle = (slug: string) => {
-    setSelectedArticleSlug(slug);
-    setPage('article');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const featuredDate = new Date(featured.date).toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
@@ -324,7 +307,7 @@ export default function BlogView() {
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
-          { label: 'Home', onClick: () => setPage('home') },
+          { label: 'Home', href: '/' },
           { label: 'Journal' },
         ]}
       />
@@ -338,17 +321,10 @@ export default function BlogView() {
           >
             Featured Story
           </span>
-          <article
-            className="group grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center cursor-pointer"
-            onClick={() => handleOpenArticle(featured.slug)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleOpenArticle(featured.slug);
-              }
-            }}
-            tabIndex={0}
-            role="button"
+          <Link
+            href={`/blog/${featured.slug}`}
+            onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className="group grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center cursor-pointer block"
             aria-label={`Read featured article: ${featured.title}`}
           >
             {/* Image */}
@@ -411,13 +387,13 @@ export default function BlogView() {
                 </span>
               </div>
               <div className="pt-3">
-                <PremiumButton variant="gold" onClick={() => handleOpenArticle(featured.slug)}>
+                <PremiumButton variant="gold" href={`/blog/${featured.slug}`}>
                   Read Article
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </PremiumButton>
               </div>
             </div>
-          </article>
+          </Link>
         </div>
       </section>
 
@@ -469,7 +445,6 @@ export default function BlogView() {
                 <div key={article.slug} className="blog-card">
                   <ArticleCard
                     article={article}
-                    onOpen={handleOpenArticle}
                   />
                 </div>
               ))}
@@ -497,7 +472,7 @@ export default function BlogView() {
             Explore our full collection of handcrafted pieces and bring the stories you read here
             into your own home.
           </p>
-          <PremiumButton variant="outline" onClick={() => setPage('shop')}>
+          <PremiumButton variant="outline" href="/shop">
             Shop the Collection
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </PremiumButton>

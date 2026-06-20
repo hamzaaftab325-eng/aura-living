@@ -2,9 +2,9 @@
 
 import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useGsapStagger, useGsapBlurText, gsap, ScrollTrigger } from '@/hooks/useGsap';
 import { categories } from '@/data/products';
-import { useStore } from '@/store/useStore';
 import { GoldDivider } from '@/components/SVGDecorations';
 
 /* ═══════════════════════════════════════════════════════════
@@ -25,18 +25,18 @@ interface CategoryCardProps {
   };
   aspectClass: string;
   textPosition: TextPosition;
-  onClick: () => void;
+  href: string;
 }
 
 function CategoryCard({
   category,
   aspectClass,
   textPosition,
-  onClick,
+  href,
 }: CategoryCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLAnchorElement>(null);
 
   // Parallax effect on category image
   useEffect(() => {
@@ -67,18 +67,15 @@ function CategoryCard({
   };
 
   return (
-    <div
+    <Link
       ref={cardRef}
-      className={`group relative cursor-pointer overflow-hidden rounded-xl ${aspectClass}`}
+      href={href}
+      className={`group relative cursor-pointer overflow-hidden rounded-xl block ${aspectClass}`}
       style={{ border: isHovered ? '2px solid var(--color-gold)' : '1px solid rgba(232, 213, 163, 0.2)',
         transition: 'border-color 0.4s ease',
       }}
-      onClick={onClick}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      role="button"
-      tabIndex={0}
       aria-label={`Browse ${category.name} category`}
     >
       {/* Image with parallax */}
@@ -137,7 +134,7 @@ function CategoryCard({
           boxShadow: isHovered ? '0 0 10px rgba(212,175,55,0.4)' : 'none',
         }}
       />
-    </div>
+    </Link>
   );
 }
 
@@ -145,8 +142,6 @@ function CategoryCard({
    Main CategoriesSection Component
    ═══════════════════════════════════════════════════════════ */
 export default function CategoriesSection() {
-  const { setSelectedCategory, setPage } = useStore();
-
   // GSAP blur text for section heading
   const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
@@ -176,8 +171,7 @@ export default function CategoriesSection() {
   }, []);
 
   const handleCategoryClick = (categoryId: string) => {
-    setSelectedCategory(categoryId);
-    setPage('shop');
+    return `/shop?category=${encodeURIComponent(categoryId)}`;
   };
 
   const textPositions: TextPosition[] = [
@@ -218,7 +212,7 @@ export default function CategoriesSection() {
               category={cat}
               aspectClass={i === 0 ? 'aspect-[4/5]' : 'aspect-[3/4]'}
               textPosition={textPositions[i]}
-              onClick={() => handleCategoryClick(cat.id)}
+              href={handleCategoryClick(cat.id)}
             />
           ))}
         </div>
@@ -231,7 +225,7 @@ export default function CategoriesSection() {
               category={cat}
               aspectClass="aspect-square"
               textPosition={textPositions[i + 2]}
-              onClick={() => handleCategoryClick(cat.id)}
+              href={handleCategoryClick(cat.id)}
             />
           ))}
         </div>
@@ -243,7 +237,7 @@ export default function CategoriesSection() {
               category={categories[5]}
               aspectClass="aspect-[21/9]"
               textPosition="center"
-              onClick={() => handleCategoryClick(categories[5].id)}
+              href={handleCategoryClick(categories[5].id)}
             />
           </div>
         )}
