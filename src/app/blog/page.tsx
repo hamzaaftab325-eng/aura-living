@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import BlogView from '@/components/BlogView';
 
+// Revalidate every 1 hours
+export const revalidate = 3600;
+
+
 export const metadata: Metadata = {
   title: 'Journal | Aura Living',
   description:

@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import CareGuideView from '@/components/CareGuideView';
 
+// Revalidate every 24 hours
+export const revalidate = 86400;
+
+
 export const metadata: Metadata = {
   title: 'Care Guide | Aura Living',
   description:

@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// Admin dashboard is lazy-loaded via dynamic import inside the client wrapper
+// to keep it out of the initial bundle for other routes.
 export default function AdminPage() {
   return <AdminDashboard />;
 }

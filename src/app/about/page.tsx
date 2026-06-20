@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import AboutView from '@/components/AboutView';
 
+// Revalidate every 24 hours
+export const revalidate = 86400;
+
+
 export const metadata: Metadata = {
   title: 'Our Story | Aura Living',
   description:

@@ -3,6 +3,10 @@ import { notFound } from 'next/navigation';
 import { products, getProductBySlug } from '@/data/products';
 import ProductDetailView from '@/components/ProductDetailView';
 
+// Revalidate every 1 hours
+export const revalidate = 3600;
+
+
 // Pre-render all product pages at build time
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));

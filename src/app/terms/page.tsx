@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import TermsView from '@/components/TermsView';
 
+// Revalidate every 720 hours
+export const revalidate = 2592000;
+
+
 export const metadata: Metadata = {
   title: 'Terms of Service | Aura Living',
   description: 'Terms governing the use of auraliving.com and purchases made on the Aura Living store.',

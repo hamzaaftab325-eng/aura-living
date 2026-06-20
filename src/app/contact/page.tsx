@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import ContactView from '@/components/ContactView';
 
+// Revalidate every 24 hours
+export const revalidate = 86400;
+
+
 export const metadata: Metadata = {
   title: 'Get in Touch | Aura Living',
   description:

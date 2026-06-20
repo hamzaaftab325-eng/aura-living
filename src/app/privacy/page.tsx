@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import PrivacyView from '@/components/PrivacyView';
 
+// Revalidate every 720 hours
+export const revalidate = 2592000;
+
+
 export const metadata: Metadata = {
   title: 'Privacy Policy | Aura Living',
   description:

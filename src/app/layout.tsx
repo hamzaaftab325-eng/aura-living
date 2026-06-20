@@ -1,12 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Poppins, Great_Vibes, Dancing_Script, Archivo_Narrow } from "next/font/google";
+import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import SiteShell from "@/components/SiteShell";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"], // removed 800 — unused
   style: ["normal", "italic"],
   variable: "--font-playfair-display",
   display: "swap",
@@ -14,29 +16,8 @@ const playfair = Playfair_Display({
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"], // removed 300 — unused
   variable: "--font-poppins",
-  display: "swap",
-});
-
-const greatVibes = Great_Vibes({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-great-vibes",
-  display: "swap",
-});
-
-const dancingScript = Dancing_Script({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-dancing-script",
-  display: "swap",
-});
-
-const archivoNarrow = Archivo_Narrow({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-archivo-narrow",
   display: "swap",
 });
 
@@ -103,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${poppins.variable} ${greatVibes.variable} ${dancingScript.variable} ${archivoNarrow.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${poppins.variable}`}>
       <body className="antialiased bg-background text-foreground min-h-screen flex flex-col w-full overflow-x-hidden">
         <a href="#main-content" className="aura-skip-link">Skip to main content</a>
 
@@ -179,6 +160,8 @@ export default function RootLayout({
         <SiteShell>{children}</SiteShell>
 
         <Toaster />
+        <Analytics /> {/* Vercel Web Analytics — page views + visitor metrics */}
+        <SpeedInsights /> {/* Vercel Speed Insights — Core Web Vitals monitoring */}
       </body>
     </html>
   );

@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import ShippingView from '@/components/ShippingView';
 
+// Revalidate every 24 hours
+export const revalidate = 86400;
+
+
 export const metadata: Metadata = {
   title: 'Shipping Information | Aura Living',
   description:

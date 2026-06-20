@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import ReturnsView from '@/components/ReturnsView';
 
+// Revalidate every 24 hours
+export const revalidate = 86400;
+
+
 export const metadata: Metadata = {
   title: 'Returns & Exchanges | Aura Living',
   description:

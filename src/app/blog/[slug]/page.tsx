@@ -3,6 +3,10 @@ import { notFound } from 'next/navigation';
 import { articles, getArticleBySlug } from '@/data/articles';
 import ArticleView from '@/components/ArticleView';
 
+// Revalidate every 24 hours
+export const revalidate = 86400;
+
+
 // Pre-render all article pages at build time
 export function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));

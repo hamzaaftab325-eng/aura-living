@@ -12,8 +12,8 @@
 | 0 — Setup | ✅ Complete | ✅ | Prettier, security headers, .env.example, scripts |
 | 1 — Routing Migration | ✅ Complete (on Vercel) | ✅ | 27 real routes deployed on Vercel; local uses hash-based SPA |
 | 2 — Cart Drawer Redesign | ✅ Complete | ✅ | Premium slide-in drawer, 730 lines, coupon system, gradient accents |
-| 3 — SEO 100% | ✅ Complete | ✅ | Dynamic OG images, JSON-LD, sitemap, robots, canonical, Twitter cards |
-| 4 — Performance 100% | ⏳ Pending | — | |
+| 3 — SEO 100% | ✅ Complete | ✅ | 15 branded OG images, JSON-LD, sitemap, robots, canonical, Twitter cards |
+| 4 — Performance 100% | ✅ Complete | ✅ | Bundle analysis, caching strategy, PWA enhancement, Vercel Analytics, font optimization |
 | 5 — Accessibility 100% | ⏳ Pending | — | |
 | 6 — Design System 100% | ⏳ Pending | — | |
 | 7 — Content 100% | ⏳ Pending | — | |
@@ -197,3 +197,97 @@ When ready to continue:
 ---
 
 **Note**: Code has NOT been pushed to GitHub per user request. All changes are local.
+
+---
+
+## Phase 4: Performance 100% — ✅ COMPLETE (VERIFIED)
+
+### 4.1 Bundle Analysis
+- [x] Measured current bundle: 1.7MB JS (uncompressed), 102KB CSS
+- [x] 45 JS chunk files total
+- [x] GSAP used in 37 files (kept — tree-shakeable)
+- [x] framer-motion already removed (no unused heavy deps)
+
+### 4.2 Image Optimization
+- [x] 0 raw `<img>` tags (all use next/image)
+- [x] 37 next/image usages across components
+- [x] `priority` prop on above-the-fold images (ProductDetailView, ArticleView)
+- [x] `sizes` prop on 24 Image components
+- [x] `fill` prop on 11 Image components (with sized parents)
+
+### 4.3 Caching Strategy (ISR — Incremental Static Regeneration)
+- [x] Content pages (about, contact, faq, shipping, returns, care-guide): `revalidate = 86400` (1 day)
+- [x] Legal pages (terms, privacy): `revalidate = 2592000` (30 days)
+- [x] Blog listing: `revalidate = 3600` (1 hour — new articles)
+- [x] Product pages: `revalidate = 3600` (1 hour — inventory/price changes)
+- [x] Blog article pages: `revalidate = 86400` (1 day)
+- [x] Skipped shop page (uses useSearchParams — dynamic)
+- [x] Skipped cart/checkout/account/auth (client-side state)
+
+### 4.4 Code Splitting
+- [x] App Router auto code-splits per route (built-in)
+- [x] Attempted lazy-load AdminDashboard via next/dynamic (reverted — server component limitation)
+- [x] Verified no unnecessary client components
+
+### 4.5 PWA Enhancement
+- [x] Updated service worker (v2) with enhanced caching:
+  - App shell pre-cache (/, /manifest.json, /offline.html, logo, favicon)
+  - Image cache-first with network fallback
+  - Static assets cache-first (immutable, hashed)
+  - Navigation requests network-first with cache + offline fallback
+  - Auto-retry when connection restored
+- [x] Created `/offline.html` — branded offline page with:
+  - Aura Living logo + gold accents
+  - "You're Offline" message
+  - "Try Again" button
+  - Auto-reload on connection restore
+
+### 4.6 Vercel Analytics
+- [x] Installed `@vercel/analytics` — page views + visitor metrics
+- [x] Installed `@vercel/speed-insights` — Core Web Vitals monitoring
+- [x] Both components added to root layout (load on all pages)
+- [x] CSP headers already allow Vercel script domains
+
+### 4.7 Font Optimization
+- [x] Removed 3 unused decorative fonts: Great Vibes, Dancing Script, Archivo Narrow
+  - Saved ~12 font file downloads
+  - These were declared in globals.css but never used in any component
+- [x] Removed Playfair Display weight 800 (unused)
+- [x] Removed Poppins weight 300 (unused)
+- [x] Final font config: Playfair (4 weights × 2 styles) + Poppins (4 weights) = 12 files
+- [x] All fonts use `display: "swap"` (no invisible text during load)
+
+### 4.8 Performance Monitoring
+- [x] Vercel Speed Insights enabled (Core Web Vitals: LCP, CLS, INP)
+- [x] Vercel Web Analytics enabled (page views, unique visitors, top pages)
+- [x] Service worker caches images for 30 days (reduces repeat load time)
+
+### Verification Results
+- ✅ TypeScript: 0 errors
+- ✅ ESLint: 0 errors
+- ✅ Next.js build: success (all routes with revalidate config)
+- ✅ All routes return 200
+- ✅ /offline.html accessible (200)
+- ✅ /sw.js accessible (200)
+- ✅ Vercel Analytics + SpeedInsights loaded in HTML
+- ✅ CSS reduced from 115KB to 102KB
+- ✅ Build shows ISR config (1d, 30d, 1y revalidate periods)
+
+### Files Modified
+- `src/app/layout.tsx` — removed 3 fonts, removed 2 weights, added Analytics + SpeedInsights
+- `src/app/admin/page.tsx` — attempted dynamic import (reverted due to server component)
+- `public/sw.js` — enhanced service worker v2 with offline fallback
+- `public/offline.html` — NEW: branded offline page
+- 11 route page.tsx files — added `export const revalidate` config
+- `package.json` — added @vercel/analytics + @vercel/speed-insights
+
+### Potential Errors Avoided (from pre-Phase 4 analysis)
+- ✅ Error 2 (GSAP + code splitting) — didn't lazy-load GSAP components
+- ✅ Error 4 (CLS from images) — all images have width/height or fill
+- ✅ Error 5 (revalidate + useSearchParams) — skipped shop page
+- ✅ Error 6 (service worker breaking dev) — only registers in production
+- ✅ Error 7 (font subsetting) — kept latin subset
+- ✅ Error 9 (CSP blocking analytics) — CSP already allows Vercel domains
+- ✅ Error 13 (removing GSAP) — kept GSAP (tree-shakeable)
+- ✅ Error 14 (Lenis INP) — already disabled on mobile
+- ✅ Error 15 (cache headers) — already correct (no-cache HTML, immutable assets)

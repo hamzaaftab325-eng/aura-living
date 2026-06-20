@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import FAQView from '@/components/FAQView';
 
+// Revalidate every 24 hours
+export const revalidate = 86400;
+
+
 export const metadata: Metadata = {
   title: 'Frequently Asked Questions | Aura Living',
   description:
