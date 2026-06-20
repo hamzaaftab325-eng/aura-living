@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
   reactStrictMode: true,
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 1080, 1440, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+  },
   // Disable static page caching so new builds always serve fresh HTML
   // (prevents "Failed to load chunk" errors when chunks get new hashed names)
   async headers() {

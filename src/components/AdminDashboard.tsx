@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Image from 'next/image';
 import {
   LayoutDashboard, Package, ShoppingCart, BarChart3, Bell, Settings as SettingsIcon,
   TrendingUp, TrendingDown, DollarSign, Users, Eye, ArrowUpRight, Search,
@@ -44,10 +45,10 @@ const mockRevenue = [
 ];
 
 const statusConfig: Record<string, { color: string; bg: string; icon: typeof CheckCircle }> = {
-  Delivered: { color: '#22C55E', bg: 'rgba(34, 197, 94, 0.1)', icon: CheckCircle },
-  Shipped: { color: '#3B82F6', bg: 'rgba(59, 130, 246, 0.1)', icon: Package },
-  Processing: { color: '#D4AF37', bg: 'rgba(212, 175, 55, 0.1)', icon: Clock },
-  Cancelled: { color: '#DC2626', bg: 'rgba(220, 38, 38, 0.1)', icon: XCircle },
+  Delivered: { color: 'var(--color-success)', bg: 'rgba(34, 197, 94, 0.1)', icon: CheckCircle },
+  Shipped: { color: 'var(--color-info)', bg: 'rgba(59, 130, 246, 0.1)', icon: Package },
+  Processing: { color: 'var(--color-gold)', bg: 'rgba(212, 175, 55, 0.1)', icon: Clock },
+  Cancelled: { color: 'var(--color-danger)', bg: 'rgba(220, 38, 38, 0.1)', icon: XCircle },
 };
 
 export default function AdminDashboard() {
@@ -88,13 +89,13 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="w-full pt-24 sm:pt-28 min-h-screen flex" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full pt-24 sm:pt-28 min-h-screen flex" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Sidebar */}
       <aside
         className={`fixed lg:sticky top-24 lg:top-28 left-0 z-40 w-64 h-[calc(100vh-6rem)] lg:h-[calc(100vh-7rem)] transition-transform duration-300 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
-        style={{ backgroundColor: '#2C2C2C' }}
+        style={{ backgroundColor: 'var(--surface-dark)' }}
       >
         <div className="p-5 flex flex-col h-full">
           {/* Logo */}
@@ -154,11 +155,11 @@ export default function AdminDashboard() {
           <button
             onClick={() => setSidebarOpen(true)}
             className="w-10 h-10 rounded-lg flex items-center justify-center"
-            style={{ backgroundColor: '#2C2C2C', color: '#FFFFFF' }}
+            style={{ backgroundColor: 'var(--surface-dark)', color: 'var(--text-on-dark)' }}
           >
             <Menu className="w-5 h-5" />
           </button>
-          <h1 className="text-lg font-bold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+          <h1 className="text-lg font-bold" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>
             {navItems.find(n => n.id === activeTab)?.label}
           </h1>
           <div className="w-10" />
@@ -167,7 +168,7 @@ export default function AdminDashboard() {
         {/* ═══ OVERVIEW ═══ */}
         {activeTab === 'overview' && (
           <div ref={fadeIn}>
-            <h1 className="hidden lg:block text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+            <h1 className="hidden lg:block text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>
               Dashboard Overview
             </h1>
             <p className="hidden lg:block aura-body-small text-muted-gray mb-6">Welcome back! Here&apos;s what&apos;s happening today.</p>
@@ -180,34 +181,34 @@ export default function AdminDashboard() {
                 { label: 'Avg Order Value', value: formatPKR(avgOrderValue), change: '+3.1%', up: true, icon: TrendingUp },
                 { label: 'Products in Stock', value: products.filter(p => p.inStock).length.toString(), change: '-2', up: false, icon: Package },
               ].map((kpi) => (
-                <div key={kpi.label} className="rounded-lg p-5" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+                <div key={kpi.label} className="rounded-lg p-5" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
                   <div className="flex items-center justify-between mb-3">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}>
-                      <kpi.icon className="w-5 h-5 text-gold" />
+                      <kpi.icon className="w-5 h-5 text-gold-text" />
                     </div>
                     <span className={`text-xs font-semibold flex items-center gap-0.5 ${kpi.up ? 'text-green-600' : 'text-red-500'}`}>
                       {kpi.up ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
                       {kpi.change}
                     </span>
                   </div>
-                  <p className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+                  <p className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>
                     {kpi.value}
                   </p>
-                  <p className="text-xs mt-1" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>{kpi.label}</p>
+                  <p className="text-xs mt-1" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>{kpi.label}</p>
                 </div>
               ))}
             </div>
 
             {/* Revenue Chart */}
-            <div className="rounded-lg p-6 mb-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="rounded-lg p-6 mb-8" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-lg font-bold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+                  <h2 className="text-lg font-bold" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>
                     Revenue Overview
                   </h2>
-                  <p className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>Last 6 months</p>
+                  <p className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>Last 6 months</p>
                 </div>
-                <button className="text-xs font-medium text-gold flex items-center gap-1 cursor-pointer" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                <button className="text-xs font-medium text-gold-text flex items-center gap-1 cursor-pointer" style={{ fontFamily: "'Poppins', sans-serif" }}>
                   <Download className="w-3 h-3" />
                   Export
                 </button>
@@ -225,7 +226,7 @@ export default function AdminDashboard() {
                           className="w-full rounded-t-md transition-all duration-500 hover:opacity-80 cursor-pointer relative group"
                           style={{
                             height: `${heightPercent}%`,
-                            background: 'linear-gradient(180deg, #D4AF37 0%, #C9A22E 100%)',
+                            background: 'linear-gradient(180deg, var(--color-gold) 0%, var(--color-gold-hover) 100%)',
                             minHeight: '8px',
                           }}
                         >
@@ -234,7 +235,7 @@ export default function AdminDashboard() {
                           </div>
                         </div>
                       </div>
-                      <span className="text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>{data.month}</span>
+                      <span className="text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>{data.month}</span>
                     </div>
                   );
                 })}
@@ -244,8 +245,8 @@ export default function AdminDashboard() {
             {/* Recent Orders + Top Products */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Recent Orders */}
-              <div className="rounded-lg p-5" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+              <div className="rounded-lg p-5" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+                <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>
                   Recent Orders
                 </h2>
                 <div className="space-y-3">
@@ -255,10 +256,10 @@ export default function AdminDashboard() {
                     return (
                       <div key={order.id} className="flex items-center justify-between gap-3 py-2" style={{ borderBottom: '1px solid rgba(232,213,163,0.4)' }}>
                         <div className="min-w-0 flex-1">
-                          <p className="text-sm font-semibold truncate" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                          <p className="text-sm font-semibold truncate" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}>
                             {order.customer}
                           </p>
-                          <p className="text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                          <p className="text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>
                             #{order.id} · {order.date}
                           </p>
                         </div>
@@ -266,45 +267,45 @@ export default function AdminDashboard() {
                           <StatusIcon className="w-2.5 h-2.5" />
                           {order.status}
                         </span>
-                        <span className="text-sm font-bold whitespace-nowrap" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                        <span className="text-sm font-bold whitespace-nowrap" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}>
                           {formatPKR(order.total)}
                         </span>
                       </div>
                     );
                   })}
                 </div>
-                <button onClick={() => setActiveTab('orders')} className="w-full text-center text-sm font-medium text-gold mt-4 hover:underline cursor-pointer" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                <button onClick={() => setActiveTab('orders')} className="w-full text-center text-sm font-medium text-gold-text mt-4 hover:underline cursor-pointer" style={{ fontFamily: "'Poppins', sans-serif" }}>
                   View All Orders
                 </button>
               </div>
 
               {/* Top Products */}
-              <div className="rounded-lg p-5" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>
+              <div className="rounded-lg p-5" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+                <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>
                   Top Products
                 </h2>
                 <div className="space-y-3">
                   {products.slice(0, 5).map((product, i) => (
                     <div key={product.id} className="flex items-center gap-3 py-2" style={{ borderBottom: '1px solid rgba(232,213,163,0.4)' }}>
-                      <span className="text-xs font-bold w-5" style={{ color: '#D4AF37' }}>#{i + 1}</span>
-                      <div className="w-10 h-10 rounded-md overflow-hidden shrink-0" style={{ border: '1px solid #E8D5A3' }}>
-                        <img src={product.image} alt={product.name} className="w-full h-full object-contain" loading="lazy" />
+                      <span className="text-xs font-bold w-5" style={{ color: 'var(--color-gold)' }}>#{i + 1}</span>
+                      <div className="w-10 h-10 rounded-md overflow-hidden shrink-0 relative" style={{ border: '1px solid var(--color-gold-soft)' }}>
+                        <Image src={product.image} alt={product.name} fill className="w-full h-full object-contain" sizes="40px" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-semibold truncate" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                        <p className="text-sm font-semibold truncate" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}>
                           {product.name}
                         </p>
-                        <p className="text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                        <p className="text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>
                           {product.reviews} reviews · ⭐ {product.rating}
                         </p>
                       </div>
-                      <span className="text-sm font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: '#B8941F' }}>
+                      <span className="text-sm font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-gold-text)' }}>
                         {formatPKR(product.price)}
                       </span>
                     </div>
                   ))}
                 </div>
-                <button onClick={() => setActiveTab('inventory')} className="w-full text-center text-sm font-medium text-gold mt-4 hover:underline cursor-pointer" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                <button onClick={() => setActiveTab('inventory')} className="w-full text-center text-sm font-medium text-gold-text mt-4 hover:underline cursor-pointer" style={{ fontFamily: "'Poppins', sans-serif" }}>
                   View All Products
                 </button>
               </div>
@@ -317,11 +318,11 @@ export default function AdminDashboard() {
           <div ref={fadeIn}>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
               <div>
-                <h1 className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>Inventory</h1>
+                <h1 className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Inventory</h1>
                 <p className="aura-body-small text-muted-gray">{products.length} products · {products.filter(p => p.inStock).length} in stock</p>
               </div>
               <div className="flex items-center gap-2">
-                <div className="flex items-center rounded-md" style={{ border: '1.5px solid #E8D5A3', backgroundColor: '#FFFDF7' }}>
+                <div className="flex items-center rounded-md" style={{ border: '1.5px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)' }}>
                   <Search className="w-4 h-4 ml-3 text-muted-gray" />
                   <input
                     type="text"
@@ -329,10 +330,10 @@ export default function AdminDashboard() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search products..."
                     className="px-2 py-2 text-sm bg-transparent outline-none w-40 sm:w-56"
-                    style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}
+                    style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}
                   />
                 </div>
-                <button className="flex items-center gap-1.5 px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ backgroundColor: '#D4AF37', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}>
+                <button className="flex items-center gap-1.5 px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)', fontFamily: "'Poppins', sans-serif" }}>
                   <Plus className="w-3.5 h-3.5" />
                   Add
                 </button>
@@ -340,17 +341,17 @@ export default function AdminDashboard() {
             </div>
 
             {/* Table */}
-            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
               <div className="overflow-x-auto">
                 <table className="w-full" style={{ fontFamily: "'Poppins', sans-serif" }}>
                   <thead>
-                    <tr style={{ borderBottom: '1px solid #E8D5A3', backgroundColor: 'rgba(245,237,218,0.3)' }}>
-                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: '#8A8A8A' }}>Product</th>
-                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold hidden sm:table-cell" style={{ color: '#8A8A8A' }}>SKU</th>
-                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold hidden md:table-cell" style={{ color: '#8A8A8A' }}>Category</th>
-                      <th className="text-right py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: '#8A8A8A' }}>Price</th>
-                      <th className="text-center py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: '#8A8A8A' }}>Stock</th>
-                      <th className="text-right py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: '#8A8A8A' }}>Actions</th>
+                    <tr style={{ borderBottom: '1px solid var(--color-gold-soft)', backgroundColor: 'rgba(245,237,218,0.3)' }}>
+                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--color-muted-gray)' }}>Product</th>
+                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold hidden sm:table-cell" style={{ color: 'var(--color-muted-gray)' }}>SKU</th>
+                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold hidden md:table-cell" style={{ color: 'var(--color-muted-gray)' }}>Category</th>
+                      <th className="text-right py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--color-muted-gray)' }}>Price</th>
+                      <th className="text-center py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--color-muted-gray)' }}>Stock</th>
+                      <th className="text-right py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--color-muted-gray)' }}>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -358,28 +359,28 @@ export default function AdminDashboard() {
                       <tr key={product.id} className="transition-colors hover:bg-gold/5" style={{ borderBottom: '1px solid rgba(232,213,163,0.3)' }}>
                         <td className="py-3 px-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-md overflow-hidden shrink-0" style={{ border: '1px solid #E8D5A3' }}>
-                              <img src={product.image} alt={product.name} className="w-full h-full object-contain" loading="lazy" />
+                            <div className="w-10 h-10 rounded-md overflow-hidden shrink-0 relative" style={{ border: '1px solid var(--color-gold-soft)' }}>
+                              <Image src={product.image} alt={product.name} fill className="w-full h-full object-contain" sizes="40px" />
                             </div>
                             <div className="min-w-0">
-                              <p className="text-sm font-medium truncate" style={{ color: '#2C2C2C' }}>{product.name}</p>
+                              <p className="text-sm font-medium truncate" style={{ color: 'var(--surface-dark)' }}>{product.name}</p>
                               {product.badge && (
-                                <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded" style={{ backgroundColor: 'rgba(212,175,55,0.15)', color: '#B8941F' }}>
+                                <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded" style={{ backgroundColor: 'rgba(212,175,55,0.15)', color: 'var(--color-gold-text)' }}>
                                   {product.badge}
                                 </span>
                               )}
                             </div>
                           </div>
                         </td>
-                        <td className="py-3 px-4 text-sm hidden sm:table-cell" style={{ color: '#8A8A8A' }}>{product.sku || '—'}</td>
-                        <td className="py-3 px-4 text-sm hidden md:table-cell" style={{ color: '#8A8A8A' }}>
+                        <td className="py-3 px-4 text-sm hidden sm:table-cell" style={{ color: 'var(--color-muted-gray)' }}>{product.sku || '—'}</td>
+                        <td className="py-3 px-4 text-sm hidden md:table-cell" style={{ color: 'var(--color-muted-gray)' }}>
                           {categories.find(c => c.id === product.category)?.name || product.category}
                         </td>
-                        <td className="py-3 px-4 text-right text-sm font-semibold" style={{ color: '#2C2C2C' }}>{formatPKR(product.price)}</td>
+                        <td className="py-3 px-4 text-right text-sm font-semibold" style={{ color: 'var(--surface-dark)' }}>{formatPKR(product.price)}</td>
                         <td className="py-3 px-4 text-center">
                           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold" style={{
                             backgroundColor: product.inStock ? 'rgba(34,197,94,0.1)' : 'rgba(220,38,38,0.1)',
-                            color: product.inStock ? '#22C55E' : '#DC2626',
+                            color: product.inStock ? 'var(--color-success)' : 'var(--color-danger)',
                           }}>
                             {product.inStock ? <CheckCircle className="w-2.5 h-2.5" /> : <XCircle className="w-2.5 h-2.5" />}
                             {product.inStock ? 'In Stock' : 'Out'}
@@ -387,10 +388,10 @@ export default function AdminDashboard() {
                         </td>
                         <td className="py-3 px-4 text-right">
                           <div className="flex items-center justify-end gap-1">
-                            <button className="w-7 h-7 rounded-md flex items-center justify-center transition-colors hover:bg-gold/10 cursor-pointer" style={{ color: '#8A8A8A' }}>
+                            <button className="w-7 h-7 rounded-md flex items-center justify-center transition-colors hover:bg-gold/10 cursor-pointer" style={{ color: 'var(--color-muted-gray)' }}>
                               <Edit2 className="w-3.5 h-3.5" />
                             </button>
-                            <button className="w-7 h-7 rounded-md flex items-center justify-center transition-colors hover:bg-red-50 hover:text-red-500 cursor-pointer" style={{ color: '#8A8A8A' }}>
+                            <button className="w-7 h-7 rounded-md flex items-center justify-center transition-colors hover:bg-red-50 hover:text-red-500 cursor-pointer" style={{ color: 'var(--color-muted-gray)' }}>
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           </div>
@@ -413,20 +414,20 @@ export default function AdminDashboard() {
         {/* ═══ ORDERS ═══ */}
         {activeTab === 'orders' && (
           <div ref={fadeIn}>
-            <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>Orders</h1>
+            <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Orders</h1>
             <p className="aura-body-small text-muted-gray mb-6">{mockOrders.length} total orders</p>
 
-            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
               <div className="overflow-x-auto">
                 <table className="w-full" style={{ fontFamily: "'Poppins', sans-serif" }}>
                   <thead>
-                    <tr style={{ borderBottom: '1px solid #E8D5A3', backgroundColor: 'rgba(245,237,218,0.3)' }}>
-                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: '#8A8A8A' }}>Order ID</th>
-                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: '#8A8A8A' }}>Customer</th>
-                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold hidden sm:table-cell" style={{ color: '#8A8A8A' }}>Date</th>
-                      <th className="text-center py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: '#8A8A8A' }}>Items</th>
-                      <th className="text-center py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: '#8A8A8A' }}>Status</th>
-                      <th className="text-right py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: '#8A8A8A' }}>Total</th>
+                    <tr style={{ borderBottom: '1px solid var(--color-gold-soft)', backgroundColor: 'rgba(245,237,218,0.3)' }}>
+                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--color-muted-gray)' }}>Order ID</th>
+                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--color-muted-gray)' }}>Customer</th>
+                      <th className="text-left py-3 px-4 text-xs uppercase tracking-wider font-semibold hidden sm:table-cell" style={{ color: 'var(--color-muted-gray)' }}>Date</th>
+                      <th className="text-center py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--color-muted-gray)' }}>Items</th>
+                      <th className="text-center py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--color-muted-gray)' }}>Status</th>
+                      <th className="text-right py-3 px-4 text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--color-muted-gray)' }}>Total</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -435,17 +436,17 @@ export default function AdminDashboard() {
                       const StatusIcon = cfg.icon;
                       return (
                         <tr key={order.id} className="transition-colors hover:bg-gold/5 cursor-pointer" style={{ borderBottom: '1px solid rgba(232,213,163,0.3)' }}>
-                          <td className="py-3 px-4 text-sm font-semibold" style={{ color: '#2C2C2C' }}>#{order.id}</td>
-                          <td className="py-3 px-4 text-sm" style={{ color: '#5A5A5A' }}>{order.customer}</td>
-                          <td className="py-3 px-4 text-sm hidden sm:table-cell" style={{ color: '#8A8A8A' }}>{order.date}</td>
-                          <td className="py-3 px-4 text-center text-sm" style={{ color: '#5A5A5A' }}>{order.items}</td>
+                          <td className="py-3 px-4 text-sm font-semibold" style={{ color: 'var(--surface-dark)' }}>#{order.id}</td>
+                          <td className="py-3 px-4 text-sm" style={{ color: 'var(--color-warm-gray)' }}>{order.customer}</td>
+                          <td className="py-3 px-4 text-sm hidden sm:table-cell" style={{ color: 'var(--color-muted-gray)' }}>{order.date}</td>
+                          <td className="py-3 px-4 text-center text-sm" style={{ color: 'var(--color-warm-gray)' }}>{order.items}</td>
                           <td className="py-3 px-4 text-center">
                             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold" style={{ backgroundColor: cfg.bg, color: cfg.color }}>
                               <StatusIcon className="w-2.5 h-2.5" />
                               {order.status}
                             </span>
                           </td>
-                          <td className="py-3 px-4 text-right text-sm font-bold" style={{ color: '#2C2C2C' }}>{formatPKR(order.total)}</td>
+                          <td className="py-3 px-4 text-right text-sm font-bold" style={{ color: 'var(--surface-dark)' }}>{formatPKR(order.total)}</td>
                         </tr>
                       );
                     })}
@@ -459,7 +460,7 @@ export default function AdminDashboard() {
         {/* ═══ ANALYTICS ═══ */}
         {activeTab === 'analytics' && (
           <div ref={fadeIn}>
-            <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>Analytics</h1>
+            <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Analytics</h1>
             <p className="aura-body-small text-muted-gray mb-6">Business performance insights</p>
 
             {/* KPI Row */}
@@ -470,9 +471,9 @@ export default function AdminDashboard() {
                 { label: 'Bounce Rate', value: '38.5%', change: '-2.1%', up: true },
                 { label: 'Page Views', value: '12.4K', change: '+8.7%', up: true },
               ].map((kpi) => (
-                <div key={kpi.label} className="rounded-lg p-5" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                  <p className="text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>{kpi.value}</p>
-                  <p className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>{kpi.label}</p>
+                <div key={kpi.label} className="rounded-lg p-5" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+                  <p className="text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>{kpi.value}</p>
+                  <p className="text-xs" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>{kpi.label}</p>
                   <span className="text-[11px] font-semibold text-green-600 flex items-center gap-0.5 mt-1">
                     <TrendingUp className="w-3 h-3" />
                     {kpi.change}
@@ -483,8 +484,8 @@ export default function AdminDashboard() {
 
             {/* Revenue + Orders Chart */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-              <div className="rounded-lg p-6" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>Revenue Trend</h2>
+              <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+                <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Revenue Trend</h2>
                 <div className="flex items-end justify-between gap-3 h-40">
                   {mockRevenue.map((data) => {
                     const maxRev = Math.max(...mockRevenue.map(r => r.revenue));
@@ -492,18 +493,18 @@ export default function AdminDashboard() {
                       <div key={data.month} className="flex-1 flex flex-col items-center gap-2">
                         <div className="w-full rounded-t-md" style={{
                           height: `${(data.revenue / maxRev) * 100}%`,
-                          background: 'linear-gradient(180deg, #D4AF37 0%, #C9A22E 100%)',
+                          background: 'linear-gradient(180deg, var(--color-gold) 0%, var(--color-gold-hover) 100%)',
                           minHeight: '6px',
                         }} />
-                        <span className="text-[10px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>{data.month}</span>
+                        <span className="text-[10px]" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>{data.month}</span>
                       </div>
                     );
                   })}
                 </div>
               </div>
 
-              <div className="rounded-lg p-6" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-                <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>Orders Trend</h2>
+              <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+                <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Orders Trend</h2>
                 <div className="flex items-end justify-between gap-3 h-40">
                   {mockRevenue.map((data) => {
                     const maxOrd = Math.max(...mockRevenue.map(r => r.orders));
@@ -511,10 +512,10 @@ export default function AdminDashboard() {
                       <div key={data.month} className="flex-1 flex flex-col items-center gap-2">
                         <div className="w-full rounded-t-md" style={{
                           height: `${(data.orders / maxOrd) * 100}%`,
-                          background: 'linear-gradient(180deg, #2C2C2C 0%, #3A3A3A 100%)',
+                          background: 'linear-gradient(180deg, var(--surface-dark) 0%, #3A3A3A 100%)',
                           minHeight: '6px',
                         }} />
-                        <span className="text-[10px]" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>{data.month}</span>
+                        <span className="text-[10px]" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>{data.month}</span>
                       </div>
                     );
                   })}
@@ -523,8 +524,8 @@ export default function AdminDashboard() {
             </div>
 
             {/* Category breakdown */}
-            <div className="rounded-lg p-6" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-              <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>Products by Category</h2>
+            <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+              <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Products by Category</h2>
               <div className="space-y-3">
                 {categories.map((cat) => {
                   const count = products.filter(p => p.category === cat.id).length;
@@ -532,11 +533,11 @@ export default function AdminDashboard() {
                   return (
                     <div key={cat.id}>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>{cat.name}</span>
-                        <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>{count} ({percent}%)</span>
+                        <span className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-warm-gray)' }}>{cat.name}</span>
+                        <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}>{count} ({percent}%)</span>
                       </div>
-                      <div className="w-full h-2 rounded-full overflow-hidden" style={{ backgroundColor: '#F5EDDA' }}>
-                        <div className="h-full rounded-full" style={{ width: `${percent}%`, backgroundColor: '#D4AF37' }} />
+                      <div className="w-full h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
+                        <div className="h-full rounded-full" style={{ width: `${percent}%`, backgroundColor: 'var(--color-gold)' }} />
                       </div>
                     </div>
                   );
@@ -551,11 +552,11 @@ export default function AdminDashboard() {
           <div ref={fadeIn}>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h1 className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>Notifications</h1>
+                <h1 className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Notifications</h1>
                 <p className="aura-body-small text-muted-gray">{unreadCount} unread</p>
               </div>
               {unreadCount > 0 && (
-                <button onClick={markAllRead} className="text-sm font-medium text-gold hover:underline cursor-pointer" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                <button onClick={markAllRead} className="text-sm font-medium text-gold-text hover:underline cursor-pointer" style={{ fontFamily: "'Poppins', sans-serif" }}>
                   Mark all as read
                 </button>
               )}
@@ -569,26 +570,26 @@ export default function AdminDashboard() {
                     key={notif.id}
                     className="rounded-lg p-4 flex items-start gap-4 transition-all"
                     style={{
-                      backgroundColor: notif.read ? '#FFFDF7' : 'rgba(212,175,55,0.05)',
-                      border: notif.read ? '1px solid #E8D5A3' : '1px solid rgba(212,175,55,0.3)',
+                      backgroundColor: notif.read ? 'var(--surface-card)' : 'rgba(212,175,55,0.05)',
+                      border: notif.read ? '1px solid var(--color-gold-soft)' : '1px solid rgba(212,175,55,0.3)',
                     }}
                   >
                     <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{
                       backgroundColor: notif.type === 'stock' ? 'rgba(220,38,38,0.1)' : 'rgba(212,175,55,0.1)',
                     }}>
-                      <NotifIcon className="w-5 h-5" style={{ color: notif.type === 'stock' ? '#DC2626' : '#D4AF37' }} />
+                      <NotifIcon className="w-5 h-5" style={{ color: notif.type === 'stock' ? 'var(--color-danger)' : 'var(--color-gold)' }} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
-                        <p className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: '#2C2C2C' }}>
+                        <p className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}>
                           {notif.title}
                         </p>
                         {!notif.read && <span className="w-2 h-2 rounded-full bg-gold shrink-0" />}
                       </div>
-                      <p className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+                      <p className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-warm-gray)' }}>
                         {notif.message}
                       </p>
-                      <p className="text-[11px] mt-1" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>
+                      <p className="text-[11px] mt-1" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>
                         {notif.time}
                       </p>
                     </div>
@@ -603,46 +604,46 @@ export default function AdminDashboard() {
         {/* ═══ SETTINGS ═══ */}
         {activeTab === 'settings' && (
           <div ref={fadeIn}>
-            <h1 className="text-2xl font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>Admin Settings</h1>
+            <h1 className="text-2xl font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Admin Settings</h1>
 
-            <div className="rounded-lg p-6 mb-6" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-              <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}>Store Information</h2>
+            <div className="rounded-lg p-6 mb-6" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+              <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Store Information</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>Store Name</label>
-                  <input type="text" defaultValue="Aura Living" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid #E8D5A3', backgroundColor: '#FFFDF7', color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }} />
+                  <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>Store Name</label>
+                  <input type="text" defaultValue="Aura Living" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)', color: 'var(--surface-dark)', fontFamily: "'Poppins', sans-serif" }} />
                 </div>
                 <div>
-                  <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>Currency</label>
-                  <select className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid #E8D5A3', backgroundColor: '#FFFDF7', color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }}>
+                  <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>Currency</label>
+                  <select className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)', color: 'var(--surface-dark)', fontFamily: "'Poppins', sans-serif" }}>
                     <option>PKR — Pakistani Rupee</option>
                     <option>USD — US Dollar</option>
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>Free Shipping Threshold</label>
-                  <input type="text" defaultValue="2999" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid #E8D5A3', backgroundColor: '#FFFDF7', color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }} />
+                  <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>Free Shipping Threshold</label>
+                  <input type="text" defaultValue="2999" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)', color: 'var(--surface-dark)', fontFamily: "'Poppins', sans-serif" }} />
                 </div>
                 <div>
-                  <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}>Tax Rate (%)</label>
-                  <input type="text" defaultValue="0" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid #E8D5A3', backgroundColor: '#FFFDF7', color: '#2C2C2C', fontFamily: "'Poppins', sans-serif" }} />
+                  <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>Tax Rate (%)</label>
+                  <input type="text" defaultValue="0" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)', color: 'var(--surface-dark)', fontFamily: "'Poppins', sans-serif" }} />
                 </div>
               </div>
-              <button className="mt-4 px-6 py-2.5 rounded-md text-sm font-semibold uppercase tracking-wider cursor-pointer" style={{ backgroundColor: '#D4AF37', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}>
+              <button className="mt-4 px-6 py-2.5 rounded-md text-sm font-semibold uppercase tracking-wider cursor-pointer" style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)', fontFamily: "'Poppins', sans-serif" }}>
                 Save Changes
               </button>
             </div>
 
             <div className="rounded-lg p-6" style={{ backgroundColor: 'rgba(220,38,38,0.03)', border: '1px solid rgba(220,38,38,0.2)' }}>
-              <h2 className="text-lg font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", color: '#DC2626' }}>Danger Zone</h2>
-              <p className="text-sm mb-4" style={{ fontFamily: "'Poppins', sans-serif", color: '#5A5A5A' }}>
+              <h2 className="text-lg font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--color-danger)' }}>Danger Zone</h2>
+              <p className="text-sm mb-4" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-warm-gray)' }}>
                 Reset all store data, clear cache, or delete the store entirely. These actions are irreversible.
               </p>
               <div className="flex flex-wrap gap-3">
-                <button className="px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ backgroundColor: '#DC2626', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}>
+                <button className="px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ backgroundColor: 'var(--color-danger)', color: 'var(--text-on-dark)', fontFamily: "'Poppins', sans-serif" }}>
                   Reset Store Data
                 </button>
-                <button className="px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ border: '1px solid #DC2626', color: '#DC2626', backgroundColor: 'transparent', fontFamily: "'Poppins', sans-serif" }}>
+                <button className="px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ border: '1px solid var(--color-danger)', color: 'var(--color-danger)', backgroundColor: 'transparent', fontFamily: "'Poppins', sans-serif" }}>
                   Clear Cache
                 </button>
               </div>

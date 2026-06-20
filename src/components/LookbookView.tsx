@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Camera, ArrowRight, Sun, UtensilsCrossed, Moon, Flower2 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 const scenes = [
@@ -88,7 +90,7 @@ export default function LookbookView() {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div ref={containerRef} className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
@@ -106,51 +108,44 @@ export default function LookbookView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
-            <Camera className="w-8 h-8" style={{ color: '#D4AF37' }} />
+            <Camera className="w-8 h-8" style={{ color: 'var(--color-gold)' }} />
           </div>
-          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
+          <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
           <h1 className="aura-hero-title text-white" >
             The Lookbook
           </h1>
-          <p className="text-[#E8D5A3] text-sm sm:text-base mt-4 max-w-md leading-relaxed" >
+          <p className="text-[var(--color-gold-soft)] text-sm sm:text-base mt-4 max-w-md leading-relaxed" >
             Curated spaces, inspired living
           </p>
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => setPage('home')}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            Home
-          </button>
-          <span className="text-sm" style={{ color: '#8A8A8A' }}>/</span>
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>Lookbook</span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'Home', onClick: () => setPage('home') },
+          { label: 'Lookbook' },
+        ]}
+      />
 
       {/* Intro */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >
+          <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >
             Editorial Spaces
           </span>
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mt-3 mb-4" >
+          <h2 className="text-[var(--surface-dark)] text-2xl sm:text-3xl md:text-4xl font-bold mt-3 mb-4" >
             Styled for Living
           </h2>
           <GoldDivider />
-          <p className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed mt-6" >
+          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg leading-relaxed mt-6" >
             Each scene is a carefully composed vision — a mood board brought to life. Discover how our pieces come together to create spaces that tell your story.
           </p>
         </div>
@@ -167,24 +162,24 @@ export default function LookbookView() {
               {index > 0 && (
                 <div className="py-6 px-4 sm:px-6 lg:px-8">
                   <div className="max-w-7xl mx-auto flex justify-center">
-                    <div className="w-full max-w-xs h-px" style={{ backgroundColor: '#D4AF37' }} />
+                    <div className="w-full max-w-xs h-px" style={{ backgroundColor: 'var(--color-gold)' }} />
                   </div>
                 </div>
               )}
 
               <section
                 className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
-                style={{ backgroundColor: index % 2 === 0 ? '#FAF8F5' : '#F5EDDA' }}
+                style={{ backgroundColor: index % 2 === 0 ? 'var(--surface-page)' : 'var(--color-gold-pale)' }}
               >
                 <div className="max-w-7xl mx-auto">
                   <div className={`flex flex-col ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-12 items-center`}>
                     {/* Scene image */}
                     <div className="w-full lg:w-1/2">
                       <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden img-zoom">
-                        <img src={scene.image} alt={scene.title} className="w-full h-full object-cover lookbook-scene-image" loading="lazy" />
+                        <Image src={scene.image} alt={scene.title} fill className="w-full h-full object-cover lookbook-scene-image" sizes="(min-width: 1024px) 50vw, 100vw" />
                         {/* Decorative corner accents */}
-                        <div className="absolute top-4 left-4 w-10 h-10 border-t-2 border-l-2 border-[#D4AF37]/40" />
-                        <div className="absolute bottom-4 right-4 w-10 h-10 border-b-2 border-r-2 border-[#D4AF37]/40" />
+                        <div className="absolute top-4 left-4 w-10 h-10 border-t-2 border-l-2 border-[var(--color-gold)]/40" />
+                        <div className="absolute bottom-4 right-4 w-10 h-10 border-b-2 border-r-2 border-[var(--color-gold)]/40" />
 
                         {/* Scene number watermark */}
                         <div
@@ -199,20 +194,20 @@ export default function LookbookView() {
                     {/* Text content */}
                     <div className="w-full lg:w-1/2 flex flex-col gap-4 sm:gap-5">
                       <span
-                        className="text-[#D4AF37] text-sm sm:text-base font-bold tracking-wider"
+                        className="text-[var(--color-gold)] text-sm sm:text-base font-bold tracking-wider"
                         
                       >
                         Scene {scene.number}
                       </span>
                       <h3
-                        className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
+                        className="text-[var(--surface-dark)] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
                         
                       >
                         {scene.title}
                       </h3>
                       <GoldDivider />
                       <p
-                        className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed"
+                        className="text-[var(--color-warm-gray)] text-base sm:text-lg leading-relaxed"
                         
                       >
                         {scene.description}
@@ -239,15 +234,15 @@ export default function LookbookView() {
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-            <Camera className="w-8 h-8" style={{ color: '#D4AF37' }} />
+            <Camera className="w-8 h-8" style={{ color: 'var(--color-gold)' }} />
           </div>
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
+          <h2 className="text-[var(--surface-dark)] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Create Your Own Story
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
+          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Every home has a story waiting to be told. Explore our full collection and bring your vision to life with pieces that speak to you.
           </p>
           <PremiumButton variant="gold" onClick={() => setPage('shop')}>

@@ -2,8 +2,9 @@
 
 import { useGsapFadeIn, useGsapStagger, useGsapScaleIn } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
-import { FileText, ChevronRight, CheckCircle, Shield, CreditCard, Truck, RotateCcw, Lock, AlertTriangle, Eye, Mail, RefreshCw } from 'lucide-react';
+import { FileText, CheckCircle, Shield, CreditCard, Truck, RotateCcw, Lock, AlertTriangle, Eye, Mail, RefreshCw } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 const sections = [
@@ -114,7 +115,7 @@ export default function TermsView() {
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
@@ -132,86 +133,79 @@ export default function TermsView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
-            <FileText className="w-8 h-8" style={{ color: '#B8941F' }} />
+            <FileText className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
           </div>
-          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
+          <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
           <h1 className="aura-hero-title text-white" >
             Terms of Service
           </h1>
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
-          <p className="text-[#E8D5A3] text-sm mt-4" >
+          <p className="text-[var(--color-gold-soft)] text-sm mt-4" >
             Last updated: June 2026
           </p>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => setPage('home')}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            Home
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#8A8A8A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>Terms of Service</span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'Home', onClick: () => setPage('home') },
+          { label: 'Terms of Service' },
+        ]}
+      />
 
       {/* Intro */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed" >
+          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg leading-relaxed" >
             Please read these Terms of Service carefully before using the Aura Living website. By accessing or using our site, you agree to be bound by these terms.
           </p>
         </div>
       </section>
 
       {/* Sections */}
-      <section className="py-4 sm:py-8 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F5EDDA' }}>
+      <section className="py-4 sm:py-8 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
         <div ref={contentRef} className="max-w-4xl mx-auto flex flex-col gap-6">
           {sections.map((section) => {
             const SectionIcon = section.icon;
             return (
               <div
                 key={section.number}
-                className="terms-section rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
-                style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                className="terms-section rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
+                style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
               >
                 <div className="flex items-start gap-4 sm:gap-5">
                   <div className="flex flex-col items-center shrink-0">
                     <div className="w-11 h-11 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                      <SectionIcon className="w-5 h-5" style={{ color: '#B8941F' }} />
+                      <SectionIcon className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                     </div>
                   </div>
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-3 mb-1">
                       <span
                         className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm"
-                        style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37' }}
+                        style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}
                       >
                         {String(section.number).padStart(2, '0')}
                       </span>
-                      <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold" >
+                      <h3 className="text-[var(--surface-dark)] text-lg sm:text-xl font-semibold" >
                         {section.title}
                       </h3>
                     </div>
-                    <p className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed" >
+                    <p className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed" >
                       {section.content}
                     </p>
                     {section.linkText && section.linkPage && (
                       <button
                         onClick={() => setPage(section.linkPage)}
-                        className="text-sm font-semibold transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer mt-1 self-start"
-                        style={{ color: '#D4AF37', background: 'none' }}
+                        className="text-sm font-semibold transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer mt-1 self-start"
+                        style={{ color: 'var(--color-gold)', background: 'none' }}
                       >
                         {section.linkText} →
                       </button>
@@ -228,17 +222,17 @@ export default function TermsView() {
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-            <Shield className="w-8 h-8" style={{ color: '#B8941F' }} />
+            <Shield className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
           </div>
-          <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-4" >
+          <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-4" >
             Questions About Our Terms?
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
+          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             We are here to help. If you have any questions or concerns about our terms, feel free to reach out to our team at{' '}
-            <a href="mailto:legal@auraliving.pk" className="font-semibold transition-colors duration-200 hover:text-[#C9A22E]" style={{ color: '#D4AF37' }}>
+            <a href="mailto:legal@auraliving.pk" className="font-semibold transition-colors duration-200 hover:text-[var(--color-gold-hover)]" style={{ color: 'var(--color-gold)' }}>
               legal@auraliving.pk
             </a>
           </p>

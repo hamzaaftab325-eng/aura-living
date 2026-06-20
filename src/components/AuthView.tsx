@@ -10,11 +10,11 @@ import {
   Eye,
   EyeOff,
   ArrowRight,
-  ChevronRight,
   Sparkles,
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { useToast } from '@/hooks/use-toast';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 /* ═══════════════════════════════════════════════════════════
    SocialButton — Google / Facebook / Apple login button
@@ -32,9 +32,9 @@ function SocialButton({
     <button
       onClick={onClick}
       className="flex items-center justify-center gap-3 w-full py-3.5 rounded-lg text-sm font-medium transition-all duration-300 hover:shadow-md active:scale-[0.98] cursor-pointer"
-      style={{ color: '#2C2C2C',
-        backgroundColor: '#FFFFFF',
-        border: '1px solid #E8D5A3',
+      style={{ color: 'var(--surface-dark)',
+        backgroundColor: 'var(--text-on-dark)',
+        border: '1px solid var(--color-gold-soft)',
       }}
     >
       {icon}
@@ -73,7 +73,7 @@ function InputField({
   return (
     <div
       className="relative flex items-center rounded-lg transition-all duration-300"
-      style={{ border: isFocused ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
+      style={{ border: isFocused ? '2px solid var(--color-gold)' : '1.5px solid var(--color-gold-soft)',
         backgroundColor: isFocused ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.7)',
         boxShadow: isFocused
           ? '0 0 20px rgba(212,175,55,0.2), 0 0 40px rgba(212,175,55,0.08)'
@@ -83,7 +83,7 @@ function InputField({
       <label htmlFor={inputId} className="sr-only">{ariaLabel}</label>
       <div
         className="flex items-center justify-center pl-4"
-        style={{ color: isFocused ? '#D4AF37' : '#B8A99A' }}
+        style={{ color: isFocused ? 'var(--color-gold)' : 'var(--color-taupe)' }}
         aria-hidden="true"
       >
         {icon}
@@ -97,7 +97,7 @@ function InputField({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className="w-full px-2 py-4 text-sm bg-transparent outline-none"
-        style={{ color: '#2C2C2C',
+        style={{ color: 'var(--surface-dark)',
         }}
         aria-label={ariaLabel}
       />
@@ -105,8 +105,8 @@ function InputField({
         <button
           type="button"
           onClick={onToggle}
-          className="pr-4 cursor-pointer transition-colors duration-200 hover:text-[#D4AF37]"
-          style={{ color: '#B8A99A', background: 'none' }}
+          className="pr-4 cursor-pointer transition-colors duration-200 hover:text-[var(--color-gold)]"
+          style={{ color: 'var(--color-taupe)', background: 'none' }}
           aria-label={isVisible ? 'Hide password' : 'Show password'}
         >
           {isVisible ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -250,7 +250,7 @@ export default function AuthView() {
   };
 
   return (
-    <div className="w-full min-h-screen flex" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full min-h-screen flex" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* ═══ Left Panel — Decorative Image + Branding ═══ */}
       <div
         className="hidden lg:flex w-[45%] xl:w-[50%] relative overflow-hidden flex-col items-center justify-center"
@@ -269,8 +269,8 @@ export default function AuthView() {
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.2) 100%)' }} />
 
         {/* Decorative corner borders */}
-        <div className="absolute top-8 left-8 w-20 h-20 border-t-2 border-l-2 border-[#D4AF37]/40 pointer-events-none" />
-        <div className="absolute bottom-8 right-8 w-20 h-20 border-b-2 border-r-2 border-[#D4AF37]/40 pointer-events-none" />
+        <div className="absolute top-8 left-8 w-20 h-20 border-t-2 border-l-2 border-[var(--color-gold)]/40 pointer-events-none" />
+        <div className="absolute bottom-8 right-8 w-20 h-20 border-b-2 border-r-2 border-[var(--color-gold)]/40 pointer-events-none" />
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center text-center px-12">
@@ -287,12 +287,12 @@ export default function AuthView() {
             Where Comfort<br />Meets Style
           </h2>
           <div className="flex items-center gap-3 mt-2">
-            <div className="w-10 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 h-px bg-[var(--color-gold)]/60" />
           </div>
           <p
-            className="text-[#E8D5A3] text-sm mt-6 max-w-sm leading-relaxed"
+            className="text-[var(--color-gold-soft)] text-sm mt-6 max-w-sm leading-relaxed"
             
           >
             Discover handpicked home decor that turns houses into homes. Join our community of decor enthusiasts across Pakistan.
@@ -305,7 +305,7 @@ export default function AuthView() {
               { number: '4.8', label: 'Rating' },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center">
-                <span className="text-[#D4AF37] text-xl font-bold" >{stat.number}</span>
+                <span className="text-[var(--color-gold)] text-xl font-bold" >{stat.number}</span>
                 <span className="text-white/60 text-[10px] uppercase tracking-wider mt-1" >{stat.label}</span>
               </div>
             ))}
@@ -338,21 +338,12 @@ export default function AuthView() {
       {/* ═══ Right Panel — Form ═══ */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 sm:px-8 lg:px-16 pt-24 sm:pt-28 pb-8">
         {/* Breadcrumb */}
-        <div className="w-full max-w-md mb-6">
-          <nav className="flex items-center gap-1.5">
-            <button
-              onClick={() => setPage('home')}
-              className="text-xs transition-colors hover:text-[#D4AF37]"
-              style={{ color: '#8A8A8A' }}
-            >
-              Home
-            </button>
-            <ChevronRight size={12} style={{ color: '#8A8A8A' }} />
-            <span className="text-xs font-medium" style={{ color: '#B8941F' }}>
-              {mode === 'login' ? 'Sign In' : 'Create Account'}
-            </span>
-          </nav>
-        </div>
+        <Breadcrumb
+          items={[
+            { label: 'Home', onClick: () => setPage('home') },
+            { label: mode === 'login' ? 'Sign In' : 'Create Account' },
+          ]}
+        />
 
         {/* Logo (mobile) */}
         <div className="lg:hidden mb-6">
@@ -377,19 +368,19 @@ export default function AuthView() {
           {/* Title with blur animation */}
           <div className="text-center mb-2">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+              <Sparkles className="w-4 h-4 text-[var(--color-gold)]" />
               <span
                 className="text-[10px] font-semibold uppercase tracking-[0.2em]"
-                style={{ color: '#D4AF37' }}
+                style={{ color: 'var(--color-gold)' }}
               >
                 {mode === 'login' ? 'Welcome Back' : 'Join the Family'}
               </span>
-              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+              <Sparkles className="w-4 h-4 text-[var(--color-gold)]" />
             </div>
             <h1
               ref={titleRef}
               className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold"
-              style={{ color: '#2C2C2C' }}
+              style={{ color: 'var(--surface-dark)' }}
             >
               {mode === 'login' ? 'Sign In to Aura' : 'Create Account'}
             </h1>
@@ -426,11 +417,11 @@ export default function AuthView() {
 
           {/* Divider */}
           <div className="flex items-center gap-4 mb-6">
-            <div className="flex-1 h-px bg-[#E8D5A3]" />
-            <span className="text-[11px] uppercase tracking-wider" style={{ color: '#B8A99A' }}>
+            <div className="flex-1 h-px bg-[var(--color-gold-soft)]" />
+            <span className="text-[11px] uppercase tracking-wider" style={{ color: 'var(--color-taupe)' }}>
               or
             </span>
-            <div className="flex-1 h-px bg-[#E8D5A3]" />
+            <div className="flex-1 h-px bg-[var(--color-gold-soft)]" />
           </div>
 
           {/* Form */}
@@ -488,8 +479,8 @@ export default function AuthView() {
                     aria-checked={rememberMe}
                     aria-label="Remember me on this device"
                     className="w-4 h-4 rounded flex items-center justify-center transition-all duration-200"
-                    style={{ border: rememberMe ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
-                      backgroundColor: rememberMe ? '#D4AF37' : 'transparent',
+                    style={{ border: rememberMe ? '2px solid var(--color-gold)' : '1.5px solid var(--color-gold-soft)',
+                      backgroundColor: rememberMe ? 'var(--color-gold)' : 'transparent',
                       padding: 0,
                     }}
                     onClick={() => setRememberMe(!rememberMe)}
@@ -500,14 +491,14 @@ export default function AuthView() {
                       </svg>
                     )}
                   </button>
-                  <span className="text-xs" style={{ color: '#8A8A8A' }}>
+                  <span className="text-xs" style={{ color: 'var(--color-muted-gray)' }}>
                     Remember me
                   </span>
                 </label>
                 <button
                   type="button"
-                  className="text-xs font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                  style={{ color: '#D4AF37', background: 'none' }}
+                  className="text-xs font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+                  style={{ color: 'var(--color-gold)', background: 'none' }}
                   onClick={() => { setPage('forgot-password'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 >
                   Forgot Password?
@@ -524,8 +515,8 @@ export default function AuthView() {
                   aria-checked={agreeTerms}
                   aria-label="I agree to the Terms of Service and Privacy Policy"
                   className="w-4 h-4 rounded flex items-center justify-center shrink-0 mt-0.5 transition-all duration-200"
-                  style={{ border: agreeTerms ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
-                    backgroundColor: agreeTerms ? '#D4AF37' : 'transparent',
+                  style={{ border: agreeTerms ? '2px solid var(--color-gold)' : '1.5px solid var(--color-gold-soft)',
+                    backgroundColor: agreeTerms ? 'var(--color-gold)' : 'transparent',
                     padding: 0,
                   }}
                   onClick={() => setAgreeTerms(!agreeTerms)}
@@ -536,11 +527,11 @@ export default function AuthView() {
                     </svg>
                   )}
                 </button>
-                <span className="text-xs leading-relaxed" style={{ color: '#8A8A8A' }}>
+                <span className="text-xs leading-relaxed" style={{ color: 'var(--color-muted-gray)' }}>
                   I agree to the{' '}
-                  <span className="text-[#D4AF37] font-medium cursor-pointer hover:underline" onClick={() => { setPage('terms'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Terms of Service</span>
+                  <span className="text-[var(--color-gold)] font-medium cursor-pointer hover:underline" onClick={() => { setPage('terms'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Terms of Service</span>
                   {' '}and{' '}
-                  <span className="text-[#D4AF37] font-medium cursor-pointer hover:underline" onClick={() => { setPage('privacy'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Privacy Policy</span>
+                  <span className="text-[var(--color-gold)] font-medium cursor-pointer hover:underline" onClick={() => { setPage('privacy'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Privacy Policy</span>
                 </span>
               </label>
             )}
@@ -549,9 +540,9 @@ export default function AuthView() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="group w-full flex items-center justify-center gap-2 py-4 rounded-lg text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:bg-[#C9A22E] active:scale-[0.98] cursor-pointer mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
-              style={{ backgroundColor: '#D4AF37',
-                color: '#FFFFFF',
+              className="group w-full flex items-center justify-center gap-2 py-4 rounded-lg text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:bg-[var(--color-gold-hover)] active:scale-[0.98] cursor-pointer mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              style={{ backgroundColor: 'var(--color-gold)',
+                color: 'var(--text-on-dark)',
               }}
             >
               {isSubmitting ? (
@@ -573,7 +564,7 @@ export default function AuthView() {
 
           {/* Switch Mode */}
           <div className="text-center mt-6 pt-5" style={{ borderTop: '1px solid rgba(232,213,163,0.3)' }}>
-            <p className="text-sm" style={{ color: '#8A8A8A' }}>
+            <p className="text-sm" style={{ color: 'var(--color-muted-gray)' }}>
               {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}{' '}
               <button
                 onClick={() => {
@@ -581,8 +572,8 @@ export default function AuthView() {
                   setShowPassword(false);
                   setShowConfirmPassword(false);
                 }}
-                className="font-semibold transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                style={{ color: '#D4AF37', background: 'none' }}
+                className="font-semibold transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+                style={{ color: 'var(--color-gold)', background: 'none' }}
               >
                 {mode === 'login' ? 'Sign Up' : 'Sign In'}
               </button>
@@ -593,7 +584,7 @@ export default function AuthView() {
         {/* Bottom info */}
         <p
           className="text-center text-[11px] mt-6 max-w-xs leading-relaxed"
-          style={{ color: '#B8A99A' }}
+          style={{ color: 'var(--color-taupe)' }}
         >
           By continuing, you agree to Aura Living&apos;s Terms of Service and acknowledge our Privacy Policy.
         </p>

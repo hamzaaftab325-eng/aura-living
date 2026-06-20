@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
-  ChevronRight,
   CreditCard,
   Banknote,
   ShieldCheck,
@@ -19,6 +19,7 @@ import { useStore } from '@/store/useStore';
 import { formatPKR } from '@/data/products';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 /* ─── Form Data Types ─── */
@@ -80,15 +81,16 @@ function FormInput({
   required?: boolean;
   error?: boolean;
 }) {
+  const errorId = `${id}-error`;
   return (
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={id}
         className="text-sm font-medium transition-all duration-200"
-        style={{ color: '#2C2C2C' }}
+        style={{ color: 'var(--surface-dark)' }}
       >
         {label}
-        {required && <span style={{ color: '#D4AF37' }}> *</span>}
+        {required && <span style={{ color: 'var(--color-gold)' }}> *</span>}
       </label>
       <input
         id={id}
@@ -98,22 +100,29 @@ function FormInput({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        aria-invalid={error ? 'true' : 'false'}
+        aria-describedby={error ? errorId : undefined}
         className={`w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200 input-gold-glow ${error ? 'animate-error-shake' : ''}`}
-        style={{ backgroundColor: '#FFFDF7',
-          border: error ? '1.5px solid #E53E3E' : '1px solid #E8D5A3',
-          color: '#2C2C2C',
+        style={{ backgroundColor: 'var(--surface-card)',
+          border: error ? '1.5px solid var(--color-danger)' : '1px solid var(--color-gold-soft)',
+          color: 'var(--surface-dark)',
         }}
         onFocus={(e) => {
-          e.target.style.borderColor = '#D4AF37';
+          e.target.style.borderColor = 'var(--color-gold)';
           e.target.style.boxShadow = '0 0 0 3px rgba(212, 175, 55, 0.2)';
         }}
         onBlur={(e) => {
-          e.target.style.borderColor = error ? '#E53E3E' : '#E8D5A3';
+          e.target.style.borderColor = error ? 'var(--color-danger)' : 'var(--color-gold-soft)';
           e.target.style.boxShadow = 'none';
         }}
       />
       {error && (
-        <span className="text-xs" style={{ color: '#E53E3E' }}>
+        <span
+          id={errorId}
+          role="alert"
+          className="text-xs"
+          style={{ color: 'var(--color-danger)' }}
+        >
           {label} is required
         </span>
       )}
@@ -247,7 +256,7 @@ export default function CheckoutView() {
   /* ─────────────── Empty Cart Redirect State ─────────────── */
   if (cart.length === 0) {
     return (
-      <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+      <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
         {/* Hero */}
         <section
           ref={heroSectionRef}
@@ -272,7 +281,7 @@ export default function CheckoutView() {
           <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
             <span
               className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-6 mt-2"
-              style={{ color: '#D4AF37' }}
+              style={{ color: 'var(--color-gold)' }}
             >
               AURA LIVING
             </span>
@@ -283,9 +292,9 @@ export default function CheckoutView() {
               Checkout
             </h1>
             <div className="flex items-center gap-3 mt-6">
-              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-              <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+              <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+              <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
             </div>
           </div>
         </section>
@@ -297,17 +306,17 @@ export default function CheckoutView() {
               className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6"
               style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
             >
-              <CheckCircle2 className="h-9 w-9" style={{ color: '#D4AF37' }} />
+              <CheckCircle2 className="h-9 w-9" style={{ color: 'var(--color-gold)' }} />
             </div>
             <h2
               className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
-              style={{ color: '#2C2C2C' }}
+              style={{ color: 'var(--surface-dark)' }}
             >
               Your Cart is Empty
             </h2>
             <p
               className="text-base mb-8 leading-relaxed"
-              style={{ color: '#8A8A8A' }}
+              style={{ color: 'var(--color-muted-gray)' }}
             >
               Add items to your cart before proceeding to checkout. Redirecting you to the shop...
             </p>
@@ -327,7 +336,7 @@ export default function CheckoutView() {
 
   /* ─────────────── Checkout with Cart Items ─────────────── */
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero */}
       <section
         ref={heroSectionRef}
@@ -353,7 +362,7 @@ export default function CheckoutView() {
 
           <span
             className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-6 mt-2"
-            style={{ color: '#D4AF37' }}
+            style={{ color: 'var(--color-gold)' }}
           >
             AURA LIVING
           </span>
@@ -364,28 +373,19 @@ export default function CheckoutView() {
             Checkout
           </h1>
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
         </div>
       </section>
       {/* Breadcrumb strip (below hero) */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => { setPage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            Cart
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
-            Checkout
-          </span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'Cart', onClick: () => { setPage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Checkout' },
+        ]}
+      />
 
       {/* Checkout Content */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
@@ -397,11 +397,11 @@ export default function CheckoutView() {
                 {/* ─── Contact Information ─── */}
                 <div
                   className="rounded-xl p-5 sm:p-6 lg:p-8"
-                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                  style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
                 >
                   <h2
                     className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                    style={{ color: '#2C2C2C' }}
+                    style={{ color: 'var(--surface-dark)' }}
                   >
                     Contact Information
                   </h2>
@@ -435,11 +435,11 @@ export default function CheckoutView() {
                 {/* ─── Shipping Address ─── */}
                 <div
                   className="rounded-xl p-5 sm:p-6 lg:p-8"
-                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                  style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
                 >
                   <h2
                     className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                    style={{ color: '#2C2C2C' }}
+                    style={{ color: 'var(--surface-dark)' }}
                   >
                     Shipping Address
                   </h2>
@@ -507,11 +507,11 @@ export default function CheckoutView() {
                 {/* ─── Payment Method ─── */}
                 <div
                   className="rounded-xl p-5 sm:p-6 lg:p-8"
-                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                  style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
                 >
                   <h2
                     className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                    style={{ color: '#2C2C2C' }}
+                    style={{ color: 'var(--surface-dark)' }}
                   >
                     Payment Method
                   </h2>
@@ -525,15 +525,15 @@ export default function CheckoutView() {
                         <label
                           key={option.id}
                           className="flex items-center gap-4 p-4 rounded-sm cursor-pointer transition-all duration-200"
-                          style={{ border: isSelected ? '2px solid #D4AF37' : '1px solid #E8D5A3',
-                            backgroundColor: isSelected ? 'rgba(212,175,55,0.04)' : '#FFFDF7',
+                          style={{ border: isSelected ? '2px solid var(--color-gold)' : '1px solid var(--color-gold-soft)',
+                            backgroundColor: isSelected ? 'rgba(212,175,55,0.04)' : 'var(--surface-card)',
                           }}
                         >
                           {/* Custom Radio */}
                           <div
                             className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-200"
-                            style={{ border: isSelected ? '2px solid #D4AF37' : '2px solid #E8D5A3',
-                              backgroundColor: isSelected ? '#D4AF37' : 'transparent',
+                            style={{ border: isSelected ? '2px solid var(--color-gold)' : '2px solid var(--color-gold-soft)',
+                              backgroundColor: isSelected ? 'var(--color-gold)' : 'transparent',
                             }}
                           >
                             {isSelected && (
@@ -552,24 +552,24 @@ export default function CheckoutView() {
                             className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
                             style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
                           >
-                            <option.icon className="w-4.5 h-4.5" style={{ color: '#D4AF37' }} />
+                            <option.icon className="w-4.5 h-4.5" style={{ color: 'var(--color-gold)' }} />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p
                               className="text-sm font-semibold"
-                              style={{ color: '#2C2C2C' }}
+                              style={{ color: 'var(--surface-dark)' }}
                             >
                               {option.label}
                             </p>
                             <p
                               className="text-xs mt-0.5"
-                              style={{ color: '#8A8A8A' }}
+                              style={{ color: 'var(--color-muted-gray)' }}
                             >
                               {option.description}
                             </p>
                           </div>
                           {isSelected && (
-                            <CheckCircle2 className="w-5 h-5 shrink-0" style={{ color: '#D4AF37' }} />
+                            <CheckCircle2 className="w-5 h-5 shrink-0" style={{ color: 'var(--color-gold)' }} />
                           )}
                         </label>
                       );
@@ -580,11 +580,11 @@ export default function CheckoutView() {
                 {/* ─── Order Notes ─── */}
                 <div
                   className="rounded-xl p-5 sm:p-6 lg:p-8"
-                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                  style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
                 >
                   <h2
                     className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                    style={{ color: '#2C2C2C' }}
+                    style={{ color: 'var(--surface-dark)' }}
                   >
                     Order Notes
                   </h2>
@@ -595,7 +595,7 @@ export default function CheckoutView() {
                     <label
                       htmlFor="orderNotes"
                       className="text-sm font-medium"
-                      style={{ color: '#2C2C2C' }}
+                      style={{ color: 'var(--surface-dark)' }}
                     >
                       Special Instructions (Optional)
                     </label>
@@ -607,16 +607,16 @@ export default function CheckoutView() {
                       onChange={handleChange}
                       placeholder="Any special delivery instructions, gift wrapping requests, or notes for our team..."
                       className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
-                      style={{ backgroundColor: '#FFFDF7',
-                        border: '1px solid #E8D5A3',
-                        color: '#2C2C2C',
+                      style={{ backgroundColor: 'var(--surface-card)',
+                        border: '1px solid var(--color-gold-soft)',
+                        color: 'var(--surface-dark)',
                       }}
                       onFocus={(e) => {
-                        e.target.style.borderColor = '#D4AF37';
+                        e.target.style.borderColor = 'var(--color-gold)';
                         e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)';
                       }}
                       onBlur={(e) => {
-                        e.target.style.borderColor = '#E8D5A3';
+                        e.target.style.borderColor = 'var(--color-gold-soft)';
                         e.target.style.boxShadow = 'none';
                       }}
                     />
@@ -628,11 +628,11 @@ export default function CheckoutView() {
               <div className="lg:col-span-1">
                 <div
                   className="rounded-xl p-5 sm:p-6 lg:p-8 sticky top-8"
-                  style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                  style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
                 >
                   <h2
                     className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
-                    style={{ color: '#2C2C2C' }}
+                    style={{ color: 'var(--surface-dark)' }}
                   >
                     Order Summary
                   </h2>
@@ -652,16 +652,18 @@ export default function CheckoutView() {
                       >
                         <div
                           className="shrink-0 w-14 h-14 rounded-lg overflow-hidden relative"
-                          style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7' }}
+                          style={{ border: '1px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)' }}
                         >
-                          <img loading="lazy"
+                          <Image
         src={item.product.image}
                             alt={item.product.name}
+                            fill
                             className="w-full h-full object-contain"
+                            sizes="56px"
                           />
                           <div
                             className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
-                            style={{ backgroundColor: '#D4AF37' }}
+                            style={{ backgroundColor: 'var(--color-gold)' }}
                           >
                             {item.quantity}
                           </div>
@@ -669,20 +671,20 @@ export default function CheckoutView() {
                         <div className="flex-1 min-w-0">
                           <p
                             className="text-sm font-medium truncate"
-                            style={{ color: '#2C2C2C' }}
+                            style={{ color: 'var(--surface-dark)' }}
                           >
                             {item.product.name}
                           </p>
                           <p
                             className="text-xs capitalize"
-                            style={{ color: '#8A8A8A' }}
+                            style={{ color: 'var(--color-muted-gray)' }}
                           >
                             {item.product.category.replace('-', ' ')}
                           </p>
                         </div>
                         <span
                           className="text-sm font-semibold shrink-0"
-                          style={{ color: '#2C2C2C' }}
+                          style={{ color: 'var(--surface-dark)' }}
                         >
                           {formatPKR(item.product.price * item.quantity)}
                         </span>
@@ -697,13 +699,13 @@ export default function CheckoutView() {
                     <div className="flex items-center justify-between">
                       <span
                         className="text-sm"
-                        style={{ color: '#5A5A5A' }}
+                        style={{ color: 'var(--color-warm-gray)' }}
                       >
                         Subtotal ({cartCount} {cartCount === 1 ? 'item' : 'items'})
                       </span>
                       <span
                         className="text-sm font-semibold"
-                        style={{ color: '#2C2C2C' }}
+                        style={{ color: 'var(--surface-dark)' }}
                       >
                         {formatPKR(subtotal)}
                       </span>
@@ -712,21 +714,21 @@ export default function CheckoutView() {
                     <div className="flex items-center justify-between">
                       <span
                         className="text-sm"
-                        style={{ color: '#5A5A5A' }}
+                        style={{ color: 'var(--color-warm-gray)' }}
                       >
                         Shipping
                       </span>
                       {shipping === 0 ? (
                         <span
                           className="text-sm font-semibold"
-                          style={{ color: '#D4AF37' }}
+                          style={{ color: 'var(--color-gold)' }}
                         >
                           Free
                         </span>
                       ) : (
                         <span
                           className="text-sm font-semibold"
-                          style={{ color: '#2C2C2C' }}
+                          style={{ color: 'var(--surface-dark)' }}
                         >
                           {formatPKR(shipping)}
                         </span>
@@ -736,17 +738,17 @@ export default function CheckoutView() {
                     {shipping > 0 && (
                       <p
                         className="text-[11px]"
-                        style={{ color: '#8A8A8A' }}
+                        style={{ color: 'var(--color-muted-gray)' }}
                       >
                         Free shipping on orders above PKR 2,999
                       </p>
                     )}
                     {shipping === 0 && (
                       <div className="flex items-center gap-1.5">
-                        <Truck className="w-3.5 h-3.5" style={{ color: '#D4AF37' }} />
+                        <Truck className="w-3.5 h-3.5" style={{ color: 'var(--color-gold)' }} />
                         <p
                           className="text-[11px]"
-                          style={{ color: '#D4AF37' }}
+                          style={{ color: 'var(--color-gold)' }}
                         >
                           You qualify for free shipping!
                         </p>
@@ -759,13 +761,13 @@ export default function CheckoutView() {
                   <div className="flex items-center justify-between mb-6">
                     <span
                       className="text-base font-semibold"
-                      style={{ color: '#2C2C2C' }}
+                      style={{ color: 'var(--surface-dark)' }}
                     >
                       Total
                     </span>
                     <span
                       className="text-lg font-bold"
-                      style={{ color: '#2C2C2C' }}
+                      style={{ color: 'var(--surface-dark)' }}
                     >
                       {formatPKR(estimatedTotal)}
                     </span>
@@ -799,8 +801,8 @@ export default function CheckoutView() {
                   <button
                     type="button"
                     onClick={() => { setPage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                    className="w-full text-center text-sm font-medium py-3 mt-2 transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-                    style={{ color: '#5A5A5A' }}
+                    className="w-full text-center text-sm font-medium py-3 mt-2 transition-colors duration-200 hover:text-[var(--color-gold)] cursor-pointer"
+                    style={{ color: 'var(--color-warm-gray)' }}
                   >
                     &larr; Back to Cart
                   </button>
@@ -808,20 +810,20 @@ export default function CheckoutView() {
                   {/* Security Note */}
                   <div
                     className="mt-6 pt-5 text-center"
-                    style={{ borderTop: '1px solid #E8D5A3' }}
+                    style={{ borderTop: '1px solid var(--color-gold-soft)' }}
                   >
                     <div className="flex items-center justify-center gap-2 mb-2">
-                      <ShieldCheck className="w-4 h-4" style={{ color: '#D4AF37' }} />
+                      <ShieldCheck className="w-4 h-4" style={{ color: 'var(--color-gold)' }} />
                       <span
                         className="text-xs font-medium tracking-wide uppercase"
-                        style={{ color: '#5A5A5A' }}
+                        style={{ color: 'var(--color-warm-gray)' }}
                       >
                         Secure Checkout
                       </span>
                     </div>
                     <p
                       className="text-[11px] leading-relaxed"
-                      style={{ color: '#8A8A8A' }}
+                      style={{ color: 'var(--color-muted-gray)' }}
                     >
                       Your personal information is encrypted and secure. We never store your payment details.
                     </p>

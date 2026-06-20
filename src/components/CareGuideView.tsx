@@ -18,11 +18,11 @@ import {
   Flame,
   Frame,
   UtensilsCrossed,
-  ChevronRight,
   ArrowRight,
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 /* ═══════════════════════════════════════════════════════════
@@ -183,7 +183,7 @@ export default function CareGuideView() {
   }, []);
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero Banner */}
       <section
         ref={heroBgRef}
@@ -224,7 +224,7 @@ export default function CareGuideView() {
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
 
           <div className="flex items-center gap-3 mb-4">
-            <Sparkles className="w-7 h-7 sm:w-8 sm:h-8" style={{ color: '#D4AF37' }} />
+            <Sparkles className="w-7 h-7 sm:w-8 sm:h-8" style={{ color: 'var(--color-gold)' }} />
           </div>
           <h1
             ref={heroTitleRef}
@@ -235,9 +235,9 @@ export default function CareGuideView() {
           </h1>
 
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
 
           <p
@@ -249,28 +249,19 @@ export default function CareGuideView() {
         </div>
       </section>
       {/* Breadcrumb strip (below hero) */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            Home
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
-            Care Guide
-          </span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'Home', onClick: () => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Care Guide' },
+        ]}
+      />
 
       {/* Intro Text */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedSection>
             <p
-              className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed"
+              className="text-[var(--color-warm-gray)] text-base sm:text-lg leading-relaxed"
               
             >
               Every piece in our collection is crafted with care and intention. To ensure your Aura Living
@@ -291,10 +282,10 @@ export default function CareGuideView() {
             {careCategories.map((category) => (
               <div
                 key={category.title}
-                className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
-                style={{ backgroundColor: '#FFFDF7',
-                  border: '1px solid #E8D5A3',
-                  borderLeft: '4px solid #D4AF37',
+                className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
+                style={{ backgroundColor: 'var(--surface-card)',
+                  border: '1px solid var(--color-gold-soft)',
+                  borderLeft: '4px solid var(--color-gold)',
                 }}
               >
                 <div className="p-6 sm:p-8">
@@ -304,18 +295,18 @@ export default function CareGuideView() {
                       className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                       style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
                     >
-                      <category.icon className="w-5 h-5" style={{ color: '#B8941F' }} />
+                      <category.icon className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                     </div>
                     <div>
                       <h3
-                        className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-1"
+                        className="text-[var(--surface-dark)] text-xl sm:text-2xl font-semibold mb-1"
                         
                       >
                         {category.title}
                       </h3>
                       <p
                         className="text-sm"
-                        style={{ color: '#8A8A8A' }}
+                        style={{ color: 'var(--color-muted-gray)' }}
                       >
                         {category.subtitle}
                       </p>
@@ -324,7 +315,7 @@ export default function CareGuideView() {
 
                   {/* Divider */}
                   <div className="mb-5">
-                    <div className="w-full h-px" style={{ backgroundColor: '#E8D5A3' }} />
+                    <div className="w-full h-px" style={{ backgroundColor: 'var(--color-gold-soft)' }} />
                   </div>
 
                   {/* Tips */}
@@ -333,10 +324,10 @@ export default function CareGuideView() {
                       <li key={idx} className="flex items-start gap-3">
                         <div
                           className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2"
-                          style={{ backgroundColor: '#D4AF37' }}
+                          style={{ backgroundColor: 'var(--color-gold)' }}
                         />
                         <span
-                          className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed"
+                          className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed"
                           
                         >
                           {tip}
@@ -352,19 +343,19 @@ export default function CareGuideView() {
       </section>
 
       {/* Need More Help CTA */}
-      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F5EDDA' }}>
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <div className="mb-6">
             <GoldDivider />
           </div>
           <h2
-            className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
+            className="text-[var(--surface-dark)] text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
             
           >
             Need More Help?
           </h2>
           <p
-            className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
+            className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
             
           >
             Our team is always here to assist you with any questions about caring for your Aura Living

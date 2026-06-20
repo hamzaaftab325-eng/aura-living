@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import {
   useGsapFadeIn,
   useGsapStagger,
@@ -15,13 +16,13 @@ import {
   Star,
   Heart,
   ShoppingCart,
-  ChevronRight,
   ShoppingBag,
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
-import { useToast } from '@/hooks/use-toast';
+import { useCartActions } from '@/hooks/useCartActions';
 import { products, formatPKR } from '@/data/products';
 import PremiumButton from '@/components/ui/PremiumButton';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 /* ═══════════════════════════════════════════════════════════
@@ -50,8 +51,8 @@ function RatingStars({ rating }: { rating: number }) {
         <Star
           key={star}
           className="w-3.5 h-3.5"
-          style={{ color: star <= Math.round(rating) ? '#D4AF37' : '#E8D5A3',
-            fill: star <= Math.round(rating) ? '#D4AF37' : 'none',
+          style={{ color: star <= Math.round(rating) ? 'var(--color-gold)' : 'var(--color-gold-soft)',
+            fill: star <= Math.round(rating) ? 'var(--color-gold)' : 'none',
           }}
         />
       ))}
@@ -62,12 +63,10 @@ function RatingStars({ rating }: { rating: number }) {
 export default function NewArrivalsView() {
   const setPage = useStore((state) => state.setPage);
   const setSelectedProduct = useStore((state) => state.setSelectedProduct);
-  const addToCart = useStore((state) => state.addToCart);
-  const toggleWishlist = useStore((state) => state.toggleWishlist);
+  const { handleAddToCart: addToCart, handleToggleWishlist: toggleWishlist } = useCartActions();
   // Subscribe to wishlist array so component re-renders when wishlist changes.
   const wishlist = useStore((state) => state.wishlist);
   const isInWishlist = (id: string) => wishlist.includes(id);
-  const setCartOpen = useStore((state) => state.setCartOpen);
 
   const heroBgRef = useRef<HTMLElement>(null);
   const heroBgDivRef = useRef<HTMLDivElement>(null);
@@ -145,12 +144,11 @@ export default function NewArrivalsView() {
   };
 
   const handleAddToCart = (product: typeof products[0]) => {
-    addToCart(product);
-    setCartOpen(true);
+    addToCart(product, { openCart: true });
   };
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero Banner */}
       <section
         ref={heroBgRef}
@@ -191,7 +189,7 @@ export default function NewArrivalsView() {
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
 
           <div className="flex items-center gap-3 mb-4">
-            <Sparkles className="w-7 h-7 sm:w-8 sm:h-8" style={{ color: '#D4AF37' }} />
+            <Sparkles className="w-7 h-7 sm:w-8 sm:h-8" style={{ color: 'var(--color-gold)' }} />
           </div>
           <h1
             ref={heroTitleRef}
@@ -202,9 +200,9 @@ export default function NewArrivalsView() {
           </h1>
 
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
 
           <p
@@ -216,21 +214,12 @@ export default function NewArrivalsView() {
         </div>
       </section>
       {/* Breadcrumb strip (below hero) */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            Home
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
-            New Arrivals
-          </span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'Home', onClick: () => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'New Arrivals' },
+        ]}
+      />
 
       {/* Products Content */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
@@ -243,16 +232,16 @@ export default function NewArrivalsView() {
                   className="w-24 h-24 rounded-full flex items-center justify-center mb-6"
                   style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}
                 >
-                  <Sparkles className="w-10 h-10" style={{ color: '#D4AF37' }} />
+                  <Sparkles className="w-10 h-10" style={{ color: 'var(--color-gold)' }} />
                 </div>
                 <h2
-                  className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
+                  className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
                   
                 >
                   No new arrivals yet
                 </h2>
                 <p
-                  className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-md text-center leading-relaxed"
+                  className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-md text-center leading-relaxed"
                   
                 >
                   We are always curating new pieces for our collection. Check back soon for exciting additions!
@@ -270,7 +259,7 @@ export default function NewArrivalsView() {
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <h2
-                      className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold"
+                      className="text-[var(--surface-dark)] text-xl sm:text-2xl font-semibold"
                       
                     >
                       Latest Additions
@@ -281,7 +270,7 @@ export default function NewArrivalsView() {
                   </div>
                   <span
                     className="text-sm"
-                    style={{ color: '#8A8A8A' }}
+                    style={{ color: 'var(--color-muted-gray)' }}
                   >
                     {newProducts.length} item{newProducts.length !== 1 ? 's' : ''}
                   </span>
@@ -297,30 +286,32 @@ export default function NewArrivalsView() {
                   return (
                     <div
                       key={product.id}
-                      className="group rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
-                      style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                      className="group rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
+                      style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
                     >
                       {/* Product Image */}
                       <div
                         className="relative w-full aspect-[3/4] overflow-hidden cursor-pointer"
-                        style={{ backgroundColor: '#F5EDDA' }}
+                        style={{ backgroundColor: 'var(--color-gold-pale)' }}
                         onClick={() => handleProductClick(product)}
                         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleProductClick(product); } }}
                         role="button"
                         tabIndex={0}
                         aria-label={`View ${product.name} details`}
                       >
-                        <img loading="lazy"
-        src={product.image}
+                        <Image
+          src={product.image}
                           alt={product.name}
+                          fill
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.08]"
+                          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                         />
 
                         {/* NEW Badge */}
                         <div
                           className="absolute top-3 left-3 px-2.5 py-1 rounded-sm text-xs font-semibold tracking-wider uppercase"
-                          style={{ backgroundColor: '#D4AF37',
-                            color: '#FFFFFF',
+                          style={{ backgroundColor: 'var(--color-gold)',
+                            color: 'var(--text-on-dark)',
                           }}
                         >
                           NEW
@@ -330,7 +321,7 @@ export default function NewArrivalsView() {
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            toggleWishlist(product.id);
+                            toggleWishlist(product.id, product.name);
                           }}
                           className="absolute top-3 right-3 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
                           style={{ backgroundColor: 'rgba(255,255,255,0.9)', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
@@ -338,8 +329,8 @@ export default function NewArrivalsView() {
                         >
                           <Heart
                             className="w-4 h-4"
-                            style={{ color: wishlisted ? '#DC2626' : '#8A8A8A',
-                              fill: wishlisted ? '#DC2626' : 'none',
+                            style={{ color: wishlisted ? 'var(--color-danger)' : 'var(--color-muted-gray)',
+                              fill: wishlisted ? 'var(--color-danger)' : 'none',
                             }}
                           />
                         </button>
@@ -349,7 +340,7 @@ export default function NewArrivalsView() {
                       <div className="p-4 sm:p-5">
                         {/* Name */}
                         <h3
-                          className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-1.5 cursor-pointer transition-colors duration-200 hover:text-[#D4AF37] leading-snug"
+                          className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold mb-1.5 cursor-pointer transition-colors duration-200 hover:text-[var(--color-gold)] leading-snug"
                           
                           onClick={() => handleProductClick(product)}
                         >
@@ -361,7 +352,7 @@ export default function NewArrivalsView() {
                           <RatingStars rating={product.rating} />
                           <span
                             className="text-xs"
-                            style={{ color: '#8A8A8A' }}
+                            style={{ color: 'var(--color-muted-gray)' }}
                           >
                             ({product.reviews})
                           </span>
@@ -371,14 +362,14 @@ export default function NewArrivalsView() {
                         <div className="flex items-center gap-2 mb-4">
                           <span
                             className="text-lg font-bold"
-                            style={{ color: '#2C2C2C' }}
+                            style={{ color: 'var(--surface-dark)' }}
                           >
                             {formatPKR(product.price)}
                           </span>
                           {product.originalPrice && (
                             <span
                               className="text-sm line-through"
-                              style={{ color: '#8A8A8A' }}
+                              style={{ color: 'var(--color-muted-gray)' }}
                             >
                               {formatPKR(product.originalPrice)}
                             </span>
@@ -390,25 +381,25 @@ export default function NewArrivalsView() {
                           <button
                             onClick={() => handleAddToCart(product)}
                             className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 active:scale-[0.97] cursor-pointer"
-                            style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #C9A22E 50%, #B8941F 100%)',
-                              color: '#FFFFFF',
+                            style={{ background: 'linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hover) 50%, var(--color-gold-text) 100%)',
+                              color: 'var(--text-on-dark)',
                             }}
                           >
                             <ShoppingCart className="w-3.5 h-3.5" />
                             Add to Cart
                           </button>
                           <button
-                            onClick={() => toggleWishlist(product.id)}
+                            onClick={() => toggleWishlist(product.id, product.name)}
                             className="w-11 h-11 rounded-sm flex items-center justify-center transition-all duration-200 cursor-pointer"
-                            style={{ border: '1px solid #E8D5A3',
+                            style={{ border: '1px solid var(--color-gold-soft)',
                               backgroundColor: wishlisted ? 'rgba(220, 38, 38, 0.06)' : 'transparent',
                             }}
                             aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
                           >
                             <Heart
                               className="w-4 h-4"
-                              style={{ color: wishlisted ? '#DC2626' : '#8A8A8A',
-                                fill: wishlisted ? '#DC2626' : 'none',
+                              style={{ color: wishlisted ? 'var(--color-danger)' : 'var(--color-muted-gray)',
+                                fill: wishlisted ? 'var(--color-danger)' : 'none',
                               }}
                             />
                           </button>
@@ -426,7 +417,7 @@ export default function NewArrivalsView() {
                     <GoldDivider />
                   </div>
                   <p
-                    className="text-[#5A5A5A] text-base mb-6"
+                    className="text-[var(--color-warm-gray)] text-base mb-6"
                     
                   >
                     Explore our full collection of curated home decor

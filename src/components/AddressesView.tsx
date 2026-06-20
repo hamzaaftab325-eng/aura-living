@@ -21,6 +21,7 @@ import {
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 /* ═══════════════════════════════════════════════════════════
    AnimatedSection — staggered children reveal
@@ -81,9 +82,9 @@ const initialAddresses: Address[] = [
 ];
 
 const labelConfig: Record<Address['label'], { icon: typeof Home; color: string; bg: string }> = {
-  Home: { icon: Home, color: '#D4AF37', bg: 'rgba(212, 175, 55, 0.1)' },
-  Work: { icon: Briefcase, color: '#3B82F6', bg: 'rgba(59, 130, 246, 0.1)' },
-  Other: { icon: MapPin, color: '#8A8A8A', bg: 'rgba(138, 138, 138, 0.1)' },
+  Home: { icon: Home, color: 'var(--color-gold)', bg: 'rgba(212, 175, 55, 0.1)' },
+  Work: { icon: Briefcase, color: 'var(--color-info)', bg: 'rgba(59, 130, 246, 0.1)' },
+  Other: { icon: MapPin, color: 'var(--color-muted-gray)', bg: 'rgba(138, 138, 138, 0.1)' },
 };
 
 const emptyForm: Omit<Address, 'id' | 'isDefault'> = {
@@ -193,7 +194,7 @@ export default function AddressesView() {
   // Not-signed-in gate
   if (hydrated && !safeUser) {
     return (
-      <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+      <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
         <section className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center">
           <div
             className="absolute inset-0"
@@ -216,29 +217,29 @@ export default function AddressesView() {
               Saved Addresses
             </h1>
             <div className="flex items-center gap-3 mt-6">
-              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-              <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+              <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+              <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
             </div>
           </div>
         </section>
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
-              <MapPin className="w-8 h-8" style={{ color: '#B8941F' }} />
+              <MapPin className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
+            <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Sign in to manage addresses
             </h2>
-            <p className="text-[#5A5A5A] text-sm sm:text-base mb-6" >
+            <p className="text-[var(--color-warm-gray)] text-sm sm:text-base mb-6" >
               Save delivery addresses for faster checkout and easy reordering.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <PremiumButton variant="gold" size="sm" onClick={() => setPage('login')}>Sign In</PremiumButton>
               <button
                 onClick={() => setPage('signup')}
-                className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                style={{ color: '#D4AF37', background: 'none' }}
+                className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+                style={{ color: 'var(--color-gold)', background: 'none' }}
               >
                 Create a free account
               </button>
@@ -250,7 +251,7 @@ export default function AddressesView() {
   }
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
@@ -276,9 +277,9 @@ export default function AddressesView() {
           </h1>
 
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
 
           <p
@@ -291,37 +292,28 @@ export default function AddressesView() {
       </section>
 
       {/* Breadcrumb strip (below hero) */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            My Account
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
-            Saved Addresses
-          </span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'My Account', onClick: () => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Saved Addresses' },
+        ]}
+      />
 
       {/* Addresses */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           {/* Add new address CTA */}
           <AnimatedSection>
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 rounded-xl p-5 sm:p-6" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 rounded-xl p-5 sm:p-6" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
               <div className="flex items-center gap-3 text-center sm:text-left">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}>
-                  <Plus className="w-5 h-5" style={{ color: '#B8941F' }} />
+                  <Plus className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                 </div>
                 <div>
-                  <p className="text-sm sm:text-base font-semibold" style={{ color: '#2C2C2C' }}>
+                  <p className="text-sm sm:text-base font-semibold" style={{ color: 'var(--surface-dark)' }}>
                     {editingId ? 'Edit address' : 'Add a new address'}
                   </p>
-                  <p className="text-xs sm:text-sm" style={{ color: '#8A8A8A' }}>
+                  <p className="text-xs sm:text-sm" style={{ color: 'var(--color-muted-gray)' }}>
                     Save home, work, or other delivery locations.
                   </p>
                 </div>
@@ -340,17 +332,17 @@ export default function AddressesView() {
               <form
                 onSubmit={handleSave}
                 className="rounded-xl p-5 sm:p-7 mb-8 sm:mb-10"
-                style={{ backgroundColor: '#FFFDF7', border: '1.5px solid #D4AF37' }}
+                style={{ backgroundColor: 'var(--surface-card)', border: '1.5px solid var(--color-gold)' }}
               >
                 <div className="flex items-center justify-between mb-5">
-                  <h3 className="text-lg sm:text-xl font-semibold" style={{ color: '#2C2C2C' }}>
+                  <h3 className="text-lg sm:text-xl font-semibold" style={{ color: 'var(--surface-dark)' }}>
                     {editingId ? 'Edit Address' : 'New Address'}
                   </h3>
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-[#E8D5A3]/30"
-                    style={{ color: '#8A8A8A' }}
+                    className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-[var(--color-gold-soft)]/30"
+                    style={{ color: 'var(--color-muted-gray)' }}
                     aria-label="Cancel"
                   >
                     <X className="w-4 h-4" />
@@ -360,7 +352,7 @@ export default function AddressesView() {
 
                 {/* Label selector */}
                 <div className="mb-5">
-                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
+                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
                     Address Type
                   </label>
                   <div className="flex gap-2">
@@ -374,9 +366,9 @@ export default function AddressesView() {
                           type="button"
                           onClick={() => setForm({ ...form, label: lbl })}
                           className="flex items-center gap-2 py-2 px-4 rounded-sm text-sm font-medium transition-all duration-200 cursor-pointer"
-                          style={{ border: selected ? `1.5px solid ${cfg.color}` : '1px solid #E8D5A3',
+                          style={{ border: selected ? `1.5px solid ${cfg.color}` : '1px solid var(--color-gold-soft)',
                             backgroundColor: selected ? cfg.bg : 'transparent',
-                            color: selected ? cfg.color : '#5A5A5A',
+                            color: selected ? cfg.color : 'var(--color-warm-gray)',
                           }}
                         >
                           <Icon className="w-3.5 h-3.5" />
@@ -390,7 +382,7 @@ export default function AddressesView() {
                 {/* Name + Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
                       Full Name *
                     </label>
                     <input
@@ -400,14 +392,14 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="e.g. Ayesha Khan"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ color: '#2C2C2C',
+                      style={{ color: 'var(--surface-dark)',
                         backgroundColor: 'rgba(255,255,255,0.7)',
-                        border: '1px solid #E8D5A3',
+                        border: '1px solid var(--color-gold-soft)',
                       }}
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
                       Phone *
                     </label>
                     <input
@@ -417,9 +409,9 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       placeholder="+92 300 1234567"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ color: '#2C2C2C',
+                      style={{ color: 'var(--surface-dark)',
                         backgroundColor: 'rgba(255,255,255,0.7)',
-                        border: '1px solid #E8D5A3',
+                        border: '1px solid var(--color-gold-soft)',
                       }}
                     />
                   </div>
@@ -427,7 +419,7 @@ export default function AddressesView() {
 
                 {/* Address line 1 */}
                 <div className="mb-4">
-                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
+                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
                     Street Address *
                   </label>
                   <input
@@ -437,16 +429,16 @@ export default function AddressesView() {
                     onChange={(e) => setForm({ ...form, line1: e.target.value })}
                     placeholder="House #, Block, Street"
                     className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                    style={{ color: '#2C2C2C',
+                    style={{ color: 'var(--surface-dark)',
                       backgroundColor: 'rgba(255,255,255,0.7)',
-                      border: '1px solid #E8D5A3',
+                      border: '1px solid var(--color-gold-soft)',
                     }}
                   />
                 </div>
 
                 {/* Address line 2 */}
                 <div className="mb-4">
-                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
+                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
                     Apartment / Suite / Landmark (optional)
                   </label>
                   <input
@@ -455,9 +447,9 @@ export default function AddressesView() {
                     onChange={(e) => setForm({ ...form, line2: e.target.value })}
                     placeholder="Near Central Park"
                     className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                    style={{ color: '#2C2C2C',
+                    style={{ color: 'var(--surface-dark)',
                       backgroundColor: 'rgba(255,255,255,0.7)',
-                      border: '1px solid #E8D5A3',
+                      border: '1px solid var(--color-gold-soft)',
                     }}
                   />
                 </div>
@@ -465,7 +457,7 @@ export default function AddressesView() {
                 {/* City + Province + Postal */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
                       City *
                     </label>
                     <input
@@ -475,14 +467,14 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, city: e.target.value })}
                       placeholder="Lahore"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ color: '#2C2C2C',
+                      style={{ color: 'var(--surface-dark)',
                         backgroundColor: 'rgba(255,255,255,0.7)',
-                        border: '1px solid #E8D5A3',
+                        border: '1px solid var(--color-gold-soft)',
                       }}
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
                       Province *
                     </label>
                     <select
@@ -490,9 +482,9 @@ export default function AddressesView() {
                       value={form.province}
                       onChange={(e) => setForm({ ...form, province: e.target.value })}
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ color: '#2C2C2C',
+                      style={{ color: 'var(--surface-dark)',
                         backgroundColor: 'rgba(255,255,255,0.7)',
-                        border: '1px solid #E8D5A3',
+                        border: '1px solid var(--color-gold-soft)',
                       }}
                     >
                       <option value="">Select</option>
@@ -506,7 +498,7 @@ export default function AddressesView() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
                       Postal Code *
                     </label>
                     <input
@@ -516,9 +508,9 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, postal: e.target.value })}
                       placeholder="54000"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ color: '#2C2C2C',
+                      style={{ color: 'var(--surface-dark)',
                         backgroundColor: 'rgba(255,255,255,0.7)',
-                        border: '1px solid #E8D5A3',
+                        border: '1px solid var(--color-gold-soft)',
                       }}
                     />
                   </div>
@@ -531,8 +523,8 @@ export default function AddressesView() {
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                    style={{ color: '#8A8A8A', background: 'none' }}
+                    className="text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+                    style={{ color: 'var(--color-muted-gray)', background: 'none' }}
                   >
                     Cancel
                   </button>
@@ -549,15 +541,15 @@ export default function AddressesView() {
               return (
                 <div
                   key={addr.id}
-                  className="relative rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
-                  style={{ backgroundColor: '#FFFDF7',
-                    border: addr.isDefault ? '1.5px solid #D4AF37' : '1px solid #E8D5A3',
+                  className="relative rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
+                  style={{ backgroundColor: 'var(--surface-card)',
+                    border: addr.isDefault ? '1.5px solid var(--color-gold)' : '1px solid var(--color-gold-soft)',
                   }}
                 >
                   {addr.isDefault && (
                     <span
                       className="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-wider"
-                      style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37' }}
+                      style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}
                     >
                       <Check className="w-3 h-3" />
                       Default
@@ -575,44 +567,44 @@ export default function AddressesView() {
                     </span>
                   </div>
 
-                  <p className="text-sm sm:text-base font-semibold mb-1" style={{ color: '#2C2C2C' }}>
+                  <p className="text-sm sm:text-base font-semibold mb-1" style={{ color: 'var(--surface-dark)' }}>
                     {addr.name}
                   </p>
-                  <p className="text-xs sm:text-sm mb-3" style={{ color: '#8A8A8A' }}>
+                  <p className="text-xs sm:text-sm mb-3" style={{ color: 'var(--color-muted-gray)' }}>
                     {addr.phone}
                   </p>
-                  <p className="text-xs sm:text-sm leading-relaxed" style={{ color: '#5A5A5A' }}>
+                  <p className="text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--color-warm-gray)' }}>
                     {addr.line1}{addr.line2 ? `, ${addr.line2}` : ''}<br />
                     {addr.city}, {addr.province} — {addr.postal}
                   </p>
 
-                  <div className="flex items-center gap-2 mt-5 pt-4" style={{ borderTop: '1px solid #E8D5A3' }}>
+                  <div className="flex items-center gap-2 mt-5 pt-4" style={{ borderTop: '1px solid var(--color-gold-soft)' }}>
                     <button
                       onClick={() => handleOpenEdit(addr)}
-                      className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                      style={{ color: '#D4AF37', background: 'none' }}
+                      className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+                      style={{ color: 'var(--color-gold)', background: 'none' }}
                     >
                       <Edit2 className="w-3 h-3" />
                       Edit
                     </button>
                     {!addr.isDefault && (
                       <>
-                        <span style={{ color: '#E8D5A3' }}>·</span>
+                        <span style={{ color: 'var(--color-gold-soft)' }}>·</span>
                         <button
                           onClick={() => handleSetDefault(addr.id)}
-                          className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                          style={{ color: '#D4AF37', background: 'none' }}
+                          className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+                          style={{ color: 'var(--color-gold)', background: 'none' }}
                         >
                           <Check className="w-3 h-3" />
                           Set Default
                         </button>
                       </>
                     )}
-                    <span style={{ color: '#E8D5A3' }}>·</span>
+                    <span style={{ color: 'var(--color-gold-soft)' }}>·</span>
                     <button
                       onClick={() => handleDelete(addr.id)}
                       className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-red-600 cursor-pointer ml-auto"
-                      style={{ color: '#DC2626', background: 'none' }}
+                      style={{ color: 'var(--color-danger)', background: 'none' }}
                     >
                       <Trash2 className="w-3 h-3" />
                       Delete
@@ -625,12 +617,12 @@ export default function AddressesView() {
 
           {/* Empty state */}
           {addresses.length === 0 && (
-            <div className="text-center py-12 rounded-xl" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-              <MapPin className="w-10 h-10 mx-auto mb-3" style={{ color: '#D4AF37' }} />
-              <h3 className="text-[#2C2C2C] text-lg font-semibold mb-1" >
+            <div className="text-center py-12 rounded-xl" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+              <MapPin className="w-10 h-10 mx-auto mb-3" style={{ color: 'var(--color-gold)' }} />
+              <h3 className="text-[var(--surface-dark)] text-lg font-semibold mb-1" >
                 No saved addresses yet
               </h3>
-              <p className="text-sm" style={{ color: '#8A8A8A' }}>
+              <p className="text-sm" style={{ color: 'var(--color-muted-gray)' }}>
                 Add an address to speed up your next checkout.
               </p>
             </div>
@@ -640,8 +632,8 @@ export default function AddressesView() {
           <div className="text-center mt-10 sm:mt-14">
             <button
               onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-              style={{ color: '#D4AF37', background: 'none' }}
+              className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+              style={{ color: 'var(--color-gold)', background: 'none' }}
             >
               <ChevronRight className="w-3.5 h-3.5 rotate-180" />
               Back to My Account

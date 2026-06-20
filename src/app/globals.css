@@ -392,6 +392,14 @@
   border-color: var(--border-gold);
 }
 
+/* Flat card variant — no shadow, used in admin tables, dense lists */
+.aura-card-flat {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
 /* ── Badge — NEW/SALE/BESTSELLER ── */
 .aura-badge {
   display: inline-flex;

@@ -22,6 +22,7 @@ import {
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 /* ═══════════════════════════════════════════════════════════
    AnimatedSection — staggered children reveal
@@ -107,9 +108,9 @@ const trackedOrders: TrackedOrder[] = [
 ];
 
 const statusConfig: Record<TrackedOrder['status'], { color: string; bg: string; icon: typeof CheckCircle }> = {
-  Delivered: { color: '#22C55E', bg: 'rgba(34, 197, 94, 0.1)', icon: CheckCircle },
-  Shipped: { color: '#3B82F6', bg: 'rgba(59, 130, 246, 0.1)', icon: Truck },
-  Processing: { color: '#D4AF37', bg: 'rgba(212, 175, 55, 0.1)', icon: Clock },
+  Delivered: { color: 'var(--color-success)', bg: 'rgba(34, 197, 94, 0.1)', icon: CheckCircle },
+  Shipped: { color: 'var(--color-info)', bg: 'rgba(59, 130, 246, 0.1)', icon: Truck },
+  Processing: { color: 'var(--color-gold)', bg: 'rgba(212, 175, 55, 0.1)', icon: Clock },
 };
 
 export default function TrackOrdersView() {
@@ -170,7 +171,7 @@ export default function TrackOrdersView() {
   // Not-signed-in gate
   if (hydrated && !safeUser) {
     return (
-      <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+      <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
         <section className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center">
           <div
             className="absolute inset-0"
@@ -193,29 +194,29 @@ export default function TrackOrdersView() {
               Track Your Orders
             </h1>
             <div className="flex items-center gap-3 mt-6">
-              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-              <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+              <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+              <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
             </div>
           </div>
         </section>
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
-              <Package className="w-8 h-8" style={{ color: '#B8941F' }} />
+              <Package className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
+            <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Sign in to track your orders
             </h2>
-            <p className="text-[#5A5A5A] text-sm sm:text-base mb-6" >
+            <p className="text-[var(--color-warm-gray)] text-sm sm:text-base mb-6" >
               Sign in to view live delivery status, ETA, and full tracking history for every order.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <PremiumButton variant="gold" size="sm" onClick={() => setPage('login')}>Sign In</PremiumButton>
               <button
                 onClick={() => setPage('signup')}
-                className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                style={{ color: '#D4AF37', background: 'none' }}
+                className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+                style={{ color: 'var(--color-gold)', background: 'none' }}
               >
                 Create a free account
               </button>
@@ -228,7 +229,7 @@ export default function TrackOrdersView() {
   }
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
@@ -254,9 +255,9 @@ export default function TrackOrdersView() {
           </h1>
 
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
 
           <p
@@ -269,21 +270,12 @@ export default function TrackOrdersView() {
       </section>
 
       {/* Breadcrumb strip (below hero) */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            My Account
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
-            Track Orders
-          </span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'My Account', onClick: () => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Track Orders' },
+        ]}
+      />
 
       {/* Search + Orders */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
@@ -292,16 +284,16 @@ export default function TrackOrdersView() {
           <AnimatedSection>
             <div
               className="rounded-xl p-5 sm:p-6 mb-8 sm:mb-10"
-              style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+              style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
             >
               <div className="flex flex-col sm:flex-row items-stretch gap-3">
                 <div
                   className="flex items-center rounded-sm flex-1"
-                  style={{ border: '1.5px solid #E8D5A3',
+                  style={{ border: '1.5px solid var(--color-gold-soft)',
                     backgroundColor: 'rgba(255,255,255,0.7)',
                   }}
                 >
-                  <div className="flex items-center justify-center pl-4" style={{ color: '#B8A99A' }}>
+                  <div className="flex items-center justify-center pl-4" style={{ color: 'var(--color-taupe)' }}>
                     <Search className="w-4 h-4" />
                   </div>
                   <input
@@ -311,7 +303,7 @@ export default function TrackOrdersView() {
                     onKeyDown={(e) => { if (e.key === 'Enter') handleSearch(); }}
                     placeholder="Enter order ID (e.g. AL-2026-001)"
                     className="w-full px-3 py-3 text-sm bg-transparent outline-none"
-                    style={{ color: '#2C2C2C' }}
+                    style={{ color: 'var(--surface-dark)' }}
                   />
                 </div>
                 <PremiumButton variant="gold" size="sm" onClick={handleSearch}>
@@ -326,13 +318,13 @@ export default function TrackOrdersView() {
             {filteredOrders.length === 0 ? (
               <div
                 className="rounded-xl p-10 text-center"
-                style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
               >
-                <Package className="w-10 h-10 mx-auto mb-3" style={{ color: '#D4AF37' }} />
-                <h3 className="text-[#2C2C2C] text-lg font-semibold mb-1" >
+                <Package className="w-10 h-10 mx-auto mb-3" style={{ color: 'var(--color-gold)' }} />
+                <h3 className="text-[var(--surface-dark)] text-lg font-semibold mb-1" >
                   No orders found
                 </h3>
-                <p className="text-sm" style={{ color: '#8A8A8A' }}>
+                <p className="text-sm" style={{ color: 'var(--color-muted-gray)' }}>
                   Try a different order ID or clear the search to see all your orders.
                 </p>
               </div>
@@ -345,7 +337,7 @@ export default function TrackOrdersView() {
                   <div
                     key={order.id}
                     className="rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)]"
-                    style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                    style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
                   >
                     {/* Order header */}
                     <button
@@ -360,10 +352,10 @@ export default function TrackOrdersView() {
                           <StatusIcon className="w-5 h-5" style={{ color: cfg.color }} />
                         </div>
                         <div>
-                          <p className="text-sm sm:text-base font-semibold" style={{ color: '#2C2C2C' }}>
+                          <p className="text-sm sm:text-base font-semibold" style={{ color: 'var(--surface-dark)' }}>
                             #{order.id}
                           </p>
-                          <p className="text-xs sm:text-sm" style={{ color: '#8A8A8A' }}>
+                          <p className="text-xs sm:text-sm" style={{ color: 'var(--color-muted-gray)' }}>
                             Placed {order.date} · {order.items} item{order.items !== 1 ? 's' : ''}
                           </p>
                         </div>
@@ -377,25 +369,25 @@ export default function TrackOrdersView() {
                             <StatusIcon className="w-3 h-3" />
                             {order.status}
                           </span>
-                          <p className="text-xs mt-1.5" style={{ color: '#5A5A5A' }}>
+                          <p className="text-xs mt-1.5" style={{ color: 'var(--color-warm-gray)' }}>
                             {order.eta}
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-semibold" style={{ color: '#2C2C2C' }}>
+                          <p className="text-sm font-semibold" style={{ color: 'var(--surface-dark)' }}>
                             {order.total}
                           </p>
                         </div>
                         <ChevronDown
                           className="w-5 h-5 transition-transform duration-300"
-                          style={{ color: '#D4AF37', transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                          style={{ color: 'var(--color-gold)', transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
                         />
                       </div>
                     </button>
 
                     {/* Tracking timeline (expandable) */}
                     {isExpanded && (
-                      <div className="px-5 sm:px-6 pb-6 sm:pb-8 pt-2" style={{ borderTop: '1px solid #E8D5A3' }}>
+                      <div className="px-5 sm:px-6 pb-6 sm:pb-8 pt-2" style={{ borderTop: '1px solid var(--color-gold-soft)' }}>
                         <div className="mb-5">
                           <GoldDivider />
                         </div>
@@ -403,7 +395,7 @@ export default function TrackOrdersView() {
                           {/* Vertical connector */}
                           <div
                             className="absolute left-[19px] top-2 bottom-2 w-px"
-                            style={{ background: 'linear-gradient(180deg, #D4AF37 0%, #D4AF37 50%, #E8D5A3 50%, #E8D5A3 100%)' }}
+                            style={{ background: 'linear-gradient(180deg, var(--color-gold) 0%, var(--color-gold) 50%, var(--color-gold-soft) 50%, var(--color-gold-soft) 100%)' }}
                           />
                           {order.stages.map((stage, i) => {
                             const StageIcon = stage.icon;
@@ -411,9 +403,9 @@ export default function TrackOrdersView() {
                               <li key={i} className="relative flex items-center gap-4 py-3 pl-0">
                                 <div
                                   className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-300"
-                                  style={{ backgroundColor: stage.done ? '#D4AF37' : '#FFFDF7',
-                                    border: stage.done ? '2px solid #D4AF37' : '2px dashed #E8D5A3',
-                                    color: stage.done ? '#FFFFFF' : '#B8A99A',
+                                  style={{ backgroundColor: stage.done ? 'var(--color-gold)' : 'var(--surface-card)',
+                                    border: stage.done ? '2px solid var(--color-gold)' : '2px dashed var(--color-gold-soft)',
+                                    color: stage.done ? 'var(--text-on-dark)' : 'var(--color-taupe)',
                                   }}
                                 >
                                   <StageIcon className="w-4 h-4" />
@@ -421,14 +413,14 @@ export default function TrackOrdersView() {
                                 <div className="flex-1">
                                   <p
                                     className="text-sm font-semibold"
-                                    style={{ color: stage.done ? '#2C2C2C' : '#8A8A8A',
+                                    style={{ color: stage.done ? 'var(--surface-dark)' : 'var(--color-muted-gray)',
                                     }}
                                   >
                                     {stage.label}
                                   </p>
                                   <p
                                     className="text-xs mt-0.5"
-                                    style={{ color: '#8A8A8A' }}
+                                    style={{ color: 'var(--color-muted-gray)' }}
                                   >
                                     {stage.date}
                                   </p>
@@ -458,8 +450,8 @@ export default function TrackOrdersView() {
           <div className="text-center mt-10 sm:mt-14">
             <button
               onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-              style={{ color: '#D4AF37', background: 'none' }}
+              className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+              style={{ color: 'var(--color-gold)', background: 'none' }}
             >
               <ChevronRight className="w-3.5 h-3.5 rotate-180" />
               Back to My Account

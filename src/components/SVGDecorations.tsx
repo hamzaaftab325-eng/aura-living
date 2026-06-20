@@ -121,13 +121,13 @@ export function FloatingGoldDots() {
       className="flex items-center justify-center gap-6 py-6 pointer-events-none"
       aria-hidden="true"
     >
-      <div className="gold-dot w-1.5 h-1.5 rounded-full bg-[#D4AF37]/30" />
-      <div className="gold-dot w-2 h-2 rounded-full bg-[#D4AF37]/40" />
-      <div className="gold-dot w-1 h-1 rounded-full bg-[#D4AF37]/25" />
-      <div className="gold-dot w-2.5 h-2.5 rounded-full bg-[#D4AF37]/20" style={{ animation: 'floatSlow 6s ease-in-out infinite' }} />
-      <div className="gold-dot w-1.5 h-1.5 rounded-full bg-[#D4AF37]/35" />
-      <div className="gold-dot w-1 h-1 rounded-full bg-[#D4AF37]/25" style={{ animation: 'floatSlow 8s ease-in-out infinite', animationDelay: '1s' }} />
-      <div className="gold-dot w-2 h-2 rounded-full bg-[#D4AF37]/30" />
+      <div className="gold-dot w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]/30" />
+      <div className="gold-dot w-2 h-2 rounded-full bg-[var(--color-gold)]/40" />
+      <div className="gold-dot w-1 h-1 rounded-full bg-[var(--color-gold)]/25" />
+      <div className="gold-dot w-2.5 h-2.5 rounded-full bg-[var(--color-gold)]/20" style={{ animation: 'floatSlow 6s ease-in-out infinite' }} />
+      <div className="gold-dot w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]/35" />
+      <div className="gold-dot w-1 h-1 rounded-full bg-[var(--color-gold)]/25" style={{ animation: 'floatSlow 8s ease-in-out infinite', animationDelay: '1s' }} />
+      <div className="gold-dot w-2 h-2 rounded-full bg-[var(--color-gold)]/30" />
     </div>
   );
 }

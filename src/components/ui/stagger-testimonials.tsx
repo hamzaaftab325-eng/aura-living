@@ -6,145 +6,147 @@ import { cn } from '@/lib/utils';
 
 const SQRT_5000 = Math.sqrt(5000);
 
+/** Local initials-based avatar — no external pravatar.cc dependency. */
+function InitialsAvatar({ name, size = 56 }: { name: string; size?: number }) {
+  const initial = name.charAt(0).toUpperCase();
+  return (
+    <svg width={size} height={size} viewBox="0 0 56 56" aria-hidden="true" className="bg-[var(--color-gold-pale)]">
+      <circle cx="28" cy="28" r="27" fill="none" stroke="var(--color-gold)" strokeWidth="1.5" />
+      <text
+        x="28"
+        y="28"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontFamily="'Playfair Display', serif"
+        fontSize="24"
+        fontWeight="600"
+        fill="var(--color-gold-text)"
+      >
+        {initial}
+      </text>
+    </svg>
+  );
+}
+
 const testimonials = [
   {
     tempId: 0,
     testimonial: "The Golden Aura Table Lamp completely transformed my bedroom! Exceptional quality and magical warm glow.",
     by: "Ayesha Khan, Lahore",
-    imgSrc: "https://i.pravatar.cc/150?img=1",
     rating: 5
   },
   {
     tempId: 1,
-    testimonial: "I'm confident my data is safe with Aura Living. The artisan craftsmanship is visible in every detail.",
+    testimonial: "Every brass piece I've ordered arrives with the kind of hand-finishing you can actually feel. The artisan craftsmanship is visible in every detail.",
     by: "Omar Farooq, Karachi",
-    imgSrc: "https://i.pravatar.cc/150?img=2",
     rating: 4
   },
   {
     tempId: 2,
     testimonial: "The Scented Candle fills my entire living room with the most calming vanilla scent. Absolutely love it!",
     by: "Sara Malik, Islamabad",
-    imgSrc: "https://i.pravatar.cc/150?img=3",
     rating: 5
   },
   {
     tempId: 3,
     testimonial: "The Pendant Lamp is a showstopper! Every guest asks where I got it. Looks even better in person.",
     by: "Hassan Ali, Rawalpindi",
-    imgSrc: "https://i.pravatar.cc/150?img=4",
     rating: 5
   },
   {
     tempId: 4,
     testimonial: "Love the Monstera planter — gold rim detail is so elegant. My living room finally feels complete!",
     by: "Fatima Noor, Faisalabad",
-    imgSrc: "https://i.pravatar.cc/150?img=5",
     rating: 4
   },
   {
     tempId: 5,
-    testimonial: "SO SO SO HAPPY WE FOUND AURA LIVING! The Ceramic Vase Set was the perfect gift. Will definitely shop again.",
+    testimonial: "SO SO SO HAPPY WE FOUND AURA LIVING! The Ceramic Vase Set was the perfect housewarming gift. Will definitely shop again.",
     by: "Zainab Ahmed, Lahore",
-    imgSrc: "https://i.pravatar.cc/150?img=6",
     rating: 5
   },
   {
     tempId: 6,
-    testimonial: "Took some convincing, but now that we've decorated with Aura pieces, we're never going back.",
+    testimonial: "Took some convincing to order online, but now that we've decorated with Aura pieces, we're never going back to mass-market decor.",
     by: "Bilal Raza, Karachi",
-    imgSrc: "https://i.pravatar.cc/150?img=7",
     rating: 4
   },
   {
     tempId: 7,
-    testimonial: "The ROI on these decor pieces is EASILY 100X. My home value and happiness both went up significantly.",
+    testimonial: "The brass lamp has become the centerpiece of our drawing room. Every visitor comments on it — best decor purchase we've made in years.",
     by: "Nadia Sheikh, Islamabad",
-    imgSrc: "https://i.pravatar.cc/150?img=8",
     rating: 5
   },
   {
     tempId: 8,
-    testimonial: "It's just the best home decor store in Pakistan. Period.",
+    testimonial: "Honestly the best home decor store in Pakistan. The pieces feel curated, not mass-produced.",
     by: "Usman Tariq, Multan",
-    imgSrc: "https://i.pravatar.cc/150?img=9",
     rating: 5
   },
   {
     tempId: 9,
-    testimonial: "I switched to Aura Living 2 years ago and never looked back. The quality is unmatched.",
+    testimonial: "I've been a customer for 2 years now and the quality has never dipped. Each piece feels like an heirloom.",
     by: "Amina Butt, Lahore",
-    imgSrc: "https://i.pravatar.cc/150?img=10",
     rating: 4
   },
   {
     tempId: 10,
-    testimonial: "I've been searching for a solution like Aura Living for YEARS. So glad I finally found one!",
+    testimonial: "I'd been searching for Pakistani-made home decor that actually feels modern and well-crafted for years. So glad I finally found Aura Living!",
     by: "Imran Shah, Peshawar",
-    imgSrc: "https://i.pravatar.cc/150?img=11",
     rating: 5
   },
   {
     tempId: 11,
-    testimonial: "It's so simple and intuitive, we got our entire home styled in just 10 minutes of browsing.",
+    testimonial: "Their curated collection made it easy to find complementary pieces — I styled my entire lounge in one afternoon of browsing.",
     by: "Marina Khan, Karachi",
-    imgSrc: "https://i.pravatar.cc/150?img=12",
     rating: 4
   },
   {
     tempId: 12,
-    testimonial: "Aura Living's customer support is unparalleled. They're always there when we need them.",
+    testimonial: "Aura Living's customer support helped me pick the right size lamp for my space. They actually care about getting it right.",
     by: "Olivia Shah, Lahore",
-    imgSrc: "https://i.pravatar.cc/150?img=13",
     rating: 5
   },
   {
     tempId: 13,
-    testimonial: "The efficiency of their delivery is off the charts! Every piece arrives in perfect condition.",
+    testimonial: "Delivery to Islamabad was quicker than expected, and every piece arrived in perfect condition with secure packaging.",
     by: "Raj Patel, Islamabad",
-    imgSrc: "https://i.pravatar.cc/150?img=14",
     rating: 5
   },
   {
     tempId: 14,
-    testimonial: "Aura Living has revolutionized how we think about home decoration. It's a game-changer!",
+    testimonial: "Aura Living has completely changed how I think about decorating our home. Every piece tells a story.",
     by: "Lila Hashmi, Karachi",
-    imgSrc: "https://i.pravatar.cc/150?img=15",
     rating: 4
   },
   {
     tempId: 15,
-    testimonial: "The scalability of their collection is impressive. It grows with our taste seamlessly.",
+    testimonial: "The range of styles means I can always find something that fits — whether I'm decorating a reading nook or the formal living room.",
     by: "Trevor Ali, Lahore",
-    imgSrc: "https://i.pravatar.cc/150?img=16",
     rating: 5
   },
   {
     tempId: 16,
-    testimonial: "I appreciate how Aura Living continually innovates. They're always one step ahead.",
+    testimonial: "I love that Aura Living keeps adding new pieces each season without dropping the classics. Always something fresh to discover.",
     by: "Naomi Rizvi, Islamabad",
-    imgSrc: "https://i.pravatar.cc/150?img=17",
     rating: 4
   },
   {
     tempId: 17,
-    testimonial: "The value we've seen with Aura Living is incredible. It's paid for itself many times over.",
+    testimonial: "The value for the craftsmanship you get is incredible. These pieces would cost three times as much imported, with none of the local character.",
     by: "Victor Khan, Karachi",
-    imgSrc: "https://i.pravatar.cc/150?img=18",
     rating: 5
   },
   {
     tempId: 18,
-    testimonial: "Their platform is so robust, yet easy to use. The perfect balance of luxury and accessibility.",
+    testimonial: "Beautiful pieces, easy ordering, quick delivery. The perfect balance of luxury and accessibility for the Pakistani home.",
     by: "Yuki Tanaka, Lahore",
-    imgSrc: "https://i.pravatar.cc/150?img=19",
     rating: 5
   },
   {
     tempId: 19,
-    testimonial: "We've tried many stores, but Aura Living stands out in terms of reliability and performance.",
+    testimonial: "We've shopped at many places, but Aura Living stands out for the consistency of quality and the thoughtful curation.",
     by: "Zoe Ahmed, Islamabad",
-    imgSrc: "https://i.pravatar.cc/150?img=20",
     rating: 4
   }
 ];
@@ -185,8 +187,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       className={cn(
         "absolute left-1/2 top-1/2 cursor-pointer border-2 transition-all duration-500 ease-in-out",
         isCenter 
-          ? "z-10 border-[#D4AF37] bg-[#2C2C2C] text-[#FFFDF7]" 
-          : "z-0 border-[#D4AF37]/20 bg-[#FAF8F5] text-[#2C2C2C] hover:border-[#D4AF37]/50"
+          ? "z-10 border-[var(--color-gold)] bg-[var(--surface-dark)] text-[var(--surface-card)]" 
+          : "z-0 border-[var(--color-gold)]/20 bg-[var(--surface-page)] text-[var(--surface-dark)] hover:border-[var(--color-gold)]/50"
       )}
       style={{
         width: cardSize,
@@ -206,7 +208,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
     >
       {/* Gold accent line — same on all screen sizes */}
       <span
-        className="absolute block origin-top-right rotate-45 bg-[#D4AF37]/30"
+        className="absolute block origin-top-right rotate-45 bg-[var(--color-gold)]/30"
         style={{
           right: -2,
           top: accentTop,
@@ -220,23 +222,23 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         className="absolute left-0 top-0 bottom-0 rounded-l-sm transition-all duration-400 z-20"
         style={{
           width: isHovered ? '4px' : '0px',
-          backgroundColor: '#D4AF37',
+          backgroundColor: 'var(--color-gold)',
           boxShadow: isHovered ? '0 0 8px rgba(212,175,55,0.5)' : 'none',
           transformOrigin: 'bottom',
         }}
       />
 
-      <img loading="lazy"
-        src={testimonial.imgSrc}
-        alt={`${testimonial.by.split(',')[0]}`}
-        className="bg-[#F5EDDA] object-cover object-top mb-3"
+      <div
+        className="bg-[var(--color-gold-pale)] mb-3 flex items-center justify-center"
         style={{
           width: imgW,
           height: imgH,
-          boxShadow: isCenter ? "3px 3px 0px #2C2C2C" : "3px 3px 0px #FAF8F5",
+          boxShadow: isCenter ? "3px 3px 0px var(--surface-dark)" : "3px 3px 0px var(--surface-page)",
           clipPath: `polygon(${imgClipNotch}px 0%, calc(100% - ${imgClipNotch}px) 0%, 100% ${imgClipNotch}px, 100% 100%, calc(100% - ${imgClipNotch}px) 100%, ${imgClipNotch}px 100%, 0 100%, 0 0)`
         }}
-      />
+      >
+        <InitialsAvatar name={testimonial.by.split(',')[0]} size={Math.min(imgW, imgH) - 4} />
+      </div>
 
       {/* Animated quote marks — scale up on hover */}
       <div
@@ -260,7 +262,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         style={{
           
           fontSize: titleSize,
-          color: isCenter ? '#FFFDF7' : '#2C2C2C'
+          color: isCenter ? 'var(--surface-card)' : 'var(--surface-dark)'
         }}
       >
         &ldquo;{testimonial.testimonial}&rdquo;
@@ -279,10 +281,10 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
             className={cn(
               "transition-all duration-300",
               i < (testimonial.rating ?? 5)
-                ? "text-[#D4AF37] fill-[#D4AF37]"
+                ? "text-[var(--color-gold)] fill-[var(--color-gold)]"
                 : isCenter
-                ? "text-[#E8D5A3]/30"
-                : "text-[#E8D5A3]/50"
+                ? "text-[var(--color-gold-soft)]/30"
+                : "text-[var(--color-gold-soft)]/50"
             )}
             style={{ width: starSize, height: starSize }}
           />
@@ -297,7 +299,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           bottom: authorBottom,
           left: authorSide,
           right: authorSide,
-          color: isCenter ? '#E8D5A3' : '#8A8A8A'
+          color: isCenter ? 'var(--color-gold-soft)' : 'var(--color-muted-gray)'
         }}
       >
         — {testimonial.by}
@@ -383,7 +385,7 @@ export const StaggerTestimonials: React.FC = () => {
 
   return (
     <div
-      className="relative w-full overflow-hidden bg-[#FAF8F5]"
+      className="relative w-full overflow-hidden bg-[var(--surface-page)]"
       style={{ height: containerHeight }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
@@ -416,9 +418,9 @@ export const StaggerTestimonials: React.FC = () => {
           onClick={() => handleMove(-1)}
           className={cn(
             "flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center text-base sm:text-2xl transition-all duration-300 rounded-full",
-            "bg-[#2C2C2C] border-2 border-[#D4AF37]/30 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37]",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2",
-            "text-[#D4AF37]"
+            "bg-[var(--surface-dark)] border-2 border-[var(--color-gold)]/30 hover:bg-[var(--color-gold)] hover:text-white hover:border-[var(--color-gold)]",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold)] focus-visible:ring-offset-2",
+            "text-[var(--color-gold)]"
           )}
           aria-label="Previous testimonial"
         >
@@ -428,9 +430,9 @@ export const StaggerTestimonials: React.FC = () => {
           onClick={() => handleMove(1)}
           className={cn(
             "flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center text-base sm:text-2xl transition-all duration-300 rounded-full",
-            "bg-[#2C2C2C] border-2 border-[#D4AF37]/30 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37]",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2",
-            "text-[#D4AF37]"
+            "bg-[var(--surface-dark)] border-2 border-[var(--color-gold)]/30 hover:bg-[var(--color-gold)] hover:text-white hover:border-[var(--color-gold)]",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold)] focus-visible:ring-offset-2",
+            "text-[var(--color-gold)]"
           )}
           aria-label="Next testimonial"
         >

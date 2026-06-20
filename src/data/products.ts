@@ -57,7 +57,7 @@ export const products: Product[] = [
     dimensions: 'H 45cm × W 25cm × D 25cm',
     weight: '2.5 kg',
     careInstructions: 'Wipe with a soft dry cloth. Avoid abrasive cleaners. Use LED bulbs only (max 60W equivalent).',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '1-year manufacturer warranty covering electrical components and finish defects',
     origin: 'Pakistan',
   },
   {
@@ -77,7 +77,7 @@ export const products: Product[] = [
     dimensions: 'H 45cm × W 25cm × D 25cm',
     weight: '2.5 kg',
     careInstructions: 'Wipe with a soft dry cloth. Avoid abrasive cleaners. Use LED bulbs only (max 60W equivalent).',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '1-year manufacturer warranty covering electrical components and finish defects',
     origin: 'Pakistan',
   },
   {
@@ -98,7 +98,7 @@ export const products: Product[] = [
     dimensions: 'H 45cm × W 25cm × D 25cm',
     weight: '2.5 kg',
     careInstructions: 'Wipe with a soft dry cloth. Avoid abrasive cleaners. Use LED bulbs only (max 60W equivalent).',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '1-year manufacturer warranty covering electrical components and finish defects',
     origin: 'Pakistan',
   },
   {
@@ -117,7 +117,7 @@ export const products: Product[] = [
     dimensions: 'H 45cm × W 25cm × D 25cm',
     weight: '2.5 kg',
     careInstructions: 'Wipe with a soft dry cloth. Avoid abrasive cleaners. Use LED bulbs only (max 60W equivalent).',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '1-year manufacturer warranty covering electrical components and finish defects',
     origin: 'Pakistan',
   },
   {
@@ -137,7 +137,7 @@ export const products: Product[] = [
     dimensions: 'H 45cm × W 25cm × D 25cm',
     weight: '2.5 kg',
     careInstructions: 'Wipe with a soft dry cloth. Avoid abrasive cleaners. Use LED bulbs only (max 60W equivalent).',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '1-year manufacturer warranty covering electrical components and finish defects',
     origin: 'Pakistan',
   },
   {
@@ -156,7 +156,7 @@ export const products: Product[] = [
     dimensions: 'H 45cm × W 25cm × D 25cm',
     weight: '2.5 kg',
     careInstructions: 'Wipe with a soft dry cloth. Avoid abrasive cleaners. Use LED bulbs only (max 60W equivalent).',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '1-year manufacturer warranty covering electrical components and finish defects',
     origin: 'Pakistan',
   },
   {
@@ -176,7 +176,7 @@ export const products: Product[] = [
     dimensions: 'H 45cm × W 25cm × D 25cm',
     weight: '2.5 kg',
     careInstructions: 'Wipe with a soft dry cloth. Avoid abrasive cleaners. Use LED bulbs only (max 60W equivalent).',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '1-year manufacturer warranty covering electrical components and finish defects',
     origin: 'Pakistan',
   },
   {
@@ -197,7 +197,7 @@ export const products: Product[] = [
     dimensions: 'H 45cm × W 25cm × D 25cm',
     weight: '2.5 kg',
     careInstructions: 'Wipe with a soft dry cloth. Avoid abrasive cleaners. Use LED bulbs only (max 60W equivalent).',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '1-year manufacturer warranty covering electrical components and finish defects',
     origin: 'Pakistan',
   },
   {
@@ -217,7 +217,7 @@ export const products: Product[] = [
     dimensions: 'H 30cm × W 25cm × D 25cm',
     weight: '1.8 kg',
     careInstructions: 'Wipe planter with damp cloth. For live plants, water according to species requirements. Ensure drainage.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; plants not included',
     origin: 'Pakistan',
   },
   {
@@ -236,7 +236,7 @@ export const products: Product[] = [
     dimensions: 'H 30cm × W 25cm × D 25cm',
     weight: '1.8 kg',
     careInstructions: 'Wipe planter with damp cloth. For live plants, water according to species requirements. Ensure drainage.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; plants not included',
     origin: 'Pakistan',
   },
   {
@@ -256,7 +256,7 @@ export const products: Product[] = [
     dimensions: 'H 30cm × W 25cm × D 25cm',
     weight: '1.8 kg',
     careInstructions: 'Wipe planter with damp cloth. For live plants, water according to species requirements. Ensure drainage.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; plants not included',
     origin: 'Pakistan',
   },
   {
@@ -275,7 +275,7 @@ export const products: Product[] = [
     dimensions: 'H 30cm × W 25cm × D 25cm',
     weight: '1.8 kg',
     careInstructions: 'Wipe planter with damp cloth. For live plants, water according to species requirements. Ensure drainage.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; plants not included',
     origin: 'Pakistan',
   },
   {
@@ -295,7 +295,7 @@ export const products: Product[] = [
     dimensions: 'H 30cm × W 25cm × D 25cm',
     weight: '1.8 kg',
     careInstructions: 'Wipe planter with damp cloth. For live plants, water according to species requirements. Ensure drainage.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; plants not included',
     origin: 'Pakistan',
   },
   {
@@ -316,7 +316,7 @@ export const products: Product[] = [
     dimensions: 'H 30cm × W 25cm × D 25cm',
     weight: '1.8 kg',
     careInstructions: 'Wipe planter with damp cloth. For live plants, water according to species requirements. Ensure drainage.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; plants not included',
     origin: 'Pakistan',
   },
   {
@@ -336,7 +336,7 @@ export const products: Product[] = [
     dimensions: 'H 28cm × W 15cm × D 15cm',
     weight: '1.2 kg',
     careInstructions: 'Hand wash with mild soap. Do not use in dishwasher. Dry thoroughly after washing.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against structural defects; hand-thrown variations are inherent to craftsmanship',
     origin: 'Pakistan',
   },
   {
@@ -355,7 +355,7 @@ export const products: Product[] = [
     dimensions: 'H 28cm × W 15cm × D 15cm',
     weight: '1.2 kg',
     careInstructions: 'Hand wash with mild soap. Do not use in dishwasher. Dry thoroughly after washing.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against structural defects; hand-thrown variations are inherent to craftsmanship',
     origin: 'Pakistan',
   },
   {
@@ -375,7 +375,7 @@ export const products: Product[] = [
     dimensions: 'H 28cm × W 15cm × D 15cm',
     weight: '1.2 kg',
     careInstructions: 'Hand wash with mild soap. Do not use in dishwasher. Dry thoroughly after washing.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against structural defects; hand-thrown variations are inherent to craftsmanship',
     origin: 'Pakistan',
   },
   {
@@ -394,7 +394,7 @@ export const products: Product[] = [
     dimensions: 'H 28cm × W 15cm × D 15cm',
     weight: '1.2 kg',
     careInstructions: 'Hand wash with mild soap. Do not use in dishwasher. Dry thoroughly after washing.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against structural defects; hand-thrown variations are inherent to craftsmanship',
     origin: 'Pakistan',
   },
   {
@@ -414,7 +414,7 @@ export const products: Product[] = [
     dimensions: 'H 28cm × W 15cm × D 15cm',
     weight: '1.2 kg',
     careInstructions: 'Hand wash with mild soap. Do not use in dishwasher. Dry thoroughly after washing.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against structural defects; hand-thrown variations are inherent to craftsmanship',
     origin: 'Pakistan',
   },
   {
@@ -434,7 +434,7 @@ export const products: Product[] = [
     dimensions: 'H 12cm × W 10cm × D 10cm',
     weight: '0.5 kg',
     careInstructions: 'Trim wick to 5mm before each burn. Never burn for more than 4 hours. Keep away from drafts.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; burn time varies with care and environment',
     origin: 'Pakistan',
   },
   {
@@ -454,7 +454,7 @@ export const products: Product[] = [
     dimensions: 'H 12cm × W 10cm × D 10cm',
     weight: '0.5 kg',
     careInstructions: 'Trim wick to 5mm before each burn. Never burn for more than 4 hours. Keep away from drafts.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; burn time varies with care and environment',
     origin: 'Pakistan',
   },
   {
@@ -473,7 +473,7 @@ export const products: Product[] = [
     dimensions: 'H 12cm × W 10cm × D 10cm',
     weight: '0.5 kg',
     careInstructions: 'Trim wick to 5mm before each burn. Never burn for more than 4 hours. Keep away from drafts.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; burn time varies with care and environment',
     origin: 'Pakistan',
   },
   {
@@ -494,7 +494,7 @@ export const products: Product[] = [
     dimensions: 'H 12cm × W 10cm × D 10cm',
     weight: '0.5 kg',
     careInstructions: 'Trim wick to 5mm before each burn. Never burn for more than 4 hours. Keep away from drafts.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; burn time varies with care and environment',
     origin: 'Pakistan',
   },
   {
@@ -514,7 +514,7 @@ export const products: Product[] = [
     dimensions: 'H 60cm × W 45cm × D 4cm',
     weight: '3.0 kg',
     careInstructions: 'Dust regularly with a soft brush. Avoid direct sunlight to prevent fading. Clean glass with standard glass cleaner.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against frame defects; keep away from direct sunlight to preserve colors',
     origin: 'Pakistan',
   },
   {
@@ -534,7 +534,7 @@ export const products: Product[] = [
     dimensions: 'H 60cm × W 45cm × D 4cm',
     weight: '3.0 kg',
     careInstructions: 'Dust regularly with a soft brush. Avoid direct sunlight to prevent fading. Clean glass with standard glass cleaner.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against frame defects; keep away from direct sunlight to preserve colors',
     origin: 'Pakistan',
   },
   {
@@ -553,7 +553,7 @@ export const products: Product[] = [
     dimensions: 'H 60cm × W 45cm × D 4cm',
     weight: '3.0 kg',
     careInstructions: 'Dust regularly with a soft brush. Avoid direct sunlight to prevent fading. Clean glass with standard glass cleaner.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against frame defects; keep away from direct sunlight to preserve colors',
     origin: 'Pakistan',
   },
   {
@@ -574,7 +574,7 @@ export const products: Product[] = [
     dimensions: 'H 60cm × W 45cm × D 4cm',
     weight: '3.0 kg',
     careInstructions: 'Dust regularly with a soft brush. Avoid direct sunlight to prevent fading. Clean glass with standard glass cleaner.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against frame defects; keep away from direct sunlight to preserve colors',
     origin: 'Pakistan',
   },
   {
@@ -654,7 +654,7 @@ export const products: Product[] = [
     dimensions: 'H 45cm × W 25cm × D 25cm',
     weight: '2.5 kg',
     careInstructions: 'Wipe with a soft dry cloth. Avoid abrasive cleaners. Use LED bulbs only (max 60W equivalent).',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '1-year manufacturer warranty covering electrical components and finish defects',
     origin: 'Pakistan',
   },
 {
@@ -674,7 +674,7 @@ export const products: Product[] = [
     dimensions: 'H 28cm × W 15cm × D 15cm',
     weight: '1.2 kg',
     careInstructions: 'Hand wash with mild soap. Do not use in dishwasher. Dry thoroughly after washing.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against structural defects; hand-thrown variations are inherent to craftsmanship',
     origin: 'Pakistan',
   },
 {
@@ -694,7 +694,7 @@ export const products: Product[] = [
     dimensions: 'H 30cm × W 25cm × D 25cm',
     weight: '1.8 kg',
     careInstructions: 'Wipe planter with damp cloth. For live plants, water according to species requirements. Ensure drainage.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; plants not included',
     origin: 'Pakistan',
   },
 {
@@ -715,7 +715,7 @@ export const products: Product[] = [
     dimensions: 'H 12cm × W 10cm × D 10cm',
     weight: '0.5 kg',
     careInstructions: 'Trim wick to 5mm before each burn. Never burn for more than 4 hours. Keep away from drafts.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; burn time varies with care and environment',
     origin: 'Pakistan',
   },
 {
@@ -735,7 +735,7 @@ export const products: Product[] = [
     dimensions: 'H 60cm × W 45cm × D 4cm',
     weight: '3.0 kg',
     careInstructions: 'Dust regularly with a soft brush. Avoid direct sunlight to prevent fading. Clean glass with standard glass cleaner.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against frame defects; keep away from direct sunlight to preserve colors',
     origin: 'Pakistan',
   },
 {
@@ -775,7 +775,7 @@ export const products: Product[] = [
     dimensions: 'H 60cm × W 45cm × D 4cm',
     weight: '3.0 kg',
     careInstructions: 'Dust regularly with a soft brush. Avoid direct sunlight to prevent fading. Clean glass with standard glass cleaner.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against frame defects; keep away from direct sunlight to preserve colors',
     origin: 'Pakistan',
   },
 {
@@ -795,7 +795,7 @@ export const products: Product[] = [
     dimensions: 'H 12cm × W 10cm × D 10cm',
     weight: '0.5 kg',
     careInstructions: 'Trim wick to 5mm before each burn. Never burn for more than 4 hours. Keep away from drafts.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; burn time varies with care and environment',
     origin: 'Pakistan',
   },
 {
@@ -815,7 +815,7 @@ export const products: Product[] = [
     dimensions: 'H 30cm × W 25cm × D 25cm',
     weight: '1.8 kg',
     careInstructions: 'Wipe planter with damp cloth. For live plants, water according to species requirements. Ensure drainage.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; plants not included',
     origin: 'Pakistan',
   },
 {
@@ -836,7 +836,7 @@ export const products: Product[] = [
     dimensions: 'H 45cm × W 25cm × D 25cm',
     weight: '2.5 kg',
     careInstructions: 'Wipe with a soft dry cloth. Avoid abrasive cleaners. Use LED bulbs only (max 60W equivalent).',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '1-year manufacturer warranty covering electrical components and finish defects',
     origin: 'Pakistan',
   },
 {
@@ -855,7 +855,7 @@ export const products: Product[] = [
     dimensions: 'H 30cm × W 25cm × D 25cm',
     weight: '1.8 kg',
     careInstructions: 'Wipe planter with damp cloth. For live plants, water according to species requirements. Ensure drainage.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '30-day satisfaction guarantee; plants not included',
     origin: 'Pakistan',
   },
 {
@@ -874,7 +874,7 @@ export const products: Product[] = [
     dimensions: 'H 28cm × W 15cm × D 15cm',
     weight: '1.2 kg',
     careInstructions: 'Hand wash with mild soap. Do not use in dishwasher. Dry thoroughly after washing.',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '6-month warranty against structural defects; hand-thrown variations are inherent to craftsmanship',
     origin: 'Pakistan',
   },
 {
@@ -933,7 +933,7 @@ export const products: Product[] = [
     dimensions: 'H 45cm × W 25cm × D 25cm',
     weight: '2.5 kg',
     careInstructions: 'Wipe with a soft dry cloth. Avoid abrasive cleaners. Use LED bulbs only (max 60W equivalent).',
-    warranty: '6-month manufacturer warranty against defects',
+    warranty: '1-year manufacturer warranty covering electrical components and finish defects',
     origin: 'Pakistan',
   }
 ];

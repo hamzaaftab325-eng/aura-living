@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { Eye, Heart, ShoppingCart, Star, ArrowRight } from 'lucide-react';
 import { products, formatPKR } from '@/data/products';
 import { useStore, badgeColors } from '@/store/useStore';
-import { useToast } from '@/hooks/use-toast';
+import { useCartActions } from '@/hooks/useCartActions';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { useGsapFadeIn, useGsapStagger, useGsapBlurText, gsap, ScrollTrigger } from '@/hooks/useGsap';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -19,8 +20,8 @@ import type { Product } from '@/store/useStore';
    dramatic image zoom (1.12), more lift (-8px), gold border fade
    ═══════════════════════════════════════════════════════════════ */
 function ProductCard({ product, index }: { product: Product; index: number }) {
-  const { addToCart, toggleWishlist, isInWishlist, setSelectedProduct, setPage } = useStore();
-  const { toast } = useToast();
+  const { isInWishlist, setSelectedProduct, setPage } = useStore();
+  const { handleAddToCart, handleToggleWishlist } = useCartActions();
   const [isHovered, setIsHovered] = useState(false);
   const wishlisted = isInWishlist(product.id);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -51,15 +52,14 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
     setPage('product');
   };
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCartClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    addToCart(product);
-    toast({ title: 'Added to cart!', description: `${product.name} has been added to your cart.` });
+    handleAddToCart(product);
   };
 
-  const handleToggleWishlist = (e: React.MouseEvent) => {
+  const handleToggleWishlistClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    toggleWishlist(product.id);
+    handleToggleWishlist(product.id, product.name);
   };
 
   const handleQuickView = (e: React.MouseEvent) => {
@@ -94,15 +94,17 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         aria-label={`View ${product.name} details`}
       >
         {/* Image with parallax + enhanced CSS zoom on hover */}
-        <div className="absolute inset-0 overflow-hidden" style={{ backgroundColor: '#FFFDF7' }}>
-          <img
+        <div className="absolute inset-0 overflow-hidden" style={{ backgroundColor: 'var(--surface-card)' }}>
+          <Image
             ref={imageRef}
             src={product.image}
             alt={product.name}
+            fill
             className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
             style={{ transform: isHovered ? 'scale(1.12)' : 'scale(1)',
             }}
-          loading="lazy" />
+            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+          />
         </div>
 
         {/* Badge */}
@@ -123,8 +125,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         <div className="touch-visible absolute top-3 right-3 z-30 flex flex-col gap-2">
           {[
             { icon: <Eye className="w-5 h-5" strokeWidth={2} />, onClick: handleQuickView, label: 'Quick view', title: 'Preview' },
-            { icon: <Heart className={`w-5 h-5 ${wishlisted ? 'fill-current' : ''}`} strokeWidth={2} />, onClick: handleToggleWishlist, label: 'Toggle wishlist', active: wishlisted, title: 'Wishlist' },
-            { icon: <ShoppingCart className="w-5 h-5" strokeWidth={2} />, onClick: handleAddToCart, label: 'Add to cart', title: 'Add to Cart' },
+            { icon: <Heart className={`w-5 h-5 ${wishlisted ? 'fill-current' : ''}`} strokeWidth={2} />, onClick: handleToggleWishlistClick, label: 'Toggle wishlist', active: wishlisted, title: 'Wishlist' },
+            { icon: <ShoppingCart className="w-5 h-5" strokeWidth={2} />, onClick: handleAddToCartClick, label: 'Add to cart', title: 'Add to Cart' },
           ].map((btn, i) => (
             <button
               key={i}
@@ -132,11 +134,11 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               title={btn.title}
               className="touch-visible w-11 h-11 rounded-full flex items-center justify-center cursor-pointer"
               style={{ backgroundColor: isHovered
-                  ? (wishlisted && btn.active ? '#D4AF37' : '#FFFDF7')
+                  ? (wishlisted && btn.active ? 'var(--color-gold)' : 'var(--surface-card)')
                   : 'transparent',
-                color: wishlisted && btn.active ? '#FFFFFF' : '#2C2C2C',
+                color: wishlisted && btn.active ? 'var(--text-on-dark)' : 'var(--surface-dark)',
                 border: wishlisted && btn.active
-                  ? '2px solid #D4AF37'
+                  ? '2px solid var(--color-gold)'
                   : (isHovered ? '2px solid rgba(212,175,55,0.3)' : '2px solid transparent'),
                 boxShadow: isHovered ? '0 2px 10px rgba(0,0,0,0.1)' : 'none',
                 opacity: isHovered ? 1 : 0,
@@ -145,15 +147,15 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                 transitionDelay: isHovered ? `${0.05 + i * 0.07}s` : '0s',
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = '#D4AF37';
-                (e.currentTarget as HTMLElement).style.color = '#FFFFFF';
-                (e.currentTarget as HTMLElement).style.borderColor = '#D4AF37';
+                (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-gold)';
+                (e.currentTarget as HTMLElement).style.color = 'var(--text-on-dark)';
+                (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-gold)';
                 (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px rgba(212,175,55,0.4)';
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = wishlisted && btn.active ? '#D4AF37' : '#FFFDF7';
-                (e.currentTarget as HTMLElement).style.color = wishlisted && btn.active ? '#FFFFFF' : '#2C2C2C';
-                (e.currentTarget as HTMLElement).style.borderColor = wishlisted && btn.active ? '#D4AF37' : 'rgba(212,175,55,0.3)';
+                (e.currentTarget as HTMLElement).style.backgroundColor = wishlisted && btn.active ? 'var(--color-gold)' : 'var(--surface-card)';
+                (e.currentTarget as HTMLElement).style.color = wishlisted && btn.active ? 'var(--text-on-dark)' : 'var(--surface-dark)';
+                (e.currentTarget as HTMLElement).style.borderColor = wishlisted && btn.active ? 'var(--color-gold)' : 'rgba(212,175,55,0.3)';
                 (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
               }}
               aria-label={btn.label}
@@ -173,10 +175,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           }}
         >
           <button
-            onClick={handleAddToCart}
-            className="w-full py-2.5 rounded-lg text-xs font-semibold tracking-[0.12em] uppercase flex items-center justify-center gap-2 cursor-pointer transition-colors duration-200 hover:bg-[#C9A22E]"
+            onClick={handleAddToCartClick}
+            className="w-full py-2.5 rounded-lg text-xs font-semibold tracking-[0.12em] uppercase flex items-center justify-center gap-2 cursor-pointer transition-colors duration-200 hover:bg-[var(--color-gold-hover)]"
             style={{ backgroundColor: 'rgba(212,175,55,0.9)',
-              color: '#FFFFFF',
+              color: 'var(--text-on-dark)',
               border: '1px solid rgba(212,175,55,0.6)',
             }}
           >
@@ -189,8 +191,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       {/* ─── Product Info below card ─── */}
       <div className="mt-4 flex flex-col gap-1.5 px-1">
         <h3
-          className="text-[15px] font-semibold leading-snug cursor-pointer transition-colors duration-300 line-clamp-1 hover:text-[#D4AF37]"
-          style={{ color: '#2C2C2C',
+          className="text-[15px] font-semibold leading-snug cursor-pointer transition-colors duration-300 line-clamp-1 hover:text-[var(--color-gold)]"
+          style={{ color: 'var(--surface-dark)',
           }}
           onClick={handleProductClick}
         >
@@ -207,10 +209,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                   key={i}
                   className={`w-3.5 h-3.5 ${
                     filled
-                      ? 'text-[#D4AF37] fill-[#D4AF37]'
+                      ? 'text-[var(--color-gold)] fill-[var(--color-gold)]'
                       : half
-                      ? 'text-[#D4AF37] fill-[#D4AF37]/40'
-                      : 'text-[#E8D5A3]/50'
+                      ? 'text-[var(--color-gold)] fill-[var(--color-gold)]/40'
+                      : 'text-[var(--color-gold-soft)]/50'
                   }`}
                 />
               );
@@ -218,7 +220,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           </div>
           <span
             className="text-[11px]"
-            style={{ color: '#8A8A8A' }}
+            style={{ color: 'var(--color-muted-gray)' }}
           >
             ({product.reviews})
           </span>
@@ -227,14 +229,14 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         <div className="flex items-center gap-2.5">
           <span
             className="text-base font-bold"
-            style={{ color: '#D4AF37' }}
+            style={{ color: 'var(--color-gold)' }}
           >
             {formatPKR(product.price)}
           </span>
           {product.originalPrice && (
             <span
               className="text-xs line-through"
-              style={{ color: '#B8A99A' }}
+              style={{ color: 'var(--color-taupe)' }}
             >
               {formatPKR(product.originalPrice)}
             </span>
@@ -299,7 +301,7 @@ export default function FeaturedProducts() {
   return (
     <section
       className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
-      style={{ backgroundColor: '#FAF8F5' }}
+      style={{ backgroundColor: 'var(--surface-page)' }}
     >
       {/* Ambient decorative blobs — hidden on mobile to save paint */}
       <div
@@ -320,15 +322,15 @@ export default function FeaturedProducts() {
         <div className="text-center mb-16">
           {/* Decorative top accent */}
           <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent to-[#D4AF37]/40" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/60" />
-            <div className="w-8 h-px bg-[#D4AF37]/30" />
+            <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent to-[var(--color-gold)]/40" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]/60" />
+            <div className="w-8 h-px bg-[var(--color-gold)]/30" />
           </div>
 
           <h2
             ref={headingRef}
             className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold tracking-tight"
-            style={{ color: '#2C2C2C' }}
+            style={{ color: 'var(--surface-dark)' }}
           >
             Curated for You
           </h2>
@@ -340,7 +342,7 @@ export default function FeaturedProducts() {
           <p
             ref={subRef}
             className="text-sm sm:text-base max-w-md mx-auto mt-5"
-            style={{ color: '#8A8A8A' }}
+            style={{ color: 'var(--color-muted-gray)' }}
           >
             Handpicked treasures that embody the Aura Living spirit
           </p>

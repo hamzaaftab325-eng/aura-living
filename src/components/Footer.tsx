@@ -46,10 +46,10 @@ function FooterLink({
   return (
     <Component
       {...props}
-      className="group relative inline-block text-sm transition-all duration-500 hover:text-[#D4AF37] hover:translate-x-1.5 hover:drop-shadow-[0_0_6px_rgba(212,175,55,0.3)]"
-      style={{ color: '#FAF8F5' }}
+      className="group relative inline-block text-sm transition-all duration-500 hover:text-[var(--color-gold)] hover:translate-x-1.5 hover:drop-shadow-[0_0_6px_rgba(212,175,55,0.3)]"
+      style={{ color: 'var(--surface-page)' }}
     >
-      <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#D4AF37] transition-all duration-500 group-hover:w-full" />
+      <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[var(--color-gold)] transition-all duration-500 group-hover:w-full" />
       <span className="relative">{children}</span>
     </Component>
   );
@@ -73,8 +73,8 @@ function SocialIcon({
       aria-label={label}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex h-11 w-11 items-center justify-center rounded-full border border-[#D4AF37]/25 transition-all duration-500 hover:border-[#D4AF37]/70 hover:scale-110 hover:rotate-6 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
-      style={{ color: '#D4AF37', backgroundColor: 'rgba(212,175,55,0.06)' }}
+      className="group flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-gold)]/25 transition-all duration-500 hover:border-[var(--color-gold)]/70 hover:scale-110 hover:rotate-6 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
+      style={{ color: 'var(--color-gold)', backgroundColor: 'rgba(212,175,55,0.06)' }}
     >
       <Icon size={18} className="transition-all duration-500 group-hover:scale-110" />
     </a>
@@ -179,12 +179,12 @@ export default function Footer() {
     <footer
       ref={footerRef}
       className="relative w-full overflow-hidden"
-      style={{ backgroundColor: '#2C2C2C' }}
+      style={{ backgroundColor: 'var(--surface-dark)' }}
     >
       {/* Gold accent line top edge */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[2px] z-10"
-        style={{ background: 'linear-gradient(90deg, transparent 0%, #D4AF37 50%, transparent 100%)',
+        style={{ background: 'linear-gradient(90deg, transparent 0%, var(--color-gold) 50%, transparent 100%)',
         }}
       />
 
@@ -216,7 +216,7 @@ export default function Footer() {
             </div>
             <p
               className="text-lg italic leading-relaxed"
-              style={{ color: '#E8D5A3', fontFamily: "'Playfair Display', serif" }}
+              style={{ color: 'var(--color-gold-soft)', fontFamily: "'Playfair Display', serif" }}
             >
               Where Comfort Meets Style
             </p>
@@ -231,10 +231,10 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <h3
               className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
-              style={{ color: '#D4AF37' }}
+              style={{ color: 'var(--color-gold)' }}
             >
               Quick Links
-              <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[#D4AF37]/50" />
+              <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[var(--color-gold)]/50" />
             </h3>
             <ul className="flex flex-col gap-3.5">
               {quickLinks.map(({ label, page }) => (
@@ -249,10 +249,10 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <h3
               className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
-              style={{ color: '#D4AF37' }}
+              style={{ color: 'var(--color-gold)' }}
             >
               Customer Service
-              <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[#D4AF37]/50" />
+              <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[var(--color-gold)]/50" />
             </h3>
             <ul className="flex flex-col gap-3.5">
               {customerLinks.map(({ label, page }) => (
@@ -267,10 +267,10 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <h3
               className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
-              style={{ color: '#D4AF37' }}
+              style={{ color: 'var(--color-gold)' }}
             >
               Newsletter
-              <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[#D4AF37]/50" />
+              <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[var(--color-gold)]/50" />
             </h3>
             <div
               className="rounded-xl p-5 transition-all duration-700"
@@ -283,8 +283,8 @@ export default function Footer() {
                   : '0 0 0 rgba(212,175,55,0)',
               }}
             >
-              <p className="text-sm mb-4 leading-relaxed" style={{ color: '#FAF8F5', opacity: 0.9 }}>
-                Get <span style={{ color: '#D4AF37', fontWeight: 600 }}>15% off</span> your first order
+              <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--surface-page)', opacity: 0.9 }}>
+                Get <span style={{ color: 'var(--color-gold)', fontWeight: 600 }}>15% off</span> your first order
               </p>
               <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
                 <div className="relative">
@@ -300,10 +300,10 @@ export default function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     onFocus={() => setFocused(true)}
                     onBlur={() => setFocused(false)}
-                    className="h-11 w-full rounded-lg px-4 text-sm outline-none transition-all duration-500 placeholder:text-[#8A8A8A]"
+                    className="h-11 w-full rounded-lg px-4 text-sm outline-none transition-all duration-500 placeholder:text-[var(--color-muted-gray)]"
                     style={{ backgroundColor: 'rgba(250,248,245,0.08)',
                       border: focused ? '1px solid rgba(212,175,55,0.6)' : '1px solid rgba(212,175,55,0.18)',
-                      color: '#FAF8F5',
+                      color: 'var(--surface-page)',
                       boxShadow: focused
                         ? '0 0 20px rgba(212,175,55,0.15), 0 0 40px rgba(212,175,55,0.05)'
                         : 'none',
@@ -321,8 +321,8 @@ export default function Footer() {
                 <button
                   type="submit"
                   className="group flex h-11 items-center justify-center gap-2 rounded-lg px-5 text-sm font-medium transition-all duration-500 hover:brightness-110 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] active:scale-[0.98]"
-                  style={{ backgroundColor: '#D4AF37',
-                    color: '#2C2C2C',
+                  style={{ backgroundColor: 'var(--color-gold)',
+                    color: 'var(--surface-dark)',
                   }}
                 >
                   <Send size={14} />
@@ -333,7 +333,7 @@ export default function Footer() {
               {subscribed && (
                 <p
                   className="text-xs mt-3 transition-opacity duration-500"
-                  style={{ color: '#D4AF37' }}
+                  style={{ color: 'var(--color-gold)' }}
                 >
                   Thank you for subscribing!
                 </p>
@@ -351,25 +351,25 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="relative z-20 mx-auto max-w-7xl px-5 pb-6 sm:px-6 sm:pb-8 lg:px-8">
         <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
-          <p className="text-xs" style={{ color: '#E8D5A3', opacity: 0.7 }}>
+          <p className="text-xs" style={{ color: 'var(--color-gold-soft)', opacity: 0.7 }}>
             &copy; {new Date().getFullYear()} Aura Living. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <button onClick={() => setPage('terms')} className="text-xs transition-colors duration-300 hover:text-[#D4AF37] cursor-pointer" style={{ color: '#E8D5A3', opacity: 0.7, background: 'none' }}>Terms of Service</button>
-            <button onClick={() => setPage('privacy')} className="text-xs transition-colors duration-300 hover:text-[#D4AF37] cursor-pointer" style={{ color: '#E8D5A3', opacity: 0.7, background: 'none' }}>Privacy Policy</button>
+            <button onClick={() => setPage('terms')} className="text-xs transition-colors duration-300 hover:text-[var(--color-gold)] cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7, background: 'none' }}>Terms of Service</button>
+            <button onClick={() => setPage('privacy')} className="text-xs transition-colors duration-300 hover:text-[var(--color-gold)] cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7, background: 'none' }}>Privacy Policy</button>
           </div>
           <div className="flex items-center gap-2 flex-wrap justify-center">
-            <span className="text-xs" style={{ color: '#E8D5A3', opacity: 0.5 }}>We accept:</span>
+            <span className="text-xs" style={{ color: 'var(--color-gold-soft)', opacity: 0.5 }}>We accept:</span>
             {paymentMethods.map((method, i) => (
               <span key={method} className="flex items-center gap-2">
                 <span
-                  className="text-xs font-medium transition-colors duration-300 hover:text-[#D4AF37]"
-                  style={{ color: '#FAF8F5', opacity: 0.8 }}
+                  className="text-xs font-medium transition-colors duration-300 hover:text-[var(--color-gold)]"
+                  style={{ color: 'var(--surface-page)', opacity: 0.8 }}
                 >
                   {method}
                 </span>
                 {i < paymentMethods.length - 1 && (
-                  <span className="text-[#D4AF37]/40 text-[8px]">•</span>
+                  <span className="text-[var(--color-gold)]/40 text-[8px]">•</span>
                 )}
               </span>
             ))}
@@ -380,7 +380,7 @@ export default function Footer() {
       {/* Bottom gold gradient accent */}
       <div
         className="absolute bottom-0 left-0 right-0 h-[2px] pointer-events-none z-10"
-        style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.4) 30%, #D4AF37 50%, rgba(212,175,55,0.4) 70%, transparent 100%)',
+        style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.4) 30%, var(--color-gold) 50%, rgba(212,175,55,0.4) 70%, transparent 100%)',
         }}
       />
     </footer>

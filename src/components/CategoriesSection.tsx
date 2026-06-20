@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useGsapStagger, useGsapBlurText, gsap, ScrollTrigger } from '@/hooks/useGsap';
 import { categories } from '@/data/products';
 import { useStore } from '@/store/useStore';
@@ -69,7 +70,7 @@ function CategoryCard({
     <div
       ref={cardRef}
       className={`group relative cursor-pointer overflow-hidden rounded-xl ${aspectClass}`}
-      style={{ border: isHovered ? '2px solid #D4AF37' : '1px solid rgba(232, 213, 163, 0.2)',
+      style={{ border: isHovered ? '2px solid var(--color-gold)' : '1px solid rgba(232, 213, 163, 0.2)',
         transition: 'border-color 0.4s ease',
       }}
       onClick={onClick}
@@ -82,13 +83,15 @@ function CategoryCard({
     >
       {/* Image with parallax */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <img
+        <Image
           ref={imageRef}
           src={category.image}
           alt={category.name}
+          fill
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           style={{ willChange: 'transform' }}
-        loading="lazy" />
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        />
       </div>
 
       {/* Dark gradient overlay — brighter on hover */}
@@ -106,7 +109,7 @@ function CategoryCard({
       >
         <h3
           className="text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-500"
-          style={{ color: isHovered ? '#D4AF37' : '#FFFFFF',
+          style={{ color: isHovered ? 'var(--color-gold)' : 'var(--text-on-dark)',
             textShadow: isHovered
               ? '0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3)'
               : '0 2px 8px rgba(0,0,0,0.3)',
@@ -129,7 +132,7 @@ function CategoryCard({
       <div
         className="absolute bottom-0 left-0 h-[3px] z-20"
         style={{ width: isHovered ? '100%' : '0%',
-          background: 'linear-gradient(90deg, #D4AF37, #E8D5A3, #D4AF37)',
+          background: 'linear-gradient(90deg, var(--color-gold), var(--color-gold-soft), var(--color-gold))',
           transition: 'width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
           boxShadow: isHovered ? '0 0 10px rgba(212,175,55,0.4)' : 'none',
         }}
@@ -189,7 +192,7 @@ export default function CategoriesSection() {
   return (
     <section
       className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
-      style={{ backgroundColor: '#FAF8F5' }}
+      style={{ backgroundColor: 'var(--surface-page)' }}
     >
       <div ref={sectionContentRef} className="max-w-7xl mx-auto relative z-10">
         {/* ── Section Title ── */}
@@ -197,7 +200,7 @@ export default function CategoriesSection() {
           <h2
             ref={headingRef}
             className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold mb-2"
-            style={{ color: '#2C2C2C',
+            style={{ color: 'var(--surface-dark)',
             }}
           >
             Shop by Category

@@ -35,7 +35,7 @@ export interface User {
   rewardsPoints: number;
 }
 
-export type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password' | 'track-orders' | 'addresses' | 'settings' | 'admin';
+export type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password' | 'track-orders' | 'addresses' | 'settings' | 'admin' | 'blog' | 'article';
 
 
 // Shared badge color mapping — used by ProductDetailView, ShopView, WishlistView, FeaturedProducts
@@ -45,11 +45,22 @@ export const badgeColors: Record<string, { bg: string; text: string }> = {
   BESTSELLER: { bg: '#2C2C2C', text: '#D4AF37' },
 };
 
+// Maximum quantity per cart line item
+export const MAX_CART_QTY = 99;
+
+/** Result of an add-to-cart operation, so callers can show appropriate toast. */
+export type AddToCartResult =
+  | { ok: true; added: number }
+  | { ok: false; reason: 'out-of-stock' | 'max-reached' };
+
+/** Result of toggle-wishlist so callers can toast "added"/"removed". */
+export type WishlistToggleResult = { added: boolean; productId: string };
+
 interface StoreState {
   // Cart
   cart: CartItem[];
-  addToCart: (product: Product) => void;
-  addToCartWithQuantity: (product: Product, quantity: number) => void;
+  addToCart: (product: Product) => AddToCartResult;
+  addToCartWithQuantity: (product: Product, quantity: number) => AddToCartResult;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -58,7 +69,7 @@ interface StoreState {
 
   // Wishlist
   wishlist: string[];
-  toggleWishlist: (productId: string) => void;
+  toggleWishlist: (productId: string) => WishlistToggleResult;
   isInWishlist: (productId: string) => boolean;
 
   // User / Auth
@@ -70,12 +81,14 @@ interface StoreState {
   // UI State
   currentPage: PageType;
   selectedProduct: Product | null;
+  selectedArticleSlug: string | null;
   selectedCategory: string;
   searchQuery: string;
   cartOpen: boolean;
 
   setPage: (page: PageType) => void;
   setSelectedProduct: (product: Product | null) => void;
+  setSelectedArticleSlug: (slug: string | null) => void;
   setSelectedCategory: (category: string) => void;
   setSearchQuery: (query: string) => void;
   setCartOpen: (open: boolean) => void;
@@ -108,6 +121,8 @@ export const pageTitles: Record<PageType, string> = {
   'addresses': 'Saved Addresses | Aura Living',
   'settings': 'Account Settings | Aura Living',
   'admin': 'Admin Dashboard | Aura Living',
+  'blog': 'Journal | Aura Living',
+  'article': 'Article | Aura Living',
 };
 
 export const useStore = create<StoreState>()(
@@ -116,51 +131,66 @@ export const useStore = create<StoreState>()(
       // Cart
       cart: [],
       addToCart: (product) => {
+        // Out-of-stock guard
+        if (product.inStock === false) {
+          return { ok: false, reason: 'out-of-stock' as const };
+        }
         const { cart } = get();
-        const MAX_QTY = 99;
         const existing = cart.find((item) => item.product.id === product.id);
         if (existing) {
-          if (existing.quantity >= MAX_QTY) return;
+          if (existing.quantity >= MAX_CART_QTY) {
+            return { ok: false, reason: 'max-reached' as const };
+          }
           set({
             cart: cart.map((item) =>
               item.product.id === product.id
-                ? { ...item, quantity: Math.min(item.quantity + 1, MAX_QTY) }
+                ? { ...item, quantity: Math.min(item.quantity + 1, MAX_CART_QTY) }
                 : item
             ),
           });
         } else {
           set({ cart: [...cart, { product, quantity: 1 }] });
         }
+        return { ok: true, added: 1 };
       },
       addToCartWithQuantity: (product, quantity) => {
+        if (product.inStock === false) {
+          return { ok: false, reason: 'out-of-stock' as const };
+        }
         const { cart } = get();
-        const MAX_QTY = 99;
-        const safeQty = Math.max(1, Math.min(quantity, MAX_QTY));
+        const safeQty = Math.max(1, Math.min(quantity, MAX_CART_QTY));
         const existing = cart.find((item) => item.product.id === product.id);
+        let added = 0;
         if (existing) {
+          if (existing.quantity >= MAX_CART_QTY) {
+            return { ok: false, reason: 'max-reached' as const };
+          }
+          const newQty = Math.min(existing.quantity + safeQty, MAX_CART_QTY);
+          added = newQty - existing.quantity;
           set({
             cart: cart.map((item) =>
               item.product.id === product.id
-                ? { ...item, quantity: Math.min(item.quantity + safeQty, MAX_QTY) }
+                ? { ...item, quantity: newQty }
                 : item
             ),
           });
         } else {
+          added = safeQty;
           set({ cart: [...cart, { product, quantity: safeQty }] });
         }
+        return { ok: true, added };
       },
       removeFromCart: (productId) => {
         set({ cart: get().cart.filter((item) => item.product.id !== productId) });
       },
       updateQuantity: (productId, quantity) => {
-        const MAX_QTY = 99;
         if (quantity <= 0) {
           get().removeFromCart(productId);
           return;
         }
         set({
           cart: get().cart.map((item) =>
-            item.product.id === productId ? { ...item, quantity: Math.min(quantity, MAX_QTY) } : item
+            item.product.id === productId ? { ...item, quantity: Math.min(quantity, MAX_CART_QTY) } : item
           ),
         });
       },
@@ -181,8 +211,10 @@ export const useStore = create<StoreState>()(
         const { wishlist } = get();
         if (wishlist.includes(productId)) {
           set({ wishlist: wishlist.filter((id) => id !== productId) });
+          return { added: false, productId };
         } else {
           set({ wishlist: [...wishlist, productId] });
+          return { added: true, productId };
         }
       },
       isInWishlist: (productId) => {
@@ -217,6 +249,7 @@ export const useStore = create<StoreState>()(
       // UI State
       currentPage: 'home',
       selectedProduct: null,
+      selectedArticleSlug: null,
       selectedCategory: 'all',
       searchQuery: '',
       cartOpen: false,
@@ -225,9 +258,15 @@ export const useStore = create<StoreState>()(
         // Push to browser history so back button works
         if (typeof window !== 'undefined' && window.history && window.history.pushState) {
           // For product pages, include the product ID in the URL
-          const hash = page === 'product' && get().selectedProduct
-            ? `#product/${get().selectedProduct!.id}`
-            : `#${page}`;
+          // For article pages, include the article slug in the URL
+          let hash: string;
+          if (page === 'product' && get().selectedProduct) {
+            hash = `#product/${get().selectedProduct!.id}`;
+          } else if (page === 'article' && get().selectedArticleSlug) {
+            hash = `#article/${get().selectedArticleSlug}`;
+          } else {
+            hash = `#${page}`;
+          }
           const current = window.history.state;
           if (!current || current.page !== page) {
             window.history.pushState({ page }, '', hash);
@@ -241,6 +280,13 @@ export const useStore = create<StoreState>()(
           window.history.replaceState({ page: 'product' }, '', `#product/${product.id}`);
         }
         set({ selectedProduct: product });
+      },
+      setSelectedArticleSlug: (slug) => {
+        // If we're already on the article page, update the URL to include the slug
+        if (typeof window !== 'undefined' && slug && get().currentPage === 'article') {
+          window.history.replaceState({ page: 'article' }, '', `#article/${slug}`);
+        }
+        set({ selectedArticleSlug: slug });
       },
       setSelectedCategory: (category) => set({ selectedCategory: category }),
       setSearchQuery: (query) => set({ searchQuery: query }),

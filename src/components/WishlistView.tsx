@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import {
   useGsapFadeIn,
   useGsapStagger,
@@ -10,11 +11,12 @@ import {
   
 } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
-import { Heart, ShoppingCart, Star, ChevronRight, ShoppingBag } from 'lucide-react';
+import { Heart, ShoppingCart, Star, ShoppingBag } from 'lucide-react';
 import { useStore, badgeColors } from '@/store/useStore';
-import { useToast } from '@/hooks/use-toast';
+import { useCartActions } from '@/hooks/useCartActions';
 import { products, formatPKR } from '@/data/products';
 import PremiumButton from '@/components/ui/PremiumButton';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 /* ═══════════════════════════════════════════════════════════
@@ -43,8 +45,8 @@ function RatingStars({ rating }: { rating: number }) {
         <Star
           key={star}
           className="w-3.5 h-3.5"
-          style={{ color: star <= Math.round(rating) ? '#D4AF37' : '#E8D5A3',
-            fill: star <= Math.round(rating) ? '#D4AF37' : 'none',
+          style={{ color: star <= Math.round(rating) ? 'var(--color-gold)' : 'var(--color-gold-soft)',
+            fill: star <= Math.round(rating) ? 'var(--color-gold)' : 'none',
           }}
         />
       ))}
@@ -54,11 +56,9 @@ function RatingStars({ rating }: { rating: number }) {
 
 export default function WishlistView() {
   const wishlist = useStore((state) => state.wishlist);
-  const toggleWishlist = useStore((state) => state.toggleWishlist);
+  const { handleToggleWishlist: toggleWishlist, handleAddToCart: addToCart } = useCartActions();
   const setPage = useStore((state) => state.setPage);
   const setSelectedProduct = useStore((state) => state.setSelectedProduct);
-  const addToCart = useStore((state) => state.addToCart);
-  const setCartOpen = useStore((state) => state.setCartOpen);
 
   const headerSectionRef = useRef<HTMLElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
@@ -124,12 +124,11 @@ export default function WishlistView() {
   };
 
   const handleAddToCart = (product: typeof products[0]) => {
-    addToCart(product);
-    setCartOpen(true);
+    addToCart(product, { openCart: true });
   };
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero Banner */}
       <section
         ref={headerSectionRef}
@@ -178,9 +177,9 @@ export default function WishlistView() {
           </h1>
 
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
 
           <p
@@ -194,21 +193,12 @@ export default function WishlistView() {
         </div>
       </section>
       {/* Breadcrumb strip (below hero) */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            Home
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
-            Wishlist
-          </span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'Home', onClick: () => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Wishlist' },
+        ]}
+      />
 
       {/* Wishlist Content */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
@@ -221,16 +211,16 @@ export default function WishlistView() {
                   className="w-24 h-24 rounded-full flex items-center justify-center mb-6"
                   style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}
                 >
-                  <Heart className="w-10 h-10" style={{ color: '#D4AF37' }} />
+                  <Heart className="w-10 h-10" style={{ color: 'var(--color-gold)' }} />
                 </div>
                 <h2
-                  className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
+                  className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
                   
                 >
                   Your wishlist is empty
                 </h2>
                 <p
-                  className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-md text-center leading-relaxed"
+                  className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-md text-center leading-relaxed"
                   
                 >
                   Start adding items you love by tapping the heart icon on any product. Your favorite pieces will appear here.
@@ -248,7 +238,7 @@ export default function WishlistView() {
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <h2
-                      className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold"
+                      className="text-[var(--surface-dark)] text-xl sm:text-2xl font-semibold"
                       
                     >
                       Saved Items
@@ -259,7 +249,7 @@ export default function WishlistView() {
                   </div>
                   <span
                     className="text-sm"
-                    style={{ color: '#8A8A8A' }}
+                    style={{ color: 'var(--color-muted-gray)' }}
                   >
                     {wishlistProducts.length} item{wishlistProducts.length !== 1 ? 's' : ''}
                   </span>
@@ -273,23 +263,25 @@ export default function WishlistView() {
                 {wishlistProducts.map((product) => (
                   <div
                     key={product.id}
-                    className="group rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
-                    style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                    className="group rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
+                    style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
                   >
                     {/* Product Image */}
                     <div
                       className="relative w-full aspect-[3/4] overflow-hidden cursor-pointer"
-                      style={{ backgroundColor: '#F5EDDA' }}
+                      style={{ backgroundColor: 'var(--color-gold-pale)' }}
                       onClick={() => handleProductClick(product)}
                       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleProductClick(product); } }}
                       role="button"
                       tabIndex={0}
                       aria-label={`View ${product.name} details`}
                     >
-                      <img loading="lazy"
+                      <Image
         src={product.image}
                         alt={product.name}
+                        fill
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.08]"
+                        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                       />
 
                       {/* Badge */}
@@ -308,13 +300,13 @@ export default function WishlistView() {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          toggleWishlist(product.id);
+                          toggleWishlist(product.id, product.name);
                         }}
                         className="absolute top-3 right-3 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer animate-heartbeat"
                         style={{ backgroundColor: 'rgba(255,255,255,0.9)', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
                         aria-label="Remove from wishlist"
                       >
-                        <Heart className="w-4.5 h-4.5" style={{ color: '#DC2626', fill: '#DC2626' }} />
+                        <Heart className="w-4.5 h-4.5" style={{ color: 'var(--color-danger)', fill: 'var(--color-danger)' }} />
                       </button>
                     </div>
 
@@ -322,7 +314,7 @@ export default function WishlistView() {
                     <div className="p-4 sm:p-5">
                       {/* Name */}
                       <h3
-                        className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-1.5 cursor-pointer transition-colors duration-200 hover:text-[#D4AF37] leading-snug"
+                        className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold mb-1.5 cursor-pointer transition-colors duration-200 hover:text-[var(--color-gold)] leading-snug"
                         
                         onClick={() => handleProductClick(product)}
                       >
@@ -334,7 +326,7 @@ export default function WishlistView() {
                         <RatingStars rating={product.rating} />
                         <span
                           className="text-xs"
-                          style={{ color: '#8A8A8A' }}
+                          style={{ color: 'var(--color-muted-gray)' }}
                         >
                           ({product.reviews})
                         </span>
@@ -344,14 +336,14 @@ export default function WishlistView() {
                       <div className="flex items-center gap-2 mb-4">
                         <span
                           className="text-lg font-bold"
-                          style={{ color: '#2C2C2C' }}
+                          style={{ color: 'var(--surface-dark)' }}
                         >
                           {formatPKR(product.price)}
                         </span>
                         {product.originalPrice && (
                           <span
                             className="text-sm line-through"
-                            style={{ color: '#8A8A8A' }}
+                            style={{ color: 'var(--color-muted-gray)' }}
                           >
                             {formatPKR(product.originalPrice)}
                           </span>
@@ -360,7 +352,7 @@ export default function WishlistView() {
                           <span
                             className="text-xs font-semibold px-1.5 py-0.5 rounded-sm"
                             style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)',
-                              color: '#D4AF37',
+                              color: 'var(--color-gold)',
                             }}
                           >
                             {product.originalPrice ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0}% OFF
@@ -373,20 +365,20 @@ export default function WishlistView() {
                         <button
                           onClick={() => handleAddToCart(product)}
                           className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 active:scale-[0.97] cursor-pointer"
-                          style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #C9A22E 50%, #B8941F 100%)',
-                            color: '#FFFFFF',
+                          style={{ background: 'linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hover) 50%, var(--color-gold-text) 100%)',
+                            color: 'var(--text-on-dark)',
                           }}
                         >
                           <ShoppingCart className="w-3.5 h-3.5" />
                           Add to Cart
                         </button>
                         <button
-                          onClick={() => toggleWishlist(product.id)}
+                          onClick={() => toggleWishlist(product.id, product.name)}
                           className="w-11 h-11 rounded-sm flex items-center justify-center transition-all duration-200 hover:bg-red-50 cursor-pointer"
-                          style={{ border: '1px solid #E8D5A3' }}
+                          style={{ border: '1px solid var(--color-gold-soft)' }}
                           aria-label="Remove from wishlist"
                         >
-                          <Heart className="w-4 h-4" style={{ color: '#DC2626', fill: '#DC2626' }} />
+                          <Heart className="w-4 h-4" style={{ color: 'var(--color-danger)', fill: 'var(--color-danger)' }} />
                         </button>
                       </div>
                     </div>
@@ -401,7 +393,7 @@ export default function WishlistView() {
                     <GoldDivider />
                   </div>
                   <p
-                    className="text-[#5A5A5A] text-base mb-6"
+                    className="text-[var(--color-warm-gray)] text-base mb-6"
                     
                   >
                     Discover more pieces to add to your wishlist

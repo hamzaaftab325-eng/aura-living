@@ -68,7 +68,7 @@ export default function NewsletterSection() {
           ref={cardRef}
           className="relative rounded-xl overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%)',
+            background: 'linear-gradient(135deg, var(--surface-dark) 0%, #1A1A1A 100%)',
             boxShadow: '0 16px 50px rgba(0, 0, 0, 0.15)',
           }}
         >
@@ -120,7 +120,7 @@ export default function NewsletterSection() {
               {/* Social proof */}
               <div ref={socialProofRef} className="mt-5 flex items-center justify-center gap-3">
                 <div className="flex -space-x-2">
-                  {['#D4AF37', '#A8B5A0', '#E8CEC1', '#B8A99A'].map((bg, i) => (
+                  {['var(--color-gold)', 'var(--color-sage)', 'var(--color-blush)', 'var(--color-taupe)'].map((bg, i) => (
                     <div
                       key={i}
                       className="w-7 h-7 rounded-full border-2 border-charcoal flex items-center justify-center text-[8px] font-bold text-white"
@@ -146,7 +146,7 @@ export default function NewsletterSection() {
                     top: shouldFloatLabel ? '6px' : '50%',
                     transform: shouldFloatLabel ? 'translateY(0)' : 'translateY(-50%)',
                     fontSize: shouldFloatLabel ? '10px' : '14px',
-                    color: shouldFloatLabel ? '#D4AF37' : 'rgba(255,255,255,0.4)',
+                    color: shouldFloatLabel ? 'var(--color-gold)' : 'rgba(255,255,255,0.4)',
                     fontWeight: shouldFloatLabel ? 600 : 400,
                     letterSpacing: shouldFloatLabel ? '0.05em' : '0',
                     fontFamily: "'Poppins', sans-serif",
@@ -165,10 +165,10 @@ export default function NewsletterSection() {
                   required
                   className="w-full px-4 py-3.5 rounded-lg text-sm outline-none transition-all duration-300"
                   style={{
-                    color: '#FFFFFF',
+                    color: 'var(--text-on-dark)',
                     backgroundColor: 'rgba(255, 255, 255, 0.08)',
                     border: isFocused
-                      ? '2px solid #D4AF37'
+                      ? '2px solid var(--color-gold)'
                       : '1.5px solid rgba(212, 175, 55, 0.2)',
                     boxShadow: isFocused
                       ? '0 0 20px rgba(212,175,55,0.2)'

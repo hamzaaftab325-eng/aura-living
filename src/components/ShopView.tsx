@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import {
   useGsapStagger,
   useGsapBlurText,
@@ -18,8 +19,9 @@ import {
   X,
 } from 'lucide-react';
 import { useStore, Product, badgeColors } from '@/store/useStore';
-import { useToast } from '@/hooks/use-toast';
+import { useCartActions } from '@/hooks/useCartActions';
 import { products, categories, formatPKR } from '@/data/products';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'newest' | 'best-selling';
@@ -63,7 +65,7 @@ function FilterSidebar({
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C' }}>
+        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--surface-dark)' }}>
           Categories
         </h3>
         <div className="space-y-3">
@@ -71,8 +73,8 @@ function FilterSidebar({
             <label key={cat.id} className="flex items-center gap-3 cursor-pointer group">
               <div
                 className="w-5 h-5 rounded flex items-center justify-center transition-all duration-200"
-                style={{ border: selectedCategory === cat.id ? '2px solid #D4AF37' : '1.5px solid #E8D5A3',
-                  backgroundColor: selectedCategory === cat.id ? '#D4AF37' : 'transparent',
+                style={{ border: selectedCategory === cat.id ? '2px solid var(--color-gold)' : '1.5px solid var(--color-gold-soft)',
+                  backgroundColor: selectedCategory === cat.id ? 'var(--color-gold)' : 'transparent',
                 }}
               >
                 {selectedCategory === cat.id && (
@@ -82,8 +84,8 @@ function FilterSidebar({
                 )}
               </div>
               <span
-                className="text-sm transition-colors duration-200 group-hover:text-[#D4AF37]"
-                style={{ color: selectedCategory === cat.id ? '#D4AF37' : '#5A5A5A' }}
+                className="text-sm transition-colors duration-200 group-hover:text-[var(--color-gold)]"
+                style={{ color: selectedCategory === cat.id ? 'var(--color-gold)' : 'var(--color-warm-gray)' }}
                 onClick={() => onCategoryChange(cat.id)}
               >
                 {cat.name}
@@ -94,7 +96,7 @@ function FilterSidebar({
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C' }}>
+        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--surface-dark)' }}>
           Price Range
         </h3>
         <div className="flex items-center gap-3">
@@ -104,48 +106,48 @@ function FilterSidebar({
               placeholder="Min"
               value={priceMin}
               onChange={(e) => onPriceMinChange(e.target.value)}
-              className="w-full h-10 px-3 rounded-xl text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/40"
-              style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7', color: '#2C2C2C' }}
+              className="w-full h-10 px-3 rounded-xl text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[var(--color-gold)]/40"
+              style={{ border: '1px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)', color: 'var(--surface-dark)' }}
             />
           </div>
-          <span style={{ color: '#8A8A8A' }}>-</span>
+          <span style={{ color: 'var(--color-muted-gray)' }}>-</span>
           <div className="flex-1">
             <input
               type="number"
               placeholder="Max"
               value={priceMax}
               onChange={(e) => onPriceMaxChange(e.target.value)}
-              className="w-full h-10 px-3 rounded-xl text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/40"
-              style={{ border: '1px solid #E8D5A3', backgroundColor: '#FFFDF7', color: '#2C2C2C' }}
+              className="w-full h-10 px-3 rounded-xl text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[var(--color-gold)]/40"
+              style={{ border: '1px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)', color: 'var(--surface-dark)' }}
             />
           </div>
         </div>
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#2C2C2C' }}>
+        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--surface-dark)' }}>
           Sort By
         </h3>
         <div className="relative">
           <select
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value as SortOption)}
-            className="w-full h-10 px-3 rounded-sm text-sm outline-none appearance-none cursor-pointer transition-all duration-300 focus:ring-2 focus:ring-[#D4AF37]/50"
-            style={{ border: '1px solid #E8D5A3', backgroundColor: 'rgba(255,253,247,0.8)', color: '#2C2C2C' }}
+            className="w-full h-10 px-3 rounded-sm text-sm outline-none appearance-none cursor-pointer transition-all duration-300 focus:ring-2 focus:ring-[var(--color-gold)]/50"
+            style={{ border: '1px solid var(--color-gold-soft)', backgroundColor: 'rgba(255,253,247,0.8)', color: 'var(--surface-dark)' }}
           >
             {sortOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>
             ))}
           </select>
-          <ChevronRight size={16} className="absolute right-3 top-1/2 -translate-y-1/2 rotate-90 pointer-events-none" style={{ color: '#8A8A8A' }} />
+          <ChevronRight size={16} className="absolute right-3 top-1/2 -translate-y-1/2 rotate-90 pointer-events-none" style={{ color: 'var(--color-muted-gray)' }} />
         </div>
       </div>
 
       {hasActiveFilters && (
         <button
           onClick={onClearFilters}
-          className="text-sm font-medium underline transition-colors hover:text-[#C9A22E]"
-          style={{ color: '#D4AF37' }}
+          className="text-sm font-medium underline transition-colors hover:text-[var(--color-gold-hover)]"
+          style={{ color: 'var(--color-gold)' }}
         >
           Clear All Filters
         </button>
@@ -167,7 +169,7 @@ function ProductCard({
   product: Product;
   onProductClick: (product: Product) => void;
   onAddToCart: (product: Product) => void;
-  onToggleWishlist: (id: string) => void;
+  onToggleWishlist: (id: string, name?: string) => void;
   isInWishlist: (id: string) => boolean;
 }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -180,7 +182,7 @@ function ProductCard({
 
   const handleToggleWishlist = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onToggleWishlist(product.id);
+    onToggleWishlist(product.id, product.name);
   };
 
   const handleQuickView = (e: React.MouseEvent) => {
@@ -207,14 +209,16 @@ function ProductCard({
         aria-label={`View ${product.name} details`}
       >
         {/* Image with zoom */}
-        <div className="absolute inset-0 overflow-hidden" style={{ backgroundColor: '#FFFDF7' }}>
-          <img loading="lazy"
-        src={product.image}
+        <div className="absolute inset-0 overflow-hidden" style={{ backgroundColor: 'var(--surface-card)' }}>
+          <Image
+      src={product.image}
             alt={product.name}
+            fill
             className="w-full h-full object-cover"
             style={{ transition: 'transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               transform: isHovered ? 'scale(1.08)' : 'scale(1)',
             }}
+            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
           />
         </div>
 
@@ -245,11 +249,11 @@ function ProductCard({
               title={btn.title}
               className="touch-visible w-11 h-11 rounded-full flex items-center justify-center cursor-pointer"
               style={{ backgroundColor: isHovered
-                  ? (wishlisted && btn.active ? '#D4AF37' : '#FFFDF7')
+                  ? (wishlisted && btn.active ? 'var(--color-gold)' : 'var(--surface-card)')
                   : 'transparent',
-                color: wishlisted && btn.active ? '#FFFFFF' : '#2C2C2C',
+                color: wishlisted && btn.active ? 'var(--text-on-dark)' : 'var(--surface-dark)',
                 border: wishlisted && btn.active
-                  ? '2px solid #D4AF37'
+                  ? '2px solid var(--color-gold)'
                   : (isHovered ? '2px solid rgba(212,175,55,0.3)' : '2px solid transparent'),
                 boxShadow: isHovered ? '0 2px 10px rgba(0,0,0,0.1)' : 'none',
                 opacity: isHovered ? 1 : 0,
@@ -258,15 +262,15 @@ function ProductCard({
                 transitionDelay: isHovered ? `${0.05 + i * 0.07}s` : '0s',
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = '#D4AF37';
-                (e.currentTarget as HTMLElement).style.color = '#FFFFFF';
-                (e.currentTarget as HTMLElement).style.borderColor = '#D4AF37';
+                (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-gold)';
+                (e.currentTarget as HTMLElement).style.color = 'var(--text-on-dark)';
+                (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-gold)';
                 (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px rgba(212,175,55,0.4)';
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = wishlisted && btn.active ? '#D4AF37' : '#FFFDF7';
-                (e.currentTarget as HTMLElement).style.color = wishlisted && btn.active ? '#FFFFFF' : '#2C2C2C';
-                (e.currentTarget as HTMLElement).style.borderColor = wishlisted && btn.active ? '#D4AF37' : 'rgba(212,175,55,0.3)';
+                (e.currentTarget as HTMLElement).style.backgroundColor = wishlisted && btn.active ? 'var(--color-gold)' : 'var(--surface-card)';
+                (e.currentTarget as HTMLElement).style.color = wishlisted && btn.active ? 'var(--text-on-dark)' : 'var(--surface-dark)';
+                (e.currentTarget as HTMLElement).style.borderColor = wishlisted && btn.active ? 'var(--color-gold)' : 'rgba(212,175,55,0.3)';
                 (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
               }}
               aria-label={btn.label}
@@ -287,9 +291,9 @@ function ProductCard({
         >
           <button
             onClick={handleAddToCart}
-            className="w-full py-2.5 rounded-lg text-xs font-semibold tracking-[0.12em] uppercase flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 hover:bg-[#C9A22E] hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 active:scale-[0.97]"
+            className="w-full py-2.5 rounded-lg text-xs font-semibold tracking-[0.12em] uppercase flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 hover:bg-[var(--color-gold-hover)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 active:scale-[0.97]"
             style={{ backgroundColor: 'rgba(212,175,55,0.9)',
-              color: '#FFFFFF',
+              color: 'var(--text-on-dark)',
               border: '1px solid rgba(212,175,55,0.6)',
             }}
           >
@@ -303,9 +307,9 @@ function ProductCard({
       <div className="mt-3 flex flex-col gap-1 px-1">
         <h3
           className="text-sm font-medium leading-snug cursor-pointer transition-colors duration-300 line-clamp-1"
-          style={{ color: '#2C2C2C' }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = '#D4AF37')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = '#2C2C2C')}
+          style={{ color: 'var(--surface-dark)' }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-gold)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--surface-dark)')}
           onClick={() => onProductClick(product)}
         >
           {product.name}
@@ -319,23 +323,23 @@ function ProductCard({
                 size={12}
                 className={
                   i < Math.round(product.rating)
-                    ? 'fill-[#D4AF37] text-[#D4AF37]'
+                    ? 'fill-[var(--color-gold)] text-[var(--color-gold)]'
                     : 'text-gray-300'
                 }
               />
             ))}
           </div>
-          <span className="text-[11px]" style={{ color: '#8A8A8A' }}>
+          <span className="text-[11px]" style={{ color: 'var(--color-muted-gray)' }}>
             ({product.reviews})
           </span>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-sm font-bold" style={{ color: '#D4AF37' }}>
+          <span className="text-sm font-bold" style={{ color: 'var(--color-gold)' }}>
             {formatPKR(product.price)}
           </span>
           {product.originalPrice && (
-            <span className="text-xs line-through" style={{ color: '#8A8A8A' }}>
+            <span className="text-xs line-through" style={{ color: 'var(--color-muted-gray)' }}>
               {formatPKR(product.originalPrice)}
             </span>
           )}
@@ -349,13 +353,49 @@ function ProductCard({
    Main ShopView
    ═══════════════════════════════════════════════════════════ */
 export default function ShopView() {
-  const { selectedCategory, setSelectedCategory, setPage, setSelectedProduct, addToCart, toggleWishlist, isInWishlist, searchQuery, setSearchQuery } = useStore();
+  const { selectedCategory, setSelectedCategory, setPage, setSelectedProduct, isInWishlist, searchQuery, setSearchQuery } = useStore();
+  const { handleAddToCart, handleToggleWishlist } = useCartActions();
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [priceMin, setPriceMin] = useState('');
   const [priceMax, setPriceMax] = useState('');
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const heroSectionRef = useRef<HTMLElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
+
+  // Inject ItemList JSON-LD for SEO — exposes all shop products to search engines
+  useEffect(() => {
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Shop All Products — Aura Living',
+      url: 'https://auraliving.pk/#shop',
+      numberOfItems: products.length,
+      itemListElement: products.map((p, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        item: {
+          '@type': 'Product',
+          name: p.name,
+          image: `https://auraliving.pk${p.image}`,
+          url: `https://auraliving.pk/#product/${p.id}`,
+          sku: p.sku || p.id,
+          priceCurrency: 'PKR',
+          price: p.price,
+          availability: p.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+        },
+      })),
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(jsonLd);
+    script.setAttribute('data-itemlist-jsonld', 'true');
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
 
   // Hero heading blur text reveal
   const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
@@ -496,7 +536,7 @@ export default function ShopView() {
   };
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero Banner */}
       <section
         ref={heroSectionRef}
@@ -538,9 +578,9 @@ export default function ShopView() {
           <h1 ref={heroTitleRef} className="aura-hero-title text-white" >Our Collection</h1>
 
           <div ref={dividerRef} className="flex items-center gap-3 mt-5">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
 
           <p className="text-white/70 text-base sm:text-lg max-w-lg mx-auto mt-4 leading-relaxed" >
@@ -549,21 +589,12 @@ export default function ShopView() {
         </div>
       </section>
       {/* Breadcrumb strip (below hero) */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            Home
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
-            Shop
-          </span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'Home', onClick: () => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Shop' },
+        ]}
+      />
 
       {/* Main Content */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
@@ -571,13 +602,13 @@ export default function ShopView() {
         <div className="lg:hidden mb-6">
           <button
             onClick={() => setMobileFiltersOpen(true)}
-            className="flex items-center gap-2 px-5 py-3 rounded-sm text-sm font-medium transition-all duration-300 hover:bg-[#F5EDDA]"
-            style={{ border: '1px solid #D4AF37', color: '#D4AF37' }}
+            className="flex items-center gap-2 px-5 py-3 rounded-sm text-sm font-medium transition-all duration-300 hover:bg-[var(--color-gold-pale)]"
+            style={{ border: '1px solid var(--color-gold)', color: 'var(--color-gold)' }}
           >
             <SlidersHorizontal size={16} />
             Filters
             {hasActiveFilters && (
-              <span className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style={{ backgroundColor: '#D4AF37' }}>!</span>
+              <span className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style={{ backgroundColor: 'var(--color-gold)' }}>!</span>
             )}
           </button>
         </div>
@@ -603,16 +634,16 @@ export default function ShopView() {
             {/* Search active banner */}
             {searchQuery.trim() && (
               <div className="flex flex-wrap items-center gap-2 mb-6 p-3 rounded-lg" style={{ backgroundColor: 'rgba(212,175,55,0.08)', border: '1px solid rgba(212,175,55,0.25)' }}>
-                <span className="text-sm" style={{ color: '#5A5A5A' }}>
-                  Showing results for <strong style={{ color: '#D4AF37' }}>&ldquo;{searchQuery.trim()}&rdquo;</strong>
+                <span className="text-sm" style={{ color: 'var(--color-warm-gray)' }}>
+                  Showing results for <strong style={{ color: 'var(--color-gold)' }}>&ldquo;{searchQuery.trim()}&rdquo;</strong>
                 </span>
-                <span className="text-xs" style={{ color: '#8A8A8A' }}>
+                <span className="text-xs" style={{ color: 'var(--color-muted-gray)' }}>
                   ({filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found)
                 </span>
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="ml-auto inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full transition-colors hover:bg-[#F5EDDA]"
-                  style={{ color: '#5A5A5A' }}
+                  className="ml-auto inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full transition-colors hover:bg-[var(--color-gold-pale)]"
+                  style={{ color: 'var(--color-warm-gray)' }}
                   aria-label="Clear search"
                 >
                   <X size={12} />
@@ -627,28 +658,28 @@ export default function ShopView() {
                 {selectedCategory !== 'all' && (
                   <span
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
-                    style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#B8941F', border: '1px solid rgba(212,175,55,0.25)' }}
+                    style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: 'var(--color-gold-text)', border: '1px solid rgba(212,175,55,0.25)' }}
                   >
                     {categories.find((c) => c.id === selectedCategory)?.name}
-                    <button onClick={() => setSelectedCategory('all')} className="hover:text-[#C9A22E]"><X size={12} /></button>
+                    <button onClick={() => setSelectedCategory('all')} className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
                   </span>
                 )}
                 {priceMin && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#B8941F', border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: 'var(--color-gold-text)', border: '1px solid rgba(212,175,55,0.25)' }}>
                     Min: {formatPKR(parseInt(priceMin, 10))}
-                    <button onClick={() => setPriceMin('')} className="hover:text-[#C9A22E]"><X size={12} /></button>
+                    <button onClick={() => setPriceMin('')} className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
                   </span>
                 )}
                 {priceMax && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#B8941F', border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: 'var(--color-gold-text)', border: '1px solid rgba(212,175,55,0.25)' }}>
                     Max: {formatPKR(parseInt(priceMax, 10))}
-                    <button onClick={() => setPriceMax('')} className="hover:text-[#C9A22E]"><X size={12} /></button>
+                    <button onClick={() => setPriceMax('')} className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
                   </span>
                 )}
                 {sortBy !== 'featured' && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: '#B8941F', border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: 'var(--color-gold-text)', border: '1px solid rgba(212,175,55,0.25)' }}>
                     {sortOptions.find((o) => o.value === sortBy)?.label}
-                    <button onClick={() => setSortBy('featured')} className="hover:text-[#C9A22E]"><X size={12} /></button>
+                    <button onClick={() => setSortBy('featured')} className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
                   </span>
                 )}
               </div>
@@ -656,12 +687,12 @@ export default function ShopView() {
 
             {filteredProducts.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20">
-                <p className="text-lg mb-2" style={{ color: '#5A5A5A' }}>No products found</p>
-                <p className="text-sm mb-6" style={{ color: '#8A8A8A' }}>Try adjusting your filters</p>
+                <p className="text-lg mb-2" style={{ color: 'var(--color-warm-gray)' }}>No products found</p>
+                <p className="text-sm mb-6" style={{ color: 'var(--color-muted-gray)' }}>Try adjusting your filters</p>
                 <button
                   onClick={clearFilters}
-                  className="px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors duration-300 hover:bg-[#C9A22E]"
-                  style={{ backgroundColor: '#D4AF37', color: '#FFFFFF' }}
+                  className="px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors duration-300 hover:bg-[var(--color-gold-hover)]"
+                  style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)' }}
                 >
                   Clear Filters
                 </button>
@@ -673,8 +704,8 @@ export default function ShopView() {
                     key={product.id}
                     product={product}
                     onProductClick={handleProductClick}
-                    onAddToCart={addToCart}
-                    onToggleWishlist={toggleWishlist}
+                    onAddToCart={handleAddToCart}
+                    onToggleWishlist={(id, name) => handleToggleWishlist(id, name)}
                     isInWishlist={isInWishlist}
                   />
                 ))}
@@ -709,8 +740,8 @@ export default function ShopView() {
           }}
         >
           <div className="flex items-center justify-between px-6 h-16" style={{ borderBottom: '1px solid rgba(212,175,55,0.15)' }}>
-            <span className="text-lg font-semibold tracking-wide" style={{ color: '#2C2C2C' }}>Filters</span>
-            <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[#F5EDDA]" style={{ color: '#5A5A5A' }} onClick={() => setMobileFiltersOpen(false)} aria-label="Close filters">
+            <span className="text-lg font-semibold tracking-wide" style={{ color: 'var(--surface-dark)' }}>Filters</span>
+            <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[var(--color-gold-pale)]" style={{ color: 'var(--color-warm-gray)' }} onClick={() => setMobileFiltersOpen(false)} aria-label="Close filters">
               <X className="h-5 w-5" />
             </button>
           </div>
@@ -720,8 +751,8 @@ export default function ShopView() {
           <div className="p-6 pt-0">
             <button
               onClick={() => setMobileFiltersOpen(false)}
-              className="w-full py-3 rounded-sm text-white font-semibold uppercase tracking-wider text-sm transition-colors duration-300 hover:bg-[#C9A22E]"
-              style={{ backgroundColor: '#D4AF37' }}
+              className="w-full py-3 rounded-sm text-white font-semibold uppercase tracking-wider text-sm transition-colors duration-300 hover:bg-[var(--color-gold-hover)]"
+              style={{ backgroundColor: 'var(--color-gold)' }}
             >
               Apply Filters
             </button>

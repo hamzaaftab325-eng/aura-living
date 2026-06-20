@@ -28,6 +28,7 @@ import {
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 /* ═══════════════════════════════════════════════════════════
@@ -55,7 +56,7 @@ const mockOrders = [
     date: 'Jan 15, 2026',
     status: 'Delivered',
     total: 'PKR 12,498',
-    statusColor: '#22C55E',
+    statusColor: 'var(--color-success)',
     statusBg: 'rgba(34, 197, 94, 0.1)',
     statusIcon: CheckCircle,
   },
@@ -64,7 +65,7 @@ const mockOrders = [
     date: 'Feb 28, 2026',
     status: 'Shipped',
     total: 'PKR 8,999',
-    statusColor: '#3B82F6',
+    statusColor: 'var(--color-info)',
     statusBg: 'rgba(59, 130, 246, 0.1)',
     statusIcon: Truck,
   },
@@ -73,7 +74,7 @@ const mockOrders = [
     date: 'Mar 10, 2026',
     status: 'Processing',
     total: 'PKR 5,499',
-    statusColor: '#D4AF37',
+    statusColor: 'var(--color-gold)',
     statusBg: 'rgba(212, 175, 55, 0.1)',
     statusIcon: Clock,
   },
@@ -228,34 +229,34 @@ export default function AccountView() {
       icon: Package,
       value: '3',
       label: 'Orders',
-      color: '#D4AF37',
+      color: 'var(--color-gold)',
       bg: 'rgba(212, 175, 55, 0.1)',
     },
     {
       icon: Heart,
       value: String(safeWishlist.length),
       label: 'Wishlist',
-      color: '#DC2626',
+      color: 'var(--color-danger)',
       bg: 'rgba(220, 38, 38, 0.08)',
     },
     {
       icon: ShoppingBag,
       value: String(cartCount),
       label: 'Cart Items',
-      color: '#2C2C2C',
+      color: 'var(--surface-dark)',
       bg: 'rgba(44, 44, 44, 0.08)',
     },
     {
       icon: Award,
       value: String(user?.rewardsPoints ?? 0),
       label: 'Rewards Points',
-      color: '#D4AF37',
+      color: 'var(--color-gold)',
       bg: 'rgba(212, 175, 55, 0.1)',
     },
   ];
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero Banner */}
       <section
         ref={headerSectionRef}
@@ -304,9 +305,9 @@ export default function AccountView() {
           </h1>
 
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
 
           <p
@@ -318,21 +319,12 @@ export default function AccountView() {
         </div>
       </section>
       {/* Breadcrumb strip (below hero) */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            Home
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
-            My Account
-          </span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'Home', onClick: () => { setPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'My Account' },
+        ]}
+      />
 
       {/* Account Content */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
@@ -341,7 +333,7 @@ export default function AccountView() {
           <AnimatedSection>
             <div
               className="rounded-xl p-5 sm:p-6 lg:p-8 mb-8 sm:mb-10"
-              style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+              style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
             >
               {user ? (
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6">
@@ -362,13 +354,13 @@ export default function AccountView() {
                   {/* Info */}
                   <div className="flex flex-col items-center sm:items-start text-center sm:text-left flex-1">
                     <h2
-                      className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2"
+                      className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2"
                       
                     >
                       {safeUser?.name}
                     </h2>
                     <p
-                      className="text-[#5A5A5A] text-sm sm:text-base mb-1"
+                      className="text-[var(--color-warm-gray)] text-sm sm:text-base mb-1"
                       
                     >
                       {safeUser?.email}
@@ -376,11 +368,11 @@ export default function AccountView() {
                     <div className="flex items-center gap-2 mt-1">
                       <div
                         className="w-2 h-2 rounded-full"
-                        style={{ backgroundColor: '#22C55E' }}
+                        style={{ backgroundColor: 'var(--color-success)' }}
                       />
                       <span
                         className="text-xs tracking-wide"
-                        style={{ color: '#8A8A8A' }}
+                        style={{ color: 'var(--color-muted-gray)' }}
                       >
                         Member Since {safeUser?.memberSince}
                       </span>
@@ -402,17 +394,17 @@ export default function AccountView() {
                     className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center shrink-0"
                     style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
                   >
-                    <LogOut className="w-8 h-8" style={{ color: '#B8941F' }} />
+                    <LogOut className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
                   </div>
                   <div className="flex-1">
                     <h2
-                      className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2"
+                      className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2"
                       
                     >
                       You are not signed in
                     </h2>
                     <p
-                      className="text-[#5A5A5A] text-sm sm:text-base mb-4"
+                      className="text-[var(--color-warm-gray)] text-sm sm:text-base mb-4"
                       
                     >
                       Sign in to view your orders, wishlist, and rewards.
@@ -434,8 +426,8 @@ export default function AccountView() {
               return (
               <div
                 key={stat.label}
-                className="rounded-xl p-5 sm:p-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37]"
-                style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                className="rounded-xl p-5 sm:p-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
+                style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
               >
                 <div
                   className="w-11 h-11 rounded-full flex items-center justify-center mx-auto mb-3"
@@ -446,13 +438,13 @@ export default function AccountView() {
                 <span
                   ref={countRef}
                   className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold block mb-1"
-                  style={{ color: '#2C2C2C' }}
+                  style={{ color: 'var(--surface-dark)' }}
                 >
                   0
                 </span>
                 <span
                   className="text-xs sm:text-sm tracking-wide"
-                  style={{ color: '#8A8A8A' }}
+                  style={{ color: 'var(--color-muted-gray)' }}
                 >
                   {stat.label}
                 </span>
@@ -467,19 +459,19 @@ export default function AccountView() {
           <AnimatedSection>
             <div
               className="rounded-xl p-5 sm:p-6 lg:p-8 mb-10 sm:mb-14"
-              style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+              style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
             >
               <div className="flex items-center justify-between mb-2">
                 <h3
-                  className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold"
+                  className="text-[var(--surface-dark)] text-xl sm:text-2xl font-semibold"
                   
                 >
                   Recent Orders
                 </h3>
                 <button
                   onClick={() => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-                  style={{ color: '#D4AF37' }}
+                  className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold)] cursor-pointer"
+                  style={{ color: 'var(--color-gold)' }}
                 >
                   View All
                 </button>
@@ -492,28 +484,28 @@ export default function AccountView() {
               <div className="hidden md:block overflow-x-auto">
                 <table className="w-full" >
                   <thead>
-                    <tr style={{ borderBottom: '1px solid #E8D5A3' }}>
+                    <tr style={{ borderBottom: '1px solid var(--color-gold-soft)' }}>
                       <th
                         className="text-left py-3 px-4 text-xs tracking-wider uppercase font-semibold"
-                        style={{ color: '#8A8A8A' }}
+                        style={{ color: 'var(--color-muted-gray)' }}
                       >
                         Order
                       </th>
                       <th
                         className="text-left py-3 px-4 text-xs tracking-wider uppercase font-semibold"
-                        style={{ color: '#8A8A8A' }}
+                        style={{ color: 'var(--color-muted-gray)' }}
                       >
                         Date
                       </th>
                       <th
                         className="text-left py-3 px-4 text-xs tracking-wider uppercase font-semibold"
-                        style={{ color: '#8A8A8A' }}
+                        style={{ color: 'var(--color-muted-gray)' }}
                       >
                         Status
                       </th>
                       <th
                         className="text-right py-3 px-4 text-xs tracking-wider uppercase font-semibold"
-                        style={{ color: '#8A8A8A' }}
+                        style={{ color: 'var(--color-muted-gray)' }}
                       >
                         Total
                       </th>
@@ -523,17 +515,17 @@ export default function AccountView() {
                     {mockOrders.map((order) => (
                       <tr
                         key={order.id}
-                        className="transition-colors duration-200 hover:bg-[#FAF8F5] cursor-pointer"
-                        style={{ borderBottom: '1px solid #E8D5A3' }}
+                        className="transition-colors duration-200 hover:bg-[var(--surface-page)] cursor-pointer"
+                        style={{ borderBottom: '1px solid var(--color-gold-soft)' }}
                         onClick={() => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                       >
                         <td className="py-4 px-4">
-                          <span className="text-sm font-medium" style={{ color: '#2C2C2C' }}>
+                          <span className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>
                             #{order.id}
                           </span>
                         </td>
                         <td className="py-4 px-4">
-                          <span className="text-sm" style={{ color: '#5A5A5A' }}>
+                          <span className="text-sm" style={{ color: 'var(--color-warm-gray)' }}>
                             {order.date}
                           </span>
                         </td>
@@ -547,7 +539,7 @@ export default function AccountView() {
                           </span>
                         </td>
                         <td className="py-4 px-4 text-right">
-                          <span className="text-sm font-semibold" style={{ color: '#2C2C2C' }}>
+                          <span className="text-sm font-semibold" style={{ color: 'var(--surface-dark)' }}>
                             {order.total}
                           </span>
                         </td>
@@ -563,11 +555,11 @@ export default function AccountView() {
                   <div
                     key={order.id}
                     className="rounded-sm p-4 transition-colors duration-200 cursor-pointer"
-                    style={{ backgroundColor: '#FAF8F5', border: '1px solid #E8D5A3' }}
+                    style={{ backgroundColor: 'var(--surface-page)', border: '1px solid var(--color-gold-soft)' }}
                     onClick={() => { setPage('track-orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-semibold" style={{ color: '#2C2C2C' }}>
+                      <span className="text-sm font-semibold" style={{ color: 'var(--surface-dark)' }}>
                         #{order.id}
                       </span>
                       <span
@@ -579,10 +571,10 @@ export default function AccountView() {
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs" style={{ color: '#8A8A8A' }}>
+                      <span className="text-xs" style={{ color: 'var(--color-muted-gray)' }}>
                         {order.date}
                       </span>
-                      <span className="text-sm font-bold" style={{ color: '#2C2C2C' }}>
+                      <span className="text-sm font-bold" style={{ color: 'var(--surface-dark)' }}>
                         {order.total}
                       </span>
                     </div>
@@ -599,7 +591,7 @@ export default function AccountView() {
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
               <h3
-                className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
+                className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3"
                 
               >
                 Account Menu
@@ -621,8 +613,8 @@ export default function AccountView() {
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.onClick(); } }}
                 role="button"
                 tabIndex={0}
-                className="group rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[#D4AF37] cursor-pointer animate-menu-ripple focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
-                style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+                className="group rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)] cursor-pointer animate-menu-ripple focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)]/40"
+                style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
               >
                 <div className="flex items-center gap-4">
                   <div
@@ -631,26 +623,26 @@ export default function AccountView() {
                   >
                     <item.icon
                       className="w-5 h-5 transition-colors duration-300"
-                      style={{ color: item.label === 'Sign Out' ? '#DC2626' : '#D4AF37' }}
+                      style={{ color: item.label === 'Sign Out' ? 'var(--color-danger)' : 'var(--color-gold)' }}
                     />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h4
-                      className="text-[#2C2C2C] text-sm sm:text-base font-semibold mb-0.5"
+                      className="text-[var(--surface-dark)] text-sm sm:text-base font-semibold mb-0.5"
                       
                     >
                       {item.label}
                     </h4>
                     <p
                       className="text-xs sm:text-sm truncate"
-                      style={{ color: '#8A8A8A' }}
+                      style={{ color: 'var(--color-muted-gray)' }}
                     >
                       {item.description}
                     </p>
                   </div>
                   <ChevronRight
                     className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ color: '#8A8A8A' }}
+                    style={{ color: 'var(--color-muted-gray)' }}
                   />
                 </div>
               </div>
@@ -664,7 +656,7 @@ export default function AccountView() {
           <AnimatedSection>
             <div
               className="mt-10 sm:mt-14 rounded-sm p-6 sm:p-8 text-center relative overflow-hidden"
-              style={{ background: 'linear-gradient(135deg, #2C2C2C 0%, #3A3A3A 50%, #2C2C2C 100%)',
+              style={{ background: 'linear-gradient(135deg, var(--surface-dark) 0%, #3A3A3A 50%, var(--surface-dark) 100%)',
                 border: '1px solid rgba(212, 175, 55, 0.3)',
               }}
             >
@@ -678,7 +670,7 @@ export default function AccountView() {
                 style={{ borderBottom: '2px solid rgba(212,175,55,0.4)', borderRight: '2px solid rgba(212,175,55,0.4)' }}
               />
 
-              <Award className="w-10 h-10 mx-auto mb-4" style={{ color: '#D4AF37' }} />
+              <Award className="w-10 h-10 mx-auto mb-4" style={{ color: 'var(--color-gold)' }} />
               <h3
                 className="text-white text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
                 
@@ -689,7 +681,7 @@ export default function AccountView() {
                 className="text-white/60 text-sm sm:text-base mb-5 max-w-md mx-auto leading-relaxed"
                 
               >
-                You have <span style={{ color: '#B8941F', fontWeight: 600 }}>{user?.rewardsPoints ?? 0} points</span> — that is PKR {user?.rewardsPoints ?? 0} off your next order!
+                You have <span style={{ color: 'var(--color-gold-text)', fontWeight: 600 }}>{user?.rewardsPoints ?? 0} points</span> — that is PKR {user?.rewardsPoints ?? 0} off your next order!
               </p>
               <PremiumButton
                 variant="gold"

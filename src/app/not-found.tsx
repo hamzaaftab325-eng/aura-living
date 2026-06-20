@@ -54,7 +54,7 @@ export default function NotFound() {
   return (
     <div
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      style={{ backgroundColor: '#FAF8F5' }}
+      style={{ backgroundColor: 'var(--surface-page)' }}
     >
       {/* Decorative background elements */}
       <div
@@ -75,15 +75,15 @@ export default function NotFound() {
       />
 
       {/* Corner ornaments */}
-      <div className="absolute top-8 left-8 w-16 h-16 border-t border-l border-[#D4AF37]/30 pointer-events-none" />
-      <div className="absolute bottom-8 right-8 w-16 h-16 border-b border-r border-[#D4AF37]/30 pointer-events-none" />
+      <div className="absolute top-8 left-8 w-16 h-16 border-t border-l border-[var(--color-gold)]/30 pointer-events-none" />
+      <div className="absolute bottom-8 right-8 w-16 h-16 border-b border-r border-[var(--color-gold)]/30 pointer-events-none" />
 
       <div className="relative z-10 text-center px-6 max-w-lg">
         {/* 404 Number */}
         <div ref={numberRef} className="mb-6">
           <span
             className="text-[120px] sm:text-[160px] md:text-[200px] font-bold leading-none"
-            style={{ fontFamily: "'Playfair Display', serif", color: '#D4AF37', opacity: 0.9 }}
+            style={{ fontFamily: "'Playfair Display', serif", color: 'var(--color-gold)', opacity: 0.9 }}
           >
             404
           </span>
@@ -91,22 +91,22 @@ export default function NotFound() {
 
         {/* Gold divider */}
         <div className="flex items-center justify-center gap-3 mb-6">
-          <div className="w-12 sm:w-20 h-px bg-gradient-to-r from-transparent to-[#D4AF37]/60" />
-          <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-          <div className="w-12 sm:w-20 h-px bg-gradient-to-l from-transparent to-[#D4AF37]/60" />
+          <div className="w-12 sm:w-20 h-px bg-gradient-to-r from-transparent to-[var(--color-gold)]/60" />
+          <div className="w-2 h-2 rounded-full bg-[var(--color-gold)]" />
+          <div className="w-12 sm:w-20 h-px bg-gradient-to-l from-transparent to-[var(--color-gold)]/60" />
         </div>
 
         {/* Text */}
         <div ref={textRef}>
           <h1
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-            style={{ fontFamily: "'Playfair Display', serif", color: '#2C2C2C' }}
+            style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}
           >
             Page Not Found
           </h1>
           <p
             className="text-sm sm:text-base leading-relaxed mb-8 max-w-md mx-auto"
-            style={{ fontFamily: "'Poppins', sans-serif", color: '#8A8A8A' }}
+            style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}
           >
             The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
           </p>
@@ -116,16 +116,16 @@ export default function NotFound() {
         <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={handleGoHome}
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[#C9A22E] hover:shadow-[0_8px_30px_rgba(212,175,55,0.35)] active:scale-[0.97] cursor-pointer"
-            style={{ backgroundColor: '#D4AF37', color: '#FFFFFF', fontFamily: "'Poppins', sans-serif" }}
+            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-hover)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.35)] active:scale-[0.97] cursor-pointer"
+            style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)', fontFamily: "'Poppins', sans-serif" }}
           >
             <Home className="w-4 h-4" />
             Back to Home
           </button>
           <button
             onClick={handleGoShop}
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[#F5EDDA] hover:text-[#D4AF37] active:scale-[0.97] cursor-pointer"
-            style={{ border: '2px solid #D4AF37', color: '#D4AF37', fontFamily: "'Poppins', sans-serif", backgroundColor: 'transparent' }}
+            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-pale)] hover:text-[var(--color-gold)] active:scale-[0.97] cursor-pointer"
+            style={{ border: '2px solid var(--color-gold)', color: 'var(--color-gold)', fontFamily: "'Poppins', sans-serif", backgroundColor: 'transparent' }}
           >
             <ShoppingBag className="w-4 h-4" />
             Browse Shop

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { useStore, pageTitles } from '@/store/useStore';
 import { products } from '@/data/products';
 import { gsap } from '@/hooks/useGsap';
@@ -13,31 +14,49 @@ import FeaturedProducts from '@/components/FeaturedProducts';
 import TrendingCollection from '@/components/TrendingCollection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import NewsletterSection from '@/components/NewsletterSection';
-import ShopView from '@/components/ShopView';
-import ProductDetailView from '@/components/ProductDetailView';
-import AboutView from '@/components/AboutView';
-import ContactView from '@/components/ContactView';
-import AuthView from '@/components/AuthView';
-import CartView from '@/components/CartView';
-import CheckoutView from '@/components/CheckoutView';
-import WishlistView from '@/components/WishlistView';
-import AccountView from '@/components/AccountView';
-import FAQView from '@/components/FAQView';
-import ShippingView from '@/components/ShippingView';
-import ReturnsView from '@/components/ReturnsView';
-import CareGuideView from '@/components/CareGuideView';
-import NewArrivalsView from '@/components/NewArrivalsView';
-import SaleView from '@/components/SaleView';
-import LookbookView from '@/components/LookbookView';
-import TermsView from '@/components/TermsView';
-import PrivacyView from '@/components/PrivacyView';
-import ForgotPasswordView from '@/components/ForgotPasswordView';
-import TrackOrdersView from '@/components/TrackOrdersView';
-import AddressesView from '@/components/AddressesView';
-import SettingsView from '@/components/SettingsView';
-import AdminDashboard from '@/components/AdminDashboard';
 import CartDrawer from '@/components/CartDrawer';
 import { GoldDivider, CornerOrnament, FloatingOrb, FloatingGoldDots } from '@/components/SVGDecorations';
+import { ProductGridSkeleton, HeroSkeleton } from '@/components/ui/Skeletons';
+
+// Code-split secondary views — they're loaded on demand when the user navigates.
+// This cuts the initial bundle by ~60% by excluding admin, checkout, account, etc.
+// from the homepage payload.
+const PageLoader = () => (
+  <div className="min-h-[60vh] flex items-center justify-center" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <HeroSkeleton />
+      <div className="mt-12">
+        <ProductGridSkeleton count={8} />
+      </div>
+    </div>
+  </div>
+);
+
+const ShopView = dynamic(() => import('@/components/ShopView'), { loading: () => <PageLoader /> });
+const ProductDetailView = dynamic(() => import('@/components/ProductDetailView'), { loading: () => <PageLoader /> });
+const AboutView = dynamic(() => import('@/components/AboutView'), { loading: () => <PageLoader /> });
+const ContactView = dynamic(() => import('@/components/ContactView'), { loading: () => <PageLoader /> });
+const AuthView = dynamic(() => import('@/components/AuthView'), { loading: () => <PageLoader /> });
+const CartView = dynamic(() => import('@/components/CartView'), { loading: () => <PageLoader /> });
+const CheckoutView = dynamic(() => import('@/components/CheckoutView'), { loading: () => <PageLoader /> });
+const WishlistView = dynamic(() => import('@/components/WishlistView'), { loading: () => <PageLoader /> });
+const AccountView = dynamic(() => import('@/components/AccountView'), { loading: () => <PageLoader /> });
+const FAQView = dynamic(() => import('@/components/FAQView'), { loading: () => <PageLoader /> });
+const ShippingView = dynamic(() => import('@/components/ShippingView'), { loading: () => <PageLoader /> });
+const ReturnsView = dynamic(() => import('@/components/ReturnsView'), { loading: () => <PageLoader /> });
+const CareGuideView = dynamic(() => import('@/components/CareGuideView'), { loading: () => <PageLoader /> });
+const NewArrivalsView = dynamic(() => import('@/components/NewArrivalsView'), { loading: () => <PageLoader /> });
+const SaleView = dynamic(() => import('@/components/SaleView'), { loading: () => <PageLoader /> });
+const LookbookView = dynamic(() => import('@/components/LookbookView'), { loading: () => <PageLoader /> });
+const TermsView = dynamic(() => import('@/components/TermsView'), { loading: () => <PageLoader /> });
+const PrivacyView = dynamic(() => import('@/components/PrivacyView'), { loading: () => <PageLoader /> });
+const ForgotPasswordView = dynamic(() => import('@/components/ForgotPasswordView'), { loading: () => <PageLoader /> });
+const TrackOrdersView = dynamic(() => import('@/components/TrackOrdersView'), { loading: () => <PageLoader /> });
+const AddressesView = dynamic(() => import('@/components/AddressesView'), { loading: () => <PageLoader /> });
+const SettingsView = dynamic(() => import('@/components/SettingsView'), { loading: () => <PageLoader /> });
+const AdminDashboard = dynamic(() => import('@/components/AdminDashboard'), { loading: () => <PageLoader /> });
+const BlogView = dynamic(() => import('@/components/BlogView'), { loading: () => <PageLoader /> });
+const ArticleView = dynamic(() => import('@/components/ArticleView'), { loading: () => <PageLoader /> });
 
 function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -54,7 +73,7 @@ function BackToTop() {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-[#D4AF37] text-white flex items-center justify-center shadow-lg hover:bg-[#C9A22E] transition-all duration-300 cursor-pointer"
+      className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-[var(--color-gold)] text-white flex items-center justify-center shadow-lg hover:bg-[var(--color-gold-hover)] transition-all duration-300 cursor-pointer"
       style={{
         opacity: shouldShow ? 1 : 0,
         transform: shouldShow ? 'translateY(0)' : 'translateY(16px)',
@@ -97,6 +116,7 @@ export default function Home() {
       'about', 'contact', 'login', 'signup', 'faq', 'shipping', 'returns',
       'care-guide', 'new-arrivals', 'sale', 'lookbook', 'terms', 'privacy',
       'forgot-password', 'track-orders', 'addresses', 'settings', 'admin',
+      'blog', 'article',
     ];
     const hash = window.location.hash.replace('#', '');
     // Check if it's a product page with an ID (e.g. #product/pendant-lamp)
@@ -119,6 +139,17 @@ export default function Home() {
         window.history.replaceState({ page: 'shop' }, '', '#shop');
       } else {
         useStore.setState({ currentPage: 'product' as typeof currentPage });
+      }
+    } else if (hash.startsWith('article/') || hash === 'article') {
+      // Article deep-link: #article/<slug>
+      const slug = hash.includes('/') ? hash.split('/')[1] : null;
+      if (slug) {
+        useStore.getState().setSelectedArticleSlug(slug);
+        useStore.setState({ currentPage: 'article' });
+      } else {
+        // #article with no slug — go to the Journal listing
+        useStore.setState({ currentPage: 'blog' });
+        window.history.replaceState({ page: 'blog' }, '', '#blog');
       }
     } else if (hash && hash !== 'home' && hash !== currentPage && validPages.includes(hash as typeof currentPage)) {
       useStore.setState({ currentPage: hash as typeof currentPage });
@@ -143,6 +174,14 @@ export default function Home() {
           if (product) {
             useStore.getState().setSelectedProduct(product);
           }
+        }
+      }
+      // If going back to article page, restore the article slug from the URL
+      if (page === 'article') {
+        const hash = window.location.hash.replace('#', '');
+        const slug = hash.includes('/') ? hash.split('/')[1] : null;
+        if (slug) {
+          useStore.getState().setSelectedArticleSlug(slug);
         }
       }
       useStore.setState({ currentPage: page });
@@ -222,6 +261,10 @@ export default function Home() {
         return <SettingsView />;
       case 'admin':
         return <AdminDashboard />;
+      case 'blog':
+        return <BlogView />;
+      case 'article':
+        return <ArticleView />;
       case 'login':
       case 'signup':
         return <AuthView />;
@@ -252,13 +295,13 @@ export default function Home() {
     return (
       <div
         className="min-h-screen"
-        style={{ backgroundColor: '#FAF8F5' }}
+        style={{ backgroundColor: 'var(--surface-page)' }}
       />
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF8F5] relative grain-overlay w-full overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-[var(--surface-page)] relative grain-overlay w-full overflow-x-hidden">
       <FloatingOrb size={90} top="15%" left="3%" delay={0} />
       <FloatingOrb size={70} top="55%" left="88%" delay={1.0} />
       <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />

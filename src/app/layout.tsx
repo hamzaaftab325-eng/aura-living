@@ -2,10 +2,11 @@ import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-playfair-display",
   display: "swap",
@@ -13,7 +14,7 @@ const playfair = Playfair_Display({
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-poppins",
   display: "swap",
 });
@@ -22,7 +23,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#D4AF37",
+  themeColor: "var(--color-gold)",
   viewportFit: "cover",
 };
 
@@ -82,6 +83,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${poppins.variable}`}>
       <body className="antialiased bg-background text-foreground min-h-screen flex flex-col w-full overflow-x-hidden">
         <a href="#main-content" className="aura-skip-link">Skip to main content</a>
+        <link rel="preload" as="image" href="/images/hero/hero-slide-1.webp" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -103,8 +105,66 @@ export default function RootLayout({
             }),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Aura Living',
+              url: 'https://auraliving.pk',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: {
+                  '@type': 'EntryPoint',
+                  urlTemplate: 'https://auraliving.pk/#shop?search={search_term_string}',
+                },
+                'query-input': 'required name=search_term_string',
+              },
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Store',
+              name: 'Aura Living',
+              image: 'https://auraliving.pk/images/hero/hero-slide-1.webp',
+              '@id': 'https://auraliving.pk',
+              url: 'https://auraliving.pk',
+              telephone: '+92-300-1234567',
+              priceRange: 'PKR 500 - 50,000',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: '123 Artisan Lane, Gulberg III',
+                addressLocality: 'Lahore',
+                addressRegion: 'Punjab',
+                postalCode: '54660',
+                addressCountry: 'PK',
+              },
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: 31.5204,
+                longitude: 74.3587,
+              },
+              openingHoursSpecification: [{
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                opens: '10:00',
+                closes: '20:00',
+              }],
+              sameAs: [
+                'https://instagram.com/auraliving',
+                'https://facebook.com/auraliving',
+              ],
+            }),
+          }}
+        />
         {children}
         <Toaster />
+        <ServiceWorkerRegister />
       </body>
     </html>
   );

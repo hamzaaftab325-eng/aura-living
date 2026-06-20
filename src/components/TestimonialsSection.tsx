@@ -32,14 +32,14 @@ export default function TestimonialsSection() {
   return (
     <section
       className="relative w-full py-16 md:py-28 overflow-hidden"
-      style={{ backgroundColor: '#FAF8F5' }}
+      style={{ backgroundColor: 'var(--surface-page)' }}
     >
       <div ref={sectionContentRef} className="relative z-10">
         {/* Title */}
         <div className="text-center mb-10 md:mb-16">
           <h2
             ref={headingRef}
-            className="text-[#2C2C2C] text-2xl sm:text-[34px] md:text-[40px] font-bold leading-tight"
+            className="text-[var(--surface-dark)] text-2xl sm:text-[34px] md:text-[40px] font-bold leading-tight"
             
           >
             What Our Customers Say

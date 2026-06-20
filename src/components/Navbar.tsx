@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import Image from 'next/image';
 import { gsap } from '@/hooks/useGsap';
 import {
   Search,
@@ -19,7 +20,7 @@ import {
 import { useStore } from '@/store/useStore';
 import { products, formatPKR } from '@/data/products';
 
-type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password' | 'track-orders' | 'addresses' | 'settings' | 'admin';
+type PageType = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'wishlist' | 'account' | 'about' | 'contact' | 'login' | 'signup' | 'faq' | 'shipping' | 'returns' | 'care-guide' | 'new-arrivals' | 'sale' | 'lookbook' | 'terms' | 'privacy' | 'forgot-password' | 'track-orders' | 'addresses' | 'settings' | 'admin' | 'blog' | 'article';
 
 interface NavLink {
   label: string;
@@ -30,6 +31,7 @@ interface NavLink {
 const navLinks: NavLink[] = [
   { label: 'Home', page: 'home' },
   { label: 'Shop', page: 'shop', hasMegaMenu: true },
+  { label: 'Journal', page: 'blog' },
   { label: 'About', page: 'about' },
   { label: 'Contact', page: 'contact' },
 ];
@@ -112,6 +114,9 @@ const megaMenuItems: MegaMenuItem[] = [
 
 // Pages that belong to the Shop mega-menu family (highlight "Shop" when on any of these)
 const shopFamilyPages: PageType[] = ['shop', 'new-arrivals', 'sale', 'lookbook', 'care-guide'];
+
+// Pages that belong to the Journal family (highlight "Journal" when on any of these)
+const journalFamilyPages: PageType[] = ['blog', 'article'];
 
 export default function Navbar() {
   // ── UI state ──
@@ -276,6 +281,7 @@ export default function Navbar() {
   // ── Helpers ──
   const isLinkActive = (page: PageType, label: string) => {
     if (label === 'Shop') return shopFamilyPages.includes(currentPage);
+    if (label === 'Journal') return journalFamilyPages.includes(currentPage);
     return currentPage === page;
   };
 
@@ -300,7 +306,7 @@ export default function Navbar() {
           {/* Pill container — NO hover handlers (mega menu is click-only now) */}
           <div
             className="relative flex items-center justify-between rounded-full transition-all duration-300 ease-out"
-            style={{ backgroundColor: '#2C2C2C',
+            style={{ backgroundColor: 'var(--surface-dark)',
               border: scrolled ? '1px solid rgba(212, 175, 55, 0.4)' : '1px solid rgba(212, 175, 55, 0.3)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
@@ -345,7 +351,7 @@ export default function Navbar() {
                       key={link.label}
                       ref={(el) => { if (el) navItemRefs.current.set(link.label, el); }}
                       className="relative z-10 block cursor-pointer uppercase font-medium transition-all duration-300 select-none"
-                      style={{ color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.85)',
+                      style={{ color: isActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.85)',
                         paddingLeft: scrolled ? '20px' : '24px',
                         paddingRight: scrolled ? '20px' : '24px',
                         paddingTop: scrolled ? '8px' : '12px',
@@ -426,7 +432,7 @@ export default function Navbar() {
               >
                 <Heart className="h-4 w-4" />
                 {wishlistCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[#D4AF37]">
+                  <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[var(--color-gold)]">
                     {wishlistCount}
                   </span>
                 )}
@@ -435,16 +441,25 @@ export default function Navbar() {
               <button
                 className="relative rounded-full transition-all duration-300 hover:bg-white/10"
                 style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '6px' : '8px' }}
-                aria-label="Cart"
+                aria-label={`Cart, ${cartCount} ${cartCount === 1 ? 'item' : 'items'}`}
                 onClick={() => setCartOpen(true)}
               >
                 <ShoppingCart className="h-4 w-4" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[#D4AF37]">
+                  <span
+                    className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[var(--color-gold)]"
+                    aria-hidden="true"
+                  >
                     {cartCount}
                   </span>
                 )}
               </button>
+              {/* Live region for screen readers — announces cart count changes */}
+              <span className="sr-only" aria-live="polite" aria-atomic="true">
+                {cartCount === 0
+                  ? 'Cart is empty'
+                  : `${cartCount} ${cartCount === 1 ? 'item' : 'items'} in cart`}
+              </span>
 
               <button
                 className="hidden sm:flex rounded-full transition-all duration-300 hover:bg-white/10"
@@ -481,7 +496,7 @@ export default function Navbar() {
                   style={{ background: 'rgba(28, 28, 28, 0.94)',
                     backdropFilter: 'blur(20px)',
                     WebkitBackdropFilter: 'blur(20px)',
-                    borderTop: '2px solid #D4AF37',
+                    borderTop: '2px solid var(--color-gold)',
                     boxShadow: '0 16px 50px rgba(0,0,0,0.35), 0 0 0 1px rgba(212,175,55,0.1)',
                     width: 'min(720px, calc(100vw - 32px))',
                   }}
@@ -490,7 +505,7 @@ export default function Navbar() {
                   <div className="flex-1 py-4" style={{ borderRight: '1px solid rgba(212,175,55,0.12)' }}>
                     <p
                       className="px-5 pb-2 text-[10px] uppercase tracking-[3px] font-semibold"
-                      style={{ color: '#D4AF37' }}
+                      style={{ color: 'var(--color-gold)' }}
                     >
                       Explore
                     </p>
@@ -502,7 +517,7 @@ export default function Navbar() {
                           key={item.label}
                           className="w-full flex items-center gap-4 px-5 py-3 text-left transition-colors duration-200"
                           style={{ backgroundColor: isPreviewing || itemActive ? 'rgba(212, 175, 55, 0.12)' : 'transparent',
-                            borderLeft: isPreviewing ? '3px solid #D4AF37' : '3px solid transparent',
+                            borderLeft: isPreviewing ? '3px solid var(--color-gold)' : '3px solid transparent',
                           }}
                           onMouseEnter={() => setPreviewItem(item)}
                           onClick={() => handleNavClick(item.page)}
@@ -510,7 +525,7 @@ export default function Navbar() {
                           <div
                             className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-all duration-300"
                             style={{ backgroundColor: isPreviewing || itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(232, 213, 163, 0.08)',
-                              color: isPreviewing || itemActive ? '#D4AF37' : '#FFFFFF',
+                              color: isPreviewing || itemActive ? 'var(--color-gold)' : 'var(--text-on-dark)',
                             }}
                           >
                             {item.icon}
@@ -518,12 +533,12 @@ export default function Navbar() {
                           <div className="min-w-0 flex-1">
                             <p
                               className="text-sm font-medium flex items-center gap-2"
-                              style={{ color: isPreviewing || itemActive ? '#D4AF37' : '#FFFFFF',
+                              style={{ color: isPreviewing || itemActive ? 'var(--color-gold)' : 'var(--text-on-dark)',
                               }}
                             >
                               {item.label}
                               {itemActive && (
-                                <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)', color: '#D4AF37' }}>
+                                <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)', color: 'var(--color-gold)' }}>
                                   Current
                                 </span>
                               )}
@@ -537,7 +552,7 @@ export default function Navbar() {
                           </div>
                           <ChevronRight
                             className="w-3.5 h-3.5 transition-opacity duration-200"
-                            style={{ color: '#D4AF37', opacity: isPreviewing ? 1 : 0 }}
+                            style={{ color: 'var(--color-gold)', opacity: isPreviewing ? 1 : 0 }}
                           />
                         </button>
                       );
@@ -566,7 +581,7 @@ export default function Navbar() {
                       <div className="relative h-full flex flex-col justify-end p-6">
                         <p
                           className="text-[10px] uppercase tracking-[3px] font-semibold mb-2"
-                          style={{ color: '#D4AF37' }}
+                          style={{ color: 'var(--color-gold)' }}
                         >
                           {activePreview.preview.eyebrow}
                         </p>
@@ -579,10 +594,10 @@ export default function Navbar() {
                         <button
                           onClick={() => handleNavClick(activePreview.page)}
                           className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:gap-2.5 cursor-pointer group"
-                          style={{ color: '#D4AF37', background: 'none' }}
+                          style={{ color: 'var(--color-gold)', background: 'none' }}
                         >
                           {activePreview.preview.cta}
-                          <ChevronRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5" style={{ color: '#D4AF37' }} />
+                          <ChevronRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5" style={{ color: 'var(--color-gold)' }} />
                         </button>
                       </div>
                     </div>
@@ -619,7 +634,7 @@ export default function Navbar() {
             />
             <button
               className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/10"
-              style={{ color: '#FFFFFF', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+              style={{ color: 'var(--text-on-dark)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
               onClick={closeMobileMenu}
               aria-label="Close menu"
             >
@@ -642,7 +657,7 @@ export default function Navbar() {
             <div className="space-y-1">
               <p
                 className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-3"
-                style={{ color: '#D4AF37' }}
+                style={{ color: 'var(--color-gold)' }}
               >
                 Menu
               </p>
@@ -652,7 +667,7 @@ export default function Navbar() {
                   <React.Fragment key={link.label}>
                     <button
                       className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
-                      style={{ color: isActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.95)',
+                      style={{ color: isActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.95)',
                         backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
                       }}
                       onClick={() => {
@@ -667,7 +682,7 @@ export default function Navbar() {
                       {link.hasMegaMenu && (
                         <ChevronDown
                           className="h-4 w-4 transition-transform duration-300"
-                          style={{ transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)', color: '#D4AF37' }}
+                          style={{ transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)', color: 'var(--color-gold)' }}
                         />
                       )}
                     </button>
@@ -695,7 +710,7 @@ export default function Navbar() {
                                 <button
                                   key={item.label}
                                   className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-white/10"
-                                  style={{ color: itemActive ? '#D4AF37' : 'rgba(255, 255, 255, 0.9)',
+                                  style={{ color: itemActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.9)',
                                     backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
                                   }}
                                   onClick={() => handleNavClick(item.page)}
@@ -703,7 +718,7 @@ export default function Navbar() {
                                   <div
                                     className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-200"
                                     style={{ backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(212, 175, 55, 0.12)',
-                                      color: '#D4AF37',
+                                      color: 'var(--color-gold)',
                                     }}
                                   >
                                     {item.icon}
@@ -714,7 +729,7 @@ export default function Navbar() {
                                       {itemActive && (
                                         <span
                                           className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm"
-                                          style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)', color: '#D4AF37' }}
+                                          style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)', color: 'var(--color-gold)' }}
                                         >
                                           Current
                                         </span>
@@ -753,7 +768,7 @@ export default function Navbar() {
             <div className="space-y-1">
               <p
                 className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-2"
-                style={{ color: '#D4AF37' }}
+                style={{ color: 'var(--color-gold)' }}
               >
                 Quick Actions
               </p>
@@ -776,11 +791,11 @@ export default function Navbar() {
                 >
                   <div
                     className="w-9 h-9 rounded-lg flex items-center justify-center relative"
-                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37' }}
+                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}
                   >
                     {item.icon}
                     {item.count && item.count > 0 ? (
-                      <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[#D4AF37]">
+                      <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full text-[9px] font-bold text-white px-1 bg-[var(--color-gold)]">
                         {item.count}
                       </span>
                     ) : null}
@@ -800,7 +815,7 @@ export default function Navbar() {
               >
                 <p
                   className="text-[11px] uppercase tracking-[3px] font-semibold mb-1.5"
-                  style={{ color: '#D4AF37' }}
+                  style={{ color: 'var(--color-gold)' }}
                 >
                   New Collection 2026
                 </p>
@@ -843,7 +858,7 @@ export default function Navbar() {
           >
             <div className="mx-auto max-w-2xl">
               <div className="flex items-center gap-3">
-                <Search className="h-5 w-5 shrink-0" style={{ color: '#D4AF37' }} />
+                <Search className="h-5 w-5 shrink-0" style={{ color: 'var(--color-gold)' }} />
                 <input
                   ref={searchInputRef}
                   type="text"
@@ -892,10 +907,10 @@ export default function Navbar() {
                         }}
                       >
                         <div
-                          className="w-10 h-10 rounded-md overflow-hidden shrink-0"
+                          className="w-10 h-10 rounded-md overflow-hidden shrink-0 relative"
                           style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
                         >
-                          <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
+                          <Image src={p.image} alt={p.name} fill className="w-full h-full object-contain" sizes="40px" />
                         </div>
                         <div className="min-w-0">
                           <p
@@ -906,7 +921,7 @@ export default function Navbar() {
                           </p>
                           <p
                             className="text-xs"
-                            style={{ color: '#D4AF37' }}
+                            style={{ color: 'var(--color-gold)' }}
                           >
                             {formatPKR(p.price)}
                           </p>

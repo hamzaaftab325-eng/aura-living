@@ -14,7 +14,6 @@ import {
   Moon,
   Globe,
   CreditCard,
-  ChevronRight,
   User as UserIcon,
   Mail,
   Check,
@@ -22,6 +21,7 @@ import {
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 /* ═══════════════════════════════════════════════════════════
    AnimatedSection — staggered children reveal
@@ -58,7 +58,7 @@ function Toggle({
       aria-label={label}
       onClick={() => onChange(!checked)}
       className="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-300 cursor-pointer"
-      style={{ backgroundColor: checked ? '#D4AF37' : '#E8D5A3',
+      style={{ backgroundColor: checked ? 'var(--color-gold)' : 'var(--color-gold-soft)',
       }}
     >
       <span
@@ -157,7 +157,7 @@ export default function SettingsView() {
   // Not-signed-in gate
   if (hydrated && !safeUser) {
     return (
-      <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+      <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
         <section className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center">
           <div
             className="absolute inset-0"
@@ -180,29 +180,29 @@ export default function SettingsView() {
               Account Settings
             </h1>
             <div className="flex items-center gap-3 mt-6">
-              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-              <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-              <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+              <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+              <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
             </div>
           </div>
         </section>
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
-              <Settings className="w-8 h-8" style={{ color: '#B8941F' }} />
+              <Settings className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
             </div>
-            <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
+            <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Sign in to manage settings
             </h2>
-            <p className="text-[#5A5A5A] text-sm sm:text-base mb-6" >
+            <p className="text-[var(--color-warm-gray)] text-sm sm:text-base mb-6" >
               Customise notifications, privacy, appearance, and more.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <PremiumButton variant="gold" size="sm" onClick={() => setPage('login')}>Sign In</PremiumButton>
               <button
                 onClick={() => setPage('signup')}
-                className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                style={{ color: '#D4AF37', background: 'none' }}
+                className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+                style={{ color: 'var(--color-gold)', background: 'none' }}
               >
                 Create a free account
               </button>
@@ -245,7 +245,7 @@ export default function SettingsView() {
   ];
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
@@ -271,9 +271,9 @@ export default function SettingsView() {
           </h1>
 
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
 
           <p
@@ -286,42 +286,33 @@ export default function SettingsView() {
       </section>
 
       {/* Breadcrumb strip (below hero) */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA', borderBottom: '1px solid #E8D5A3' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37] cursor-pointer"
-            style={{ color: '#8A8A8A', background: 'none' }}
-          >
-            My Account
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#B8A99A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>
-            Settings
-          </span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'My Account', onClick: () => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+          { label: 'Settings' },
+        ]}
+      />
 
       {/* Settings sections */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           {/* Profile card with inline edit */}
           <AnimatedSection>
-            <div className="rounded-xl p-5 sm:p-6 mb-8 sm:mb-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="rounded-xl p-5 sm:p-6 mb-8 sm:mb-10" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
               {editingProfile ? (
                 <form onSubmit={handleSaveProfile}>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
-                      <UserIcon className="w-5 h-5" style={{ color: '#B8941F' }} />
+                      <UserIcon className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: '#2C2C2C' }}>
+                    <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--surface-dark)' }}>
                       Edit Profile
                     </h3>
                   </div>
                   <div className="my-4"><GoldDivider /></div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     <div>
-                      <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
+                      <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
                         Full Name
                       </label>
                       <input
@@ -330,14 +321,14 @@ export default function SettingsView() {
                         value={profileName}
                         onChange={(e) => setProfileName(e.target.value)}
                         className="w-full px-3 py-2.5 rounded-sm text-sm outline-none"
-                        style={{ color: '#2C2C2C',
+                        style={{ color: 'var(--surface-dark)',
                           backgroundColor: 'rgba(255,255,255,0.7)',
-                          border: '1px solid #E8D5A3',
+                          border: '1px solid var(--color-gold-soft)',
                         }}
                       />
                     </div>
                     <div>
-                      <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: '#8A8A8A' }}>
+                      <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
                         Email
                       </label>
                       <input
@@ -346,9 +337,9 @@ export default function SettingsView() {
                         value={profileEmail}
                         onChange={(e) => setProfileEmail(e.target.value)}
                         className="w-full px-3 py-2.5 rounded-sm text-sm outline-none"
-                        style={{ color: '#2C2C2C',
+                        style={{ color: 'var(--surface-dark)',
                           backgroundColor: 'rgba(255,255,255,0.7)',
-                          border: '1px solid #E8D5A3',
+                          border: '1px solid var(--color-gold-soft)',
                         }}
                       />
                     </div>
@@ -360,8 +351,8 @@ export default function SettingsView() {
                     <button
                       type="button"
                       onClick={() => setEditingProfile(false)}
-                      className="text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                      style={{ color: '#8A8A8A', background: 'none' }}
+                      className="text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+                      style={{ color: 'var(--color-muted-gray)', background: 'none' }}
                     >
                       Cancel
                     </button>
@@ -378,10 +369,10 @@ export default function SettingsView() {
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm sm:text-base font-semibold truncate" style={{ color: '#2C2C2C' }}>
+                    <p className="text-sm sm:text-base font-semibold truncate" style={{ color: 'var(--surface-dark)' }}>
                       {safeUser?.name}
                     </p>
-                    <p className="text-xs sm:text-sm truncate" style={{ color: '#8A8A8A' }}>
+                    <p className="text-xs sm:text-sm truncate" style={{ color: 'var(--color-muted-gray)' }}>
                       {safeUser?.email}
                     </p>
                   </div>
@@ -407,16 +398,16 @@ export default function SettingsView() {
             {settingSections.map((section) => {
               const SectionIcon = section.icon;
               return (
-                <div key={section.title} className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+                <div key={section.title} className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
-                      <SectionIcon className="w-5 h-5" style={{ color: '#B8941F' }} />
+                      <SectionIcon className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                     </div>
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: '#2C2C2C' }}>
+                      <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--surface-dark)' }}>
                         {section.title}
                       </h3>
-                      <p className="text-xs sm:text-sm" style={{ color: '#8A8A8A' }}>
+                      <p className="text-xs sm:text-sm" style={{ color: 'var(--color-muted-gray)' }}>
                         {section.description}
                       </p>
                     </div>
@@ -432,10 +423,10 @@ export default function SettingsView() {
                         style={{ borderBottom: '1px solid rgba(232, 213, 163, 0.4)' }}
                       >
                         <div className="min-w-0">
-                          <p className="text-sm sm:text-base font-medium" style={{ color: '#2C2C2C' }}>
+                          <p className="text-sm sm:text-base font-medium" style={{ color: 'var(--surface-dark)' }}>
                             {item.label}
                           </p>
-                          <p className="text-xs sm:text-sm mt-0.5" style={{ color: '#8A8A8A' }}>
+                          <p className="text-xs sm:text-sm mt-0.5" style={{ color: 'var(--color-muted-gray)' }}>
                             {item.sub}
                           </p>
                         </div>
@@ -448,16 +439,16 @@ export default function SettingsView() {
             })}
 
             {/* Currency selector */}
-            <div className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
-                  <Globe className="w-5 h-5" style={{ color: '#B8941F' }} />
+                  <Globe className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                 </div>
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: '#2C2C2C' }}>
+                  <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--surface-dark)' }}>
                     Currency
                   </h3>
-                  <p className="text-xs sm:text-sm" style={{ color: '#8A8A8A' }}>
+                  <p className="text-xs sm:text-sm" style={{ color: 'var(--color-muted-gray)' }}>
                     Display prices in your preferred currency.
                   </p>
                 </div>
@@ -469,9 +460,9 @@ export default function SettingsView() {
                     key={c}
                     onClick={() => setCurrency(c)}
                     className="flex-1 py-3 rounded-sm text-sm font-medium transition-all duration-300 cursor-pointer"
-                    style={{ border: currency === c ? '1.5px solid #D4AF37' : '1px solid #E8D5A3',
+                    style={{ border: currency === c ? '1.5px solid var(--color-gold)' : '1px solid var(--color-gold-soft)',
                       backgroundColor: currency === c ? 'rgba(212,175,55,0.08)' : 'transparent',
-                      color: currency === c ? '#D4AF37' : '#5A5A5A',
+                      color: currency === c ? 'var(--color-gold)' : 'var(--color-warm-gray)',
                     }}
                   >
                     {currency === c && <Check className="w-3.5 h-3.5 inline mr-1" />}
@@ -482,16 +473,16 @@ export default function SettingsView() {
             </div>
 
             {/* Payment methods */}
-            <div className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
+            <div className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
-                  <CreditCard className="w-5 h-5" style={{ color: '#B8941F' }} />
+                  <CreditCard className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: '#2C2C2C' }}>
+                  <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--surface-dark)' }}>
                     Payment Methods
                   </h3>
-                  <p className="text-xs sm:text-sm" style={{ color: '#8A8A8A' }}>
+                  <p className="text-xs sm:text-sm" style={{ color: 'var(--color-muted-gray)' }}>
                     Manage saved cards and digital wallets.
                   </p>
                 </div>
@@ -501,20 +492,20 @@ export default function SettingsView() {
                 <div className="flex items-center justify-between p-3 rounded-sm" style={{ backgroundColor: 'rgba(212,175,55,0.05)' }}>
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-md flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-                      <CreditCard className="w-4 h-4" style={{ color: '#B8941F' }} />
+                      <CreditCard className="w-4 h-4" style={{ color: 'var(--color-gold-text)' }} />
                     </div>
                     <div>
-                      <p className="text-sm font-medium" style={{ color: '#2C2C2C' }}>
+                      <p className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>
                         JazzCash •••• 4242
                       </p>
-                      <p className="text-xs" style={{ color: '#8A8A8A' }}>
+                      <p className="text-xs" style={{ color: 'var(--color-muted-gray)' }}>
                         Default payment method
                       </p>
                     </div>
                   </div>
                   <span
                     className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-sm"
-                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: '#D4AF37' }}
+                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}
                   >
                     Default
                   </span>
@@ -530,10 +521,10 @@ export default function SettingsView() {
               className="rounded-sm p-5 sm:p-7"
               style={{ backgroundColor: 'rgba(220, 38, 38, 0.03)', border: '1px solid rgba(220, 38, 38, 0.2)' }}
             >
-              <h3 className="text-xl sm:text-2xl font-semibold mb-2" style={{ color: '#DC2626' }}>
+              <h3 className="text-xl sm:text-2xl font-semibold mb-2" style={{ color: 'var(--color-danger)' }}>
                 Danger Zone
               </h3>
-              <p className="text-xs sm:text-sm mb-5" style={{ color: '#5A5A5A' }}>
+              <p className="text-xs sm:text-sm mb-5" style={{ color: 'var(--color-warm-gray)' }}>
                 Sign out of your account or request permanent deletion. Deletion is irreversible.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -543,8 +534,8 @@ export default function SettingsView() {
                 <button
                   onClick={handleDeleteAccount}
                   className="px-4 py-2 rounded-sm text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer"
-                  style={{ color: '#FFFFFF',
-                    backgroundColor: '#DC2626',
+                  style={{ color: 'var(--text-on-dark)',
+                    backgroundColor: 'var(--color-danger)',
                   }}
                 >
                   Request Account Deletion
@@ -554,16 +545,16 @@ export default function SettingsView() {
           </div>
 
           {/* Save bar */}
-          <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-xl p-5" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
-            <p className="text-xs sm:text-sm text-center sm:text-left" style={{ color: '#5A5A5A' }}>
-              <Mail className="w-3.5 h-3.5 inline mr-1" style={{ color: '#D4AF37' }} />
+          <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-xl p-5" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+            <p className="text-xs sm:text-sm text-center sm:text-left" style={{ color: 'var(--color-warm-gray)' }}>
+              <Mail className="w-3.5 h-3.5 inline mr-1" style={{ color: 'var(--color-gold)' }} />
               Changes are saved instantly to your device.
             </p>
             <div className="flex items-center gap-3">
               <button
                 onClick={() => { setPage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[#C9A22E] cursor-pointer"
-                style={{ color: '#D4AF37', background: 'none' }}
+                className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
+                style={{ color: 'var(--color-gold)', background: 'none' }}
               >
                 Back to Account
               </button>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
@@ -49,12 +50,13 @@ export default function TrendingCollection() {
           <div ref={imageRef} className="w-full lg:w-1/2 relative">
             <div className="relative overflow-hidden rounded-lg">
               {/* Image */}
-              <div className="w-full aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5]">
-                <img
+              <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5]">
+                <Image
                   src="/images/categories/lighting-category.webp"
                   alt="The Artisan Collection — handcrafted lighting"
+                  fill
                   className="w-full h-full object-cover rounded-lg"
-                  loading="lazy"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                 />
               </div>
 

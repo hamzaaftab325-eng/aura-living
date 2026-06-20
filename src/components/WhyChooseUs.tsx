@@ -76,8 +76,8 @@ function FeatureCard({ feature }: FeatureCardProps) {
   return (
     <div
       className="group relative h-full rounded-2xl overflow-hidden transition-all duration-300 cursor-default"
-      style={{ background: '#FFFDF7',
-        border: '1px solid #E8D5A3',
+      style={{ background: 'var(--surface-card)',
+        border: '1px solid var(--color-gold-soft)',
         transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
         boxShadow: isHovered
           ? '0 16px 40px rgba(212, 175, 55, 0.18), 0 0 0 1px rgba(212, 175, 55, 0.25)'
@@ -90,7 +90,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
       <div
         className="absolute top-0 left-0 h-[3px] transition-all duration-500 ease-out"
         style={{ width: isHovered ? '100%' : '0%',
-          background: 'linear-gradient(90deg, #D4AF37, #E8D5A3)',
+          background: 'linear-gradient(90deg, var(--color-gold), var(--color-gold-soft))',
         }}
       />
 
@@ -110,21 +110,21 @@ function FeatureCard({ feature }: FeatureCardProps) {
         <div className="mb-5">
           <div
             className="relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300"
-            style={{ backgroundColor: isHovered ? '#D4AF37' : '#F5EDDA',
+            style={{ backgroundColor: isHovered ? 'var(--color-gold)' : 'var(--color-gold-pale)',
               transform: isHovered ? 'scale(1.08)' : 'scale(1)',
               boxShadow: isHovered ? '0 8px 20px rgba(212, 175, 55, 0.35)' : 'none',
             }}
           >
             <IconComponent
               className="w-6 h-6 transition-colors duration-300"
-              style={{ color: isHovered ? '#FFFFFF' : '#D4AF37' }}
+              style={{ color: isHovered ? 'var(--text-on-dark)' : 'var(--color-gold)' }}
             />
           </div>
         </div>
 
         <h3
           className="text-lg sm:text-xl font-bold mb-2 transition-colors duration-300"
-          style={{ color: isHovered ? '#D4AF37' : '#2C2C2C',
+          style={{ color: isHovered ? 'var(--color-gold)' : 'var(--surface-dark)',
           }}
         >
           {feature.title}
@@ -132,7 +132,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
 
         <p
           className="text-sm leading-relaxed flex-1"
-          style={{ color: '#8A8A8A' }}
+          style={{ color: 'var(--color-muted-gray)' }}
         >
           {feature.description}
         </p>
@@ -174,7 +174,7 @@ export default function WhyChooseUs() {
   return (
     <section
       className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
-      style={{ backgroundColor: '#F2EDE4' }}
+      style={{ backgroundColor: 'var(--color-cream)' }}
     >
       <DotPattern />
 
@@ -182,27 +182,27 @@ export default function WhyChooseUs() {
         <div className="text-center mb-14 sm:mb-16">
           {/* Eyebrow */}
           <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-8 h-px bg-[#D4AF37]/50" />
+            <div className="w-8 h-px bg-[var(--color-gold)]/50" />
             <span
               className="text-[11px] font-semibold uppercase tracking-[0.25em]"
-              style={{ color: '#D4AF37' }}
+              style={{ color: 'var(--color-gold)' }}
             >
               The Aura Promise
             </span>
-            <div className="w-8 h-px bg-[#D4AF37]/50" />
+            <div className="w-8 h-px bg-[var(--color-gold)]/50" />
           </div>
 
           <h2
             ref={headingRef}
             className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold mb-3"
-            style={{ color: '#2C2C2C' }}
+            style={{ color: 'var(--surface-dark)' }}
           >
             Why Discerning Homes Choose Aura
           </h2>
 
           <p
             className="text-sm sm:text-base max-w-xl mx-auto mt-4"
-            style={{ color: '#8A8A8A' }}
+            style={{ color: 'var(--color-muted-gray)' }}
           >
             Four promises we live by, so your home can be lived in beautifully.
           </p>
@@ -224,11 +224,11 @@ export default function WhyChooseUs() {
         {/* Simple CSS wavy divider at bottom */}
         <div className="flex justify-center mt-16">
           <div className="flex items-center gap-2">
-            <div className="w-20 h-px bg-[#D4AF37]/30" />
-            <div className="w-2 h-2 rotate-45 border border-[#D4AF37]/30" />
-            <div className="w-20 h-px bg-[#D4AF37]/30" />
-            <div className="w-2 h-2 rotate-45 border border-[#D4AF37]/30" />
-            <div className="w-20 h-px bg-[#D4AF37]/30" />
+            <div className="w-20 h-px bg-[var(--color-gold)]/30" />
+            <div className="w-2 h-2 rotate-45 border border-[var(--color-gold)]/30" />
+            <div className="w-20 h-px bg-[var(--color-gold)]/30" />
+            <div className="w-2 h-2 rotate-45 border border-[var(--color-gold)]/30" />
+            <div className="w-20 h-px bg-[var(--color-gold)]/30" />
           </div>
         </div>
       </div>

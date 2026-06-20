@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import {
   useGsapFadeIn,
   useGsapStagger,
@@ -147,14 +148,14 @@ function ChapterLabel({ number }: { number: string }) {
   return (
     <div ref={ref} className="flex items-center gap-4 mb-6">
       <span
-        className="chapter-text text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium"
+        className="chapter-text text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium"
         
       >
         Chapter {number}
       </span>
       <div
         className="chapter-line w-16 sm:w-24 h-px"
-        style={{ backgroundColor: '#D4AF37' }}
+        style={{ backgroundColor: 'var(--color-gold)' }}
       />
     </div>
   );
@@ -298,13 +299,15 @@ function KenBurnsImage({
   }, []);
 
   return (
-    <div ref={containerRef} className={`overflow-hidden ${className || ''}`}>
-      <img
+    <div ref={containerRef} className={`relative overflow-hidden ${className || ''}`}>
+      <Image
         ref={imgRef}
         src={src}
         alt={alt}
+        fill
         className="w-full h-full object-cover will-change-transform"
-      loading="lazy" />
+        sizes="(min-width: 1024px) 50vw, 100vw"
+      />
     </div>
   );
 }
@@ -344,20 +347,20 @@ function DecorativeGoldLine() {
 
   return (
     <div ref={ref} className="flex items-center justify-center gap-3 py-8 sm:py-12">
-      <div className="w-8 sm:w-16 h-px bg-[#D4AF37]/40" />
+      <div className="w-8 sm:w-16 h-px bg-[var(--color-gold)]/40" />
       <div
         className="deco-line w-16 sm:w-32 h-px"
-        style={{ backgroundColor: '#D4AF37' }}
+        style={{ backgroundColor: 'var(--color-gold)' }}
       />
       <div
         className="deco-dot w-1.5 h-1.5 rounded-full"
-        style={{ backgroundColor: '#D4AF37' }}
+        style={{ backgroundColor: 'var(--color-gold)' }}
       />
       <div
         className="deco-line w-16 sm:w-32 h-px"
-        style={{ backgroundColor: '#D4AF37' }}
+        style={{ backgroundColor: 'var(--color-gold)' }}
       />
-      <div className="w-8 sm:w-16 h-px bg-[#D4AF37]/40" />
+      <div className="w-8 sm:w-16 h-px bg-[var(--color-gold)]/40" />
     </div>
   );
 }
@@ -398,7 +401,7 @@ function FloatingDots() {
         <div
           key={i}
           className="float-dot w-1 h-1 rounded-full"
-          style={{ backgroundColor: '#D4AF37', opacity: 0.6 }}
+          style={{ backgroundColor: 'var(--color-gold)', opacity: 0.6 }}
         />
       ))}
     </div>
@@ -437,10 +440,10 @@ function CornerOrnaments() {
 
   return (
     <div ref={ref} className="absolute inset-0 pointer-events-none">
-      <div className="corner-el absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-[#D4AF37]/50" />
-      <div className="corner-el absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-[#D4AF37]/50" />
-      <div className="corner-el absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-[#D4AF37]/50" />
-      <div className="corner-el absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-[#D4AF37]/50" />
+      <div className="corner-el absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-[var(--color-gold)]/50" />
+      <div className="corner-el absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-[var(--color-gold)]/50" />
+      <div className="corner-el absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-[var(--color-gold)]/50" />
+      <div className="corner-el absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-[var(--color-gold)]/50" />
     </div>
   );
 }
@@ -552,29 +555,29 @@ function ValueCard({
     <div
       ref={cardRef}
       className="relative rounded-xl p-5 sm:p-6 lg:p-8 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(212,175,55,0.15)] overflow-hidden"
-      style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
+      style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
     >
       {/* Animated gold left border */}
       <div
         ref={borderRef}
         className="absolute top-0 left-0 w-1 h-full"
-        style={{ backgroundColor: '#D4AF37' }}
+        style={{ backgroundColor: 'var(--color-gold)' }}
       />
       <div
         ref={iconRef}
         className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-5"
         style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
       >
-        <Icon className="w-7 h-7" style={{ color: '#D4AF37' }} />
+        <Icon className="w-7 h-7" style={{ color: 'var(--color-gold)' }} />
       </div>
       <h3
-        className="text-[#2C2C2C] text-xl sm:text-2xl font-semibold mb-4"
+        className="text-[var(--surface-dark)] text-xl sm:text-2xl font-semibold mb-4"
         
       >
         {title}
       </h3>
       <p
-        className="text-[#5A5A5A] text-sm sm:text-base leading-relaxed"
+        className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed"
         
       >
         {description}
@@ -653,10 +656,10 @@ function TimelineItem({
         <div
           ref={badgeRef}
           className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center z-10 shrink-0 transition-all duration-300 hover:scale-110"
-          style={{ backgroundColor: item.isFuture ? '#FAF8F5' : '#D4AF37',
+          style={{ backgroundColor: item.isFuture ? 'var(--surface-page)' : 'var(--color-gold)',
             border: item.isFuture
-              ? '2px dashed #D4AF37'
-              : '2px solid #D4AF37',
+              ? '2px dashed var(--color-gold)'
+              : '2px solid var(--color-gold)',
             boxShadow: item.isFuture
               ? 'none'
               : '0 4px 14px rgba(212,175,55,0.25)',
@@ -664,7 +667,7 @@ function TimelineItem({
         >
           <Icon
             className="w-5 h-5 sm:w-6 sm:h-6"
-            style={{ color: item.isFuture ? '#D4AF37' : '#FFFDF7' }}
+            style={{ color: item.isFuture ? 'var(--color-gold)' : 'var(--surface-card)' }}
           />
         </div>
         {!isLast && (
@@ -683,7 +686,7 @@ function TimelineItem({
       <div
         ref={cardRef}
         className="tl-card group flex-1 rounded-lg p-5 sm:p-6 mb-4 sm:mb-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] hover:-translate-y-1"
-        style={{ backgroundColor: item.isFuture ? 'rgba(212,175,55,0.04)' : '#FFFDF7',
+        style={{ backgroundColor: item.isFuture ? 'rgba(212,175,55,0.04)' : 'var(--surface-card)',
           border: item.isFuture
             ? '1px dashed rgba(212,175,55,0.4)'
             : '1px solid rgba(232,213,163,0.4)',
@@ -692,7 +695,7 @@ function TimelineItem({
         {/* Year + Upcoming badge */}
         <div className="flex items-center gap-3 mb-2 flex-wrap">
           <span
-            className="text-[#D4AF37] text-[28px] sm:text-[32px] lg:text-[40px] font-bold leading-none"
+            className="text-[var(--color-gold)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold leading-none"
             
           >
             {item.year}
@@ -701,7 +704,7 @@ function TimelineItem({
             <span
               className="text-[9px] uppercase tracking-[2px] font-semibold px-2 py-0.5 rounded-full"
               style={{ backgroundColor: 'rgba(212,175,55,0.12)',
-                color: '#D4AF37',
+                color: 'var(--color-gold)',
               }}
             >
               Upcoming
@@ -711,7 +714,7 @@ function TimelineItem({
 
         {/* Title */}
         <h4
-          className="text-[#2C2C2C] text-base sm:text-lg font-semibold mb-2"
+          className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold mb-2"
           
         >
           {item.title}
@@ -719,7 +722,7 @@ function TimelineItem({
 
         {/* Description */}
         <p
-          className="text-[#5A5A5A] text-xs sm:text-sm leading-relaxed mb-3"
+          className="text-[var(--color-warm-gray)] text-xs sm:text-sm leading-relaxed mb-3"
           
         >
           {item.description}
@@ -730,7 +733,7 @@ function TimelineItem({
           <div
             className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-sm"
             style={{ backgroundColor: 'rgba(212,175,55,0.08)',
-              color: '#D4AF37',
+              color: 'var(--color-gold)',
             }}
           >
             <Icon className="w-3 h-3" />
@@ -772,7 +775,7 @@ function ScrollProgressIndicator() {
       <div
         ref={lineRef}
         className="h-full w-full"
-        style={{ backgroundColor: '#D4AF37' }}
+        style={{ backgroundColor: 'var(--color-gold)' }}
       />
     </div>
   );
@@ -922,7 +925,7 @@ export default function AboutView() {
   }, []);
 
   return (
-    <div className="w-full" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Scroll Progress Indicator */}
       <ScrollProgressIndicator />
 
@@ -953,7 +956,7 @@ export default function AboutView() {
           className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8"
         >
           <span
-            className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
+            className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
             
           >
             ABOUT AURA LIVING
@@ -965,9 +968,9 @@ export default function AboutView() {
             Our Story
           </h1>
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
           <p
             className="text-white/80 text-sm sm:text-base mt-6 max-w-lg leading-relaxed"
@@ -983,14 +986,14 @@ export default function AboutView() {
         <div className="max-w-3xl mx-auto text-center">
           {/* Decorative opening quote mark */}
           <div
-            className="text-[#D4AF37] text-5xl sm:text-6xl md:text-7xl leading-none mb-2 sm:mb-4 select-none"
+            className="text-[var(--color-gold)] text-5xl sm:text-6xl md:text-7xl leading-none mb-2 sm:mb-4 select-none"
             
             aria-hidden="true"
           >
             &ldquo;
           </div>
           <blockquote
-            className="text-[#2C2C2C] leading-relaxed"
+            className="text-[var(--surface-dark)] leading-relaxed"
             
           >
             We believe every home tells a story. Ours begins with the hands of artisans.
@@ -1015,7 +1018,7 @@ export default function AboutView() {
               
             />
             <ParagraphReveal
-              className="text-[#5A5A5A] text-base leading-relaxed"
+              className="text-[var(--color-warm-gray)] text-base leading-relaxed"
               
             >
               Aura Living was born from a deep-rooted passion for bringing
@@ -1025,7 +1028,7 @@ export default function AboutView() {
               and comfort.
             </ParagraphReveal>
             <ParagraphReveal
-              className="text-[#5A5A5A] text-base leading-relaxed"
+              className="text-[var(--color-warm-gray)] text-base leading-relaxed"
               
             >
               Our journey began with a simple belief: that every home deserves
@@ -1040,11 +1043,11 @@ export default function AboutView() {
           <div ref={chapter1ImgSlideRef} className="relative flex items-center justify-center">
             <div
               className="absolute -inset-3 sm:-inset-4 rounded-sm"
-              style={{ border: '2px solid #D4AF37', opacity: 0.4 }}
+              style={{ border: '2px solid var(--color-gold)', opacity: 0.4 }}
             />
             <div
               className="absolute -inset-1.5 sm:-inset-2 rounded-sm"
-              style={{ border: '1px solid #D4AF37', opacity: 0.2 }}
+              style={{ border: '1px solid var(--color-gold)', opacity: 0.2 }}
             />
             <div className="relative w-full aspect-[4/5] overflow-hidden rounded-sm">
               <div ref={chapter1ImgRef} className="w-full h-full">
@@ -1072,11 +1075,11 @@ export default function AboutView() {
           >
             <div
               className="absolute -inset-3 sm:-inset-4 rounded-sm"
-              style={{ border: '2px solid #D4AF37', opacity: 0.4 }}
+              style={{ border: '2px solid var(--color-gold)', opacity: 0.4 }}
             />
             <div
               className="absolute -inset-1.5 sm:-inset-2 rounded-sm"
-              style={{ border: '1px solid #D4AF37', opacity: 0.2 }}
+              style={{ border: '1px solid var(--color-gold)', opacity: 0.2 }}
             />
             <div className="relative w-full aspect-[4/5] overflow-hidden rounded-sm">
               <div ref={chapter2ImgRef} className="w-full h-full">
@@ -1099,7 +1102,7 @@ export default function AboutView() {
               
             />
             <ParagraphReveal
-              className="text-[#5A5A5A] text-base leading-relaxed"
+              className="text-[var(--color-warm-gray)] text-base leading-relaxed"
               
             >
               We travel across Pakistan to source the finest artisan pieces —
@@ -1108,7 +1111,7 @@ export default function AboutView() {
               the vibrant truck art traditions of Punjab.
             </ParagraphReveal>
             <ParagraphReveal
-              className="text-[#5A5A5A] text-base leading-relaxed"
+              className="text-[var(--color-warm-gray)] text-base leading-relaxed"
               
             >
               Each item in our collection carries the fingerprints of its maker,
@@ -1128,12 +1131,12 @@ export default function AboutView() {
       {/* ═══════════════════ VALUES SECTION ═══════════════════ */}
       <section
         className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8"
-        style={{ backgroundColor: '#F5EDDA' }}
+        style={{ backgroundColor: 'var(--color-gold-pale)' }}
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
             <span
-              className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium"
+              className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[3px] uppercase font-medium"
               
             >
               What We Stand For
@@ -1175,7 +1178,7 @@ export default function AboutView() {
               <div key={stat.label} className="text-center py-6">
                 <span
                   className="aura-h2 text-charcoal block mb-2"
-                  style={{ color: '#D4AF37',
+                  style={{ color: 'var(--color-gold)',
                   }}
                 >
                   <CountUp
@@ -1187,7 +1190,7 @@ export default function AboutView() {
                 </span>
                 <span
                   className="text-sm sm:text-base tracking-wide"
-                  style={{ color: '#8A8A8A',
+                  style={{ color: 'var(--color-muted-gray)',
                   }}
                 >
                   {stat.label}
@@ -1201,11 +1204,11 @@ export default function AboutView() {
       <DecorativeGoldLine />
 
       {/* ═══════════════════ TIMELINE ═══════════════════ */}
-      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#FAF8F5' }}>
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--surface-page)' }}>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
             <span
-              className="text-[#D4AF37] text-xs sm:text-sm tracking-[3px] uppercase font-medium"
+              className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[3px] uppercase font-medium"
               
             >
               Our Journey
@@ -1217,7 +1220,7 @@ export default function AboutView() {
               Milestones
             </h2>
             <p
-              className="text-[#5A5A5A] text-sm sm:text-base mt-3 max-w-lg mx-auto leading-relaxed"
+              className="text-[var(--color-warm-gray)] text-sm sm:text-base mt-3 max-w-lg mx-auto leading-relaxed"
               
             >
               From a single workshop to a nationwide brand — every milestone
@@ -1247,7 +1250,7 @@ export default function AboutView() {
       {/* ═══════════════════ CTA SECTION ═══════════════════ */}
       <section
         className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8"
-        style={{ backgroundColor: '#F5EDDA' }}
+        style={{ backgroundColor: 'var(--color-gold-pale)' }}
       >
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <h2
@@ -1257,7 +1260,7 @@ export default function AboutView() {
             Ready to Transform Your Space?
           </h2>
           <p
-            className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
+            className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
             
           >
             Explore our curated collection of handcrafted home decor and bring

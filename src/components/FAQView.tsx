@@ -3,9 +3,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { useGsapFadeIn, useGsapStagger,  gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
-import { HelpCircle, ChevronDown, ChevronRight, MessageCircle, ArrowRight } from 'lucide-react';
+import { HelpCircle, ChevronDown, MessageCircle, ArrowRight } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 type FAQCategory = 'all' | 'orders' | 'returns' | 'products' | 'payment';
@@ -176,7 +177,7 @@ export default function FAQView() {
   };
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: '#FAF8F5' }}>
+    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
@@ -194,36 +195,29 @@ export default function FAQView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
-            <HelpCircle className="w-8 h-8" style={{ color: '#B8941F' }} />
+            <HelpCircle className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
           </div>
-          <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
+          <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
           <h1 className="aura-hero-title text-white" >
             Frequently Asked Questions
           </h1>
           <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <div className="w-10 sm:w-14 h-px bg-[#D4AF37]/60" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate" style={{ backgroundColor: '#F5EDDA' }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <button
-            onClick={() => setPage('home')}
-            className="text-sm transition-colors duration-200 hover:text-[#D4AF37]"
-            style={{ color: '#8A8A8A' }}
-          >
-            Home
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" style={{ color: '#8A8A8A' }} />
-          <span className="text-sm font-medium" style={{ color: '#B8941F' }}>FAQ</span>
-        </div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: 'Home', onClick: () => setPage('home') },
+          { label: 'FAQ' },
+        ]}
+      />
 
       {/* Category Tabs */}
       <section className="py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
@@ -234,9 +228,9 @@ export default function FAQView() {
                 key={cat.key}
                 onClick={() => { setActiveCategory(cat.key); setOpenId(null); }}
                 className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-sm text-xs sm:text-sm font-medium tracking-wider uppercase cursor-pointer transition-all duration-300"
-                style={{ backgroundColor: activeCategory === cat.key ? '#D4AF37' : '#FFFDF7',
-                  color: activeCategory === cat.key ? '#FFFFFF' : '#5A5A5A',
-                  border: `1px solid ${activeCategory === cat.key ? '#D4AF37' : '#E8D5A3'}`,
+                style={{ backgroundColor: activeCategory === cat.key ? 'var(--color-gold)' : 'var(--surface-card)',
+                  color: activeCategory === cat.key ? 'var(--text-on-dark)' : 'var(--color-warm-gray)',
+                  border: `1px solid ${activeCategory === cat.key ? 'var(--color-gold)' : 'var(--color-gold-soft)'}`,
                 }}
               >
                 {cat.label}
@@ -252,9 +246,9 @@ export default function FAQView() {
                 <div
                   key={item.id}
                   className="rounded-xl overflow-hidden transition-all duration-300"
-                  style={{ backgroundColor: '#FFFDF7',
-                    border: `1px solid ${isOpen ? '#D4AF37' : '#E8D5A3'}`,
-                    borderLeft: isOpen ? '4px solid #D4AF37' : '4px solid transparent',
+                  style={{ backgroundColor: 'var(--surface-card)',
+                    border: `1px solid ${isOpen ? 'var(--color-gold)' : 'var(--color-gold-soft)'}`,
+                    borderLeft: isOpen ? '4px solid var(--color-gold)' : '4px solid transparent',
                   }}
                 >
                   <button
@@ -266,7 +260,7 @@ export default function FAQView() {
                   >
                     <span
                       className="text-sm sm:text-base font-semibold leading-relaxed"
-                      style={{ color: isOpen ? '#D4AF37' : '#2C2C2C',
+                      style={{ color: isOpen ? 'var(--color-gold)' : 'var(--surface-dark)',
                       }}
                     >
                       {item.question}
@@ -274,7 +268,7 @@ export default function FAQView() {
                     <ChevronDown
                       ref={(el) => { if (el) chevronRefs.current.set(item.id, el); }}
                       className="w-5 h-5 shrink-0"
-                      style={{ color: isOpen ? '#D4AF37' : '#8A8A8A',
+                      style={{ color: isOpen ? 'var(--color-gold)' : 'var(--color-muted-gray)',
                       }}
                     />
                   </button>
@@ -290,8 +284,8 @@ export default function FAQView() {
                   >
                     <div
                       className="px-4 sm:px-6 pb-4 sm:pb-6 text-sm sm:text-base leading-relaxed"
-                      style={{ color: '#5A5A5A',
-                        borderTop: isOpen ? '1px solid #E8D5A3' : 'none',
+                      style={{ color: 'var(--color-warm-gray)',
+                        borderTop: isOpen ? '1px solid var(--color-gold-soft)' : 'none',
                         paddingTop: isOpen ? '16px' : '0px',
                       }}
                     >
@@ -306,18 +300,18 @@ export default function FAQView() {
       </section>
 
       {/* Still Have Questions CTA */}
-      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F5EDDA' }}>
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-            <MessageCircle className="w-8 h-8" style={{ color: '#B8941F' }} />
+            <MessageCircle className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
           </div>
-          <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
+          <h2 className="text-[var(--surface-dark)] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Still Have Questions?
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[#5A5A5A] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
+          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Our team is here to help. Reach out to us and we will get back to you as soon as possible.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -330,7 +324,7 @@ export default function FAQView() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase cursor-pointer transition-all duration-300 hover:shadow-[0_8px_25px_rgba(37,211,102,0.3)] hover:brightness-110 active:scale-[0.98]"
-              style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
+              style={{ backgroundColor: '#25D366', color: 'var(--text-on-dark)' }}
             >
               <MessageCircle className="w-4 h-4" />
               WhatsApp Us
