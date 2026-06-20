@@ -189,8 +189,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative w-full overflow-hidden"
-      
+      className="relative w-full overflow-hidden aura-surface-dark"
     >
       {/* Gold accent line top edge */}
       <div

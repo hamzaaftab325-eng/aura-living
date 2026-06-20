@@ -324,6 +324,7 @@ export default function Navbar() {
           <div
             className="relative flex items-center justify-between rounded-full transition-all duration-300 ease-out"
             style={{ border: scrolled ? '1px solid rgba(212, 175, 55, 0.4)' : '1px solid rgba(212, 175, 55, 0.3)',
+              backgroundColor: 'rgba(20, 20, 20, 0.85)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
               paddingLeft: scrolled ? '14px' : '16px',
