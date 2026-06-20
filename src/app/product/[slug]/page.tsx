@@ -24,7 +24,7 @@ export async function generateMetadata({
     };
   }
 
-  const title = product.name;
+  const title = `${product.name} | Aura Living`;
   const description = product.description;
   const canonical = `/product/${product.slug}`;
 
