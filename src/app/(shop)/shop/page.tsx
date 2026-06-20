@@ -8,8 +8,15 @@ export const metadata: Metadata = {
   alternates: { canonical: '/shop' },
   openGraph: {
     title: 'Shop All Home Decor | Aura Living',
-    description:
-      'Handcrafted lamps, vases, candles, planters, wall art, and tableware — delivered across Pakistan.',
+    description: 'Handcrafted lamps, vases, candles, planters, wall art, and tableware — delivered across Pakistan.',
+    type: 'website',
+    images: [{ url: '/og/shop.png', width: 1344, height: 768, alt: 'Shop All Home Decor | Aura Living' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shop All Home Decor | Aura Living',
+    description: 'Handcrafted lamps, vases, candles, planters, wall art & tableware — delivered across Pakistan.',
+    images: ['/og/shop.png'],
   },
 };
 

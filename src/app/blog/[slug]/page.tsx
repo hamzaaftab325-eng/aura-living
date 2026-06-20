@@ -42,9 +42,9 @@ export async function generateMetadata({
       tags: article.tags,
       images: [
         {
-          url: article.coverImage,
-          width: 1200,
-          height: 630,
+          url: '/og/blog.png',
+          width: 1344,
+          height: 768,
           alt: article.title,
         },
       ],
@@ -53,7 +53,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [article.coverImage],
+      images: ['/og/blog.png'],
     },
   };
 }

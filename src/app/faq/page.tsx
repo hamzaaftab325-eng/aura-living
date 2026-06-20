@@ -8,8 +8,15 @@ export const metadata: Metadata = {
   alternates: { canonical: '/faq' },
   openGraph: {
     title: 'Frequently Asked Questions | Aura Living',
-    description:
-      'Answers to common questions about orders, shipping, returns, products, payment, and the Aura Rewards program.',
+    description: 'Answers about orders, shipping, returns, products, payment, and the Aura Rewards program.',
+    type: 'website',
+    images: [{ url: '/og/faq.png', width: 1344, height: 768, alt: 'FAQ | Aura Living' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FAQ | Aura Living',
+    description: 'Answers about orders, shipping, returns, products, payment, and rewards.',
+    images: ['/og/faq.png'],
   },
 };
 
