@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     default: "Aura Living | Premium Home Decor Pakistan — Where Comfort Meets Style",
     template: "%s | Aura Living",
   },
+  // Note: title.template applies the suffix automatically.
+  // Child pages should set title to just the page name (e.g. "Get in Touch")
+  // and the template will append " | Aura Living".
   description: "Discover handcrafted home decor, elegant lamps, indoor plants, ceramic vases, candles & more. Premium quality home decoration items delivered across Pakistan. Shop PKR.",
   keywords: ["home decor Pakistan", "luxury home decoration", "lamps online Pakistan", "indoor plants Karachi", "ceramic vases", "candles", "wall art", "Aura Living", "home accessories PKR"],
   authors: [{ name: "Aura Living" }],
@@ -56,20 +59,13 @@ export const metadata: Metadata = {
     siteName: "Aura Living",
     type: "website",
     locale: "en_PK",
-    images: [
-      {
-        url: "/images/hero/hero-slide-1.webp",
-        width: 1200,
-        height: 630,
-        alt: "Aura Living — Premium Home Decor Pakistan",
-      },
-    ],
+    // Note: OG image is set per-route (home, product, blog) to avoid
+    // preloading the hero image on every page.
   },
   twitter: {
     card: "summary_large_image",
     title: "Aura Living | Premium Home Decor Pakistan",
     description: "Where Comfort Meets Style — Shop handcrafted home decor online in Pakistan",
-    images: ["/images/hero/hero-slide-1.webp"],
   },
   robots: {
     index: true,
@@ -87,7 +83,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${poppins.variable}`}>
       <body className="antialiased bg-background text-foreground min-h-screen flex flex-col w-full overflow-x-hidden">
         <a href="#main-content" className="aura-skip-link">Skip to main content</a>
-        <link rel="preload" as="image" href="/images/hero/hero-slide-1.webp" />
 
         {/* Organization schema */}
         <script

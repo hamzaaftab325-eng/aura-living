@@ -73,15 +73,23 @@ export default function HeroSection() {
       ref={sectionRef}
       className="relative w-full h-[100dvh] overflow-hidden bg-charcoal flex items-center justify-center"
     >
-      {/* ═══ Background video ═══ */}
+      {/* ═══ Background video with image fallback ═══ */}
       <div ref={bgRef} className="absolute inset-0 w-full h-[120%] -top-[10%]">
+        {/* Fallback background image — shows immediately while video loads */}
+        <div
+          className="absolute inset-0 w-full h-full bg-cover bg-center"
+          style={{ backgroundImage: 'url(/images/hero/hero-slide-1.webp)' }}
+          aria-hidden="true"
+        />
         <video
           ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover"
+          preload="auto"
+          poster="/images/hero/hero-slide-1.webp"
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source
             src="https://res.cloudinary.com/diometfe9/video/upload/v1781723540/Working_on_ecommerce_store_backg__202606180012_pm2rtf.mp4"

@@ -52,6 +52,8 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      {/* Preload hero image — only on home page where it's actually used */}
+      <link rel="preload" as="image" href="/images/hero/hero-slide-1.webp" />
       <HeroSection />
       <FloatingGoldDots />
       <CategoriesSection />
