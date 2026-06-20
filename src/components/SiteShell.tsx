@@ -87,8 +87,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
       admin: '/admin',
       login: '/auth/login',
       signup: '/auth/signup',
-      blog: '/blog',
-    };
+      blog: '/blog' };
 
     if (pageRedirects[hash]) {
       router.replace(pageRedirects[hash]);

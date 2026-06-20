@@ -22,8 +22,7 @@ export default function Badge({
   customText,
   children,
   className = '',
-  position = 'inline',
-}: BadgeProps) {
+  position = 'inline' }: BadgeProps) {
   const isCustom = variant === 'custom';
   const colors = !isCustom ? badgeColors[variant] : null;
   const bg = colors?.bg || customBg || 'var(--cta-bg)';

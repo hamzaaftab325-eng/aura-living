@@ -17,16 +17,14 @@ export default function NotFound() {
       gsap.set(numberRef.current, { opacity: 0, scale: 0.5, y: 40 });
       tl.to(numberRef.current, {
         opacity: 1, scale: 1, y: 0,
-        duration: 0.8, ease: 'back.out(1.7)',
-      });
+        duration: 0.8, ease: 'back.out(1.7)' });
     }
 
     if (textRef.current) {
       gsap.set(textRef.current, { opacity: 0, y: 30 });
       tl.to(textRef.current, {
         opacity: 1, y: 0,
-        duration: 0.6, ease: 'power3.out',
-      }, '-=0.3');
+        duration: 0.6, ease: 'power3.out' }, '-=0.3');
     }
 
     if (buttonsRef.current) {
@@ -34,15 +32,14 @@ export default function NotFound() {
       gsap.set(btns, { opacity: 0, y: 20 });
       tl.to(btns, {
         opacity: 1, y: 0,
-        duration: 0.5, stagger: 0.12, ease: 'power3.out',
-      }, '-=0.2');
+        duration: 0.5, stagger: 0.12, ease: 'power3.out' }, '-=0.2');
     }
   }, []);
 
   return (
     <div
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      style={{ backgroundColor: 'var(--surface-page)' }}
+      
     >
       {/* Decorative background elements */}
       <div
@@ -50,16 +47,14 @@ export default function NotFound() {
         style={{
           width: 400, height: 400, top: '10%', right: '-5%',
           background: 'radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%)',
-          borderRadius: '50%', filter: 'blur(40px)',
-        }}
+          borderRadius: '50%', filter: 'blur(40px)' }}
       />
       <div
         className="absolute pointer-events-none"
         style={{
           width: 300, height: 300, bottom: '15%', left: '-3%',
           background: 'radial-gradient(circle, rgba(168,181,160,0.08) 0%, transparent 70%)',
-          borderRadius: '50%', filter: 'blur(40px)',
-        }}
+          borderRadius: '50%', filter: 'blur(40px)' }}
       />
 
       {/* Corner ornaments */}
@@ -71,7 +66,7 @@ export default function NotFound() {
         <div ref={numberRef} className="mb-6">
           <span
             className="text-[120px] sm:text-[160px] md:text-[200px] font-bold leading-none"
-            style={{ fontFamily: "'Playfair Display', serif", color: 'var(--color-gold)', opacity: 0.9 }}
+            style={{ fontFamily: "'Playfair Display', serif", opacity: 0.9 }}
           >
             404
           </span>
@@ -88,13 +83,13 @@ export default function NotFound() {
         <div ref={textRef}>
           <h1
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-            style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}
+            style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Page Not Found
           </h1>
           <p
             className="text-sm sm:text-base leading-relaxed mb-8 max-w-md mx-auto"
-            style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}
+            style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
           </p>
@@ -105,7 +100,7 @@ export default function NotFound() {
           <Link
             href="/"
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-hover)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.35)] active:scale-[0.97] cursor-pointer"
-            style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)', fontFamily: "'Poppins', sans-serif" }}
+            style={{ backgroundColor: 'var(--color-gold)', fontFamily: "'Poppins', sans-serif" }}
           >
             <Home className="w-4 h-4" />
             Back to Home
@@ -113,7 +108,7 @@ export default function NotFound() {
           <Link
             href="/shop"
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-pale)] hover:text-[var(--color-gold)] active:scale-[0.97] cursor-pointer"
-            style={{ border: '2px solid var(--color-gold)', color: 'var(--color-gold)', fontFamily: "'Poppins', sans-serif", backgroundColor: 'transparent' }}
+            style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             <ShoppingBag className="w-4 h-4" />
             Browse Shop

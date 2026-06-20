@@ -8,9 +8,7 @@ import {
   useGsapStagger,
   useGsapBlurText,
   useGsapScaleIn,
-  gsap,
-  
-} from '@/hooks/useGsap';
+  gsap } from '@/hooks/useGsap';
 import {
   ChevronRight,
   Star,
@@ -18,8 +16,7 @@ import {
   Heart,
   ShoppingCart,
   SlidersHorizontal,
-  X,
-} from 'lucide-react';
+  X } from 'lucide-react';
 import { useStore, Product, badgeColors } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
 import { products, categories, formatPKR } from '@/data/products';
@@ -62,8 +59,7 @@ function FilterSidebar({
   onPriceMinChange,
   onPriceMaxChange,
   hasActiveFilters,
-  onClearFilters,
-}: FilterSidebarProps) {
+  onClearFilters }: FilterSidebarProps) {
   return (
     <div className="space-y-8">
       <div>
@@ -148,7 +144,7 @@ function FilterSidebar({
         <button
           onClick={onClearFilters}
           className="text-sm font-medium underline transition-colors hover:text-[var(--color-gold-hover)]"
-          style={{ color: 'var(--color-gold)' }}
+          
         >
           Clear All Filters
         </button>
@@ -164,8 +160,7 @@ function ProductCard({
   product,
   onAddToCart,
   onToggleWishlist,
-  isInWishlist: checkWishlist,
-}: {
+  isInWishlist: checkWishlist }: {
   product: Product;
   onAddToCart: (product: Product) => void;
   onToggleWishlist: (id: string, name?: string) => void;
@@ -326,7 +321,7 @@ function ProductCard({
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-sm font-bold" style={{ color: 'var(--color-gold)' }}>
+          <span className="text-sm font-bold" >
             {formatPKR(product.price)}
           </span>
           {product.originalPrice && (
@@ -388,10 +383,7 @@ function ShopViewInner() {
           sku: p.sku || p.id,
           priceCurrency: 'PKR',
           price: p.price,
-          availability: p.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-        },
-      })),
-    };
+          availability: p.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' } })) };
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';
@@ -416,8 +408,7 @@ function ShopViewInner() {
     duration: 0.7,
     stagger: 0.08,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   // GSAP stagger for hero content
   const heroRef = useGsapStagger<HTMLDivElement>({
@@ -425,8 +416,7 @@ function ShopViewInner() {
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
 
   // Enhanced parallax for hero background — 0.5x speed + zoom 1→1.1
   useEffect(() => {
@@ -440,9 +430,7 @@ function ShopViewInner() {
           trigger: heroSectionRef.current,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.5,
-        },
-      });
+          scrub: 0.5 } });
       // Zoom from 1 to 1.1 on scroll
       gsap.fromTo(heroBgRef.current,
         { scale: 1 },
@@ -453,9 +441,7 @@ function ShopViewInner() {
             trigger: heroSectionRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: true,
-          },
-        }
+            scrub: true } }
       );
     }, heroSectionRef);
     return () => ctx.revert();
@@ -545,8 +531,7 @@ function ShopViewInner() {
     onPriceMinChange: setPriceMin,
     onPriceMaxChange: setPriceMax,
     hasActiveFilters,
-    onClearFilters: clearFilters,
-  };
+    onClearFilters: clearFilters };
 
   return (
     <div className="w-full page-transition" >
@@ -612,7 +597,7 @@ function ShopViewInner() {
           <button
             onClick={() => setMobileFiltersOpen(true)}
             className="flex items-center gap-2 px-5 py-3 rounded-sm text-sm font-medium transition-all duration-300 hover:bg-[var(--color-gold-pale)]"
-            style={{ border: '1px solid var(--color-gold)', color: 'var(--color-gold)' }}
+            style={{ border: '1px solid var(--color-gold)' }}
           >
             <SlidersHorizontal size={16} />
             Filters
@@ -641,9 +626,9 @@ function ShopViewInner() {
           <div className="flex-1">
             {/* Search active banner */}
             {searchQuery.trim() && (
-              <div className="flex flex-wrap items-center gap-2 mb-6 p-3 rounded-lg" style={{ backgroundColor: 'rgba(212,175,55,0.08)', border: '1px solid rgba(212,175,55,0.25)' }}>
+              <div className="flex flex-wrap items-center gap-2 mb-6 p-3 rounded-lg" style={{ backgroundColor: 'rgba(212,175,55,0.08)' }}>
                 <span className="text-sm" >
-                  Showing results for <strong style={{ color: 'var(--color-gold)' }}>&ldquo;{searchQuery.trim()}&rdquo;</strong>
+                  Showing results for <strong >&ldquo;{searchQuery.trim()}&rdquo;</strong>
                 </span>
                 <span className="text-xs" >
                   ({filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found)
@@ -666,26 +651,26 @@ function ShopViewInner() {
                 {selectedCategory !== 'all' && (
                   <span
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
-                    style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: 'var(--color-gold-text)', border: '1px solid rgba(212,175,55,0.25)' }}
+                    style={{ backgroundColor: 'rgba(245,237,218,0.8)' }}
                   >
                     {categories.find((c) => c.id === selectedCategory)?.name}
                     <button onClick={clearCategory} aria-label="Clear category filter" className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
                   </span>
                 )}
                 {priceMin && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: 'var(--color-gold-text)', border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)' }}>
                     Min: {formatPKR(parseInt(priceMin, 10))}
                     <button onClick={() => setPriceMin('')} className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
                   </span>
                 )}
                 {priceMax && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: 'var(--color-gold-text)', border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)' }}>
                     Max: {formatPKR(parseInt(priceMax, 10))}
                     <button onClick={() => setPriceMax('')} className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
                   </span>
                 )}
                 {sortBy !== 'featured' && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: 'var(--color-gold-text)', border: '1px solid rgba(212,175,55,0.25)' }}>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(245,237,218,0.8)' }}>
                     {sortOptions.find((o) => o.value === sortBy)?.label}
                     <button onClick={() => setSortBy('featured')} className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
                   </span>
@@ -728,8 +713,6 @@ function ShopViewInner() {
         <div
           className="fixed inset-0 z-50 transition-opacity duration-300"
           style={{ backgroundColor: 'rgba(0,0,0,0.25)',
-            backdropFilter: 'blur(4px)',
-            WebkitBackdropFilter: 'blur(4px)',
             opacity: mobileFiltersOpen ? 1 : 0,
             pointerEvents: mobileFiltersOpen ? 'auto' : 'none' }}
           onClick={() => setMobileFiltersOpen(false)}
@@ -739,8 +722,6 @@ function ShopViewInner() {
         <div
           className="fixed top-0 left-0 bottom-0 z-50 w-[320px] max-w-[92vw] shadow-2xl overflow-y-auto transition-transform duration-300 ease-out"
           style={{ backgroundColor: 'rgba(250,248,245,0.85)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
             borderRight: '1px solid rgba(212,175,55,0.15)',
             transform: mobileFiltersOpen ? 'translateX(0)' : 'translateX(-100%)' }}
         >

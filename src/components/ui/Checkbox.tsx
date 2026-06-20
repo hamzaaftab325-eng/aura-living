@@ -46,7 +46,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             id={errorId}
             role="alert"
             className="text-xs font-medium ml-6"
-            style={{ color: 'var(--color-danger)' }}
+            
           >
             {error}
           </p>

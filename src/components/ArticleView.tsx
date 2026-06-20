@@ -13,8 +13,7 @@ import {
   Share2,
   Link2,
   Facebook,
-  Twitter,
-} from 'lucide-react';
+  Twitter } from 'lucide-react';
 import Link from 'next/link';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -29,8 +28,7 @@ const categoryLabels: Record<Article['category'], string> = {
   care: 'Care',
   trends: 'Trends',
   lifestyle: 'Lifestyle',
-  'behind-the-scenes': 'Behind the Scenes',
-};
+  'behind-the-scenes': 'Behind the Scenes' };
 
 /* ═══════════════════════════════════════════════════════════
    ArticleImage — graceful fallback for missing cover images
@@ -42,8 +40,7 @@ function ArticleImage({
   title,
   sizes,
   priority = false,
-  className,
-}: {
+  className }: {
   src: string;
   alt: string;
   title: string;
@@ -66,12 +63,12 @@ function ArticleImage({
         <div className="text-center px-6 py-10">
           <BookOpen
             className="w-10 h-10 mx-auto mb-3"
-            style={{ color: 'var(--color-gold)' }}
+            
             aria-hidden="true"
           />
           <p
             className="font-serif text-lg sm:text-xl leading-snug"
-            style={{ color: 'var(--color-gold-text)', fontFamily: 'var(--font-playfair)' }}
+            style={{ fontFamily: 'var(--font-playfair)' }}
           >
             {title}
           </p>
@@ -250,14 +247,13 @@ function ShareButtons({ title, slug }: { title: string; slug: string }) {
   const btnClass =
     'flex items-center justify-center w-10 h-10 rounded-sm border transition-all duration-200 hover:opacity-80 cursor-pointer';
   const btnStyle = {
-    borderColor: 'var(--border-default)',
-  };
+    borderColor: 'var(--border-default)' };
 
   return (
     <div className="flex flex-col gap-3">
       <span
         className="text-xs uppercase tracking-[3px] font-medium"
-        style={{ color: 'var(--color-gold)' }}
+        
       >
         Share this article
       </span>
@@ -292,7 +288,7 @@ function ShareButtons({ title, slug }: { title: string; slug: string }) {
           {copied ? (
             <span
               className="text-[10px] font-bold uppercase"
-              style={{ color: 'var(--color-gold)' }}
+              
             >
               Copied
             </span>
@@ -330,20 +326,16 @@ export default function ArticleView({ article }: { article: Article }) {
       dateModified: article.date,
       author: {
         '@type': 'Person',
-        name: article.author.name,
-      },
+        name: article.author.name },
       publisher: {
         '@type': 'Organization',
-        name: 'Aura Living',
-      },
+        name: 'Aura Living' },
       description: article.excerpt,
       articleSection: categoryLabels[article.category],
       keywords: article.tags.join(', '),
       mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': `${baseUrl}/blog/${article.slug}`,
-      },
-    };
+        '@id': `${baseUrl}/blog/${article.slug}` } };
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';
@@ -364,8 +356,7 @@ export default function ArticleView({ article }: { article: Article }) {
   const formattedDate = new Date(article.date).toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
-    year: 'numeric',
-  });
+    year: 'numeric' });
 
   return (
     <div className="w-full page-transition" >
@@ -384,8 +375,7 @@ export default function ArticleView({ article }: { article: Article }) {
           <span
             className="inline-block text-xs sm:text-sm font-medium uppercase tracking-[3px] mb-4 px-3 py-1.5 rounded-sm"
             style={{
-              backgroundColor: 'var(--color-gold-pale)',
-              color: 'var(--color-gold-text)' }}
+              backgroundColor: 'var(--color-gold-pale)' }}
           >
             {categoryLabels[article.category]}
           </span>
@@ -488,7 +478,7 @@ export default function ArticleView({ article }: { article: Article }) {
             >
               <p
                 className="text-xs uppercase tracking-[2px] font-medium mb-2"
-                style={{ color: 'var(--color-gold)' }}
+                
               >
                 Written by
               </p>
@@ -516,7 +506,7 @@ export default function ArticleView({ article }: { article: Article }) {
             <div className="text-center mb-10">
               <span
                 className="text-xs sm:text-sm tracking-[3px] uppercase font-medium"
-                style={{ color: 'var(--color-gold)' }}
+                
               >
                 Keep Reading
               </span>
@@ -536,8 +526,7 @@ export default function ArticleView({ article }: { article: Article }) {
                 const relDate = new Date(rel.date).toLocaleDateString('en-US', {
                   month: 'short',
                   day: 'numeric',
-                  year: 'numeric',
-                });
+                  year: 'numeric' });
                 return (
                   <Link
                     key={rel.slug}
@@ -558,8 +547,7 @@ export default function ArticleView({ article }: { article: Article }) {
                       <span
                         className="absolute top-3 left-3 text-[10px] uppercase tracking-[2px] font-medium px-3 py-1.5 rounded-sm"
                         style={{
-                          backgroundColor: 'rgba(250, 248, 245, 0.95)',
-                          color: 'var(--color-gold-text)' }}
+                          backgroundColor: 'rgba(250, 248, 245, 0.95)' }}
                       >
                         {categoryLabels[rel.category]}
                       </span>

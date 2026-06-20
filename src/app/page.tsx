@@ -36,18 +36,14 @@ export const metadata: Metadata = {
         url: '/og/home.png',
         width: 1344,
         height: 768,
-        alt: 'Aura Living — Where Comfort Meets Style',
-      },
-    ],
-  },
+        alt: 'Aura Living — Where Comfort Meets Style' },
+    ] },
   twitter: {
     card: 'summary_large_image',
     title: 'Aura Living | Premium Home Decor Pakistan',
     description:
       'Where Comfort Meets Style — Shop handcrafted home decor online in Pakistan',
-    images: ['/og/home.png'],
-  },
-};
+    images: ['/og/home.png'] } };
 
 export default function HomePage() {
   return (

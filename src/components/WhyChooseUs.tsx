@@ -13,26 +13,22 @@ const features = [
     icon: Truck,
     title: 'Complimentary Shipping',
     description: 'Free doorstep delivery on every order above PKR 2,999, anywhere in Pakistan.',
-    number: '01',
-  },
+    number: '01' },
   {
     icon: RotateCcw,
     title: 'Effortless Returns',
     description: 'Changed your mind? Enjoy 7-day no-questions-asked returns and exchanges.',
-    number: '02',
-  },
+    number: '02' },
   {
     icon: Palette,
     title: 'Artisan Crafted',
     description: 'Every piece is shaped by skilled hands, carrying the soul of its maker.',
-    number: '03',
-  },
+    number: '03' },
   {
     icon: MessageCircle,
     title: 'Always By Your Side',
     description: 'Real people, real answers — reach us on WhatsApp, phone, or email, day or night.',
-    number: '04',
-  },
+    number: '04' },
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -157,8 +153,7 @@ export default function WhyChooseUs() {
       start: 'top 90%',
       onEnter: () => {
         gsap.to(el, { scale: 1, duration: 1, ease: 'power3.out' });
-      },
-    });
+      } });
 
     return () => {
       trigger.kill();
@@ -179,7 +174,7 @@ export default function WhyChooseUs() {
             <div className="w-8 h-px bg-[var(--color-gold)]/50" />
             <span
               className="text-[11px] font-semibold uppercase tracking-[0.25em]"
-              style={{ color: 'var(--color-gold)' }}
+              
             >
               The Aura Promise
             </span>

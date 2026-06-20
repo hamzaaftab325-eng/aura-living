@@ -23,8 +23,7 @@ function formatDate(iso: string): string {
   return date.toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'short',
-    year: 'numeric',
-  });
+    year: 'numeric' });
 }
 
 function Stars({ value, size = 14 }: { value: number; size?: number }) {
@@ -59,7 +58,7 @@ function ReviewCard({ review }: { review: Review }) {
   return (
     <article
       className="p-5 sm:p-6 rounded-md"
-      style={{ border: '1px solid rgba(232,213,163,0.4)' }}
+      
     >
       {/* Header: author + verified + date */}
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
@@ -157,8 +156,7 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
       return {
         rating,
         count,
-        percentage: (count / total) * 100,
-      };
+        percentage: (count / total) * 100 };
     });
   }, [reviews]);
 
@@ -167,7 +165,7 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
     return (
       <div
         className="text-center py-12 px-6 rounded-md"
-        style={{ border: '1px solid rgba(232,213,163,0.4)' }}
+        
       >
         <MessageSquare
           size={36}
@@ -195,7 +193,7 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
       {/* Summary header */}
       <div
         className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-6 sm:gap-8 p-5 sm:p-6 rounded-md mb-6"
-        style={{ border: '1px solid rgba(232,213,163,0.4)' }}
+        
       >
         {/* Average rating block */}
         <div className="flex sm:flex-col items-center sm:items-start gap-3 sm:gap-1">
@@ -295,7 +293,7 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
             <ChevronDown
               size={14}
               className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
-              style={{ color: 'var(--color-gold)' }}
+              
               aria-hidden="true"
             />
           </span>
@@ -317,8 +315,7 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
             onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-sm text-xs font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-pale)] active:scale-[0.97]"
             style={{
-              border: '1px solid var(--color-gold)',
-              backgroundColor: 'transparent' }}
+              border: '1px solid var(--color-gold)' }}
           >
             Show more reviews
             <span >

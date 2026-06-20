@@ -5,8 +5,7 @@ export const metadata: Metadata = {
   title: 'Create Account | Aura Living',
   description: 'Create an Aura Living account to track orders, save addresses, and earn rewards.',
   alternates: { canonical: '/auth/signup' },
-  robots: { index: false, follow: false },
-};
+  robots: { index: false, follow: false } };
 
 export default function SignupPage() {
   return <AuthView mode="signup" />;

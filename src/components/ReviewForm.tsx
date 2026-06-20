@@ -20,8 +20,7 @@ const STAR_LABELS: Record<number, string> = {
   2: '2 stars — Fair',
   3: '3 stars — Good',
   4: '4 stars — Very Good',
-  5: '5 stars — Excellent',
-};
+  5: '5 stars — Excellent' };
 
 export default function ReviewForm({ productId, productName, onSubmitted }: ReviewFormProps) {
   const [rating, setRating] = useState(0);
@@ -62,8 +61,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
       toast({
         title: 'Please fix the errors',
         description: 'Some required fields are missing or incomplete.',
-        variant: 'destructive',
-      });
+        variant: 'destructive' });
       return;
     }
 
@@ -74,8 +72,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
       setSubmitting(false);
       toast({
         title: 'Review submitted!',
-        description: 'Thank you for your feedback on ' + productName + '.',
-      });
+        description: 'Thank you for your feedback on ' + productName + '.' });
       setRating(0);
       setHoveredRating(0);
       setTitle('');
@@ -113,7 +110,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
     <form
       onSubmit={handleSubmit}
       className="p-5 sm:p-6 rounded-md"
-      style={{ border: '1px solid rgba(232,213,163,0.4)' }}
+      
       noValidate
     >
       <h4 className="text-base font-semibold mb-1" >
@@ -130,7 +127,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
           
         >
           Your Rating
-          <span style={{ color: 'var(--color-danger)' }} aria-hidden="true">
+          <span  aria-hidden="true">
             {' '}
             *
           </span>
@@ -188,7 +185,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
             id={`${ratingGroupId}-error`}
             role="alert"
             className="text-xs font-medium mt-1.5"
-            style={{ color: 'var(--color-danger)' }}
+            
           >
             {errors.rating}
           </p>

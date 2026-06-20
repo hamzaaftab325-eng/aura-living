@@ -30,86 +30,72 @@ const faqItems: FAQItem[] = [
     id: 1,
     category: 'orders',
     question: 'What are the shipping times for my order?',
-    answer: 'Standard delivery takes 3-5 business days across Pakistan. Express delivery is available for 1-2 business days, and same-day delivery is offered within Lahore. Once your order is dispatched, you will receive a tracking number via SMS and email to monitor your shipment in real time.',
-  },
+    answer: 'Standard delivery takes 3-5 business days across Pakistan. Express delivery is available for 1-2 business days, and same-day delivery is offered within Lahore. Once your order is dispatched, you will receive a tracking number via SMS and email to monitor your shipment in real time.' },
   {
     id: 2,
     category: 'orders',
     question: 'Which areas do you deliver to?',
-    answer: 'We deliver to all major cities in Pakistan including Lahore, Karachi, Islamabad, Rawalpindi, Faisalabad, Multan, Peshawar, and Quetta, plus 50+ additional cities. If you are unsure whether we deliver to your area, please contact us and we will do our best to accommodate your location.',
-  },
+    answer: 'We deliver to all major cities in Pakistan including Lahore, Karachi, Islamabad, Rawalpindi, Faisalabad, Multan, Peshawar, and Quetta, plus 50+ additional cities. If you are unsure whether we deliver to your area, please contact us and we will do our best to accommodate your location.' },
   {
     id: 3,
     category: 'payment',
     question: 'Is Cash on Delivery (COD) available?',
-    answer: 'Yes, we offer Cash on Delivery across Pakistan. Simply select the COD option at checkout. For COD orders, please ensure someone is available at the delivery address to receive and pay for the package. A confirmation call will be made before dispatch.',
-  },
+    answer: 'Yes, we offer Cash on Delivery across Pakistan. Simply select the COD option at checkout. For COD orders, please ensure someone is available at the delivery address to receive and pay for the package. A confirmation call will be made before dispatch.' },
   {
     id: 4,
     category: 'returns',
     question: 'What is your return policy?',
-    answer: 'We offer a 14-day return window from the date of delivery. Items must be unused, in their original packaging, and with all tags still attached. To initiate a return, please contact us via WhatsApp or email within the 14-day period, and we will guide you through the process.',
-  },
+    answer: 'We offer a 14-day return window from the date of delivery. Items must be unused, in their original packaging, and with all tags still attached. To initiate a return, please contact us via WhatsApp or email within the 14-day period, and we will guide you through the process.' },
   {
     id: 5,
     category: 'returns',
     question: 'How do I exchange an item for a different size or color?',
-    answer: 'To exchange an item, contact us within 14 days of delivery via WhatsApp or email. Specify the item you wish to exchange and your preferred size or color. We will arrange a pickup and deliver the replacement once we receive the original item. Exchanges are subject to stock availability.',
-  },
+    answer: 'To exchange an item, contact us within 14 days of delivery via WhatsApp or email. Specify the item you wish to exchange and your preferred size or color. We will arrange a pickup and deliver the replacement once we receive the original item. Exchanges are subject to stock availability.' },
   {
     id: 6,
     category: 'products',
     question: 'What materials are your products made from?',
-    answer: 'Our products are crafted from premium materials sourced from skilled artisans across Pakistan. This includes hand-thrown ceramics, sustainably sourced wood, pure cotton and linen textiles, brass and copper metals, and natural soy wax for candles. Each product description includes detailed material information.',
-  },
+    answer: 'Our products are crafted from premium materials sourced from skilled artisans across Pakistan. This includes hand-thrown ceramics, sustainably sourced wood, pure cotton and linen textiles, brass and copper metals, and natural soy wax for candles. Each product description includes detailed material information.' },
   {
     id: 7,
     category: 'products',
     question: 'Do you offer product customization?',
-    answer: 'Yes, select items in our collection can be customized. This includes personalized engravings on ceramic pieces, custom sizes for textiles, and bespoke color options for certain decor items. Customized products typically take 7-14 additional business days and are non-returnable. Contact us to discuss your requirements.',
-  },
+    answer: 'Yes, select items in our collection can be customized. This includes personalized engravings on ceramic pieces, custom sizes for textiles, and bespoke color options for certain decor items. Customized products typically take 7-14 additional business days and are non-returnable. Contact us to discuss your requirements.' },
   {
     id: 8,
     category: 'payment',
     question: 'What payment methods do you accept?',
-    answer: 'We accept Cash on Delivery (COD), JazzCash, EasyPaisa, bank transfer, and all major credit/debit cards (Visa, Mastercard) through our secure payment gateway. All online transactions are encrypted and processed through SSL-secured servers for your safety.',
-  },
+    answer: 'We accept Cash on Delivery (COD), JazzCash, EasyPaisa, bank transfer, and all major credit/debit cards (Visa, Mastercard) through our secure payment gateway. All online transactions are encrypted and processed through SSL-secured servers for your safety.' },
   {
     id: 9,
     category: 'orders',
     question: 'How can I track my order?',
-    answer: 'Once your order is dispatched, you will receive a tracking number via SMS and email. You can use this tracking number on our website or the courier partner\'s website to monitor your shipment in real time. You can also contact our support team for order status updates.',
-  },
+    answer: 'Once your order is dispatched, you will receive a tracking number via SMS and email. You can use this tracking number on our website or the courier partner\'s website to monitor your shipment in real time. You can also contact our support team for order status updates.' },
   {
     id: 10,
     category: 'orders',
     question: 'Do you offer gift wrapping?',
-    answer: 'Yes! We offer premium gift wrapping for PKR 299. Each gift-wrapped order includes elegant packaging with a handwritten card and our signature gold ribbon. You can add gift wrapping during checkout. Gift wrapping is especially popular for our candle sets, vases, and decorative trays.',
-  },
+    answer: 'Yes! We offer premium gift wrapping for PKR 299. Each gift-wrapped order includes elegant packaging with a handwritten card and our signature gold ribbon. You can add gift wrapping during checkout. Gift wrapping is especially popular for our candle sets, vases, and decorative trays.' },
   {
     id: 11,
     category: 'products',
     question: 'Do your products come with a warranty?',
-    answer: 'All our products undergo strict quality checks before dispatch. If you receive a defective or damaged item, please contact us within 48 hours of delivery with photo evidence, and we will provide a free replacement or full refund. Handcrafted items may have slight variations, which are a hallmark of artisan craftsmanship.',
-  },
+    answer: 'All our products undergo strict quality checks before dispatch. If you receive a defective or damaged item, please contact us within 48 hours of delivery with photo evidence, and we will provide a free replacement or full refund. Handcrafted items may have slight variations, which are a hallmark of artisan craftsmanship.' },
   {
     id: 12,
     category: 'payment',
     question: 'Do you have a loyalty or rewards program?',
-    answer: 'Yes, we offer the Aura Rewards program. Earn 1 point for every PKR 100 spent. Points can be redeemed for discounts on future purchases — 100 points equals PKR 50 off. You also receive bonus points on your birthday, double points during sale events, and exclusive early access to new collections as a loyalty member.',
-  },
+    answer: 'Yes, we offer the Aura Rewards program. Earn 1 point for every PKR 100 spent. Points can be redeemed for discounts on future purchases — 100 points equals PKR 50 off. You also receive bonus points on your birthday, double points during sale events, and exclusive early access to new collections as a loyalty member.' },
   {
     id: 13,
     category: 'orders',
     question: 'Can I change or cancel my order after placing it?',
-    answer: 'You can modify or cancel your order within 2 hours of placing it by contacting our support team. After 2 hours, your order enters processing and changes may not be possible. If your order has already been dispatched, you will need to follow our returns process once it is delivered.',
-  },
+    answer: 'You can modify or cancel your order within 2 hours of placing it by contacting our support team. After 2 hours, your order enters processing and changes may not be possible. If your order has already been dispatched, you will need to follow our returns process once it is delivered.' },
   {
     id: 14,
     category: 'products',
     question: 'How should I care for my Aura Living products?',
-    answer: 'Each product comes with specific care instructions. Generally, we recommend hand-washing ceramics and textiles with mild detergent, keeping candles away from direct sunlight, and dusting wooden items regularly. Avoid using harsh chemicals or abrasive cleaners on any of our products to maintain their beauty and longevity.',
-  },
+    answer: 'Each product comes with specific care instructions. Generally, we recommend hand-washing ceramics and textiles with mild detergent, keeping candles away from direct sunlight, and dusting wooden items regularly. Avoid using harsh chemicals or abrasive cleaners on any of our products to maintain their beauty and longevity.' },
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -122,8 +108,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
 
   return <div ref={ref} className={className}>{children}</div>;
 }
@@ -140,8 +125,7 @@ export default function FAQView() {
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
 
   const contentRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
   const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
@@ -192,7 +176,7 @@ export default function FAQView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
-            <HelpCircle className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
+            <HelpCircle className="w-8 h-8"  />
           </div>
           <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
@@ -291,8 +275,8 @@ export default function FAQView() {
       {/* Still Have Questions CTA */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-            <MessageCircle className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
+          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" >
+            <MessageCircle className="w-8 h-8"  />
           </div>
           <h2 className="aura-text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Still Have Questions?
@@ -334,10 +318,7 @@ export default function FAQView() {
               name: item.question,
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: item.answer,
-              },
-            })),
-          }) }}
+                text: item.answer } })) }) }}
       />
     </div>
   );

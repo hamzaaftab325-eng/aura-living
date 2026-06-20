@@ -23,8 +23,7 @@ export default function Card({
   onClick,
   role,
   ariaLabel,
-  style,
-}: CardProps) {
+  style }: CardProps) {
   const presetClass =
     preset === 'card' ? 'aura-card' : preset === 'flat' ? 'aura-card-flat' : '';
 

@@ -7,9 +7,7 @@ import {
   useGsapStagger,
   useGsapBlurText,
   useGsapScaleIn,
-  gsap,
-  
-} from '@/hooks/useGsap';
+  gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Heart, ShoppingCart, Star, ShoppingBag } from 'lucide-react';
 import { useStore, badgeColors } from '@/store/useStore';
@@ -30,8 +28,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
 
   return <div ref={ref} className={className}>{children}</div>;
 }
@@ -81,8 +78,7 @@ export default function WishlistView() {
     duration: 0.7,
     stagger: 0.08,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   // Enhanced parallax for hero section — 0.5x speed + zoom 1→1.1
   useEffect(() => {
@@ -95,9 +91,7 @@ export default function WishlistView() {
           trigger: headerSectionRef.current,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.5,
-        },
-      });
+          scrub: 0.5 } });
       gsap.fromTo(heroBgRef.current,
         { scale: 1 },
         {
@@ -107,9 +101,7 @@ export default function WishlistView() {
             trigger: headerSectionRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: true,
-          },
-        }
+            scrub: true } }
       );
     }, headerSectionRef);
     return () => ctx.revert();
@@ -199,7 +191,7 @@ export default function WishlistView() {
                   className="w-24 h-24 rounded-full flex items-center justify-center mb-6"
                   
                 >
-                  <Heart className="w-10 h-10" style={{ color: 'var(--color-gold)' }} />
+                  <Heart className="w-10 h-10"  />
                 </div>
                 <h2
                   className="aura-text-primary aura-h2 mb-3"
@@ -289,10 +281,10 @@ export default function WishlistView() {
                           toggleWishlist(product.id, product.name);
                         }}
                         className="absolute top-3 right-3 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer animate-heartbeat"
-                        style={{ backgroundColor: 'rgba(255,255,255,0.9)', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+                        style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
                         aria-label="Remove from wishlist"
                       >
-                        <Heart className="w-4.5 h-4.5" style={{ color: 'var(--color-danger)', fill: 'var(--color-danger)' }} />
+                        <Heart className="w-4.5 h-4.5" style={{ fill: 'var(--color-danger)' }} />
                       </button>
                     </Link>
 
@@ -337,8 +329,7 @@ export default function WishlistView() {
                         {product.originalPrice && (
                           <span
                             className="text-xs font-semibold px-1.5 py-0.5 rounded-sm"
-                            style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)',
-                              color: 'var(--color-gold)' }}
+                            style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
                           >
                             {product.originalPrice ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0}% OFF
                           </span>
@@ -360,7 +351,7 @@ export default function WishlistView() {
                           
                           aria-label="Remove from wishlist"
                         >
-                          <Heart className="w-4 h-4" style={{ color: 'var(--color-danger)', fill: 'var(--color-danger)' }} />
+                          <Heart className="w-4 h-4" style={{ fill: 'var(--color-danger)' }} />
                         </button>
                       </div>
                     </div>

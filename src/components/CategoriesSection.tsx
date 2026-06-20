@@ -32,8 +32,7 @@ function CategoryCard({
   category,
   aspectClass,
   textPosition,
-  href,
-}: CategoryCardProps) {
+  href }: CategoryCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
   const cardRef = useRef<HTMLAnchorElement>(null);
@@ -52,8 +51,7 @@ function CategoryCard({
       onUpdate: (self) => {
         const progress = self.progress;
         gsap.set(img, { y: (progress - 0.5) * -40 });
-      },
-    });
+      } });
 
     return () => {
       trigger.kill();
@@ -63,8 +61,7 @@ function CategoryCard({
   const positionClasses: Record<TextPosition, string> = {
     'bottom-left': 'items-start justify-end pb-8 pl-6',
     center: 'items-center justify-center',
-    'top-right': 'items-end justify-start pt-8 pr-6',
-  };
+    'top-right': 'items-end justify-start pt-8 pr-6' };
 
   return (
     <Link
@@ -157,8 +154,7 @@ export default function CategoriesSection() {
       start: 'top 90%',
       onEnter: () => {
         gsap.to(el, { scale: 1, duration: 1, ease: 'power3.out' });
-      },
-    });
+      } });
 
     return () => {
       trigger.kill();

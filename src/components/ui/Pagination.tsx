@@ -25,8 +25,7 @@ export default function Pagination({
   currentPage,
   totalPages,
   href,
-  paramName = 'page',
-}: PaginationProps) {
+  paramName = 'page' }: PaginationProps) {
   if (totalPages <= 1) return null;
 
   const pages: (number | 'ellipsis')[] = [];

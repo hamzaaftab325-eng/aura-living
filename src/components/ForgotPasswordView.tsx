@@ -53,9 +53,6 @@ export default function ForgotPasswordView() {
         <div
           className="w-full rounded-2xl p-8 sm:p-10"
           style={{ backgroundColor: 'rgba(255,253,247,0.9)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(232,213,163,0.3)',
             boxShadow: '0 8px 40px rgba(212,175,55,0.06), 0 2px 12px rgba(0,0,0,0.04)' }}
         >
           {!submitted ? (
@@ -67,7 +64,7 @@ export default function ForgotPasswordView() {
                     className="w-14 h-14 rounded-full flex items-center justify-center"
                     style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
                   >
-                    <Lock className="w-6 h-6" style={{ color: 'var(--color-gold)' }} />
+                    <Lock className="w-6 h-6"  />
                   </div>
                 </div>
                 <h1
@@ -135,7 +132,7 @@ export default function ForgotPasswordView() {
                       id="forgot-email-error"
                       role="alert"
                       className="text-xs pl-1"
-                      style={{ color: 'var(--color-danger)' }}
+                      
                     >
                       {emailError}
                     </span>
@@ -170,7 +167,7 @@ export default function ForgotPasswordView() {
                 <Link
                   href="/auth/login"
                   className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                  style={{ color: 'var(--color-gold)', background: 'none' }}
+                  style={{ background: 'none' }}
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                   Back to Sign In
@@ -186,7 +183,7 @@ export default function ForgotPasswordView() {
                     className="w-16 h-16 rounded-full flex items-center justify-center"
                     style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
                   >
-                    <Mail className="w-7 h-7" style={{ color: 'var(--color-gold)' }} />
+                    <Mail className="w-7 h-7"  />
                   </div>
                 </div>
                 <h2
@@ -213,7 +210,7 @@ export default function ForgotPasswordView() {
                     setEmailError('');
                   }}
                   className="text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                  style={{ color: 'var(--color-gold)', background: 'none' }}
+                  style={{ background: 'none' }}
                 >
                   Didn&apos;t receive the email? Resend
                 </button>
@@ -222,7 +219,7 @@ export default function ForgotPasswordView() {
                   <Link
                     href="/auth/login"
                     className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                    style={{ color: 'var(--color-gold)', background: 'none' }}
+                    style={{ background: 'none' }}
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
                     Back to Sign In
@@ -242,7 +239,7 @@ export default function ForgotPasswordView() {
           <Link
             href="/auth/login"
             className="font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-            style={{ color: 'var(--color-gold)', background: 'none' }}
+            style={{ background: 'none' }}
           >
             Sign in instead
           </Link>

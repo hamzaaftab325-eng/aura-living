@@ -7,9 +7,7 @@ import {
   useGsapFadeIn,
   useGsapStagger,
   useGsapScaleIn,
-  gsap,
-  
-} from '@/hooks/useGsap';
+  gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Tag,
@@ -19,8 +17,7 @@ import {
   ShoppingBag,
   Clock,
   AlertTriangle,
-  X,
-} from 'lucide-react';
+  X } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
 import { products, formatPKR } from '@/data/products';
@@ -39,8 +36,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
 
   return <div ref={ref} className={className}>{children}</div>;
 }
@@ -92,8 +88,7 @@ function SaleCountdown() {
         days: Math.floor(diff / (1000 * 60 * 60 * 24)),
         hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((diff / (1000 * 60)) % 60),
-        seconds: Math.floor((diff / 1000) % 60),
-      });
+        seconds: Math.floor((diff / 1000) % 60) });
     };
 
     tick();
@@ -114,10 +109,7 @@ function SaleCountdown() {
         <Fragment key={unit.label}>
           <div
             className="relative flex flex-col items-center justify-center rounded-lg px-2 py-1.5 sm:px-3 sm:py-2 min-w-[48px] sm:min-w-[62px] transition-transform duration-300"
-            style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)',
-              border: '1px solid rgba(212, 175, 55, 0.25)',
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)' }}
+            style={{ border: '1px solid rgba(212, 175, 55, 0.25)' }}
           >
             {/* Gold top corner accent */}
             <div
@@ -132,7 +124,7 @@ function SaleCountdown() {
             </span>
             <span
               className="text-[8px] sm:text-[9px] uppercase tracking-[1.5px] mt-1 font-semibold"
-              style={{ color: 'var(--color-gold)' }}
+              
             >
               {unit.label}
             </span>
@@ -191,8 +183,7 @@ export default function SaleView() {
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
 
   // Grid stagger — enhanced y:60 stagger:0.08
   const gridRef = useGsapStagger<HTMLDivElement>({
@@ -201,8 +192,7 @@ export default function SaleView() {
     duration: 0.7,
     stagger: 0.08,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
@@ -220,9 +210,7 @@ export default function SaleView() {
           trigger: heroBgRef.current,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.5,
-        },
-      });
+          scrub: 0.5 } });
       gsap.fromTo(heroBgDivRef.current,
         { scale: 1 },
         {
@@ -232,9 +220,7 @@ export default function SaleView() {
             trigger: heroBgRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: true,
-          },
-        }
+            scrub: true } }
       );
     }, heroBgRef);
     return () => ctx.revert();
@@ -358,16 +344,16 @@ export default function SaleView() {
             className="text-white/85 text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-8"
             
           >
-            Up to <span style={{ color: 'var(--color-gold-text)', fontWeight: 600 }}>40% off</span> handcrafted lamps, ceramics, textiles, and greenery. Premium home decor, made affordable.
+            Up to <span style={{ fontWeight: 600 }}>40% off</span> handcrafted lamps, ceramics, textiles, and greenery. Premium home decor, made affordable.
           </p>
 
           {/* Countdown Timer — wrapped in a compact card for clearer separation */}
           <div className="w-full max-w-md rounded-xl p-3 sm:p-4 backdrop-blur-sm" style={{ backgroundColor: 'rgba(20,20,20,0.6)', border: '1px solid rgba(212, 175, 55, 0.25)' }}>
             <div className="flex items-center justify-center gap-1.5 mb-2">
-              <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" style={{ color: 'var(--color-gold)' }} />
+              <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5"  />
               <span
                 className="text-[9px] sm:text-[10px] uppercase tracking-[2.5px] font-semibold"
-                style={{ color: 'var(--color-gold)' }}
+                
               >
                 Sale Ends In
               </span>
@@ -395,7 +381,7 @@ export default function SaleView() {
                   className="w-24 h-24 rounded-full flex items-center justify-center mb-6"
                   
                 >
-                  <Tag className="w-10 h-10" style={{ color: 'var(--color-gold)' }} />
+                  <Tag className="w-10 h-10"  />
                 </div>
                 <h2
                   className="aura-text-primary aura-h2 mb-3"
@@ -497,7 +483,7 @@ export default function SaleView() {
                             toggleWishlist(product.id, product.name);
                           }}
                           className="absolute top-3 right-3 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
-                          style={{ backgroundColor: 'rgba(255,255,255,0.9)', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+                          style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
                           aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
                         >
                           <Heart

@@ -5,8 +5,7 @@ import {
   useGsapFadeIn,
   useGsapStagger,
   useGsapBlurText,
-  useGsapScaleIn,
-} from '@/hooks/useGsap';
+  useGsapScaleIn } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Package,
@@ -17,8 +16,7 @@ import {
   ChevronRight,
   ChevronDown,
   Search,
-  Box,
-} from 'lucide-react';
+  Box } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -36,8 +34,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
   return <div ref={ref} className={className}>{children}</div>;
 }
 
@@ -75,8 +72,7 @@ const trackedOrders: TrackedOrder[] = [
       { label: 'Shipped', date: 'Jan 16, 09:45 AM', done: true, icon: Truck },
       { label: 'Out for Delivery', date: 'Jan 19, 11:20 AM', done: true, icon: MapPin },
       { label: 'Delivered', date: 'Jan 19, 03:48 PM', done: true, icon: CheckCircle },
-    ],
-  },
+    ] },
   {
     id: 'AL-2026-002',
     date: 'Feb 28, 2026',
@@ -90,8 +86,7 @@ const trackedOrders: TrackedOrder[] = [
       { label: 'Shipped', date: 'Mar 01, 08:30 AM', done: true, icon: Truck },
       { label: 'Out for Delivery', date: 'Pending', done: false, icon: MapPin },
       { label: 'Delivered', date: 'Pending', done: false, icon: CheckCircle },
-    ],
-  },
+    ] },
   {
     id: 'AL-2026-003',
     date: 'Mar 10, 2026',
@@ -105,8 +100,7 @@ const trackedOrders: TrackedOrder[] = [
       { label: 'Shipped', date: 'Pending', done: false, icon: Truck },
       { label: 'Out for Delivery', date: 'Pending', done: false, icon: MapPin },
       { label: 'Delivered', date: 'Pending', done: false, icon: CheckCircle },
-    ],
-  },
+    ] },
 ];
 
 const statusConfig: Record<TrackedOrder['status'], { color: string; bg: string; icon: typeof CheckCircle }> = {
@@ -138,15 +132,13 @@ export default function TrackOrdersView() {
     duration: 0.6,
     stagger: 0.12,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   const handleSearch = () => {
     if (!searchId.trim()) {
       toast({
         title: 'Enter an order ID',
-        description: 'Please type your order number (e.g. AL-2026-001) to track it.',
-      });
+        description: 'Please type your order number (e.g. AL-2026-001) to track it.' });
       return;
     }
     const found = trackedOrders.find((o) => o.id.toLowerCase() === searchId.trim().toLowerCase());
@@ -154,15 +146,13 @@ export default function TrackOrdersView() {
       setExpandedId(found.id);
       toast({
         title: 'Order found',
-        description: `Showing tracking timeline for #${found.id}.`,
-      });
+        description: `Showing tracking timeline for #${found.id}.` });
       setSearchId('');
     } else {
       toast({
         title: 'Order not found',
         description: `We couldn't find an order with ID "${searchId}". Please double-check and try again.`,
-        variant: 'destructive',
-      });
+        variant: 'destructive' });
     }
   };
 
@@ -203,7 +193,7 @@ export default function TrackOrdersView() {
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" >
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ border: '1px dashed rgba(212,175,55,0.4)' }}>
-              <Package className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
+              <Package className="w-8 h-8"  />
             </div>
             <h2 className="aura-text-primary aura-h2 mb-3" >
               Sign in to track your orders
@@ -216,7 +206,7 @@ export default function TrackOrdersView() {
               <Link
                 href="/auth/signup"
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                style={{ color: 'var(--color-gold)', background: 'none' }}
+                style={{ background: 'none' }}
               >
                 Create a free account
               </Link>
@@ -287,8 +277,7 @@ export default function TrackOrdersView() {
               <div className="flex flex-col sm:flex-row items-stretch gap-3">
                 <div
                   className="flex items-center rounded-sm flex-1"
-                  style={{ border: '1.5px solid var(--color-gold-soft)',
-                    backgroundColor: 'rgba(255,255,255,0.7)' }}
+                  style={{ border: '1.5px solid var(--color-gold-soft)' }}
                 >
                   <div className="flex items-center justify-center pl-4" style={{ color: 'var(--color-taupe)' }}>
                     <Search className="w-4 h-4" />
@@ -317,7 +306,7 @@ export default function TrackOrdersView() {
                 className="rounded-xl p-10 text-center"
                 
               >
-                <Package className="w-10 h-10 mx-auto mb-3" style={{ color: 'var(--color-gold)' }} />
+                <Package className="w-10 h-10 mx-auto mb-3"  />
                 <h3 className="aura-text-primary text-lg font-semibold mb-1" >
                   No orders found
                 </h3>
@@ -377,14 +366,14 @@ export default function TrackOrdersView() {
                         </div>
                         <ChevronDown
                           className="w-5 h-5 transition-transform duration-300"
-                          style={{ color: 'var(--color-gold)', transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                          style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
                         />
                       </div>
                     </button>
 
                     {/* Tracking timeline (expandable) */}
                     {isExpanded && (
-                      <div className="px-5 sm:px-6 pb-6 sm:pb-8 pt-2" style={{ borderTop: '1px solid var(--color-gold-soft)' }}>
+                      <div className="px-5 sm:px-6 pb-6 sm:pb-8 pt-2" >
                         <div className="mb-5">
                           <GoldDivider />
                         </div>
@@ -426,7 +415,7 @@ export default function TrackOrdersView() {
                         </ol>
 
                         <div className="mt-6 flex flex-wrap items-center gap-3">
-                          <PremiumButton variant="secondary" size="sm" onClick={() => toast({ title: 'Invoice', description: `Invoice for #${order.id} downloaded.`, })}>
+                          <PremiumButton variant="secondary" size="sm" onClick={() => toast({ title: 'Invoice', description: `Invoice for #${order.id} downloaded.` })}>
                             Download Invoice
                           </PremiumButton>
                           <PremiumButton variant="primary" size="sm" href="/contact">
@@ -447,7 +436,7 @@ export default function TrackOrdersView() {
               href="/account"
               onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-              style={{ color: 'var(--color-gold)', background: 'none' }}
+              style={{ background: 'none' }}
             >
               <ChevronRight className="w-3.5 h-3.5 rotate-180" />
               Back to My Account

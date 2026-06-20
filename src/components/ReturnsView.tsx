@@ -11,51 +11,42 @@ const returnSteps = [
   {
     step: 1,
     title: 'Contact Us',
-    description: 'Reach out to us via WhatsApp or email within 14 days of delivery. Provide your order number and reason for return.',
-  },
+    description: 'Reach out to us via WhatsApp or email within 14 days of delivery. Provide your order number and reason for return.' },
   {
     step: 2,
     title: 'Receive Authorization',
-    description: 'We will review your request and send you a return authorization along with a prepaid shipping label for damaged items.',
-  },
+    description: 'We will review your request and send you a return authorization along with a prepaid shipping label for damaged items.' },
   {
     step: 3,
     title: 'Pack Securely',
-    description: 'Pack the item securely in its original packaging with all tags and accessories included. Ensure the item is unused and undamaged.',
-  },
+    description: 'Pack the item securely in its original packaging with all tags and accessories included. Ensure the item is unused and undamaged.' },
   {
     step: 4,
     title: 'Ship It Back',
-    description: 'Ship the item back using the provided label. Return shipping is free for damaged items. For other returns, a nominal fee may apply.',
-  },
+    description: 'Ship the item back using the provided label. Return shipping is free for damaged items. For other returns, a nominal fee may apply.' },
   {
     step: 5,
     title: 'Refund Processed',
-    description: 'Once we receive and inspect the item, your refund will be processed within 5-7 business days to your original payment method.',
-  },
+    description: 'Once we receive and inspect the item, your refund will be processed within 5-7 business days to your original payment method.' },
 ];
 
 const exchangeSteps = [
   {
     step: 1,
     title: 'Contact Us',
-    description: 'Reach out within 14 days of delivery. Let us know which item you want to exchange and your preferred size or color.',
-  },
+    description: 'Reach out within 14 days of delivery. Let us know which item you want to exchange and your preferred size or color.' },
   {
     step: 2,
     title: 'Confirm Availability',
-    description: 'We will check stock availability for your preferred replacement and confirm the exchange details with you.',
-  },
+    description: 'We will check stock availability for your preferred replacement and confirm the exchange details with you.' },
   {
     step: 3,
     title: 'Ship Original Item',
-    description: 'Pack and ship the original item back to us in its original packaging with all tags attached.',
-  },
+    description: 'Pack and ship the original item back to us in its original packaging with all tags attached.' },
   {
     step: 4,
     title: 'Receive Replacement',
-    description: 'Once we receive your returned item, we will dispatch the replacement. If the new item costs more, you will pay the difference. If less, you will receive store credit.',
-  },
+    description: 'Once we receive your returned item, we will dispatch the replacement. If the new item costs more, you will pay the difference. If less, you will receive store credit.' },
 ];
 
 const nonReturnableItems = [
@@ -75,8 +66,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
 
   return <div ref={ref} className={className}>{children}</div>;
 }
@@ -89,8 +79,7 @@ export default function ReturnsView() {
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
 
   const policyRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
   const returnStepsRef = useGsapStagger<HTMLDivElement>({
@@ -99,16 +88,14 @@ export default function ReturnsView() {
     duration: 0.7,
     stagger: 0.08,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
   const exchangeStepsRef = useGsapStagger<HTMLDivElement>({
     selector: ':scope > div',
     y: 60,
     duration: 0.7,
     stagger: 0.08,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
   const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
 
   return (
@@ -129,7 +116,7 @@ export default function ReturnsView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
-            <RotateCcw className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
+            <RotateCcw className="w-8 h-8"  />
           </div>
           <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
@@ -158,7 +145,7 @@ export default function ReturnsView() {
         <div ref={policyRef} className="max-w-4xl mx-auto text-center">
           <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" >
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-              <RotateCcw className="w-6 h-6" style={{ color: 'var(--color-gold-text)' }} />
+              <RotateCcw className="w-6 h-6"  />
             </div>
             <h2 className="aura-text-primary aura-h2 mb-3" >
               Our Return Policy
@@ -197,7 +184,7 @@ export default function ReturnsView() {
                 >
                   <div className="flex flex-col items-center shrink-0">
                     <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                      <CheckCircle className="w-5 h-5 sm:w-5.5 sm:h-5.5" style={{ color: 'var(--color-gold)' }} />
+                      <CheckCircle className="w-5 h-5 sm:w-5.5 sm:h-5.5"  />
                     </div>
                     {step.step < returnSteps.length && (
                       <div className="w-px h-4 sm:h-6 mt-1" style={{ backgroundColor: 'var(--color-gold-soft)' }} />
@@ -205,7 +192,7 @@ export default function ReturnsView() {
                   </div>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}>
+                      <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" >
                         Step {step.step}
                       </span>
                       <h3 className="aura-text-primary text-base sm:text-lg font-semibold" >
@@ -247,7 +234,7 @@ export default function ReturnsView() {
                 >
                   <div className="flex flex-col items-center shrink-0">
                     <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                      <CheckCircle className="w-5 h-5 sm:w-5.5 sm:h-5.5" style={{ color: 'var(--color-gold)' }} />
+                      <CheckCircle className="w-5 h-5 sm:w-5.5 sm:h-5.5"  />
                     </div>
                     {step.step < exchangeSteps.length && (
                       <div className="w-px h-4 sm:h-6 mt-1" style={{ backgroundColor: 'var(--color-gold-soft)' }} />
@@ -255,7 +242,7 @@ export default function ReturnsView() {
                   </div>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}>
+                      <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" >
                         Step {step.step}
                       </span>
                       <h3 className="aura-text-primary text-base sm:text-lg font-semibold" >
@@ -293,7 +280,7 @@ export default function ReturnsView() {
                   
                 >
                   <div className="flex items-start gap-3">
-                    <XCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: 'var(--color-danger)' }} />
+                    <XCircle className="w-5 h-5 shrink-0 mt-0.5"  />
                     <div>
                       <h3 className="aura-text-primary text-base sm:text-lg font-semibold mb-1" >
                         {item.item}
@@ -328,7 +315,7 @@ export default function ReturnsView() {
                 
               >
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                  <CreditCard className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                  <CreditCard className="w-5 h-5"  />
                 </div>
                 <h3 className="aura-text-primary text-lg sm:text-xl font-semibold mb-2" >
                   Original Payment Method
@@ -343,13 +330,13 @@ export default function ReturnsView() {
                 
               >
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                  <CreditCard className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                  <CreditCard className="w-5 h-5"  />
                 </div>
                 <h3 className="aura-text-primary text-lg sm:text-xl font-semibold mb-2" >
                   Store Credit
                 </h3>
                 <p className="aura-text-secondary text-sm sm:text-base leading-relaxed" >
-                  Opt for store credit and receive a <strong style={{ color: 'var(--color-gold)' }}>10% bonus</strong> on your refund amount. Store credit never expires and can be used across our entire collection — a great way to discover something new.
+                  Opt for store credit and receive a <strong >10% bonus</strong> on your refund amount. Store credit never expires and can be used across our entire collection — a great way to discover something new.
                 </p>
               </div>
             </div>
@@ -364,7 +351,7 @@ export default function ReturnsView() {
             <div className="rounded-xl p-5 sm:p-6 lg:p-8" >
               <div className="flex items-start gap-4 mb-5">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(204, 68, 68, 0.1)' }}>
-                  <AlertTriangle className="w-5 h-5" style={{ color: 'var(--color-danger)' }} />
+                  <AlertTriangle className="w-5 h-5"  />
                 </div>
                 <div>
                   <h2 className="aura-text-primary aura-h2 mb-2" >
@@ -380,11 +367,11 @@ export default function ReturnsView() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <div className="flex items-center gap-2 px-4 py-2.5 rounded-sm" >
-                    <CheckCircle className="w-4 h-4 shrink-0" style={{ color: 'var(--color-gold)' }} />
+                    <CheckCircle className="w-4 h-4 shrink-0"  />
                     <span className="text-sm font-medium" >Free replacement shipped immediately</span>
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2.5 rounded-sm" >
-                    <CheckCircle className="w-4 h-4 shrink-0" style={{ color: 'var(--color-gold)' }} />
+                    <CheckCircle className="w-4 h-4 shrink-0"  />
                     <span className="text-sm font-medium" >Full refund available</span>
                   </div>
                 </div>
@@ -400,8 +387,8 @@ export default function ReturnsView() {
       {/* CTA */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-            <RotateCcw className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
+          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" >
+            <RotateCcw className="w-8 h-8"  />
           </div>
           <h2 className="aura-text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Need to Return Something?

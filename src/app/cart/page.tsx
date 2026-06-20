@@ -5,8 +5,7 @@ export const metadata: Metadata = {
   title: 'Your Cart | Aura Living',
   description: 'Review the items in your shopping cart before checking out.',
   alternates: { canonical: '/cart' },
-  robots: { index: false, follow: false },
-};
+  robots: { index: false, follow: false } };
 
 export default function CartPage() {
   return <CartView />;

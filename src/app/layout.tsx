@@ -11,23 +11,20 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600", "700"], // removed 800 — unused
   style: ["normal", "italic"],
   variable: "--font-playfair-display",
-  display: "swap",
-});
+  display: "swap" });
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"], // removed 300 — unused
   variable: "--font-poppins",
-  display: "swap",
-});
+  display: "swap" });
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
   themeColor: "#D4AF37",
-  viewportFit: "cover",
-};
+  viewportFit: "cover" };
 
 // Use the actual deployment URL for metadataBase so OG images resolve correctly.
 // When you move to a custom domain (auraliving.com), update this to "https://auraliving.com".
@@ -40,15 +37,13 @@ export const metadata: Metadata = {
   keywords: ["home decor Pakistan", "luxury home decoration", "lamps online Pakistan", "indoor plants Karachi", "ceramic vases", "candles", "wall art", "Aura Living", "home accessories PKR"],
   authors: [{ name: "Aura Living" }],
   alternates: {
-    canonical: "/",
-  },
+    canonical: "/" },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "32x32" },
       { url: "/logo/favicon.svg", type: "image/svg+xml" },
     ],
-    apple: "/apple-touch-icon.png",
-  },
+    apple: "/apple-touch-icon.png" },
   openGraph: {
     title: "Aura Living | Premium Home Decor Pakistan",
     description: "Where Comfort Meets Style — Handcrafted home decor, lamps, plants, vases & more. Shop online in Pakistan.",
@@ -61,26 +56,20 @@ export const metadata: Metadata = {
         url: "/og/default.png",
         width: 1344,
         height: 768,
-        alt: "Aura Living — Premium Home Decor Pakistan",
-      },
-    ],
-  },
+        alt: "Aura Living — Premium Home Decor Pakistan" },
+    ] },
   twitter: {
     card: "summary_large_image",
     title: "Aura Living | Premium Home Decor Pakistan",
     description: "Where Comfort Meets Style — Shop handcrafted home decor online in Pakistan",
-    images: ["/og/default.png"],
-  },
+    images: ["/og/default.png"] },
   robots: {
     index: true,
-    follow: true,
-  },
-  manifest: "/manifest.json",
-};
+    follow: true },
+  manifest: "/manifest.json" };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
+  children }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
@@ -100,9 +89,7 @@ export default function RootLayout({
               logo: `${siteUrl}/logo/default-monochrome-gold-black.svg`,
               description: 'Premium Home Decor Pakistan — Where Comfort Meets Style',
               address: { '@type': 'PostalAddress', addressCountry: 'PK' },
-              sameAs: ['https://instagram.com/auraliving', 'https://facebook.com/auraliving'],
-            }),
-          }}
+              sameAs: ['https://instagram.com/auraliving', 'https://facebook.com/auraliving'] }) }}
         />
         {/* WebSite schema with SearchAction */}
         <script
@@ -117,12 +104,8 @@ export default function RootLayout({
                 '@type': 'SearchAction',
                 target: {
                   '@type': 'EntryPoint',
-                  urlTemplate: `${siteUrl}/#shop?search={search_term_string}`,
-                },
-                'query-input': 'required name=search_term_string',
-              },
-            }),
-          }}
+                  urlTemplate: `${siteUrl}/#shop?search={search_term_string}` },
+                'query-input': 'required name=search_term_string' } }) }}
         />
         {/* Store schema with NAP + geo + hours */}
         <script
@@ -143,18 +126,14 @@ export default function RootLayout({
                 addressLocality: 'Lahore',
                 addressRegion: 'Punjab',
                 postalCode: '54660',
-                addressCountry: 'PK',
-              },
+                addressCountry: 'PK' },
               geo: { '@type': 'GeoCoordinates', latitude: 31.5204, longitude: 74.3587 },
               openingHoursSpecification: [{
                 '@type': 'OpeningHoursSpecification',
                 dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
                 opens: '10:00',
-                closes: '20:00',
-              }],
-              sameAs: ['https://instagram.com/auraliving', 'https://facebook.com/auraliving'],
-            }),
-          }}
+                closes: '20:00' }],
+              sameAs: ['https://instagram.com/auraliving', 'https://facebook.com/auraliving'] }) }}
         />
 
         <SiteShell>{children}</SiteShell>

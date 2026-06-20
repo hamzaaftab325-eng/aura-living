@@ -15,8 +15,7 @@ import {
   ShoppingCart,
   ChevronDown,
   Package,
-  PenLine,
-} from 'lucide-react';
+  PenLine } from 'lucide-react';
 import { useStore, badgeColors, type Product } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
 import { products, categories, formatPKR } from '@/data/products';
@@ -44,8 +43,7 @@ const accordionItems = [
       <p  className="text-sm leading-relaxed">
         {product.description}
       </p>
-    ),
-  },
+    ) },
   {
     id: 'materials',
     title: 'Materials & Care',
@@ -55,8 +53,7 @@ const accordionItems = [
         <p><strong>Material:</strong> {product.material}</p>
         <p><strong>Care:</strong> Wipe with a soft, dry cloth. Avoid direct sunlight and moisture.</p>
       </div>
-    ),
-  },
+    ) },
   {
     id: 'shipping',
     title: 'Shipping & Returns',
@@ -67,8 +64,7 @@ const accordionItems = [
         <p><strong>Delivery:</strong> 3-5 business days across Pakistan</p>
         <p><strong>Returns:</strong> 7-day hassle-free returns & exchanges</p>
       </div>
-    ),
-  },
+    ) },
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -76,8 +72,7 @@ const accordionItems = [
    ═══════════════════════════════════════════════════════════ */
 function AccordionItem({
   item,
-  product,
-}: {
+  product }: {
   item: (typeof accordionItems)[number];
   product: Product;
 }) {
@@ -110,7 +105,7 @@ function AccordionItem({
         </span>
         <ChevronDown
           className="w-4 h-4 transition-transform duration-300"
-          style={{ color: 'var(--color-gold)', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
         />
       </button>
       <div
@@ -154,8 +149,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
     y: 20,
     duration: 0.5,
     stagger: 0.1,
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
 
   const wishlisted = isInWishlist(product.id);
 
@@ -213,7 +207,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
           {/* Left: Image Gallery */}
           <div className="flex flex-col gap-4">
             {/* Main Image — CSS transition for switching */}
-            <div className="relative rounded-lg overflow-hidden" style={{ aspectRatio: '3/4', border: '1px solid rgba(232,213,163,0.3)' }}>
+            <div className="relative rounded-lg overflow-hidden" style={{ aspectRatio: '3/4' }}>
               <Image
                 key={selectedImage}
                 src={galleryImages[selectedImage]}
@@ -268,7 +262,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
           <div className="flex flex-col">
             {/* Category Tag */}
             {productCategory && (
-              <span className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--color-gold)' }}>
+              <span className="text-xs font-semibold uppercase tracking-widest mb-3" >
                 {productCategory.name}
               </span>
             )}
@@ -292,7 +286,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
 
             {/* Price */}
             <div className="flex items-center gap-3 mb-8">
-              <span className="text-2xl font-bold" style={{ color: 'var(--color-gold)' }}>
+              <span className="text-2xl font-bold" >
                 {formatPKR(product.price)}
               </span>
               {product.originalPrice && (
@@ -309,7 +303,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
             {/* Color Swatches — CSS transition for selection ring */}
             <div className="mb-8">
               <span className="text-sm font-medium mb-3 block" >
-                Color: <span style={{ color: 'var(--color-gold)' }}>{selectedColor}</span>
+                Color: <span >{selectedColor}</span>
               </span>
               <div className="flex items-center gap-3">
                 {colorSwatches.map((swatch) => (
@@ -375,8 +369,8 @@ export default function ProductDetailView({ product }: { product: Product }) {
                 { icon: <Shield className="w-4 h-4 sm:w-5 sm:h-5" />, label: 'Secure Payment' },
                 { icon: <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />, label: 'Easy Returns' },
               ].map((badge) => (
-                <div key={badge.label} className="flex flex-col items-center gap-1.5 sm:gap-2 text-center p-2 sm:p-3 rounded-sm" style={{ border: '1px solid rgba(232,213,163,0.3)' }}>
-                  <div style={{ color: 'var(--color-gold)' }}>{badge.icon}</div>
+                <div key={badge.label} className="flex flex-col items-center gap-1.5 sm:gap-2 text-center p-2 sm:p-3 rounded-sm" >
+                  <div >{badge.icon}</div>
                   <span className="text-[10px] sm:text-[11px] font-medium leading-tight" >{badge.label}</span>
                 </div>
               ))}
@@ -435,14 +429,14 @@ export default function ProductDetailView({ product }: { product: Product }) {
                   href={`/product/${rp.slug}`}
                   onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)]/40 block"
-                  style={{ border: '1px solid rgba(232,213,163,0.3)' }}
+                  
                 >
                   <div className="relative aspect-square overflow-hidden" >
                     <Image src={rp.image} alt={rp.name} fill className="w-full h-full object-cover" sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw" />
                   </div>
                   <div className="p-3 sm:p-4">
                     <h3 className="text-xs sm:text-sm font-medium line-clamp-1" >{rp.name}</h3>
-                    <p className="text-xs sm:text-sm font-bold mt-1" style={{ color: 'var(--color-gold-text)' }}>{formatPKR(rp.price)}</p>
+                    <p className="text-xs sm:text-sm font-bold mt-1" >{formatPKR(rp.price)}</p>
                   </div>
                 </Link>
               ))}
@@ -464,15 +458,13 @@ export default function ProductDetailView({ product }: { product: Product }) {
             sku: product.id,
             brand: {
               '@type': 'Brand',
-              name: 'Aura Living',
-            },
+              name: 'Aura Living' },
             material: product.material,
             category: productCategory?.name || product.category,
             aggregateRating: {
               '@type': 'AggregateRating',
               ratingValue: product.rating,
-              reviewCount: product.reviews,
-            },
+              reviewCount: product.reviews },
             // Individual review records (capped at 10 most helpful for SEO).
             // Only included when the product has written reviews.
             ...(productReviews.length > 0
@@ -488,13 +480,10 @@ export default function ProductDetailView({ product }: { product: Product }) {
                         '@type': 'Rating',
                         ratingValue: r.rating,
                         bestRating: 5,
-                        worstRating: 1,
-                      },
+                        worstRating: 1 },
                       name: r.title,
                       reviewBody: r.body,
-                      ...(r.verified ? { reviewAspect: 'Verified Purchase' } : {}),
-                    })),
-                }
+                      ...(r.verified ? { reviewAspect: 'Verified Purchase' } : {}) })) }
               : {}),
             offers: {
               '@type': 'Offer',
@@ -507,10 +496,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
               itemCondition: 'https://schema.org/NewCondition',
               seller: {
                 '@type': 'Organization',
-                name: 'Aura Living',
-              },
-            },
-          }) }}
+                name: 'Aura Living' } } }) }}
       />
     </div>
   );

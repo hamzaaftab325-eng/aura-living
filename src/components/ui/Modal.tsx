@@ -32,8 +32,7 @@ export default function Modal({
   className = '',
   variant = 'center',
   size = 'md',
-  labelledById,
-}: ModalProps) {
+  labelledById }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
 
@@ -99,8 +98,7 @@ export default function Modal({
   const sizeClass = {
     sm: 'max-w-md',
     md: 'max-w-lg',
-    lg: 'max-w-2xl',
-  }[size];
+    lg: 'max-w-2xl' }[size];
 
   return (
     <div
@@ -113,7 +111,7 @@ export default function Modal({
       {/* Overlay */}
       <div
         className="absolute inset-0"
-        style={{ backgroundColor: 'rgba(44, 44, 44, 0.5)', backdropFilter: 'blur(2px)' }}
+        
         aria-hidden="true"
       />
 

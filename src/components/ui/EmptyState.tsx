@@ -39,8 +39,7 @@ export default function EmptyState({
   actionHref,
   actionOnClick,
   secondaryActionLabel,
-  secondaryActionHref,
-}: EmptyStateProps) {
+  secondaryActionHref }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center px-6 py-16 text-center">
       {/* Icon circle */}

@@ -5,8 +5,7 @@ export const metadata: Metadata = {
   title: 'Track Your Orders | Aura Living',
   description: 'View and track your Aura Living orders.',
   alternates: { canonical: '/account/orders' },
-  robots: { index: false, follow: false },
-};
+  robots: { index: false, follow: false } };
 
 export default function OrdersPage() {
   return <TrackOrdersView />;

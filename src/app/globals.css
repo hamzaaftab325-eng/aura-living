@@ -463,6 +463,109 @@
 .aura-shadow-lg { box-shadow: var(--shadow-lg); }
 .aura-shadow-gold { box-shadow: var(--shadow-gold); }
 
+/* ═══════════════════════════════════════════════════════════
+   BACKGROUND TINT UTILITY CLASSES — replace inline rgba()
+   ═══════════════════════════════════════════════════════════ */
+.aura-bg-gold-tint          { background-color: rgba(212,175,55,0.1); }
+.aura-bg-gold-tint-strong   { background-color: rgba(212,175,55,0.15); }
+.aura-bg-gold-tint-light    { background-color: rgba(212,175,55,0.06); }
+.aura-bg-gold-tint-lighter  { background-color: rgba(212,175,55,0.04); }
+.aura-bg-gold-tint-22       { background-color: rgba(212,175,55,0.22); }
+.aura-bg-accent-tint        { background-color: rgba(245,237,218,0.3); }
+.aura-bg-accent-tint-light  { background-color: rgba(245,237,218,0.15); }
+.aura-bg-success-tint       { background-color: rgba(34,197,94,0.08); }
+.aura-bg-success-tint-light { background-color: rgba(34,197,94,0.04); }
+.aura-bg-danger-tint        { background-color: rgba(220,38,38,0.08); }
+.aura-bg-dark-tint          { background-color: rgba(20,20,20,0.85); }
+.aura-bg-dark-tint-light    { background-color: rgba(44,44,44,0.6); }
+.aura-bg-dark-tint-50       { background-color: rgba(44,44,44,0.5); }
+.aura-bg-cream-tint         { background-color: rgba(250,248,245,0.08); }
+.aura-bg-cream-tint-15      { background-color: rgba(250,248,245,0.15); }
+.aura-bg-cream-tint-30      { background-color: rgba(250,248,245,0.3); }
+.aura-bg-cream-tint-50      { background-color: rgba(250,248,245,0.5); }
+.aura-bg-white-tint-08      { background-color: rgba(255,255,255,0.08); }
+.aura-bg-white-tint-40      { background-color: rgba(255,255,255,0.4); }
+.aura-bg-white-tint-70      { background-color: rgba(255,255,255,0.7); }
+.aura-bg-white-tint-90      { background-color: rgba(255,255,255,0.9); }
+.aura-bg-white-tint-full    { background-color: rgba(255,255,255,1); }
+.aura-bg-transparent        { background-color: transparent; }
+
+/* ═══════════════════════════════════════════════════════════
+   GRADIENT UTILITY CLASSES — replace inline linear-gradient()
+   ═══════════════════════════════════════════════════════════ */
+.aura-gradient-gold           { background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hover) 50%, var(--color-gold-text) 100%); }
+.aura-gradient-gold-hover     { background: linear-gradient(135deg, #E0BD4A 0%, var(--color-gold) 50%, var(--color-gold-hover) 100%); }
+.aura-gradient-gold-horizontal { background: linear-gradient(90deg, transparent, var(--color-gold) 50%, transparent); }
+.aura-gradient-gold-soft-h    { background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-gold-soft) 100%); }
+.aura-gradient-dark           { background: linear-gradient(180deg, var(--surface-dark) 0%, #1A1A1A 100%); }
+.aura-gradient-dark-diagonal  { background: linear-gradient(135deg, var(--surface-dark) 0%, #1A1A1A 100%); }
+.aura-gradient-card           { background: linear-gradient(135deg, var(--surface-card) 0%, var(--surface-page) 100%); }
+.aura-gradient-card-vertical  { background: linear-gradient(180deg, var(--surface-card) 0%, var(--surface-page) 100%); }
+.aura-gradient-success        { background: linear-gradient(90deg, var(--color-success), #16A34A); }
+.aura-gradient-overlay-dark   { background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%); }
+.aura-gradient-overlay-cream  { background: linear-gradient(to bottom, rgba(250,248,245,0.15) 0%, rgba(44,44,44,0) 100%); }
+.aura-gradient-radial-gold    { background: radial-gradient(ellipse at center, rgba(212,175,55,0.04) 0%, transparent 70%); }
+.aura-gradient-footer-dark    { background: linear-gradient(135deg, var(--surface-dark) 0%, #1A1A1A 100%); }
+
+/* ═══════════════════════════════════════════════════════════
+   BORDER UTILITY CLASSES — replace inline border with rgba
+   ═══════════════════════════════════════════════════════════ */
+.aura-border-subtle           { border: 1px solid rgba(232,213,163,0.4); }
+.aura-border-subtle-strong    { border: 1px solid rgba(232,213,163,0.5); }
+.aura-border-subtle-light     { border: 1px solid rgba(232,213,163,0.3); }
+.aura-border-gold-tint        { border: 1px solid rgba(212,175,55,0.3); }
+.aura-border-gold-tint-strong { border: 1px solid rgba(212,175,55,0.4); }
+.aura-border-gold-tint-light  { border: 1px solid rgba(212,175,55,0.2); }
+.aura-border-gold-tint-25     { border: 1px solid rgba(212,175,55,0.25); }
+.aura-border-success          { border: 1px solid rgba(34,197,94,0.25); }
+.aura-border-danger           { border: 1px solid rgba(220,38,38,0.2); }
+.aura-border-2-gold           { border: 2px solid var(--color-gold); }
+.aura-border-2-gold-soft      { border: 2px solid var(--color-gold-soft); }
+.aura-border-bottom-subtle    { border-bottom: 1px solid rgba(232,213,163,0.4); }
+.aura-border-bottom-subtle-light { border-bottom: 1px solid rgba(232,213,163,0.3); }
+.aura-border-bottom-gold-soft { border-bottom: 1px solid var(--color-gold-soft); }
+.aura-border-top-gold         { border-top: 2px solid var(--color-gold); }
+.aura-border-top-gold-soft    { border-top: 1px solid var(--color-gold-soft); }
+
+/* ═══════════════════════════════════════════════════════════
+   LAYOUT UTILITY CLASSES — replace inline flex/align
+   ═══════════════════════════════════════════════════════════ */
+.aura-flex-center          { display: flex; align-items: center; justify-content: center; }
+.aura-flex-col-center      { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.aura-flex-between         { display: flex; align-items: center; justify-content: space-between; }
+.aura-flex-col             { display: flex; flex-direction: column; }
+.aura-flex-row             { display: flex; flex-direction: row; }
+
+/* ═══════════════════════════════════════════════════════════
+   BACKDROP FILTER UTILITY CLASSES — replace inline backdropFilter
+   ═══════════════════════════════════════════════════════════ */
+.aura-blur-sm              { backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.aura-blur-md              { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.aura-blur-lg              { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+.aura-blur-xl              { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.aura-blur-2px             { backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
+
+/* ═══════════════════════════════════════════════════════════
+   OPACITY UTILITY CLASSES — replace inline opacity
+   ═══════════════════════════════════════════════════════════ */
+.aura-opacity-3            { opacity: 0.03; }
+.aura-opacity-4            { opacity: 0.04; }
+.aura-opacity-5            { opacity: 0.05; }
+.aura-opacity-8            { opacity: 0.08; }
+.aura-opacity-10           { opacity: 0.10; }
+.aura-opacity-12           { opacity: 0.12; }
+.aura-opacity-15           { opacity: 0.15; }
+.aura-opacity-20           { opacity: 0.20; }
+.aura-opacity-25           { opacity: 0.25; }
+.aura-opacity-30           { opacity: 0.30; }
+.aura-opacity-40           { opacity: 0.40; }
+.aura-opacity-50           { opacity: 0.50; }
+.aura-opacity-60           { opacity: 0.60; }
+.aura-opacity-70           { opacity: 0.70; }
+.aura-opacity-80           { opacity: 0.80; }
+.aura-opacity-85           { opacity: 0.85; }
+.aura-opacity-90           { opacity: 0.90; }
+
 /* Breadcrumb strip — below hero, gold-pale bg */
 .aura-breadcrumb {
   padding: 1rem 1rem;

@@ -42,8 +42,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       onUpdate: (self) => {
         const progress = self.progress;
         gsap.set(img, { y: (progress - 0.5) * -30 });
-      },
-    });
+      } });
 
     return () => {
       trigger.kill();
@@ -214,7 +213,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         <div className="flex items-center gap-2.5">
           <span
             className="text-base font-bold"
-            style={{ color: 'var(--color-gold)' }}
+            
           >
             {formatPKR(product.price)}
           </span>
@@ -248,8 +247,7 @@ export default function FeaturedProducts() {
     y: 50,
     duration: 0.7,
     stagger: 0.1,
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   // Scale on scroll effect for the whole section content
   const sectionContentRef = useRef<HTMLDivElement>(null);
@@ -263,8 +261,7 @@ export default function FeaturedProducts() {
       start: 'top 90%',
       onEnter: () => {
         gsap.to(el, { scale: 1, duration: 1, ease: 'power3.out' });
-      },
-    });
+      } });
 
     return () => {
       trigger.kill();

@@ -17,8 +17,7 @@ import {
   Banknote,
   ShoppingBag as BagIcon,
   ArrowLeft,
-  Tag,
-} from 'lucide-react';
+  Tag } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -65,8 +64,7 @@ export default function CartView() {
     duration: 0.4,
     stagger: 0.08,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
   const summaryRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.5, delay: 0.2 });
 
   const handleApplyCoupon = () => {
@@ -153,7 +151,7 @@ export default function CartView() {
                 <span className="font-semibold text-gold-text">FREE shipping</span>
               </p>
             ) : (
-              <p className="text-sm mb-2 text-center flex items-center justify-center gap-1.5" style={{ color: 'var(--color-success)' }}>
+              <p className="text-sm mb-2 text-center flex items-center justify-center gap-1.5" >
                 <Truck className="w-4 h-4" />
                 <span className="font-semibold">You&apos;ve unlocked FREE shipping!</span>
               </p>
@@ -318,8 +316,7 @@ export default function CartView() {
                     onChange={(e) => setCouponCode(e.target.value)}
                     placeholder="Enter code"
                     className="flex-1 px-3 py-2.5 rounded-md text-sm outline-none"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.7)',
-                      border: '1.5px solid var(--color-gold-soft)' }}
+                    style={{ border: '1.5px solid var(--color-gold-soft)' }}
                   />
                   <button
                     onClick={handleApplyCoupon}
@@ -350,7 +347,7 @@ export default function CartView() {
                     Shipping
                   </span>
                   {shipping === 0 ? (
-                    <span className="text-sm font-bold" style={{ color: 'var(--color-success)' }}>FREE</span>
+                    <span className="text-sm font-bold" >FREE</span>
                   ) : (
                     <span className="text-sm font-semibold" >
                       {formatPKR(shipping)}
@@ -359,11 +356,11 @@ export default function CartView() {
                 </div>
                 {discount > 0 && (
                   <div className="flex items-center justify-between">
-                    <span className="text-sm flex items-center gap-1.5" style={{ color: 'var(--color-success)' }}>
+                    <span className="text-sm flex items-center gap-1.5" >
                       <Tag className="w-3.5 h-3.5" />
                       Discount
                     </span>
-                    <span className="text-sm font-bold" style={{ color: 'var(--color-success)' }}>
+                    <span className="text-sm font-bold" >
                       -{formatPKR(discount)}
                     </span>
                   </div>
@@ -395,7 +392,7 @@ export default function CartView() {
               </PremiumButton>
 
               {/* Payment methods */}
-              <div className="mt-5 pt-5" style={{ borderTop: '1px solid var(--color-gold-soft)' }}>
+              <div className="mt-5 pt-5" >
                 <p className="text-[10px] uppercase tracking-widest font-semibold mb-3" >
                   We Accept
                 </p>
@@ -412,7 +409,7 @@ export default function CartView() {
               </div>
 
               {/* Trust badges */}
-              <div className="mt-4 pt-4 flex items-center justify-center gap-4" style={{ borderTop: '1px solid var(--color-gold-soft)' }}>
+              <div className="mt-4 pt-4 flex items-center justify-center gap-4" >
                 <span className="inline-flex items-center gap-1 text-[11px]" >
                   <ShieldCheck className="w-3.5 h-3.5 text-gold-text" />
                   Secure Checkout

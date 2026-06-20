@@ -14,8 +14,7 @@ export function generateStaticParams() {
 
 // Per-product metadata for SEO
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
@@ -24,8 +23,7 @@ export async function generateMetadata({
   if (!product) {
     return {
       title: 'Product Not Found | Aura Living',
-      robots: { index: false, follow: true },
-    };
+      robots: { index: false, follow: true } };
   }
 
   const title = `${product.name} | Aura Living`;
@@ -46,22 +44,17 @@ export async function generateMetadata({
           url: product.image,
           width: 1200,
           height: 1200,
-          alt: product.name,
-        },
-      ],
-    },
+          alt: product.name },
+      ] },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [product.image],
-    },
-  };
+      images: [product.image] } };
 }
 
 export default async function ProductPage({
-  params,
-}: {
+  params }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;

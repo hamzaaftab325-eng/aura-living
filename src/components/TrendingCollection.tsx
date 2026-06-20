@@ -31,8 +31,7 @@ export default function TrendingCollection() {
       start: 'top 90%',
       onEnter: () => {
         gsap.to(contentRef.current, { scale: 1, duration: 0.8, ease: 'power3.out' });
-      },
-    });
+      } });
 
     return () => trigger.kill();
   }, []);

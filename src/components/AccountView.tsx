@@ -7,9 +7,7 @@ import {
   useGsapBlurText,
   useGsapScaleIn,
   useGsapCountUp,
-  gsap,
-  
-} from '@/hooks/useGsap';
+  gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Package,
@@ -23,8 +21,7 @@ import {
   Award,
   Truck,
   Clock,
-  CheckCircle,
-} from 'lucide-react';
+  CheckCircle } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
@@ -42,8 +39,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
 
   return <div ref={ref} className={className}>{children}</div>;
 }
@@ -59,8 +55,7 @@ const mockOrders = [
     total: 'PKR 12,498',
     statusColor: 'var(--color-success)',
     statusBg: 'rgba(34, 197, 94, 0.1)',
-    statusIcon: CheckCircle,
-  },
+    statusIcon: CheckCircle },
   {
     id: 'AL-2026-002',
     date: 'Feb 28, 2026',
@@ -68,8 +63,7 @@ const mockOrders = [
     total: 'PKR 8,999',
     statusColor: 'var(--color-info)',
     statusBg: 'rgba(59, 130, 246, 0.1)',
-    statusIcon: Truck,
-  },
+    statusIcon: Truck },
   {
     id: 'AL-2026-003',
     date: 'Mar 10, 2026',
@@ -77,8 +71,7 @@ const mockOrders = [
     total: 'PKR 5,499',
     statusColor: 'var(--color-gold)',
     statusBg: 'rgba(212, 175, 55, 0.1)',
-    statusIcon: Clock,
-  },
+    statusIcon: Clock },
 ];
 
 export default function AccountView() {
@@ -118,8 +111,7 @@ export default function AccountView() {
     duration: 0.6,
     stagger: 0.1,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   // Count-up refs for each stat
   const orderCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: 3, duration: 0.8, start: 'top 85%' });
@@ -134,8 +126,7 @@ export default function AccountView() {
     duration: 0.5,
     stagger: 0.1,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   // Menu grid stagger
   const menuRef = useGsapStagger<HTMLDivElement>({
@@ -144,8 +135,7 @@ export default function AccountView() {
     duration: 0.6,
     stagger: 0.08,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   // Enhanced parallax for hero section — 0.5x speed + zoom 1→1.1
   useEffect(() => {
@@ -158,9 +148,7 @@ export default function AccountView() {
           trigger: headerSectionRef.current,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.5,
-        },
-      });
+          scrub: 0.5 } });
       gsap.fromTo(heroBgRef.current,
         { scale: 1 },
         {
@@ -170,9 +158,7 @@ export default function AccountView() {
             trigger: headerSectionRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: true,
-          },
-        }
+            scrub: true } }
       );
     }, headerSectionRef);
     return () => ctx.revert();
@@ -183,32 +169,27 @@ export default function AccountView() {
       icon: Package,
       label: 'Track My Orders',
       description: 'Live status, ETAs & timeline',
-      onClick: () => { router.push('/account/orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
-    },
+      onClick: () => { router.push('/account/orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
     {
       icon: Heart,
       label: 'My Wishlist',
       description: `${safeWishlist.length} saved item${safeWishlist.length !== 1 ? 's' : ''}`,
-      onClick: () => { router.push('/wishlist'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
-    },
+      onClick: () => { router.push('/wishlist'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
     {
       icon: MapPin,
       label: 'Saved Addresses',
       description: 'Manage delivery addresses',
-      onClick: () => { router.push('/account/addresses'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
-    },
+      onClick: () => { router.push('/account/addresses'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
     {
       icon: Settings,
       label: 'Account Settings',
       description: 'Notifications, privacy & more',
-      onClick: () => { router.push('/account/settings'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
-    },
+      onClick: () => { router.push('/account/settings'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
     {
       icon: HelpCircle,
       label: 'Help & Support',
       description: 'Get assistance',
-      onClick: () => { router.push('/contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); },
-    },
+      onClick: () => { router.push('/contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
     {
       icon: LogOut,
       label: 'Sign Out',
@@ -217,12 +198,10 @@ export default function AccountView() {
         logout();
         toast({
           title: 'Signed out',
-          description: 'You have been successfully signed out.',
-        });
+          description: 'You have been successfully signed out.' });
         router.push('/');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      },
-    },
+      } },
   ];
 
   const quickStats = [
@@ -231,28 +210,25 @@ export default function AccountView() {
       value: '3',
       label: 'Orders',
       color: 'var(--color-gold)',
-      bg: 'rgba(212, 175, 55, 0.1)',
-    },
+      bg: 'rgba(212, 175, 55, 0.1)' },
     {
       icon: Heart,
       value: String(safeWishlist.length),
       label: 'Wishlist',
       color: 'var(--color-danger)',
-      bg: 'rgba(220, 38, 38, 0.08)',
-    },
+      bg: 'rgba(220, 38, 38, 0.08)' },
     {
       icon: ShoppingBag,
       value: String(cartCount),
       label: 'Cart Items',
-      bg: 'rgba(44, 44, 44, 0.08)',
-    },
+      color: 'var(--color-gold)',
+      bg: 'rgba(44, 44, 44, 0.08)' },
     {
       icon: Award,
       value: String(user?.rewardsPoints ?? 0),
       label: 'Rewards Points',
       color: 'var(--color-gold)',
-      bg: 'rgba(212, 175, 55, 0.1)',
-    },
+      bg: 'rgba(212, 175, 55, 0.1)' },
   ];
 
   return (
@@ -389,7 +365,7 @@ export default function AccountView() {
                     className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center shrink-0"
                     
                   >
-                    <LogOut className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
+                    <LogOut className="w-8 h-8"  />
                   </div>
                   <div className="flex-1">
                     <h2
@@ -466,7 +442,7 @@ export default function AccountView() {
                 <button
                   onClick={() => { router.push('/account/orders'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:aura-text-gold cursor-pointer"
-                  style={{ color: 'var(--color-gold)' }}
+                  
                 >
                   View All
                 </button>
@@ -651,8 +627,7 @@ export default function AccountView() {
           <AnimatedSection>
             <div
               className="mt-10 sm:mt-14 rounded-sm p-6 sm:p-8 text-center relative overflow-hidden"
-              style={{ background: 'linear-gradient(135deg, var(--surface-dark) 0%, #3A3A3A 50%, var(--surface-dark) 100%)',
-                border: '1px solid rgba(212, 175, 55, 0.3)' }}
+              style={{ background: 'linear-gradient(135deg, var(--surface-dark) 0%, #3A3A3A 50%, var(--surface-dark) 100%)' }}
             >
               {/* Decorative corner accents */}
               <div
@@ -664,7 +639,7 @@ export default function AccountView() {
                 style={{ borderBottom: '2px solid rgba(212,175,55,0.4)', borderRight: '2px solid rgba(212,175,55,0.4)' }}
               />
 
-              <Award className="w-10 h-10 mx-auto mb-4" style={{ color: 'var(--color-gold)' }} />
+              <Award className="w-10 h-10 mx-auto mb-4"  />
               <h3
                 className="text-white aura-h2 mb-3"
                 
@@ -675,7 +650,7 @@ export default function AccountView() {
                 className="text-white/60 text-sm sm:text-base mb-5 max-w-md mx-auto leading-relaxed"
                 
               >
-                You have <span style={{ color: 'var(--color-gold-text)', fontWeight: 600 }}>{user?.rewardsPoints ?? 0} points</span> — that is PKR {user?.rewardsPoints ?? 0} off your next order!
+                You have <span style={{ fontWeight: 600 }}>{user?.rewardsPoints ?? 0} points</span> — that is PKR {user?.rewardsPoints ?? 0} off your next order!
               </p>
               <PremiumButton
                 variant="primary"

@@ -31,8 +31,7 @@ export default function SectionHeader({
   subtitle,
   align = 'center',
   showDivider = true,
-  className = '',
-}: SectionHeaderProps) {
+  className = '' }: SectionHeaderProps) {
   return (
     <div
       className={`flex flex-col ${align === 'center' ? 'items-center text-center' : 'items-start text-left'} mb-12 ${className}`}

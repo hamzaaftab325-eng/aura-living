@@ -4,7 +4,7 @@ export default function BlogLoading() {
   return (
     <div
       className="w-full min-h-[60vh] flex items-center justify-center"
-      style={{ backgroundColor: 'var(--surface-page)' }}
+      
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div

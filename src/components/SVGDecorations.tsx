@@ -30,19 +30,16 @@ export function GoldDivider() {
           scaleX: 1,
           duration: 0.8,
           ease: 'power3.out',
-          stagger: 0.1,
-        });
+          stagger: 0.1 });
         if (diamond) {
           gsap.to(diamond, {
             scale: 1,
             opacity: 1,
             duration: 0.5,
             delay: 0.4,
-            ease: 'back.out(2)',
-          });
+            ease: 'back.out(2)' });
         }
-      },
-    });
+      } });
 
     return () => {
       trigger.kill();
@@ -104,10 +101,8 @@ export function FloatingGoldDots() {
           y: 0,
           duration: 0.6,
           stagger: 0.08,
-          ease: 'power3.out',
-        });
-      },
-    });
+          ease: 'power3.out' });
+      } });
 
     return () => {
       trigger.kill();

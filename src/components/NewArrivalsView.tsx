@@ -7,17 +7,14 @@ import {
   useGsapStagger,
   useGsapBlurText,
   useGsapScaleIn,
-  gsap,
-  
-} from '@/hooks/useGsap';
+  gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Sparkles,
   Star,
   Heart,
   ShoppingCart,
-  ShoppingBag,
-} from 'lucide-react';
+  ShoppingBag } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
 import { products, formatPKR } from '@/data/products';
@@ -36,8 +33,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
 
   return <div ref={ref} className={className}>{children}</div>;
 }
@@ -84,8 +80,7 @@ export default function NewArrivalsView() {
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
   // Hero heading blur text
   const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.8, stagger: 0.05, start: 'top 90%' });
   // GoldDivider scale-in
@@ -98,8 +93,7 @@ export default function NewArrivalsView() {
     duration: 0.7,
     stagger: 0.08,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   // CTA section fade-in
   const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
@@ -115,9 +109,7 @@ export default function NewArrivalsView() {
           trigger: heroBgRef.current,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.5,
-        },
-      });
+          scrub: 0.5 } });
       gsap.fromTo(heroBgDivRef.current,
         { scale: 1 },
         {
@@ -127,9 +119,7 @@ export default function NewArrivalsView() {
             trigger: heroBgRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: true,
-          },
-        }
+            scrub: true } }
       );
     }, heroBgRef);
     return () => ctx.revert();
@@ -177,7 +167,7 @@ export default function NewArrivalsView() {
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
 
           <div className="flex items-center gap-3 mb-4">
-            <Sparkles className="w-7 h-7 sm:w-8 sm:h-8" style={{ color: 'var(--color-gold)' }} />
+            <Sparkles className="w-7 h-7 sm:w-8 sm:h-8"  />
           </div>
           <h1
             ref={heroTitleRef}
@@ -220,7 +210,7 @@ export default function NewArrivalsView() {
                   className="w-24 h-24 rounded-full flex items-center justify-center mb-6"
                   
                 >
-                  <Sparkles className="w-10 h-10" style={{ color: 'var(--color-gold)' }} />
+                  <Sparkles className="w-10 h-10"  />
                 </div>
                 <h2
                   className="aura-text-primary aura-h2 mb-3"
@@ -309,7 +299,7 @@ export default function NewArrivalsView() {
                             toggleWishlist(product.id, product.name);
                           }}
                           className="absolute top-3 right-3 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
-                          style={{ backgroundColor: 'rgba(255,255,255,0.9)', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+                          style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
                           aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
                         >
                           <Heart

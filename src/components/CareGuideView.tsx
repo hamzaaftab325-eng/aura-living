@@ -6,9 +6,7 @@ import {
   useGsapStagger,
   useGsapBlurText,
   useGsapScaleIn,
-  gsap,
-  
-} from '@/hooks/useGsap';
+  gsap } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Sparkles,
@@ -18,8 +16,7 @@ import {
   Flame,
   Frame,
   UtensilsCrossed,
-  ArrowRight,
-} from 'lucide-react';
+  ArrowRight } from 'lucide-react';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
@@ -44,8 +41,7 @@ const careCategories: CareCategory[] = [
       'Avoid water on brass fixtures',
       'Use a dry microfiber cloth for lamp shades',
       'Always unplug before cleaning',
-    ],
-  },
+    ] },
   {
     icon: Flower2,
     title: 'Plant Care',
@@ -55,8 +51,7 @@ const careCategories: CareCategory[] = [
       'Keep in indirect sunlight',
       'Wipe leaves with damp cloth',
       'Ensure proper drainage',
-    ],
-  },
+    ] },
   {
     icon: CupSoda,
     title: 'Vase & Decor Care',
@@ -65,8 +60,7 @@ const careCategories: CareCategory[] = [
       'Hand wash ceramics with mild soap',
       'Avoid abrasive cleaners',
       'Display away from direct sunlight to prevent fading',
-    ],
-  },
+    ] },
   {
     icon: Flame,
     title: 'Candle Care',
@@ -76,8 +70,7 @@ const careCategories: CareCategory[] = [
       'First burn for 2+ hours',
       'Keep away from drafts',
       'Never leave unattended',
-    ],
-  },
+    ] },
   {
     icon: Frame,
     title: 'Wall Art & Mirror Care',
@@ -87,8 +80,7 @@ const careCategories: CareCategory[] = [
       'Clean mirrors with glass cleaner',
       'Avoid hanging in humid areas',
       'Use proper wall anchors',
-    ],
-  },
+    ] },
   {
     icon: UtensilsCrossed,
     title: 'Kitchen & Dining Care',
@@ -97,8 +89,7 @@ const careCategories: CareCategory[] = [
       'Hand wash recommended',
       'Not microwave safe for gold-rimmed items',
       'Dry immediately after washing',
-    ],
-  },
+    ] },
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -111,8 +102,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
 
   return <div ref={ref} className={className}>{children}</div>;
 }
@@ -127,8 +117,7 @@ export default function CareGuideView() {
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
   // Hero heading blur text
   const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
   // GoldDivider scale-in
@@ -141,8 +130,7 @@ export default function CareGuideView() {
     duration: 0.7,
     stagger: 0.08,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   // CTA section fade-in
   const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
@@ -160,9 +148,7 @@ export default function CareGuideView() {
           trigger: heroBgRef.current,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.5,
-        },
-      });
+          scrub: 0.5 } });
       gsap.fromTo(heroBgDivRef.current,
         { scale: 1 },
         {
@@ -172,9 +158,7 @@ export default function CareGuideView() {
             trigger: heroBgRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: true,
-          },
-        }
+            scrub: true } }
       );
     }, heroBgRef);
     return () => ctx.revert();
@@ -218,7 +202,7 @@ export default function CareGuideView() {
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
 
           <div className="flex items-center gap-3 mb-4">
-            <Sparkles className="w-7 h-7 sm:w-8 sm:h-8" style={{ color: 'var(--color-gold)' }} />
+            <Sparkles className="w-7 h-7 sm:w-8 sm:h-8"  />
           </div>
           <h1
             ref={heroTitleRef}
@@ -286,7 +270,7 @@ export default function CareGuideView() {
                       className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                       style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
                     >
-                      <category.icon className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                      <category.icon className="w-5 h-5"  />
                     </div>
                     <div>
                       <h3

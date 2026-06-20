@@ -14,15 +14,12 @@ export const metadata: Metadata = {
     title: 'Shipping Information | Aura Living',
     description: 'Standard, Express, and Same-Day delivery across Pakistan. Free shipping over PKR 2,999.',
     type: 'website',
-    images: [{ url: '/og/shipping.png', width: 1344, height: 768, alt: 'Shipping Information | Aura Living' }],
-  },
+    images: [{ url: '/og/shipping.png', width: 1344, height: 768, alt: 'Shipping Information | Aura Living' }] },
   twitter: {
     card: 'summary_large_image',
     title: 'Shipping Information | Aura Living',
     description: 'Standard, Express, and Same-Day delivery across Pakistan. Free shipping over PKR 2,999.',
-    images: ['/og/shipping.png'],
-  },
-};
+    images: ['/og/shipping.png'] } };
 
 export default function ShippingPage() {
   return <ShippingView />;

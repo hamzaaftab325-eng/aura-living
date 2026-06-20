@@ -55,7 +55,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         >
           {label}
           {required && (
-            <span style={{ color: 'var(--color-danger)' }} aria-hidden="true">
+            <span  aria-hidden="true">
               {' '}
               *
             </span>
@@ -102,7 +102,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             id={errorId}
             role="alert"
             className="text-xs font-medium"
-            style={{ color: 'var(--color-danger)' }}
+            
           >
             {error}
           </p>

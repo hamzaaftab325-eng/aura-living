@@ -51,7 +51,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         >
           {label}
           {required && (
-            <span style={{ color: 'var(--color-danger)' }} aria-hidden="true">
+            <span  aria-hidden="true">
               {' '}
               *
             </span>
@@ -94,7 +94,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             id={errorId}
             role="alert"
             className="text-xs font-medium"
-            style={{ color: 'var(--color-danger)' }}
+            
           >
             {error}
           </p>

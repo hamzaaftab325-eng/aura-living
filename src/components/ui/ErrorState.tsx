@@ -29,8 +29,7 @@ export default function ErrorState({
   code,
   title,
   description,
-  showSearch = false,
-}: ErrorStateProps) {
+  showSearch = false }: ErrorStateProps) {
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-6 py-20">
       <div className="text-center max-w-lg">

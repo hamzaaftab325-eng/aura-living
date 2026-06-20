@@ -13,8 +13,7 @@ import {
   
   CheckCircle2,
   ArrowRight,
-  Truck,
-} from 'lucide-react';
+  Truck } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -60,8 +59,7 @@ const initialForm: CheckoutForm = {
   province: '',
   postalCode: '',
   paymentMethod: 'cod',
-  orderNotes: '',
-};
+  orderNotes: '' };
 
 /* ─── Input Field Component ─── */
 function FormInput({
@@ -72,8 +70,7 @@ function FormInput({
   value,
   onChange,
   required = false,
-  error = false,
-}: {
+  error = false }: {
   id: string;
   label: string;
   type?: string;
@@ -92,7 +89,7 @@ function FormInput({
         
       >
         {label}
-        {required && <span style={{ color: 'var(--color-gold)' }}> *</span>}
+        {required && <span > *</span>}
       </label>
       <input
         id={id}
@@ -120,7 +117,7 @@ function FormInput({
           id={errorId}
           role="alert"
           className="text-xs"
-          style={{ color: 'var(--color-danger)' }}
+          
         >
           {label} is required
         </span>
@@ -156,8 +153,7 @@ export default function CheckoutView() {
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
 
   const contentRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
@@ -173,9 +169,7 @@ export default function CheckoutView() {
           trigger: heroSectionRef.current,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.5,
-        },
-      });
+          scrub: 0.5 } });
       gsap.fromTo(heroBgRef.current,
         { scale: 1 },
         {
@@ -185,9 +179,7 @@ export default function CheckoutView() {
             trigger: heroSectionRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: true,
-          },
-        }
+            scrub: true } }
       );
     }, heroSectionRef);
     return () => ctx.revert();
@@ -240,8 +232,7 @@ export default function CheckoutView() {
       toast({
         title: 'Order Placed Successfully!',
         description: 'Thank you for your order. You will receive a confirmation email shortly.',
-        duration: 5000,
-      });
+        duration: 5000 });
       router.push('/account/orders');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 2000);
@@ -273,7 +264,7 @@ export default function CheckoutView() {
           <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
             <span
               className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-6 mt-2"
-              style={{ color: 'var(--color-gold)' }}
+              
             >
               AURA LIVING
             </span>
@@ -298,7 +289,7 @@ export default function CheckoutView() {
               className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6"
               
             >
-              <CheckCircle2 className="h-9 w-9" style={{ color: 'var(--color-gold)' }} />
+              <CheckCircle2 className="h-9 w-9"  />
             </div>
             <h2
               className="aura-h2 mb-3"
@@ -352,7 +343,7 @@ export default function CheckoutView() {
 
           <span
             className="text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-6 mt-2"
-            style={{ color: 'var(--color-gold)' }}
+            
           >
             AURA LIVING
           </span>
@@ -540,7 +531,7 @@ export default function CheckoutView() {
                             className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
                             
                           >
-                            <option.icon className="w-4.5 h-4.5" style={{ color: 'var(--color-gold)' }} />
+                            <option.icon className="w-4.5 h-4.5"  />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p
@@ -557,7 +548,7 @@ export default function CheckoutView() {
                             </p>
                           </div>
                           {isSelected && (
-                            <CheckCircle2 className="w-5 h-5 shrink-0" style={{ color: 'var(--color-gold)' }} />
+                            <CheckCircle2 className="w-5 h-5 shrink-0"  />
                           )}
                         </label>
                       );
@@ -706,7 +697,7 @@ export default function CheckoutView() {
                       {shipping === 0 ? (
                         <span
                           className="text-sm font-semibold"
-                          style={{ color: 'var(--color-gold)' }}
+                          
                         >
                           Free
                         </span>
@@ -730,10 +721,10 @@ export default function CheckoutView() {
                     )}
                     {shipping === 0 && (
                       <div className="flex items-center gap-1.5">
-                        <Truck className="w-3.5 h-3.5" style={{ color: 'var(--color-gold)' }} />
+                        <Truck className="w-3.5 h-3.5"  />
                         <p
                           className="text-[11px]"
-                          style={{ color: 'var(--color-gold)' }}
+                          
                         >
                           You qualify for free shipping!
                         </p>
@@ -795,10 +786,10 @@ export default function CheckoutView() {
                   {/* Security Note */}
                   <div
                     className="mt-6 pt-5 text-center"
-                    style={{ borderTop: '1px solid var(--color-gold-soft)' }}
+                    
                   >
                     <div className="flex items-center justify-center gap-2 mb-2">
-                      <ShieldCheck className="w-4 h-4" style={{ color: 'var(--color-gold)' }} />
+                      <ShieldCheck className="w-4 h-4"  />
                       <span
                         className="text-xs font-medium tracking-wide uppercase"
                         

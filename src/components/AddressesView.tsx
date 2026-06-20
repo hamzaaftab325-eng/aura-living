@@ -4,8 +4,7 @@ import { useState } from 'react';
 import {
   useGsapFadeIn,
   useGsapStagger,
-  useGsapBlurText,
-} from '@/hooks/useGsap';
+  useGsapBlurText } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   MapPin,
@@ -16,8 +15,7 @@ import {
   Edit2,
   Trash2,
   Check,
-  X,
-} from 'lucide-react';
+  X } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -34,8 +32,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
   return <div ref={ref} className={className}>{children}</div>;
 }
 
@@ -66,8 +63,7 @@ const initialAddresses: Address[] = [
     city: 'Lahore',
     province: 'Punjab',
     postal: '54000',
-    isDefault: true,
-  },
+    isDefault: true },
   {
     id: 'addr-2',
     label: 'Work',
@@ -78,8 +74,7 @@ const initialAddresses: Address[] = [
     city: 'Lahore',
     province: 'Punjab',
     postal: '54000',
-    isDefault: false,
-  },
+    isDefault: false },
 ];
 
 const labelConfig: Record<Address['label'], { icon: typeof Home; color: string; bg: string }> = {
@@ -96,8 +91,7 @@ const emptyForm: Omit<Address, 'id' | 'isDefault'> = {
   line2: '',
   city: '',
   province: '',
-  postal: '',
-};
+  postal: '' };
 
 export default function AddressesView() {
   const user = useStore((state) => state.user);
@@ -122,8 +116,7 @@ export default function AddressesView() {
     duration: 0.6,
     stagger: 0.1,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   const resetForm = () => {
     setForm(emptyForm);
@@ -146,8 +139,7 @@ export default function AddressesView() {
       line2: addr.line2 ?? '',
       city: addr.city,
       province: addr.province,
-      postal: addr.postal,
-    });
+      postal: addr.postal });
     setEditingId(addr.id);
     setShowForm(true);
   };
@@ -179,16 +171,14 @@ export default function AddressesView() {
     setAddresses((prev) => prev.map((a) => ({ ...a, isDefault: a.id === id })));
     toast({
       title: 'Default address updated',
-      description: 'Future orders will ship to this address by default.',
-    });
+      description: 'Future orders will ship to this address by default.' });
   };
 
   const handleDelete = (id: string) => {
     setAddresses((prev) => prev.filter((a) => a.id !== id));
     toast({
       title: 'Address removed',
-      description: 'The saved address has been deleted.',
-    });
+      description: 'The saved address has been deleted.' });
   };
 
   // Not-signed-in gate
@@ -224,7 +214,7 @@ export default function AddressesView() {
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" >
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ border: '1px dashed rgba(212,175,55,0.4)' }}>
-              <MapPin className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
+              <MapPin className="w-8 h-8"  />
             </div>
             <h2 className="aura-text-primary aura-h2 mb-3" >
               Sign in to manage addresses
@@ -237,7 +227,7 @@ export default function AddressesView() {
               <Link
                 href="/auth/signup"
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                style={{ color: 'var(--color-gold)', background: 'none' }}
+                style={{ background: 'none' }}
               >
                 Create a free account
               </Link>
@@ -303,7 +293,7 @@ export default function AddressesView() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 rounded-xl p-5 sm:p-6" >
               <div className="flex items-center gap-3 text-center sm:text-left">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" >
-                  <Plus className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                  <Plus className="w-5 h-5"  />
                 </div>
                 <div>
                   <p className="text-sm sm:text-base font-semibold" >
@@ -387,7 +377,7 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="e.g. Ayesha Khan"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+                      
                     />
                   </div>
                   <div>
@@ -401,7 +391,7 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       placeholder="+92 300 1234567"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+                      
                     />
                   </div>
                 </div>
@@ -418,7 +408,7 @@ export default function AddressesView() {
                     onChange={(e) => setForm({ ...form, line1: e.target.value })}
                     placeholder="House #, Block, Street"
                     className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+                    
                   />
                 </div>
 
@@ -433,7 +423,7 @@ export default function AddressesView() {
                     onChange={(e) => setForm({ ...form, line2: e.target.value })}
                     placeholder="Near Central Park"
                     className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+                    
                   />
                 </div>
 
@@ -450,7 +440,7 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, city: e.target.value })}
                       placeholder="Lahore"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+                      
                     />
                   </div>
                   <div>
@@ -462,7 +452,7 @@ export default function AddressesView() {
                       value={form.province}
                       onChange={(e) => setForm({ ...form, province: e.target.value })}
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+                      
                     >
                       <option value="">Select</option>
                       <option value="Punjab">Punjab</option>
@@ -485,7 +475,7 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, postal: e.target.value })}
                       placeholder="54000"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+                      
                     />
                   </div>
                 </div>
@@ -521,7 +511,7 @@ export default function AddressesView() {
                   {addr.isDefault && (
                     <span
                       className="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-wider"
-                      style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}
+                      
                     >
                       <Check className="w-3 h-3" />
                       Default
@@ -550,11 +540,11 @@ export default function AddressesView() {
                     {addr.city}, {addr.province} — {addr.postal}
                   </p>
 
-                  <div className="flex items-center gap-2 mt-5 pt-4" style={{ borderTop: '1px solid var(--color-gold-soft)' }}>
+                  <div className="flex items-center gap-2 mt-5 pt-4" >
                     <button
                       onClick={() => handleOpenEdit(addr)}
                       className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                      style={{ color: 'var(--color-gold)', background: 'none' }}
+                      style={{ background: 'none' }}
                     >
                       <Edit2 className="w-3 h-3" />
                       Edit
@@ -565,7 +555,7 @@ export default function AddressesView() {
                         <button
                           onClick={() => handleSetDefault(addr.id)}
                           className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                          style={{ color: 'var(--color-gold)', background: 'none' }}
+                          style={{ background: 'none' }}
                         >
                           <Check className="w-3 h-3" />
                           Set Default
@@ -576,7 +566,7 @@ export default function AddressesView() {
                     <button
                       onClick={() => handleDelete(addr.id)}
                       className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-red-600 cursor-pointer ml-auto"
-                      style={{ color: 'var(--color-danger)', background: 'none' }}
+                      style={{ background: 'none' }}
                     >
                       <Trash2 className="w-3 h-3" />
                       Delete
@@ -590,7 +580,7 @@ export default function AddressesView() {
           {/* Empty state */}
           {addresses.length === 0 && (
             <div className="text-center py-12 rounded-xl" >
-              <MapPin className="w-10 h-10 mx-auto mb-3" style={{ color: 'var(--color-gold)' }} />
+              <MapPin className="w-10 h-10 mx-auto mb-3"  />
               <h3 className="aura-text-primary text-lg font-semibold mb-1" >
                 No saved addresses yet
               </h3>
@@ -606,7 +596,7 @@ export default function AddressesView() {
               href="/account"
               onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-              style={{ color: 'var(--color-gold)', background: 'none' }}
+              style={{ background: 'none' }}
             >
               <ChevronRight className="w-3.5 h-3.5 rotate-180" />
               Back to My Account

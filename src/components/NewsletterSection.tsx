@@ -28,8 +28,7 @@ export default function NewsletterSection() {
       start: 'top 90%',
       onEnter: () => {
         gsap.to(sectionContentRef.current, { scale: 1, duration: 0.8, ease: 'power3.out' });
-      },
-    });
+      } });
 
     return () => trigger.kill();
   }, []);
@@ -50,8 +49,7 @@ export default function NewsletterSection() {
       {/* Subtle gold radial glow background */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.04) 0%, transparent 70%)' }}
+        
       />
 
       {/* Decorative corner lines */}
@@ -66,9 +64,7 @@ export default function NewsletterSection() {
         <div
           ref={cardRef}
           className="relative rounded-xl overflow-hidden"
-          style={{
-            background: 'linear-gradient(135deg, var(--surface-dark) 0%, #1A1A1A 100%)',
-            boxShadow: '0 16px 50px rgba(0, 0, 0, 0.15)' }}
+          style={{ boxShadow: '0 16px 50px rgba(0, 0, 0, 0.15)' }}
         >
           {/* Gold top accent line */}
           <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-gold to-transparent" />
@@ -162,8 +158,7 @@ export default function NewsletterSection() {
                   aria-invalid={submitted ? 'false' : 'false'}
                   aria-label="Email address for newsletter signup"
                   className="w-full px-4 py-3.5 rounded-lg text-sm outline-none transition-all duration-300"
-                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                    border: isFocused
+                  style={{ border: isFocused
                       ? '2px solid var(--color-gold)'
                       : '1.5px solid rgba(212, 175, 55, 0.2)',
                     boxShadow: isFocused

@@ -10,8 +10,7 @@ import {
   Eye,
   EyeOff,
   ArrowRight,
-  Sparkles,
-} from 'lucide-react';
+  Sparkles } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -24,8 +23,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb';
 function SocialButton({
   icon,
   label,
-  onClick,
-}: {
+  onClick }: {
   icon: React.ReactNode;
   label: string;
   onClick?: () => void;
@@ -55,8 +53,7 @@ function InputField({
   isVisible,
   ariaLabel,
   error,
-  required,
-}: {
+  required }: {
   icon: React.ReactNode;
   type?: string;
   placeholder: string;
@@ -126,7 +123,7 @@ function InputField({
           id={errorId}
           role="alert"
           className="mt-1.5 ml-1 text-xs font-medium"
-          style={{ color: 'var(--color-danger)' }}
+          
         >
           {error}
         </p>
@@ -164,8 +161,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
     duration: 0.7,
     stagger: 0.05,
     blur: 10,
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -177,16 +173,14 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
         toast({
           title: 'Missing information',
           description: 'Please enter both email and password.',
-          variant: 'destructive',
-        });
+          variant: 'destructive' });
         return;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginEmail)) {
         toast({
           title: 'Invalid email',
           description: 'Please enter a valid email address.',
-          variant: 'destructive',
-        });
+          variant: 'destructive' });
         return;
       }
     } else {
@@ -195,40 +189,35 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
         toast({
           title: 'Missing information',
           description: 'Please fill in all fields.',
-          variant: 'destructive',
-        });
+          variant: 'destructive' });
         return;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signupEmail)) {
         toast({
           title: 'Invalid email',
           description: 'Please enter a valid email address.',
-          variant: 'destructive',
-        });
+          variant: 'destructive' });
         return;
       }
       if (signupPassword.length < 6) {
         toast({
           title: 'Password too short',
           description: 'Password must be at least 6 characters.',
-          variant: 'destructive',
-        });
+          variant: 'destructive' });
         return;
       }
       if (signupPassword !== signupConfirmPassword) {
         toast({
           title: 'Passwords do not match',
           description: 'Please make sure both passwords are identical.',
-          variant: 'destructive',
-        });
+          variant: 'destructive' });
         return;
       }
       if (!agreeTerms) {
         toast({
           title: 'Please accept terms',
           description: 'You must agree to the Terms of Service and Privacy Policy.',
-          variant: 'destructive',
-        });
+          variant: 'destructive' });
         return;
       }
     }
@@ -240,14 +229,12 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
         login(loginEmail.trim());
         toast({
           title: 'Welcome back!',
-          description: 'You have successfully signed in.',
-        });
+          description: 'You have successfully signed in.' });
       } else {
         signup(signupName.trim(), signupEmail.trim());
         toast({
           title: 'Account created!',
-          description: 'Welcome to Aura Living. A 100-point welcome bonus has been added to your account.',
-        });
+          description: 'Welcome to Aura Living. A 100-point welcome bonus has been added to your account.' });
       }
       setIsSubmitting(false);
       router.push('/account');
@@ -261,8 +248,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
       login(`guest@${provider.toLowerCase()}.com`);
       toast({
         title: `Signed in with ${provider}`,
-        description: 'You have successfully authenticated.',
-      });
+        description: 'You have successfully authenticated.' });
       setIsSubmitting(false);
       router.push('/account');
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -375,9 +361,6 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
         <div
           className="w-full max-w-md rounded-2xl p-8 sm:p-10"
           style={{ backgroundColor: 'rgba(255,253,247,0.8)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(232,213,163,0.3)',
             boxShadow: '0 8px 40px rgba(212,175,55,0.06), 0 2px 12px rgba(0,0,0,0.04)' }}
         >
           {/* Title with blur animation */}
@@ -386,7 +369,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
               <Sparkles className="w-4 h-4 aura-text-gold" />
               <span
                 className="text-[10px] font-semibold uppercase tracking-[0.2em]"
-                style={{ color: 'var(--color-gold)' }}
+                
               >
                 {mode === 'login' ? 'Welcome Back' : 'Join the Family'}
               </span>
@@ -513,7 +496,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
                   href="/auth/forgot-password"
                   onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="text-xs font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                  style={{ color: 'var(--color-gold)', background: 'none' }}
+                  style={{ background: 'none' }}
                 >
                   Forgot Password?
                 </Link>
@@ -585,7 +568,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 className="font-semibold transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                style={{ color: 'var(--color-gold)', background: 'none' }}
+                style={{ background: 'none' }}
               >
                 {mode === 'login' ? 'Sign Up' : 'Sign In'}
               </Link>

@@ -5,8 +5,7 @@ import { AlertTriangle, RotateCcw, Home } from 'lucide-react';
 
 export default function Error({
   error,
-  reset,
-}: {
+  reset }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
@@ -17,7 +16,7 @@ export default function Error({
   return (
     <div
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      style={{ backgroundColor: 'var(--surface-page)' }}
+      
     >
       {/* Decorative background */}
       <div
@@ -25,16 +24,14 @@ export default function Error({
         style={{
           width: 400, height: 400, top: '10%', right: '-5%',
           background: 'radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%)',
-          borderRadius: '50%', filter: 'blur(40px)',
-        }}
+          borderRadius: '50%', filter: 'blur(40px)' }}
       />
       <div
         className="absolute pointer-events-none"
         style={{
           width: 300, height: 300, bottom: '15%', left: '-3%',
           background: 'radial-gradient(circle, rgba(168,181,160,0.08) 0%, transparent 70%)',
-          borderRadius: '50%', filter: 'blur(40px)',
-        }}
+          borderRadius: '50%', filter: 'blur(40px)' }}
       />
 
       {/* Corner ornaments */}
@@ -45,9 +42,9 @@ export default function Error({
         {/* Error Icon */}
         <div
           className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6"
-          style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
+          
         >
-          <AlertTriangle className="w-9 h-9" style={{ color: 'var(--color-gold)' }} />
+          <AlertTriangle className="w-9 h-9"  />
         </div>
 
         {/* Gold divider */}
@@ -59,13 +56,13 @@ export default function Error({
 
         <h1
           className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-          style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}
+          style={{ fontFamily: "'Playfair Display', serif" }}
         >
           Something Went Wrong
         </h1>
         <p
           className="text-sm sm:text-base leading-relaxed mb-8 max-w-md mx-auto"
-          style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}
+          style={{ fontFamily: "'Poppins', sans-serif" }}
         >
           We encountered an unexpected error. Please try again or return to the homepage.
         </p>
@@ -74,7 +71,7 @@ export default function Error({
         {error.message && (
           <div
             className="mb-6 p-3 rounded-sm text-xs text-left"
-            style={{ backgroundColor: 'rgba(232,206,193,0.2)', border: '1px solid rgba(232,206,193,0.4)', color: 'var(--color-muted-gray)', fontFamily: "'Poppins', sans-serif" }}
+            style={{ backgroundColor: 'rgba(232,206,193,0.2)', border: '1px solid rgba(232,206,193,0.4)', fontFamily: "'Poppins', sans-serif" }}
           >
             {error.message}
           </div>
@@ -85,7 +82,7 @@ export default function Error({
           <button
             onClick={() => reset()}
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-hover)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.35)] active:scale-[0.97] cursor-pointer"
-            style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)', fontFamily: "'Poppins', sans-serif" }}
+            style={{ backgroundColor: 'var(--color-gold)', fontFamily: "'Poppins', sans-serif" }}
           >
             <RotateCcw className="w-4 h-4" />
             Try Again
@@ -93,7 +90,7 @@ export default function Error({
           <a
             href="/"
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-pale)] hover:text-[var(--color-gold)] active:scale-[0.97]"
-            style={{ border: '2px solid var(--color-gold)', color: 'var(--color-gold)', fontFamily: "'Poppins', sans-serif", backgroundColor: 'transparent', textDecoration: 'none' }}
+            style={{ fontFamily: "'Poppins', sans-serif", textDecoration: 'none' }}
           >
             <Home className="w-4 h-4" />
             Go Home

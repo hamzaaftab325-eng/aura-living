@@ -14,8 +14,7 @@ export function generateStaticParams() {
 
 // Per-article metadata for SEO
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
@@ -24,8 +23,7 @@ export async function generateMetadata({
   if (!article) {
     return {
       title: 'Article Not Found | Aura Living',
-      robots: { index: false, follow: true },
-    };
+      robots: { index: false, follow: true } };
   }
 
   const title = `${article.title} | Aura Living Journal`;
@@ -49,22 +47,17 @@ export async function generateMetadata({
           url: '/og/blog.png',
           width: 1344,
           height: 768,
-          alt: article.title,
-        },
-      ],
-    },
+          alt: article.title },
+      ] },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ['/og/blog.png'],
-    },
-  };
+      images: ['/og/blog.png'] } };
 }
 
 export default async function ArticlePage({
-  params,
-}: {
+  params }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;

@@ -36,14 +36,12 @@ export default function Breadcrumb({ items, productName, productId }: Breadcrumb
         ? `${baseUrl}/`
         : item.href
           ? `${baseUrl}${item.href}`
-          : `${baseUrl}/#${item.label.toLowerCase().replace(/\s+/g, '-')}`,
-    }));
+          : `${baseUrl}/#${item.label.toLowerCase().replace(/\s+/g, '-')}` }));
 
     const jsonLd = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
-      itemListElement,
-    };
+      itemListElement };
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';

@@ -32,8 +32,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
       error,
       required,
       orientation = 'vertical',
-      wrapperClassName = '',
-    },
+      wrapperClassName = '' },
     _ref
   ) => {
     const groupId = useId();
@@ -50,7 +49,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
         >
           {label}
           {required && (
-            <span style={{ color: 'var(--color-danger)' }} aria-hidden="true">
+            <span  aria-hidden="true">
               {' '}
               *
             </span>
@@ -110,7 +109,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
             id={errorId}
             role="alert"
             className="text-xs font-medium"
-            style={{ color: 'var(--color-danger)' }}
+            
           >
             {error}
           </p>

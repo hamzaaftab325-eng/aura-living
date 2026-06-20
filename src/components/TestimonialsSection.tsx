@@ -21,8 +21,7 @@ export default function TestimonialsSection() {
       start: 'top 90%',
       onEnter: () => {
         gsap.to(el, { scale: 1, duration: 1, ease: 'power3.out' });
-      },
-    });
+      } });
 
     return () => {
       trigger.kill();

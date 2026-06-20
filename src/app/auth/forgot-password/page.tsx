@@ -5,8 +5,7 @@ export const metadata: Metadata = {
   title: 'Reset Your Password | Aura Living',
   description: 'Request a password reset link for your Aura Living account.',
   alternates: { canonical: '/auth/forgot-password' },
-  robots: { index: false, follow: false },
-};
+  robots: { index: false, follow: false } };
 
 export default function ForgotPasswordPage() {
   return <ForgotPasswordView />;

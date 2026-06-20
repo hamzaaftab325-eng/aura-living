@@ -17,8 +17,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
 
   return <div ref={ref} className={className}>{children}</div>;
 }
@@ -54,9 +53,7 @@ export default function ContactView() {
           trigger: heroSectionRef.current,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: true,
-        },
-      });
+          scrub: true } });
     }, heroSectionRef);
     return () => ctx.revert();
   }, []);
@@ -253,7 +250,7 @@ export default function ContactView() {
                     {contactInfo.map((info) => (
                       <div key={info.label} className="flex items-start gap-4">
                         <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                          <info.icon className="w-4.5 h-4.5" style={{ color: 'var(--color-gold-text)' }} />
+                          <info.icon className="w-4.5 h-4.5"  />
                         </div>
                         <div className="flex flex-col">
                           <span className="text-xs tracking-wider uppercase mb-0.5" >{info.label}</span>
@@ -268,7 +265,7 @@ export default function ContactView() {
                   </div>
 
                   {/* WhatsApp Button — CSS hover transitions */}
-                  <div className="mt-8 pt-6" style={{ borderTop: '1px solid var(--color-gold-soft)' }}>
+                  <div className="mt-8 pt-6" >
                     <a
                       href="https://wa.me/923001234567"
                       target="_blank"
@@ -298,7 +295,7 @@ export default function ContactView() {
                       <div className="absolute left-3/4 top-0 bottom-0 w-px" style={{ backgroundColor: 'var(--color-muted-gray)' }} />
                     </div>
                     <div className="flex flex-col items-center gap-3 relative z-10">
-                      <MapPin className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
+                      <MapPin className="w-8 h-8"  />
                       <a
                         href="https://maps.google.com/?q=123+Artisan+Lane+Gulberg+III+Lahore+Pakistan"
                         target="_blank"

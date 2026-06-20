@@ -7,8 +7,7 @@ import {
   useGsapBlurText,
   useGsapFadeIn,
   useGsapScaleIn,
-  gsap,
-} from '@/hooks/useGsap';
+  gsap } from '@/hooks/useGsap';
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -21,24 +20,21 @@ export default function HeroSection() {
     stagger: 0.03,
     delay: 0.15,
     start: 'top 90%',
-    splitBy: 'words',
-  });
+    splitBy: 'words' });
 
   const headingRef = useGsapBlurText<HTMLHeadingElement>({
     duration: 0.6,
     stagger: 0.04,
     delay: 0.25,
     start: 'top 90%',
-    splitBy: 'words',
-  });
+    splitBy: 'words' });
 
   const subtitleRef = useGsapBlurText<HTMLParagraphElement>({
     duration: 0.5,
     stagger: 0.02,
     delay: 0.45,
     start: 'top 90%',
-    splitBy: 'words',
-  });
+    splitBy: 'words' });
 
   // CTA + scroll indicator — fade in
   const ctaRef = useGsapFadeIn<HTMLAnchorElement>({ y: 20, duration: 0.4, delay: 0.1 });
@@ -60,9 +56,7 @@ export default function HeroSection() {
           trigger: sectionRef.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: 1.5,
-        },
-      });
+          scrub: 1.5 } });
     }, sectionRef);
 
     return () => ctx.revert();

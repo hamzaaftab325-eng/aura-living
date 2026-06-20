@@ -6,8 +6,7 @@ import {
   LayoutDashboard, Package, ShoppingCart, BarChart3, Bell, Settings as SettingsIcon,
   TrendingUp, TrendingDown, DollarSign, Users, Eye, ArrowUpRight, Search,
   Filter, Download, Plus, Edit2, Trash2, AlertTriangle, CheckCircle,
-  Clock, XCircle, ChevronRight, Menu, X, Package2, Star, ShoppingCart as CartIcon,
-} from 'lucide-react';
+  Clock, XCircle, ChevronRight, Menu, X, Package2, Star, ShoppingCart as CartIcon } from 'lucide-react';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Link from 'next/link';
 import { products, formatPKR, categories } from '@/data/products';
@@ -254,7 +253,7 @@ export default function AdminDashboard() {
                     const cfg = statusConfig[order.status];
                     const StatusIcon = cfg.icon;
                     return (
-                      <div key={order.id} className="flex items-center justify-between gap-3 py-2" style={{ borderBottom: '1px solid rgba(232,213,163,0.4)' }}>
+                      <div key={order.id} className="flex items-center justify-between gap-3 py-2" >
                         <div className="min-w-0 flex-1">
                           <p className="text-sm font-semibold truncate" >
                             {order.customer}
@@ -286,8 +285,8 @@ export default function AdminDashboard() {
                 </h2>
                 <div className="space-y-3">
                   {products.slice(0, 5).map((product, i) => (
-                    <div key={product.id} className="flex items-center gap-3 py-2" style={{ borderBottom: '1px solid rgba(232,213,163,0.4)' }}>
-                      <span className="text-xs font-bold w-5" style={{ color: 'var(--color-gold)' }}>#{i + 1}</span>
+                    <div key={product.id} className="flex items-center gap-3 py-2" >
+                      <span className="text-xs font-bold w-5" >#{i + 1}</span>
                       <div className="w-10 h-10 rounded-md overflow-hidden shrink-0 relative" >
                         <Image src={product.image} alt={product.name} fill className="w-full h-full object-contain" sizes="40px" />
                       </div>
@@ -299,7 +298,7 @@ export default function AdminDashboard() {
                           {product.reviews} reviews · ⭐ {product.rating}
                         </p>
                       </div>
-                      <span className="text-sm font-bold" style={{ color: 'var(--color-gold-text)' }}>
+                      <span className="text-sm font-bold" >
                         {formatPKR(product.price)}
                       </span>
                     </div>
@@ -355,7 +354,7 @@ export default function AdminDashboard() {
                   </thead>
                   <tbody>
                     {filteredProducts.map((product) => (
-                      <tr key={product.id} className="transition-colors hover:bg-gold/5" style={{ borderBottom: '1px solid rgba(232,213,163,0.3)' }}>
+                      <tr key={product.id} className="transition-colors hover:bg-gold/5" >
                         <td className="py-3 px-4">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-md overflow-hidden shrink-0 relative" >
@@ -364,7 +363,7 @@ export default function AdminDashboard() {
                             <div className="min-w-0">
                               <p className="text-sm font-medium truncate" >{product.name}</p>
                               {product.badge && (
-                                <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded" style={{ color: 'var(--color-gold-text)' }}>
+                                <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded" >
                                   {product.badge}
                                 </span>
                               )}
@@ -433,7 +432,7 @@ export default function AdminDashboard() {
                       const cfg = statusConfig[order.status];
                       const StatusIcon = cfg.icon;
                       return (
-                        <tr key={order.id} className="transition-colors hover:bg-gold/5 cursor-pointer" style={{ borderBottom: '1px solid rgba(232,213,163,0.3)' }}>
+                        <tr key={order.id} className="transition-colors hover:bg-gold/5 cursor-pointer" >
                           <td className="py-3 px-4 text-sm font-semibold" >#{order.id}</td>
                           <td className="py-3 px-4 text-sm" >{order.customer}</td>
                           <td className="py-3 px-4 text-sm hidden sm:table-cell" >{order.date}</td>
@@ -628,8 +627,8 @@ export default function AdminDashboard() {
               </PremiumButton>
             </div>
 
-            <div className="rounded-lg p-6" style={{ backgroundColor: 'rgba(220,38,38,0.03)', border: '1px solid rgba(220,38,38,0.2)' }}>
-              <h2 className="text-lg font-bold mb-2" style={{ color: 'var(--color-danger)' }}>Danger Zone</h2>
+            <div className="rounded-lg p-6" style={{ backgroundColor: 'rgba(220,38,38,0.03)' }}>
+              <h2 className="text-lg font-bold mb-2" >Danger Zone</h2>
               <p className="text-sm mb-4" >
                 Reset all store data, clear cache, or delete the store entirely. These actions are irreversible.
               </p>
@@ -637,7 +636,7 @@ export default function AdminDashboard() {
                 <button className="px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ backgroundColor: 'var(--color-danger)' }}>
                   Reset Store Data
                 </button>
-                <button className="px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ border: '1px solid var(--color-danger)', color: 'var(--color-danger)', backgroundColor: 'transparent' }}>
+                <button className="px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ border: '1px solid var(--color-danger)' }}>
                   Clear Cache
                 </button>
               </div>

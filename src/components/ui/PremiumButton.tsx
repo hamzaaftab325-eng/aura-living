@@ -64,8 +64,7 @@ export default function PremiumButton({
   leftIcon,
   rightIcon,
   ariaLabel,
-  href,
-}: PremiumButtonProps) {
+  href }: PremiumButtonProps) {
   const handleClick = useCallback(() => {
     if (disabled || loading) return;
     onClick?.();
@@ -76,14 +75,12 @@ export default function PremiumButton({
   const variantClasses: Record<ButtonVariant, string> = {
     primary: 'btn-primary',
     secondary: 'btn-secondary',
-    newsletter: 'btn-newsletter',
-  };
+    newsletter: 'btn-newsletter' };
 
   const sizeClasses: Record<ButtonSize, string> = {
     sm: 'btn-sm',
     md: '',
-    lg: 'btn-lg',
-  };
+    lg: 'btn-lg' };
 
   const computedClassName = `premium-btn ${variantClasses[normalizedVariant]} ${sizeClasses[size]} ${
     fullWidth ? 'w-full' : ''

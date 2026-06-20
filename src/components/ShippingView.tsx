@@ -13,22 +13,19 @@ const shippingRates = [
     title: 'Standard Delivery',
     duration: '3-5 business days',
     price: 'PKR 250',
-    note: 'FREE on orders above PKR 2,999',
-  },
+    note: 'FREE on orders above PKR 2,999' },
   {
     icon: Truck,
     title: 'Express Delivery',
     duration: '1-2 business days',
     price: 'PKR 500',
-    note: 'Available in major cities',
-  },
+    note: 'Available in major cities' },
   {
     icon: Clock,
     title: 'Same-Day Delivery',
     duration: 'Same day (Lahore only)',
     price: 'PKR 800',
-    note: 'Order before 12 PM PKT',
-  },
+    note: 'Order before 12 PM PKT' },
 ];
 
 const deliveryCities = [
@@ -46,8 +43,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
 
   return <div ref={ref} className={className}>{children}</div>;
 }
@@ -60,8 +56,7 @@ export default function ShippingView() {
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
 
   const overviewRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
   const ratesRef = useGsapStagger<HTMLDivElement>({
@@ -70,8 +65,7 @@ export default function ShippingView() {
     duration: 0.7,
     stagger: 0.08,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
   const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
@@ -93,7 +87,7 @@ export default function ShippingView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
-            <Truck className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
+            <Truck className="w-8 h-8"  />
           </div>
           <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
@@ -122,7 +116,7 @@ export default function ShippingView() {
         <div ref={overviewRef} className="max-w-4xl mx-auto text-center">
           <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" >
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-              <Truck className="w-6 h-6" style={{ color: 'var(--color-gold-text)' }} />
+              <Truck className="w-6 h-6"  />
             </div>
             <h2 className="aura-text-primary aura-h2 mb-3" >
               Shipping Overview
@@ -157,7 +151,7 @@ export default function ShippingView() {
                   
                 >
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                    <rate.icon className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                    <rate.icon className="w-5 h-5"  />
                   </div>
                   <h3 className="aura-text-primary text-lg sm:text-xl font-semibold mb-1" >
                     {rate.title}
@@ -165,7 +159,7 @@ export default function ShippingView() {
                   <span className="block text-xs sm:text-sm tracking-wider uppercase mb-3" >
                     {rate.duration}
                   </span>
-                  <span className="block aura-h2 mb-3" style={{ color: 'var(--color-gold)' }}>
+                  <span className="block aura-h2 mb-3" >
                     {rate.price}
                   </span>
                   <span className="block text-xs sm:text-sm leading-relaxed" >
@@ -185,7 +179,7 @@ export default function ShippingView() {
             <div className="rounded-xl p-5 sm:p-6 lg:p-8" >
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                  <MapPin className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                  <MapPin className="w-5 h-5"  />
                 </div>
                 <div>
                   <h2 className="aura-text-primary aura-h2 mb-2" >
@@ -204,7 +198,7 @@ export default function ShippingView() {
                     className="flex items-center gap-2 px-3 py-2.5 rounded-sm"
                     style={{ backgroundColor: 'rgba(212, 175, 55, 0.08)' }}
                   >
-                    <MapPin className="w-3.5 h-3.5 shrink-0" style={{ color: 'var(--color-gold)' }} />
+                    <MapPin className="w-3.5 h-3.5 shrink-0"  />
                     <span className="text-sm font-medium" >{city}</span>
                   </div>
                 ))}
@@ -226,7 +220,7 @@ export default function ShippingView() {
               <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                    <Clock className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                    <Clock className="w-5 h-5"  />
                   </div>
                   <div>
                     <h3 className="aura-text-primary aura-h2 mb-3" >
@@ -243,7 +237,7 @@ export default function ShippingView() {
               <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                    <Gift className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                    <Gift className="w-5 h-5"  />
                   </div>
                   <div>
                     <h3 className="aura-text-primary aura-h2 mb-3" >
@@ -253,7 +247,7 @@ export default function ShippingView() {
                       Each item is carefully wrapped in premium protective materials to ensure it arrives in perfect condition. We take great pride in our unboxing experience — because the joy of receiving something beautiful should start the moment you open the package.
                     </p>
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-sm" >
-                      <Gift className="w-4 h-4" style={{ color: 'var(--color-gold-text)' }} />
+                      <Gift className="w-4 h-4"  />
                       <span className="text-sm font-medium" >
                         Gift-wrap option available for PKR 299
                       </span>
@@ -266,7 +260,7 @@ export default function ShippingView() {
               <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                    <Globe className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                    <Globe className="w-5 h-5"  />
                   </div>
                   <div>
                     <h3 className="aura-text-primary aura-h2 mb-3" >

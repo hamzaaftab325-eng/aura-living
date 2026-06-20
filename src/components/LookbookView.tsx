@@ -15,29 +15,25 @@ const scenes = [
     title: 'The Golden Hour Living Room',
     description:
       'Warm brass lighting, cream textures, and gold accents create a sanctuary of warmth. Style this space with layered cushions in ivory and champagne, drape a cashmere throw over an accent chair, and let the soft glow of a gold-finished table lamp cast dancing shadows across handwoven rugs. Complete the look with our signature brass candleholders and a curated stack of art books.',
-    image: '/images/pages/lookbook-scene-1.webp',
-  },
+    image: '/images/pages/lookbook-scene-1.webp' },
   {
     number: '02',
     title: "The Artisan's Dining",
     description:
       'Handcrafted ceramics, gold-rimmed glassware, and linen runners set the stage for memorable gatherings. Lay a natural linen runner down the centre of your table, arrange our hand-thrown ceramic serving bowls alongside gold-rimmed crystal glasses, and finish with a woven placemat at each setting. A statement centrepiece of dried pampas grass in a hand-painted vase completes this effortlessly elegant table.',
-    image: '/images/pages/lookbook-scene-2.webp',
-  },
+    image: '/images/pages/lookbook-scene-2.webp' },
   {
     number: '03',
     title: 'The Serene Bedroom',
     description:
       'Soft candlelight, delicate vases, and warm textiles transform your bedroom into a peaceful retreat. Layer crisp white sheets with a warm cream quilt, place a cluster of our hand-poured soy candles on the nightstand, and add a single stem in a porcelain bud vase. A textured throw at the foot of the bed and soft gold-framed artwork above create a space that invites rest and reflection.',
-    image: '/images/pages/lookbook-scene-3.webp',
-  },
+    image: '/images/pages/lookbook-scene-3.webp' },
   {
     number: '04',
     title: 'The Botanical Corner',
     description:
       'Lush greenery in gold-rimmed planters brings life and freshness to any corner of your home. Pair our gold-rimmed ceramic planters with trailing pothos and structural snake plants, add a brass watering can as a sculptural accent, and place a natural jute mat beneath. A floating shelf displaying air plants in geometric terrariums adds height and visual interest to this living vignette.',
-    image: '/images/pages/lookbook-scene-4.webp',
-  },
+    image: '/images/pages/lookbook-scene-4.webp' },
 ];
 
 export default function LookbookView() {
@@ -48,8 +44,7 @@ export default function LookbookView() {
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
 
   const scenesRef = useGsapStagger<HTMLDivElement>({
     selector: '.lookbook-scene',
@@ -57,8 +52,7 @@ export default function LookbookView() {
     duration: 0.8,
     stagger: 0.2,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
@@ -78,9 +72,7 @@ export default function LookbookView() {
               trigger: img.closest('.lookbook-scene'),
               start: 'top bottom',
               end: 'bottom top',
-              scrub: true,
-            },
-          }
+              scrub: true } }
         );
       });
     }, containerRef);
@@ -105,7 +97,7 @@ export default function LookbookView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
-            <Camera className="w-8 h-8" style={{ color: 'var(--color-gold)' }} />
+            <Camera className="w-8 h-8"  />
           </div>
           <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
@@ -230,8 +222,8 @@ export default function LookbookView() {
       {/* Bottom CTA */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-            <Camera className="w-8 h-8" style={{ color: 'var(--color-gold)' }} />
+          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" >
+            <Camera className="w-8 h-8"  />
           </div>
           <h2 className="aura-text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Create Your Own Story

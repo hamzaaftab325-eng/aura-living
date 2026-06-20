@@ -29,8 +29,7 @@ const categoryLabels: Record<Article['category'], string> = {
   care: 'Care',
   trends: 'Trends',
   lifestyle: 'Lifestyle',
-  'behind-the-scenes': 'Behind the Scenes',
-};
+  'behind-the-scenes': 'Behind the Scenes' };
 
 /* ═══════════════════════════════════════════════════════════
    ArticleImage — next/image with graceful fallback for missing
@@ -44,8 +43,7 @@ function ArticleImage({
   title,
   sizes,
   priority = false,
-  className,
-}: {
+  className }: {
   src: string;
   alt: string;
   title: string;
@@ -68,12 +66,12 @@ function ArticleImage({
         <div className="text-center px-6 py-8">
           <BookOpen
             className="w-8 h-8 mx-auto mb-3"
-            style={{ color: 'var(--color-gold)' }}
+            
             aria-hidden="true"
           />
           <p
             className="font-serif text-base sm:text-lg leading-snug"
-            style={{ color: 'var(--color-gold-text)', fontFamily: 'var(--font-playfair)' }}
+            style={{ fontFamily: 'var(--font-playfair)' }}
           >
             {title}
           </p>
@@ -100,8 +98,7 @@ function ArticleImage({
    ═══════════════════════════════════════════════════════════ */
 function ArticleCard({
   article,
-  priority = false,
-}: {
+  priority = false }: {
   article: ArticleType;
   priority?: boolean;
 }) {
@@ -110,8 +107,7 @@ function ArticleCard({
       new Date(article.date).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
-        year: 'numeric',
-      }),
+        year: 'numeric' }),
     [article.date]
   );
 
@@ -137,9 +133,7 @@ function ArticleCard({
         <span
           className="absolute top-3 left-3 text-[10px] uppercase tracking-[2px] font-medium px-3 py-1.5 rounded-sm"
           style={{
-            backgroundColor: 'rgba(250, 248, 245, 0.95)',
-            color: 'var(--color-gold-text)',
-            backdropFilter: 'blur(4px)' }}
+            backgroundColor: 'rgba(250, 248, 245, 0.95)' }}
         >
           {categoryLabels[article.category]}
         </span>
@@ -192,8 +186,7 @@ export default function BlogView() {
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
 
   const gridRef = useGsapStagger<HTMLDivElement>({
     selector: '.blog-card',
@@ -201,8 +194,7 @@ export default function BlogView() {
     duration: 0.7,
     stagger: 0.1,
     ease: 'power3.out',
-    start: 'top 88%',
-  });
+    start: 'top 88%' });
 
   const featuredRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.1 });
 
@@ -218,9 +210,7 @@ export default function BlogView() {
         '@type': 'ListItem',
         position: idx + 1,
         url: `${baseUrl}/#article/${a.slug}`,
-        name: a.title,
-      })),
-    };
+        name: a.title })) };
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';
@@ -249,8 +239,7 @@ export default function BlogView() {
   const featuredDate = new Date(featured.date).toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
-    year: 'numeric',
-  });
+    year: 'numeric' });
 
   return (
     <div className="w-full page-transition" >
@@ -265,13 +254,13 @@ export default function BlogView() {
         <div ref={heroRef} className="relative z-10 max-w-3xl mx-auto text-center">
           <div
             className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
-            style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}
+            
           >
-            <BookOpen className="w-8 h-8" style={{ color: 'var(--color-gold)' }} aria-hidden="true" />
+            <BookOpen className="w-8 h-8"  aria-hidden="true" />
           </div>
           <span
             className="text-xs sm:text-sm tracking-[4px] uppercase font-medium"
-            style={{ color: 'var(--color-gold)' }}
+            
           >
             Aura Living
           </span>
@@ -309,7 +298,7 @@ export default function BlogView() {
         <div ref={featuredRef} className="max-w-7xl mx-auto">
           <span
             className="text-xs sm:text-sm tracking-[3px] uppercase font-medium block mb-6 text-center"
-            style={{ color: 'var(--color-gold)' }}
+            
           >
             Featured Story
           </span>
@@ -343,7 +332,7 @@ export default function BlogView() {
             <div className="flex flex-col gap-4">
               <span
                 className="text-xs sm:text-sm font-medium uppercase tracking-wider"
-                style={{ color: 'var(--color-gold)' }}
+                
               >
                 {categoryLabels[featured.category]}
               </span>

@@ -4,8 +4,7 @@ import { useState } from 'react';
 import {
   useGsapFadeIn,
   useGsapStagger,
-  useGsapBlurText,
-} from '@/hooks/useGsap';
+  useGsapBlurText } from '@/hooks/useGsap';
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Settings,
@@ -16,8 +15,7 @@ import {
   CreditCard,
   User as UserIcon,
   Mail,
-  Check,
-} from 'lucide-react';
+  Check } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -35,8 +33,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
     stagger: 0.12,
     delay: 0.15,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
   return <div ref={ref} className={className}>{children}</div>;
 }
 
@@ -46,8 +43,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
 function Toggle({
   checked,
   onChange,
-  label,
-}: {
+  label }: {
   checked: boolean;
   onChange: (v: boolean) => void;
   label: string;
@@ -109,14 +105,12 @@ export default function SettingsView() {
     duration: 0.6,
     stagger: 0.1,
     ease: 'power3.out',
-    start: 'top 85%',
-  });
+    start: 'top 85%' });
 
   const handleSave = () => {
     toast({
       title: 'Settings saved',
-      description: 'Your preferences have been updated successfully.',
-    });
+      description: 'Your preferences have been updated successfully.' });
   };
 
   const handleSaveProfile = (e: React.FormEvent) => {
@@ -132,8 +126,7 @@ export default function SettingsView() {
     // Note: full profile update requires backend. We acknowledge and close form.
     toast({
       title: 'Profile updated (demo)',
-      description: 'In production this would update your account on the server.',
-    });
+      description: 'In production this would update your account on the server.' });
     setEditingProfile(false);
   };
 
@@ -141,16 +134,14 @@ export default function SettingsView() {
     toast({
       title: 'Account deletion requested',
       description: 'Our support team will contact you within 24 hours to confirm.',
-      variant: 'destructive',
-    });
+      variant: 'destructive' });
   };
 
   const handleLogout = () => {
     logout();
     toast({
       title: 'Signed out',
-      description: 'You have been successfully signed out.',
-    });
+      description: 'You have been successfully signed out.' });
     router.push('/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -188,7 +179,7 @@ export default function SettingsView() {
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" >
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ border: '1px dashed rgba(212,175,55,0.4)' }}>
-              <Settings className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
+              <Settings className="w-8 h-8"  />
             </div>
             <h2 className="aura-text-primary aura-h2 mb-3" >
               Sign in to manage settings
@@ -201,7 +192,7 @@ export default function SettingsView() {
               <Link
                 href="/auth/signup"
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                style={{ color: 'var(--color-gold)', background: 'none' }}
+                style={{ background: 'none' }}
               >
                 Create a free account
               </Link>
@@ -222,8 +213,7 @@ export default function SettingsView() {
         { key: 'emailPromos', label: 'Promotions & offers', sub: 'Sales, new arrivals, members-only deals', value: emailPromos, setter: setEmailPromos },
         { key: 'smsUpdates', label: 'SMS updates', sub: 'Critical order updates by text message', value: smsUpdates, setter: setSmsUpdates },
         { key: 'pushNotifs', label: 'Push notifications', sub: 'Real-time alerts on your device', value: pushNotifs, setter: setPushNotifs },
-      ],
-    },
+      ] },
     {
       icon: Shield,
       title: 'Privacy',
@@ -231,16 +221,14 @@ export default function SettingsView() {
       items: [
         { key: 'showProfile', label: 'Public profile', sub: 'Allow other members to see your activity', value: showProfile, setter: setShowProfile },
         { key: 'personalizedAds', label: 'Personalised recommendations', sub: 'Tailor product suggestions based on browsing', value: personalizedAds, setter: setPersonalizedAds },
-      ],
-    },
+      ] },
     {
       icon: Moon,
       title: 'Appearance',
       description: 'Adjust how Aura looks on your device.',
       items: [
         { key: 'darkMode', label: 'Dark mode', sub: 'Switch to a darker, evening-friendly palette', value: darkMode, setter: setDarkMode },
-      ],
-    },
+      ] },
   ];
 
   return (
@@ -300,7 +288,7 @@ export default function SettingsView() {
                 <form onSubmit={handleSaveProfile}>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" >
-                      <UserIcon className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                      <UserIcon className="w-5 h-5"  />
                     </div>
                     <h3 className="text-xl sm:text-2xl font-semibold" >
                       Edit Profile
@@ -318,7 +306,7 @@ export default function SettingsView() {
                         value={profileName}
                         onChange={(e) => setProfileName(e.target.value)}
                         className="w-full px-3 py-2.5 rounded-sm text-sm outline-none"
-                        style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+                        
                       />
                     </div>
                     <div>
@@ -331,7 +319,7 @@ export default function SettingsView() {
                         value={profileEmail}
                         onChange={(e) => setProfileEmail(e.target.value)}
                         className="w-full px-3 py-2.5 rounded-sm text-sm outline-none"
-                        style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+                        
                       />
                     </div>
                   </div>
@@ -392,7 +380,7 @@ export default function SettingsView() {
                 <div key={section.title} className="rounded-xl p-5 sm:p-7" >
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" >
-                      <SectionIcon className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                      <SectionIcon className="w-5 h-5"  />
                     </div>
                     <div>
                       <h3 className="text-xl sm:text-2xl font-semibold" >
@@ -433,7 +421,7 @@ export default function SettingsView() {
             <div className="rounded-xl p-5 sm:p-7" >
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" >
-                  <Globe className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                  <Globe className="w-5 h-5"  />
                 </div>
                 <div>
                   <h3 className="text-xl sm:text-2xl font-semibold" >
@@ -466,7 +454,7 @@ export default function SettingsView() {
             <div className="rounded-xl p-5 sm:p-7" >
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" >
-                  <CreditCard className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                  <CreditCard className="w-5 h-5"  />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl sm:text-2xl font-semibold" >
@@ -481,8 +469,8 @@ export default function SettingsView() {
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between p-3 rounded-sm" style={{ backgroundColor: 'rgba(212,175,55,0.05)' }}>
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-md flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-                      <CreditCard className="w-4 h-4" style={{ color: 'var(--color-gold-text)' }} />
+                    <div className="w-9 h-9 rounded-md flex items-center justify-center" >
+                      <CreditCard className="w-4 h-4"  />
                     </div>
                     <div>
                       <p className="text-sm font-medium" >
@@ -495,7 +483,7 @@ export default function SettingsView() {
                   </div>
                   <span
                     className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-sm"
-                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}
+                    
                   >
                     Default
                   </span>
@@ -511,7 +499,7 @@ export default function SettingsView() {
               className="rounded-sm p-5 sm:p-7"
               style={{ backgroundColor: 'rgba(220, 38, 38, 0.03)', border: '1px solid rgba(220, 38, 38, 0.2)' }}
             >
-              <h3 className="text-xl sm:text-2xl font-semibold mb-2" style={{ color: 'var(--color-danger)' }}>
+              <h3 className="text-xl sm:text-2xl font-semibold mb-2" >
                 Danger Zone
               </h3>
               <p className="text-xs sm:text-sm mb-5" >
@@ -535,7 +523,7 @@ export default function SettingsView() {
           {/* Save bar */}
           <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-xl p-5" >
             <p className="text-xs sm:text-sm text-center sm:text-left" >
-              <Mail className="w-3.5 h-3.5 inline mr-1" style={{ color: 'var(--color-gold)' }} />
+              <Mail className="w-3.5 h-3.5 inline mr-1"  />
               Changes are saved instantly to your device.
             </p>
             <div className="flex items-center gap-3">
@@ -543,7 +531,7 @@ export default function SettingsView() {
                 href="/account"
                 onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                style={{ color: 'var(--color-gold)', background: 'none' }}
+                style={{ background: 'none' }}
               >
                 Back to Account
               </Link>

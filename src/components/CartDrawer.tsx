@@ -5,8 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import {
   X, Minus, Plus, Trash2, ShoppingBag, ArrowRight, CreditCard,
-  Truck, Shield, CheckCircle, Tag, Lock, Sparkles, ShoppingBagIcon,
-} from 'lucide-react';
+  Truck, Shield, CheckCircle, Tag, Lock, Sparkles, ShoppingBagIcon } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { formatPKR } from '@/data/products';
 import { trapFocus, focusFirst } from '@/lib/focusTrap';
@@ -16,8 +15,7 @@ import PremiumButton from '@/components/ui/PremiumButton';
 type CouponCode = 'AURA15' | 'WELCOME10';
 const VALID_COUPONS: Record<CouponCode, { discount: number; label: string }> = {
   AURA15: { discount: 0.15, label: '15% off' },
-  WELCOME10: { discount: 0.10, label: '10% off (welcome)' },
-};
+  WELCOME10: { discount: 0.10, label: '10% off (welcome)' } };
 
 export default function CartDrawer() {
   const router = useRouter();
@@ -28,8 +26,7 @@ export default function CartDrawer() {
     getCartTotal,
     getCartCount,
     cartOpen,
-    setCartOpen,
-  } = useStore();
+    setCartOpen } = useStore();
   const { toast } = useToast();
 
   const [hydrated, setHydrated] = useState(false);
@@ -80,15 +77,13 @@ export default function CartDrawer() {
       setAppliedCoupon(code);
       toast({
         title: 'Coupon applied!',
-        description: `${VALID_COUPONS[code].label} discount applied to your order.`,
-      });
+        description: `${VALID_COUPONS[code].label} discount applied to your order.` });
       setCouponInput('');
     } else {
       toast({
         title: 'Invalid coupon',
         description: 'This coupon code is not valid. Try AURA15 or WELCOME10.',
-        variant: 'destructive',
-      });
+        variant: 'destructive' });
     }
   };
 
@@ -168,8 +163,6 @@ export default function CartDrawer() {
         className="fixed inset-0 z-[70]"
         style={{
           background: 'linear-gradient(135deg, rgba(44,44,44,0.6) 0%, rgba(28,28,28,0.5) 100%)',
-          backdropFilter: 'blur(4px)',
-          WebkitBackdropFilter: 'blur(4px)',
           opacity: 0 }}
         onClick={handleClose}
         aria-hidden="true"
@@ -183,17 +176,14 @@ export default function CartDrawer() {
           aria-modal="true"
           aria-labelledby="cart-drawer-title"
           className="relative h-full w-full max-w-[440px] flex flex-col pointer-events-auto"
-          style={{
-            background: 'linear-gradient(180deg, var(--surface-card) 0%, var(--surface-page) 100%)',
-            boxShadow: '-20px 0 60px rgba(0,0,0,0.15), -1px 0 0 rgba(212,175,55,0.1)',
+          style={{ boxShadow: '-20px 0 60px rgba(0,0,0,0.15), -1px 0 0 rgba(212,175,55,0.1)',
             transform: 'translateX(100%)',
             opacity: 0 }}
         >
           {/* ═══ Premium gold top accent with gradient ═══ */}
           <div
             className="h-[4px] w-full shrink-0"
-            style={{
-              background: 'linear-gradient(90deg, transparent 0%, var(--color-gold) 20%, #E0BD4A 50%, var(--color-gold) 80%, transparent 100%)' }}
+            
           />
 
           {/* ═══ Header — premium with icon + badge ═══ */}
@@ -205,10 +195,9 @@ export default function CartDrawer() {
               <div
                 className="w-11 h-11 rounded-xl flex items-center justify-center"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.05) 100%)',
-                  border: '1px solid rgba(212,175,55,0.2)' }}
+                  background: 'linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.05) 100%)' }}
               >
-                <ShoppingBag className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
+                <ShoppingBag className="w-5 h-5"  />
               </div>
               <div>
                 <h2
@@ -244,24 +233,24 @@ export default function CartDrawer() {
             >
               {amountToFreeShipping > 0 ? (
                 <div className="flex items-center gap-2 mb-2.5">
-                  <Truck className="w-4 h-4 shrink-0" style={{ color: 'var(--color-gold-text)' }} />
+                  <Truck className="w-4 h-4 shrink-0"  />
                   <p className="text-xs" >
                     Add{' '}
-                    <span className="font-bold" style={{ color: 'var(--color-gold-text)' }}>
+                    <span className="font-bold" >
                       {formatPKR(amountToFreeShipping)}
                     </span>
                     {' '}more for{' '}
-                    <span className="font-bold" style={{ color: 'var(--color-gold-text)' }}>
+                    <span className="font-bold" >
                       FREE shipping
                     </span>
                   </p>
                 </div>
               ) : (
                 <div className="flex items-center justify-center gap-2 mb-2.5">
-                  <CheckCircle className="w-4 h-4" style={{ color: 'var(--color-success)' }} />
+                  <CheckCircle className="w-4 h-4"  />
                   <p
                     className="text-xs font-bold"
-                    style={{ color: 'var(--color-success)' }}
+                    
                   >
                     FREE shipping unlocked!
                   </p>
@@ -309,10 +298,10 @@ export default function CartDrawer() {
                     background: 'linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.05) 100%)',
                     border: '2px dashed rgba(212,175,55,0.3)' }}
                 >
-                  <ShoppingBag className="h-10 w-10" style={{ color: 'var(--color-gold-text)' }} />
+                  <ShoppingBag className="h-10 w-10"  />
                   <Sparkles
                     className="w-5 h-5 absolute -top-1 -right-1"
-                    style={{ color: 'var(--color-gold)' }}
+                    
                   />
                 </div>
                 <h3
@@ -349,7 +338,6 @@ export default function CartDrawer() {
                       className="shrink-0 w-20 h-20 rounded-xl overflow-hidden relative transition-transform duration-300 group-hover:scale-105"
                       style={{
                         border: '1px solid rgba(232, 213, 163, 0.6)',
-                        background: 'linear-gradient(135deg, var(--surface-card) 0%, var(--surface-page) 100%)',
                         boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}
                     >
                       <Image
@@ -383,8 +371,7 @@ export default function CartDrawer() {
                             removeFromCart(item.product.id);
                             toast({
                               title: 'Removed',
-                              description: `${item.product.name} removed from cart.`,
-                            });
+                              description: `${item.product.name} removed from cart.` });
                           }}
                           className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all hover:bg-red-50"
                           
@@ -467,20 +454,19 @@ export default function CartDrawer() {
                     <div
                       className="flex items-center justify-between p-3.5 rounded-xl"
                       style={{
-                        background: 'linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(34,197,94,0.04) 100%)',
-                        border: '1px solid rgba(34,197,94,0.25)' }}
+                        background: 'linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(34,197,94,0.04) 100%)' }}
                     >
                       <div className="flex items-center gap-2.5">
                         <div
                           className="w-8 h-8 rounded-full flex items-center justify-center"
                           style={{ backgroundColor: 'rgba(34,197,94,0.15)' }}
                         >
-                          <Tag className="w-4 h-4" style={{ color: 'var(--color-success)' }} />
+                          <Tag className="w-4 h-4"  />
                         </div>
                         <div>
                           <p
                             className="text-xs font-bold"
-                            style={{ color: 'var(--color-success)' }}
+                            
                           >
                             {appliedCoupon} Applied
                           </p>
@@ -547,9 +533,7 @@ export default function CartDrawer() {
           {cart.length > 0 && (
             <div
               className="shrink-0 px-6 pt-5 pb-6"
-              style={{
-                borderTop: '2px solid var(--color-gold)',
-                background: 'linear-gradient(180deg, rgba(255,253,247,1) 0%, rgba(245,237,218,0.3) 100%)',
+              style={{ background: 'linear-gradient(180deg, rgba(255,253,247,1) 0%, rgba(245,237,218,0.3) 100%)',
                 boxShadow: '0 -8px 30px rgba(0,0,0,0.06)' }}
             >
               {/* Summary rows */}
@@ -572,14 +556,14 @@ export default function CartDrawer() {
                 <div className="flex items-center justify-between mb-2">
                   <span
                     className="text-sm flex items-center gap-1.5"
-                    style={{ color: 'var(--color-success)' }}
+                    
                   >
                     <Tag className="w-3.5 h-3.5" />
                     Discount ({appliedCoupon})
                   </span>
                   <span
                     className="text-sm font-semibold"
-                    style={{ color: 'var(--color-success)' }}
+                    
                   >
                     −{formatPKR(discount)}
                   </span>
@@ -597,7 +581,7 @@ export default function CartDrawer() {
                 {shipping === 0 ? (
                   <span
                     className="text-sm font-bold"
-                    style={{ color: 'var(--color-success)' }}
+                    
                   >
                     FREE
                   </span>
@@ -669,14 +653,14 @@ export default function CartDrawer() {
                   className="inline-flex items-center gap-1.5 text-[11px]"
                   
                 >
-                  <Lock className="w-3.5 h-3.5" style={{ color: 'var(--color-gold-text)' }} />
+                  <Lock className="w-3.5 h-3.5"  />
                   Secure Checkout
                 </span>
                 <span
                   className="inline-flex items-center gap-1.5 text-[11px]"
                   
                 >
-                  <Shield className="w-3.5 h-3.5" style={{ color: 'var(--color-gold-text)' }} />
+                  <Shield className="w-3.5 h-3.5"  />
                   Free Returns
                 </span>
                 <span

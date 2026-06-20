@@ -31,8 +31,7 @@ const PinterestIcon = ({ size = 20, className = '' }: { size?: number; className
 function FooterLink({
   children,
   onClick,
-  href,
-}: {
+  href }: {
   children: React.ReactNode;
   onClick?: () => void;
   href?: string;
@@ -73,8 +72,7 @@ function FooterLink({
 function SocialIcon({
   icon: Icon,
   href,
-  label,
-}: {
+  label }: {
   icon: React.ComponentType<{ size?: number; className?: string }>;
   href: string;
   label: string;
@@ -86,7 +84,7 @@ function SocialIcon({
       target="_blank"
       rel="noopener noreferrer"
       className="group flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-gold)]/25 transition-all duration-500 hover:border-[var(--color-gold)]/70 hover:scale-110 hover:rotate-6 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
-      style={{ color: 'var(--color-gold)', backgroundColor: 'rgba(212,175,55,0.06)' }}
+      
     >
       <Icon size={18} className="transition-all duration-500 group-hover:scale-110" />
     </a>
@@ -165,10 +163,8 @@ export default function Footer() {
           y: 0,
           duration: 0.7,
           stagger: 0.15,
-          ease: 'power3.out',
-        });
-      },
-    });
+          ease: 'power3.out' });
+      } });
 
     // Safety fallback: if columns are still hidden after 3s, show them
     const fallback = setTimeout(() => {
@@ -194,13 +190,13 @@ export default function Footer() {
       {/* Gold accent line top edge */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[2px] z-10"
-        style={{ background: 'linear-gradient(90deg, transparent 0%, var(--color-gold) 50%, transparent 100%)' }}
+        
       />
 
       {/* Subtle gradient transition from page cream to footer charcoal */}
       <div
         className="absolute top-0 left-0 right-0 h-20 pointer-events-none z-10"
-        style={{ background: 'linear-gradient(to bottom, rgba(250,248,245,0.15) 0%, rgba(44,44,44,0) 100%)' }}
+        
       />
 
       {/* Subtle brand pattern overlay */}
@@ -238,7 +234,7 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <h3
               className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
-              style={{ color: 'var(--color-gold)' }}
+              
             >
               Quick Links
               <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[var(--color-gold)]/50" />
@@ -256,7 +252,7 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <h3
               className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
-              style={{ color: 'var(--color-gold)' }}
+              
             >
               Customer Service
               <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[var(--color-gold)]/50" />
@@ -274,7 +270,7 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <h3
               className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
-              style={{ color: 'var(--color-gold)' }}
+              
             >
               Newsletter
               <span className="absolute -bottom-1.5 left-0 w-8 h-[1.5px] bg-[var(--color-gold)]/50" />
@@ -290,7 +286,7 @@ export default function Footer() {
                   : '0 0 0 rgba(212,175,55,0)' }}
             >
               <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--surface-page)', opacity: 0.9 }}>
-                Get <span style={{ color: 'var(--color-gold)', fontWeight: 600 }}>15% off</span> your first order
+                Get <span style={{ fontWeight: 600 }}>15% off</span> your first order
               </p>
               <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
                 <div className="relative">
@@ -307,8 +303,7 @@ export default function Footer() {
                     onFocus={() => setFocused(true)}
                     onBlur={() => setFocused(false)}
                     className="h-11 w-full rounded-lg px-4 text-sm outline-none transition-all duration-500 placeholder:aura-text-muted"
-                    style={{ backgroundColor: 'rgba(250,248,245,0.08)',
-                      border: focused ? '1px solid rgba(212,175,55,0.6)' : '1px solid rgba(212,175,55,0.18)',
+                    style={{ border: focused ? '1px solid rgba(212,175,55,0.6)' : '1px solid rgba(212,175,55,0.18)',
                       color: 'var(--surface-page)',
                       boxShadow: focused
                         ? '0 0 20px rgba(212,175,55,0.15), 0 0 40px rgba(212,175,55,0.05)'
@@ -335,7 +330,7 @@ export default function Footer() {
               {subscribed && (
                 <p
                   className="text-xs mt-3 transition-opacity duration-500"
-                  style={{ color: 'var(--color-gold)' }}
+                  
                 >
                   Thank you for subscribing!
                 </p>

@@ -17,8 +17,7 @@ import {
   ShoppingBag,
   Sparkles,
   Tag,
-  Camera,
-} from 'lucide-react';
+  Camera } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { products, formatPKR } from '@/data/products';
 import { trapFocus, focusFirst } from '@/lib/focusTrap';
@@ -60,9 +59,7 @@ const megaMenuItems: MegaMenuItem[] = [
       image: '/images/pages/shop-hero.webp',
       eyebrow: 'The Full Collection',
       headline: 'Explore Every Piece, Curated for Pakistan',
-      cta: 'Shop Everything',
-    },
-  },
+      cta: 'Shop Everything' } },
   {
     label: 'New Arrivals',
     href: '/new-arrivals',
@@ -72,9 +69,7 @@ const megaMenuItems: MegaMenuItem[] = [
       image: '/images/pages/new-arrivals-hero.webp',
       eyebrow: 'Fresh Off the Workbench',
       headline: "New Pieces, Just Landed This Week",
-      cta: "Discover What's New",
-    },
-  },
+      cta: "Discover What's New" } },
   {
     label: 'Sale',
     href: '/sale',
@@ -84,9 +79,7 @@ const megaMenuItems: MegaMenuItem[] = [
       image: '/images/pages/sale-hero.webp',
       eyebrow: 'Limited Time Only',
       headline: 'Up to 40% Off Select Home Treasures',
-      cta: 'Shop the Sale',
-    },
-  },
+      cta: 'Shop the Sale' } },
   {
     label: 'Lookbook',
     href: '/lookbook',
@@ -96,9 +89,7 @@ const megaMenuItems: MegaMenuItem[] = [
       image: '/images/pages/lookbook-hero.webp',
       eyebrow: 'Styled Spaces',
       headline: 'Real Rooms, Real Inspiration for Your Home',
-      cta: 'Browse the Lookbook',
-    },
-  },
+      cta: 'Browse the Lookbook' } },
   {
     label: 'Care Guide',
     href: '/care-guide',
@@ -108,9 +99,7 @@ const megaMenuItems: MegaMenuItem[] = [
       image: '/images/pages/care-guide-hero.webp',
       eyebrow: 'Preserve the Beauty',
       headline: 'How to Care for Your Aura Pieces for Years',
-      cta: 'Read the Guide',
-    },
-  },
+      cta: 'Read the Guide' } },
 ];
 
 // Routes that belong to the Shop mega-menu family (highlight "Shop" when on any of these)
@@ -278,8 +267,7 @@ export default function Navbar() {
     if (mobileMenuRef.current) {
       gsap.to(mobileMenuRef.current, {
         opacity: 0, duration: 0.15, ease: 'power2.in',
-        onComplete: () => { setMobileMenuOpen(false); setMobileShopExpanded(false); },
-      });
+        onComplete: () => { setMobileMenuOpen(false); setMobileShopExpanded(false); } });
     } else {
       setMobileMenuOpen(false);
       setMobileShopExpanded(false);
@@ -324,9 +312,6 @@ export default function Navbar() {
           <div
             className="relative flex items-center justify-between rounded-full transition-all duration-300 ease-out"
             style={{ border: scrolled ? '1px solid rgba(212, 175, 55, 0.4)' : '1px solid rgba(212, 175, 55, 0.3)',
-              backgroundColor: 'rgba(20, 20, 20, 0.85)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
               paddingLeft: scrolled ? '14px' : '16px',
               paddingRight: scrolled ? '14px' : '16px',
               paddingTop: scrolled ? '8px' : '10px',
@@ -511,9 +496,6 @@ export default function Navbar() {
                 <div
                   className="rounded-2xl overflow-hidden flex"
                   style={{ background: 'rgba(28, 28, 28, 0.94)',
-                    backdropFilter: 'blur(20px)',
-                    WebkitBackdropFilter: 'blur(20px)',
-                    borderTop: '2px solid var(--color-gold)',
                     boxShadow: '0 16px 50px rgba(0,0,0,0.35), 0 0 0 1px rgba(212,175,55,0.1)',
                     width: 'min(720px, calc(100vw - 32px))' }}
                 >
@@ -521,7 +503,7 @@ export default function Navbar() {
                   <div className="flex-1 py-4" style={{ borderRight: '1px solid rgba(212,175,55,0.12)' }}>
                     <p
                       className="px-5 pb-2 text-[10px] uppercase tracking-[3px] font-semibold"
-                      style={{ color: 'var(--color-gold)' }}
+                      
                     >
                       Explore
                     </p>
@@ -552,7 +534,7 @@ export default function Navbar() {
                             >
                               {item.label}
                               {itemActive && (
-                                <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)', color: 'var(--color-gold)' }}>
+                                <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)' }}>
                                   Current
                                 </span>
                               )}
@@ -566,7 +548,7 @@ export default function Navbar() {
                           </div>
                           <ChevronRight
                             className="w-3.5 h-3.5 transition-opacity duration-200"
-                            style={{ color: 'var(--color-gold)', opacity: isPreviewing ? 1 : 0 }}
+                            style={{ opacity: isPreviewing ? 1 : 0 }}
                           />
                         </Link>
                       );
@@ -593,7 +575,7 @@ export default function Navbar() {
                       <div className="relative h-full flex flex-col justify-end p-6">
                         <p
                           className="text-[10px] uppercase tracking-[3px] font-semibold mb-2"
-                          style={{ color: 'var(--color-gold)' }}
+                          
                         >
                           {activePreview.preview.eyebrow}
                         </p>
@@ -607,10 +589,10 @@ export default function Navbar() {
                           href={activePreview.href}
                           onClick={closeMenusAndScroll}
                           className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:gap-2.5 cursor-pointer group"
-                          style={{ color: 'var(--color-gold)', background: 'none' }}
+                          style={{ background: 'none' }}
                         >
                           {activePreview.preview.cta}
-                          <ChevronRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5" style={{ color: 'var(--color-gold)' }} />
+                          <ChevronRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5"  />
                         </Link>
                       </div>
                     </div>
@@ -629,7 +611,7 @@ export default function Navbar() {
         <div
           ref={mobileMenuRef}
           className="fixed inset-0 z-[52] flex flex-col"
-          style={{ backgroundColor: 'rgba(20, 20, 20, 0.97)', backdropFilter: 'blur(20px)' }}
+          style={{ backgroundColor: 'rgba(20, 20, 20, 0.97)' }}
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation menu"
@@ -670,7 +652,7 @@ export default function Navbar() {
             <div className="space-y-1">
               <p
                 className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-3"
-                style={{ color: 'var(--color-gold)' }}
+                
               >
                 Menu
               </p>
@@ -682,7 +664,7 @@ export default function Navbar() {
                     {link.hasMegaMenu && (
                       <ChevronDown
                         className="h-4 w-4 transition-transform duration-300"
-                        style={{ transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)', color: 'var(--color-gold)' }}
+                        style={{ transform: mobileShopExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
                       />
                     )}
                   </>
@@ -749,8 +731,7 @@ export default function Navbar() {
                                 >
                                   <div
                                     className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-200"
-                                    style={{ backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(212, 175, 55, 0.12)',
-                                      color: 'var(--color-gold)' }}
+                                    style={{ backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(212, 175, 55, 0.12)' }}
                                   >
                                     {item.icon}
                                   </div>
@@ -760,7 +741,7 @@ export default function Navbar() {
                                       {itemActive && (
                                         <span
                                           className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm"
-                                          style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)', color: 'var(--color-gold)' }}
+                                          style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)' }}
                                         >
                                           Current
                                         </span>
@@ -799,7 +780,7 @@ export default function Navbar() {
             <div className="space-y-1">
               <p
                 className="text-[10px] uppercase tracking-[3px] font-medium px-3 mb-2"
-                style={{ color: 'var(--color-gold)' }}
+                
               >
                 Quick Actions
               </p>
@@ -813,7 +794,7 @@ export default function Navbar() {
                   <>
                     <div
                       className="w-9 h-9 rounded-lg flex items-center justify-center relative"
-                      style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}
+                      
                     >
                       {item.icon}
                       {item.count && item.count > 0 ? (
@@ -853,12 +834,11 @@ export default function Navbar() {
             <div className="mt-auto pt-5">
               <div
                 className="mobile-cta-card rounded-2xl p-4"
-                style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(232,213,163,0.12) 100%)',
-                  border: '1px solid rgba(212,175,55,0.2)' }}
+                style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(232,213,163,0.12) 100%)' }}
               >
                 <p
                   className="text-[11px] uppercase tracking-[3px] font-semibold mb-1.5"
-                  style={{ color: 'var(--color-gold)' }}
+                  
                 >
                   New Collection 2026
                 </p>
@@ -903,7 +883,7 @@ export default function Navbar() {
           >
             <div className="mx-auto max-w-2xl">
               <div className="flex items-center gap-3">
-                <Search className="h-5 w-5 shrink-0" style={{ color: 'var(--color-gold)' }} />
+                <Search className="h-5 w-5 shrink-0"  />
                 <input
                   ref={searchInputRef}
                   type="text"
@@ -967,7 +947,7 @@ export default function Navbar() {
                           </p>
                           <p
                             className="text-xs"
-                            style={{ color: 'var(--color-gold)' }}
+                            
                           >
                             {formatPKR(p.price)}
                           </p>

@@ -7,8 +7,7 @@ import {
   useGsapStagger,
   
   gsap,
-  ScrollTrigger,
-} from '@/hooks/useGsap';
+  ScrollTrigger } from '@/hooks/useGsap';
 import { GoldDivider, FloatingOrb } from '@/components/SVGDecorations';
 import { Leaf, Hammer, Heart, ArrowRight, Sparkles, Package, Users, Truck, Store, Globe, Rocket, type LucideIcon } from 'lucide-react';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -19,20 +18,17 @@ const values = [
     icon: Leaf,
     title: 'Sustainability',
     description:
-      'We are committed to eco-friendly packaging and sustainable sourcing practices. Every piece in our collection is thoughtfully selected to minimize environmental impact while maximizing beauty, ensuring that your home looks stunning without costing the earth.',
-  },
+      'We are committed to eco-friendly packaging and sustainable sourcing practices. Every piece in our collection is thoughtfully selected to minimize environmental impact while maximizing beauty, ensuring that your home looks stunning without costing the earth.' },
   {
     icon: Hammer,
     title: 'Craftsmanship',
     description:
-      'We proudly support local artisans across Pakistan, preserving centuries-old techniques that have been passed down through generations. Each handcrafted piece tells a story of dedication, skill, and cultural heritage that machine-made products simply cannot replicate.',
-  },
+      'We proudly support local artisans across Pakistan, preserving centuries-old techniques that have been passed down through generations. Each handcrafted piece tells a story of dedication, skill, and cultural heritage that machine-made products simply cannot replicate.' },
   {
     icon: Heart,
     title: 'Community',
     description:
-      'We are building a vibrant community of home decor enthusiasts who share our passion for creating beautiful spaces. From workshops to curated events, we bring people together to celebrate the art of making a house feel like home.',
-  },
+      'We are building a vibrant community of home decor enthusiasts who share our passion for creating beautiful spaces. From workshops to curated events, we bring people together to celebrate the art of making a house feel like home.' },
 ];
 
 const statsData = [
@@ -58,48 +54,42 @@ const timeline: TimelineEntry[] = [
     description:
       'Founded in a small Lahore workshop with three artisans, a borrowed kiln, and a vision to bring handcrafted Pakistani decor to every home.',
     icon: Sparkles,
-    highlight: '3 artisans · 1 workshop',
-  },
+    highlight: '3 artisans · 1 workshop' },
   {
     year: '2021',
     title: 'First Collection Launches',
     description:
       'Our debut collection of 50 handcrafted pieces goes live online. Within the first month, we fulfil 100 orders across Lahore and Karachi.',
     icon: Package,
-    highlight: '50 pieces · 100 orders in 30 days',
-  },
+    highlight: '50 pieces · 100 orders in 30 days' },
   {
     year: '2022',
     title: 'Artisan Network Grows',
     description:
       'We partner with 100+ artisans across Punjab, Sindh, and KPK, preserving centuries-old techniques and providing fair-trade income to craft communities.',
     icon: Users,
-    highlight: '100+ artisan partners',
-  },
+    highlight: '100+ artisan partners' },
   {
     year: '2023',
     title: 'Nationwide Reach',
     description:
       'Delivery expands to 50+ cities across Pakistan. We cross 2,000 homes served and launch our signature gold-rim planter that becomes a bestseller.',
     icon: Truck,
-    highlight: '50+ cities · 2,000+ homes',
-  },
+    highlight: '50+ cities · 2,000+ homes' },
   {
     year: '2024',
     title: 'Flagship Experience Center',
     description:
       'We open our first physical experience center in Gulberg, Lahore — a 2,000 sq ft space where customers can touch, feel, and experience every piece in person.',
     icon: Store,
-    highlight: '2,000 sq ft · Gulberg, Lahore',
-  },
+    highlight: '2,000 sq ft · Gulberg, Lahore' },
   {
     year: '2025',
     title: 'Digital Transformation',
     description:
       'We launch our redesigned online platform with 500+ products, AI-powered search, and same-day delivery within Lahore. Mobile app goes live on iOS and Android.',
     icon: Globe,
-    highlight: '500+ products · Mobile app launch',
-  },
+    highlight: '500+ products · Mobile app launch' },
   {
     year: '2026',
     title: 'Going Global',
@@ -107,8 +97,7 @@ const timeline: TimelineEntry[] = [
       'Expanding our collection with international shipping to the UAE, UK, and US. Launching the Aura Artisan Fund to support the next generation of Pakistani craftspeople.',
     icon: Rocket,
     highlight: 'International shipping · Artisan Fund',
-    isFuture: true,
-  },
+    isFuture: true },
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -136,10 +125,8 @@ function ChapterLabel({ number }: { number: string }) {
           scaleX: 1,
           duration: 0.8,
           ease: 'power3.out',
-          delay: 0.2,
-        });
-      },
-    });
+          delay: 0.2 });
+      } });
 
     return () => trigger.kill();
   }, []);
@@ -166,8 +153,7 @@ function ChapterLabel({ number }: { number: string }) {
 function AnimatedHeading({
   text,
   className,
-  style,
-}: {
+  style }: {
   text: string;
   className?: string;
   style?: React.CSSProperties;
@@ -202,10 +188,8 @@ function AnimatedHeading({
           y: 0,
           duration: 0.5,
           stagger: 0.03,
-          ease: 'power3.out',
-        });
-      },
-    });
+          ease: 'power3.out' });
+      } });
 
     return () => trigger.kill();
   }, [text]);
@@ -223,8 +207,7 @@ function AnimatedHeading({
 function ParagraphReveal({
   children,
   className,
-  style,
-}: {
+  style }: {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -245,10 +228,8 @@ function ParagraphReveal({
           opacity: 1,
           y: 0,
           duration: 0.8,
-          ease: 'power3.out',
-        });
-      },
-    });
+          ease: 'power3.out' });
+      } });
 
     return () => trigger.kill();
   }, []);
@@ -266,8 +247,7 @@ function ParagraphReveal({
 function KenBurnsImage({
   src,
   alt,
-  className,
-}: {
+  className }: {
   src: string;
   alt: string;
   className?: string;
@@ -291,8 +271,7 @@ function KenBurnsImage({
         const progress = self.progress;
         const scale = 1 + progress * 0.08;
         gsap.set(img, { scale });
-      },
-    });
+      } });
 
     return () => trigger.kill();
   }, []);
@@ -336,10 +315,8 @@ function DecorativeGoldLine() {
           opacity: 1,
           duration: 0.5,
           ease: 'back.out(2)',
-          delay: 0.8,
-        });
-      },
-    });
+          delay: 0.8 });
+      } });
 
     return () => trigger.kill();
   }, []);
@@ -386,10 +363,8 @@ function FloatingDots() {
           y: 0,
           duration: 0.6,
           stagger: 0.12,
-          ease: 'power2.out',
-        });
-      },
-    });
+          ease: 'power2.out' });
+      } });
 
     return () => trigger.kill();
   }, []);
@@ -429,10 +404,8 @@ function CornerOrnaments() {
           opacity: 1,
           duration: 0.6,
           stagger: 0.1,
-          ease: 'back.out(2)',
-        });
-      },
-    });
+          ease: 'back.out(2)' });
+      } });
 
     return () => trigger.kill();
   }, []);
@@ -454,8 +427,7 @@ function CountUp({
   target,
   suffix,
   duration = 2,
-  decimals = 0,
-}: {
+  decimals = 0 }: {
   target: number;
   suffix?: string;
   duration?: number;
@@ -481,10 +453,8 @@ function CountUp({
           ease: 'power2.out',
           onUpdate: () => {
             el.textContent = obj.val.toFixed(decimals) + (suffix || '');
-          },
-        });
-      },
-    });
+          } });
+      } });
 
     return () => trigger.kill();
   }, [target, suffix, duration, decimals]);
@@ -499,8 +469,7 @@ function ValueCard({
   icon: Icon,
   title,
   description,
-  index,
-}: {
+  index }: {
   icon: React.ElementType;
   title: string;
   description: string;
@@ -529,23 +498,19 @@ function ValueCard({
           y: 0,
           duration: 0.7,
           delay: index * 0.15,
-          ease: 'power3.out',
-        });
+          ease: 'power3.out' });
         gsap.to(border, {
           scaleY: 1,
           duration: 0.8,
           delay: index * 0.15 + 0.3,
-          ease: 'power3.out',
-        });
+          ease: 'power3.out' });
         gsap.to(iconWrap, {
           scale: 1,
           opacity: 1,
           duration: 0.6,
           delay: index * 0.15 + 0.2,
-          ease: 'back.out(2)',
-        });
-      },
-    });
+          ease: 'back.out(2)' });
+      } });
 
     return () => trigger.kill();
   }, [index]);
@@ -567,7 +532,7 @@ function ValueCard({
         className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-5"
         style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
       >
-        <Icon className="w-7 h-7" style={{ color: 'var(--color-gold)' }} />
+        <Icon className="w-7 h-7"  />
       </div>
       <h3
         className="aura-text-primary text-xl sm:text-2xl font-semibold mb-4"
@@ -593,8 +558,7 @@ function ValueCard({
 function TimelineItem({
   item,
   index,
-  isLast,
-}: {
+  isLast }: {
   item: TimelineEntry;
   index: number;
   isLast: boolean;
@@ -625,25 +589,21 @@ function TimelineItem({
           opacity: 1,
           duration: 0.5,
           ease: 'back.out(2)',
-          delay: 0.1,
-        });
+          delay: 0.1 });
         if (line) {
           gsap.to(line, {
             scaleY: 1,
             duration: 0.6,
             ease: 'power3.out',
-            delay: 0.2,
-          });
+            delay: 0.2 });
         }
         gsap.to(card, {
           y: 0,
           opacity: 1,
           duration: 0.7,
           delay: 0.3,
-          ease: 'power3.out',
-        });
-      },
-    });
+          ease: 'power3.out' });
+      } });
 
     return () => trigger.kill();
   }, [index]);
@@ -699,8 +659,7 @@ function TimelineItem({
           {item.isFuture && (
             <span
               className="text-[9px] uppercase tracking-[2px] font-semibold px-2 py-0.5 rounded-full"
-              style={{ backgroundColor: 'rgba(212,175,55,0.12)',
-                color: 'var(--color-gold)' }}
+              style={{ backgroundColor: 'rgba(212,175,55,0.12)' }}
             >
               Upcoming
             </span>
@@ -727,8 +686,7 @@ function TimelineItem({
         {item.highlight && (
           <div
             className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-sm"
-            style={{ backgroundColor: 'rgba(212,175,55,0.08)',
-              color: 'var(--color-gold)' }}
+            style={{ backgroundColor: 'rgba(212,175,55,0.08)' }}
           >
             <Icon className="w-3 h-3" />
             {item.highlight}
@@ -758,8 +716,7 @@ function ScrollProgressIndicator() {
       scrub: 0.3,
       onUpdate: (self) => {
         gsap.set(el, { scaleX: self.progress });
-      },
-    });
+      } });
 
     return () => trigger.kill();
   }, []);
@@ -787,8 +744,7 @@ export default function AboutView() {
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
-    start: 'top 90%',
-  });
+    start: 'top 90%' });
 
   // CTA section fade-in
   const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
@@ -804,9 +760,7 @@ export default function AboutView() {
           trigger: heroBgRef.current?.parentElement,
           start: 'top top',
           end: 'bottom top',
-          scrub: true,
-        },
-      });
+          scrub: true } });
     }, heroBgRef);
     return () => ctx.revert();
   }, []);
@@ -824,9 +778,7 @@ export default function AboutView() {
           trigger: el.parentElement,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: true,
-        },
-      });
+          scrub: true } });
     }, el);
     return () => ctx.revert();
   }, []);
@@ -844,9 +796,7 @@ export default function AboutView() {
           trigger: el.parentElement,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: true,
-        },
-      });
+          scrub: true } });
     }, el);
     return () => ctx.revert();
   }, []);
@@ -858,8 +808,7 @@ export default function AboutView() {
     duration: 0.6,
     stagger: 0.1,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
 
   // Chapter 2 text reveal
   const chapter2TextRef = useGsapStagger<HTMLDivElement>({
@@ -868,8 +817,7 @@ export default function AboutView() {
     duration: 0.6,
     stagger: 0.1,
     ease: 'power3.out',
-    start: 'top 80%',
-  });
+    start: 'top 80%' });
 
   // Chapter 1 image slide in from left
   const chapter1ImgSlideRef = useRef<HTMLDivElement>(null);
@@ -886,10 +834,8 @@ export default function AboutView() {
           opacity: 1,
           x: 0,
           duration: 0.9,
-          ease: 'power3.out',
-        });
-      },
-    });
+          ease: 'power3.out' });
+      } });
 
     return () => trigger.kill();
   }, []);
@@ -909,10 +855,8 @@ export default function AboutView() {
           opacity: 1,
           x: 0,
           duration: 0.9,
-          ease: 'power3.out',
-        });
-      },
-    });
+          ease: 'power3.out' });
+      } });
 
     return () => trigger.kill();
   }, []);
@@ -1034,7 +978,7 @@ export default function AboutView() {
           <div ref={chapter1ImgSlideRef} className="relative flex items-center justify-center">
             <div
               className="absolute -inset-3 sm:-inset-4 rounded-sm"
-              style={{ border: '2px solid var(--color-gold)', opacity: 0.4 }}
+              style={{ opacity: 0.4 }}
             />
             <div
               className="absolute -inset-1.5 sm:-inset-2 rounded-sm"
@@ -1066,7 +1010,7 @@ export default function AboutView() {
           >
             <div
               className="absolute -inset-3 sm:-inset-4 rounded-sm"
-              style={{ border: '2px solid var(--color-gold)', opacity: 0.4 }}
+              style={{ opacity: 0.4 }}
             />
             <div
               className="absolute -inset-1.5 sm:-inset-2 rounded-sm"
@@ -1169,7 +1113,7 @@ export default function AboutView() {
               <div key={stat.label} className="text-center py-6">
                 <span
                   className="aura-h2 text-charcoal block mb-2"
-                  style={{ color: 'var(--color-gold)' }}
+                  
                 >
                   <CountUp
                     target={stat.number}

@@ -14,15 +14,12 @@ export const metadata: Metadata = {
     title: 'Frequently Asked Questions | Aura Living',
     description: 'Answers about orders, shipping, returns, products, payment, and the Aura Rewards program.',
     type: 'website',
-    images: [{ url: '/og/faq.png', width: 1344, height: 768, alt: 'FAQ | Aura Living' }],
-  },
+    images: [{ url: '/og/faq.png', width: 1344, height: 768, alt: 'FAQ | Aura Living' }] },
   twitter: {
     card: 'summary_large_image',
     title: 'FAQ | Aura Living',
     description: 'Answers about orders, shipping, returns, products, payment, and rewards.',
-    images: ['/og/faq.png'],
-  },
-};
+    images: ['/og/faq.png'] } };
 
 export default function FAQPage() {
   return <FAQView />;
