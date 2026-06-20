@@ -248,13 +248,13 @@ export default function TrackOrdersView() {
         />
 
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-          <h1
+          <h2
             ref={heroTitleRef}
             className="aura-hero-title text-white"
             
           >
             Track Your Orders
-          </h1>
+          </h2>
 
           <div className="flex items-center gap-3 mt-6">
             <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />

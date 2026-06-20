@@ -169,9 +169,9 @@ export default function AdminDashboard() {
         {/* ═══ OVERVIEW ═══ */}
         {activeTab === 'overview' && (
           <div ref={fadeIn}>
-            <h1 className="hidden lg:block text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>
+            <h2 className="hidden lg:block text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>
               Dashboard Overview
-            </h1>
+            </h2>
             <p className="hidden lg:block aura-body-small text-muted-gray mb-6">Welcome back! Here&apos;s what&apos;s happening today.</p>
 
             {/* KPI Cards */}
@@ -319,7 +319,7 @@ export default function AdminDashboard() {
           <div ref={fadeIn}>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
               <div>
-                <h1 className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Inventory</h1>
+                <h2 className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Inventory</h2>
                 <p className="aura-body-small text-muted-gray">{products.length} products · {products.filter(p => p.inStock).length} in stock</p>
               </div>
               <div className="flex items-center gap-2">
@@ -388,10 +388,10 @@ export default function AdminDashboard() {
                         </td>
                         <td className="py-3 px-4 text-right">
                           <div className="flex items-center justify-end gap-1">
-                            <button className="w-7 h-7 rounded-md flex items-center justify-center transition-colors hover:bg-gold/10 cursor-pointer" style={{ color: 'var(--color-muted-gray)' }}>
+                            <button aria-label="Edit product" className="w-7 h-7 rounded-md flex items-center justify-center transition-colors hover:bg-gold/10 cursor-pointer" style={{ color: 'var(--color-muted-gray)' }}>
                               <Edit2 className="w-3.5 h-3.5" />
                             </button>
-                            <button className="w-7 h-7 rounded-md flex items-center justify-center transition-colors hover:bg-red-50 hover:text-red-500 cursor-pointer" style={{ color: 'var(--color-muted-gray)' }}>
+                            <button aria-label="Delete product" className="w-7 h-7 rounded-md flex items-center justify-center transition-colors hover:bg-red-50 hover:text-red-500 cursor-pointer" style={{ color: 'var(--color-muted-gray)' }}>
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           </div>
@@ -414,7 +414,7 @@ export default function AdminDashboard() {
         {/* ═══ ORDERS ═══ */}
         {activeTab === 'orders' && (
           <div ref={fadeIn}>
-            <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Orders</h1>
+            <h2 className="text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Orders</h2>
             <p className="aura-body-small text-muted-gray mb-6">{mockOrders.length} total orders</p>
 
             <div className="rounded-lg overflow-hidden" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
@@ -460,7 +460,7 @@ export default function AdminDashboard() {
         {/* ═══ ANALYTICS ═══ */}
         {activeTab === 'analytics' && (
           <div ref={fadeIn}>
-            <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Analytics</h1>
+            <h2 className="text-2xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Analytics</h2>
             <p className="aura-body-small text-muted-gray mb-6">Business performance insights</p>
 
             {/* KPI Row */}
@@ -552,7 +552,7 @@ export default function AdminDashboard() {
           <div ref={fadeIn}>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h1 className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Notifications</h1>
+                <h2 className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Notifications</h2>
                 <p className="aura-body-small text-muted-gray">{unreadCount} unread</p>
               </div>
               {unreadCount > 0 && (
@@ -604,7 +604,7 @@ export default function AdminDashboard() {
         {/* ═══ SETTINGS ═══ */}
         {activeTab === 'settings' && (
           <div ref={fadeIn}>
-            <h1 className="text-2xl font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Admin Settings</h1>
+            <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Admin Settings</h2>
 
             <div className="rounded-lg p-6 mb-6" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
               <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>Store Information</h2>

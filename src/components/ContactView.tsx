@@ -151,7 +151,12 @@ export default function ContactView() {
                   </div>
 
                   {isSubmitted && (
-                    <div className="mb-6 p-4 rounded-sm text-sm transition-all duration-300" style={{ backgroundColor: 'rgba(168, 181, 160, 0.2)', border: '1px solid var(--color-sage)', color: 'var(--surface-dark)' }}>
+                    <div
+                      role="status"
+                      aria-live="polite"
+                      className="mb-6 p-4 rounded-sm text-sm transition-all duration-300"
+                      style={{ backgroundColor: 'rgba(168, 181, 160, 0.2)', border: '1px solid var(--color-sage)', color: 'var(--surface-dark)' }}
+                    >
                       Thank you! Your message has been sent successfully. We will get back to you soon.
                     </div>
                   )}
@@ -161,7 +166,7 @@ export default function ContactView() {
                     <div className="flex flex-col gap-1.5">
                       <label htmlFor="name" className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>Name</label>
                       <input
-                        id="name" name="name" type="text" required value={formData.name} onChange={handleChange}
+                        id="name" name="name" type="text" required aria-required="true" value={formData.name} onChange={handleChange}
                         placeholder="Your full name"
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
                         style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)', color: 'var(--surface-dark)' }}
@@ -174,7 +179,7 @@ export default function ContactView() {
                     <div className="flex flex-col gap-1.5">
                       <label htmlFor="email" className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>Email</label>
                       <input
-                        id="email" name="email" type="email" required value={formData.email} onChange={handleChange}
+                        id="email" name="email" type="email" required aria-required="true" value={formData.email} onChange={handleChange}
                         placeholder="your@email.com"
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
                         style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)', color: 'var(--surface-dark)' }}
@@ -187,7 +192,7 @@ export default function ContactView() {
                     <div className="flex flex-col gap-1.5">
                       <label htmlFor="subject" className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>Subject</label>
                       <select
-                        id="subject" name="subject" required value={formData.subject} onChange={handleChange}
+                        id="subject" name="subject" required aria-required="true" value={formData.subject} onChange={handleChange}
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
                         style={{ backgroundColor: 'var(--surface-card)',
                           border: '1px solid var(--color-gold-soft)',
@@ -208,7 +213,7 @@ export default function ContactView() {
                     <div className="flex flex-col gap-1.5">
                       <label htmlFor="message" className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>Message</label>
                       <textarea
-                        id="message" name="message" required rows={5} value={formData.message} onChange={handleChange}
+                        id="message" name="message" required aria-required="true" rows={5} value={formData.message} onChange={handleChange}
                         placeholder="How can we help you?"
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
                         style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)', color: 'var(--surface-dark)' }}

@@ -129,10 +129,15 @@ export default function ForgotPasswordView() {
                       style={{ color: 'var(--surface-dark)',
                       }}
                       autoComplete="email"
+                      aria-required="true"
+                      aria-invalid={emailError ? 'true' : 'false'}
+                      aria-describedby={emailError ? 'forgot-email-error' : undefined}
                     />
                   </div>
                   {emailError && (
                     <span
+                      id="forgot-email-error"
+                      role="alert"
                       className="text-xs pl-1"
                       style={{ color: '#C44' }}
                     >

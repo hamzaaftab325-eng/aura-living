@@ -680,7 +680,7 @@ function ShopViewInner() {
                     style={{ backgroundColor: 'rgba(245,237,218,0.8)', color: 'var(--color-gold-text)', border: '1px solid rgba(212,175,55,0.25)' }}
                   >
                     {categories.find((c) => c.id === selectedCategory)?.name}
-                    <button onClick={clearCategory} className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
+                    <button onClick={clearCategory} aria-label="Clear category filter" className="hover:text-[var(--color-gold-hover)]"><X size={12} /></button>
                   </span>
                 )}
                 {priceMin && (

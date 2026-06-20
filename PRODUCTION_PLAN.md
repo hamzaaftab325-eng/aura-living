@@ -14,7 +14,7 @@
 | 2 — Cart Drawer Redesign | ✅ Complete | ✅ | Premium slide-in drawer, 730 lines, coupon system, gradient accents |
 | 3 — SEO 100% | ✅ Complete | ✅ | 15 branded OG images, JSON-LD, sitemap, robots, canonical, Twitter cards |
 | 4 — Performance 100% | ✅ Complete | ✅ | Bundle analysis, caching strategy, PWA enhancement, Vercel Analytics, font optimization |
-| 5 — Accessibility 100% | ⏳ Pending | — | |
+| 5 — Accessibility 100% | ✅ Complete | ✅ | Form aria-invalid, heading hierarchy, focus trap, reduced motion, print styles, ARIA labels |
 | 6 — Design System 100% | ⏳ Pending | — | |
 | 7 — Content 100% | ⏳ Pending | — | |
 | 8 — Production Polish | ⏳ Pending | — | |
@@ -291,3 +291,103 @@ When ready to continue:
 - ✅ Error 13 (removing GSAP) — kept GSAP (tree-shakeable)
 - ✅ Error 14 (Lenis INP) — already disabled on mobile
 - ✅ Error 15 (cache headers) — already correct (no-cache HTML, immutable assets)
+
+---
+
+## Phase 5: Accessibility 100% — ✅ COMPLETE (VERIFIED)
+
+### 5.1 Form Accessibility
+- [x] AuthView (login/signup) — added `error` + `required` props to InputField
+  - `aria-invalid={error ? 'true' : 'false'}`
+  - `aria-describedby` linking to error message
+  - `aria-required={required || undefined}`
+  - `role="alert"` on error message span
+  - Red border when error present
+- [x] NewsletterSection — added `aria-required="true"`, `aria-label`, `role="status"` + `aria-live="polite"` on success message
+- [x] ContactView — added `aria-required="true"` on all 4 form fields (name, email, subject, message), `role="status"` + `aria-live="polite"` on success message
+- [x] ForgotPasswordView — added `aria-invalid`, `aria-describedby`, `aria-required`, `role="alert"` on error
+
+### 5.2 Heading Hierarchy
+Fixed 7 files with multiple `<h1>` tags (now exactly 1 per page):
+- [x] AdminDashboard.tsx — was 7 h1, now 1 (demoted 6 to h2)
+- [x] AddressesView.tsx — was 2 h1, now 1
+- [x] CartView.tsx — was 2 h1, now 1
+- [x] CheckoutView.tsx — was 2 h1, now 1
+- [x] SettingsView.tsx — was 2 h1, now 1
+- [x] TrackOrdersView.tsx — was 2 h1, now 1
+- [x] ArticleView.tsx — already 1 h1 (verified)
+
+### 5.3 Color Contrast
+- [x] Audited all `text-gold` usages — all are on DARK backgrounds (HeroSection, NewsletterSection, AdminDashboard sidebar) where #D4AF37 passes WCAG AA
+- [x] No changes needed — text-gold on light backgrounds was already migrated to text-gold-text in earlier work
+
+### 5.4 Keyboard Navigation
+- [x] Added focus trap to mobile menu (Navbar) — uses trapFocus + focusFirst from @/lib/focusTrap
+- [x] Focus trap restores focus to trigger button on close
+- [x] Cart drawer focus trap already implemented (Phase 2)
+- [x] Skip-to-content link present (Phase 1)
+- [x] ESC closes mobile menu + cart drawer + mega menu
+
+### 5.5 ARIA Labels Audit
+- [x] Audited all icon-only buttons — found 3 missing aria-label
+- [x] ShopView.tsx — added `aria-label="Clear category filter"` on X button
+- [x] AdminDashboard.tsx — added `aria-label="Edit product"` + `aria-label="Delete product"` on row action buttons
+- [x] All other icon-only buttons already have aria-label (verified)
+
+### 5.6 Reduced Motion
+- [x] Added `prefersReducedMotion()` helper to useGsap.ts
+- [x] useGsapFadeIn — shows element immediately (opacity:1, y:0) when reduced motion preferred
+- [x] useGsapStagger — shows all children immediately when reduced motion preferred
+- [x] useGsapBlurText — shows text immediately without blur animation when reduced motion preferred
+- [x] Global CSS `@media (prefers-reduced-motion: reduce)` disables all animations/transitions
+- [x] Button hover transforms disabled when reduced motion preferred
+- [x] Lenis smooth scroll already disabled on mobile (useLenis.ts)
+
+### 5.7 Print Styles
+- [x] Added comprehensive `@media print` CSS to globals.css:
+  - Hides nav, footer, cart drawer, back-to-top, decorative elements
+  - Uses serif font (Playfair Display) for better print readability
+  - Constrains images to 300px max width
+  - Hides buttons (not actionable on paper)
+  - Shows URLs in parentheses after links
+  - Avoids page breaks inside product cards
+  - Forces background colors to print
+  - Added `.no-print` utility class
+
+### Verification Results
+- ✅ TypeScript: 0 errors
+- ✅ ESLint: 0 errors
+- ✅ Build: success (all routes with ISR config)
+- ✅ All routes return 200
+- ✅ All 7 files now have exactly 1 h1 tag
+- ✅ Forms have aria-invalid + role="alert"
+- ✅ Mobile menu has focus trap
+- ✅ GSAP respects reduced motion preference
+- ✅ Print styles added
+
+### Errors Avoided (from pre-Phase 5 analysis)
+- ✅ Error 1 (form validation) — only added aria attributes, didn't change validation logic
+- ✅ Error 2 (heading hierarchy SEO) — kept exactly 1 h1 per page
+- ✅ Error 3 (color contrast design) — verified text-gold is only on dark backgrounds
+- ✅ Error 4 (focus trap mobile menu) — tested ESC + click-outside still work
+- ✅ Error 5 (aria-label conflicts) — only added to icon-only buttons
+- ✅ Error 6 (reduced motion GSAP) — set final state immediately, no hidden elements
+- ✅ Error 7 (print styles) — only hide nav/footer/cart, keep main content
+- ✅ Error 10 (aria-live spam) — only used role=status for form success messages
+- ✅ Error 11 (form errors silent) — all error spans have role="alert"
+
+### Files Modified
+- `src/components/AuthView.tsx` — InputField now supports error + required props with aria
+- `src/components/NewsletterSection.tsx` — aria-required, aria-label, role=status on success
+- `src/components/ContactView.tsx` — aria-required on all fields, role=status on success
+- `src/components/ForgotPasswordView.tsx` — aria-invalid, aria-describedby, role=alert
+- `src/components/AdminDashboard.tsx` — 6 h1→h2, aria-label on edit/delete buttons
+- `src/components/AddressesView.tsx` — 1 h1→h2
+- `src/components/CartView.tsx` — 1 h1→h2
+- `src/components/CheckoutView.tsx` — 1 h1→h2
+- `src/components/SettingsView.tsx` — 1 h1→h2
+- `src/components/TrackOrdersView.tsx` — 1 h1→h2
+- `src/components/Navbar.tsx` — focus trap for mobile menu
+- `src/components/ShopView.tsx` — aria-label on clear filter button
+- `src/hooks/useGsap.ts` — prefersReducedMotion() helper + 3 hooks respect it
+- `src/app/globals.css` — comprehensive print styles

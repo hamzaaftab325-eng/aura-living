@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { products, formatPKR } from '@/data/products';
+import { trapFocus, focusFirst } from '@/lib/focusTrap';
 
 interface NavLink {
   label: string;
@@ -209,6 +210,19 @@ export default function Navbar() {
         );
       }
     }
+  }, [mobileMenuOpen]);
+
+  // Mobile menu focus trap + restore focus on close
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const t = setTimeout(() => focusFirst(mobileMenuRef.current), 100);
+    const releaseTrap = trapFocus(mobileMenuRef.current);
+    return () => {
+      clearTimeout(t);
+      releaseTrap();
+      previouslyFocused?.focus?.();
+    };
   }, [mobileMenuOpen]);
 
   // Mega menu entrance animation

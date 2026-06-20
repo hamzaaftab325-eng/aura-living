@@ -130,7 +130,7 @@ export default function CartView() {
               <ArrowLeft className="w-5 h-5 text-gold-text" />
             </button>
             <div>
-              <h1 className="aura-h2 text-charcoal">Shopping Cart</h1>
+              <h2 className="aura-h2 text-charcoal">Shopping Cart</h2>
               <p className="aura-body-small text-muted-gray">{safeCount} item{safeCount !== 1 ? 's' : ''} in your cart</p>
             </div>
           </div>

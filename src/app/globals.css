@@ -996,3 +996,97 @@ body {
   white-space: nowrap;
   border: 0;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   PRINT STYLES — clean printing for product pages, order confirmations
+   ═══════════════════════════════════════════════════════════ */
+@media print {
+  /* Hide navigation, footer, cart drawer, back-to-top, decorative elements */
+  nav,
+  footer,
+  [aria-label="Shopping cart"],
+  [aria-label="Back to top"],
+  .fixed,
+  .aura-skip-link,
+  .floating-orb,
+  .corner-ornament,
+  .floating-gold-dots,
+  .gold-divider,
+  [class*="animate"],
+  [class*="FloatingOrb"],
+  [class*="FloatingGoldDots"],
+  [class*="CornerOrnament"] {
+    display: none !important;
+  }
+
+  /* Show main content at full width */
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Use serif font for print (better readability) */
+  body {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    color: #000 !important;
+    background: #fff !important;
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Product details — make sure they're visible */
+  h1, h2, h3 {
+    color: #000 !important;
+    page-break-after: avoid;
+  }
+
+  /* Product images — keep visible but constrained */
+  img, [class*="Image"] {
+    max-width: 300px !important;
+    height: auto !important;
+  }
+
+  /* Buttons — hide in print (they're not actionable on paper) */
+  button, .premium-btn, [class*="btn-"] {
+    display: none !important;
+  }
+
+  /* Links — show URL in parentheses for print */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #666;
+  }
+
+  /* Don't show URL for internal links or links with no visible text */
+  a[href^="#"]:after,
+  a[href^="javascript"]:after {
+    content: "";
+  }
+
+  /* Page breaks */
+  h1, h2, h3 {
+    page-break-before: auto;
+    page-break-after: avoid;
+  }
+
+  /* Avoid breaking inside product cards */
+  [class*="product-card"],
+  [class*="ProductCard"],
+  article {
+    page-break-inside: avoid;
+  }
+
+  /* Force background colors to print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}

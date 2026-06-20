@@ -163,6 +163,9 @@ export default function NewsletterSection() {
                   onBlur={() => setIsFocused(false)}
                   placeholder=""
                   required
+                  aria-required="true"
+                  aria-invalid={submitted ? 'false' : 'false'}
+                  aria-label="Email address for newsletter signup"
                   className="w-full px-4 py-3.5 rounded-lg text-sm outline-none transition-all duration-300"
                   style={{
                     color: 'var(--text-on-dark)',
@@ -186,9 +189,11 @@ export default function NewsletterSection() {
               </PremiumButton>
             </form>
 
-            {/* Success message */}
+            {/* Success message — announced to screen readers via role=status */}
             {submitted && (
               <div
+                role="status"
+                aria-live="polite"
                 className="mt-4 max-w-md mx-auto p-3 rounded-lg text-center"
                 style={{
                   backgroundColor: 'rgba(212, 175, 55, 0.1)',

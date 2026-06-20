@@ -12,6 +12,15 @@ gsap.registerPlugin(ScrollTrigger);
 const GPU = { force3D: true };
 
 /**
+ * Check if user prefers reduced motion.
+ * When true, GSAP animations should be skipped (elements shown immediately).
+ */
+function prefersReducedMotion(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
  * useGsapFadeIn — animates elements from opacity:0, y:30 to opacity:1, y:0
  * when they scroll into view. GPU-accelerated.
  */
@@ -30,6 +39,12 @@ export function useGsapFadeIn<T extends HTMLElement = HTMLDivElement>(
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // Respect reduced motion — show element immediately without animation
+    if (prefersReducedMotion()) {
+      gsap.set(el, { opacity: 1, y: 0, ...GPU });
+      return;
+    }
 
     gsap.set(el, { opacity: 0, y, ...GPU });
 
@@ -82,6 +97,12 @@ export function useGsapStagger<T extends HTMLElement = HTMLDivElement>(
 
     const children = el.querySelectorAll(selector);
     if (!children.length) return;
+
+    // Respect reduced motion — show elements immediately
+    if (prefersReducedMotion()) {
+      gsap.set(children, { opacity: 1, y: 0, ...GPU });
+      return;
+    }
 
     gsap.set(children, { opacity: 0, y, ...GPU });
 
@@ -176,6 +197,12 @@ export function useGsapBlurText<T extends HTMLElement = HTMLDivElement>(
     }
 
     if (!items.length) return;
+
+    // Respect reduced motion — show text immediately
+    if (prefersReducedMotion()) {
+      gsap.set(items, { opacity: 1, y: 0, scaleX: 1, ...GPU });
+      return;
+    }
 
     // Use opacity + y + slight scaleX instead of filter:blur()
     // This is 100% GPU-composited = buttery smooth on all devices

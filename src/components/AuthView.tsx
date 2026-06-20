@@ -54,6 +54,8 @@ function InputField({
   onToggle,
   isVisible,
   ariaLabel,
+  error,
+  required,
 }: {
   icon: React.ReactNode;
   type?: string;
@@ -64,41 +66,51 @@ function InputField({
   onToggle?: () => void;
   isVisible?: boolean;
   ariaLabel: string;
+  error?: string;
+  required?: boolean;
 }) {
   const [isFocused, setIsFocused] = useState(false);
   const inputId = React.useId();
+  const errorId = `${inputId}-error`;
 
   return (
-    <div
-      className="relative flex items-center rounded-lg transition-all duration-300"
-      style={{ border: isFocused ? '2px solid var(--color-gold)' : '1.5px solid var(--color-gold-soft)',
-        backgroundColor: isFocused ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.7)',
-        boxShadow: isFocused
-          ? '0 0 20px rgba(212,175,55,0.2), 0 0 40px rgba(212,175,55,0.08)'
-          : '0 2px 8px rgba(0,0,0,0.03)',
-      }}
-    >
-      <label htmlFor={inputId} className="sr-only">{ariaLabel}</label>
+    <div>
       <div
-        className="flex items-center justify-center pl-4"
-        style={{ color: isFocused ? 'var(--color-gold)' : 'var(--color-taupe)' }}
-        aria-hidden="true"
-      >
-        {icon}
-      </div>
-      <input
-        id={inputId}
-        type={showToggle ? (isVisible ? 'text' : 'password') : type}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        className="w-full px-2 py-4 text-sm bg-transparent outline-none"
-        style={{ color: 'var(--surface-dark)',
+        className="relative flex items-center rounded-lg transition-all duration-300"
+        style={{ border: error
+          ? '2px solid var(--color-danger)'
+          : isFocused ? '2px solid var(--color-gold)' : '1.5px solid var(--color-gold-soft)',
+          backgroundColor: isFocused ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.7)',
+          boxShadow: isFocused
+            ? '0 0 20px rgba(212,175,55,0.2), 0 0 40px rgba(212,175,55,0.08)'
+            : '0 2px 8px rgba(0,0,0,0.03)',
         }}
-        aria-label={ariaLabel}
-      />
+      >
+        <label htmlFor={inputId} className="sr-only">{ariaLabel}</label>
+        <div
+          className="flex items-center justify-center pl-4"
+          style={{ color: isFocused ? 'var(--color-gold)' : 'var(--color-taupe)' }}
+          aria-hidden="true"
+        >
+          {icon}
+        </div>
+        <input
+          id={inputId}
+          type={showToggle ? (isVisible ? 'text' : 'password') : type}
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          className="w-full px-2 py-4 text-sm bg-transparent outline-none"
+          style={{ color: 'var(--surface-dark)',
+          }}
+          aria-label={ariaLabel}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? errorId : undefined}
+          aria-required={required || undefined}
+          required={required}
+        />
       {showToggle && (
         <button
           type="button"
@@ -109,6 +121,17 @@ function InputField({
         >
           {isVisible ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
         </button>
+      )}
+      </div>
+      {error && (
+        <p
+          id={errorId}
+          role="alert"
+          className="mt-1.5 ml-1 text-xs font-medium"
+          style={{ color: 'var(--color-danger)' }}
+        >
+          {error}
+        </p>
       )}
     </div>
   );

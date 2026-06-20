@@ -363,12 +363,12 @@ export default function CheckoutView() {
           >
             AURA LIVING
           </span>
-          <h1
+          <h2
             className="aura-hero-title text-white"
             
           >
             Checkout
-          </h1>
+          </h2>
           <div className="flex items-center gap-3 mt-6">
             <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
             <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
