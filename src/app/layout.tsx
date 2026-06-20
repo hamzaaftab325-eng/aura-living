@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Poppins, Great_Vibes, Dancing_Script, Archivo_Narrow } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import SiteShell from "@/components/SiteShell";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -166,7 +167,8 @@ export default function RootLayout({
           }}
         />
 
-        {children}
+        <SiteShell>{children}</SiteShell>
+
         <Toaster />
       </body>
     </html>
