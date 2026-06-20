@@ -189,7 +189,7 @@ export default function SettingsView() {
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
-              <Settings className="w-8 h-8" style={{ color: '#D4AF37' }} />
+              <Settings className="w-8 h-8" style={{ color: '#B8941F' }} />
             </div>
             <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Sign in to manage settings
@@ -312,7 +312,7 @@ export default function SettingsView() {
                 <form onSubmit={handleSaveProfile}>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
-                      <UserIcon className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                      <UserIcon className="w-5 h-5" style={{ color: '#B8941F' }} />
                     </div>
                     <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: '#2C2C2C' }}>
                       Edit Profile
@@ -410,7 +410,7 @@ export default function SettingsView() {
                 <div key={section.title} className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
-                      <SectionIcon className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                      <SectionIcon className="w-5 h-5" style={{ color: '#B8941F' }} />
                     </div>
                     <div>
                       <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: '#2C2C2C' }}>
@@ -451,7 +451,7 @@ export default function SettingsView() {
             <div className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
-                  <Globe className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                  <Globe className="w-5 h-5" style={{ color: '#B8941F' }} />
                 </div>
                 <div>
                   <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: '#2C2C2C' }}>
@@ -485,7 +485,7 @@ export default function SettingsView() {
             <div className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
-                  <CreditCard className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                  <CreditCard className="w-5 h-5" style={{ color: '#B8941F' }} />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: '#2C2C2C' }}>
@@ -501,7 +501,7 @@ export default function SettingsView() {
                 <div className="flex items-center justify-between p-3 rounded-sm" style={{ backgroundColor: 'rgba(212,175,55,0.05)' }}>
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-md flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-                      <CreditCard className="w-4 h-4" style={{ color: '#D4AF37' }} />
+                      <CreditCard className="w-4 h-4" style={{ color: '#B8941F' }} />
                     </div>
                     <div>
                       <p className="text-sm font-medium" style={{ color: '#2C2C2C' }}>

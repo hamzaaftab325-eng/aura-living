@@ -3,7 +3,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { Eye, Heart, ShoppingCart, Star, ArrowRight } from 'lucide-react';
 import { products, formatPKR } from '@/data/products';
-import { useStore } from '@/store/useStore';
+import { useStore, badgeColors } from '@/store/useStore';
+import { useToast } from '@/hooks/use-toast';
 import { GoldDivider } from '@/components/SVGDecorations';
 import { useGsapFadeIn, useGsapStagger, useGsapBlurText, gsap, ScrollTrigger } from '@/hooks/useGsap';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -12,11 +13,6 @@ import type { Product } from '@/store/useStore';
 /* ═══════════════════════════════════════════════════════════════
    Badge palette
    ═══════════════════════════════════════════════════════════════ */
-const badgeStyles: Record<string, { bg: string; text: string; border: string }> = {
-  NEW: { bg: 'rgba(168,181,160,0.92)', text: '#2C2C2C', border: 'rgba(168,181,160,0.5)' },
-  SALE: { bg: 'rgba(232,206,193,0.92)', text: '#2C2C2C', border: 'rgba(232,206,193,0.5)' },
-  BESTSELLER: { bg: 'rgba(212,175,55,0.92)', text: '#FFFFFF', border: 'rgba(212,175,55,0.6)' },
-};
 
 /* ═══════════════════════════════════════════════════════════════
    ProductCard — Enhanced CSS hover transforms with gold glow,
@@ -24,6 +20,7 @@ const badgeStyles: Record<string, { bg: string; text: string; border: string }> 
    ═══════════════════════════════════════════════════════════════ */
 function ProductCard({ product, index }: { product: Product; index: number }) {
   const { addToCart, toggleWishlist, isInWishlist, setSelectedProduct, setPage } = useStore();
+  const { toast } = useToast();
   const [isHovered, setIsHovered] = useState(false);
   const wishlisted = isInWishlist(product.id);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -57,6 +54,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     addToCart(product);
+    toast({ title: 'Added to cart!', description: `${product.name} has been added to your cart.` });
   };
 
   const handleToggleWishlist = (e: React.MouseEvent) => {
@@ -101,7 +99,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             ref={imageRef}
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+            className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
             style={{ transform: isHovered ? 'scale(1.12)' : 'scale(1)',
             }}
           loading="lazy" />
@@ -111,10 +109,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         {product.badge && (
           <div className="absolute top-3 left-3 z-30">
             <span
-              className="inline-block px-3 py-1 rounded-md text-[10px] font-bold tracking-[0.15em] uppercase"
-              style={{ backgroundColor: badgeStyles[product.badge].bg,
-                color: badgeStyles[product.badge].text,
-                border: `1px solid ${badgeStyles[product.badge].border}`,
+              className="inline-block px-2.5 py-1 rounded-sm text-[10px] font-bold tracking-wider uppercase"
+              style={{ backgroundColor: badgeColors[product.badge]?.bg,
+                color: badgeColors[product.badge]?.text,
               }}
             >
               {product.badge}

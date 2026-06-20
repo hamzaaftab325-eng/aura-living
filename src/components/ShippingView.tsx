@@ -95,7 +95,7 @@ export default function ShippingView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
-            <Truck className="w-8 h-8" style={{ color: '#D4AF37' }} />
+            <Truck className="w-8 h-8" style={{ color: '#B8941F' }} />
           </div>
           <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
@@ -131,7 +131,7 @@ export default function ShippingView() {
         <div ref={overviewRef} className="max-w-4xl mx-auto text-center">
           <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-              <Truck className="w-6 h-6" style={{ color: '#D4AF37' }} />
+              <Truck className="w-6 h-6" style={{ color: '#B8941F' }} />
             </div>
             <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Shipping Overview
@@ -166,7 +166,7 @@ export default function ShippingView() {
                   style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
                 >
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                    <rate.icon className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                    <rate.icon className="w-5 h-5" style={{ color: '#B8941F' }} />
                   </div>
                   <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-1" >
                     {rate.title}
@@ -194,7 +194,7 @@ export default function ShippingView() {
             <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                  <MapPin className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                  <MapPin className="w-5 h-5" style={{ color: '#B8941F' }} />
                 </div>
                 <div>
                   <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" >
@@ -235,7 +235,7 @@ export default function ShippingView() {
               <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                    <Clock className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                    <Clock className="w-5 h-5" style={{ color: '#B8941F' }} />
                   </div>
                   <div>
                     <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >
@@ -252,7 +252,7 @@ export default function ShippingView() {
               <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                    <Gift className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                    <Gift className="w-5 h-5" style={{ color: '#B8941F' }} />
                   </div>
                   <div>
                     <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >
@@ -262,7 +262,7 @@ export default function ShippingView() {
                       Each item is carefully wrapped in premium protective materials to ensure it arrives in perfect condition. We take great pride in our unboxing experience — because the joy of receiving something beautiful should start the moment you open the package.
                     </p>
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid #E8D5A3' }}>
-                      <Gift className="w-4 h-4" style={{ color: '#D4AF37' }} />
+                      <Gift className="w-4 h-4" style={{ color: '#B8941F' }} />
                       <span className="text-sm font-medium" style={{ color: '#2C2C2C' }}>
                         Gift-wrap option available for PKR 299
                       </span>
@@ -275,7 +275,7 @@ export default function ShippingView() {
               <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                    <Globe className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                    <Globe className="w-5 h-5" style={{ color: '#B8941F' }} />
                   </div>
                   <div>
                     <h3 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >

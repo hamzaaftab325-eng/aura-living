@@ -117,12 +117,14 @@ export const useStore = create<StoreState>()(
       cart: [],
       addToCart: (product) => {
         const { cart } = get();
+        const MAX_QTY = 99;
         const existing = cart.find((item) => item.product.id === product.id);
         if (existing) {
+          if (existing.quantity >= MAX_QTY) return;
           set({
             cart: cart.map((item) =>
               item.product.id === product.id
-                ? { ...item, quantity: item.quantity + 1 }
+                ? { ...item, quantity: Math.min(item.quantity + 1, MAX_QTY) }
                 : item
             ),
           });
@@ -132,30 +134,33 @@ export const useStore = create<StoreState>()(
       },
       addToCartWithQuantity: (product, quantity) => {
         const { cart } = get();
+        const MAX_QTY = 99;
+        const safeQty = Math.max(1, Math.min(quantity, MAX_QTY));
         const existing = cart.find((item) => item.product.id === product.id);
         if (existing) {
           set({
             cart: cart.map((item) =>
               item.product.id === product.id
-                ? { ...item, quantity: item.quantity + quantity }
+                ? { ...item, quantity: Math.min(item.quantity + safeQty, MAX_QTY) }
                 : item
             ),
           });
         } else {
-          set({ cart: [...cart, { product, quantity }] });
+          set({ cart: [...cart, { product, quantity: safeQty }] });
         }
       },
       removeFromCart: (productId) => {
         set({ cart: get().cart.filter((item) => item.product.id !== productId) });
       },
       updateQuantity: (productId, quantity) => {
+        const MAX_QTY = 99;
         if (quantity <= 0) {
           get().removeFromCart(productId);
           return;
         }
         set({
           cart: get().cart.map((item) =>
-            item.product.id === productId ? { ...item, quantity } : item
+            item.product.id === productId ? { ...item, quantity: Math.min(quantity, MAX_QTY) } : item
           ),
         });
       },

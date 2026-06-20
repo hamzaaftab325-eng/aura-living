@@ -131,7 +131,7 @@ export default function ReturnsView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
-            <RotateCcw className="w-8 h-8" style={{ color: '#D4AF37' }} />
+            <RotateCcw className="w-8 h-8" style={{ color: '#B8941F' }} />
           </div>
           <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
@@ -167,7 +167,7 @@ export default function ReturnsView() {
         <div ref={policyRef} className="max-w-4xl mx-auto text-center">
           <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-              <RotateCcw className="w-6 h-6" style={{ color: '#D4AF37' }} />
+              <RotateCcw className="w-6 h-6" style={{ color: '#B8941F' }} />
             </div>
             <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Our Return Policy
@@ -337,7 +337,7 @@ export default function ReturnsView() {
                 style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
               >
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                  <CreditCard className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                  <CreditCard className="w-5 h-5" style={{ color: '#B8941F' }} />
                 </div>
                 <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-2" >
                   Original Payment Method
@@ -352,7 +352,7 @@ export default function ReturnsView() {
                 style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}
               >
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                  <CreditCard className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                  <CreditCard className="w-5 h-5" style={{ color: '#B8941F' }} />
                 </div>
                 <h3 className="text-[#2C2C2C] text-lg sm:text-xl font-semibold mb-2" >
                   Store Credit
@@ -410,7 +410,7 @@ export default function ReturnsView() {
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-            <RotateCcw className="w-8 h-8" style={{ color: '#D4AF37' }} />
+            <RotateCcw className="w-8 h-8" style={{ color: '#B8941F' }} />
           </div>
           <h2 className="text-[#2C2C2C] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Need to Return Something?

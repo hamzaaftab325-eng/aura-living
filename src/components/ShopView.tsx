@@ -18,6 +18,7 @@ import {
   X,
 } from 'lucide-react';
 import { useStore, Product, badgeColors } from '@/store/useStore';
+import { useToast } from '@/hooks/use-toast';
 import { products, categories, formatPKR } from '@/data/products';
 
 
@@ -210,7 +211,7 @@ function ProductCard({
           <img loading="lazy"
         src={product.image}
             alt={product.name}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-cover"
             style={{ transition: 'transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               transform: isHovered ? 'scale(1.08)' : 'scale(1)',
             }}

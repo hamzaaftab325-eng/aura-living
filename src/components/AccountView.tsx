@@ -402,7 +402,7 @@ export default function AccountView() {
                     className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center shrink-0"
                     style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}
                   >
-                    <LogOut className="w-8 h-8" style={{ color: '#D4AF37' }} />
+                    <LogOut className="w-8 h-8" style={{ color: '#B8941F' }} />
                   </div>
                   <div className="flex-1">
                     <h2

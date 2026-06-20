@@ -18,6 +18,7 @@ import {
   Package,
 } from 'lucide-react';
 import { useStore, badgeColors } from '@/store/useStore';
+import { useToast } from '@/hooks/use-toast';
 import { products, categories, formatPKR } from '@/data/products';
 import PremiumButton from '@/components/ui/PremiumButton';
 
@@ -129,6 +130,7 @@ function AccordionItem({
    ═══════════════════════════════════════════════════════════ */
 export default function ProductDetailView() {
   const { selectedProduct, setSelectedProduct, setPage, addToCartWithQuantity, toggleWishlist, isInWishlist, setCartOpen } = useStore();
+  const { toast } = useToast();
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('Gold');
   const [selectedImage, setSelectedImage] = useState(0);
@@ -177,6 +179,7 @@ export default function ProductDetailView() {
   const handleAddToCart = () => {
     addToCartWithQuantity(product, quantity);
     setCartOpen(true);
+    toast({ title: 'Added to cart!', description: `${quantity} × ${product.name} added to your cart.` });
   };
 
   const handleToggleWishlist = () => {
@@ -246,7 +249,7 @@ export default function ProductDetailView() {
                 key={selectedImage}
                 src={galleryImages[selectedImage]}
                 alt={product.name}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               loading="lazy" />
               {product.badge && (
                 <div className="absolute top-4 left-4">
@@ -286,7 +289,7 @@ export default function ProductDetailView() {
                     backgroundColor: '#FFFDF7',
                   }}
                 >
-                  <img src={img} alt={`${product.name} view ${i + 1}`} className="w-full h-full object-contain" loading="lazy" />
+                  <img src={img} alt={`${product.name} view ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
                 </button>
               ))}
             </div>
@@ -447,7 +450,7 @@ export default function ProductDetailView() {
                   }}
                 >
                   <div className="aspect-square overflow-hidden" style={{ backgroundColor: '#FFFDF7' }}>
-                    <img src={rp.image} alt={rp.name} className="w-full h-full object-contain" loading="lazy" />
+                    <img src={rp.image} alt={rp.name} className="w-full h-full object-cover" loading="lazy" />
                   </div>
                   <div className="p-3 sm:p-4">
                     <h3 className="text-xs sm:text-sm font-medium line-clamp-1" style={{ color: '#2C2C2C' }}>{rp.name}</h3>

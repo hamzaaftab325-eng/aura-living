@@ -225,7 +225,7 @@ export default function AddressesView() {
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
-              <MapPin className="w-8 h-8" style={{ color: '#D4AF37' }} />
+              <MapPin className="w-8 h-8" style={{ color: '#B8941F' }} />
             </div>
             <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Sign in to manage addresses
@@ -315,7 +315,7 @@ export default function AddressesView() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 rounded-xl p-5 sm:p-6" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
               <div className="flex items-center gap-3 text-center sm:text-left">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}>
-                  <Plus className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                  <Plus className="w-5 h-5" style={{ color: '#B8941F' }} />
                 </div>
                 <div>
                   <p className="text-sm sm:text-base font-semibold" style={{ color: '#2C2C2C' }}>

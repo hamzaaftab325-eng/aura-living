@@ -304,7 +304,7 @@ export default function CareGuideView() {
                       className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                       style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
                     >
-                      <category.icon className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                      <category.icon className="w-5 h-5" style={{ color: '#B8941F' }} />
                     </div>
                     <div>
                       <h3

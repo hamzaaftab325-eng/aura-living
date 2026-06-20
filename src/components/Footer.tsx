@@ -216,7 +216,7 @@ export default function Footer() {
             </div>
             <p
               className="text-lg italic leading-relaxed"
-              style={{ color: '#E8D5A3', fontFamily: "'Dancing Script', cursive" }}
+              style={{ color: '#E8D5A3', fontFamily: "'Playfair Display', serif" }}
             >
               Where Comfort Meets Style
             </p>

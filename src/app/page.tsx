@@ -263,7 +263,7 @@ export default function Home() {
       <FloatingOrb size={70} top="55%" left="88%" delay={1.0} />
       <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />
       <Navbar />
-      <main ref={contentRef} className="flex-1 w-full">
+      <main ref={contentRef} id="main-content" className="flex-1 w-full">
         {renderPage()}
       </main>
       <div className="flex justify-center py-8 px-4 sm:px-6 w-full">

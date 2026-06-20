@@ -202,7 +202,7 @@ export default function TrackOrdersView() {
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: '#FFFDF7', border: '1px solid #E8D5A3' }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
-              <Package className="w-8 h-8" style={{ color: '#D4AF37' }} />
+              <Package className="w-8 h-8" style={{ color: '#B8941F' }} />
             </div>
             <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
               Sign in to track your orders

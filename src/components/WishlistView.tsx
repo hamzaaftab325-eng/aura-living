@@ -12,6 +12,7 @@ import {
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Heart, ShoppingCart, Star, ChevronRight, ShoppingBag } from 'lucide-react';
 import { useStore, badgeColors } from '@/store/useStore';
+import { useToast } from '@/hooks/use-toast';
 import { products, formatPKR } from '@/data/products';
 import PremiumButton from '@/components/ui/PremiumButton';
 
@@ -288,7 +289,7 @@ export default function WishlistView() {
                       <img loading="lazy"
         src={product.image}
                         alt={product.name}
-                        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.08]"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.08]"
                       />
 
                       {/* Badge */}

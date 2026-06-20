@@ -132,7 +132,7 @@ export default function TermsView() {
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
-            <FileText className="w-8 h-8" style={{ color: '#D4AF37' }} />
+            <FileText className="w-8 h-8" style={{ color: '#B8941F' }} />
           </div>
           <span className="text-[#D4AF37] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
@@ -189,7 +189,7 @@ export default function TermsView() {
                 <div className="flex items-start gap-4 sm:gap-5">
                   <div className="flex flex-col items-center shrink-0">
                     <div className="w-11 h-11 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                      <SectionIcon className="w-5 h-5" style={{ color: '#D4AF37' }} />
+                      <SectionIcon className="w-5 h-5" style={{ color: '#B8941F' }} />
                     </div>
                   </div>
                   <div className="flex flex-col gap-2">
@@ -228,7 +228,7 @@ export default function TermsView() {
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
-            <Shield className="w-8 h-8" style={{ color: '#D4AF37' }} />
+            <Shield className="w-8 h-8" style={{ color: '#B8941F' }} />
           </div>
           <h2 className="text-[#2C2C2C] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-4" >
             Questions About Our Terms?

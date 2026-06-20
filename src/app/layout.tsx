@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Poppins, Great_Vibes, Dancing_Script, Archivo_Narrow } from "next/font/google";
+import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -15,27 +15,6 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-poppins",
-  display: "swap",
-});
-
-const greatVibes = Great_Vibes({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-great-vibes",
-  display: "swap",
-});
-
-const dancingScript = Dancing_Script({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-dancing-script",
-  display: "swap",
-});
-
-const archivoNarrow = Archivo_Narrow({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-archivo-narrow",
   display: "swap",
 });
 
@@ -100,8 +79,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${poppins.variable} ${greatVibes.variable} ${dancingScript.variable} ${archivoNarrow.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${poppins.variable}`}>
       <body className="antialiased bg-background text-foreground min-h-screen flex flex-col w-full overflow-x-hidden">
+        <a href="#main-content" className="aura-skip-link">Skip to main content</a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Aura Living',
+              url: 'https://auraliving.pk',
+              logo: 'https://auraliving.pk/logo/default-monochrome-gold-black.svg',
+              description: 'Premium Home Decor Pakistan — Where Comfort Meets Style',
+              address: {
+                '@type': 'PostalAddress',
+                addressCountry: 'PK',
+              },
+              sameAs: [
+                'https://instagram.com/auraliving',
+                'https://facebook.com/auraliving',
+              ],
+            }),
+          }}
+        />
         {children}
         <Toaster />
       </body>

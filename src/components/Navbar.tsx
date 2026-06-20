@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { gsap } from '@/hooks/useGsap';
 import {
   Search,
@@ -394,14 +393,15 @@ export default function Navbar() {
                   );
                 })}
 
-                {/* Animated cursor pill */}
-                <motion.li
-                  animate={cursorPos}
-                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  className="absolute z-0 h-7 rounded-full"
-                  style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)',
+                {/* Animated cursor pill — CSS transition instead of Framer Motion */}
+                <li
+                  className="absolute z-0 h-7 rounded-full transition-all duration-200 ease-out"
+                  style={{
+                    backgroundColor: 'rgba(212, 175, 55, 0.25)',
                     top: '50%',
-                    translateY: '-50%',
+                    transform: `translateY(-50%) translateX(${cursorPos.left}px)`,
+                    width: `${cursorPos.width}px`,
+                    opacity: cursorPos.opacity,
                   }}
                 />
               </ul>

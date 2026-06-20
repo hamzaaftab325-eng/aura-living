@@ -265,7 +265,7 @@ export default function ContactView() {
                     {contactInfo.map((info) => (
                       <div key={info.label} className="flex items-start gap-4">
                         <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
-                          <info.icon className="w-4.5 h-4.5" style={{ color: '#D4AF37' }} />
+                          <info.icon className="w-4.5 h-4.5" style={{ color: '#B8941F' }} />
                         </div>
                         <div className="flex flex-col">
                           <span className="text-xs tracking-wider uppercase mb-0.5" style={{ color: '#8A8A8A' }}>{info.label}</span>
@@ -311,7 +311,7 @@ export default function ContactView() {
                       <div className="absolute left-3/4 top-0 bottom-0 w-px" style={{ backgroundColor: '#8A8A8A' }} />
                     </div>
                     <div className="flex flex-col items-center gap-3 relative z-10">
-                      <MapPin className="w-8 h-8" style={{ color: '#D4AF37' }} />
+                      <MapPin className="w-8 h-8" style={{ color: '#B8941F' }} />
                       <a
                         href="https://maps.google.com/?q=123+Artisan+Lane+Gulberg+III+Lahore+Pakistan"
                         target="_blank"
