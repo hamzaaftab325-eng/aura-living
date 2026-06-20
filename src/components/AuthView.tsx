@@ -33,11 +33,7 @@ function SocialButton({
   return (
     <button
       onClick={onClick}
-      className="flex items-center justify-center gap-3 w-full py-3.5 rounded-lg text-sm font-medium transition-all duration-300 hover:shadow-md active:scale-[0.98] cursor-pointer"
-      style={{ color: 'var(--surface-dark)',
-        backgroundColor: 'var(--text-on-dark)',
-        border: '1px solid var(--color-gold-soft)',
-      }}
+      className="premium-btn btn-secondary w-full"
     >
       {icon}
       <span>{label}</span>
@@ -543,10 +539,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="group w-full flex items-center justify-center gap-2 py-4 rounded-lg text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:bg-[var(--color-gold-hover)] active:scale-[0.98] cursor-pointer mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
-              style={{ backgroundColor: 'var(--color-gold)',
-                color: 'var(--text-on-dark)',
-              }}
+              className="premium-btn btn-primary btn-lg w-full mt-2"
             >
               {isSubmitting ? (
                 <>
@@ -559,7 +552,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
               ) : (
                 <>
                   {mode === 'login' ? 'Sign In' : 'Create Account'}
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>

@@ -359,16 +359,14 @@ export default function ProductDetailView({ product }: { product: Product }) {
             <div className="flex flex-col sm:flex-row gap-3 mb-10">
               <button
                 onClick={handleAddToCart}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-hover)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] active:scale-[0.97]"
-                style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)' }}
+                className="premium-btn btn-primary btn-lg flex-1"
               >
                 <ShoppingCart className="w-4 h-4" />
                 Add to Cart
               </button>
               <button
                 onClick={handleToggleWishlistClick}
-                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-pale)] hover:text-[var(--color-gold)] active:scale-[0.97]"
-                style={{ border: '2px solid var(--color-gold)', color: wishlisted ? 'var(--color-gold)' : 'var(--surface-dark)', backgroundColor: wishlisted ? 'rgba(212,175,55,0.08)' : 'transparent' }}
+                className="premium-btn btn-secondary btn-lg"
               >
                 <Heart className={`w-4 h-4 ${wishlisted ? 'fill-current' : ''}`} />
                 {wishlisted ? 'Wishlisted' : 'Wishlist'}
@@ -415,7 +413,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
             ) : (
               <div className="text-center">
                 <PremiumButton
-                  variant="outline"
+                  variant="secondary"
                   onClick={() => setShowReviewForm(true)}
                   leftIcon={<PenLine size={14} aria-hidden="true" />}
                 >

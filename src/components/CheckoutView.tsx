@@ -318,7 +318,7 @@ export default function CheckoutView() {
               Add items to your cart before proceeding to checkout. Redirecting you to the shop...
             </p>
             <PremiumButton
-              variant="gold"
+              variant="primary"
               size="lg"
               href="/shop"
             >
@@ -772,7 +772,7 @@ export default function CheckoutView() {
 
                   {/* Place Order Button */}
                   <PremiumButton
-                    variant="gold"
+                    variant="primary"
                     size="lg"
                     fullWidth
                     type="submit"

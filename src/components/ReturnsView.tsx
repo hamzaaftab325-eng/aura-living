@@ -414,7 +414,7 @@ export default function ReturnsView() {
             Our customer support team will guide you through the return or exchange process. We are committed to making it as smooth as possible.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <PremiumButton variant="gold" href="/contact">
+            <PremiumButton variant="primary" href="/contact">
               Contact Us
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </PremiumButton>

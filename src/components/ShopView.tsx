@@ -291,11 +291,7 @@ function ProductCard({
         >
           <button
             onClick={handleAddToCart}
-            className="w-full py-2.5 rounded-lg text-xs font-semibold tracking-[0.12em] uppercase flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 hover:bg-[var(--color-gold-hover)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 active:scale-[0.97]"
-            style={{ backgroundColor: 'rgba(212,175,55,0.9)',
-              color: 'var(--text-on-dark)',
-              border: '1px solid rgba(212,175,55,0.6)',
-            }}
+            className="premium-btn btn-primary btn-sm w-full"
           >
             <ShoppingCart className="w-3.5 h-3.5" />
             Add to Cart

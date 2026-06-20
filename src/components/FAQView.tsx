@@ -313,7 +313,7 @@ export default function FAQView() {
             Our team is here to help. Reach out to us and we will get back to you as soon as possible.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <PremiumButton variant="gold" href="/contact">
+            <PremiumButton variant="primary" href="/contact">
               Contact Us
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </PremiumButton>

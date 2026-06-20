@@ -3,11 +3,25 @@
 import { useCallback } from 'react';
 import Link from 'next/link';
 
+type ButtonVariant = 'primary' | 'secondary' | 'newsletter';
+type ButtonSize = 'sm' | 'md' | 'lg';
+
 interface PremiumButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
-  variant?: 'gold' | 'outline' | 'dark';
-  size?: 'sm' | 'md' | 'lg';
+  /**
+   * Button variant — exactly 3 options:
+   * - `primary` — Main CTA (gold gradient, white text)
+   * - `secondary` — Supporting action (outline, gold text)
+   * - `newsletter` — Newsletter form submit (enhanced primary)
+   *
+   * Legacy aliases (backward compat, mapped automatically):
+   * - `gold` → `primary`
+   * - `outline` → `secondary`
+   * - `dark` → `secondary` (deprecated)
+   */
+  variant?: ButtonVariant | 'gold' | 'outline' | 'dark';
+  size?: ButtonSize;
   className?: string;
   fullWidth?: boolean;
   type?: 'button' | 'submit' | 'reset';
@@ -20,10 +34,27 @@ interface PremiumButtonProps {
   href?: string;
 }
 
+/** Map legacy variant names to the new 3-class system. */
+function normalizeVariant(variant: string | undefined): ButtonVariant {
+  switch (variant) {
+    case 'gold':
+    case 'primary':
+      return 'primary';
+    case 'outline':
+    case 'secondary':
+      return 'secondary';
+    case 'newsletter':
+      return 'newsletter';
+    case 'dark':
+    default:
+      return 'secondary';
+  }
+}
+
 export default function PremiumButton({
   children,
   onClick,
-  variant = 'gold',
+  variant = 'primary',
   size = 'md',
   className = '',
   fullWidth = false,
@@ -40,19 +71,23 @@ export default function PremiumButton({
     onClick?.();
   }, [onClick, disabled, loading]);
 
-  const sizeClasses = {
-    sm: 'px-5 py-2 text-xs',
-    md: 'px-8 py-3.5 text-sm',
-    lg: 'px-10 py-4 text-base',
+  const normalizedVariant = normalizeVariant(variant);
+
+  const variantClasses: Record<ButtonVariant, string> = {
+    primary: 'btn-primary',
+    secondary: 'btn-secondary',
+    newsletter: 'btn-newsletter',
   };
 
-  const variantClasses = {
-    gold: 'btn-gold',
-    outline: 'btn-outline',
-    dark: 'btn-dark',
+  const sizeClasses: Record<ButtonSize, string> = {
+    sm: 'btn-sm',
+    md: '',
+    lg: 'btn-lg',
   };
 
-  const computedClassName = `premium-btn ${variantClasses[variant]} ${sizeClasses[size]} ${fullWidth ? 'w-full' : ''} ${disabled || loading ? 'opacity-60 cursor-not-allowed' : ''} ${className}`;
+  const computedClassName = `premium-btn ${variantClasses[normalizedVariant]} ${sizeClasses[size]} ${
+    fullWidth ? 'w-full' : ''
+  } ${disabled || loading ? 'opacity-60 cursor-not-allowed' : ''} ${className}`;
 
   const inner = (
     <span className="flex items-center justify-center gap-2">

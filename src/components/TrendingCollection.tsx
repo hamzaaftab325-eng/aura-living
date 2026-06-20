@@ -96,7 +96,7 @@ export default function TrendingCollection() {
             </p>
 
             <div ref={btnWrapperRef}>
-              <PremiumButton variant="gold" href="/shop">
+              <PremiumButton variant="primary" href="/shop">
                 Shop This Collection
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </PremiumButton>

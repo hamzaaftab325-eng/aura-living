@@ -180,7 +180,7 @@ export default function NewsletterSection() {
                 />
               </div>
 
-              <PremiumButton variant="gold" fullWidth type="submit">
+              <PremiumButton variant="newsletter" fullWidth type="submit">
                 <Send className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 Claim My 15% Off
               </PremiumButton>

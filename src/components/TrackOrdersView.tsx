@@ -214,7 +214,7 @@ export default function TrackOrdersView() {
               Sign in to view live delivery status, ETA, and full tracking history for every order.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <PremiumButton variant="gold" size="sm" href="/auth/login">Sign In</PremiumButton>
+              <PremiumButton variant="primary" size="sm" href="/auth/login">Sign In</PremiumButton>
               <Link
                 href="/auth/signup"
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
@@ -308,7 +308,7 @@ export default function TrackOrdersView() {
                     style={{ color: 'var(--surface-dark)' }}
                   />
                 </div>
-                <PremiumButton variant="gold" size="sm" onClick={handleSearch}>
+                <PremiumButton variant="primary" size="sm" onClick={handleSearch}>
                   Track Order
                 </PremiumButton>
               </div>
@@ -433,10 +433,10 @@ export default function TrackOrdersView() {
                         </ol>
 
                         <div className="mt-6 flex flex-wrap items-center gap-3">
-                          <PremiumButton variant="outline" size="sm" onClick={() => toast({ title: 'Invoice', description: `Invoice for #${order.id} downloaded.`, })}>
+                          <PremiumButton variant="secondary" size="sm" onClick={() => toast({ title: 'Invoice', description: `Invoice for #${order.id} downloaded.`, })}>
                             Download Invoice
                           </PremiumButton>
-                          <PremiumButton variant="gold" size="sm" href="/contact">
+                          <PremiumButton variant="primary" size="sm" href="/contact">
                             Get Help with this Order
                           </PremiumButton>
                         </div>

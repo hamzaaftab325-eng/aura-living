@@ -8,6 +8,7 @@ import {
   Filter, Download, Plus, Edit2, Trash2, AlertTriangle, CheckCircle,
   Clock, XCircle, ChevronRight, Menu, X, Package2, Star, ShoppingCart as CartIcon,
 } from 'lucide-react';
+import PremiumButton from '@/components/ui/PremiumButton';
 import Link from 'next/link';
 import { products, formatPKR, categories } from '@/data/products';
 import { useGsapFadeIn, useGsapStagger } from '@/hooks/useGsap';
@@ -333,10 +334,9 @@ export default function AdminDashboard() {
                     style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}
                   />
                 </div>
-                <button className="flex items-center gap-1.5 px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)', fontFamily: "'Poppins', sans-serif" }}>
-                  <Plus className="w-3.5 h-3.5" />
+                <PremiumButton variant="primary" size="sm" leftIcon={<Plus className="w-3.5 h-3.5" />}>
                   Add
-                </button>
+                </PremiumButton>
               </div>
             </div>
 
@@ -629,9 +629,9 @@ export default function AdminDashboard() {
                   <input type="text" defaultValue="0" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)', color: 'var(--surface-dark)', fontFamily: "'Poppins', sans-serif" }} />
                 </div>
               </div>
-              <button className="mt-4 px-6 py-2.5 rounded-md text-sm font-semibold uppercase tracking-wider cursor-pointer" style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)', fontFamily: "'Poppins', sans-serif" }}>
+              <PremiumButton variant="primary" className="mt-4">
                 Save Changes
-              </button>
+              </PremiumButton>
             </div>
 
             <div className="rounded-lg p-6" style={{ backgroundColor: 'rgba(220,38,38,0.03)', border: '1px solid rgba(220,38,38,0.2)' }}>

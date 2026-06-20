@@ -200,7 +200,7 @@ export default function SettingsView() {
               Customise notifications, privacy, appearance, and more.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <PremiumButton variant="gold" size="sm" href="/auth/login">Sign In</PremiumButton>
+              <PremiumButton variant="primary" size="sm" href="/auth/login">Sign In</PremiumButton>
               <Link
                 href="/auth/signup"
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
@@ -347,7 +347,7 @@ export default function SettingsView() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <PremiumButton variant="gold" size="sm" type="submit">
+                    <PremiumButton variant="primary" size="sm" type="submit">
                       Save Changes
                     </PremiumButton>
                     <button
@@ -379,7 +379,7 @@ export default function SettingsView() {
                     </p>
                   </div>
                   <PremiumButton
-                    variant="outline"
+                    variant="secondary"
                     size="sm"
                     onClick={() => {
                       setProfileName(safeUser?.name ?? '');
@@ -512,7 +512,7 @@ export default function SettingsView() {
                     Default
                   </span>
                 </div>
-                <PremiumButton variant="outline" size="sm" onClick={() => toast({ title: 'Coming soon', description: 'Adding new payment methods will be available soon.' })}>
+                <PremiumButton variant="secondary" size="sm" onClick={() => toast({ title: 'Coming soon', description: 'Adding new payment methods will be available soon.' })}>
                   Add Payment Method
                 </PremiumButton>
               </div>
@@ -530,7 +530,7 @@ export default function SettingsView() {
                 Sign out of your account or request permanent deletion. Deletion is irreversible.
               </p>
               <div className="flex flex-wrap gap-3">
-                <PremiumButton variant="outline" size="sm" onClick={handleLogout}>
+                <PremiumButton variant="secondary" size="sm" onClick={handleLogout}>
                   Sign Out
                 </PremiumButton>
                 <button
@@ -561,7 +561,7 @@ export default function SettingsView() {
               >
                 Back to Account
               </Link>
-              <PremiumButton variant="gold" size="sm" onClick={handleSave}>
+              <PremiumButton variant="primary" size="sm" onClick={handleSave}>
                 Save Changes
               </PremiumButton>
             </div>

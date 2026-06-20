@@ -142,7 +142,7 @@ export default function ForgotPasswordView() {
                 </div>
 
                 <PremiumButton
-                  variant="gold"
+                  variant="primary"
                   fullWidth
                   type="submit"
                   disabled={loading}

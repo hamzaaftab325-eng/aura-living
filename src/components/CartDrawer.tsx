@@ -8,6 +8,7 @@ import { useStore } from '@/store/useStore';
 import { formatPKR } from '@/data/products';
 import { trapFocus, focusFirst } from '@/lib/focusTrap';
 import { useToast } from '@/hooks/use-toast';
+import PremiumButton from '@/components/ui/PremiumButton';
 
 type CouponCode = 'AURA15' | 'WELCOME10';
 const VALID_COUPONS: Record<CouponCode, { discount: number; label: string }> = {
@@ -293,14 +294,13 @@ export default function CartDrawer() {
                 >
                   Start exploring our handcrafted collection and find pieces you&apos;ll love.
                 </p>
-                <button
+                <PremiumButton
+                  variant="primary"
                   onClick={handleGoToShop}
-                  className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white transition-all hover:shadow-lg hover:scale-[1.02] cursor-pointer"
-                  style={{ backgroundColor: 'var(--color-gold)' }}
+                  rightIcon={<ArrowRight className="h-4 w-4" />}
                 >
                   Start Shopping
-                  <ArrowRight className="h-4 w-4" />
-                </button>
+                </PremiumButton>
               </div>
             ) : (
               <div className="px-5 py-2">
@@ -589,23 +589,24 @@ export default function CartDrawer() {
               </div>
 
               {/* CTAs */}
-              <button
+              <PremiumButton
+                variant="primary"
+                fullWidth
                 onClick={handleCheckout}
-                className="group w-full flex items-center justify-center gap-2 py-3.5 rounded-full text-sm font-bold uppercase tracking-wider text-white transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] active:scale-[0.99] mb-2 cursor-pointer"
-                style={{ backgroundColor: 'var(--color-gold)' }}
+                leftIcon={<CreditCard className="h-4 w-4" />}
+                rightIcon={<ArrowRight className="h-4 w-4" />}
+                className="mb-2"
               >
-                <CreditCard className="h-4 w-4" />
                 Proceed to Checkout
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
+              </PremiumButton>
 
-              <button
+              <PremiumButton
+                variant="secondary"
+                fullWidth
                 onClick={handleViewCart}
-                className="w-full text-center text-sm font-medium py-2 transition-colors hover:underline cursor-pointer"
-                style={{ color: 'var(--color-warm-gray)' }}
               >
                 View Full Cart
-              </button>
+              </PremiumButton>
 
               {/* Trust badges */}
               <div

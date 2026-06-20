@@ -239,7 +239,7 @@ export default function NewArrivalsView() {
                 >
                   We are always curating new pieces for our collection. Check back soon for exciting additions!
                 </p>
-                <PremiumButton variant="gold" href="/shop">
+                <PremiumButton variant="primary" href="/shop">
                   <ShoppingBag className="w-4 h-4" />
                   Browse Our Collection
                 </PremiumButton>
@@ -372,10 +372,7 @@ export default function NewArrivalsView() {
                         <div className="flex items-center gap-3">
                           <button
                             onClick={() => handleAddToCart(product)}
-                            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 active:scale-[0.97] cursor-pointer"
-                            style={{ background: 'linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hover) 50%, var(--color-gold-text) 100%)',
-                              color: 'var(--text-on-dark)',
-                            }}
+                            className="premium-btn btn-primary btn-sm flex-1"
                           >
                             <ShoppingCart className="w-3.5 h-3.5" />
                             Add to Cart
@@ -414,7 +411,7 @@ export default function NewArrivalsView() {
                   >
                     Explore our full collection of curated home decor
                   </p>
-                  <PremiumButton variant="outline" href="/shop">
+                  <PremiumButton variant="secondary" href="/shop">
                     <ShoppingBag className="w-4 h-4" />
                     View All Products
                   </PremiumButton>

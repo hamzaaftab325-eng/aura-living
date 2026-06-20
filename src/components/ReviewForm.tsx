@@ -252,7 +252,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
         <PremiumButton
           type="submit"
-          variant="gold"
+          variant="primary"
           size="md"
           loading={submitting}
           leftIcon={<Star size={14} className="fill-current" aria-hidden="true" />}

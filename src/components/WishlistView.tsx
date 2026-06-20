@@ -218,7 +218,7 @@ export default function WishlistView() {
                 >
                   Start adding items you love by tapping the heart icon on any product. Your favorite pieces will appear here.
                 </p>
-                <PremiumButton variant="gold" href="/shop">
+                <PremiumButton variant="primary" href="/shop">
                   <ShoppingBag className="w-4 h-4" />
                   Explore Our Collection
                 </PremiumButton>
@@ -356,10 +356,7 @@ export default function WishlistView() {
                       <div className="flex items-center gap-3">
                         <button
                           onClick={() => handleAddToCart(product)}
-                          className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 active:scale-[0.97] cursor-pointer"
-                          style={{ background: 'linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hover) 50%, var(--color-gold-text) 100%)',
-                            color: 'var(--text-on-dark)',
-                          }}
+                          className="premium-btn btn-primary btn-sm flex-1"
                         >
                           <ShoppingCart className="w-3.5 h-3.5" />
                           Add to Cart
@@ -390,7 +387,7 @@ export default function WishlistView() {
                   >
                     Discover more pieces to add to your wishlist
                   </p>
-                  <PremiumButton variant="outline" href="/shop">
+                  <PremiumButton variant="secondary" href="/shop">
                     <ShoppingBag className="w-4 h-4" />
                     Continue Shopping
                   </PremiumButton>

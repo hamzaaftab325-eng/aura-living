@@ -172,11 +172,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         >
           <button
             onClick={handleAddToCartClick}
-            className="w-full py-2.5 rounded-lg text-xs font-semibold tracking-[0.12em] uppercase flex items-center justify-center gap-2 cursor-pointer transition-colors duration-200 hover:bg-[var(--color-gold-hover)]"
-            style={{ backgroundColor: 'rgba(212,175,55,0.9)',
-              color: 'var(--text-on-dark)',
-              border: '1px solid rgba(212,175,55,0.6)',
-            }}
+            className="premium-btn btn-primary btn-sm w-full"
           >
             <ShoppingCart className="w-3.5 h-3.5" />
             Add to Cart
@@ -350,7 +346,7 @@ export default function FeaturedProducts() {
 
         {/* ─── View All Products ─── */}
         <div className="mt-16 text-center">
-          <PremiumButton variant="outline" href="/shop">
+          <PremiumButton variant="secondary" href="/shop">
             View All Products
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </PremiumButton>

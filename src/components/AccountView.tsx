@@ -382,7 +382,7 @@ export default function AccountView() {
 
                   {/* Edit Profile Button */}
                   <PremiumButton
-                    variant="outline"
+                    variant="secondary"
                     size="sm"
                     href="/account/settings"
                   >
@@ -410,7 +410,7 @@ export default function AccountView() {
                     >
                       Sign in to view your orders, wishlist, and rewards.
                     </p>
-                    <PremiumButton variant="gold" size="sm" href="/auth/login">
+                    <PremiumButton variant="primary" size="sm" href="/auth/login">
                       Sign In
                     </PremiumButton>
                   </div>
@@ -685,7 +685,7 @@ export default function AccountView() {
                 You have <span style={{ color: 'var(--color-gold-text)', fontWeight: 600 }}>{user?.rewardsPoints ?? 0} points</span> — that is PKR {user?.rewardsPoints ?? 0} off your next order!
               </p>
               <PremiumButton
-                variant="gold"
+                variant="primary"
                 size="sm"
                 href="/shop"
               >

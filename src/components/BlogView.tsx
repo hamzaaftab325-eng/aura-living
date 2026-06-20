@@ -387,7 +387,7 @@ export default function BlogView() {
                 </span>
               </div>
               <div className="pt-3">
-                <PremiumButton variant="gold" href={`/blog/${featured.slug}`}>
+                <PremiumButton variant="primary" href={`/blog/${featured.slug}`}>
                   Read Article
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </PremiumButton>
@@ -472,7 +472,7 @@ export default function BlogView() {
             Explore our full collection of handcrafted pieces and bring the stories you read here
             into your own home.
           </p>
-          <PremiumButton variant="outline" href="/shop">
+          <PremiumButton variant="secondary" href="/shop">
             Shop the Collection
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </PremiumButton>

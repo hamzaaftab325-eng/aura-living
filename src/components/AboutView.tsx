@@ -1264,7 +1264,7 @@ export default function AboutView() {
             Explore our curated collection of handcrafted home decor and bring
             the warmth of Aura Living into your home.
           </p>
-          <PremiumButton variant="gold" href="/shop">
+          <PremiumButton variant="primary" href="/shop">
             Shop Now
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </PremiumButton>

@@ -212,7 +212,7 @@ export default function LookbookView() {
                       </p>
                       <div className="mt-2">
                         <PremiumButton
-                          variant="outline"
+                          variant="secondary"
                           href="/shop"
                         >
                           Shop This Look
@@ -243,7 +243,7 @@ export default function LookbookView() {
           <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Every home has a story waiting to be told. Explore our full collection and bring your vision to life with pieces that speak to you.
           </p>
-          <PremiumButton variant="gold" href="/shop">
+          <PremiumButton variant="primary" href="/shop">
             Shop the Collection
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </PremiumButton>

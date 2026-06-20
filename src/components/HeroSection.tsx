@@ -139,7 +139,7 @@ export default function HeroSection() {
         <Link
           ref={ctaRef}
           href="/shop"
-          className="premium-btn btn-gold group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm rounded-full hover:gap-3 hover:shadow-[0_8px_40px_rgba(212,175,55,0.5)]"
+          className="premium-btn btn-primary group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm rounded-full hover:gap-3"
         >
           Shop Collection
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

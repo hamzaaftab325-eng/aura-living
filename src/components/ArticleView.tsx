@@ -484,7 +484,7 @@ export default function ArticleView({ article }: { article: Article }) {
 
             {/* Back to journal */}
             <div className="mt-10">
-              <PremiumButton variant="outline" href="/blog">
+              <PremiumButton variant="secondary" href="/blog">
                 <ArrowLeft className="w-4 h-4" />
                 Back to Journal
               </PremiumButton>
@@ -618,7 +618,7 @@ export default function ArticleView({ article }: { article: Article }) {
             </div>
 
             <div className="text-center mt-10">
-              <PremiumButton variant="gold" href="/blog">
+              <PremiumButton variant="primary" href="/blog">
                 View All Articles
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </PremiumButton>

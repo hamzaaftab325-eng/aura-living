@@ -876,7 +876,7 @@ export default function Navbar() {
                     closeMobileMenu();
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="premium-btn btn-gold px-5 py-2.5 text-xs w-full rounded-sm"
+                  className="premium-btn btn-primary btn-sm w-full"
                 >
                   Explore Now
                 </Link>

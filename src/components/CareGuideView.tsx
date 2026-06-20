@@ -359,7 +359,7 @@ export default function CareGuideView() {
             Our team is always here to assist you with any questions about caring for your Aura Living
             pieces. Get in touch and we will be happy to help.
           </p>
-          <PremiumButton variant="gold" href="/contact">
+          <PremiumButton variant="primary" href="/contact">
             Contact Us
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </PremiumButton>

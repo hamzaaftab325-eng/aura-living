@@ -296,7 +296,7 @@ export default function ShippingView() {
           <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Our customer support team is always ready to assist you with any shipping inquiries or delivery concerns.
           </p>
-          <PremiumButton variant="gold" href="/contact">
+          <PremiumButton variant="primary" href="/contact">
             Contact Support
             <Truck className="w-4 h-4" />
           </PremiumButton>

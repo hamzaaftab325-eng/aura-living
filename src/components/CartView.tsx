@@ -108,8 +108,7 @@ export default function CartView() {
             Looks like you haven&apos;t added anything yet. Explore our handcrafted collection
             and find pieces you&apos;ll love for your home.
           </p>
-          <PremiumButton variant="gold" href="/shop">
-            <ShoppingBag className="w-4 h-4" />
+          <PremiumButton variant="primary" href="/shop" leftIcon={<ShoppingBag className="w-4 h-4" />}>
             Start Shopping
           </PremiumButton>
         </div>
@@ -286,14 +285,15 @@ export default function CartView() {
             ))}
 
             {/* Continue shopping */}
-            <Link
+            <PremiumButton
+              variant="secondary"
+              size="sm"
               href="/shop"
-              onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-gold-text cursor-pointer text-muted-gray mt-2"
+              leftIcon={<ArrowLeft className="w-4 h-4" />}
+              className="mt-2"
             >
-              <ArrowLeft className="w-4 h-4" />
               Continue Shopping
-            </Link>
+            </PremiumButton>
           </div>
 
           {/* ═══ Order Summary (1/3 width, sticky) ═══ */}
@@ -389,10 +389,14 @@ export default function CartView() {
               </div>
 
               {/* Checkout button */}
-              <PremiumButton variant="gold" fullWidth onClick={handleCheckout}>
-                <CreditCard className="w-4 h-4" />
+              <PremiumButton
+                variant="primary"
+                fullWidth
+                onClick={handleCheckout}
+                leftIcon={<CreditCard className="w-4 h-4" />}
+                rightIcon={<ArrowRight className="w-4 h-4" />}
+              >
                 Proceed to Checkout
-                <ArrowRight className="w-4 h-4" />
               </PremiumButton>
 
               {/* Payment methods */}

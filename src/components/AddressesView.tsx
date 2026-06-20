@@ -235,7 +235,7 @@ export default function AddressesView() {
               Save delivery addresses for faster checkout and easy reordering.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <PremiumButton variant="gold" size="sm" href="/auth/login">Sign In</PremiumButton>
+              <PremiumButton variant="primary" size="sm" href="/auth/login">Sign In</PremiumButton>
               <Link
                 href="/auth/signup"
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
@@ -319,7 +319,7 @@ export default function AddressesView() {
                 </div>
               </div>
               {!showForm && (
-                <PremiumButton variant="gold" size="sm" onClick={handleOpenAdd}>
+                <PremiumButton variant="primary" size="sm" onClick={handleOpenAdd}>
                   Add Address
                 </PremiumButton>
               )}
@@ -517,7 +517,7 @@ export default function AddressesView() {
                 </div>
 
                 <div className="flex items-center gap-3 pt-2">
-                  <PremiumButton variant="gold" size="sm" type="submit">
+                  <PremiumButton variant="primary" size="sm" type="submit">
                     {editingId ? 'Save Changes' : 'Save Address'}
                   </PremiumButton>
                   <button
