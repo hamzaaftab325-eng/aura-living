@@ -51,7 +51,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <label
           htmlFor={inputId}
           className="text-sm font-medium"
-          style={{ color: 'var(--text-secondary)' }}
+          
         >
           {label}
           {required && (
@@ -65,7 +65,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {leftAdornment && (
             <span
               className="absolute left-3 flex items-center pointer-events-none"
-              style={{ color: 'var(--text-muted)' }}
+              
               aria-hidden="true"
             >
               {leftAdornment}
@@ -81,11 +81,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             className={`w-full px-4 py-3 text-sm rounded-md transition-all duration-200 focus:outline-none focus:ring-2 ${
               leftAdornment ? 'pl-10' : ''
             } ${rightAdornment ? 'pr-10' : ''} ${className}`}
-            style={{
-              backgroundColor: 'var(--surface-card)',
-              border: `1px solid ${error ? 'var(--color-danger)' : 'var(--border-default)'}`,
-              color: 'var(--text-primary)',
-            }}
+            style={{ border: `1px solid ${error ? 'var(--color-danger)' : 'var(--border-default)'}` }}
             {...props}
           />
           {rightAdornment && (
@@ -96,7 +92,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <p
             id={hintId}
             className="text-xs"
-            style={{ color: 'var(--text-muted)' }}
+            
           >
             {hint}
           </p>

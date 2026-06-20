@@ -113,16 +113,13 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
     <form
       onSubmit={handleSubmit}
       className="p-5 sm:p-6 rounded-md"
-      style={{
-        backgroundColor: 'var(--surface-card)',
-        border: '1px solid rgba(232,213,163,0.4)',
-      }}
+      style={{ border: '1px solid rgba(232,213,163,0.4)' }}
       noValidate
     >
-      <h4 className="text-base font-semibold mb-1" style={{ color: 'var(--surface-dark)' }}>
+      <h4 className="text-base font-semibold mb-1" >
         Write a Review
       </h4>
-      <p className="text-xs mb-5" style={{ color: 'var(--color-muted-gray)' }}>
+      <p className="text-xs mb-5" >
         Share your experience with {productName}.
       </p>
 
@@ -130,7 +127,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
       <div className="mb-5">
         <span
           className="text-sm font-medium block mb-2"
-          style={{ color: 'var(--surface-dark)' }}
+          
         >
           Your Rating
           <span style={{ color: 'var(--color-danger)' }} aria-hidden="true">
@@ -170,7 +167,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
                   size={28}
                   className={
                     active
-                      ? 'fill-[var(--color-gold)] text-[var(--color-gold)]'
+                      ? 'fill-[var(--color-gold)] aura-text-gold'
                       : 'text-[var(--color-gold-soft)]'
                   }
                   aria-hidden="true"
@@ -180,7 +177,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
           })}
           <span
             className="ml-3 text-xs font-medium"
-            style={{ color: 'var(--color-warm-gray)' }}
+            
             aria-live="polite"
           >
             {STAR_LABELS[displayedRating]}
@@ -259,7 +256,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
         >
           {submitting ? 'Submitting…' : 'Submit Review'}
         </PremiumButton>
-        <p className="text-xs" style={{ color: 'var(--color-muted-gray)' }}>
+        <p className="text-xs" >
           Your review will be visible after moderation.
         </p>
       </div>

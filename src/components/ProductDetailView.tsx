@@ -41,7 +41,7 @@ const accordionItems = [
     title: 'Product Description',
     defaultOpen: true,
     getContent: (product: Product) => (
-      <p style={{ color: 'var(--color-warm-gray)' }} className="text-sm leading-relaxed">
+      <p  className="text-sm leading-relaxed">
         {product.description}
       </p>
     ),
@@ -51,7 +51,7 @@ const accordionItems = [
     title: 'Materials & Care',
     defaultOpen: false,
     getContent: (product: Product) => (
-      <div style={{ color: 'var(--color-warm-gray)' }} className="text-sm leading-relaxed space-y-2">
+      <div  className="text-sm leading-relaxed space-y-2">
         <p><strong>Material:</strong> {product.material}</p>
         <p><strong>Care:</strong> Wipe with a soft, dry cloth. Avoid direct sunlight and moisture.</p>
       </div>
@@ -62,7 +62,7 @@ const accordionItems = [
     title: 'Shipping & Returns',
     defaultOpen: false,
     getContent: () => (
-      <div style={{ color: 'var(--color-warm-gray)' }} className="text-sm leading-relaxed space-y-2">
+      <div  className="text-sm leading-relaxed space-y-2">
         <p><strong>Free Shipping:</strong> On orders above PKR 2,999</p>
         <p><strong>Delivery:</strong> 3-5 business days across Pakistan</p>
         <p><strong>Returns:</strong> 7-day hassle-free returns & exchanges</p>
@@ -105,7 +105,7 @@ function AccordionItem({
         aria-controls={`${accordionId}-panel`}
         id={`${accordionId}-button`}
       >
-        <span className="text-sm font-semibold" style={{ color: 'var(--surface-dark)' }}>
+        <span className="text-sm font-semibold" >
           {item.title}
         </span>
         <ChevronDown
@@ -121,8 +121,7 @@ function AccordionItem({
         style={{ maxHeight: item.defaultOpen ? '500px' : '0px',
           opacity: item.defaultOpen ? 1 : 0,
           overflow: 'hidden',
-          transition: 'max-height 0.35s ease, opacity 0.3s ease',
-        }}
+          transition: 'max-height 0.35s ease, opacity 0.3s ease' }}
       >
         <div className="pb-4">{item.getContent(product)}</div>
       </div>
@@ -195,7 +194,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
   const relatedProducts = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   return (
-    <div className="w-full pt-28 sm:pt-32" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full pt-28 sm:pt-32" >
       {/* Breadcrumb Header */}
       <Breadcrumb
         items={[
@@ -214,7 +213,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
           {/* Left: Image Gallery */}
           <div className="flex flex-col gap-4">
             {/* Main Image — CSS transition for switching */}
-            <div className="relative rounded-lg overflow-hidden" style={{ aspectRatio: '3/4', border: '1px solid rgba(232,213,163,0.3)', backgroundColor: 'var(--surface-card)' }}>
+            <div className="relative rounded-lg overflow-hidden" style={{ aspectRatio: '3/4', border: '1px solid rgba(232,213,163,0.3)' }}>
               <Image
                 key={selectedImage}
                 src={galleryImages[selectedImage]}
@@ -241,8 +240,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
                 style={{ backgroundColor: wishlisted ? 'var(--color-gold)' : 'rgba(255,253,247,0.9)',
                   border: wishlisted ? '2px solid var(--color-gold)' : '2px solid rgba(212,175,55,0.3)',
                   color: wishlisted ? 'var(--text-on-dark)' : 'var(--surface-dark)',
-                  boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                }}
+                  boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
                 aria-label="Toggle wishlist"
               >
                 <Heart className={`w-5 h-5 ${wishlisted ? 'fill-current' : ''}`} strokeWidth={2} />
@@ -258,9 +256,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
                   className="relative w-14 h-14 sm:w-20 sm:h-20 rounded-md overflow-hidden transition-all duration-300"
                   style={{ border: selectedImage === i ? '2px solid var(--color-gold)' : '1px solid rgba(232,213,163,0.3)',
                     opacity: selectedImage === i ? 1 : 0.7,
-                    boxShadow: selectedImage === i ? '0 0 10px rgba(212,175,55,0.2)' : 'none',
-                    backgroundColor: 'var(--surface-card)',
-                  }}
+                    boxShadow: selectedImage === i ? '0 0 10px rgba(212,175,55,0.2)' : 'none' }}
                 >
                   <Image src={img} alt={`${product.name} view ${i + 1}`} fill className="w-full h-full object-cover" sizes="80px" />
                 </button>
@@ -286,10 +282,10 @@ export default function ProductDetailView({ product }: { product: Product }) {
             <div className="flex items-center gap-2 mb-5">
               <div className="flex items-center gap-0.5">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} className={i < Math.round(product.rating) ? 'fill-[var(--color-gold)] text-[var(--color-gold)]' : 'text-[var(--color-gold-soft)]'} />
+                  <Star key={i} size={16} className={i < Math.round(product.rating) ? 'fill-[var(--color-gold)] aura-text-gold' : 'text-[var(--color-gold-soft)]'} />
                 ))}
               </div>
-              <span className="text-sm" style={{ color: 'var(--color-muted-gray)' }}>
+              <span className="text-sm" >
                 ({product.reviews} reviews)
               </span>
             </div>
@@ -312,7 +308,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
 
             {/* Color Swatches — CSS transition for selection ring */}
             <div className="mb-8">
-              <span className="text-sm font-medium mb-3 block" style={{ color: 'var(--surface-dark)' }}>
+              <span className="text-sm font-medium mb-3 block" >
                 Color: <span style={{ color: 'var(--color-gold)' }}>{selectedColor}</span>
               </span>
               <div className="flex items-center gap-3">
@@ -323,8 +319,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
                     className="w-11 h-11 rounded-full transition-all duration-300 hover:scale-110"
                     style={{ backgroundColor: swatch.hex,
                       border: selectedColor === swatch.name ? '2px solid var(--color-gold)' : '1px solid var(--color-gold-soft)',
-                      boxShadow: selectedColor === swatch.name ? '0 0 10px rgba(212,175,55,0.3)' : 'none',
-                    }}
+                      boxShadow: selectedColor === swatch.name ? '0 0 10px rgba(212,175,55,0.3)' : 'none' }}
                     aria-label={`Select ${swatch.name} color`}
                   />
                 ))}
@@ -333,21 +328,21 @@ export default function ProductDetailView({ product }: { product: Product }) {
 
             {/* Quantity */}
             <div className="mb-8">
-              <span className="text-sm font-medium mb-3 block" style={{ color: 'var(--surface-dark)' }}>Quantity</span>
-              <div className="inline-flex items-center rounded-full" style={{ border: '1px solid var(--color-gold-soft)', backgroundColor: 'rgba(245,237,218,0.3)' }}>
+              <span className="text-sm font-medium mb-3 block" >Quantity</span>
+              <div className="inline-flex items-center rounded-full" >
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   className="flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-200 hover:bg-[var(--color-gold-pale)]"
-                  style={{ color: 'var(--color-warm-gray)' }}
+                  
                   aria-label="Decrease quantity"
                 >
                   <Minus className="h-4 w-4" />
                 </button>
-                <span className="w-10 text-center text-sm font-semibold" style={{ color: 'var(--surface-dark)' }}>{quantity}</span>
+                <span className="w-10 text-center text-sm font-semibold" >{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
                   className="flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-200 hover:bg-[var(--color-gold-pale)]"
-                  style={{ color: 'var(--color-warm-gray)' }}
+                  
                   aria-label="Increase quantity"
                 >
                   <Plus className="h-4 w-4" />
@@ -380,9 +375,9 @@ export default function ProductDetailView({ product }: { product: Product }) {
                 { icon: <Shield className="w-4 h-4 sm:w-5 sm:h-5" />, label: 'Secure Payment' },
                 { icon: <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />, label: 'Easy Returns' },
               ].map((badge) => (
-                <div key={badge.label} className="flex flex-col items-center gap-1.5 sm:gap-2 text-center p-2 sm:p-3 rounded-sm" style={{ backgroundColor: 'rgba(245,237,218,0.3)', border: '1px solid rgba(232,213,163,0.3)' }}>
+                <div key={badge.label} className="flex flex-col items-center gap-1.5 sm:gap-2 text-center p-2 sm:p-3 rounded-sm" style={{ border: '1px solid rgba(232,213,163,0.3)' }}>
                   <div style={{ color: 'var(--color-gold)' }}>{badge.icon}</div>
-                  <span className="text-[10px] sm:text-[11px] font-medium leading-tight" style={{ color: 'var(--color-warm-gray)' }}>{badge.label}</span>
+                  <span className="text-[10px] sm:text-[11px] font-medium leading-tight" >{badge.label}</span>
                 </div>
               ))}
             </div>
@@ -440,13 +435,13 @@ export default function ProductDetailView({ product }: { product: Product }) {
                   href={`/product/${rp.slug}`}
                   onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)]/40 block"
-                  style={{ border: '1px solid rgba(232,213,163,0.3)', backgroundColor: 'var(--surface-card)' }}
+                  style={{ border: '1px solid rgba(232,213,163,0.3)' }}
                 >
-                  <div className="relative aspect-square overflow-hidden" style={{ backgroundColor: 'var(--surface-card)' }}>
+                  <div className="relative aspect-square overflow-hidden" >
                     <Image src={rp.image} alt={rp.name} fill className="w-full h-full object-cover" sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw" />
                   </div>
                   <div className="p-3 sm:p-4">
-                    <h3 className="text-xs sm:text-sm font-medium line-clamp-1" style={{ color: 'var(--surface-dark)' }}>{rp.name}</h3>
+                    <h3 className="text-xs sm:text-sm font-medium line-clamp-1" >{rp.name}</h3>
                     <p className="text-xs sm:text-sm font-bold mt-1" style={{ color: 'var(--color-gold-text)' }}>{formatPKR(rp.price)}</p>
                   </div>
                 </Link>
@@ -515,8 +510,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
                 name: 'Aura Living',
               },
             },
-          }),
-        }}
+          }) }}
       />
     </div>
   );

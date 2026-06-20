@@ -323,16 +323,14 @@ export default function Navbar() {
           {/* Pill container — NO hover handlers (mega menu is click-only now) */}
           <div
             className="relative flex items-center justify-between rounded-full transition-all duration-300 ease-out"
-            style={{ backgroundColor: 'var(--surface-dark)',
-              border: scrolled ? '1px solid rgba(212, 175, 55, 0.4)' : '1px solid rgba(212, 175, 55, 0.3)',
+            style={{ border: scrolled ? '1px solid rgba(212, 175, 55, 0.4)' : '1px solid rgba(212, 175, 55, 0.3)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
               paddingLeft: scrolled ? '14px' : '16px',
               paddingRight: scrolled ? '14px' : '16px',
               paddingTop: scrolled ? '8px' : '10px',
               paddingBottom: scrolled ? '8px' : '12px',
-              boxShadow: scrolled ? '0 8px 24px rgba(0,0,0,0.25)' : 'none',
-            }}
+              boxShadow: scrolled ? '0 8px 24px rgba(0,0,0,0.25)' : 'none' }}
           >
             {/* Logo */}
             <Link
@@ -348,8 +346,7 @@ export default function Navbar() {
                   style={{ height: scrolled ? 'clamp(38px, 6vw, 52px)' : 'clamp(46px, 7vw, 64px)',
                     width: 'auto',
                     objectFit: 'contain',
-                    transition: 'height 0.3s ease-out',
-                  }}
+                    transition: 'height 0.3s ease-out' }}
                 />
               </span>
             </Link>
@@ -383,8 +380,7 @@ export default function Navbar() {
                         paddingRight: scrolled ? '20px' : '24px',
                         paddingTop: scrolled ? '8px' : '12px',
                         paddingBottom: scrolled ? '8px' : '12px',
-                        fontSize: scrolled ? '13px' : '15px',
-                      }}
+                        fontSize: scrolled ? '13px' : '15px' }}
                       onMouseEnter={() => {
                         setHoveredLink(link.label);
                         const el = navItemRefs.current.get(link.label);
@@ -426,8 +422,7 @@ export default function Navbar() {
                     top: '50%',
                     transform: `translateY(-50%) translateX(${cursorPos.left}px)`,
                     width: `${cursorPos.width}px`,
-                    opacity: cursorPos.opacity,
-                  }}
+                    opacity: cursorPos.opacity }}
                 />
               </ul>
             </div>
@@ -519,8 +514,7 @@ export default function Navbar() {
                     WebkitBackdropFilter: 'blur(20px)',
                     borderTop: '2px solid var(--color-gold)',
                     boxShadow: '0 16px 50px rgba(0,0,0,0.35), 0 0 0 1px rgba(212,175,55,0.1)',
-                    width: 'min(720px, calc(100vw - 32px))',
-                  }}
+                    width: 'min(720px, calc(100vw - 32px))' }}
                 >
                   {/* Left column — navigation items */}
                   <div className="flex-1 py-4" style={{ borderRight: '1px solid rgba(212,175,55,0.12)' }}>
@@ -540,23 +534,20 @@ export default function Navbar() {
                           onClick={closeMenusAndScroll}
                           className="w-full flex items-center gap-4 px-5 py-3 text-left transition-colors duration-200"
                           style={{ backgroundColor: isPreviewing || itemActive ? 'rgba(212, 175, 55, 0.12)' : 'transparent',
-                            borderLeft: isPreviewing ? '3px solid var(--color-gold)' : '3px solid transparent',
-                          }}
+                            borderLeft: isPreviewing ? '3px solid var(--color-gold)' : '3px solid transparent' }}
                           onMouseEnter={() => setPreviewItem(item)}
                         >
                           <div
                             className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-all duration-300"
                             style={{ backgroundColor: isPreviewing || itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(232, 213, 163, 0.08)',
-                              color: isPreviewing || itemActive ? 'var(--color-gold)' : 'var(--text-on-dark)',
-                            }}
+                              color: isPreviewing || itemActive ? 'var(--color-gold)' : 'var(--text-on-dark)' }}
                           >
                             {item.icon}
                           </div>
                           <div className="min-w-0 flex-1">
                             <p
                               className="text-sm font-medium flex items-center gap-2"
-                              style={{ color: isPreviewing || itemActive ? 'var(--color-gold)' : 'var(--text-on-dark)',
-                              }}
+                              style={{ color: isPreviewing || itemActive ? 'var(--color-gold)' : 'var(--text-on-dark)' }}
                             >
                               {item.label}
                               {itemActive && (
@@ -588,13 +579,11 @@ export default function Navbar() {
                         className="absolute inset-0 transition-opacity duration-300"
                         style={{ backgroundImage: `url(${activePreview.preview.image})`,
                           backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                        }}
+                          backgroundPosition: 'center' }}
                       />
                       <div
                         className="absolute inset-0"
-                        style={{ background: 'linear-gradient(180deg, rgba(28,28,28,0.35) 0%, rgba(28,28,28,0.85) 60%, rgba(28,28,28,0.95) 100%)',
-                        }}
+                        style={{ background: 'linear-gradient(180deg, rgba(28,28,28,0.35) 0%, rgba(28,28,28,0.85) 60%, rgba(28,28,28,0.95) 100%)' }}
                       />
                       <div
                         className="absolute top-4 right-4 w-10 h-10"
@@ -657,7 +646,7 @@ export default function Navbar() {
             />
             <button
               className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/10"
-              style={{ color: 'var(--text-on-dark)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+              style={{ border: '1px solid rgba(212, 175, 55, 0.2)' }}
               onClick={closeMobileMenu}
               aria-label="Close menu"
             >
@@ -706,8 +695,7 @@ export default function Navbar() {
                         style={{ color: isActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.95)',
                           backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
                           background: 'none',
-                          cursor: 'pointer',
-                        }}
+                          cursor: 'pointer' }}
                         onClick={() => setMobileShopExpanded((prev) => !prev)}
                         aria-expanded={mobileShopExpanded}
                       >
@@ -722,8 +710,7 @@ export default function Navbar() {
                         }}
                         className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
                         style={{ color: isActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.95)',
-                          backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
-                        }}
+                          backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent' }}
                       >
                         {labelInner}
                       </Link>
@@ -737,8 +724,7 @@ export default function Navbar() {
                       <div
                         className="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
                         style={{ gridTemplateRows: mobileShopExpanded ? '1fr' : '0fr',
-                          opacity: mobileShopExpanded ? 1 : 0,
-                        }}
+                          opacity: mobileShopExpanded ? 1 : 0 }}
                       >
                         <div className="overflow-hidden">
                           <div className="pl-3 pr-1 py-1 flex flex-col gap-0.5">
@@ -758,14 +744,12 @@ export default function Navbar() {
                                   }}
                                   className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-white/10"
                                   style={{ color: itemActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.9)',
-                                    backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
-                                  }}
+                                    backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent' }}
                                 >
                                   <div
                                     className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-200"
                                     style={{ backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.22)' : 'rgba(212, 175, 55, 0.12)',
-                                      color: 'var(--color-gold)',
-                                    }}
+                                      color: 'var(--color-gold)' }}
                                   >
                                     {item.icon}
                                   </div>
@@ -869,8 +853,7 @@ export default function Navbar() {
               <div
                 className="mobile-cta-card rounded-2xl p-4"
                 style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(232,213,163,0.12) 100%)',
-                  border: '1px solid rgba(212,175,55,0.2)',
-                }}
+                  border: '1px solid rgba(212,175,55,0.2)' }}
               >
                 <p
                   className="text-[11px] uppercase tracking-[3px] font-semibold mb-1.5"
@@ -915,8 +898,7 @@ export default function Navbar() {
               borderBottom: '1px solid rgba(212,175,55,0.2)',
               boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
               backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-            }}
+              WebkitBackdropFilter: 'blur(12px)' }}
           >
             <div className="mx-auto max-w-2xl">
               <div className="flex items-center gap-3">

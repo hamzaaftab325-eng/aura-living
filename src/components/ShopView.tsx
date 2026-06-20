@@ -67,7 +67,7 @@ function FilterSidebar({
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--surface-dark)' }}>
+        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" >
           Categories
         </h3>
         <div className="space-y-3">
@@ -76,8 +76,7 @@ function FilterSidebar({
               <div
                 className="w-5 h-5 rounded flex items-center justify-center transition-all duration-200"
                 style={{ border: selectedCategory === cat.id ? '2px solid var(--color-gold)' : '1.5px solid var(--color-gold-soft)',
-                  backgroundColor: selectedCategory === cat.id ? 'var(--color-gold)' : 'transparent',
-                }}
+                  backgroundColor: selectedCategory === cat.id ? 'var(--color-gold)' : 'transparent' }}
               >
                 {selectedCategory === cat.id && (
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -86,7 +85,7 @@ function FilterSidebar({
                 )}
               </div>
               <span
-                className="text-sm transition-colors duration-200 group-hover:text-[var(--color-gold)]"
+                className="text-sm transition-colors duration-200 group-hover:aura-text-gold"
                 style={{ color: selectedCategory === cat.id ? 'var(--color-gold)' : 'var(--color-warm-gray)' }}
                 onClick={() => onCategoryChange(cat.id)}
               >
@@ -98,7 +97,7 @@ function FilterSidebar({
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--surface-dark)' }}>
+        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" >
           Price Range
         </h3>
         <div className="flex items-center gap-3">
@@ -109,10 +108,10 @@ function FilterSidebar({
               value={priceMin}
               onChange={(e) => onPriceMinChange(e.target.value)}
               className="w-full h-10 px-3 rounded-xl text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[var(--color-gold)]/40"
-              style={{ border: '1px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)', color: 'var(--surface-dark)' }}
+              
             />
           </div>
-          <span style={{ color: 'var(--color-muted-gray)' }}>-</span>
+          <span >-</span>
           <div className="flex-1">
             <input
               type="number"
@@ -120,14 +119,14 @@ function FilterSidebar({
               value={priceMax}
               onChange={(e) => onPriceMaxChange(e.target.value)}
               className="w-full h-10 px-3 rounded-xl text-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-[var(--color-gold)]/40"
-              style={{ border: '1px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)', color: 'var(--surface-dark)' }}
+              
             />
           </div>
         </div>
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--surface-dark)' }}>
+        <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" >
           Sort By
         </h3>
         <div className="relative">
@@ -135,13 +134,13 @@ function FilterSidebar({
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value as SortOption)}
             className="w-full h-10 px-3 rounded-sm text-sm outline-none appearance-none cursor-pointer transition-all duration-300 focus:ring-2 focus:ring-[var(--color-gold)]/50"
-            style={{ border: '1px solid var(--color-gold-soft)', backgroundColor: 'rgba(255,253,247,0.8)', color: 'var(--surface-dark)' }}
+            style={{ backgroundColor: 'rgba(255,253,247,0.8)' }}
           >
             {sortOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>
             ))}
           </select>
-          <ChevronRight size={16} className="absolute right-3 top-1/2 -translate-y-1/2 rotate-90 pointer-events-none" style={{ color: 'var(--color-muted-gray)' }} />
+          <ChevronRight size={16} className="absolute right-3 top-1/2 -translate-y-1/2 rotate-90 pointer-events-none"  />
         </div>
       </div>
 
@@ -202,22 +201,20 @@ function ProductCard({
           border: isHovered ? '1px solid rgba(212,175,55,0.6)' : '1px solid rgba(232,213,163,0.25)',
           boxShadow: isHovered ? '0 0 25px rgba(212,175,55,0.2), 0 8px 32px rgba(0,0,0,0.08)' : '0 2px 8px rgba(0,0,0,0.04)',
           transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
-          transform: isHovered ? 'translateY(-8px) scale(1.01)' : 'translateY(0) scale(1)',
-        }}
+          transform: isHovered ? 'translateY(-8px) scale(1.01)' : 'translateY(0) scale(1)' }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         aria-label={`View ${product.name} details`}
       >
         {/* Image with zoom */}
-        <div className="absolute inset-0 overflow-hidden" style={{ backgroundColor: 'var(--surface-card)' }}>
+        <div className="absolute inset-0 overflow-hidden" >
           <Image
       src={product.image}
             alt={product.name}
             fill
             className="w-full h-full object-cover"
             style={{ transition: 'transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-              transform: isHovered ? 'scale(1.08)' : 'scale(1)',
-            }}
+              transform: isHovered ? 'scale(1.08)' : 'scale(1)' }}
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
           />
         </div>
@@ -228,8 +225,7 @@ function ProductCard({
             <span
               className="inline-block px-2.5 py-1 rounded-sm text-[10px] font-bold tracking-wider uppercase"
               style={{ backgroundColor: badgeColors[product.badge]?.bg,
-                color: badgeColors[product.badge]?.text,
-              }}
+                color: badgeColors[product.badge]?.text }}
             >
               {product.badge}
             </span>
@@ -259,8 +255,7 @@ function ProductCard({
                 opacity: isHovered ? 1 : 0,
                 transform: isHovered ? 'translateX(0)' : 'translateX(12px)',
                 transition: 'all 0.3s ease',
-                transitionDelay: isHovered ? `${0.05 + i * 0.07}s` : '0s',
-              }}
+                transitionDelay: isHovered ? `${0.05 + i * 0.07}s` : '0s' }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-gold)';
                 (e.currentTarget as HTMLElement).style.color = 'var(--text-on-dark)';
@@ -286,8 +281,7 @@ function ProductCard({
           style={{ opacity: isHovered ? 1 : 0,
             transform: isHovered ? 'translateY(0)' : 'translateY(30px)',
             transition: 'all 0.35s ease',
-            transitionDelay: isHovered ? '0.1s' : '0s',
-          }}
+            transitionDelay: isHovered ? '0.1s' : '0s' }}
         >
           <button
             onClick={handleAddToCart}
@@ -305,7 +299,7 @@ function ProductCard({
           href={`/product/${product.slug}`}
           onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           className="text-sm font-medium leading-snug transition-colors duration-300 line-clamp-1 block"
-          style={{ color: 'var(--surface-dark)' }}
+          
           onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-gold)')}
           onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--surface-dark)')}
         >
@@ -320,13 +314,13 @@ function ProductCard({
                 size={12}
                 className={
                   i < Math.round(product.rating)
-                    ? 'fill-[var(--color-gold)] text-[var(--color-gold)]'
+                    ? 'fill-[var(--color-gold)] aura-text-gold'
                     : 'text-gray-300'
                 }
               />
             ))}
           </div>
-          <span className="text-[11px]" style={{ color: 'var(--color-muted-gray)' }}>
+          <span className="text-[11px]" >
             ({product.reviews})
           </span>
         </div>
@@ -336,7 +330,7 @@ function ProductCard({
             {formatPKR(product.price)}
           </span>
           {product.originalPrice && (
-            <span className="text-xs line-through" style={{ color: 'var(--color-muted-gray)' }}>
+            <span className="text-xs line-through" >
               {formatPKR(product.originalPrice)}
             </span>
           )}
@@ -555,7 +549,7 @@ function ShopViewInner() {
   };
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Hero Banner */}
       <section
         ref={heroSectionRef}
@@ -568,28 +562,24 @@ function ShopViewInner() {
           style={{ backgroundImage: 'url(/images/pages/shop-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+            backgroundRepeat: 'no-repeat' }}
         />
         {/* Gradient overlay */}
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.18) 100%)',
-          }}
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.18) 100%)' }}
         />
 
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
           style={{ filter: 'blur(60px)',
-            background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
-          }}
+            background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
           style={{ filter: 'blur(70px)',
-            background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
-          }}
+            background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
@@ -641,8 +631,7 @@ function ShopViewInner() {
                 backdropFilter: 'blur(12px)',
                 WebkitBackdropFilter: 'blur(12px)',
                 border: '1px solid rgba(212,175,55,0.15)',
-                boxShadow: '0 4px 20px rgba(212,175,55,0.06)',
-              }}
+                boxShadow: '0 4px 20px rgba(212,175,55,0.06)' }}
             >
               <FilterSidebar {...filterSidebarProps} />
             </div>
@@ -653,16 +642,16 @@ function ShopViewInner() {
             {/* Search active banner */}
             {searchQuery.trim() && (
               <div className="flex flex-wrap items-center gap-2 mb-6 p-3 rounded-lg" style={{ backgroundColor: 'rgba(212,175,55,0.08)', border: '1px solid rgba(212,175,55,0.25)' }}>
-                <span className="text-sm" style={{ color: 'var(--color-warm-gray)' }}>
+                <span className="text-sm" >
                   Showing results for <strong style={{ color: 'var(--color-gold)' }}>&ldquo;{searchQuery.trim()}&rdquo;</strong>
                 </span>
-                <span className="text-xs" style={{ color: 'var(--color-muted-gray)' }}>
+                <span className="text-xs" >
                   ({filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found)
                 </span>
                 <button
                   onClick={clearSearch}
                   className="ml-auto inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full transition-colors hover:bg-[var(--color-gold-pale)]"
-                  style={{ color: 'var(--color-warm-gray)' }}
+                  
                   aria-label="Clear search"
                 >
                   <X size={12} />
@@ -706,12 +695,12 @@ function ShopViewInner() {
 
             {filteredProducts.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20">
-                <p className="text-lg mb-2" style={{ color: 'var(--color-warm-gray)' }}>No products found</p>
-                <p className="text-sm mb-6" style={{ color: 'var(--color-muted-gray)' }}>Try adjusting your filters</p>
+                <p className="text-lg mb-2" >No products found</p>
+                <p className="text-sm mb-6" >Try adjusting your filters</p>
                 <button
                   onClick={clearFilters}
                   className="px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors duration-300 hover:bg-[var(--color-gold-hover)]"
-                  style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)' }}
+                  style={{ backgroundColor: 'var(--color-gold)' }}
                 >
                   Clear Filters
                 </button>
@@ -742,8 +731,7 @@ function ShopViewInner() {
             backdropFilter: 'blur(4px)',
             WebkitBackdropFilter: 'blur(4px)',
             opacity: mobileFiltersOpen ? 1 : 0,
-            pointerEvents: mobileFiltersOpen ? 'auto' : 'none',
-          }}
+            pointerEvents: mobileFiltersOpen ? 'auto' : 'none' }}
           onClick={() => setMobileFiltersOpen(false)}
         />
 
@@ -754,12 +742,11 @@ function ShopViewInner() {
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
             borderRight: '1px solid rgba(212,175,55,0.15)',
-            transform: mobileFiltersOpen ? 'translateX(0)' : 'translateX(-100%)',
-          }}
+            transform: mobileFiltersOpen ? 'translateX(0)' : 'translateX(-100%)' }}
         >
           <div className="flex items-center justify-between px-6 h-16" style={{ borderBottom: '1px solid rgba(212,175,55,0.15)' }}>
-            <span className="text-lg font-semibold tracking-wide" style={{ color: 'var(--surface-dark)' }}>Filters</span>
-            <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[var(--color-gold-pale)]" style={{ color: 'var(--color-warm-gray)' }} onClick={() => setMobileFiltersOpen(false)} aria-label="Close filters">
+            <span className="text-lg font-semibold tracking-wide" >Filters</span>
+            <button className="p-2 rounded-full transition-colors duration-200 hover:bg-[var(--color-gold-pale)]"  onClick={() => setMobileFiltersOpen(false)} aria-label="Close filters">
               <X className="h-5 w-5" />
             </button>
           </div>

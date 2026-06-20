@@ -1,7 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* Dark mode: intentionally disabled for v1 — light-only by design.
+   To enable later, add: @custom-variant dark (&:is(.dark *)); */
 
 @theme inline {
   --color-background: var(--background);
@@ -126,6 +127,33 @@
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 400ms;
+
+  /* ── Spacing tokens ── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  /* ── Breakpoint tokens (reference only — CSS @media uses px values) ── */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+
+  /* ── Container width tokens ── */
+  --container-narrow: 640px;
+  --container-default: 1024px;
+  --container-wide: 1280px;
+  --container-full: 1536px;
+
+  /* ── Transition presets ── */
+  --transition-fast: var(--duration-fast) var(--ease-out);
+  --transition-normal: var(--duration-normal) var(--ease-out);
+  --transition-slow: var(--duration-slow) var(--ease-out);
 }
 
 @layer base {
@@ -320,6 +348,51 @@
   .aura-eyebrow { font-size: 0.875rem; }
 }
 
+/* ── Display Large: Page hero titles (larger than H1) ── */
+.aura-display-large {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-size: clamp(44px, 8vw, 96px);
+}
+
+/* ── H5: Small card titles, sub-section headers ── */
+.aura-h5 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  line-height: 1.4;
+  font-size: clamp(16px, 1.5vw, 18px);
+}
+
+/* ── H6: Smallest heading level ── */
+.aura-h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  line-height: 1.4;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Caption: Image captions, footnotes, helper text ── */
+.aura-caption {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ── Label: Form labels, button labels, UI labels ── */
+.aura-label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  line-height: 1.4;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
 /* ═══════════════════════════════════════════════════════════
    LAYOUT SYSTEM
    ═══════════════════════════════════════════════════════════ */
@@ -348,6 +421,47 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Wide content container (shop grid, lookbook) */
+.aura-container-wide {
+  max-width: var(--container-wide);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SURFACE UTILITY CLASSES — replace inline backgroundColor
+   ═══════════════════════════════════════════════════════════ */
+.aura-surface-page { background-color: var(--surface-page); }
+.aura-surface-card { background-color: var(--surface-card); }
+.aura-surface-accent { background-color: var(--surface-accent); }
+.aura-surface-dark { background-color: var(--surface-dark); }
+
+/* ═══════════════════════════════════════════════════════════
+   TEXT UTILITY CLASSES — replace inline color/fontFamily
+   ═══════════════════════════════════════════════════════════ */
+.aura-text-primary { color: var(--text-primary); }
+.aura-text-secondary { color: var(--text-secondary); }
+.aura-text-muted { color: var(--text-muted); }
+.aura-text-gold { color: var(--text-gold); }
+.aura-text-on-dark { color: var(--text-on-dark); }
+
+/* ═══════════════════════════════════════════════════════════
+   BORDER UTILITY CLASSES — replace inline border
+   ═══════════════════════════════════════════════════════════ */
+.aura-border-default { border: 1px solid var(--border-default); }
+.aura-border-gold { border: 1px solid var(--border-gold); }
+.aura-border-gold-soft { border: 1px solid var(--color-gold-soft); }
+.aura-border-bottom-gold { border-bottom: 1px solid var(--color-gold-soft); }
+.aura-border-top-gold { border-top: 2px solid var(--color-gold); }
+
+/* ═══════════════════════════════════════════════════════════
+   SHADOW UTILITY CLASSES — replace inline boxShadow
+   ═══════════════════════════════════════════════════════════ */
+.aura-shadow-sm { box-shadow: var(--shadow-sm); }
+.aura-shadow-md { box-shadow: var(--shadow-md); }
+.aura-shadow-lg { box-shadow: var(--shadow-lg); }
+.aura-shadow-gold { box-shadow: var(--shadow-gold); }
 
 /* Breadcrumb strip — below hero, gold-pale bg */
 .aura-breadcrumb {

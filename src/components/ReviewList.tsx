@@ -36,7 +36,7 @@ function Stars({ value, size = 14 }: { value: number; size?: number }) {
           size={size}
           className={
             i <= Math.round(value)
-              ? 'fill-[var(--color-gold)] text-[var(--color-gold)]'
+              ? 'fill-[var(--color-gold)] aura-text-gold'
               : 'text-[var(--color-gold-soft)]'
           }
           aria-hidden="true"
@@ -59,22 +59,19 @@ function ReviewCard({ review }: { review: Review }) {
   return (
     <article
       className="p-5 sm:p-6 rounded-md"
-      style={{
-        backgroundColor: 'var(--surface-card)',
-        border: '1px solid rgba(232,213,163,0.4)',
-      }}
+      style={{ border: '1px solid rgba(232,213,163,0.4)' }}
     >
       {/* Header: author + verified + date */}
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
-        <span className="text-sm font-semibold" style={{ color: 'var(--surface-dark)' }}>
+        <span className="text-sm font-semibold" >
           {review.author}
         </span>
         {review.location && (
           <>
-            <span className="text-xs" style={{ color: 'var(--color-muted-gray)' }} aria-hidden="true">
+            <span className="text-xs"  aria-hidden="true">
               •
             </span>
-            <span className="text-xs" style={{ color: 'var(--color-muted-gray)' }}>
+            <span className="text-xs" >
               {review.location}
             </span>
           </>
@@ -84,8 +81,7 @@ function ReviewCard({ review }: { review: Review }) {
             className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider"
             style={{
               backgroundColor: 'rgba(34,197,94,0.1)',
-              color: '#15803d',
-            }}
+              color: '#15803d' }}
           >
             <CheckCircle2 size={11} aria-hidden="true" />
             Verified Purchase
@@ -96,20 +92,20 @@ function ReviewCard({ review }: { review: Review }) {
       {/* Date + stars */}
       <div className="flex items-center gap-3 mb-3">
         <Stars value={review.rating} />
-        <span className="text-xs" style={{ color: 'var(--color-muted-gray)' }}>
+        <span className="text-xs" >
           {formatDate(review.date)}
         </span>
       </div>
 
       {/* Title */}
-      <h4 className="text-sm font-semibold mb-1.5" style={{ color: 'var(--surface-dark)' }}>
+      <h4 className="text-sm font-semibold mb-1.5" >
         {review.title}
       </h4>
 
       {/* Body */}
       <p
         className="text-sm leading-relaxed mb-4"
-        style={{ color: 'var(--color-warm-gray)' }}
+        
       >
         {review.body}
       </p>
@@ -121,8 +117,7 @@ function ReviewCard({ review }: { review: Review }) {
         disabled={voted}
         className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors duration-200 disabled:cursor-default"
         style={{
-          color: voted ? 'var(--color-gold)' : 'var(--color-muted-gray)',
-        }}
+          color: voted ? 'var(--color-gold)' : 'var(--color-muted-gray)' }}
         aria-pressed={voted}
         aria-label={voted ? 'Marked as helpful' : 'Mark this review as helpful'}
       >
@@ -172,10 +167,7 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
     return (
       <div
         className="text-center py-12 px-6 rounded-md"
-        style={{
-          backgroundColor: 'var(--surface-card)',
-          border: '1px solid rgba(232,213,163,0.4)',
-        }}
+        style={{ border: '1px solid rgba(232,213,163,0.4)' }}
       >
         <MessageSquare
           size={36}
@@ -185,11 +177,11 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
         />
         <p
           className="text-sm font-medium mb-1"
-          style={{ color: 'var(--surface-dark)' }}
+          
         >
           No reviews yet
         </p>
-        <p className="text-xs" style={{ color: 'var(--color-muted-gray)' }}>
+        <p className="text-xs" >
           Be the first to share your experience with this product.
         </p>
       </div>
@@ -203,23 +195,20 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
       {/* Summary header */}
       <div
         className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-6 sm:gap-8 p-5 sm:p-6 rounded-md mb-6"
-        style={{
-          backgroundColor: 'var(--surface-card)',
-          border: '1px solid rgba(232,213,163,0.4)',
-        }}
+        style={{ border: '1px solid rgba(232,213,163,0.4)' }}
       >
         {/* Average rating block */}
         <div className="flex sm:flex-col items-center sm:items-start gap-3 sm:gap-1">
           <div className="flex items-baseline gap-1">
             <span
               className="text-4xl font-bold leading-none"
-              style={{ color: 'var(--surface-dark)' }}
+              
             >
               {roundedAverage}
             </span>
             <span
               className="text-sm font-medium"
-              style={{ color: 'var(--color-muted-gray)' }}
+              
             >
               / 5
             </span>
@@ -228,7 +217,7 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
             <Stars value={averageRating} size={16} />
             <span
               className="text-xs"
-              style={{ color: 'var(--color-muted-gray)' }}
+              
             >
               {reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}
             </span>
@@ -241,13 +230,13 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
             <div key={row.rating} className="flex items-center gap-3">
               <span
                 className="text-xs font-medium w-3 text-right"
-                style={{ color: 'var(--color-warm-gray)' }}
+                
               >
                 {row.rating}
               </span>
               <Star
                 size={11}
-                className="fill-[var(--color-gold)] text-[var(--color-gold)]"
+                className="fill-[var(--color-gold)] aura-text-gold"
                 aria-hidden="true"
               />
               <div
@@ -263,13 +252,12 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
                   className="h-full rounded-full transition-all duration-500"
                   style={{
                     width: `${row.percentage}%`,
-                    backgroundColor: 'var(--color-gold)',
-                  }}
+                    backgroundColor: 'var(--color-gold)' }}
                 />
               </div>
               <span
                 className="text-xs tabular-nums w-8 text-right"
-                style={{ color: 'var(--color-muted-gray)' }}
+                
               >
                 {row.count}
               </span>
@@ -282,11 +270,11 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
       <div className="flex items-center justify-between mb-5">
         <h3
           className="text-base font-semibold"
-          style={{ color: 'var(--surface-dark)' }}
+          
         >
           Customer Reviews
         </h3>
-        <label className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-warm-gray)' }}>
+        <label className="flex items-center gap-2 text-xs" >
           <span className="font-medium">Sort by:</span>
           <span className="relative inline-flex">
             <select
@@ -296,11 +284,7 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
                 setVisibleCount(INITIAL_VISIBLE);
               }}
               className="appearance-none pl-3 pr-8 py-1.5 rounded-md text-xs font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)]/40"
-              style={{
-                backgroundColor: 'var(--surface-card)',
-                border: '1px solid var(--color-gold-soft)',
-                color: 'var(--surface-dark)',
-              }}
+              
               aria-label="Sort reviews"
             >
               <option value="helpful">Most Helpful</option>
@@ -334,12 +318,10 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
             className="inline-flex items-center gap-2 px-6 py-3 rounded-sm text-xs font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-pale)] active:scale-[0.97]"
             style={{
               border: '1px solid var(--color-gold)',
-              color: 'var(--surface-dark)',
-              backgroundColor: 'transparent',
-            }}
+              backgroundColor: 'transparent' }}
           >
             Show more reviews
-            <span style={{ color: 'var(--color-muted-gray)' }}>
+            <span >
               ({sortedReviews.length - visibleCount} remaining)
             </span>
           </button>

@@ -88,7 +88,7 @@ export default function LookbookView() {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div ref={containerRef} className="w-full page-transition" >
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
@@ -96,8 +96,7 @@ export default function LookbookView() {
           style={{ backgroundImage: 'url(/images/pages/lookbook-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+            backgroundRepeat: 'no-repeat' }}
         />
         <div
           className="absolute inset-0"
@@ -108,7 +107,7 @@ export default function LookbookView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
             <Camera className="w-8 h-8" style={{ color: 'var(--color-gold)' }} />
           </div>
-          <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
+          <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
           <h1 className="aura-hero-title text-white" >
@@ -136,14 +135,14 @@ export default function LookbookView() {
       {/* Intro */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >
+          <span className="aura-text-gold text-xs sm:text-sm tracking-[3px] uppercase font-medium" >
             Editorial Spaces
           </span>
-          <h2 className="text-[var(--surface-dark)] text-2xl sm:text-3xl md:text-4xl font-bold mt-3 mb-4" >
+          <h2 className="aura-text-primary text-2xl sm:text-3xl md:text-4xl font-bold mt-3 mb-4" >
             Styled for Living
           </h2>
           <GoldDivider />
-          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg leading-relaxed mt-6" >
+          <p className="aura-text-secondary text-base sm:text-lg leading-relaxed mt-6" >
             Each scene is a carefully composed vision — a mood board brought to life. Discover how our pieces come together to create spaces that tell your story.
           </p>
         </div>
@@ -192,20 +191,20 @@ export default function LookbookView() {
                     {/* Text content */}
                     <div className="w-full lg:w-1/2 flex flex-col gap-4 sm:gap-5">
                       <span
-                        className="text-[var(--color-gold)] text-sm sm:text-base font-bold tracking-wider"
+                        className="aura-text-gold text-sm sm:text-base font-bold tracking-wider"
                         
                       >
                         Scene {scene.number}
                       </span>
                       <h3
-                        className="text-[var(--surface-dark)] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
+                        className="aura-text-primary text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
                         
                       >
                         {scene.title}
                       </h3>
                       <GoldDivider />
                       <p
-                        className="text-[var(--color-warm-gray)] text-base sm:text-lg leading-relaxed"
+                        className="aura-text-secondary text-base sm:text-lg leading-relaxed"
                         
                       >
                         {scene.description}
@@ -234,13 +233,13 @@ export default function LookbookView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <Camera className="w-8 h-8" style={{ color: 'var(--color-gold)' }} />
           </div>
-          <h2 className="text-[var(--surface-dark)] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
+          <h2 className="aura-text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Create Your Own Story
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
+          <p className="aura-text-secondary text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Every home has a story waiting to be told. Explore our full collection and bring your vision to life with pieces that speak to you.
           </p>
           <PremiumButton variant="primary" href="/shop">

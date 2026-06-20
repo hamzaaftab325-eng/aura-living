@@ -38,7 +38,7 @@ function FooterLink({
   href?: string;
 }) {
   const className =
-    'group relative inline-block text-sm transition-all duration-500 hover:text-[var(--color-gold)] hover:translate-x-1.5 hover:drop-shadow-[0_0_6px_rgba(212,175,55,0.3)]';
+    'group relative inline-block text-sm transition-all duration-500 hover:aura-text-gold hover:translate-x-1.5 hover:drop-shadow-[0_0_6px_rgba(212,175,55,0.3)]';
   const style = { color: 'var(--surface-page)' } as const;
   const inner = (
     <>
@@ -190,27 +190,24 @@ export default function Footer() {
     <footer
       ref={footerRef}
       className="relative w-full overflow-hidden"
-      style={{ backgroundColor: 'var(--surface-dark)' }}
+      
     >
       {/* Gold accent line top edge */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[2px] z-10"
-        style={{ background: 'linear-gradient(90deg, transparent 0%, var(--color-gold) 50%, transparent 100%)',
-        }}
+        style={{ background: 'linear-gradient(90deg, transparent 0%, var(--color-gold) 50%, transparent 100%)' }}
       />
 
       {/* Subtle gradient transition from page cream to footer charcoal */}
       <div
         className="absolute top-0 left-0 right-0 h-20 pointer-events-none z-10"
-        style={{ background: 'linear-gradient(to bottom, rgba(250,248,245,0.15) 0%, rgba(44,44,44,0) 100%)',
-        }}
+        style={{ background: 'linear-gradient(to bottom, rgba(250,248,245,0.15) 0%, rgba(44,44,44,0) 100%)' }}
       />
 
       {/* Subtle brand pattern overlay */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
-        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}
+        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}
       />
 
       {/* Main Footer Content */}
@@ -227,7 +224,7 @@ export default function Footer() {
             </div>
             <p
               className="text-lg italic leading-relaxed"
-              style={{ color: 'var(--color-gold-soft)', fontFamily: "'Playfair Display', serif" }}
+              style={{ color: 'var(--color-gold-soft)' }}
             >
               Where Comfort Meets Style
             </p>
@@ -291,8 +288,7 @@ export default function Footer() {
                   : '1px solid rgba(212,175,55,0.15)',
                 boxShadow: focused
                   ? '0 0 30px rgba(212,175,55,0.1), inset 0 0 30px rgba(212,175,55,0.03)'
-                  : '0 0 0 rgba(212,175,55,0)',
-              }}
+                  : '0 0 0 rgba(212,175,55,0)' }}
             >
               <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--surface-page)', opacity: 0.9 }}>
                 Get <span style={{ color: 'var(--color-gold)', fontWeight: 600 }}>15% off</span> your first order
@@ -311,30 +307,26 @@ export default function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     onFocus={() => setFocused(true)}
                     onBlur={() => setFocused(false)}
-                    className="h-11 w-full rounded-lg px-4 text-sm outline-none transition-all duration-500 placeholder:text-[var(--color-muted-gray)]"
+                    className="h-11 w-full rounded-lg px-4 text-sm outline-none transition-all duration-500 placeholder:aura-text-muted"
                     style={{ backgroundColor: 'rgba(250,248,245,0.08)',
                       border: focused ? '1px solid rgba(212,175,55,0.6)' : '1px solid rgba(212,175,55,0.18)',
                       color: 'var(--surface-page)',
                       boxShadow: focused
                         ? '0 0 20px rgba(212,175,55,0.15), 0 0 40px rgba(212,175,55,0.05)'
-                        : 'none',
-                    }}
+                        : 'none' }}
                   />
                   {/* Gold glow pulse on focus */}
                   {focused && (
                     <span
                       className="absolute inset-0 rounded-lg pointer-events-none animate-[goldPulse_2s_ease-in-out_infinite]"
-                      style={{ boxShadow: '0 0 15px rgba(212,175,55,0.2)',
-                      }}
+                      style={{ boxShadow: '0 0 15px rgba(212,175,55,0.2)' }}
                     />
                   )}
                 </div>
                 <button
                   type="submit"
                   className="group flex h-11 items-center justify-center gap-2 rounded-lg px-5 text-sm font-medium transition-all duration-500 hover:brightness-110 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] active:scale-[0.98]"
-                  style={{ backgroundColor: 'var(--color-gold)',
-                    color: 'var(--surface-dark)',
-                  }}
+                  style={{ backgroundColor: 'var(--color-gold)' }}
                 >
                   <Send size={14} />
                   <span>Subscribe</span>
@@ -366,21 +358,21 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Aura Living. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/terms" className="text-xs transition-colors duration-300 hover:text-[var(--color-gold)] cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7 }}>Terms of Service</Link>
-            <Link href="/privacy" className="text-xs transition-colors duration-300 hover:text-[var(--color-gold)] cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7 }}>Privacy Policy</Link>
+            <Link href="/terms" className="text-xs transition-colors duration-300 hover:aura-text-gold cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7 }}>Terms of Service</Link>
+            <Link href="/privacy" className="text-xs transition-colors duration-300 hover:aura-text-gold cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7 }}>Privacy Policy</Link>
           </div>
           <div className="flex items-center gap-2 flex-wrap justify-center">
             <span className="text-xs" style={{ color: 'var(--color-gold-soft)', opacity: 0.5 }}>We accept:</span>
             {paymentMethods.map((method, i) => (
               <span key={method} className="flex items-center gap-2">
                 <span
-                  className="text-xs font-medium transition-colors duration-300 hover:text-[var(--color-gold)]"
+                  className="text-xs font-medium transition-colors duration-300 hover:aura-text-gold"
                   style={{ color: 'var(--surface-page)', opacity: 0.8 }}
                 >
                   {method}
                 </span>
                 {i < paymentMethods.length - 1 && (
-                  <span className="text-[var(--color-gold)]/40 text-[8px]">•</span>
+                  <span className="aura-text-gold/40 text-[8px]">•</span>
                 )}
               </span>
             ))}
@@ -391,8 +383,7 @@ export default function Footer() {
       {/* Bottom gold gradient accent */}
       <div
         className="absolute bottom-0 left-0 right-0 h-[2px] pointer-events-none z-10"
-        style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.4) 30%, var(--color-gold) 50%, rgba(212,175,55,0.4) 70%, transparent 100%)',
-        }}
+        style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.4) 30%, var(--color-gold) 50%, rgba(212,175,55,0.4) 70%, transparent 100%)' }}
       />
     </footer>
   );

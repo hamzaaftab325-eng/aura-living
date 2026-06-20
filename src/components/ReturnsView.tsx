@@ -112,7 +112,7 @@ export default function ReturnsView() {
   const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
@@ -120,8 +120,7 @@ export default function ReturnsView() {
           style={{ backgroundImage: 'url(/images/pages/returns-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+            backgroundRepeat: 'no-repeat' }}
         />
         <div
           className="absolute inset-0"
@@ -132,7 +131,7 @@ export default function ReturnsView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
             <RotateCcw className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
           </div>
-          <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
+          <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
           <h1 className="aura-hero-title text-white" >
@@ -157,20 +156,20 @@ export default function ReturnsView() {
       {/* Our Return Policy */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div ref={policyRef} className="max-w-4xl mx-auto text-center">
-          <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+          <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" >
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
               <RotateCcw className="w-6 h-6" style={{ color: 'var(--color-gold-text)' }} />
             </div>
-            <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
+            <h2 className="aura-text-primary aura-h2 mb-3" >
               Our Return Policy
             </h2>
             <div className="flex justify-center mb-4">
               <GoldDivider />
             </div>
-            <p className="text-[var(--color-warm-gray)] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-4" >
-              We offer a <strong style={{ color: 'var(--surface-dark)' }}>14-day return window</strong> from the date of delivery. Items must be unused, in their original packaging, and with all tags still attached.
+            <p className="aura-text-secondary text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-4" >
+              We offer a <strong >14-day return window</strong> from the date of delivery. Items must be unused, in their original packaging, and with all tags still attached.
             </p>
-            <p className="text-[var(--color-warm-gray)] text-base leading-relaxed max-w-2xl mx-auto" >
+            <p className="aura-text-secondary text-base leading-relaxed max-w-2xl mx-auto" >
               We want you to be completely satisfied with your purchase. If for any reason you are not happy with your order, we are here to make it right.
             </p>
           </div>
@@ -182,8 +181,8 @@ export default function ReturnsView() {
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
-              <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Step by Step</span>
-              <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" >How to Return</h2>
+              <span className="aura-text-gold text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Step by Step</span>
+              <h2 className="aura-text-primary aura-h2 mt-2" >How to Return</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -194,7 +193,7 @@ export default function ReturnsView() {
                 <div
                   key={step.step}
                   className="rounded-xl p-5 sm:p-6 flex items-start gap-4 sm:gap-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
-                  style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+                  
                 >
                   <div className="flex flex-col items-center shrink-0">
                     <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
@@ -209,11 +208,11 @@ export default function ReturnsView() {
                       <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}>
                         Step {step.step}
                       </span>
-                      <h3 className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold" >
+                      <h3 className="aura-text-primary text-base sm:text-lg font-semibold" >
                         {step.title}
                       </h3>
                     </div>
-                    <p className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed" >
+                    <p className="aura-text-secondary text-sm sm:text-base leading-relaxed" >
                       {step.description}
                     </p>
                   </div>
@@ -229,12 +228,12 @@ export default function ReturnsView() {
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
-              <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Swap & Replace</span>
-              <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" >Exchange Process</h2>
+              <span className="aura-text-gold text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Swap & Replace</span>
+              <h2 className="aura-text-primary aura-h2 mt-2" >Exchange Process</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
-              <p className="text-[var(--color-warm-gray)] text-base leading-relaxed max-w-xl mx-auto mt-4" >
+              <p className="aura-text-secondary text-base leading-relaxed max-w-xl mx-auto mt-4" >
                 Want a different size or color? Our exchange process is simple and hassle-free. Size and color exchanges are available for all eligible items.
               </p>
             </div>
@@ -244,7 +243,7 @@ export default function ReturnsView() {
                 <div
                   key={step.step}
                   className="rounded-xl p-5 sm:p-6 flex items-start gap-4 sm:gap-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
-                  style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+                  
                 >
                   <div className="flex flex-col items-center shrink-0">
                     <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
@@ -259,11 +258,11 @@ export default function ReturnsView() {
                       <span className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)', color: 'var(--color-gold)' }}>
                         Step {step.step}
                       </span>
-                      <h3 className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold" >
+                      <h3 className="aura-text-primary text-base sm:text-lg font-semibold" >
                         {step.title}
                       </h3>
                     </div>
-                    <p className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed" >
+                    <p className="aura-text-secondary text-sm sm:text-base leading-relaxed" >
                       {step.description}
                     </p>
                   </div>
@@ -279,8 +278,8 @@ export default function ReturnsView() {
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
-              <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Please Note</span>
-              <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" >Non-Returnable Items</h2>
+              <span className="aura-text-gold text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Please Note</span>
+              <h2 className="aura-text-primary aura-h2 mt-2" >Non-Returnable Items</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -291,15 +290,15 @@ export default function ReturnsView() {
                 <div
                   key={item.item}
                   className="rounded-xl p-5 sm:p-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]"
-                  style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+                  
                 >
                   <div className="flex items-start gap-3">
-                    <XCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: '#C44' }} />
+                    <XCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: 'var(--color-danger)' }} />
                     <div>
-                      <h3 className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold mb-1" >
+                      <h3 className="aura-text-primary text-base sm:text-lg font-semibold mb-1" >
                         {item.item}
                       </h3>
-                      <p className="text-[var(--color-warm-gray)] text-sm leading-relaxed" >
+                      <p className="aura-text-secondary text-sm leading-relaxed" >
                         {item.reason}
                       </p>
                     </div>
@@ -316,8 +315,8 @@ export default function ReturnsView() {
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
-              <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Getting Your Money Back</span>
-              <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" >Refund Methods</h2>
+              <span className="aura-text-gold text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Getting Your Money Back</span>
+              <h2 className="aura-text-primary aura-h2 mt-2" >Refund Methods</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -326,30 +325,30 @@ export default function ReturnsView() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div
                 className="rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
-                style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+                
               >
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                   <CreditCard className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                 </div>
-                <h3 className="text-[var(--surface-dark)] text-lg sm:text-xl font-semibold mb-2" >
+                <h3 className="aura-text-primary text-lg sm:text-xl font-semibold mb-2" >
                   Original Payment Method
                 </h3>
-                <p className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed" >
+                <p className="aura-text-secondary text-sm sm:text-base leading-relaxed" >
                   Refunds are processed to your original payment method within 5-7 business days after we receive and inspect the returned item. This applies to credit/debit cards, JazzCash, EasyPaisa, and bank transfers.
                 </p>
               </div>
 
               <div
                 className="rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
-                style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+                
               >
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                   <CreditCard className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                 </div>
-                <h3 className="text-[var(--surface-dark)] text-lg sm:text-xl font-semibold mb-2" >
+                <h3 className="aura-text-primary text-lg sm:text-xl font-semibold mb-2" >
                   Store Credit
                 </h3>
-                <p className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed" >
+                <p className="aura-text-secondary text-sm sm:text-base leading-relaxed" >
                   Opt for store credit and receive a <strong style={{ color: 'var(--color-gold)' }}>10% bonus</strong> on your refund amount. Store credit never expires and can be used across our entire collection — a great way to discover something new.
                 </p>
               </div>
@@ -362,13 +361,13 @@ export default function ReturnsView() {
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+            <div className="rounded-xl p-5 sm:p-6 lg:p-8" >
               <div className="flex items-start gap-4 mb-5">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(204, 68, 68, 0.1)' }}>
-                  <AlertTriangle className="w-5 h-5" style={{ color: '#C44' }} />
+                  <AlertTriangle className="w-5 h-5" style={{ color: 'var(--color-danger)' }} />
                 </div>
                 <div>
-                  <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" >
+                  <h2 className="aura-text-primary aura-h2 mb-2" >
                     Damaged or Defective Items
                   </h2>
                   <GoldDivider />
@@ -376,20 +375,20 @@ export default function ReturnsView() {
               </div>
 
               <div className="flex flex-col gap-4 ml-0 sm:ml-16">
-                <p className="text-[var(--color-warm-gray)] text-base leading-relaxed" >
-                  If you receive a damaged or defective item, please contact us <strong style={{ color: 'var(--surface-dark)' }}>within 48 hours</strong> of delivery. Photo evidence is required for all damage claims.
+                <p className="aura-text-secondary text-base leading-relaxed" >
+                  If you receive a damaged or defective item, please contact us <strong >within 48 hours</strong> of delivery. Photo evidence is required for all damage claims.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <div className="flex items-center gap-2 px-4 py-2.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid var(--color-gold-soft)' }}>
+                  <div className="flex items-center gap-2 px-4 py-2.5 rounded-sm" >
                     <CheckCircle className="w-4 h-4 shrink-0" style={{ color: 'var(--color-gold)' }} />
-                    <span className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>Free replacement shipped immediately</span>
+                    <span className="text-sm font-medium" >Free replacement shipped immediately</span>
                   </div>
-                  <div className="flex items-center gap-2 px-4 py-2.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid var(--color-gold-soft)' }}>
+                  <div className="flex items-center gap-2 px-4 py-2.5 rounded-sm" >
                     <CheckCircle className="w-4 h-4 shrink-0" style={{ color: 'var(--color-gold)' }} />
-                    <span className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>Full refund available</span>
+                    <span className="text-sm font-medium" >Full refund available</span>
                   </div>
                 </div>
-                <p className="text-[var(--color-warm-gray)] text-sm leading-relaxed" >
+                <p className="aura-text-secondary text-sm leading-relaxed" >
                   We will cover all return shipping costs for damaged items and prioritize your case for the fastest possible resolution.
                 </p>
               </div>
@@ -404,13 +403,13 @@ export default function ReturnsView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <RotateCcw className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
           </div>
-          <h2 className="text-[var(--surface-dark)] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
+          <h2 className="aura-text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Need to Return Something?
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
+          <p className="aura-text-secondary text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Our customer support team will guide you through the return or exchange process. We are committed to making it as smooth as possible.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -423,7 +422,7 @@ export default function ReturnsView() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase cursor-pointer transition-all duration-300 hover:shadow-[0_8px_25px_rgba(37,211,102,0.3)] hover:brightness-110 active:scale-[0.98]"
-              style={{ backgroundColor: '#25D366', color: 'var(--text-on-dark)' }}
+              style={{ backgroundColor: '#25D366' }}
             >
               <MessageCircle className="w-4 h-4" />
               WhatsApp Us

@@ -76,7 +76,7 @@ export default function ShippingView() {
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
@@ -84,8 +84,7 @@ export default function ShippingView() {
           style={{ backgroundImage: 'url(/images/pages/shipping-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+            backgroundRepeat: 'no-repeat' }}
         />
         <div
           className="absolute inset-0"
@@ -96,7 +95,7 @@ export default function ShippingView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
             <Truck className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
           </div>
-          <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
+          <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
           <h1 className="aura-hero-title text-white" >
@@ -121,17 +120,17 @@ export default function ShippingView() {
       {/* Shipping Overview */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div ref={overviewRef} className="max-w-4xl mx-auto text-center">
-          <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+          <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" >
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
               <Truck className="w-6 h-6" style={{ color: 'var(--color-gold-text)' }} />
             </div>
-            <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
+            <h2 className="aura-text-primary aura-h2 mb-3" >
               Shipping Overview
             </h2>
             <div className="flex justify-center mb-4">
               <GoldDivider />
             </div>
-            <p className="text-[var(--color-warm-gray)] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto" >
+            <p className="aura-text-secondary text-base sm:text-lg leading-relaxed max-w-2xl mx-auto" >
               We deliver across Pakistan with care and attention to every package. Your order is handled with the same love and precision that goes into crafting each product. From our artisan workshop to your doorstep, we ensure every item arrives safely and beautifully presented.
             </p>
           </div>
@@ -143,8 +142,8 @@ export default function ShippingView() {
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
-              <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Delivery Options</span>
-              <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mt-2" >Shipping Rates</h2>
+              <span className="aura-text-gold text-xs sm:text-sm tracking-[3px] uppercase font-medium" >Delivery Options</span>
+              <h2 className="aura-text-primary aura-h2 mt-2" >Shipping Rates</h2>
               <div className="mt-3 flex justify-center">
                 <GoldDivider />
               </div>
@@ -155,21 +154,21 @@ export default function ShippingView() {
                 <div
                   key={rate.title}
                   className="rounded-xl p-5 sm:p-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
-                  style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+                  
                 >
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                     <rate.icon className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                   </div>
-                  <h3 className="text-[var(--surface-dark)] text-lg sm:text-xl font-semibold mb-1" >
+                  <h3 className="aura-text-primary text-lg sm:text-xl font-semibold mb-1" >
                     {rate.title}
                   </h3>
-                  <span className="block text-xs sm:text-sm tracking-wider uppercase mb-3" style={{ color: 'var(--color-muted-gray)' }}>
+                  <span className="block text-xs sm:text-sm tracking-wider uppercase mb-3" >
                     {rate.duration}
                   </span>
-                  <span className="block text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" style={{ color: 'var(--color-gold)' }}>
+                  <span className="block aura-h2 mb-3" style={{ color: 'var(--color-gold)' }}>
                     {rate.price}
                   </span>
-                  <span className="block text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--color-warm-gray)' }}>
+                  <span className="block text-xs sm:text-sm leading-relaxed" >
                     {rate.note}
                   </span>
                 </div>
@@ -183,19 +182,19 @@ export default function ShippingView() {
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+            <div className="rounded-xl p-5 sm:p-6 lg:p-8" >
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                   <MapPin className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                 </div>
                 <div>
-                  <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-2" >
+                  <h2 className="aura-text-primary aura-h2 mb-2" >
                     Delivery Areas
                   </h2>
                   <GoldDivider />
                 </div>
               </div>
-              <p className="text-[var(--color-warm-gray)] text-base leading-relaxed mb-6" >
+              <p className="aura-text-secondary text-base leading-relaxed mb-6" >
                 We deliver to all major cities across Pakistan. Our courier partners ensure timely and safe delivery to your doorstep.
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
@@ -203,14 +202,14 @@ export default function ShippingView() {
                   <div
                     key={city}
                     className="flex items-center gap-2 px-3 py-2.5 rounded-sm"
-                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.08)', border: '1px solid var(--color-gold-soft)' }}
+                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.08)' }}
                   >
                     <MapPin className="w-3.5 h-3.5 shrink-0" style={{ color: 'var(--color-gold)' }} />
-                    <span className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>{city}</span>
+                    <span className="text-sm font-medium" >{city}</span>
                   </div>
                 ))}
               </div>
-              <p className="text-[var(--color-warm-gray)] text-sm leading-relaxed" >
+              <p className="aura-text-secondary text-sm leading-relaxed" >
                 ...and 50+ more cities across Pakistan. Not sure if we deliver to your area? Contact us and we will find a way.
               </p>
             </div>
@@ -224,16 +223,16 @@ export default function ShippingView() {
           <AnimatedSection>
             <div className="grid grid-cols-1 gap-4 sm:gap-6">
               {/* Order Tracking */}
-              <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+              <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                     <Clock className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                   </div>
                   <div>
-                    <h3 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >
+                    <h3 className="aura-text-primary aura-h2 mb-3" >
                       Order Tracking
                     </h3>
-                    <p className="text-[var(--color-warm-gray)] text-base leading-relaxed" >
+                    <p className="aura-text-secondary text-base leading-relaxed" >
                       Track your order with the tracking number sent via SMS and email once your order is dispatched. You can use this tracking number on our website or the courier partner&apos;s website to monitor your shipment in real time. You will also receive notifications at each stage of delivery.
                     </p>
                   </div>
@@ -241,21 +240,21 @@ export default function ShippingView() {
               </div>
 
               {/* Packaging */}
-              <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+              <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                     <Gift className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                   </div>
                   <div>
-                    <h3 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >
+                    <h3 className="aura-text-primary aura-h2 mb-3" >
                       Packaging
                     </h3>
-                    <p className="text-[var(--color-warm-gray)] text-base leading-relaxed mb-3" >
+                    <p className="aura-text-secondary text-base leading-relaxed mb-3" >
                       Each item is carefully wrapped in premium protective materials to ensure it arrives in perfect condition. We take great pride in our unboxing experience — because the joy of receiving something beautiful should start the moment you open the package.
                     </p>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid var(--color-gold-soft)' }}>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-sm" >
                       <Gift className="w-4 h-4" style={{ color: 'var(--color-gold-text)' }} />
-                      <span className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>
+                      <span className="text-sm font-medium" >
                         Gift-wrap option available for PKR 299
                       </span>
                     </div>
@@ -264,16 +263,16 @@ export default function ShippingView() {
               </div>
 
               {/* International Shipping */}
-              <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+              <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
                     <Globe className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                   </div>
                   <div>
-                    <h3 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >
+                    <h3 className="aura-text-primary aura-h2 mb-3" >
                       International Shipping
                     </h3>
-                    <p className="text-[var(--color-warm-gray)] text-base leading-relaxed" >
+                    <p className="aura-text-secondary text-base leading-relaxed" >
                       Currently we only ship within Pakistan. International shipping is coming soon! Sign up for our newsletter to be the first to know when we start delivering worldwide.
                     </p>
                   </div>
@@ -287,13 +286,13 @@ export default function ShippingView() {
       {/* CTA */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
-          <h2 className="text-[var(--surface-dark)] text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
+          <h2 className="aura-text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-4" >
             Need Help With Your Delivery?
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
+          <p className="aura-text-secondary text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             Our customer support team is always ready to assist you with any shipping inquiries or delivery concerns.
           </p>
           <PremiumButton variant="primary" href="/contact">

@@ -147,7 +147,7 @@ function ChapterLabel({ number }: { number: string }) {
   return (
     <div ref={ref} className="flex items-center gap-4 mb-6">
       <span
-        className="chapter-text text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium"
+        className="chapter-text aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium"
         
       >
         Chapter {number}
@@ -554,7 +554,7 @@ function ValueCard({
     <div
       ref={cardRef}
       className="relative rounded-xl p-5 sm:p-6 lg:p-8 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(212,175,55,0.15)] overflow-hidden"
-      style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+      
     >
       {/* Animated gold left border */}
       <div
@@ -570,13 +570,13 @@ function ValueCard({
         <Icon className="w-7 h-7" style={{ color: 'var(--color-gold)' }} />
       </div>
       <h3
-        className="text-[var(--surface-dark)] text-xl sm:text-2xl font-semibold mb-4"
+        className="aura-text-primary text-xl sm:text-2xl font-semibold mb-4"
         
       >
         {title}
       </h3>
       <p
-        className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed"
+        className="aura-text-secondary text-sm sm:text-base leading-relaxed"
         
       >
         {description}
@@ -661,8 +661,7 @@ function TimelineItem({
               : '2px solid var(--color-gold)',
             boxShadow: item.isFuture
               ? 'none'
-              : '0 4px 14px rgba(212,175,55,0.25)',
-          }}
+              : '0 4px 14px rgba(212,175,55,0.25)' }}
         >
           <Icon
             className="w-5 h-5 sm:w-6 sm:h-6"
@@ -675,8 +674,7 @@ function TimelineItem({
             className="w-0.5 flex-1 min-h-[40px] sm:min-h-[60px]"
             style={{ background: item.isFuture
                 ? 'repeating-linear-gradient(to bottom, rgba(212,175,55,0.5) 0, rgba(212,175,55,0.5) 4px, transparent 4px, transparent 8px)'
-                : 'linear-gradient(to bottom, rgba(212,175,55,0.4), rgba(212,175,55,0.12))',
-            }}
+                : 'linear-gradient(to bottom, rgba(212,175,55,0.4), rgba(212,175,55,0.12))' }}
           />
         )}
       </div>
@@ -688,13 +686,12 @@ function TimelineItem({
         style={{ backgroundColor: item.isFuture ? 'rgba(212,175,55,0.04)' : 'var(--surface-card)',
           border: item.isFuture
             ? '1px dashed rgba(212,175,55,0.4)'
-            : '1px solid rgba(232,213,163,0.4)',
-        }}
+            : '1px solid rgba(232,213,163,0.4)' }}
       >
         {/* Year + Upcoming badge */}
         <div className="flex items-center gap-3 mb-2 flex-wrap">
           <span
-            className="text-[var(--color-gold)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold leading-none"
+            className="aura-text-gold aura-h2 leading-none"
             
           >
             {item.year}
@@ -703,8 +700,7 @@ function TimelineItem({
             <span
               className="text-[9px] uppercase tracking-[2px] font-semibold px-2 py-0.5 rounded-full"
               style={{ backgroundColor: 'rgba(212,175,55,0.12)',
-                color: 'var(--color-gold)',
-              }}
+                color: 'var(--color-gold)' }}
             >
               Upcoming
             </span>
@@ -713,7 +709,7 @@ function TimelineItem({
 
         {/* Title */}
         <h4
-          className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold mb-2"
+          className="aura-text-primary text-base sm:text-lg font-semibold mb-2"
           
         >
           {item.title}
@@ -721,7 +717,7 @@ function TimelineItem({
 
         {/* Description */}
         <p
-          className="text-[var(--color-warm-gray)] text-xs sm:text-sm leading-relaxed mb-3"
+          className="aura-text-secondary text-xs sm:text-sm leading-relaxed mb-3"
           
         >
           {item.description}
@@ -732,8 +728,7 @@ function TimelineItem({
           <div
             className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-sm"
             style={{ backgroundColor: 'rgba(212,175,55,0.08)',
-              color: 'var(--color-gold)',
-            }}
+              color: 'var(--color-gold)' }}
           >
             <Icon className="w-3 h-3" />
             {item.highlight}
@@ -923,7 +918,7 @@ export default function AboutView() {
   }, []);
 
   return (
-    <div className="w-full" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full" >
       {/* Scroll Progress Indicator */}
       <ScrollProgressIndicator />
 
@@ -935,14 +930,12 @@ export default function AboutView() {
           style={{ backgroundImage: 'url(/images/about-workshop.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+            backgroundRepeat: 'no-repeat' }}
         />
         <div
           className="absolute inset-0"
           style={{ background:
-              'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.55) 50%, rgba(212,175,55,0.15) 100%)',
-          }}
+              'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.55) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
 
         {/* Decorative floating orbs in hero */}
@@ -954,7 +947,7 @@ export default function AboutView() {
           className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8"
         >
           <span
-            className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
+            className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4"
             
           >
             ABOUT AURA LIVING
@@ -984,14 +977,14 @@ export default function AboutView() {
         <div className="max-w-3xl mx-auto text-center">
           {/* Decorative opening quote mark */}
           <div
-            className="text-[var(--color-gold)] text-5xl sm:text-6xl md:text-7xl leading-none mb-2 sm:mb-4 select-none"
+            className="aura-text-gold text-5xl sm:text-6xl md:text-7xl leading-none mb-2 sm:mb-4 select-none"
             
             aria-hidden="true"
           >
             &ldquo;
           </div>
           <blockquote
-            className="text-[var(--surface-dark)] leading-relaxed"
+            className="aura-text-primary leading-relaxed"
             
           >
             We believe every home tells a story. Ours begins with the hands of artisans.
@@ -1016,7 +1009,7 @@ export default function AboutView() {
               
             />
             <ParagraphReveal
-              className="text-[var(--color-warm-gray)] text-base leading-relaxed"
+              className="aura-text-secondary text-base leading-relaxed"
               
             >
               Aura Living was born from a deep-rooted passion for bringing
@@ -1026,7 +1019,7 @@ export default function AboutView() {
               and comfort.
             </ParagraphReveal>
             <ParagraphReveal
-              className="text-[var(--color-warm-gray)] text-base leading-relaxed"
+              className="aura-text-secondary text-base leading-relaxed"
               
             >
               Our journey began with a simple belief: that every home deserves
@@ -1100,7 +1093,7 @@ export default function AboutView() {
               
             />
             <ParagraphReveal
-              className="text-[var(--color-warm-gray)] text-base leading-relaxed"
+              className="aura-text-secondary text-base leading-relaxed"
               
             >
               We travel across Pakistan to source the finest artisan pieces —
@@ -1109,7 +1102,7 @@ export default function AboutView() {
               the vibrant truck art traditions of Punjab.
             </ParagraphReveal>
             <ParagraphReveal
-              className="text-[var(--color-warm-gray)] text-base leading-relaxed"
+              className="aura-text-secondary text-base leading-relaxed"
               
             >
               Each item in our collection carries the fingerprints of its maker,
@@ -1134,7 +1127,7 @@ export default function AboutView() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
             <span
-              className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[3px] uppercase font-medium"
+              className="aura-text-gold text-xs sm:text-sm tracking-[3px] uppercase font-medium"
               
             >
               What We Stand For
@@ -1176,8 +1169,7 @@ export default function AboutView() {
               <div key={stat.label} className="text-center py-6">
                 <span
                   className="aura-h2 text-charcoal block mb-2"
-                  style={{ color: 'var(--color-gold)',
-                  }}
+                  style={{ color: 'var(--color-gold)' }}
                 >
                   <CountUp
                     target={stat.number}
@@ -1188,8 +1180,7 @@ export default function AboutView() {
                 </span>
                 <span
                   className="text-sm sm:text-base tracking-wide"
-                  style={{ color: 'var(--color-muted-gray)',
-                  }}
+                  
                 >
                   {stat.label}
                 </span>
@@ -1202,11 +1193,11 @@ export default function AboutView() {
       <DecorativeGoldLine />
 
       {/* ═══════════════════ TIMELINE ═══════════════════ */}
-      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--surface-page)' }}>
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" >
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
             <span
-              className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[3px] uppercase font-medium"
+              className="aura-text-gold text-xs sm:text-sm tracking-[3px] uppercase font-medium"
               
             >
               Our Journey
@@ -1218,7 +1209,7 @@ export default function AboutView() {
               Milestones
             </h2>
             <p
-              className="text-[var(--color-warm-gray)] text-sm sm:text-base mt-3 max-w-lg mx-auto leading-relaxed"
+              className="aura-text-secondary text-sm sm:text-base mt-3 max-w-lg mx-auto leading-relaxed"
               
             >
               From a single workshop to a nationwide brand — every milestone
@@ -1258,7 +1249,7 @@ export default function AboutView() {
             Ready to Transform Your Space?
           </h2>
           <p
-            className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
+            className="aura-text-secondary text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
             
           >
             Explore our curated collection of handcrafted home decor and bring

@@ -69,8 +69,7 @@ export default function Tabs({ tabs, activeTab, onTabChange, className = '', bad
             style={{
               color: isActive ? 'var(--text-gold)' : 'var(--text-muted)',
               borderBottom: isActive ? '2px solid var(--color-gold)' : '2px solid transparent',
-              marginBottom: '-1px',
-            }}
+              marginBottom: '-1px' }}
           >
             {tab.icon}
             <span>{tab.label}</span>

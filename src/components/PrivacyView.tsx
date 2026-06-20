@@ -137,7 +137,7 @@ export default function PrivacyView() {
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
@@ -145,8 +145,7 @@ export default function PrivacyView() {
           style={{ backgroundImage: 'url(/images/pages/privacy-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+            backgroundRepeat: 'no-repeat' }}
         />
         <div
           className="absolute inset-0"
@@ -157,7 +156,7 @@ export default function PrivacyView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
             <Shield className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
           </div>
-          <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
+          <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
           <h1 className="aura-hero-title text-white" >
@@ -185,7 +184,7 @@ export default function PrivacyView() {
       {/* Intro */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg leading-relaxed" >
+          <p className="aura-text-secondary text-base sm:text-lg leading-relaxed" >
             At Aura Living, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you visit our website.
           </p>
         </div>
@@ -200,7 +199,7 @@ export default function PrivacyView() {
               <div
                 key={section.number}
                 className="privacy-section rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
-                style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+                
               >
                 <div className="flex items-start gap-4 sm:gap-5">
                   <div className="flex flex-col items-center shrink-0">
@@ -216,12 +215,12 @@ export default function PrivacyView() {
                       >
                         {String(section.number).padStart(2, '0')}
                       </span>
-                      <h3 className="text-[var(--surface-dark)] text-lg sm:text-xl font-semibold" >
+                      <h3 className="aura-text-primary text-lg sm:text-xl font-semibold" >
                         {section.title}
                       </h3>
                     </div>
                     {section.paragraphs.map((paragraph, idx) => (
-                      <p key={idx} className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed" >
+                      <p key={idx} className="aura-text-secondary text-sm sm:text-base leading-relaxed" >
                         {paragraph}
                       </p>
                     ))}
@@ -239,13 +238,13 @@ export default function PrivacyView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <Lock className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
           </div>
-          <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-4" >
+          <h2 className="aura-text-primary aura-h2 mb-4" >
             Your Privacy Matters
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-6 max-w-lg mx-auto leading-relaxed" >
+          <p className="aura-text-secondary text-base sm:text-lg mb-6 max-w-lg mx-auto leading-relaxed" >
             We take the protection of your personal data seriously. If you have any questions or concerns, reach out to us at{' '}
             <a href="mailto:privacy@auraliving.pk" className="font-semibold transition-colors duration-200 hover:text-[var(--color-gold-hover)]" style={{ color: 'var(--color-gold)' }}>
               privacy@auraliving.pk

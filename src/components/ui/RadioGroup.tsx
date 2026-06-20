@@ -46,7 +46,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
       >
         <legend
           className="text-sm font-medium"
-          style={{ color: 'var(--text-secondary)' }}
+          
         >
           {label}
           {required && (
@@ -73,8 +73,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
                 }`}
                 style={{
                   borderColor: isSelected ? 'var(--color-gold)' : 'var(--border-default)',
-                  backgroundColor: isSelected ? 'var(--surface-accent)' : 'transparent',
-                }}
+                  backgroundColor: isSelected ? 'var(--surface-accent)' : 'transparent' }}
               >
                 <input
                   type="radio"
@@ -89,14 +88,14 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
                 <div className="flex flex-col">
                   <span
                     className="text-sm font-medium"
-                    style={{ color: 'var(--text-primary)' }}
+                    
                   >
                     {opt.label}
                   </span>
                   {opt.description && (
                     <span
                       className="text-xs mt-0.5"
-                      style={{ color: 'var(--text-muted)' }}
+                      
                     >
                       {opt.description}
                     </span>

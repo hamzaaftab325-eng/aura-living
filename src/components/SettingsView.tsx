@@ -60,8 +60,7 @@ function Toggle({
       aria-label={label}
       onClick={() => onChange(!checked)}
       className="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-300 cursor-pointer"
-      style={{ backgroundColor: checked ? 'var(--color-gold)' : 'var(--color-gold-soft)',
-      }}
+      style={{ backgroundColor: checked ? 'var(--color-gold)' : 'var(--color-gold-soft)' }}
     >
       <span
         className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300"
@@ -159,19 +158,17 @@ export default function SettingsView() {
   // Not-signed-in gate
   if (hydrated && !safeUser) {
     return (
-      <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+      <div className="w-full page-transition" >
         <section className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center">
           <div
             className="absolute inset-0"
             style={{ backgroundImage: 'url(/images/pages/account-hero.webp)',
               backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
+              backgroundPosition: 'center' }}
           />
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
-            }}
+            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
           />
           <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4">
             <h1
@@ -189,14 +186,14 @@ export default function SettingsView() {
           </div>
         </section>
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
-            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
+          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" >
+            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ border: '1px dashed rgba(212,175,55,0.4)' }}>
               <Settings className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
             </div>
-            <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
+            <h2 className="aura-text-primary aura-h2 mb-3" >
               Sign in to manage settings
             </h2>
-            <p className="text-[var(--color-warm-gray)] text-sm sm:text-base mb-6" >
+            <p className="aura-text-secondary text-sm sm:text-base mb-6" >
               Customise notifications, privacy, appearance, and more.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
@@ -247,20 +244,18 @@ export default function SettingsView() {
   ];
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
           className="absolute inset-0"
           style={{ backgroundImage: 'url(/images/pages/account-hero.webp)',
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
+            backgroundPosition: 'center' }}
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
-          }}
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
 
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
@@ -300,21 +295,21 @@ export default function SettingsView() {
         <div className="max-w-3xl mx-auto">
           {/* Profile card with inline edit */}
           <AnimatedSection>
-            <div className="rounded-xl p-5 sm:p-6 mb-8 sm:mb-10" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+            <div className="rounded-xl p-5 sm:p-6 mb-8 sm:mb-10" >
               {editingProfile ? (
                 <form onSubmit={handleSaveProfile}>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center" >
                       <UserIcon className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--surface-dark)' }}>
+                    <h3 className="text-xl sm:text-2xl font-semibold" >
                       Edit Profile
                     </h3>
                   </div>
                   <div className="my-4"><GoldDivider /></div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     <div>
-                      <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
+                      <label className="text-xs font-medium tracking-wide uppercase block mb-2" >
                         Full Name
                       </label>
                       <input
@@ -323,14 +318,11 @@ export default function SettingsView() {
                         value={profileName}
                         onChange={(e) => setProfileName(e.target.value)}
                         className="w-full px-3 py-2.5 rounded-sm text-sm outline-none"
-                        style={{ color: 'var(--surface-dark)',
-                          backgroundColor: 'rgba(255,255,255,0.7)',
-                          border: '1px solid var(--color-gold-soft)',
-                        }}
+                        style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
                       />
                     </div>
                     <div>
-                      <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
+                      <label className="text-xs font-medium tracking-wide uppercase block mb-2" >
                         Email
                       </label>
                       <input
@@ -339,10 +331,7 @@ export default function SettingsView() {
                         value={profileEmail}
                         onChange={(e) => setProfileEmail(e.target.value)}
                         className="w-full px-3 py-2.5 rounded-sm text-sm outline-none"
-                        style={{ color: 'var(--surface-dark)',
-                          backgroundColor: 'rgba(255,255,255,0.7)',
-                          border: '1px solid var(--color-gold-soft)',
-                        }}
+                        style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
                       />
                     </div>
                   </div>
@@ -354,7 +343,7 @@ export default function SettingsView() {
                       type="button"
                       onClick={() => setEditingProfile(false)}
                       className="text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                      style={{ color: 'var(--color-muted-gray)', background: 'none' }}
+                      style={{ background: 'none' }}
                     >
                       Cancel
                     </button>
@@ -371,10 +360,10 @@ export default function SettingsView() {
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm sm:text-base font-semibold truncate" style={{ color: 'var(--surface-dark)' }}>
+                    <p className="text-sm sm:text-base font-semibold truncate" >
                       {safeUser?.name}
                     </p>
-                    <p className="text-xs sm:text-sm truncate" style={{ color: 'var(--color-muted-gray)' }}>
+                    <p className="text-xs sm:text-sm truncate" >
                       {safeUser?.email}
                     </p>
                   </div>
@@ -400,16 +389,16 @@ export default function SettingsView() {
             {settingSections.map((section) => {
               const SectionIcon = section.icon;
               return (
-                <div key={section.title} className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+                <div key={section.title} className="rounded-xl p-5 sm:p-7" >
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center" >
                       <SectionIcon className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                     </div>
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--surface-dark)' }}>
+                      <h3 className="text-xl sm:text-2xl font-semibold" >
                         {section.title}
                       </h3>
-                      <p className="text-xs sm:text-sm" style={{ color: 'var(--color-muted-gray)' }}>
+                      <p className="text-xs sm:text-sm" >
                         {section.description}
                       </p>
                     </div>
@@ -422,13 +411,13 @@ export default function SettingsView() {
                       <div
                         key={item.key}
                         className="flex items-center justify-between gap-4 py-3"
-                        style={{ borderBottom: '1px solid rgba(232, 213, 163, 0.4)' }}
+                        
                       >
                         <div className="min-w-0">
-                          <p className="text-sm sm:text-base font-medium" style={{ color: 'var(--surface-dark)' }}>
+                          <p className="text-sm sm:text-base font-medium" >
                             {item.label}
                           </p>
-                          <p className="text-xs sm:text-sm mt-0.5" style={{ color: 'var(--color-muted-gray)' }}>
+                          <p className="text-xs sm:text-sm mt-0.5" >
                             {item.sub}
                           </p>
                         </div>
@@ -441,16 +430,16 @@ export default function SettingsView() {
             })}
 
             {/* Currency selector */}
-            <div className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+            <div className="rounded-xl p-5 sm:p-7" >
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" >
                   <Globe className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                 </div>
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--surface-dark)' }}>
+                  <h3 className="text-xl sm:text-2xl font-semibold" >
                     Currency
                   </h3>
-                  <p className="text-xs sm:text-sm" style={{ color: 'var(--color-muted-gray)' }}>
+                  <p className="text-xs sm:text-sm" >
                     Display prices in your preferred currency.
                   </p>
                 </div>
@@ -464,8 +453,7 @@ export default function SettingsView() {
                     className="flex-1 py-3 rounded-sm text-sm font-medium transition-all duration-300 cursor-pointer"
                     style={{ border: currency === c ? '1.5px solid var(--color-gold)' : '1px solid var(--color-gold-soft)',
                       backgroundColor: currency === c ? 'rgba(212,175,55,0.08)' : 'transparent',
-                      color: currency === c ? 'var(--color-gold)' : 'var(--color-warm-gray)',
-                    }}
+                      color: currency === c ? 'var(--color-gold)' : 'var(--color-warm-gray)' }}
                   >
                     {currency === c && <Check className="w-3.5 h-3.5 inline mr-1" />}
                     {c === 'PKR' ? 'PKR — Pakistani Rupee' : 'USD — US Dollar'}
@@ -475,16 +463,16 @@ export default function SettingsView() {
             </div>
 
             {/* Payment methods */}
-            <div className="rounded-xl p-5 sm:p-7" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+            <div className="rounded-xl p-5 sm:p-7" >
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" >
                   <CreditCard className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--surface-dark)' }}>
+                  <h3 className="text-xl sm:text-2xl font-semibold" >
                     Payment Methods
                   </h3>
-                  <p className="text-xs sm:text-sm" style={{ color: 'var(--color-muted-gray)' }}>
+                  <p className="text-xs sm:text-sm" >
                     Manage saved cards and digital wallets.
                   </p>
                 </div>
@@ -497,10 +485,10 @@ export default function SettingsView() {
                       <CreditCard className="w-4 h-4" style={{ color: 'var(--color-gold-text)' }} />
                     </div>
                     <div>
-                      <p className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>
+                      <p className="text-sm font-medium" >
                         JazzCash •••• 4242
                       </p>
-                      <p className="text-xs" style={{ color: 'var(--color-muted-gray)' }}>
+                      <p className="text-xs" >
                         Default payment method
                       </p>
                     </div>
@@ -526,7 +514,7 @@ export default function SettingsView() {
               <h3 className="text-xl sm:text-2xl font-semibold mb-2" style={{ color: 'var(--color-danger)' }}>
                 Danger Zone
               </h3>
-              <p className="text-xs sm:text-sm mb-5" style={{ color: 'var(--color-warm-gray)' }}>
+              <p className="text-xs sm:text-sm mb-5" >
                 Sign out of your account or request permanent deletion. Deletion is irreversible.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -536,9 +524,7 @@ export default function SettingsView() {
                 <button
                   onClick={handleDeleteAccount}
                   className="px-4 py-2 rounded-sm text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer"
-                  style={{ color: 'var(--text-on-dark)',
-                    backgroundColor: 'var(--color-danger)',
-                  }}
+                  style={{ backgroundColor: 'var(--color-danger)' }}
                 >
                   Request Account Deletion
                 </button>
@@ -547,8 +533,8 @@ export default function SettingsView() {
           </div>
 
           {/* Save bar */}
-          <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-xl p-5" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
-            <p className="text-xs sm:text-sm text-center sm:text-left" style={{ color: 'var(--color-warm-gray)' }}>
+          <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-xl p-5" >
+            <p className="text-xs sm:text-sm text-center sm:text-left" >
               <Mail className="w-3.5 h-3.5 inline mr-1" style={{ color: 'var(--color-gold)' }} />
               Changes are saved instantly to your device.
             </p>

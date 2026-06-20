@@ -83,8 +83,7 @@ function InputField({
           backgroundColor: isFocused ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.7)',
           boxShadow: isFocused
             ? '0 0 20px rgba(212,175,55,0.2), 0 0 40px rgba(212,175,55,0.08)'
-            : '0 2px 8px rgba(0,0,0,0.03)',
-        }}
+            : '0 2px 8px rgba(0,0,0,0.03)' }}
       >
         <label htmlFor={inputId} className="sr-only">{ariaLabel}</label>
         <div
@@ -103,8 +102,7 @@ function InputField({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           className="w-full px-2 py-4 text-sm bg-transparent outline-none"
-          style={{ color: 'var(--surface-dark)',
-          }}
+          
           aria-label={ariaLabel}
           aria-invalid={error ? 'true' : 'false'}
           aria-describedby={error ? errorId : undefined}
@@ -115,7 +113,7 @@ function InputField({
         <button
           type="button"
           onClick={onToggle}
-          className="pr-4 cursor-pointer transition-colors duration-200 hover:text-[var(--color-gold)]"
+          className="pr-4 cursor-pointer transition-colors duration-200 hover:aura-text-gold"
           style={{ color: 'var(--color-taupe)', background: 'none' }}
           aria-label={isVisible ? 'Hide password' : 'Show password'}
         >
@@ -272,20 +270,18 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
   };
 
   return (
-    <div className="w-full min-h-screen flex" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full min-h-screen flex" >
       {/* ═══ Left Panel — Decorative Image + Branding ═══ */}
       <div
         className="hidden lg:flex w-[45%] xl:w-[50%] relative overflow-hidden flex-col items-center justify-center"
-        style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.85), rgba(212,175,55,0.25))',
-        }}
+        style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.85), rgba(212,175,55,0.25))' }}
       >
         {/* Background image */}
         <div
           className="absolute inset-0"
           style={{ backgroundImage: 'url(/images/hero/hero-slide-1.webp)',
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
+            backgroundPosition: 'center' }}
         />
         {/* Overlay */}
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.2) 100%)' }} />
@@ -327,7 +323,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
               { number: '4.8', label: 'Rating' },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center">
-                <span className="text-[var(--color-gold)] text-xl font-bold" >{stat.number}</span>
+                <span className="aura-text-gold text-xl font-bold" >{stat.number}</span>
                 <span className="text-white/60 text-[10px] uppercase tracking-wider mt-1" >{stat.label}</span>
               </div>
             ))}
@@ -342,8 +338,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
             top: '8%',
             right: '-5%',
             background: 'radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%)',
-            borderRadius: '50%',
-          }}
+            borderRadius: '50%' }}
         />
         <div
           className="absolute pointer-events-none"
@@ -352,8 +347,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
             bottom: '12%',
             left: '-3%',
             background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
-            borderRadius: '50%',
-          }}
+            borderRadius: '50%' }}
         />
       </div>
 
@@ -384,25 +378,24 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
             border: '1px solid rgba(232,213,163,0.3)',
-            boxShadow: '0 8px 40px rgba(212,175,55,0.06), 0 2px 12px rgba(0,0,0,0.04)',
-          }}
+            boxShadow: '0 8px 40px rgba(212,175,55,0.06), 0 2px 12px rgba(0,0,0,0.04)' }}
         >
           {/* Title with blur animation */}
           <div className="text-center mb-2">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Sparkles className="w-4 h-4 text-[var(--color-gold)]" />
+              <Sparkles className="w-4 h-4 aura-text-gold" />
               <span
                 className="text-[10px] font-semibold uppercase tracking-[0.2em]"
                 style={{ color: 'var(--color-gold)' }}
               >
                 {mode === 'login' ? 'Welcome Back' : 'Join the Family'}
               </span>
-              <Sparkles className="w-4 h-4 text-[var(--color-gold)]" />
+              <Sparkles className="w-4 h-4 aura-text-gold" />
             </div>
             <h1
               ref={titleRef}
-              className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold"
-              style={{ color: 'var(--surface-dark)' }}
+              className="aura-h2"
+              
             >
               {mode === 'login' ? 'Sign In to Aura' : 'Create Account'}
             </h1>
@@ -503,8 +496,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
                     className="w-4 h-4 rounded flex items-center justify-center transition-all duration-200"
                     style={{ border: rememberMe ? '2px solid var(--color-gold)' : '1.5px solid var(--color-gold-soft)',
                       backgroundColor: rememberMe ? 'var(--color-gold)' : 'transparent',
-                      padding: 0,
-                    }}
+                      padding: 0 }}
                     onClick={() => setRememberMe(!rememberMe)}
                   >
                     {rememberMe && (
@@ -513,7 +505,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
                       </svg>
                     )}
                   </button>
-                  <span className="text-xs" style={{ color: 'var(--color-muted-gray)' }}>
+                  <span className="text-xs" >
                     Remember me
                   </span>
                 </label>
@@ -539,8 +531,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
                   className="w-4 h-4 rounded flex items-center justify-center shrink-0 mt-0.5 transition-all duration-200"
                   style={{ border: agreeTerms ? '2px solid var(--color-gold)' : '1.5px solid var(--color-gold-soft)',
                     backgroundColor: agreeTerms ? 'var(--color-gold)' : 'transparent',
-                    padding: 0,
-                  }}
+                    padding: 0 }}
                   onClick={() => setAgreeTerms(!agreeTerms)}
                 >
                   {agreeTerms && (
@@ -549,11 +540,11 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
                     </svg>
                   )}
                 </button>
-                <span className="text-xs leading-relaxed" style={{ color: 'var(--color-muted-gray)' }}>
+                <span className="text-xs leading-relaxed" >
                   I agree to the{' '}
-                  <Link href="/terms" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-[var(--color-gold)] font-medium cursor-pointer hover:underline">Terms of Service</Link>
+                  <Link href="/terms" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="aura-text-gold font-medium cursor-pointer hover:underline">Terms of Service</Link>
                   {' '}and{' '}
-                  <Link href="/privacy" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-[var(--color-gold)] font-medium cursor-pointer hover:underline">Privacy Policy</Link>
+                  <Link href="/privacy" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="aura-text-gold font-medium cursor-pointer hover:underline">Privacy Policy</Link>
                 </span>
               </label>
             )}
@@ -583,7 +574,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
 
           {/* Switch Mode */}
           <div className="text-center mt-6 pt-5" style={{ borderTop: '1px solid rgba(232,213,163,0.3)' }}>
-            <p className="text-sm" style={{ color: 'var(--color-muted-gray)' }}>
+            <p className="text-sm" >
               {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}{' '}
               <Link
                 href={mode === 'login' ? '/auth/signup' : '/auth/login'}

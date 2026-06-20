@@ -51,8 +51,7 @@ export default function NewsletterSection() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.04) 0%, transparent 70%)',
-        }}
+          background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.04) 0%, transparent 70%)' }}
       />
 
       {/* Decorative corner lines */}
@@ -69,8 +68,7 @@ export default function NewsletterSection() {
           className="relative rounded-xl overflow-hidden"
           style={{
             background: 'linear-gradient(135deg, var(--surface-dark) 0%, #1A1A1A 100%)',
-            boxShadow: '0 16px 50px rgba(0, 0, 0, 0.15)',
-          }}
+            boxShadow: '0 16px 50px rgba(0, 0, 0, 0.15)' }}
         >
           {/* Gold top accent line */}
           <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-gold to-transparent" />
@@ -84,8 +82,7 @@ export default function NewsletterSection() {
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5"
                 style={{
                   backgroundColor: 'rgba(212, 175, 55, 0.12)',
-                  border: '1px solid rgba(212, 175, 55, 0.25)',
-                }}
+                  border: '1px solid rgba(212, 175, 55, 0.25)' }}
               >
                 <Gift className="w-3.5 h-3.5 text-gold" />
                 <span className="aura-eyebrow">
@@ -148,9 +145,7 @@ export default function NewsletterSection() {
                     fontSize: shouldFloatLabel ? '10px' : '14px',
                     color: shouldFloatLabel ? 'var(--color-gold)' : 'rgba(255,255,255,0.4)',
                     fontWeight: shouldFloatLabel ? 600 : 400,
-                    letterSpacing: shouldFloatLabel ? '0.05em' : '0',
-                    fontFamily: "'Poppins', sans-serif",
-                  }}
+                    letterSpacing: shouldFloatLabel ? '0.05em' : '0' }}
                 >
                   Email address
                 </label>
@@ -167,19 +162,15 @@ export default function NewsletterSection() {
                   aria-invalid={submitted ? 'false' : 'false'}
                   aria-label="Email address for newsletter signup"
                   className="w-full px-4 py-3.5 rounded-lg text-sm outline-none transition-all duration-300"
-                  style={{
-                    color: 'var(--text-on-dark)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)',
                     border: isFocused
                       ? '2px solid var(--color-gold)'
                       : '1.5px solid rgba(212, 175, 55, 0.2)',
                     boxShadow: isFocused
                       ? '0 0 20px rgba(212,175,55,0.2)'
                       : 'none',
-                    fontFamily: "'Poppins', sans-serif",
                     paddingTop: shouldFloatLabel ? '24px' : '14px',
-                    paddingBottom: shouldFloatLabel ? '8px' : '14px',
-                  }}
+                    paddingBottom: shouldFloatLabel ? '8px' : '14px' }}
                 />
               </div>
 
@@ -195,12 +186,9 @@ export default function NewsletterSection() {
                 role="status"
                 aria-live="polite"
                 className="mt-4 max-w-md mx-auto p-3 rounded-lg text-center"
-                style={{
-                  backgroundColor: 'rgba(212, 175, 55, 0.1)',
-                  border: '1px solid rgba(212, 175, 55, 0.2)',
-                }}
+                style={{ border: '1px solid rgba(212, 175, 55, 0.2)' }}
               >
-                <p className="text-sm font-medium text-gold" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                <p className="text-sm font-medium text-gold" >
                   Welcome to the family! Your 15% welcome code is on its way.
                 </p>
               </div>
@@ -208,11 +196,11 @@ export default function NewsletterSection() {
 
             {/* Trust signals */}
             <div className="mt-6 flex items-center justify-center gap-6 flex-wrap">
-              <span className="inline-flex items-center gap-1.5 text-[11px] text-white/50" style={{ fontFamily: "'Poppins', sans-serif" }}>
+              <span className="inline-flex items-center gap-1.5 text-[11px] text-white/50" >
                 <ShieldCheck className="w-3.5 h-3.5 text-gold" />
                 No spam, unsubscribe anytime
               </span>
-              <span className="inline-flex items-center gap-1.5 text-[11px] text-white/50" style={{ fontFamily: "'Poppins', sans-serif" }}>
+              <span className="inline-flex items-center gap-1.5 text-[11px] text-white/50" >
                 <Mail className="w-3.5 h-3.5 text-gold" />
                 We respect your privacy
               </span>

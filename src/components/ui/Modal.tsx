@@ -128,10 +128,7 @@ export default function Modal({
             ? `m-auto w-full ${sizeClass} rounded-2xl shadow-xl`
             : 'ml-auto h-full w-full max-w-md shadow-xl'
         } ${className}`}
-        style={{
-          backgroundColor: 'var(--surface-card)',
-          animation: variant === 'center' ? 'modalZoomIn 250ms var(--ease-out)' : 'drawerSlideIn 300ms var(--ease-out)',
-        }}
+        style={{ animation: variant === 'center' ? 'modalZoomIn 250ms var(--ease-out)' : 'drawerSlideIn 300ms var(--ease-out)' }}
       >
         {title && (
           <div
@@ -141,7 +138,7 @@ export default function Modal({
             <h2
               id={titleId}
               className="text-lg font-bold"
-              style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-playfair)' }}
+              style={{ fontFamily: 'var(--font-playfair)' }}
             >
               {title}
             </h2>
@@ -150,7 +147,7 @@ export default function Modal({
               onClick={onClose}
               aria-label="Close dialog"
               className="p-1.5 rounded-md transition-colors hover:bg-black/5"
-              style={{ color: 'var(--text-muted)' }}
+              
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="18" y1="6" x2="6" y2="18" />

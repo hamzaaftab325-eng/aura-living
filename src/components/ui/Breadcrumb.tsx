@@ -60,10 +60,7 @@ export default function Breadcrumb({ items, productName, productId }: Breadcrumb
     <nav
       aria-label="Breadcrumb"
       className="py-4 px-4 sm:px-6 lg:px-8 breadcrumb-animate"
-      style={{
-        backgroundColor: 'var(--surface-accent)',
-        borderBottom: '1px solid var(--border-default)',
-      }}
+      style={{ borderBottom: '1px solid var(--border-default)' }}
     >
       <ol className="max-w-7xl mx-auto flex items-center gap-2 flex-wrap">
         {items.map((item, idx) => {
@@ -82,7 +79,7 @@ export default function Breadcrumb({ items, productName, productId }: Breadcrumb
                 <span
                   aria-current={isLast ? 'page' : undefined}
                   className="text-sm font-medium"
-                  style={{ color: 'var(--text-gold)' }}
+                  
                 >
                   {item.label}
                 </span>
@@ -91,7 +88,7 @@ export default function Breadcrumb({ items, productName, productId }: Breadcrumb
                   href={item.href}
                   onClick={item.onClick}
                   className="text-sm transition-colors duration-200 hover:opacity-80 cursor-pointer"
-                  style={{ color: 'var(--text-muted)' }}
+                  
                 >
                   {item.label}
                 </Link>
@@ -100,7 +97,7 @@ export default function Breadcrumb({ items, productName, productId }: Breadcrumb
                   type="button"
                   onClick={item.onClick}
                   className="text-sm transition-colors duration-200 hover:opacity-80 cursor-pointer"
-                  style={{ color: 'var(--text-muted)', background: 'none' }}
+                  style={{ background: 'none' }}
                 >
                   {item.label}
                 </button>

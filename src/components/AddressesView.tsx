@@ -194,19 +194,17 @@ export default function AddressesView() {
   // Not-signed-in gate
   if (hydrated && !safeUser) {
     return (
-      <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+      <div className="w-full page-transition" >
         <section className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center">
           <div
             className="absolute inset-0"
             style={{ backgroundImage: 'url(/images/pages/account-hero.webp)',
               backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
+              backgroundPosition: 'center' }}
           />
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
-            }}
+            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
           />
           <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4">
             <h1
@@ -224,14 +222,14 @@ export default function AddressesView() {
           </div>
         </section>
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
-            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '1px dashed rgba(212,175,55,0.4)' }}>
+          <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" >
+            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ border: '1px dashed rgba(212,175,55,0.4)' }}>
               <MapPin className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
             </div>
-            <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3" >
+            <h2 className="aura-text-primary aura-h2 mb-3" >
               Sign in to manage addresses
             </h2>
-            <p className="text-[var(--color-warm-gray)] text-sm sm:text-base mb-6" >
+            <p className="aura-text-secondary text-sm sm:text-base mb-6" >
               Save delivery addresses for faster checkout and easy reordering.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
@@ -251,20 +249,18 @@ export default function AddressesView() {
   }
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
           className="absolute inset-0"
           style={{ backgroundImage: 'url(/images/pages/account-hero.webp)',
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
+            backgroundPosition: 'center' }}
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
-          }}
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
 
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
@@ -304,16 +300,16 @@ export default function AddressesView() {
         <div className="max-w-5xl mx-auto">
           {/* Add new address CTA */}
           <AnimatedSection>
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 rounded-xl p-5 sm:p-6" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 rounded-xl p-5 sm:p-6" >
               <div className="flex items-center gap-3 text-center sm:text-left">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212,175,55,0.1)' }}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" >
                   <Plus className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
                 </div>
                 <div>
-                  <p className="text-sm sm:text-base font-semibold" style={{ color: 'var(--surface-dark)' }}>
+                  <p className="text-sm sm:text-base font-semibold" >
                     {editingId ? 'Edit address' : 'Add a new address'}
                   </p>
-                  <p className="text-xs sm:text-sm" style={{ color: 'var(--color-muted-gray)' }}>
+                  <p className="text-xs sm:text-sm" >
                     Save home, work, or other delivery locations.
                   </p>
                 </div>
@@ -332,17 +328,17 @@ export default function AddressesView() {
               <form
                 onSubmit={handleSave}
                 className="rounded-xl p-5 sm:p-7 mb-8 sm:mb-10"
-                style={{ backgroundColor: 'var(--surface-card)', border: '1.5px solid var(--color-gold)' }}
+                style={{ border: '1.5px solid var(--color-gold)' }}
               >
                 <div className="flex items-center justify-between mb-5">
-                  <h3 className="text-lg sm:text-xl font-semibold" style={{ color: 'var(--surface-dark)' }}>
+                  <h3 className="text-lg sm:text-xl font-semibold" >
                     {editingId ? 'Edit Address' : 'New Address'}
                   </h3>
                   <button
                     type="button"
                     onClick={resetForm}
                     className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-[var(--color-gold-soft)]/30"
-                    style={{ color: 'var(--color-muted-gray)' }}
+                    
                     aria-label="Cancel"
                   >
                     <X className="w-4 h-4" />
@@ -352,7 +348,7 @@ export default function AddressesView() {
 
                 {/* Label selector */}
                 <div className="mb-5">
-                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
+                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" >
                     Address Type
                   </label>
                   <div className="flex gap-2">
@@ -368,8 +364,7 @@ export default function AddressesView() {
                           className="flex items-center gap-2 py-2 px-4 rounded-sm text-sm font-medium transition-all duration-200 cursor-pointer"
                           style={{ border: selected ? `1.5px solid ${cfg.color}` : '1px solid var(--color-gold-soft)',
                             backgroundColor: selected ? cfg.bg : 'transparent',
-                            color: selected ? cfg.color : 'var(--color-warm-gray)',
-                          }}
+                            color: selected ? cfg.color : 'var(--color-warm-gray)' }}
                         >
                           <Icon className="w-3.5 h-3.5" />
                           {lbl}
@@ -382,7 +377,7 @@ export default function AddressesView() {
                 {/* Name + Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" >
                       Full Name *
                     </label>
                     <input
@@ -392,14 +387,11 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="e.g. Ayesha Khan"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ color: 'var(--surface-dark)',
-                        backgroundColor: 'rgba(255,255,255,0.7)',
-                        border: '1px solid var(--color-gold-soft)',
-                      }}
+                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" >
                       Phone *
                     </label>
                     <input
@@ -409,17 +401,14 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       placeholder="+92 300 1234567"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ color: 'var(--surface-dark)',
-                        backgroundColor: 'rgba(255,255,255,0.7)',
-                        border: '1px solid var(--color-gold-soft)',
-                      }}
+                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
                     />
                   </div>
                 </div>
 
                 {/* Address line 1 */}
                 <div className="mb-4">
-                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
+                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" >
                     Street Address *
                   </label>
                   <input
@@ -429,16 +418,13 @@ export default function AddressesView() {
                     onChange={(e) => setForm({ ...form, line1: e.target.value })}
                     placeholder="House #, Block, Street"
                     className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                    style={{ color: 'var(--surface-dark)',
-                      backgroundColor: 'rgba(255,255,255,0.7)',
-                      border: '1px solid var(--color-gold-soft)',
-                    }}
+                    style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
                   />
                 </div>
 
                 {/* Address line 2 */}
                 <div className="mb-4">
-                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
+                  <label className="text-xs font-medium tracking-wide uppercase block mb-2" >
                     Apartment / Suite / Landmark (optional)
                   </label>
                   <input
@@ -447,17 +433,14 @@ export default function AddressesView() {
                     onChange={(e) => setForm({ ...form, line2: e.target.value })}
                     placeholder="Near Central Park"
                     className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                    style={{ color: 'var(--surface-dark)',
-                      backgroundColor: 'rgba(255,255,255,0.7)',
-                      border: '1px solid var(--color-gold-soft)',
-                    }}
+                    style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
                   />
                 </div>
 
                 {/* City + Province + Postal */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" >
                       City *
                     </label>
                     <input
@@ -467,14 +450,11 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, city: e.target.value })}
                       placeholder="Lahore"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ color: 'var(--surface-dark)',
-                        backgroundColor: 'rgba(255,255,255,0.7)',
-                        border: '1px solid var(--color-gold-soft)',
-                      }}
+                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" >
                       Province *
                     </label>
                     <select
@@ -482,10 +462,7 @@ export default function AddressesView() {
                       value={form.province}
                       onChange={(e) => setForm({ ...form, province: e.target.value })}
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ color: 'var(--surface-dark)',
-                        backgroundColor: 'rgba(255,255,255,0.7)',
-                        border: '1px solid var(--color-gold-soft)',
-                      }}
+                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
                     >
                       <option value="">Select</option>
                       <option value="Punjab">Punjab</option>
@@ -498,7 +475,7 @@ export default function AddressesView() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ color: 'var(--color-muted-gray)' }}>
+                    <label className="text-xs font-medium tracking-wide uppercase block mb-2" >
                       Postal Code *
                     </label>
                     <input
@@ -508,10 +485,7 @@ export default function AddressesView() {
                       onChange={(e) => setForm({ ...form, postal: e.target.value })}
                       placeholder="54000"
                       className="w-full px-3 py-2.5 rounded-sm text-sm outline-none transition-colors"
-                      style={{ color: 'var(--surface-dark)',
-                        backgroundColor: 'rgba(255,255,255,0.7)',
-                        border: '1px solid var(--color-gold-soft)',
-                      }}
+                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
                     />
                   </div>
                 </div>
@@ -524,7 +498,7 @@ export default function AddressesView() {
                     type="button"
                     onClick={resetForm}
                     className="text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                    style={{ color: 'var(--color-muted-gray)', background: 'none' }}
+                    style={{ background: 'none' }}
                   >
                     Cancel
                   </button>
@@ -542,9 +516,7 @@ export default function AddressesView() {
                 <div
                   key={addr.id}
                   className="relative rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
-                  style={{ backgroundColor: 'var(--surface-card)',
-                    border: addr.isDefault ? '1.5px solid var(--color-gold)' : '1px solid var(--color-gold-soft)',
-                  }}
+                  style={{ border: addr.isDefault ? '1.5px solid var(--color-gold)' : '1px solid var(--color-gold-soft)' }}
                 >
                   {addr.isDefault && (
                     <span
@@ -567,13 +539,13 @@ export default function AddressesView() {
                     </span>
                   </div>
 
-                  <p className="text-sm sm:text-base font-semibold mb-1" style={{ color: 'var(--surface-dark)' }}>
+                  <p className="text-sm sm:text-base font-semibold mb-1" >
                     {addr.name}
                   </p>
-                  <p className="text-xs sm:text-sm mb-3" style={{ color: 'var(--color-muted-gray)' }}>
+                  <p className="text-xs sm:text-sm mb-3" >
                     {addr.phone}
                   </p>
-                  <p className="text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--color-warm-gray)' }}>
+                  <p className="text-xs sm:text-sm leading-relaxed" >
                     {addr.line1}{addr.line2 ? `, ${addr.line2}` : ''}<br />
                     {addr.city}, {addr.province} — {addr.postal}
                   </p>
@@ -617,12 +589,12 @@ export default function AddressesView() {
 
           {/* Empty state */}
           {addresses.length === 0 && (
-            <div className="text-center py-12 rounded-xl" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+            <div className="text-center py-12 rounded-xl" >
               <MapPin className="w-10 h-10 mx-auto mb-3" style={{ color: 'var(--color-gold)' }} />
-              <h3 className="text-[var(--surface-dark)] text-lg font-semibold mb-1" >
+              <h3 className="aura-text-primary text-lg font-semibold mb-1" >
                 No saved addresses yet
               </h3>
-              <p className="text-sm" style={{ color: 'var(--color-muted-gray)' }}>
+              <p className="text-sm" >
                 Add an address to speed up your next checkout.
               </p>
             </div>

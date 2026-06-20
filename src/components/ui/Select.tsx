@@ -47,7 +47,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <label
           htmlFor={selectId}
           className="text-sm font-medium"
-          style={{ color: 'var(--text-secondary)' }}
+          
         >
           {label}
           {required && (
@@ -65,12 +65,8 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           aria-required={required || undefined}
           required={required}
           className={`w-full px-4 py-3 text-sm rounded-md transition-all duration-200 focus:outline-none focus:ring-2 ${className}`}
-          style={{
-            backgroundColor: 'var(--surface-card)',
-            border: `1px solid ${error ? 'var(--color-danger)' : 'var(--border-default)'}`,
-            color: 'var(--text-primary)',
-            cursor: 'pointer',
-          }}
+          style={{ border: `1px solid ${error ? 'var(--color-danger)' : 'var(--border-default)'}`,
+            cursor: 'pointer' }}
           {...props}
         >
           {placeholder && (
@@ -88,7 +84,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           <p
             id={hintId}
             className="text-xs"
-            style={{ color: 'var(--text-muted)' }}
+            
           >
             {hint}
           </p>

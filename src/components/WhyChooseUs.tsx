@@ -77,12 +77,10 @@ function FeatureCard({ feature }: FeatureCardProps) {
     <div
       className="group relative h-full rounded-2xl overflow-hidden transition-all duration-300 cursor-default"
       style={{ background: 'var(--surface-card)',
-        border: '1px solid var(--color-gold-soft)',
         transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
         boxShadow: isHovered
           ? '0 16px 40px rgba(212, 175, 55, 0.18), 0 0 0 1px rgba(212, 175, 55, 0.25)'
-          : '0 2px 12px rgba(0, 0, 0, 0.04)',
-      }}
+          : '0 2px 12px rgba(0, 0, 0, 0.04)' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -90,8 +88,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
       <div
         className="absolute top-0 left-0 h-[3px] transition-all duration-500 ease-out"
         style={{ width: isHovered ? '100%' : '0%',
-          background: 'linear-gradient(90deg, var(--color-gold), var(--color-gold-soft))',
-        }}
+          background: 'linear-gradient(90deg, var(--color-gold), var(--color-gold-soft))' }}
       />
 
       {/* Floating gold number in corner */}
@@ -99,8 +96,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
         className="absolute top-4 right-5 select-none pointer-events-none z-0 transition-all duration-300"
         style={{ fontSize: '3.5rem',
           lineHeight: 1,
-          color: isHovered ? 'rgba(212, 175, 55, 0.18)' : 'rgba(212, 175, 55, 0.08)',
-        }}
+          color: isHovered ? 'rgba(212, 175, 55, 0.18)' : 'rgba(212, 175, 55, 0.08)' }}
       >
         {feature.number}
       </span>
@@ -112,8 +108,7 @@ function FeatureCard({ feature }: FeatureCardProps) {
             className="relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300"
             style={{ backgroundColor: isHovered ? 'var(--color-gold)' : 'var(--color-gold-pale)',
               transform: isHovered ? 'scale(1.08)' : 'scale(1)',
-              boxShadow: isHovered ? '0 8px 20px rgba(212, 175, 55, 0.35)' : 'none',
-            }}
+              boxShadow: isHovered ? '0 8px 20px rgba(212, 175, 55, 0.35)' : 'none' }}
           >
             <IconComponent
               className="w-6 h-6 transition-colors duration-300"
@@ -124,15 +119,14 @@ function FeatureCard({ feature }: FeatureCardProps) {
 
         <h3
           className="text-lg sm:text-xl font-bold mb-2 transition-colors duration-300"
-          style={{ color: isHovered ? 'var(--color-gold)' : 'var(--surface-dark)',
-          }}
+          style={{ color: isHovered ? 'var(--color-gold)' : 'var(--surface-dark)' }}
         >
           {feature.title}
         </h3>
 
         <p
           className="text-sm leading-relaxed flex-1"
-          style={{ color: 'var(--color-muted-gray)' }}
+          
         >
           {feature.description}
         </p>
@@ -194,15 +188,15 @@ export default function WhyChooseUs() {
 
           <h2
             ref={headingRef}
-            className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold mb-3"
-            style={{ color: 'var(--surface-dark)' }}
+            className="aura-h2 mb-3"
+            
           >
             Why Discerning Homes Choose Aura
           </h2>
 
           <p
             className="text-sm sm:text-base max-w-xl mx-auto mt-4"
-            style={{ color: 'var(--color-muted-gray)' }}
+            
           >
             Four promises we live by, so your home can be lived in beautifully.
           </p>

@@ -47,8 +47,7 @@ function RatingStars({ rating }: { rating: number }) {
           key={star}
           className="w-3.5 h-3.5"
           style={{ color: star <= Math.round(rating) ? 'var(--color-gold)' : 'var(--color-gold-soft)',
-            fill: star <= Math.round(rating) ? 'var(--color-gold)' : 'none',
-          }}
+            fill: star <= Math.round(rating) ? 'var(--color-gold)' : 'none' }}
         />
       ))}
     </div>
@@ -121,7 +120,7 @@ export default function WishlistView() {
   };
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Hero Banner */}
       <section
         ref={headerSectionRef}
@@ -134,29 +133,25 @@ export default function WishlistView() {
           style={{ backgroundImage: "url('/images/pages/wishlist-hero.webp')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+            backgroundRepeat: 'no-repeat' }}
         />
         {/* Gradient overlay */}
         <div
           className="absolute inset-0"
           style={{ background:
-              'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)',
-          }}
+              'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)' }}
         />
 
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
           style={{ filter: 'blur(60px)',
-            background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
-          }}
+            background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
           style={{ filter: 'blur(70px)',
-            background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
-          }}
+            background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
         />
 
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
@@ -202,18 +197,18 @@ export default function WishlistView() {
               <div className="flex flex-col items-center justify-center py-16 sm:py-24">
                 <div
                   className="w-24 h-24 rounded-full flex items-center justify-center mb-6"
-                  style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}
+                  
                 >
                   <Heart className="w-10 h-10" style={{ color: 'var(--color-gold)' }} />
                 </div>
                 <h2
-                  className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
+                  className="aura-text-primary aura-h2 mb-3"
                   
                 >
                   Your wishlist is empty
                 </h2>
                 <p
-                  className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-md text-center leading-relaxed"
+                  className="aura-text-secondary text-base sm:text-lg mb-8 max-w-md text-center leading-relaxed"
                   
                 >
                   Start adding items you love by tapping the heart icon on any product. Your favorite pieces will appear here.
@@ -231,7 +226,7 @@ export default function WishlistView() {
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <h2
-                      className="text-[var(--surface-dark)] text-xl sm:text-2xl font-semibold"
+                      className="aura-text-primary text-xl sm:text-2xl font-semibold"
                       
                     >
                       Saved Items
@@ -242,7 +237,7 @@ export default function WishlistView() {
                   </div>
                   <span
                     className="text-sm"
-                    style={{ color: 'var(--color-muted-gray)' }}
+                    
                   >
                     {wishlistProducts.length} item{wishlistProducts.length !== 1 ? 's' : ''}
                   </span>
@@ -257,7 +252,7 @@ export default function WishlistView() {
                   <div
                     key={product.id}
                     className="group rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
-                    style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+                    
                   >
                     {/* Product Image */}
                     <Link
@@ -280,8 +275,7 @@ export default function WishlistView() {
                         <div
                           className="absolute top-3 left-3 px-2.5 py-1 rounded-sm text-xs font-semibold tracking-wider uppercase"
                           style={{ backgroundColor: badgeColors[product.badge]?.bg,
-                            color: badgeColors[product.badge]?.text,
-                          }}
+                            color: badgeColors[product.badge]?.text }}
                         >
                           {product.badge}
                         </div>
@@ -308,7 +302,7 @@ export default function WishlistView() {
                       <Link
                         href={`/product/${product.slug}`}
                         onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                        className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold mb-1.5 transition-colors duration-200 hover:text-[var(--color-gold)] leading-snug block"
+                        className="aura-text-primary text-base sm:text-lg font-semibold mb-1.5 transition-colors duration-200 hover:aura-text-gold leading-snug block"
                       >
                         {product.name}
                       </Link>
@@ -318,7 +312,7 @@ export default function WishlistView() {
                         <RatingStars rating={product.rating} />
                         <span
                           className="text-xs"
-                          style={{ color: 'var(--color-muted-gray)' }}
+                          
                         >
                           ({product.reviews})
                         </span>
@@ -328,14 +322,14 @@ export default function WishlistView() {
                       <div className="flex items-center gap-2 mb-4">
                         <span
                           className="text-lg font-bold"
-                          style={{ color: 'var(--surface-dark)' }}
+                          
                         >
                           {formatPKR(product.price)}
                         </span>
                         {product.originalPrice && (
                           <span
                             className="text-sm line-through"
-                            style={{ color: 'var(--color-muted-gray)' }}
+                            
                           >
                             {formatPKR(product.originalPrice)}
                           </span>
@@ -344,8 +338,7 @@ export default function WishlistView() {
                           <span
                             className="text-xs font-semibold px-1.5 py-0.5 rounded-sm"
                             style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)',
-                              color: 'var(--color-gold)',
-                            }}
+                              color: 'var(--color-gold)' }}
                           >
                             {product.originalPrice ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0}% OFF
                           </span>
@@ -364,7 +357,7 @@ export default function WishlistView() {
                         <button
                           onClick={() => toggleWishlist(product.id, product.name)}
                           className="w-11 h-11 rounded-sm flex items-center justify-center transition-all duration-200 hover:bg-red-50 cursor-pointer"
-                          style={{ border: '1px solid var(--color-gold-soft)' }}
+                          
                           aria-label="Remove from wishlist"
                         >
                           <Heart className="w-4 h-4" style={{ color: 'var(--color-danger)', fill: 'var(--color-danger)' }} />
@@ -382,7 +375,7 @@ export default function WishlistView() {
                     <GoldDivider />
                   </div>
                   <p
-                    className="text-[var(--color-warm-gray)] text-base mb-6"
+                    className="aura-text-secondary text-base mb-6"
                     
                   >
                     Discover more pieces to add to your wishlist

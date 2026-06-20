@@ -167,8 +167,7 @@ function BackToTop() {
         opacity: shouldShow ? 1 : 0,
         transform: shouldShow ? 'translateY(0)' : 'translateY(16px)',
         pointerEvents: shouldShow ? 'auto' : 'none',
-        visibility: shouldShow ? 'visible' : 'hidden',
-      }}
+        visibility: shouldShow ? 'visible' : 'hidden' }}
       aria-label="Back to top"
       tabIndex={shouldShow ? 0 : -1}
     >

@@ -77,7 +77,7 @@ export default function ContactView() {
   };
 
   return (
-    <div className="w-full" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full" >
       {/* Hero Banner */}
       <section
         ref={heroSectionRef}
@@ -90,28 +90,24 @@ export default function ContactView() {
           style={{ backgroundImage: 'url(/images/pages/contact-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+            backgroundRepeat: 'no-repeat' }}
         />
         {/* Gradient overlay */}
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
-          }}
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
 
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
           style={{ filter: 'blur(60px)',
-            background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
-          }}
+            background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
           style={{ filter: 'blur(70px)',
-            background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
-          }}
+            background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
         />
 
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
@@ -144,8 +140,8 @@ export default function ContactView() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
               {/* Contact Form */}
               <div>
-                <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
-                  <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >Send Us a Message</h2>
+                <div className="rounded-xl p-5 sm:p-6 lg:p-8" >
+                  <h2 className="aura-text-primary aura-h2 mb-3" >Send Us a Message</h2>
                   <div className="mb-6">
                     <GoldDivider />
                   </div>
@@ -155,7 +151,7 @@ export default function ContactView() {
                       role="status"
                       aria-live="polite"
                       className="mb-6 p-4 rounded-sm text-sm transition-all duration-300"
-                      style={{ backgroundColor: 'rgba(168, 181, 160, 0.2)', border: '1px solid var(--color-sage)', color: 'var(--surface-dark)' }}
+                      style={{ backgroundColor: 'rgba(168, 181, 160, 0.2)', border: '1px solid var(--color-sage)' }}
                     >
                       Thank you! Your message has been sent successfully. We will get back to you soon.
                     </div>
@@ -164,12 +160,12 @@ export default function ContactView() {
                   <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                     {/* Name — CSS focus transitions */}
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="name" className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>Name</label>
+                      <label htmlFor="name" className="text-sm font-medium" >Name</label>
                       <input
                         id="name" name="name" type="text" required aria-required="true" value={formData.name} onChange={handleChange}
                         placeholder="Your full name"
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
-                        style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)', color: 'var(--surface-dark)' }}
+                        
                         onFocus={(e) => { e.target.style.borderColor = 'var(--color-gold)'; e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)'; }}
                         onBlur={(e) => { e.target.style.borderColor = 'var(--color-gold-soft)'; e.target.style.boxShadow = 'none'; }}
                       />
@@ -177,12 +173,12 @@ export default function ContactView() {
 
                     {/* Email — CSS focus transitions */}
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="email" className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>Email</label>
+                      <label htmlFor="email" className="text-sm font-medium" >Email</label>
                       <input
                         id="email" name="email" type="email" required aria-required="true" value={formData.email} onChange={handleChange}
                         placeholder="your@email.com"
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
-                        style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)', color: 'var(--surface-dark)' }}
+                        
                         onFocus={(e) => { e.target.style.borderColor = 'var(--color-gold)'; e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)'; }}
                         onBlur={(e) => { e.target.style.borderColor = 'var(--color-gold-soft)'; e.target.style.boxShadow = 'none'; }}
                       />
@@ -190,17 +186,14 @@ export default function ContactView() {
 
                     {/* Subject — CSS focus transitions */}
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="subject" className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>Subject</label>
+                      <label htmlFor="subject" className="text-sm font-medium" >Subject</label>
                       <select
                         id="subject" name="subject" required aria-required="true" value={formData.subject} onChange={handleChange}
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
-                        style={{ backgroundColor: 'var(--surface-card)',
-                          border: '1px solid var(--color-gold-soft)',
-                          color: formData.subject ? 'var(--surface-dark)' : 'var(--color-muted-gray)',
+                        style={{ color: formData.subject ? 'var(--surface-dark)' : 'var(--color-muted-gray)',
                           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238A8A8A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
                           backgroundRepeat: 'no-repeat',
-                          backgroundPosition: 'right 12px center',
-                        }}
+                          backgroundPosition: 'right 12px center' }}
                         onFocus={(e) => { e.target.style.borderColor = 'var(--color-gold)'; e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)'; }}
                         onBlur={(e) => { e.target.style.borderColor = 'var(--color-gold-soft)'; e.target.style.boxShadow = 'none'; }}
                       >
@@ -211,12 +204,12 @@ export default function ContactView() {
 
                     {/* Message — CSS focus transitions */}
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="message" className="text-sm font-medium" style={{ color: 'var(--surface-dark)' }}>Message</label>
+                      <label htmlFor="message" className="text-sm font-medium" >Message</label>
                       <textarea
                         id="message" name="message" required aria-required="true" rows={5} value={formData.message} onChange={handleChange}
                         placeholder="How can we help you?"
                         className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
-                        style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)', color: 'var(--surface-dark)' }}
+                        
                         onFocus={(e) => { e.target.style.borderColor = 'var(--color-gold)'; e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.15)'; }}
                         onBlur={(e) => { e.target.style.borderColor = 'var(--color-gold-soft)'; e.target.style.boxShadow = 'none'; }}
                       />
@@ -227,7 +220,7 @@ export default function ContactView() {
                       type="submit"
                       disabled={isSubmitting}
                       className="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm sm:text-base font-semibold tracking-wider uppercase rounded-sm cursor-pointer transition-all duration-300 hover:bg-[var(--color-gold-hover)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.35)] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed mt-2"
-                      style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)' }}
+                      style={{ backgroundColor: 'var(--color-gold)' }}
                     >
                       {isSubmitting ? (
                         <>
@@ -250,8 +243,8 @@ export default function ContactView() {
 
               {/* Contact Info */}
               <div className="flex flex-col gap-6">
-                <div className="rounded-xl p-5 sm:p-6 lg:p-8" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
-                  <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-semibold mb-3" >Contact Information</h2>
+                <div className="rounded-xl p-5 sm:p-6 lg:p-8" >
+                  <h2 className="aura-text-primary aura-h2 mb-3" >Contact Information</h2>
                   <div className="mb-6">
                     <GoldDivider />
                   </div>
@@ -263,11 +256,11 @@ export default function ContactView() {
                           <info.icon className="w-4.5 h-4.5" style={{ color: 'var(--color-gold-text)' }} />
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-xs tracking-wider uppercase mb-0.5" style={{ color: 'var(--color-muted-gray)' }}>{info.label}</span>
+                          <span className="text-xs tracking-wider uppercase mb-0.5" >{info.label}</span>
                           {info.href ? (
-                            <a href={info.href} className="text-sm sm:text-base transition-colors duration-200 hover:text-[var(--color-gold)]" style={{ color: 'var(--surface-dark)' }}>{info.value}</a>
+                            <a href={info.href} className="text-sm sm:text-base transition-colors duration-200 hover:aura-text-gold" >{info.value}</a>
                           ) : (
-                            <span className="text-sm sm:text-base" style={{ color: 'var(--surface-dark)' }}>{info.value}</span>
+                            <span className="text-sm sm:text-base" >{info.value}</span>
                           )}
                         </div>
                       </div>
@@ -281,7 +274,7 @@ export default function ContactView() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-sm text-sm sm:text-base font-semibold tracking-wider uppercase cursor-pointer transition-all duration-300 hover:shadow-[0_8px_25px_rgba(37,211,102,0.3)] hover:brightness-110 active:scale-[0.98]"
-                      style={{ backgroundColor: '#25D366', color: 'var(--text-on-dark)' }}
+                      style={{ backgroundColor: '#25D366' }}
                     >
                       <MessageCircle className="w-4 h-4" />
                       Chat on WhatsApp
@@ -290,12 +283,11 @@ export default function ContactView() {
                 </div>
 
                 {/* Map Placeholder — CSS only */}
-                <div className="rounded-sm overflow-hidden" style={{ border: '1px solid var(--color-gold-soft)' }}>
+                <div className="rounded-sm overflow-hidden" >
                   <div
                     className="relative w-full aspect-video flex items-center justify-center"
                     style={{ backgroundColor: 'var(--color-gold-soft)',
-                      backgroundImage: 'radial-gradient(circle at 30% 40%, rgba(212,175,55,0.1) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(168,181,160,0.15) 0%, transparent 50%), linear-gradient(135deg, var(--color-gold-pale) 25%, var(--color-gold-soft) 50%, var(--color-gold-pale) 75%)',
-                    }}
+                      backgroundImage: 'radial-gradient(circle at 30% 40%, rgba(212,175,55,0.1) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(168,181,160,0.15) 0%, transparent 50%), linear-gradient(135deg, var(--color-gold-pale) 25%, var(--color-gold-soft) 50%, var(--color-gold-pale) 75%)' }}
                   >
                     <div className="absolute inset-0 opacity-10">
                       <div className="absolute top-1/4 left-0 right-0 h-px" style={{ backgroundColor: 'var(--color-muted-gray)' }} />
@@ -312,7 +304,7 @@ export default function ContactView() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-200 hover:bg-[var(--color-gold-hover)]"
-                        style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)' }}
+                        style={{ backgroundColor: 'var(--color-gold)' }}
                       >
                         View on Google Maps
                         <ChevronRight className="w-3.5 h-3.5" />

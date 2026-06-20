@@ -114,7 +114,7 @@ export default function TermsView() {
   const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Hero */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
         <div
@@ -122,8 +122,7 @@ export default function TermsView() {
           style={{ backgroundImage: 'url(/images/pages/terms-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+            backgroundRepeat: 'no-repeat' }}
         />
         <div
           className="absolute inset-0"
@@ -134,7 +133,7 @@ export default function TermsView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
             <FileText className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
           </div>
-          <span className="text-[var(--color-gold)] text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
+          <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
             AURA LIVING
           </span>
           <h1 className="aura-hero-title text-white" >
@@ -162,7 +161,7 @@ export default function TermsView() {
       {/* Intro */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg leading-relaxed" >
+          <p className="aura-text-secondary text-base sm:text-lg leading-relaxed" >
             Please read these Terms of Service carefully before using the Aura Living website. By accessing or using our site, you agree to be bound by these terms.
           </p>
         </div>
@@ -177,7 +176,7 @@ export default function TermsView() {
               <div
                 key={section.number}
                 className="terms-section rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
-                style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+                
               >
                 <div className="flex items-start gap-4 sm:gap-5">
                   <div className="flex flex-col items-center shrink-0">
@@ -193,11 +192,11 @@ export default function TermsView() {
                       >
                         {String(section.number).padStart(2, '0')}
                       </span>
-                      <h3 className="text-[var(--surface-dark)] text-lg sm:text-xl font-semibold" >
+                      <h3 className="aura-text-primary text-lg sm:text-xl font-semibold" >
                         {section.title}
                       </h3>
                     </div>
-                    <p className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed" >
+                    <p className="aura-text-secondary text-sm sm:text-base leading-relaxed" >
                       {section.content}
                     </p>
                     {section.linkText && section.linkHref && (
@@ -223,13 +222,13 @@ export default function TermsView() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.15)' }}>
             <Shield className="w-8 h-8" style={{ color: 'var(--color-gold-text)' }} />
           </div>
-          <h2 className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-4" >
+          <h2 className="aura-text-primary aura-h2 mb-4" >
             Questions About Our Terms?
           </h2>
           <div className="flex justify-center mb-4">
             <GoldDivider />
           </div>
-          <p className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
+          <p className="aura-text-secondary text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed" >
             We are here to help. If you have any questions or concerns about our terms, feel free to reach out to our team at{' '}
             <a href="mailto:legal@auraliving.pk" className="font-semibold transition-colors duration-200 hover:text-[var(--color-gold-hover)]" style={{ color: 'var(--color-gold)' }}>
               legal@auraliving.pk

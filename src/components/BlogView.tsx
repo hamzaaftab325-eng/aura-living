@@ -61,8 +61,7 @@ function ArticleImage({
         className={`flex items-center justify-center ${className ?? ''}`}
         style={{
           background:
-            'linear-gradient(135deg, var(--color-gold-pale) 0%, var(--surface-accent) 50%, #EAD9B6 100%)',
-        }}
+            'linear-gradient(135deg, var(--color-gold-pale) 0%, var(--surface-accent) 50%, var(--color-gold-soft) 100%)' }}
         aria-label={alt}
         role="img"
       >
@@ -121,10 +120,7 @@ function ArticleCard({
       href={`/blog/${article.slug}`}
       onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
       className="group flex flex-col overflow-hidden rounded-sm border transition-all duration-300 hover:shadow-lg cursor-pointer block"
-      style={{
-        backgroundColor: 'var(--surface-page)',
-        borderColor: 'var(--border-default)',
-      }}
+      style={{ borderColor: 'var(--border-default)' }}
       aria-label={`Read article: ${article.title}`}
     >
       {/* Cover image */}
@@ -143,8 +139,7 @@ function ArticleCard({
           style={{
             backgroundColor: 'rgba(250, 248, 245, 0.95)',
             color: 'var(--color-gold-text)',
-            backdropFilter: 'blur(4px)',
-          }}
+            backdropFilter: 'blur(4px)' }}
         >
           {categoryLabels[article.category]}
         </span>
@@ -154,13 +149,13 @@ function ArticleCard({
       <div className="flex flex-col flex-1 p-5">
         <h3
           className="text-lg sm:text-xl font-bold leading-snug mb-2 transition-colors duration-200"
-          style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-playfair)' }}
+          style={{ fontFamily: 'var(--font-playfair)' }}
         >
           {article.title}
         </h3>
         <p
           className="text-sm leading-relaxed mb-4 line-clamp-3"
-          style={{ color: 'var(--text-muted)' }}
+          
         >
           {article.excerpt}
         </p>
@@ -169,9 +164,7 @@ function ArticleCard({
         <div
           className="mt-auto pt-3 flex items-center justify-between gap-2 text-xs"
           style={{
-            borderTop: '1px solid var(--border-default)',
-            color: 'var(--text-muted)',
-          }}
+            borderTop: '1px solid var(--border-default)' }}
         >
           <span className="truncate">
             {article.author.name}
@@ -260,15 +253,14 @@ export default function BlogView() {
   });
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Hero */}
       <section className="relative w-full py-20 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, var(--color-gold-pale) 0%, var(--surface-page) 100%)',
-          }}
+              'linear-gradient(180deg, var(--color-gold-pale) 0%, var(--surface-page) 100%)' }}
         />
         <div ref={heroRef} className="relative z-10 max-w-3xl mx-auto text-center">
           <div
@@ -285,13 +277,13 @@ export default function BlogView() {
           </span>
           <h1
             className="text-4xl sm:text-5xl md:text-6xl font-bold mt-3 mb-5"
-            style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-playfair)' }}
+            style={{ fontFamily: 'var(--font-playfair)' }}
           >
             The Journal
           </h1>
           <p
             className="text-base sm:text-lg leading-relaxed max-w-xl mx-auto"
-            style={{ color: 'var(--text-muted)' }}
+            
           >
             Stories, styling notes, and care guides from the Aura Living studio — written by the
             people who design, make, and live with our pieces every day.
@@ -341,8 +333,7 @@ export default function BlogView() {
                 className="absolute top-4 left-4 text-[10px] uppercase tracking-[2px] font-medium px-3 py-1.5 rounded-sm"
                 style={{
                   backgroundColor: 'var(--color-gold)',
-                  color: '#FFFFFF',
-                }}
+                  color: '#FFFFFF' }}
               >
                 Featured
               </div>
@@ -358,22 +349,22 @@ export default function BlogView() {
               </span>
               <h2
                 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
-                style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-playfair)' }}
+                style={{ fontFamily: 'var(--font-playfair)' }}
               >
                 {featured.title}
               </h2>
               <GoldDivider />
               <p
                 className="text-base sm:text-lg leading-relaxed"
-                style={{ color: 'var(--text-muted)' }}
+                
               >
                 {featured.excerpt}
               </p>
               <div
                 className="flex items-center gap-3 text-sm pt-2"
-                style={{ color: 'var(--text-muted)' }}
+                
               >
-                <span className="font-medium" style={{ color: 'var(--text-primary)' }}>
+                <span className="font-medium" >
                   {featured.author.name}
                 </span>
                 <span aria-hidden="true">·</span>
@@ -418,8 +409,7 @@ export default function BlogView() {
                   style={{
                     backgroundColor: isActive ? 'var(--color-gold)' : 'transparent',
                     color: isActive ? '#FFFFFF' : 'var(--text-muted)',
-                    border: `1px solid ${isActive ? 'var(--color-gold)' : 'var(--border-default)'}`,
-                  }}
+                    border: `1px solid ${isActive ? 'var(--color-gold)' : 'var(--border-default)'}` }}
                 >
                   {tab.label}
                 </button>
@@ -435,7 +425,7 @@ export default function BlogView() {
           {visibleArticles.length === 0 ? (
             <p
               className="text-center py-16 text-base"
-              style={{ color: 'var(--text-muted)' }}
+              
             >
               No articles in this category yet — check back soon.
             </p>
@@ -458,7 +448,7 @@ export default function BlogView() {
         <div className="max-w-3xl mx-auto text-center">
           <h2
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-            style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-playfair)' }}
+            style={{ fontFamily: 'var(--font-playfair)' }}
           >
             Bring the Journal Home
           </h2>
@@ -467,7 +457,7 @@ export default function BlogView() {
           </div>
           <p
             className="text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed"
-            style={{ color: 'var(--text-muted)' }}
+            
           >
             Explore our full collection of handcrafted pieces and bring the stories you read here
             into your own home.

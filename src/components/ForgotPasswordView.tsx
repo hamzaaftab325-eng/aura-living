@@ -41,12 +41,11 @@ export default function ForgotPasswordView() {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 sm:pt-28 pb-12 relative overflow-hidden" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 sm:pt-28 pb-12 relative overflow-hidden" >
       {/* Background decoration */}
       <div
         className="absolute inset-0 pointer-events-none overflow-hidden"
-        style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.03) 0%, transparent 50%)',
-        }}
+        style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.03) 0%, transparent 50%)' }}
       />
 
       <div ref={cardRef} className="relative z-10 w-full max-w-md">
@@ -57,8 +56,7 @@ export default function ForgotPasswordView() {
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
             border: '1px solid rgba(232,213,163,0.3)',
-            boxShadow: '0 8px 40px rgba(212,175,55,0.06), 0 2px 12px rgba(0,0,0,0.04)',
-          }}
+            boxShadow: '0 8px 40px rgba(212,175,55,0.06), 0 2px 12px rgba(0,0,0,0.04)' }}
         >
           {!submitted ? (
             <>
@@ -73,14 +71,14 @@ export default function ForgotPasswordView() {
                   </div>
                 </div>
                 <h1
-                  className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold"
-                  style={{ color: 'var(--surface-dark)' }}
+                  className="aura-h2"
+                  
                 >
                   Reset Your Password
                 </h1>
                 <p
                   className="text-sm mt-3 leading-relaxed max-w-xs mx-auto"
-                  style={{ color: 'var(--color-warm-gray)' }}
+                  
                 >
                   Enter your email and we&apos;ll send you a link to reset your password
                 </p>
@@ -96,22 +94,21 @@ export default function ForgotPasswordView() {
                   <label
                     htmlFor="forgot-email"
                     className="text-xs font-medium tracking-wide uppercase"
-                    style={{ color: 'var(--color-muted-gray)' }}
+                    
                   >
                     Email Address
                   </label>
                   <div
                     className="relative flex items-center rounded-lg transition-all duration-300"
-                    style={{ border: emailError ? '2px solid #C44' : '1.5px solid var(--color-gold-soft)',
+                    style={{ border: emailError ? '2px solid var(--color-danger)' : '1.5px solid var(--color-gold-soft)',
                       backgroundColor: emailError ? 'rgba(204,68,68,0.03)' : 'rgba(255,255,255,0.7)',
                       boxShadow: emailError
                         ? '0 0 12px rgba(204,68,68,0.1)'
-                        : '0 2px 8px rgba(0,0,0,0.03)',
-                    }}
+                        : '0 2px 8px rgba(0,0,0,0.03)' }}
                   >
                     <div
                       className="flex items-center justify-center pl-4"
-                      style={{ color: emailError ? '#C44' : 'var(--color-taupe)' }}
+                      style={{ color: emailError ? 'var(--color-danger)' : 'var(--color-taupe)' }}
                     >
                       <Mail className="w-4 h-4" />
                     </div>
@@ -126,8 +123,7 @@ export default function ForgotPasswordView() {
                       }}
                       onBlur={() => { if (email) validateEmail(email); }}
                       className="w-full px-2 py-4 text-sm bg-transparent outline-none"
-                      style={{ color: 'var(--surface-dark)',
-                      }}
+                      
                       autoComplete="email"
                       aria-required="true"
                       aria-invalid={emailError ? 'true' : 'false'}
@@ -139,7 +135,7 @@ export default function ForgotPasswordView() {
                       id="forgot-email-error"
                       role="alert"
                       className="text-xs pl-1"
-                      style={{ color: '#C44' }}
+                      style={{ color: 'var(--color-danger)' }}
                     >
                       {emailError}
                     </span>
@@ -194,14 +190,14 @@ export default function ForgotPasswordView() {
                   </div>
                 </div>
                 <h2
-                  className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold"
-                  style={{ color: 'var(--surface-dark)' }}
+                  className="aura-h2"
+                  
                 >
                   Check Your Email
                 </h2>
                 <p
                   className="text-sm mt-3 leading-relaxed max-w-xs mx-auto"
-                  style={{ color: 'var(--color-warm-gray)' }}
+                  
                 >
                   We&apos;ve sent a password reset link to your email address. Please check your inbox and follow the instructions.
                 </p>

@@ -59,8 +59,7 @@ function ArticleImage({
         className={`flex items-center justify-center ${className ?? ''}`}
         style={{
           background:
-            'linear-gradient(135deg, var(--color-gold-pale) 0%, var(--surface-accent) 50%, #EAD9B6 100%)',
-        }}
+            'linear-gradient(135deg, var(--color-gold-pale) 0%, var(--surface-accent) 50%, var(--color-gold-soft) 100%)' }}
         aria-label={alt}
         role="img"
       >
@@ -107,7 +106,7 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
   return parts.map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       return (
-        <strong key={`${keyPrefix}-b-${i}`} style={{ color: 'var(--text-primary)' }}>
+        <strong key={`${keyPrefix}-b-${i}`} >
           {part.slice(2, -2)}
         </strong>
       );
@@ -177,10 +176,7 @@ function ArticleBody({ body }: { body: string }) {
           {section.heading && (
             <h2
               className="text-2xl sm:text-3xl font-bold mt-4 first:mt-0"
-              style={{
-                color: 'var(--text-primary)',
-                fontFamily: 'var(--font-playfair)',
-              }}
+              style={{ fontFamily: 'var(--font-playfair)' }}
             >
               {section.heading}
             </h2>
@@ -191,13 +187,13 @@ function ArticleBody({ body }: { body: string }) {
                 <ul
                   key={`ul-${sIdx}-${bIdx}`}
                   className="flex flex-col gap-2 pl-5"
-                  style={{ listStyleType: 'disc', color: 'var(--text-secondary)' }}
+                  style={{ listStyleType: 'disc' }}
                 >
                   {block.items.map((item, i) => (
                     <li
                       key={`li-${sIdx}-${bIdx}-${i}`}
                       className="text-base sm:text-lg leading-relaxed pl-1"
-                      style={{ color: 'var(--text-secondary)' }}
+                      
                     >
                       {renderInline(item, `li-${sIdx}-${bIdx}-${i}`)}
                     </li>
@@ -209,7 +205,7 @@ function ArticleBody({ body }: { body: string }) {
               <p
                 key={`p-${sIdx}-${bIdx}`}
                 className="text-base sm:text-lg leading-relaxed"
-                style={{ color: 'var(--text-secondary)' }}
+                
               >
                 {renderInline(block.text ?? '', `p-${sIdx}-${bIdx}`)}
               </p>
@@ -255,8 +251,6 @@ function ShareButtons({ title, slug }: { title: string; slug: string }) {
     'flex items-center justify-center w-10 h-10 rounded-sm border transition-all duration-200 hover:opacity-80 cursor-pointer';
   const btnStyle = {
     borderColor: 'var(--border-default)',
-    backgroundColor: 'var(--surface-page)',
-    color: 'var(--text-muted)',
   };
 
   return (
@@ -374,7 +368,7 @@ export default function ArticleView({ article }: { article: Article }) {
   });
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
@@ -391,20 +385,19 @@ export default function ArticleView({ article }: { article: Article }) {
             className="inline-block text-xs sm:text-sm font-medium uppercase tracking-[3px] mb-4 px-3 py-1.5 rounded-sm"
             style={{
               backgroundColor: 'var(--color-gold-pale)',
-              color: 'var(--color-gold-text)',
-            }}
+              color: 'var(--color-gold-text)' }}
           >
             {categoryLabels[article.category]}
           </span>
           <h1
             className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6"
-            style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-playfair)' }}
+            style={{ fontFamily: 'var(--font-playfair)' }}
           >
             {article.title}
           </h1>
           <p
             className="text-base sm:text-lg leading-relaxed mb-6"
-            style={{ color: 'var(--text-muted)' }}
+            
           >
             {article.excerpt}
           </p>
@@ -413,11 +406,9 @@ export default function ArticleView({ article }: { article: Article }) {
           <div
             className="flex flex-wrap items-center justify-center gap-3 text-sm pt-4"
             style={{
-              borderTop: '1px solid var(--border-default)',
-              color: 'var(--text-muted)',
-            }}
+              borderTop: '1px solid var(--border-default)' }}
           >
-            <span className="font-medium" style={{ color: 'var(--text-primary)' }}>
+            <span className="font-medium" >
               {article.author.name}
             </span>
             <span aria-hidden="true">·</span>
@@ -466,10 +457,7 @@ export default function ArticleView({ article }: { article: Article }) {
                   <span
                     key={tag}
                     className="text-xs px-3 py-1.5 rounded-sm"
-                    style={{
-                      backgroundColor: 'var(--surface-accent)',
-                      color: 'var(--text-muted)',
-                    }}
+                    
                   >
                     #{tag}
                   </span>
@@ -496,10 +484,7 @@ export default function ArticleView({ article }: { article: Article }) {
             <ShareButtons title={article.title} slug={article.slug} />
             <div
               className="rounded-sm p-4"
-              style={{
-                backgroundColor: 'var(--surface-accent)',
-                border: '1px solid var(--border-default)',
-              }}
+              
             >
               <p
                 className="text-xs uppercase tracking-[2px] font-medium mb-2"
@@ -509,11 +494,11 @@ export default function ArticleView({ article }: { article: Article }) {
               </p>
               <p
                 className="font-bold text-sm mb-1"
-                style={{ color: 'var(--text-primary)' }}
+                
               >
                 {article.author.name}
               </p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              <p className="text-xs" >
                 {article.author.role}
               </p>
             </div>
@@ -525,7 +510,7 @@ export default function ArticleView({ article }: { article: Article }) {
       {related.length > 0 && (
         <section
           className="py-14 sm:py-16 px-4 sm:px-6 lg:px-8"
-          style={{ backgroundColor: 'var(--surface-accent)' }}
+          
         >
           <div ref={relatedRef} className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
@@ -537,7 +522,7 @@ export default function ArticleView({ article }: { article: Article }) {
               </span>
               <h2
                 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 mb-4"
-                style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-playfair)' }}
+                style={{ fontFamily: 'var(--font-playfair)' }}
               >
                 Continue Your Journey
               </h2>
@@ -559,10 +544,7 @@ export default function ArticleView({ article }: { article: Article }) {
                     href={`/blog/${rel.slug}`}
                     onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     className="group flex flex-col overflow-hidden rounded-sm border cursor-pointer transition-all duration-300 hover:shadow-lg block"
-                    style={{
-                      backgroundColor: 'var(--surface-page)',
-                      borderColor: 'var(--border-default)',
-                    }}
+                    style={{ borderColor: 'var(--border-default)' }}
                     aria-label={`Read related article: ${rel.title}`}
                   >
                     <div className="relative w-full aspect-[16/10] overflow-hidden">
@@ -577,8 +559,7 @@ export default function ArticleView({ article }: { article: Article }) {
                         className="absolute top-3 left-3 text-[10px] uppercase tracking-[2px] font-medium px-3 py-1.5 rounded-sm"
                         style={{
                           backgroundColor: 'rgba(250, 248, 245, 0.95)',
-                          color: 'var(--color-gold-text)',
-                        }}
+                          color: 'var(--color-gold-text)' }}
                       >
                         {categoryLabels[rel.category]}
                       </span>
@@ -586,22 +567,20 @@ export default function ArticleView({ article }: { article: Article }) {
                       <div className="flex flex-col flex-1 p-5">
                         <h3
                           className="text-lg font-bold leading-snug mb-2"
-                          style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-playfair)' }}
+                          style={{ fontFamily: 'var(--font-playfair)' }}
                         >
                           {rel.title}
                         </h3>
                         <p
                           className="text-sm leading-relaxed mb-4 line-clamp-2"
-                          style={{ color: 'var(--text-muted)' }}
+                          
                         >
                           {rel.excerpt}
                         </p>
                         <div
                           className="mt-auto pt-3 flex items-center justify-between text-xs"
                           style={{
-                            borderTop: '1px solid var(--border-default)',
-                            color: 'var(--text-muted)',
-                          }}
+                            borderTop: '1px solid var(--border-default)' }}
                         >
                           <span>{rel.author.name}</span>
                           <span className="flex items-center gap-1.5">

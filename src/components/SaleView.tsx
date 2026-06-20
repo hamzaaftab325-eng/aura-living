@@ -56,8 +56,7 @@ function RatingStars({ rating }: { rating: number }) {
           key={star}
           className="w-3.5 h-3.5"
           style={{ color: star <= Math.round(rating) ? 'var(--color-gold)' : 'var(--color-gold-soft)',
-            fill: star <= Math.round(rating) ? 'var(--color-gold)' : 'none',
-          }}
+            fill: star <= Math.round(rating) ? 'var(--color-gold)' : 'none' }}
         />
       ))}
     </div>
@@ -118,8 +117,7 @@ function SaleCountdown() {
             style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)',
               border: '1px solid rgba(212, 175, 55, 0.25)',
               backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
-            }}
+              WebkitBackdropFilter: 'blur(8px)' }}
           >
             {/* Gold top corner accent */}
             <div
@@ -128,7 +126,7 @@ function SaleCountdown() {
             />
             <span
               className={`text-base sm:text-xl md:text-2xl font-bold tabular-nums leading-none ${unit.label === 'Secs' ? 'animate-countdown-pulse' : ''}`}
-              style={{ color: 'var(--text-on-dark)' }}
+              
             >
               {String(unit.value).padStart(2, '0')}
             </span>
@@ -247,7 +245,7 @@ export default function SaleView() {
   };
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Urgency Popup — rendered via portal at document.body so it's
           not affected by the .page-transition ancestor's transform
           (which would break position: fixed). Auto-appears after 1.5s
@@ -257,15 +255,13 @@ export default function SaleView() {
           className="fixed bottom-6 right-6 z-[80] transition-all duration-500 ease-out"
           style={{ transform: showUrgencyPopup ? 'translateY(0) scale(1)' : 'translateY(120%) scale(0.9)',
             opacity: showUrgencyPopup ? 1 : 0,
-            pointerEvents: showUrgencyPopup ? 'auto' : 'none',
-          }}
+            pointerEvents: showUrgencyPopup ? 'auto' : 'none' }}
         >
           <div
             className="rounded-2xl shadow-2xl overflow-hidden max-w-[300px] sm:max-w-[340px]"
             style={{ background: 'linear-gradient(135deg, var(--color-danger) 0%, #B91C1C 100%)',
               border: '1px solid rgba(255,255,255,0.15)',
-              boxShadow: '0 12px 40px rgba(220, 38, 38, 0.35)',
-            }}
+              boxShadow: '0 12px 40px rgba(220, 38, 38, 0.35)' }}
           >
             {/* Gold top accent */}
             <div className="h-[3px] w-full" style={{ background: 'linear-gradient(90deg, transparent, var(--color-gold), transparent)' }} />
@@ -317,36 +313,31 @@ export default function SaleView() {
           style={{ backgroundImage: 'url(/images/pages/sale-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+            backgroundRepeat: 'no-repeat' }}
         />
         {/* Stronger dark gradient overlay so text always reads clearly */}
         <div
           className="absolute inset-0"
           style={{ background:
-              'linear-gradient(180deg, rgba(20,20,20,0.85) 0%, rgba(20,20,20,0.75) 50%, rgba(20,20,20,0.9) 100%)',
-          }}
+              'linear-gradient(180deg, rgba(20,20,20,0.85) 0%, rgba(20,20,20,0.75) 50%, rgba(20,20,20,0.9) 100%)' }}
         />
         {/* Subtle gold tint to make it feel premium */}
         <div
           className="absolute inset-0"
           style={{ background:
-              'radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%)',
-          }}
+              'radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
         />
 
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
           style={{ filter: 'blur(60px)',
-            background: 'radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%)',
-          }}
+            background: 'radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
           style={{ filter: 'blur(70px)',
-            background: 'radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%)',
-          }}
+            background: 'radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%)' }}
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
@@ -402,18 +393,18 @@ export default function SaleView() {
               <div className="flex flex-col items-center justify-center py-16 sm:py-24">
                 <div
                   className="w-24 h-24 rounded-full flex items-center justify-center mb-6"
-                  style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}
+                  
                 >
                   <Tag className="w-10 h-10" style={{ color: 'var(--color-gold)' }} />
                 </div>
                 <h2
-                  className="text-[var(--surface-dark)] text-[28px] sm:text-[32px] lg:text-[40px] font-bold mb-3"
+                  className="aura-text-primary aura-h2 mb-3"
                   
                 >
                   No sale items right now
                 </h2>
                 <p
-                  className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-md text-center leading-relaxed"
+                  className="aura-text-secondary text-base sm:text-lg mb-8 max-w-md text-center leading-relaxed"
                   
                 >
                   Our sales are always changing. Check back soon for amazing deals on premium home decor!
@@ -431,7 +422,7 @@ export default function SaleView() {
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <h2
-                      className="text-[var(--surface-dark)] text-xl sm:text-2xl font-semibold"
+                      className="aura-text-primary text-xl sm:text-2xl font-semibold"
                       
                     >
                       Sale Items
@@ -442,7 +433,7 @@ export default function SaleView() {
                   </div>
                   <span
                     className="text-sm"
-                    style={{ color: 'var(--color-muted-gray)' }}
+                    
                   >
                     {saleProducts.length} item{saleProducts.length !== 1 ? 's' : ''}
                   </span>
@@ -462,7 +453,7 @@ export default function SaleView() {
                     <div
                       key={product.id}
                       className="group rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
-                      style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+                      
                     >
                       {/* Product Image */}
                       <Link
@@ -483,9 +474,7 @@ export default function SaleView() {
                         {/* SALE Badge */}
                         <div
                           className="absolute top-3 left-3 px-2.5 py-1 rounded-sm text-xs font-semibold tracking-wider uppercase"
-                          style={{ backgroundColor: '#E85D4A',
-                            color: 'var(--text-on-dark)',
-                          }}
+                          style={{ backgroundColor: '#E85D4A' }}
                         >
                           SALE
                         </div>
@@ -494,9 +483,7 @@ export default function SaleView() {
                         {product.originalPrice && (
                           <div
                             className="absolute bottom-3 left-3 px-2 py-1 rounded-sm text-xs font-bold"
-                            style={{ backgroundColor: 'var(--color-gold)',
-                              color: 'var(--text-on-dark)',
-                            }}
+                            style={{ backgroundColor: 'var(--color-gold)' }}
                           >
                             -{savingsPercent}%
                           </div>
@@ -516,8 +503,7 @@ export default function SaleView() {
                           <Heart
                             className="w-4 h-4"
                             style={{ color: wishlisted ? 'var(--color-danger)' : 'var(--color-muted-gray)',
-                              fill: wishlisted ? 'var(--color-danger)' : 'none',
-                            }}
+                              fill: wishlisted ? 'var(--color-danger)' : 'none' }}
                           />
                         </button>
                       </Link>
@@ -528,7 +514,7 @@ export default function SaleView() {
                         <Link
                           href={`/product/${product.slug}`}
                           onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                          className="text-[var(--surface-dark)] text-base sm:text-lg font-semibold mb-1.5 transition-colors duration-200 hover:text-[var(--color-gold)] leading-snug block"
+                          className="aura-text-primary text-base sm:text-lg font-semibold mb-1.5 transition-colors duration-200 hover:aura-text-gold leading-snug block"
                         >
                           {product.name}
                         </Link>
@@ -538,7 +524,7 @@ export default function SaleView() {
                           <RatingStars rating={product.rating} />
                           <span
                             className="text-xs"
-                            style={{ color: 'var(--color-muted-gray)' }}
+                            
                           >
                             ({product.reviews})
                           </span>
@@ -555,7 +541,7 @@ export default function SaleView() {
                           {product.originalPrice && (
                             <span
                               className="text-sm line-through"
-                              style={{ color: 'var(--color-muted-gray)' }}
+                              
                             >
                               {formatPKR(product.originalPrice)}
                             </span>
@@ -564,8 +550,7 @@ export default function SaleView() {
                             <span
                               className="text-xs font-semibold px-1.5 py-0.5 rounded-sm"
                               style={{ backgroundColor: 'rgba(232, 93, 74, 0.1)',
-                                color: '#E85D4A',
-                              }}
+                                color: '#E85D4A' }}
                             >
                               Save {formatPKR(product.originalPrice - product.price)}
                             </span>
@@ -584,16 +569,13 @@ export default function SaleView() {
                           <button
                             onClick={() => toggleWishlist(product.id, product.name)}
                             className="w-11 h-11 rounded-sm flex items-center justify-center transition-all duration-200 cursor-pointer"
-                            style={{ border: '1px solid var(--color-gold-soft)',
-                              backgroundColor: wishlisted ? 'rgba(220, 38, 38, 0.06)' : 'transparent',
-                            }}
+                            style={{ backgroundColor: wishlisted ? 'rgba(220, 38, 38, 0.06)' : 'transparent' }}
                             aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
                           >
                             <Heart
                               className="w-4 h-4"
                               style={{ color: wishlisted ? 'var(--color-danger)' : 'var(--color-muted-gray)',
-                                fill: wishlisted ? 'var(--color-danger)' : 'none',
-                              }}
+                                fill: wishlisted ? 'var(--color-danger)' : 'none' }}
                             />
                           </button>
                         </div>
@@ -610,7 +592,7 @@ export default function SaleView() {
                     <GoldDivider />
                   </div>
                   <p
-                    className="text-[var(--color-warm-gray)] text-base mb-6"
+                    className="aura-text-secondary text-base mb-6"
                     
                   >
                     Explore our full collection of curated home decor

@@ -98,9 +98,9 @@ export default function CartView() {
   // Empty cart state
   if (hydrated && safeCart.length === 0) {
     return (
-      <div className="w-full pt-28 sm:pt-32 min-h-screen" style={{ backgroundColor: 'var(--surface-page)' }}>
+      <div className="w-full pt-28 sm:pt-32 min-h-screen" >
         <div className="max-w-md mx-auto text-center px-4 py-16">
-          <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
+          <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6" >
             <BagIcon className="w-12 h-12 text-gold-text" />
           </div>
           <h1 className="aura-h2 text-charcoal mb-3">Your Cart is Empty</h1>
@@ -117,7 +117,7 @@ export default function CartView() {
   }
 
   return (
-    <div className="w-full pt-28 sm:pt-32 pb-16" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full pt-28 sm:pt-32 pb-16" >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div ref={headerRef} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
@@ -146,14 +146,14 @@ export default function CartView() {
 
         {/* Free shipping progress */}
         {safeSubtotal > 0 && (
-          <div className="mb-8 rounded-lg p-4" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+          <div className="mb-8 rounded-lg p-4" >
             {amountToFreeShipping > 0 ? (
-              <p className="text-sm mb-2 text-center" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-warm-gray)' }}>
+              <p className="text-sm mb-2 text-center" >
                 Add <span className="font-semibold text-gold-text">{formatPKR(amountToFreeShipping)}</span> more for{' '}
                 <span className="font-semibold text-gold-text">FREE shipping</span>
               </p>
             ) : (
-              <p className="text-sm mb-2 text-center flex items-center justify-center gap-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-success)' }}>
+              <p className="text-sm mb-2 text-center flex items-center justify-center gap-1.5" style={{ color: 'var(--color-success)' }}>
                 <Truck className="w-4 h-4" />
                 <span className="font-semibold">You&apos;ve unlocked FREE shipping!</span>
               </p>
@@ -165,8 +165,7 @@ export default function CartView() {
                   width: `${freeShippingProgress}%`,
                   background: freeShippingProgress >= 100
                     ? 'linear-gradient(90deg, var(--color-success), #16A34A)'
-                    : 'linear-gradient(90deg, var(--color-gold), var(--color-gold-soft))',
-                }}
+                    : 'linear-gradient(90deg, var(--color-gold), var(--color-gold-soft))' }}
               />
             </div>
           </div>
@@ -180,13 +179,13 @@ export default function CartView() {
               <div
                 key={`${item.product.id}-${index}`}
                 className="rounded-lg p-4 sm:p-5 flex gap-4 sm:gap-6 transition-all duration-300"
-                style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}
+                
               >
                 {/* Image */}
                 <Link
                   href={`/product/${item.product.slug}`}
                   className="shrink-0 relative w-20 h-20 sm:w-28 sm:h-28 rounded-lg overflow-hidden"
-                  style={{ border: '1px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)' }}
+                  
                   onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 >
                   <Image
@@ -206,11 +205,11 @@ export default function CartView() {
                         href={`/product/${item.product.slug}`}
                         onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                         className="text-sm sm:text-base font-semibold truncate hover:text-gold-text transition-colors"
-                        style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}
+                        
                       >
                         {item.product.name}
                       </Link>
-                      <p className="text-xs mt-0.5 capitalize" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>
+                      <p className="text-xs mt-0.5 capitalize" >
                         {item.product.category.replace('-', ' ')}
                       </p>
                     </div>
@@ -229,11 +228,11 @@ export default function CartView() {
 
                   {/* Quantity + Price */}
                   <div className="flex items-end justify-between mt-auto pt-3 gap-3">
-                    <div className="flex items-center rounded-full" style={{ border: '1.5px solid var(--color-gold-soft)', backgroundColor: 'var(--surface-card)' }}>
+                    <div className="flex items-center rounded-full" style={{ border: '1.5px solid var(--color-gold-soft)' }}>
                       <button
                         onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
                         className="flex items-center justify-center w-9 h-9 rounded-full transition-colors hover:bg-gold/10"
-                        style={{ color: 'var(--color-warm-gray)' }}
+                        
                         aria-label="Decrease quantity"
                       >
                         <Minus className="h-3.5 w-3.5" />
@@ -257,24 +256,24 @@ export default function CartView() {
                           }
                         }}
                         className="w-12 text-center text-sm font-bold bg-transparent focus:outline-none"
-                        style={{ color: 'var(--surface-dark)' }}
+                        
                         aria-label={`Quantity for ${item.product.name}`}
                       />
                       <button
                         onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
                         className="flex items-center justify-center w-9 h-9 rounded-full transition-colors hover:bg-gold/10"
-                        style={{ color: 'var(--color-warm-gray)' }}
+                        
                         aria-label="Increase quantity"
                       >
                         <Plus className="h-3.5 w-3.5" />
                       </button>
                     </div>
                     <div className="text-right">
-                      <span className="text-base sm:text-lg font-bold block" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}>
+                      <span className="text-base sm:text-lg font-bold block" >
                         {formatPKR(item.product.price * item.quantity)}
                       </span>
                       {item.quantity > 1 && (
-                        <span className="text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>
+                        <span className="text-[11px]" >
                           {formatPKR(item.product.price)} each
                         </span>
                       )}
@@ -300,16 +299,16 @@ export default function CartView() {
           <div ref={summaryRef} className="lg:col-span-1">
             <div
               className="rounded-lg p-6 lg:sticky lg:top-28"
-              style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}
+              style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}
             >
-              <h2 className="text-xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>
+              <h2 className="text-xl font-bold mb-4" >
                 Order Summary
               </h2>
               <div className="mb-4"><GoldDivider /></div>
 
               {/* Coupon */}
               <div className="mb-5">
-                <label className="text-xs font-medium tracking-wide uppercase block mb-2" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>
+                <label className="text-xs font-medium tracking-wide uppercase block mb-2" >
                   Promo Code
                 </label>
                 <div className="flex gap-2">
@@ -319,22 +318,18 @@ export default function CartView() {
                     onChange={(e) => setCouponCode(e.target.value)}
                     placeholder="Enter code"
                     className="flex-1 px-3 py-2.5 rounded-md text-sm outline-none"
-                    style={{
-                      fontFamily: "'Poppins', sans-serif",
-                      color: 'var(--surface-dark)',
-                      backgroundColor: 'rgba(255,255,255,0.7)',
-                      border: '1.5px solid var(--color-gold-soft)',
-                    }}
+                    style={{ backgroundColor: 'rgba(255,255,255,0.7)',
+                      border: '1.5px solid var(--color-gold-soft)' }}
                   />
                   <button
                     onClick={handleApplyCoupon}
                     className="px-4 py-2.5 rounded-md text-xs font-semibold uppercase tracking-wider transition-all hover:bg-gold/80 cursor-pointer"
-                    style={{ backgroundColor: 'var(--color-gold)', color: 'var(--text-on-dark)', fontFamily: "'Poppins', sans-serif" }}
+                    style={{ backgroundColor: 'var(--color-gold)' }}
                   >
                     Apply
                   </button>
                 </div>
-                <p className="text-[11px] mt-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-taupe)' }}>
+                <p className="text-[11px] mt-1.5" style={{ color: 'var(--color-taupe)' }}>
                   Try: AURA15 or WELCOME10
                 </p>
               </div>
@@ -342,33 +337,33 @@ export default function CartView() {
               {/* Summary lines */}
               <div className="space-y-3 mb-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-warm-gray)' }}>
+                  <span className="text-sm" >
                     Subtotal ({safeCount} item{safeCount !== 1 ? 's' : ''})
                   </span>
-                  <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}>
+                  <span className="text-sm font-semibold" >
                     {formatPKR(safeSubtotal)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm flex items-center gap-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-warm-gray)' }}>
+                  <span className="text-sm flex items-center gap-1.5" >
                     <Truck className="w-3.5 h-3.5" />
                     Shipping
                   </span>
                   {shipping === 0 ? (
-                    <span className="text-sm font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-success)' }}>FREE</span>
+                    <span className="text-sm font-bold" style={{ color: 'var(--color-success)' }}>FREE</span>
                   ) : (
-                    <span className="text-sm font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}>
+                    <span className="text-sm font-semibold" >
                       {formatPKR(shipping)}
                     </span>
                   )}
                 </div>
                 {discount > 0 && (
                   <div className="flex items-center justify-between">
-                    <span className="text-sm flex items-center gap-1.5" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-success)' }}>
+                    <span className="text-sm flex items-center gap-1.5" style={{ color: 'var(--color-success)' }}>
                       <Tag className="w-3.5 h-3.5" />
                       Discount
                     </span>
-                    <span className="text-sm font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-success)' }}>
+                    <span className="text-sm font-bold" style={{ color: 'var(--color-success)' }}>
                       -{formatPKR(discount)}
                     </span>
                   </div>
@@ -380,10 +375,10 @@ export default function CartView() {
 
               {/* Total */}
               <div className="flex items-center justify-between mb-6">
-                <span className="text-base font-semibold" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--surface-dark)' }}>
+                <span className="text-base font-semibold" >
                   Total
                 </span>
-                <span className="text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif", color: 'var(--surface-dark)' }}>
+                <span className="text-2xl font-bold" >
                   {formatPKR(finalTotal)}
                 </span>
               </div>
@@ -401,14 +396,14 @@ export default function CartView() {
 
               {/* Payment methods */}
               <div className="mt-5 pt-5" style={{ borderTop: '1px solid var(--color-gold-soft)' }}>
-                <p className="text-[10px] uppercase tracking-widest font-semibold mb-3" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>
+                <p className="text-[10px] uppercase tracking-widest font-semibold mb-3" >
                   We Accept
                 </p>
                 <div className="flex items-center justify-center gap-4 flex-wrap">
                   {paymentMethods.map((method) => (
                     <div key={method.label} className="flex flex-col items-center gap-1">
                       <method.icon className="w-5 h-5 text-gold-text" />
-                      <span className="text-[10px]" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>
+                      <span className="text-[10px]" >
                         {method.label}
                       </span>
                     </div>
@@ -418,11 +413,11 @@ export default function CartView() {
 
               {/* Trust badges */}
               <div className="mt-4 pt-4 flex items-center justify-center gap-4" style={{ borderTop: '1px solid var(--color-gold-soft)' }}>
-                <span className="inline-flex items-center gap-1 text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>
+                <span className="inline-flex items-center gap-1 text-[11px]" >
                   <ShieldCheck className="w-3.5 h-3.5 text-gold-text" />
                   Secure Checkout
                 </span>
-                <span className="inline-flex items-center gap-1 text-[11px]" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--color-muted-gray)' }}>
+                <span className="inline-flex items-center gap-1 text-[11px]" >
                   <Truck className="w-3.5 h-3.5 text-gold-text" />
                   Fast Delivery
                 </span>

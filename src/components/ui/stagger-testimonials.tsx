@@ -17,7 +17,7 @@ function InitialsAvatar({ name, size = 56 }: { name: string; size?: number }) {
         y="28"
         textAnchor="middle"
         dominantBaseline="central"
-        fontFamily="'Playfair Display', serif"
+        fontFamily="var(--font-playfair), serif"
         fontSize="24"
         fontWeight="600"
         fill="var(--color-gold-text)"
@@ -188,7 +188,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         "absolute left-1/2 top-1/2 cursor-pointer border-2 transition-all duration-500 ease-in-out",
         isCenter 
           ? "z-10 border-[var(--color-gold)] bg-[var(--surface-dark)] text-[var(--surface-card)]" 
-          : "z-0 border-[var(--color-gold)]/20 bg-[var(--surface-page)] text-[var(--surface-dark)] hover:border-[var(--color-gold)]/50"
+          : "z-0 border-[var(--color-gold)]/20 bg-[var(--surface-page)] aura-text-primary hover:border-[var(--color-gold)]/50"
       )}
       style={{
         width: cardSize,
@@ -224,8 +224,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           width: isHovered ? '4px' : '0px',
           backgroundColor: 'var(--color-gold)',
           boxShadow: isHovered ? '0 0 8px rgba(212,175,55,0.5)' : 'none',
-          transformOrigin: 'bottom',
-        }}
+          transformOrigin: 'bottom' }}
       />
 
       <div
@@ -251,8 +250,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           
           color: isCenter ? 'rgba(212,175,55,0.2)' : 'rgba(212,175,55,0.12)',
           transform: isHovered ? 'scale(1.3)' : 'scale(1)',
-          transformOrigin: 'top right',
-        }}
+          transformOrigin: 'top right' }}
       >
         &ldquo;
       </div>
@@ -272,8 +270,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       <div
         className="flex items-center gap-0.5 mt-2"
         style={{
-          animation: isHovered ? 'starShimmer 1.5s ease-in-out infinite' : 'none',
-        }}
+          animation: isHovered ? 'starShimmer 1.5s ease-in-out infinite' : 'none' }}
       >
         {Array.from({ length: 5 }).map((_, i) => (
           <Star
@@ -281,7 +278,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
             className={cn(
               "transition-all duration-300",
               i < (testimonial.rating ?? 5)
-                ? "text-[var(--color-gold)] fill-[var(--color-gold)]"
+                ? "aura-text-gold fill-[var(--color-gold)]"
                 : isCenter
                 ? "text-[var(--color-gold-soft)]/30"
                 : "text-[var(--color-gold-soft)]/50"
@@ -394,8 +391,7 @@ export const StaggerTestimonials: React.FC = () => {
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.02]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}
       />
 
       {testimonialsList.map((testimonial, index) => {
@@ -420,7 +416,7 @@ export const StaggerTestimonials: React.FC = () => {
             "flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center text-base sm:text-2xl transition-all duration-300 rounded-full",
             "bg-[var(--surface-dark)] border-2 border-[var(--color-gold)]/30 hover:bg-[var(--color-gold)] hover:text-white hover:border-[var(--color-gold)]",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold)] focus-visible:ring-offset-2",
-            "text-[var(--color-gold)]"
+            "aura-text-gold"
           )}
           aria-label="Previous testimonial"
         >
@@ -432,7 +428,7 @@ export const StaggerTestimonials: React.FC = () => {
             "flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center text-base sm:text-2xl transition-all duration-300 rounded-full",
             "bg-[var(--surface-dark)] border-2 border-[var(--color-gold)]/30 hover:bg-[var(--color-gold)] hover:text-white hover:border-[var(--color-gold)]",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold)] focus-visible:ring-offset-2",
-            "text-[var(--color-gold)]"
+            "aura-text-gold"
           )}
           aria-label="Next testimonial"
         >

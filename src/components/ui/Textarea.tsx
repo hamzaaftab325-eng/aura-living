@@ -37,7 +37,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <label
           htmlFor={textareaId}
           className="text-sm font-medium"
-          style={{ color: 'var(--text-secondary)' }}
+          
         >
           {label}
           {required && (
@@ -55,19 +55,15 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-required={required || undefined}
           required={required}
           className={`w-full px-4 py-3 text-sm rounded-md transition-all duration-200 focus:outline-none focus:ring-2 resize-vertical ${className}`}
-          style={{
-            backgroundColor: 'var(--surface-card)',
-            border: `1px solid ${error ? 'var(--color-danger)' : 'var(--border-default)'}`,
-            color: 'var(--text-primary)',
-            minHeight: '120px',
-          }}
+          style={{ border: `1px solid ${error ? 'var(--color-danger)' : 'var(--border-default)'}`,
+            minHeight: '120px' }}
           {...props}
         />
         {hint && !error && (
           <p
             id={hintId}
             className="text-xs"
-            style={{ color: 'var(--text-muted)' }}
+            
           >
             {hint}
           </p>

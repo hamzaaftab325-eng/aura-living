@@ -30,14 +30,13 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             aria-describedby={error ? errorId : undefined}
             className="mt-0.5 w-4 h-4 rounded cursor-pointer focus:ring-2"
             style={{
-              accentColor: 'var(--color-gold)',
-            }}
+              accentColor: 'var(--color-gold)' }}
             {...props}
           />
           <label
             htmlFor={checkboxId}
             className="text-sm leading-relaxed cursor-pointer"
-            style={{ color: 'var(--text-secondary)' }}
+            
           >
             {label}
           </label>
@@ -55,7 +54,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         {hint && !error && (
           <p
             className="text-xs ml-6"
-            style={{ color: 'var(--text-muted)' }}
+            
           >
             {hint}
           </p>

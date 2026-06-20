@@ -70,8 +70,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
   return (
     <div
       className="relative flex flex-col transition-all duration-500"
-      style={{ transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
-      }}
+      style={{ transform: isHovered ? 'translateY(-8px)' : 'translateY(0)' }}
     >
       <Link
         href={`/product/${product.slug}`}
@@ -83,22 +82,20 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           boxShadow: isHovered
             ? '0 0 20px rgba(212,175,55,0.2), 0 8px 32px rgba(0,0,0,0.08)'
             : '0 2px 12px rgba(0,0,0,0.04)',
-          transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
-        }}
+          transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease' }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         aria-label={`View ${product.name} details`}
       >
         {/* Image with parallax + enhanced CSS zoom on hover */}
-        <div className="absolute inset-0 overflow-hidden" style={{ backgroundColor: 'var(--surface-card)' }}>
+        <div className="absolute inset-0 overflow-hidden" >
           <Image
             ref={imageRef}
             src={product.image}
             alt={product.name}
             fill
             className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
-            style={{ transform: isHovered ? 'scale(1.12)' : 'scale(1)',
-            }}
+            style={{ transform: isHovered ? 'scale(1.12)' : 'scale(1)' }}
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
           />
         </div>
@@ -109,8 +106,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             <span
               className="inline-block px-2.5 py-1 rounded-sm text-[10px] font-bold tracking-wider uppercase"
               style={{ backgroundColor: badgeColors[product.badge]?.bg,
-                color: badgeColors[product.badge]?.text,
-              }}
+                color: badgeColors[product.badge]?.text }}
             >
               {product.badge}
             </span>
@@ -140,8 +136,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                 opacity: isHovered ? 1 : 0,
                 transform: isHovered ? 'translateX(0)' : 'translateX(12px)',
                 transition: 'all 0.3s ease',
-                transitionDelay: isHovered ? `${0.05 + i * 0.07}s` : '0s',
-              }}
+                transitionDelay: isHovered ? `${0.05 + i * 0.07}s` : '0s' }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-gold)';
                 (e.currentTarget as HTMLElement).style.color = 'var(--text-on-dark)';
@@ -167,8 +162,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           style={{ opacity: isHovered ? 1 : 0,
             transform: isHovered ? 'translateY(0)' : 'translateY(30px)',
             transition: 'all 0.35s ease',
-            transitionDelay: isHovered ? '0.1s' : '0s',
-          }}
+            transitionDelay: isHovered ? '0.1s' : '0s' }}
         >
           <button
             onClick={handleAddToCartClick}
@@ -184,8 +178,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       <div className="mt-4 flex flex-col gap-1.5 px-1">
         <Link
           href={`/product/${product.slug}`}
-          className="text-[15px] font-semibold leading-snug transition-colors duration-300 line-clamp-1 hover:text-[var(--color-gold)]"
-          style={{ color: 'var(--surface-dark)' }}
+          className="text-[15px] font-semibold leading-snug transition-colors duration-300 line-clamp-1 hover:aura-text-gold"
+          
         >
           {product.name}
         </Link>
@@ -200,9 +194,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                   key={i}
                   className={`w-3.5 h-3.5 ${
                     filled
-                      ? 'text-[var(--color-gold)] fill-[var(--color-gold)]'
+                      ? 'aura-text-gold fill-[var(--color-gold)]'
                       : half
-                      ? 'text-[var(--color-gold)] fill-[var(--color-gold)]/40'
+                      ? 'aura-text-gold fill-[var(--color-gold)]/40'
                       : 'text-[var(--color-gold-soft)]/50'
                   }`}
                 />
@@ -211,7 +205,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           </div>
           <span
             className="text-[11px]"
-            style={{ color: 'var(--color-muted-gray)' }}
+            
           >
             ({product.reviews})
           </span>
@@ -290,20 +284,18 @@ export default function FeaturedProducts() {
   return (
     <section
       className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
-      style={{ backgroundColor: 'var(--surface-page)' }}
+      
     >
       {/* Ambient decorative blobs — hidden on mobile to save paint */}
       <div
         className="hidden sm:block absolute top-0 left-0 w-[500px] h-[500px] pointer-events-none opacity-30"
         style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
-          transform: 'translate(-30%, -30%)',
-        }}
+          transform: 'translate(-30%, -30%)' }}
       />
       <div
         className="hidden sm:block absolute bottom-0 right-0 w-[400px] h-[400px] pointer-events-none opacity-25"
         style={{ background: 'radial-gradient(circle, rgba(168,181,160,0.1) 0%, transparent 70%)',
-          transform: 'translate(20%, 30%)',
-        }}
+          transform: 'translate(20%, 30%)' }}
       />
 
       <div ref={sectionContentRef} className="max-w-7xl mx-auto relative z-10">
@@ -318,8 +310,8 @@ export default function FeaturedProducts() {
 
           <h2
             ref={headingRef}
-            className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold tracking-tight"
-            style={{ color: 'var(--surface-dark)' }}
+            className="aura-h2 tracking-tight"
+            
           >
             Curated for You
           </h2>
@@ -331,7 +323,7 @@ export default function FeaturedProducts() {
           <p
             ref={subRef}
             className="text-sm sm:text-base max-w-md mx-auto mt-5"
-            style={{ color: 'var(--color-muted-gray)' }}
+            
           >
             Handpicked treasures that embody the Aura Living spirit
           </p>

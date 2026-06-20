@@ -11,3 +11,7 @@ export { default as Badge } from './Badge';
 export { default as Tabs } from './Tabs';
 export { default as Modal } from './Modal';
 export { default as FormRow } from './FormRow';
+export { default as SectionHeader } from './SectionHeader';
+export { default as EmptyState } from './EmptyState';
+export { default as ErrorState } from './ErrorState';
+export { default as Pagination } from './Pagination';

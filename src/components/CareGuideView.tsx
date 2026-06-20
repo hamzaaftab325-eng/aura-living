@@ -181,7 +181,7 @@ export default function CareGuideView() {
   }, []);
 
   return (
-    <div className="w-full page-transition" style={{ backgroundColor: 'var(--surface-page)' }}>
+    <div className="w-full page-transition" >
       {/* Hero Banner */}
       <section
         ref={heroBgRef}
@@ -194,29 +194,25 @@ export default function CareGuideView() {
           style={{ backgroundImage: 'url(/images/pages/care-guide-hero.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+            backgroundRepeat: 'no-repeat' }}
         />
         {/* Gradient overlay */}
         <div
           className="absolute inset-0"
           style={{ background:
-              'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)',
-          }}
+              'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
 
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
           style={{ filter: 'blur(60px)',
-            background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
-          }}
+            background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
           style={{ filter: 'blur(70px)',
-            background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
-          }}
+            background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
@@ -259,7 +255,7 @@ export default function CareGuideView() {
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedSection>
             <p
-              className="text-[var(--color-warm-gray)] text-base sm:text-lg leading-relaxed"
+              className="aura-text-secondary text-base sm:text-lg leading-relaxed"
               
             >
               Every piece in our collection is crafted with care and intention. To ensure your Aura Living
@@ -281,10 +277,7 @@ export default function CareGuideView() {
               <div
                 key={category.title}
                 className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
-                style={{ backgroundColor: 'var(--surface-card)',
-                  border: '1px solid var(--color-gold-soft)',
-                  borderLeft: '4px solid var(--color-gold)',
-                }}
+                style={{ borderLeft: '4px solid var(--color-gold)' }}
               >
                 <div className="p-6 sm:p-8">
                   {/* Icon + Title */}
@@ -297,14 +290,14 @@ export default function CareGuideView() {
                     </div>
                     <div>
                       <h3
-                        className="text-[var(--surface-dark)] text-xl sm:text-2xl font-semibold mb-1"
+                        className="aura-text-primary text-xl sm:text-2xl font-semibold mb-1"
                         
                       >
                         {category.title}
                       </h3>
                       <p
                         className="text-sm"
-                        style={{ color: 'var(--color-muted-gray)' }}
+                        
                       >
                         {category.subtitle}
                       </p>
@@ -325,7 +318,7 @@ export default function CareGuideView() {
                           style={{ backgroundColor: 'var(--color-gold)' }}
                         />
                         <span
-                          className="text-[var(--color-warm-gray)] text-sm sm:text-base leading-relaxed"
+                          className="aura-text-secondary text-sm sm:text-base leading-relaxed"
                           
                         >
                           {tip}
@@ -347,13 +340,13 @@ export default function CareGuideView() {
             <GoldDivider />
           </div>
           <h2
-            className="text-[var(--surface-dark)] text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
+            className="aura-text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
             
           >
             Need More Help?
           </h2>
           <p
-            className="text-[var(--color-warm-gray)] text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
+            className="aura-text-secondary text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed"
             
           >
             Our team is always here to assist you with any questions about caring for your Aura Living

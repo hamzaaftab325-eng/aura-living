@@ -170,8 +170,7 @@ export default function CartDrawer() {
           background: 'linear-gradient(135deg, rgba(44,44,44,0.6) 0%, rgba(28,28,28,0.5) 100%)',
           backdropFilter: 'blur(4px)',
           WebkitBackdropFilter: 'blur(4px)',
-          opacity: 0,
-        }}
+          opacity: 0 }}
         onClick={handleClose}
         aria-hidden="true"
       />
@@ -185,35 +184,29 @@ export default function CartDrawer() {
           aria-labelledby="cart-drawer-title"
           className="relative h-full w-full max-w-[440px] flex flex-col pointer-events-auto"
           style={{
-            background: 'linear-gradient(180deg, #FFFDF7 0%, #FAF8F5 100%)',
+            background: 'linear-gradient(180deg, var(--surface-card) 0%, var(--surface-page) 100%)',
             boxShadow: '-20px 0 60px rgba(0,0,0,0.15), -1px 0 0 rgba(212,175,55,0.1)',
             transform: 'translateX(100%)',
-            opacity: 0,
-          }}
+            opacity: 0 }}
         >
           {/* ═══ Premium gold top accent with gradient ═══ */}
           <div
             className="h-[4px] w-full shrink-0"
             style={{
-              background: 'linear-gradient(90deg, transparent 0%, #D4AF37 20%, #E0BD4A 50%, #D4AF37 80%, transparent 100%)',
-            }}
+              background: 'linear-gradient(90deg, transparent 0%, var(--color-gold) 20%, #E0BD4A 50%, var(--color-gold) 80%, transparent 100%)' }}
           />
 
           {/* ═══ Header — premium with icon + badge ═══ */}
           <div
             className="flex items-center justify-between px-6 py-5 shrink-0"
-            style={{
-              borderBottom: '1px solid rgba(232, 213, 163, 0.5)',
-              background: 'linear-gradient(180deg, rgba(255,253,247,1) 0%, rgba(245,237,218,0.3) 100%)',
-            }}
+            style={{ background: 'linear-gradient(180deg, rgba(255,253,247,1) 0%, rgba(245,237,218,0.3) 100%)' }}
           >
             <div className="flex items-center gap-3">
               <div
                 className="w-11 h-11 rounded-xl flex items-center justify-center"
                 style={{
                   background: 'linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.05) 100%)',
-                  border: '1px solid rgba(212,175,55,0.2)',
-                }}
+                  border: '1px solid rgba(212,175,55,0.2)' }}
               >
                 <ShoppingBag className="w-5 h-5" style={{ color: 'var(--color-gold-text)' }} />
               </div>
@@ -221,13 +214,13 @@ export default function CartDrawer() {
                 <h2
                   id="cart-drawer-title"
                   className="text-lg font-bold leading-tight"
-                  style={{ color: 'var(--surface-dark)', fontFamily: "'Playfair Display', serif" }}
+                  
                 >
                   Your Cart
                 </h2>
                 <p
                   className="text-[11px]"
-                  style={{ color: 'var(--color-muted-gray)' }}
+                  
                 >
                   {cartCount === 0 ? 'No items yet' : `${cartCount} ${cartCount === 1 ? 'item' : 'items'} ready`}
                 </p>
@@ -235,7 +228,7 @@ export default function CartDrawer() {
             </div>
             <button
               className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:bg-black/5"
-              style={{ color: 'var(--color-warm-gray)' }}
+              
               onClick={handleClose}
               aria-label="Close cart"
             >
@@ -247,15 +240,12 @@ export default function CartDrawer() {
           {cart.length > 0 && (
             <div
               className="px-6 py-4 shrink-0"
-              style={{
-                borderBottom: '1px solid rgba(232, 213, 163, 0.5)',
-                background: 'linear-gradient(180deg, rgba(245,237,218,0.4) 0%, rgba(245,237,218,0.1) 100%)',
-              }}
+              style={{ background: 'linear-gradient(180deg, rgba(245,237,218,0.4) 0%, rgba(245,237,218,0.1) 100%)' }}
             >
               {amountToFreeShipping > 0 ? (
                 <div className="flex items-center gap-2 mb-2.5">
                   <Truck className="w-4 h-4 shrink-0" style={{ color: 'var(--color-gold-text)' }} />
-                  <p className="text-xs" style={{ color: 'var(--color-warm-gray)' }}>
+                  <p className="text-xs" >
                     Add{' '}
                     <span className="font-bold" style={{ color: 'var(--color-gold-text)' }}>
                       {formatPKR(amountToFreeShipping)}
@@ -288,19 +278,17 @@ export default function CartDrawer() {
                     background:
                       freeShippingProgress >= 100
                         ? 'linear-gradient(90deg, #22C55E, #16A34A)'
-                        : 'linear-gradient(90deg, #D4AF37 0%, #E0BD4A 50%, #D4AF37 100%)',
+                        : 'linear-gradient(90deg, var(--color-gold) 0%, #E0BD4A 50%, var(--color-gold) 100%)',
                     boxShadow: freeShippingProgress >= 100
                       ? '0 0 12px rgba(34,197,94,0.4)'
-                      : '0 0 12px rgba(212,175,55,0.3)',
-                  }}
+                      : '0 0 12px rgba(212,175,55,0.3)' }}
                 >
                   {/* Shimmer effect */}
                   <div
                     className="absolute inset-0 rounded-full"
                     style={{
                       background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
-                      animation: 'shimmer 2s infinite',
-                    }}
+                      animation: 'shimmer 2s infinite' }}
                   />
                 </div>
               </div>
@@ -319,8 +307,7 @@ export default function CartDrawer() {
                   className="relative w-24 h-24 rounded-full flex items-center justify-center mb-6"
                   style={{
                     background: 'linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.05) 100%)',
-                    border: '2px dashed rgba(212,175,55,0.3)',
-                  }}
+                    border: '2px dashed rgba(212,175,55,0.3)' }}
                 >
                   <ShoppingBag className="h-10 w-10" style={{ color: 'var(--color-gold-text)' }} />
                   <Sparkles
@@ -330,13 +317,13 @@ export default function CartDrawer() {
                 </div>
                 <h3
                   className="text-xl font-bold mb-2"
-                  style={{ color: 'var(--surface-dark)', fontFamily: "'Playfair Display', serif" }}
+                  
                 >
                   Your cart is empty
                 </h3>
                 <p
                   className="text-sm text-center mb-7 max-w-[280px]"
-                  style={{ color: 'var(--color-muted-gray)' }}
+                  
                 >
                   Discover handcrafted decor pieces that bring warmth and character to your home.
                 </p>
@@ -355,16 +342,15 @@ export default function CartDrawer() {
                   <div
                     key={`${item.product.id}-${index}`}
                     className="flex gap-4 py-4 group"
-                    style={{ borderBottom: '1px solid rgba(232, 213, 163, 0.4)' }}
+                    
                   >
                     {/* Product image */}
                     <div
                       className="shrink-0 w-20 h-20 rounded-xl overflow-hidden relative transition-transform duration-300 group-hover:scale-105"
                       style={{
                         border: '1px solid rgba(232, 213, 163, 0.6)',
-                        background: 'linear-gradient(135deg, #FFFDF7 0%, #FAF8F5 100%)',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                      }}
+                        background: 'linear-gradient(135deg, var(--surface-card) 0%, var(--surface-page) 100%)',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}
                     >
                       <Image
                         src={item.product.image}
@@ -381,13 +367,13 @@ export default function CartDrawer() {
                         <div className="min-w-0">
                           <h4
                             className="text-sm font-semibold leading-tight line-clamp-2"
-                            style={{ color: 'var(--surface-dark)' }}
+                            
                           >
                             {item.product.name}
                           </h4>
                           <p
                             className="text-[11px] mt-0.5 capitalize"
-                            style={{ color: 'var(--color-muted-gray)' }}
+                            
                           >
                             {item.product.category.replace('-', ' ')}
                           </p>
@@ -401,7 +387,7 @@ export default function CartDrawer() {
                             });
                           }}
                           className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all hover:bg-red-50"
-                          style={{ color: 'var(--color-muted-gray)' }}
+                          
                           aria-label={`Remove ${item.product.name} from cart`}
                         >
                           <Trash2 className="h-3.5 w-3.5" />
@@ -413,14 +399,12 @@ export default function CartDrawer() {
                         <div
                           className="flex items-center rounded-full"
                           style={{
-                            border: '1.5px solid rgba(232, 213, 163, 0.8)',
-                            backgroundColor: '#FFFDF7',
-                          }}
+                            border: '1.5px solid rgba(232, 213, 163, 0.8)' }}
                         >
                           <button
                             onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
                             className="flex items-center justify-center w-8 h-8 rounded-full transition-colors hover:bg-black/5"
-                            style={{ color: 'var(--color-warm-gray)' }}
+                            
                             aria-label={`Decrease quantity of ${item.product.name}`}
                           >
                             <Minus className="h-3 w-3" />
@@ -444,13 +428,13 @@ export default function CartDrawer() {
                               }
                             }}
                             className="w-12 text-center text-sm font-bold bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            style={{ color: 'var(--surface-dark)' }}
+                            
                             aria-label={`Quantity for ${item.product.name}`}
                           />
                           <button
                             onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
                             className="flex items-center justify-center w-8 h-8 rounded-full transition-colors hover:bg-black/5"
-                            style={{ color: 'var(--color-warm-gray)' }}
+                            
                             aria-label={`Increase quantity of ${item.product.name}`}
                           >
                             <Plus className="h-3 w-3" />
@@ -459,14 +443,14 @@ export default function CartDrawer() {
                         <div className="text-right">
                           <span
                             className="text-sm font-bold block"
-                            style={{ color: 'var(--surface-dark)' }}
+                            
                           >
                             {formatPKR(item.product.price * item.quantity)}
                           </span>
                           {item.quantity > 1 && (
                             <span
                               className="text-[10px]"
-                              style={{ color: 'var(--color-muted-gray)' }}
+                              
                             >
                               {formatPKR(item.product.price)} each
                             </span>
@@ -484,8 +468,7 @@ export default function CartDrawer() {
                       className="flex items-center justify-between p-3.5 rounded-xl"
                       style={{
                         background: 'linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(34,197,94,0.04) 100%)',
-                        border: '1px solid rgba(34,197,94,0.25)',
-                      }}
+                        border: '1px solid rgba(34,197,94,0.25)' }}
                     >
                       <div className="flex items-center gap-2.5">
                         <div
@@ -503,7 +486,7 @@ export default function CartDrawer() {
                           </p>
                           <p
                             className="text-[10px]"
-                            style={{ color: 'var(--color-warm-gray)' }}
+                            
                           >
                             {VALID_COUPONS[appliedCoupon].label} · You saved {formatPKR(discount)}
                           </p>
@@ -512,7 +495,7 @@ export default function CartDrawer() {
                       <button
                         onClick={handleRemoveCoupon}
                         className="text-xs font-medium underline cursor-pointer"
-                        style={{ color: 'var(--color-warm-gray)' }}
+                        
                       >
                         Remove
                       </button>
@@ -522,7 +505,7 @@ export default function CartDrawer() {
                       <label
                         htmlFor="cart-coupon-input"
                         className="text-[11px] font-semibold uppercase tracking-wider block mb-2"
-                        style={{ color: 'var(--color-warm-gray)' }}
+                        
                       >
                         Have a coupon code?
                       </label>
@@ -540,11 +523,7 @@ export default function CartDrawer() {
                           }}
                           placeholder="e.g. AURA15"
                           className="flex-1 px-3.5 py-2.5 text-xs rounded-lg focus:outline-none focus:ring-2"
-                          style={{
-                            backgroundColor: 'var(--surface-page)',
-                            border: '1px solid rgba(232, 213, 163, 0.8)',
-                            color: 'var(--surface-dark)',
-                          }}
+                          style={{ border: '1px solid rgba(232, 213, 163, 0.8)' }}
                           aria-label="Enter coupon code"
                         />
                         <button
@@ -552,9 +531,7 @@ export default function CartDrawer() {
                           disabled={!couponInput.trim()}
                           className="px-4 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                           style={{
-                            background: 'var(--surface-dark)',
-                            color: 'var(--text-on-dark)',
-                          }}
+                            background: 'var(--surface-dark)' }}
                         >
                           Apply
                         </button>
@@ -573,20 +550,19 @@ export default function CartDrawer() {
               style={{
                 borderTop: '2px solid var(--color-gold)',
                 background: 'linear-gradient(180deg, rgba(255,253,247,1) 0%, rgba(245,237,218,0.3) 100%)',
-                boxShadow: '0 -8px 30px rgba(0,0,0,0.06)',
-              }}
+                boxShadow: '0 -8px 30px rgba(0,0,0,0.06)' }}
             >
               {/* Summary rows */}
               <div className="flex items-center justify-between mb-2">
                 <span
                   className="text-sm"
-                  style={{ color: 'var(--color-warm-gray)' }}
+                  
                 >
                   Subtotal ({cartCount} {cartCount !== 1 ? 'items' : 'item'})
                 </span>
                 <span
                   className="text-sm font-semibold"
-                  style={{ color: 'var(--surface-dark)' }}
+                  
                 >
                   {formatPKR(subtotal)}
                 </span>
@@ -613,7 +589,7 @@ export default function CartDrawer() {
               <div className="flex items-center justify-between mb-3">
                 <span
                   className="text-sm flex items-center gap-1.5"
-                  style={{ color: 'var(--color-warm-gray)' }}
+                  
                 >
                   <Truck className="w-3.5 h-3.5" />
                   Shipping
@@ -628,7 +604,7 @@ export default function CartDrawer() {
                 ) : (
                   <span
                     className="text-sm font-semibold"
-                    style={{ color: 'var(--surface-dark)' }}
+                    
                   >
                     {formatPKR(shipping)}
                   </span>
@@ -645,23 +621,20 @@ export default function CartDrawer() {
                 <div>
                   <span
                     className="text-base font-bold block"
-                    style={{ color: 'var(--surface-dark)' }}
+                    
                   >
                     Estimated Total
                   </span>
                   <span
                     className="text-[10px]"
-                    style={{ color: 'var(--color-muted-gray)' }}
+                    
                   >
                     Taxes calculated at checkout
                   </span>
                 </div>
                 <span
                   className="text-2xl font-bold"
-                  style={{
-                    color: 'var(--surface-dark)',
-                    fontFamily: "'Playfair Display', serif",
-                  }}
+                  
                 >
                   {formatPKR(estimatedTotal)}
                 </span>
@@ -694,21 +667,21 @@ export default function CartDrawer() {
               >
                 <span
                   className="inline-flex items-center gap-1.5 text-[11px]"
-                  style={{ color: 'var(--color-muted-gray)' }}
+                  
                 >
                   <Lock className="w-3.5 h-3.5" style={{ color: 'var(--color-gold-text)' }} />
                   Secure Checkout
                 </span>
                 <span
                   className="inline-flex items-center gap-1.5 text-[11px]"
-                  style={{ color: 'var(--color-muted-gray)' }}
+                  
                 >
                   <Shield className="w-3.5 h-3.5" style={{ color: 'var(--color-gold-text)' }} />
                   Free Returns
                 </span>
                 <span
                   className="inline-flex items-center gap-1.5 text-[11px] font-semibold"
-                  style={{ color: 'var(--color-muted-gray)' }}
+                  
                 >
                   COD · JazzCash · EasyPaisa
                 </span>

@@ -2,7 +2,7 @@
 
 export function ProductCardSkeleton() {
   return (
-    <div className="rounded-lg overflow-hidden" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+    <div className="rounded-lg overflow-hidden" >
       <div className="w-full aspect-[3/4] animate-pulse" style={{ backgroundColor: 'var(--color-gold-pale)' }} />
       <div className="p-4 space-y-2">
         <div className="h-3 rounded animate-pulse" style={{ backgroundColor: 'var(--color-gold-pale)', width: '60%' }} />
@@ -25,7 +25,7 @@ export function ProductGridSkeleton({ count = 8 }: { count?: number }) {
 
 export function CardSkeleton() {
   return (
-    <div className="rounded-lg p-6 space-y-3" style={{ backgroundColor: 'var(--surface-card)', border: '1px solid var(--color-gold-soft)' }}>
+    <div className="rounded-lg p-6 space-y-3" >
       <div className="h-5 rounded animate-pulse" style={{ backgroundColor: 'var(--color-gold-pale)', width: '50%' }} />
       <div className="h-3 rounded animate-pulse" style={{ backgroundColor: 'var(--color-gold-pale)', width: '80%' }} />
       <div className="h-3 rounded animate-pulse" style={{ backgroundColor: 'var(--color-gold-pale)', width: '70%' }} />
@@ -36,7 +36,7 @@ export function CardSkeleton() {
 
 export function HeroSkeleton() {
   return (
-    <div className="w-full h-[60vh] sm:h-[70vh] md:h-[80vh] animate-pulse" style={{ backgroundColor: 'var(--surface-dark)' }}>
+    <div className="w-full h-[60vh] sm:h-[70vh] md:h-[80vh] animate-pulse" >
       <div className="flex flex-col items-center justify-center h-full gap-4">
         <div className="h-4 rounded animate-pulse" style={{ backgroundColor: 'rgba(212,175,55,0.2)', width: '200px' }} />
         <div className="h-12 rounded animate-pulse" style={{ backgroundColor: 'rgba(255,255,255,0.1)', width: '400px' }} />
