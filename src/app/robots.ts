@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://auraliving.com/sitemap.xml',
+    sitemap: 'https://aura-living-two.vercel.app/sitemap.xml',
   };
 }

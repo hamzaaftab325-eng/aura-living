@@ -3,7 +3,8 @@ import { products } from '@/data/products';
 import { articles } from '@/data/articles';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://auraliving.com';
+  // Use the actual deployment URL. Update to 'https://auraliving.com' when custom domain is connected.
+  const baseUrl = 'https://aura-living-two.vercel.app';
   const now = new Date();
 
   // Static routes — one entry per page

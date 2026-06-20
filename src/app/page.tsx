@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: 'Aura Living | Premium Home Decor Pakistan',
     description:
       'Where Comfort Meets Style — Handcrafted home decor, lamps, plants, vases & more. Shop online in Pakistan.',
-    url: 'https://auraliving.com',
+    url: '/',
     siteName: 'Aura Living',
     type: 'website',
     locale: 'en_PK',

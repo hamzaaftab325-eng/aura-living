@@ -36,7 +36,7 @@ export async function generateMetadata({
       type: 'article',
       title,
       description,
-      url: `https://auraliving.com${canonical}`,
+      url: canonical,
       publishedTime: article.date,
       authors: [article.author.name],
       tags: article.tags,
