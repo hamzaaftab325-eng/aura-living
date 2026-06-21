@@ -101,7 +101,7 @@ export default function CartView() {
           <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6" >
             <BagIcon className="w-12 h-12 text-gold-text" />
           </div>
-          <h1 className="aura-h2 text-charcoal mb-3">Your Cart is Empty</h1>
+          <h1 className="aura-h2 aura-text-primary mb-3">Your Cart is Empty</h1>
           <p className="aura-body text-muted-gray mb-8 max-w-sm mx-auto">
             Looks like you haven&apos;t added anything yet. Explore our handcrafted collection
             and find pieces you&apos;ll love for your home.
@@ -128,7 +128,7 @@ export default function CartView() {
               <ArrowLeft className="w-5 h-5 text-gold-text" />
             </button>
             <div>
-              <h2 className="aura-h2 text-charcoal">Shopping Cart</h2>
+              <h2 className="aura-h2 aura-text-primary">Shopping Cart</h2>
               <p className="aura-body-small text-muted-gray">{safeCount} item{safeCount !== 1 ? 's' : ''} in your cart</p>
             </div>
           </div>
@@ -299,7 +299,7 @@ export default function CartView() {
               className="rounded-lg p-6 lg:sticky lg:top-28"
               style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}
             >
-              <h2 className="text-xl font-bold mb-4" >
+              <h2 className="text-xl font-bold mb-4 aura-text-primary" >
                 Order Summary
               </h2>
               <div className="mb-4"><GoldDivider /></div>

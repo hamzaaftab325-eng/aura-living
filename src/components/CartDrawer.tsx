@@ -175,7 +175,7 @@ export default function CartDrawer() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="cart-drawer-title"
-          className="relative h-full w-full max-w-[440px] flex flex-col pointer-events-auto"
+          className="relative h-full w-full max-w-[440px] flex flex-col pointer-events-auto aura-gradient-card-vertical"
           style={{ boxShadow: '-20px 0 60px rgba(0,0,0,0.15), -1px 0 0 rgba(212,175,55,0.1)',
             transform: 'translateX(100%)',
             opacity: 0 }}
@@ -197,19 +197,17 @@ export default function CartDrawer() {
                 style={{
                   background: 'linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.05) 100%)' }}
               >
-                <ShoppingBag className="w-5 h-5"  />
+                <ShoppingBag className="w-5 h-5 aura-text-gold" />
               </div>
               <div>
                 <h2
                   id="cart-drawer-title"
-                  className="text-lg font-bold leading-tight"
-                  
+                  className="text-lg font-bold leading-tight aura-text-primary"
                 >
                   Your Cart
                 </h2>
                 <p
-                  className="text-[11px]"
-                  
+                  className="text-[11px] aura-text-muted"
                 >
                   {cartCount === 0 ? 'No items yet' : `${cartCount} ${cartCount === 1 ? 'item' : 'items'} ready`}
                 </p>
@@ -233,24 +231,23 @@ export default function CartDrawer() {
             >
               {amountToFreeShipping > 0 ? (
                 <div className="flex items-center gap-2 mb-2.5">
-                  <Truck className="w-4 h-4 shrink-0"  />
-                  <p className="text-xs" >
+                  <Truck className="w-4 h-4 shrink-0 aura-text-gold" />
+                  <p className="text-xs aura-text-secondary">
                     Add{' '}
-                    <span className="font-bold" >
+                    <span className="font-bold aura-text-gold">
                       {formatPKR(amountToFreeShipping)}
                     </span>
                     {' '}more for{' '}
-                    <span className="font-bold" >
+                    <span className="font-bold aura-text-gold">
                       FREE shipping
                     </span>
                   </p>
                 </div>
               ) : (
                 <div className="flex items-center justify-center gap-2 mb-2.5">
-                  <CheckCircle className="w-4 h-4"  />
+                  <CheckCircle className="w-4 h-4 aura-text-success" />
                   <p
-                    className="text-xs font-bold"
-                    
+                    className="text-xs font-bold aura-text-success"
                   >
                     FREE shipping unlocked!
                   </p>
@@ -304,14 +301,12 @@ export default function CartDrawer() {
                   />
                 </div>
                 <h3
-                  className="text-xl font-bold mb-2"
-                  
+                  className="text-xl font-bold mb-2 aura-text-primary"
                 >
                   Your cart is empty
                 </h3>
                 <p
-                  className="text-sm text-center mb-7 max-w-[280px]"
-                  
+                  className="text-sm text-center mb-7 max-w-[280px] aura-text-muted"
                 >
                   Discover handcrafted decor pieces that bring warmth and character to your home.
                 </p>
@@ -389,8 +384,7 @@ export default function CartDrawer() {
                         >
                           <button
                             onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                            className="flex items-center justify-center w-8 h-8 rounded-full transition-colors hover:bg-black/5"
-                            
+                            className="flex items-center justify-center w-8 h-8 rounded-full transition-colors hover:bg-black/5 aura-text-secondary"
                             aria-label={`Decrease quantity of ${item.product.name}`}
                           >
                             <Minus className="h-3 w-3" />
@@ -413,14 +407,12 @@ export default function CartDrawer() {
                                 updateQuantity(item.product.id, 1);
                               }
                             }}
-                            className="w-12 text-center text-sm font-bold bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            
+                            className="w-12 text-center text-sm font-bold bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none aura-text-primary"
                             aria-label={`Quantity for ${item.product.name}`}
                           />
                           <button
                             onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                            className="flex items-center justify-center w-8 h-8 rounded-full transition-colors hover:bg-black/5"
-                            
+                            className="flex items-center justify-center w-8 h-8 rounded-full transition-colors hover:bg-black/5 aura-text-secondary"
                             aria-label={`Increase quantity of ${item.product.name}`}
                           >
                             <Plus className="h-3 w-3" />
@@ -428,15 +420,13 @@ export default function CartDrawer() {
                         </div>
                         <div className="text-right">
                           <span
-                            className="text-sm font-bold block"
-                            
+                            className="text-sm font-bold block aura-text-primary"
                           >
                             {formatPKR(item.product.price * item.quantity)}
                           </span>
                           {item.quantity > 1 && (
                             <span
-                              className="text-[10px]"
-                              
+                              className="text-[10px] aura-text-muted"
                             >
                               {formatPKR(item.product.price)} each
                             </span>
@@ -460,18 +450,16 @@ export default function CartDrawer() {
                           className="w-8 h-8 rounded-full flex items-center justify-center"
                           style={{ backgroundColor: 'rgba(34,197,94,0.15)' }}
                         >
-                          <Tag className="w-4 h-4"  />
+                          <Tag className="w-4 h-4 aura-text-success" />
                         </div>
                         <div>
                           <p
-                            className="text-xs font-bold"
-                            
+                            className="text-xs font-bold aura-text-success"
                           >
                             {appliedCoupon} Applied
                           </p>
                           <p
-                            className="text-[10px]"
-                            
+                            className="text-[10px] aura-text-secondary"
                           >
                             {VALID_COUPONS[appliedCoupon].label} · You saved {formatPKR(discount)}
                           </p>
@@ -489,8 +477,7 @@ export default function CartDrawer() {
                     <div>
                       <label
                         htmlFor="cart-coupon-input"
-                        className="text-[11px] font-semibold uppercase tracking-wider block mb-2"
-                        
+                        className="text-[11px] font-semibold uppercase tracking-wider block mb-2 aura-text-secondary"
                       >
                         Have a coupon code?
                       </label>
@@ -507,14 +494,14 @@ export default function CartDrawer() {
                             }
                           }}
                           placeholder="e.g. AURA15"
-                          className="flex-1 px-3.5 py-2.5 text-xs rounded-lg focus:outline-none focus:ring-2"
+                          className="flex-1 px-3.5 py-2.5 text-xs rounded-lg focus:outline-none focus:ring-2 aura-text-primary"
                           style={{ border: '1px solid rgba(232, 213, 163, 0.8)' }}
                           aria-label="Enter coupon code"
                         />
                         <button
                           onClick={handleApplyCoupon}
                           disabled={!couponInput.trim()}
-                          className="px-4 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                          className="px-4 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed aura-bg-dark aura-text-white"
                           style={{
                             background: 'var(--surface-dark)' }}
                         >
@@ -649,22 +636,19 @@ export default function CartDrawer() {
                 style={{ borderTop: '1px solid rgba(232, 213, 163, 0.5)' }}
               >
                 <span
-                  className="inline-flex items-center gap-1.5 text-[11px]"
-                  
+                  className="inline-flex items-center gap-1.5 text-[11px] aura-text-muted"
                 >
                   <Lock className="w-3.5 h-3.5"  />
                   Secure Checkout
                 </span>
                 <span
-                  className="inline-flex items-center gap-1.5 text-[11px]"
-                  
+                  className="inline-flex items-center gap-1.5 text-[11px] aura-text-muted"
                 >
                   <Shield className="w-3.5 h-3.5"  />
                   Free Returns
                 </span>
                 <span
-                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold"
-                  
+                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold aura-text-muted"
                 >
                   COD · JazzCash · EasyPaisa
                 </span>
