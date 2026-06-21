@@ -1,9 +1,57 @@
 # Aura Living — Professional Engineering Roadmap
 
-> **Version**: 2.0 (Senior Developer Approved)
+> **Version**: 2.1 (Codebase Cleaned — 2026-06-21)
 > **Goal**: Transform current codebase into a production-grade ecommerce platform
 > **Philosophy**: Preserve existing UI/UX, business logic, SEO, and accessibility. Rebuild ONLY the engineering architecture.
 > **Inspiration**: Webflow/WordPress-level professional structure — clean, maintainable, scalable.
+
+---
+
+## 🧹 Codebase Cleanup Status (Completed 2026-06-21)
+
+| What | Status |
+|---|---|
+| Old planning docs (BUTTON_SYSTEM_AUDIT, PRODUCTION_PLAN, PROFESSIONAL_CLEANUP_PLAN) | ✅ Deleted |
+| Old home.html | ✅ Deleted |
+| Old shell scripts (run-no-cache.sh, run-server.sh) | ✅ Deleted |
+| Log files (dev.log, server.log, prod.log, build.log) | ✅ Deleted |
+| Worklog (worklog.md) | ✅ Deleted |
+| Upload directory (temp screenshots) | ✅ Cleared |
+| Migration scripts (20+ Python files) | ✅ Deleted |
+| Mini-services directory | ✅ Deleted |
+| .zscripts directory | ✅ Deleted |
+| console.log statements | ✅ Only 2 remain (error handler + SW registration — legitimate) |
+| TODO/FIXME comments | ✅ None found |
+| Commented-out code | ✅ Only documentation comments remain |
+| Unused imports | ✅ ESLint clean (0 errors) |
+| TypeScript | ✅ 0 errors |
+| Build | ✅ PASS |
+
+### Files Remaining in Root Directory
+
+```
+/home/z/my-project/
+├── ENGINEERING_ROADMAP.md    ← This document (single source of truth)
+├── start-server.sh           ← Server startup script
+├── .env                      ← Environment variables
+├── .env.example              ← Environment template
+├── .gitignore
+├── .prettierrc
+├── .prettierignore
+├── bun.lock
+├── package-lock.json
+├── package.json
+├── next.config.ts
+├── postcss.config.mjs
+├── tailwind.config.ts
+├── tsconfig.json
+├── eslint.config.mjs
+├── components.json
+├── Caddyfile
+└── server.pid
+```
+
+Clean. No dead files. No old docs. No temp scripts.
 
 ---
 
