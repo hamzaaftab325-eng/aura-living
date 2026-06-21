@@ -309,9 +309,8 @@ export default function Navbar() {
 
           {/* Pill container — NO hover handlers (mega menu is click-only now) */}
           <div
-            className="relative flex items-center justify-between rounded-full transition-all duration-300 ease-out"
-            style={{ border: scrolled ? '1px solid rgba(212, 175, 55, 0.4)' : '1px solid rgba(212, 175, 55, 0.3)',
-              paddingLeft: scrolled ? '14px' : '16px',
+            className="relative flex items-center justify-between rounded-full transition-all duration-300 ease-out aura-bg-dark-tint aura-blur-lg aura-border-gold-tint"
+            style={{ paddingLeft: scrolled ? '14px' : '16px',
               paddingRight: scrolled ? '14px' : '16px',
               paddingTop: scrolled ? '8px' : '10px',
               paddingBottom: scrolled ? '8px' : '12px',
@@ -425,7 +424,7 @@ export default function Navbar() {
 
               <Link
                 href="/wishlist"
-                className="relative hidden sm:flex rounded-full transition-all duration-300 hover:bg-white/10"
+                className="relative hidden sm:flex rounded-full transition-all duration-300 hover:bg-white/10 aura-text-white-85"
                 style={{  padding: scrolled ? '6px' : '8px' }}
                 aria-label="Wishlist"
                 onClick={closeMenusAndScroll}
@@ -439,7 +438,7 @@ export default function Navbar() {
               </Link>
 
               <button
-                className="relative rounded-full transition-all duration-300 hover:bg-white/10"
+                className="relative rounded-full transition-all duration-300 hover:bg-white/10 aura-text-white-85"
                 style={{  padding: scrolled ? '6px' : '8px' }}
                 aria-label={`Cart, ${cartCount} ${cartCount === 1 ? 'item' : 'items'}`}
                 onClick={() => setCartOpen(true)}

@@ -37,8 +37,8 @@ function FooterLink({
   href?: string;
 }) {
   const className =
-    'group relative inline-block text-sm transition-all duration-500 hover:aura-text-gold hover:translate-x-1.5 hover:drop-shadow-[0_0_6px_rgba(212,175,55,0.3)]';
-  const style = { } as const;
+    'group relative inline-block text-sm aura-text-white-80 transition-all duration-500 hover:aura-text-gold hover:translate-x-1.5 hover:drop-shadow-[0_0_6px_rgba(212,175,55,0.3)]';
+  const style = {} as const;
   const inner = (
     <>
       <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[var(--color-gold)] transition-all duration-500 group-hover:w-full" />
@@ -83,8 +83,7 @@ function SocialIcon({
       aria-label={label}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-gold)]/25 transition-all duration-500 hover:border-[var(--color-gold)]/70 hover:scale-110 hover:rotate-6 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
-      
+      className="group flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-gold)]/25 transition-all duration-500 hover:border-[var(--color-gold)]/70 hover:scale-110 hover:rotate-6 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] aura-text-gold"
     >
       <Icon size={18} className="transition-all duration-500 group-hover:scale-110" />
     </a>
@@ -233,7 +232,7 @@ export default function Footer() {
           {/* Column 2: Quick Links */}
           <div className="flex flex-col gap-5">
             <h3
-              className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
+              className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block aura-text-gold"
               
             >
               Quick Links
@@ -251,7 +250,7 @@ export default function Footer() {
           {/* Column 3: Customer Service */}
           <div className="flex flex-col gap-5">
             <h3
-              className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
+              className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block aura-text-gold"
               
             >
               Customer Service
@@ -269,7 +268,7 @@ export default function Footer() {
           {/* Column 4: Newsletter */}
           <div className="flex flex-col gap-5">
             <h3
-              className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block"
+              className="text-sm font-semibold uppercase tracking-[0.2em] relative inline-block aura-text-gold"
               
             >
               Newsletter
@@ -285,7 +284,7 @@ export default function Footer() {
                   ? '0 0 30px rgba(212,175,55,0.1), inset 0 0 30px rgba(212,175,55,0.03)'
                   : '0 0 0 rgba(212,175,55,0)' }}
             >
-              <p className="text-sm mb-4 leading-relaxed">
+              <p className="text-sm mb-4 leading-relaxed aura-text-white-80">
                 Get <span style={{ fontWeight: 600 }}>15% off</span> your first order
               </p>
               <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
