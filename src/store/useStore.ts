@@ -1,40 +1,9 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import type { Product, CartItem, User } from '@/types';
 
-export interface Product {
-  id: string;
-  slug: string; // URL-friendly identifier (e.g. 'hammered-brass-table-lamp')
-  name: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  images: string[];
-  category: string;
-  rating: number;
-  reviews: number;
-  badge?: 'NEW' | 'SALE' | 'BESTSELLER';
-  description: string;
-  material: string;
-  inStock: boolean;
-  sku?: string;
-  dimensions?: string;
-  weight?: string;
-  careInstructions?: string;
-  warranty?: string;
-  origin?: string;
-}
-
-export interface CartItem {
-  product: Product;
-  quantity: number;
-}
-
-export interface User {
-  name: string;
-  email: string;
-  memberSince: string;
-  rewardsPoints: number;
-}
+// Re-export types for backward compatibility with existing imports
+export type { Product, CartItem, User } from '@/types';
 
 // Shared badge color mapping — used by ProductDetailView, ShopView, WishlistView, FeaturedProducts
 export const badgeColors: Record<string, { bg: string; text: string }> = {
