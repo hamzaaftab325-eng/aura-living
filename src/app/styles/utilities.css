@@ -141,6 +141,68 @@
 .aura-flex-col             { display: flex; flex-direction: column; }
 .aura-flex-row             { display: flex; flex-direction: row; }
 
+/* ─── Section spacing variants ─── */
+.aura-section-sm           { padding: 2rem 1rem; }
+.aura-section-lg           { padding: 5rem 2rem; }
+.aura-section-cta          { padding: 4rem 1.5rem; }
+@media (min-width: 640px) {
+  .aura-section-sm         { padding: 2.5rem 1.5rem; }
+  .aura-section-lg         { padding: 6rem 2rem; }
+  .aura-section-cta        { padding: 5rem 2rem; }
+}
+@media (min-width: 1024px) {
+  .aura-section-sm         { padding: 3rem 2rem; }
+  .aura-section-lg         { padding: 8rem 2rem; }
+  .aura-section-cta        { padding: 6rem 2rem; }
+}
+
+/* ─── Text alignment ─── */
+.aura-text-center          { text-align: center; }
+.aura-text-left            { text-align: left; }
+.aura-text-right           { text-align: right; }
+
+/* ─── Flex item alignment ─── */
+.aura-items-center         { align-items: center; }
+.aura-items-start          { align-items: flex-start; }
+.aura-items-end            { align-items: flex-end; }
+.aura-items-stretch        { align-items: stretch; }
+
+/* ─── Flex justification ─── */
+.aura-justify-center       { justify-content: center; }
+.aura-justify-between      { justify-content: space-between; }
+.aura-justify-end          { justify-content: flex-end; }
+.aura-justify-start        { justify-content: flex-start; }
+
+/* ─── Gap utilities ─── */
+.aura-gap-sm               { gap: 1rem; }
+.aura-gap-md               { gap: 1.5rem; }
+.aura-gap-lg               { gap: 2rem; }
+.aura-gap-xl               { gap: 2.5rem; }
+
+/* ─── Width/Height ─── */
+.aura-w-full               { width: 100%; }
+.aura-h-full               { height: 100%; }
+.aura-w-auto               { width: auto; }
+.aura-h-auto               { height: auto; }
+
+/* ─── Position ─── */
+.aura-relative             { position: relative; }
+.aura-absolute             { position: absolute; }
+.aura-fixed                { position: fixed; }
+.aura-sticky               { position: sticky; }
+
+/* ─── Display ─── */
+.aura-hidden               { display: none; }
+.aura-block                { display: block; }
+.aura-inline-block         { display: inline-block; }
+.aura-inline-flex          { display: inline-flex; }
+
+/* ─── Overflow ─── */
+.aura-overflow-hidden      { overflow: hidden; }
+.aura-overflow-auto        { overflow: auto; }
+.aura-overflow-scroll      { overflow: scroll; }
+.aura-overflow-visible     { overflow: visible; }
+
 /* ═══════════════════════════════════════════════════════════
    BACKDROP FILTER UTILITY CLASSES — replace inline backdropFilter
    ═══════════════════════════════════════════════════════════ */
