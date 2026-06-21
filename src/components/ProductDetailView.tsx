@@ -22,6 +22,7 @@ import { products, categories, formatPKR } from '@/data/products';
 import { getReviewsForProduct, getAverageRating } from '@/data/reviews';
 import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';
+import { SaveButton } from '@/components/ui/SaveButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import ReviewList from '@/components/ReviewList';
 import ReviewForm from '@/components/ReviewForm';
@@ -344,7 +345,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
               </div>
             </div>
 
-            {/* Action Buttons — CSS transitions for hover/active states */}
+            {/* Action Buttons — Premium button system with GSAP SaveButton */}
             <div className="flex flex-col sm:flex-row gap-3 mb-10">
               <button
                 onClick={handleAddToCart}
@@ -360,6 +361,16 @@ export default function ProductDetailView({ product }: { product: Product }) {
                 <Heart className={`w-4 h-4 ${wishlisted ? 'fill-current' : ''}`} />
                 {wishlisted ? 'Wishlisted' : 'Wishlist'}
               </button>
+            </div>
+
+            {/* Save for Later — GSAP-powered button with confetti */}
+            <div className="mb-10">
+              <SaveButton
+                text={{ idle: 'Save for Later', saving: 'Saving...', saved: 'Saved!' }}
+                onSave={() => {
+                  handleToggleWishlistClick();
+                }}
+              />
             </div>
 
             {/* Trust Badges */}

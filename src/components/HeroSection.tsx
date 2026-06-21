@@ -1,53 +1,74 @@
 'use client';
 
+/**
+ * HeroSection — Premium hero with video background, text reveal animations,
+ * and parallax effect. Uses the official @gsap/react useGSAP hook.
+ *
+ * Animations:
+ * - Eyebrow tag: word-by-word blur reveal
+ * - Main heading: word-by-word blur reveal
+ * - Subtitle: word-by-word blur reveal
+ * - CTA button + scroll indicator: fade + slide up
+ * - Gold divider: scale-in
+ * - Background: parallax on scroll (desktop only)
+ *
+ * All animations respect prefers-reduced-motion.
+ */
 import { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ChevronDown } from 'lucide-react';
-import {
-  useGsapBlurText,
-  useGsapFadeIn,
-  useGsapScaleIn,
-  gsap } from '@/hooks/useGsap';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useTextReveal, useScrollReveal, useScaleIn } from '@/hooks/useAnimations';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
 
-  // Text animation — snappy on mobile, smooth on desktop
-  const tagRef = useGsapBlurText<HTMLSpanElement>({
+  // Text animations — word-by-word blur reveal (new useAnimations hooks)
+  const tagRef = useTextReveal<HTMLSpanElement>({
     duration: 0.5,
     stagger: 0.03,
     delay: 0.15,
     start: 'top 90%',
-    splitBy: 'words' });
+    splitBy: 'words',
+  });
 
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({
+  const headingRef = useTextReveal<HTMLHeadingElement>({
     duration: 0.6,
     stagger: 0.04,
     delay: 0.25,
     start: 'top 90%',
-    splitBy: 'words' });
+    splitBy: 'words',
+  });
 
-  const subtitleRef = useGsapBlurText<HTMLParagraphElement>({
+  const subtitleRef = useTextReveal<HTMLParagraphElement>({
     duration: 0.5,
     stagger: 0.02,
     delay: 0.45,
     start: 'top 90%',
-    splitBy: 'words' });
+    splitBy: 'words',
+  });
 
-  // CTA + scroll indicator — fade in
-  const ctaRef = useGsapFadeIn<HTMLAnchorElement>({ y: 20, duration: 0.4, delay: 0.1 });
-  const scrollRef = useGsapFadeIn<HTMLDivElement>({ y: 14, duration: 0.4, delay: 0.3 });
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.4, delay: 0.4 });
+  // CTA + scroll indicator — fade + slide up
+  const ctaRef = useScrollReveal<HTMLAnchorElement>({ y: 20, duration: 0.4, delay: 0.1 });
+  const scrollRef = useScrollReveal<HTMLDivElement>({ y: 14, duration: 0.4, delay: 0.3 });
+  const dividerRef = useScaleIn<HTMLDivElement>({ duration: 0.4, delay: 0.4 });
 
   // Parallax on scroll — background moves slower (desktop only)
-  useEffect(() => {
-    if (!sectionRef.current || !bgRef.current) return;
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if (isMobile) return;
+  // Uses official useGSAP hook with automatic cleanup
+  useGSAP(
+    () => {
+      if (!sectionRef.current || !bgRef.current) return;
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      if (isMobile) return;
 
-    const ctx = gsap.context(() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
       gsap.to(bgRef.current, {
         y: 120,
         ease: 'none',
@@ -56,11 +77,12 @@ export default function HeroSection() {
           trigger: sectionRef.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: 1.5 } });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+          scrub: 1.5,
+        },
+      });
+    },
+    { scope: sectionRef }
+  );
 
   return (
     <section
@@ -93,10 +115,10 @@ export default function HeroSection() {
       </div>
 
       {/* ═══ Black overlay for text readability ═══ */}
-      <div className="absolute inset-0 z-[3] bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
+      <div className="absolute inset-0 z-[3] aura-gradient-overlay-dark" />
 
       {/* ═══ Center content ═══ */}
-      <div className="relative z-[4] flex flex-col items-center justify-center text-center px-4 sm:px-6 max-w-4xl mx-auto">
+      <div className="relative z-[4] flex flex-col items-center justify-center text-center px-4 sm:px-6 max-w-4xl">
 
         {/* Eyebrow tag */}
         <span

@@ -2,7 +2,12 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Send, Gift, Mail, ShieldCheck } from 'lucide-react';
-import { useGsapFadeIn, useGsapBlurText, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import { useTextReveal, useScrollReveal } from '@/hooks/useAnimations';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 import PremiumButton from '@/components/ui/PremiumButton';
 
 export default function NewsletterSection() {
@@ -11,27 +16,33 @@ export default function NewsletterSection() {
   const [isFocused, setIsFocused] = useState(false);
 
   // GSAP animations
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
-  const eyebrowRef = useGsapFadeIn<HTMLDivElement>({ y: 20, duration: 0.5, delay: 0 });
-  const descRef = useGsapFadeIn<HTMLParagraphElement>({ y: 20, duration: 0.5, delay: 0.3 });
-  const socialProofRef = useGsapFadeIn<HTMLDivElement>({ y: 15, duration: 0.4, delay: 0.5 });
-  const cardRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.5, delay: 0.2 });
+  const headingRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
+  const eyebrowRef = useScrollReveal<HTMLDivElement>({ y: 20, duration: 0.5, delay: 0 });
+  const descRef = useScrollReveal<HTMLParagraphElement>({ y: 20, duration: 0.5, delay: 0.3 });
+  const socialProofRef = useScrollReveal<HTMLDivElement>({ y: 15, duration: 0.4, delay: 0.5 });
+  const cardRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.5, delay: 0.2 });
 
-  // Scale-in on scroll
+  // Scale-in on scroll — uses useGSAP for cleanup
   const sectionContentRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!sectionContentRef.current) return;
+  useGSAP(
+    () => {
+      const el = sectionContentRef.current;
+      if (!el) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    gsap.set(sectionContentRef.current, { scale: 0.97 });
-    const trigger = ScrollTrigger.create({
-      trigger: sectionContentRef.current,
-      start: 'top 90%',
-      onEnter: () => {
-        gsap.to(sectionContentRef.current, { scale: 1, duration: 0.8, ease: 'power3.out' });
-      } });
+      gsap.set(el, { scale: 0.97 });
+      const trigger = ScrollTrigger.create({
+        trigger: el,
+        start: 'top 90%',
+        onEnter: () => {
+          gsap.to(el, { scale: 1, duration: 0.8, ease: 'power3.out' });
+        },
+      });
 
-    return () => trigger.kill();
-  }, []);
+      return () => trigger.kill();
+    },
+    { scope: sectionContentRef }
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

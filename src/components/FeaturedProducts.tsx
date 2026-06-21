@@ -8,10 +8,15 @@ import { useStore, badgeColors } from '@/store/useStore';
 import type { Product } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
 import { GoldDivider } from '@/components/SVGDecorations';
-import { useGsapFadeIn, useGsapStagger, useGsapBlurText, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import { useTextReveal, useScrollReveal, useStaggerReveal, useScaleIn } from '@/hooks/useAnimations';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import PremiumButton from '@/components/ui/PremiumButton';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 /* ═══════════════════════════════════════════════════════════════
    Badge palette
@@ -29,25 +34,27 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
   const wishlisted = isInWishlist(product.id);
   const imageRef = useRef<HTMLImageElement>(null);
 
-  // Parallax effect on product image
-  useEffect(() => {
-    const img = imageRef.current;
-    if (!img) return;
+  // Parallax effect on product image — uses official useGSAP hook
+  useGSAP(
+    () => {
+      const img = imageRef.current;
+      if (!img) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const trigger = ScrollTrigger.create({
-      trigger: img,
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: true,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        gsap.set(img, { y: (progress - 0.5) * -30 });
-      } });
+      const trigger = ScrollTrigger.create({
+        trigger: img,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+        onUpdate: (self) => {
+          gsap.set(img, { y: (self.progress - 0.5) * -30 });
+        },
+      });
 
-    return () => {
-      trigger.kill();
-    };
-  }, []);
+      return () => trigger.kill();
+    },
+    { scope: imageRef }
+  );
 
   const handleAddToCartClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -235,37 +242,21 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
    ═══════════════════════════════════════════════════════════════ */
 export default function FeaturedProducts() {
   // GSAP blur text for section heading
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
+  const headingRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
   // GSAP fade-in for subheading/description
-  const subRef = useGsapFadeIn<HTMLParagraphElement>({ y: 20, duration: 0.7, delay: 0.4 });
+  const subRef = useScrollReveal<HTMLParagraphElement>({ y: 20, duration: 0.7, delay: 0.4 });
 
   // GSAP stagger for product grid — enhanced y:50, stagger:0.1, start:'top 85%'
-  const gridRef = useGsapStagger<HTMLDivElement>({
+  const gridRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 50,
     duration: 0.7,
     stagger: 0.1,
     start: 'top 85%' });
 
-  // Scale on scroll effect for the whole section content
-  const sectionContentRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = sectionContentRef.current;
-    if (!el) return;
-
-    gsap.set(el, { scale: 0.95 });
-    const trigger = ScrollTrigger.create({
-      trigger: el,
-      start: 'top 90%',
-      onEnter: () => {
-        gsap.to(el, { scale: 1, duration: 1, ease: 'power3.out' });
-      } });
-
-    return () => {
-      trigger.kill();
-    };
-  }, []);
+  // Scale on scroll effect — uses useScaleIn hook from useAnimations
+  const sectionContentRef = useScaleIn<HTMLDivElement>({ duration: 1, start: 'top 90%' });
 
   // Pick 4 featured
   const featuredProducts = [...products]

@@ -3,7 +3,12 @@
 import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useGsapStagger, useGsapBlurText, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import { useTextReveal, useStaggerReveal } from '@/hooks/useAnimations';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 import { categories } from '@/data/products';
 import { GoldDivider } from '@/components/SVGDecorations';
 
@@ -135,31 +140,34 @@ function CategoryCard({
    ═══════════════════════════════════════════════════════════ */
 export default function CategoriesSection() {
   // GSAP blur text for section heading
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
+  const headingRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
   // Enhanced stagger with y:50, stagger:0.1, start:'top 85%'
-  const row1Ref = useGsapStagger<HTMLDivElement>({ y: 50, stagger: 0.1, duration: 0.6, start: 'top 85%' });
-  const row2Ref = useGsapStagger<HTMLDivElement>({ y: 50, stagger: 0.1, duration: 0.6, delay: 0.2, start: 'top 85%' });
-  const row3Ref = useGsapStagger<HTMLDivElement>({ y: 50, stagger: 0.1, duration: 0.6, delay: 0.4, start: 'top 85%' });
+  const row1Ref = useStaggerReveal<HTMLDivElement>({ y: 50, stagger: 0.1, duration: 0.6, start: 'top 85%' });
+  const row2Ref = useStaggerReveal<HTMLDivElement>({ y: 50, stagger: 0.1, duration: 0.6, delay: 0.2, start: 'top 85%' });
+  const row3Ref = useStaggerReveal<HTMLDivElement>({ y: 50, stagger: 0.1, duration: 0.6, delay: 0.4, start: 'top 85%' });
 
-  // Scale on scroll
+  // Scale on scroll — uses useGSAP
   const sectionContentRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = sectionContentRef.current;
-    if (!el) return;
+  useGSAP(
+    () => {
+      const el = sectionContentRef.current;
+      if (!el) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    gsap.set(el, { scale: 0.95 });
-    const trigger = ScrollTrigger.create({
-      trigger: el,
-      start: 'top 90%',
-      onEnter: () => {
-        gsap.to(el, { scale: 1, duration: 1, ease: 'power3.out' });
-      } });
+      gsap.set(el, { scale: 0.95 });
+      const trigger = ScrollTrigger.create({
+        trigger: el,
+        start: 'top 90%',
+        onEnter: () => {
+          gsap.to(el, { scale: 1, duration: 1, ease: 'power3.out' });
+        },
+      });
 
-    return () => {
-      trigger.kill();
-    };
-  }, []);
+      return () => trigger.kill();
+    },
+    { scope: sectionContentRef }
+  );
 
   const handleCategoryClick = (categoryId: string) => {
     return `/shop?category=${encodeURIComponent(categoryId)}`;
