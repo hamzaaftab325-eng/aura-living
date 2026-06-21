@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { useGsapFadeIn, useGsapStagger } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal } from '@/hooks/useAnimations';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Star,
@@ -142,10 +142,10 @@ export default function ProductDetailView({ product }: { product: Product }) {
   }, [product.id]);
 
   // GSAP fade-in for main content area
-  const contentRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.6 });
+  const contentRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.6 });
 
   // Related products stagger — must be called before any conditional returns
-  const relatedRef = useGsapStagger<HTMLDivElement>({
+  const relatedRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 20,
     duration: 0.5,

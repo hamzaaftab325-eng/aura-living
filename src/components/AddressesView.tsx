@@ -1,10 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  useGsapFadeIn,
-  useGsapStagger,
-  useGsapBlurText } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal, useTextReveal } from '@/hooks/useAnimations';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   MapPin,
@@ -26,7 +23,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb';
    AnimatedSection — staggered children reveal
    ═══════════════════════════════════════════════════════════ */
 function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useGsapStagger<HTMLDivElement>({
+  const ref = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.12,
@@ -108,9 +105,9 @@ export default function AddressesView() {
   const [form, setForm] = useState<Omit<Address, 'id' | 'isDefault'>>(emptyForm);
 
   // GSAP refs
-  const headerRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
-  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
-  const cardsRef = useGsapStagger<HTMLDivElement>({
+  const headerRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const heroTitleRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
+  const cardsRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 30,
     duration: 0.6,

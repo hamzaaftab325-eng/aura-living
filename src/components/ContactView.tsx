@@ -1,17 +1,18 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useGsapFadeIn, useGsapStagger, gsap } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal } from '@/hooks/useAnimations';
+import gsap from 'gsap';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import { MapPin, Phone, Mail, Clock, MessageCircle, ChevronRight, Send } from 'lucide-react';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 /* ═══════════════════════════════════════════════════════════
-   AnimatedSection — uses useGsapStagger for children reveal
+   AnimatedSection — uses useStaggerReveal for children reveal
    ═══════════════════════════════════════════════════════════ */
 function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useGsapStagger<HTMLDivElement>({
+  const ref = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.12,
@@ -40,7 +41,7 @@ export default function ContactView() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // GSAP fade-in for hero content
-  const headerRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const headerRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
 
   // Parallax for hero background image
   useEffect(() => {

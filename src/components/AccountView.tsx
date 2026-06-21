@@ -1,13 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import {
-  useGsapFadeIn,
-  useGsapStagger,
-  useGsapBlurText,
-  useGsapScaleIn,
-  useGsapCountUp,
-  gsap } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal, useTextReveal, useScaleIn, useCountUp } from '@/hooks/useAnimations';
+import gsap from 'gsap';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Package,
@@ -30,10 +25,10 @@ import { useRouter } from 'next/navigation';
 
 
 /* ═══════════════════════════════════════════════════════════
-   AnimatedSection — uses useGsapStagger for children reveal
+   AnimatedSection — uses useStaggerReveal for children reveal
    ═══════════════════════════════════════════════════════════ */
 function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useGsapStagger<HTMLDivElement>({
+  const ref = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.12,
@@ -101,14 +96,14 @@ export default function AccountView() {
   const heroBgRef = useRef<HTMLDivElement>(null);
 
   // GSAP fade-in for header
-  const headerRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const headerRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
   // Hero heading blur text
-  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
+  const heroTitleRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
   // GoldDivider scale-in
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
+  const dividerRef = useScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   // Stats stagger
-  const statsRef = useGsapStagger<HTMLDivElement>({
+  const statsRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 25,
     duration: 0.6,
@@ -117,13 +112,13 @@ export default function AccountView() {
     start: 'top 85%' });
 
   // Count-up refs for each stat
-  const orderCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: 3, duration: 0.8, start: 'top 85%' });
-  const wishlistCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: safeWishlist.length, duration: 0.8, delay: 0.1, start: 'top 85%' });
-  const cartCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: cartCount, duration: 0.8, delay: 0.2, start: 'top 85%' });
-  const rewardsCountRef = useGsapCountUp<HTMLSpanElement>({ endValue: user?.rewardsPoints ?? 0, duration: 1.0, delay: 0.2, start: 'top 85%' });
+  const orderCountRef = useCountUp<HTMLSpanElement>({ end: 3, duration: 0.8, start: 'top 85%' });
+  const wishlistCountRef = useCountUp<HTMLSpanElement>({ end: safeWishlist.length, duration: 0.8, delay: 0.1, start: 'top 85%' });
+  const cartCountRef = useCountUp<HTMLSpanElement>({ end: cartCount, duration: 0.8, delay: 0.2, start: 'top 85%' });
+  const rewardsCountRef = useCountUp<HTMLSpanElement>({ end: user?.rewardsPoints ?? 0, duration: 1.0, delay: 0.2, start: 'top 85%' });
 
   // Orders stagger
-  const ordersRef = useGsapStagger<HTMLDivElement>({
+  const ordersRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 20,
     duration: 0.5,
@@ -132,7 +127,7 @@ export default function AccountView() {
     start: 'top 85%' });
 
   // Menu grid stagger
-  const menuRef = useGsapStagger<HTMLDivElement>({
+  const menuRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 25,
     duration: 0.6,

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import Image from 'next/image';
-import { useGsapFadeIn } from '@/hooks/useGsap';
+import { useScrollReveal } from '@/hooks/useAnimations';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   ArrowLeft,
@@ -308,8 +308,8 @@ export default function ArticleView({ article }: { article: Article }) {
     [article.slug]
   );
 
-  const bodyFadeRef = useGsapFadeIn<HTMLDivElement>({ y: 20, duration: 0.7, delay: 0.1 });
-  const relatedRef = useGsapFadeIn<HTMLDivElement>({ y: 20, duration: 0.7, delay: 0.05 });
+  const bodyFadeRef = useScrollReveal<HTMLDivElement>({ y: 20, duration: 0.7, delay: 0.1 });
+  const relatedRef = useScrollReveal<HTMLDivElement>({ y: 20, duration: 0.7, delay: 0.05 });
 
   // Inject BlogPosting JSON-LD for the article
   useEffect(() => {

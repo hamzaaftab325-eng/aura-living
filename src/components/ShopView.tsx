@@ -4,11 +4,8 @@ import { useState, useMemo, useEffect, useRef, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import {
-  useGsapStagger,
-  useGsapBlurText,
-  useGsapScaleIn,
-  gsap } from '@/hooks/useGsap';
+import { useStaggerReveal, useTextReveal, useScaleIn } from '@/hooks/useAnimations';
+import gsap from 'gsap';;
 import {
   ChevronRight,
   Star,
@@ -396,12 +393,12 @@ function ShopViewInner() {
   }, []);
 
   // Hero heading blur text reveal
-  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
+  const heroTitleRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
   // GoldDivider scale-in
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.3 });
+  const dividerRef = useScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.3 });
 
   // GSAP stagger for product grid — enhanced with y:60 and stagger:0.08
-  const gridRef = useGsapStagger<HTMLDivElement>({
+  const gridRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 60,
     duration: 0.7,
@@ -410,7 +407,7 @@ function ShopViewInner() {
     start: 'top 85%' });
 
   // GSAP stagger for hero content
-  const heroRef = useGsapStagger<HTMLDivElement>({
+  const heroRef = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.15,

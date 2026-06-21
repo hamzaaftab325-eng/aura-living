@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
-import { gsap } from '@/hooks/useGsap';
+import gsap from 'gsap';;
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 

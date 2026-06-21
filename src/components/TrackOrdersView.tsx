@@ -1,11 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  useGsapFadeIn,
-  useGsapStagger,
-  useGsapBlurText,
-  useGsapScaleIn } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal, useTextReveal, useScaleIn } from '@/hooks/useAnimations';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Package,
@@ -28,7 +24,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb';
    AnimatedSection — staggered children reveal
    ═══════════════════════════════════════════════════════════ */
 function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useGsapStagger<HTMLDivElement>({
+  const ref = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.12,
@@ -123,10 +119,10 @@ export default function TrackOrdersView() {
   const [expandedId, setExpandedId] = useState<string | null>(trackedOrders[0]?.id ?? null);
 
   // GSAP refs
-  const headerRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
-  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
-  const ordersRef = useGsapStagger<HTMLDivElement>({
+  const headerRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const heroTitleRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
+  const dividerRef = useScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
+  const ordersRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 30,
     duration: 0.6,

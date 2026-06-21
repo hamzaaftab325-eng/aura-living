@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal, useScaleIn } from '@/hooks/useAnimations';
+import gsap from 'gsap';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Camera, ArrowRight, Sun, UtensilsCrossed, Moon, Flower2 } from 'lucide-react';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -39,14 +40,14 @@ const scenes = [
 export default function LookbookView() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const heroRef = useGsapStagger<HTMLDivElement>({
+  const heroRef = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
     start: 'top 90%' });
 
-  const scenesRef = useGsapStagger<HTMLDivElement>({
+  const scenesRef = useStaggerReveal<HTMLDivElement>({
     selector: '.lookbook-scene',
     y: 60,
     duration: 0.8,
@@ -54,8 +55,8 @@ export default function LookbookView() {
     ease: 'power3.out',
     start: 'top 85%' });
 
-  const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
+  const ctaRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
+  const dividerRef = useScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   // Independent parallax for each lookbook scene image (scoped to container)
   useEffect(() => {

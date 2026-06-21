@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
-import { useGsapFadeIn, useGsapStagger } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal } from '@/hooks/useAnimations';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import { ArrowRight, Clock, BookOpen } from 'lucide-react';
 import Link from 'next/link';
@@ -179,14 +179,14 @@ function ArticleCard({
 export default function BlogView() {
   const [activeCategory, setActiveCategory] = useState<CategoryTab>('all');
 
-  const heroRef = useGsapStagger<HTMLDivElement>({
+  const heroRef = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
     start: 'top 90%' });
 
-  const gridRef = useGsapStagger<HTMLDivElement>({
+  const gridRef = useStaggerReveal<HTMLDivElement>({
     selector: '.blog-card',
     y: 50,
     duration: 0.7,
@@ -194,7 +194,7 @@ export default function BlogView() {
     ease: 'power3.out',
     start: 'top 88%' });
 
-  const featuredRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.1 });
+  const featuredRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.1 });
 
   // Inject ItemList JSON-LD for the article listing
   useEffect(() => {

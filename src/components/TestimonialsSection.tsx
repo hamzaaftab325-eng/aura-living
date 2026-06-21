@@ -1,13 +1,17 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { useGsapBlurText, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import { useTextReveal } from '@/hooks/useAnimations';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import { StaggerTestimonials } from '@/components/ui/stagger-testimonials';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function TestimonialsSection() {
   // GSAP blur text for section heading
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
+  const headingRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
   // Scale on scroll
   const sectionContentRef = useRef<HTMLDivElement>(null);

@@ -1,9 +1,13 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useGsapStagger, useGsapBlurText, gsap, ScrollTrigger } from '@/hooks/useGsap';
+import { useStaggerReveal, useTextReveal } from '@/hooks/useAnimations';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';;
 import { Truck, RotateCcw, Palette, MessageCircle } from 'lucide-react';
 import { GoldDivider } from '@/components/SVGDecorations';
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ═══════════════════════════════════════════════════════════
    Feature Data
@@ -136,10 +140,10 @@ function FeatureCard({ feature }: FeatureCardProps) {
    ═══════════════════════════════════════════════════════════ */
 export default function WhyChooseUs() {
   // GSAP blur text for section heading
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
+  const headingRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
   // Enhanced stagger with y:50, stagger:0.1, start:'top 85%'
-  const cardsRef = useGsapStagger<HTMLDivElement>({ y: 50, stagger: 0.1, duration: 0.6, start: 'top 85%' });
+  const cardsRef = useStaggerReveal<HTMLDivElement>({ y: 50, stagger: 0.1, duration: 0.6, start: 'top 85%' });
 
   // Scale on scroll
   const sectionContentRef = useRef<HTMLDivElement>(null);

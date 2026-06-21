@@ -10,7 +10,7 @@ import {
 import PremiumButton from '@/components/ui/PremiumButton';
 import Link from 'next/link';
 import { products, formatPKR, categories } from '@/data/products';
-import { useGsapFadeIn, useGsapStagger } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal } from '@/hooks/useAnimations';;
 
 type Tab = 'overview' | 'inventory' | 'orders' | 'analytics' | 'notifications' | 'settings';
 
@@ -57,8 +57,8 @@ export default function AdminDashboard() {
   const [searchQuery, setSearchQuery] = useState('');
   const [notifications, setNotifications] = useState(mockNotifications);
 
-  const fadeIn = useGsapFadeIn<HTMLDivElement>({ y: 20, duration: 0.4 });
-  const stagger = useGsapStagger<HTMLDivElement>({ y: 20, duration: 0.4, stagger: 0.06, start: 'top 90%' });
+  const fadeIn = useScrollReveal<HTMLDivElement>({ y: 20, duration: 0.4 });
+  const stagger = useStaggerReveal<HTMLDivElement>({ y: 20, duration: 0.4, stagger: 0.06, start: 'top 90%' });
 
   const totalRevenue = mockRevenue.reduce((sum, r) => sum + r.revenue, 0);
   const totalOrders = mockRevenue.reduce((sum, r) => sum + r.orders, 0);

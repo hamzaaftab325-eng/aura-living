@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useGsapBlurText } from '@/hooks/useGsap';
+import { useTextReveal } from '@/hooks/useAnimations';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Mail,
@@ -156,10 +156,9 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
   const [agreeTerms, setAgreeTerms] = useState(false);
 
   // Blur text animation for the title
-  const titleRef = useGsapBlurText<HTMLHeadingElement>({
+  const titleRef = useTextReveal<HTMLHeadingElement>({
     duration: 0.7,
     stagger: 0.05,
-    blur: 10,
     start: 'top 90%' });
 
   const handleSubmit = (e: React.FormEvent) => {

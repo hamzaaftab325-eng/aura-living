@@ -1,6 +1,6 @@
 'use client';
 
-import { useGsapFadeIn, useGsapStagger, useGsapScaleIn } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal, useScaleIn } from '@/hooks/useAnimations';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import { FileText, CheckCircle, Shield, CreditCard, Truck, RotateCcw, Lock, AlertTriangle, Eye, Mail, RefreshCw } from 'lucide-react';
 import Link from 'next/link';
@@ -82,14 +82,14 @@ const sections = [
 
 export default function TermsView() {
 
-  const heroRef = useGsapStagger<HTMLDivElement>({
+  const heroRef = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
     start: 'top 90%' });
 
-  const contentRef = useGsapStagger<HTMLDivElement>({
+  const contentRef = useStaggerReveal<HTMLDivElement>({
     selector: '.terms-section',
     y: 60,
     duration: 0.7,
@@ -97,8 +97,8 @@ export default function TermsView() {
     ease: 'power3.out',
     start: 'top 85%' });
 
-  const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
+  const ctaRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
+  const dividerRef = useScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   return (
     <div className="w-full page-transition" >

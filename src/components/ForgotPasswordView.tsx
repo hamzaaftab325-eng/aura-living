@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useGsapFadeIn } from '@/hooks/useGsap';
+import { useScrollReveal } from '@/hooks/useAnimations';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Lock, Mail, ArrowRight, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -13,7 +13,7 @@ export default function ForgotPasswordView() {
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState('');
 
-  const cardRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const cardRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
 
   const validateEmail = (value: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

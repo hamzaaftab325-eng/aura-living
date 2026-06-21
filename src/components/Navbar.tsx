@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { gsap } from '@/hooks/useGsap';
+import gsap from 'gsap';;
 import {
   Search,
   Heart,

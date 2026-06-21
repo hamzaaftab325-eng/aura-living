@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { useGsapFadeIn, useGsapStagger, gsap } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal } from '@/hooks/useAnimations';
+import gsap from 'gsap';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Minus,
@@ -57,15 +58,15 @@ export default function CartView() {
   const safeSubtotal = hydrated ? subtotal : 0;
 
   // GSAP
-  const headerRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.5 });
-  const itemsRef = useGsapStagger<HTMLDivElement>({
+  const headerRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.5 });
+  const itemsRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 30,
     duration: 0.4,
     stagger: 0.08,
     ease: 'power3.out',
     start: 'top 85%' });
-  const summaryRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.5, delay: 0.2 });
+  const summaryRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.5, delay: 0.2 });
 
   const handleApplyCoupon = () => {
     if (couponCode.trim().toUpperCase() === 'AURA15') {

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Home, ShoppingBag } from 'lucide-react';
-import { gsap } from '@/hooks/useGsap';
+import gsap from 'gsap';;
 
 export default function NotFound() {
   const numberRef = useRef<HTMLDivElement>(null);

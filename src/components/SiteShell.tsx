@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 import { GoldDivider, CornerOrnament, FloatingOrb } from '@/components/SVGDecorations';
 import { useLenis } from '@/hooks/useLenis';
-import { gsap } from '@/hooks/useGsap';
+import gsap from 'gsap';;
 import { useStore } from '@/store/useStore';
 import { getProductById } from '@/data/products';
 import { getArticleBySlug } from '@/data/articles';

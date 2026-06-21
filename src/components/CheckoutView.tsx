@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useGsapFadeIn, useGsapStagger, useGsapScaleIn, gsap } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal, useScaleIn } from '@/hooks/useAnimations';
+import gsap from 'gsap';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   CreditCard,
@@ -148,15 +149,15 @@ export default function CheckoutView() {
   const heroBgRef = useRef<HTMLDivElement>(null);
 
   // GSAP animations
-  const heroRef = useGsapStagger<HTMLDivElement>({
+  const heroRef = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
     start: 'top 90%' });
 
-  const contentRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
+  const contentRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
+  const dividerRef = useScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   // Enhanced parallax for hero background — 0.5x speed + zoom 1→1.1
   useEffect(() => {

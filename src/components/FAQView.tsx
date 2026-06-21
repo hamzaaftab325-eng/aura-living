@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useGsapFadeIn, useGsapStagger,  gsap } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal } from '@/hooks/useAnimations';
+import gsap from 'gsap';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import { HelpCircle, ChevronDown, MessageCircle, ArrowRight } from 'lucide-react';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -99,10 +100,10 @@ const faqItems: FAQItem[] = [
 ];
 
 /* ═══════════════════════════════════════════════════════════
-   AnimatedSection — uses useGsapStagger for children reveal
+   AnimatedSection — uses useStaggerReveal for children reveal
    ═══════════════════════════════════════════════════════════ */
 function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useGsapStagger<HTMLDivElement>({
+  const ref = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.12,
@@ -120,15 +121,15 @@ export default function FAQView() {
   const chevronRefs = useRef<Map<number, SVGElement>>(new Map());
 
   // GSAP refs
-  const heroRef = useGsapStagger<HTMLDivElement>({
+  const heroRef = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
     start: 'top 90%' });
 
-  const contentRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
-  const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
+  const contentRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const ctaRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
 
   // GSAP-based accordion animation — uses scrollHeight so long answers are not clipped
   useEffect(() => {

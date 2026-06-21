@@ -3,11 +3,8 @@
 import { useMemo, useEffect, useRef, useState, Fragment } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
-import {
-  useGsapFadeIn,
-  useGsapStagger,
-  useGsapScaleIn,
-  gsap } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal, useScaleIn } from '@/hooks/useAnimations';
+import gsap from 'gsap';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Tag,
@@ -27,10 +24,10 @@ import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 /* ═══════════════════════════════════════════════════════════
-   AnimatedSection — uses useGsapStagger for children reveal
+   AnimatedSection — uses useStaggerReveal for children reveal
    ═══════════════════════════════════════════════════════════ */
 function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useGsapStagger<HTMLDivElement>({
+  const ref = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.12,
@@ -177,8 +174,8 @@ export default function SaleView() {
     };
   }, []);
 
-  // Hero entrance with useGsapStagger
-  const heroRef = useGsapStagger<HTMLDivElement>({
+  // Hero entrance with useStaggerReveal
+  const heroRef = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.15,
@@ -186,7 +183,7 @@ export default function SaleView() {
     start: 'top 90%' });
 
   // Grid stagger — enhanced y:60 stagger:0.08
-  const gridRef = useGsapStagger<HTMLDivElement>({
+  const gridRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 60,
     duration: 0.7,
@@ -194,10 +191,10 @@ export default function SaleView() {
     ease: 'power3.out',
     start: 'top 85%' });
 
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
+  const dividerRef = useScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   // CTA section fade-in
-  const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const ctaRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
 
   // Enhanced parallax for hero section — 0.5x speed + zoom 1→1.1
   useEffect(() => {

@@ -1,12 +1,8 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import {
-  useGsapFadeIn,
-  useGsapStagger,
-  useGsapBlurText,
-  useGsapScaleIn,
-  gsap } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal, useTextReveal, useScaleIn } from '@/hooks/useAnimations';
+import gsap from 'gsap';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Sparkles,
@@ -93,10 +89,10 @@ const careCategories: CareCategory[] = [
 ];
 
 /* ═══════════════════════════════════════════════════════════
-   AnimatedSection — uses useGsapStagger for children reveal
+   AnimatedSection — uses useStaggerReveal for children reveal
    ═══════════════════════════════════════════════════════════ */
 function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useGsapStagger<HTMLDivElement>({
+  const ref = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.12,
@@ -111,20 +107,20 @@ export default function CareGuideView() {
   const heroBgRef = useRef<HTMLDivElement>(null);
   const heroBgDivRef = useRef<HTMLDivElement>(null);
 
-  // Hero entrance with useGsapStagger
-  const heroRef = useGsapStagger<HTMLDivElement>({
+  // Hero entrance with useStaggerReveal
+  const heroRef = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
     start: 'top 90%' });
   // Hero heading blur text
-  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
+  const heroTitleRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
   // GoldDivider scale-in
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
+  const dividerRef = useScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   // Care cards stagger — enhanced y:60 stagger:0.08
-  const cardsRef = useGsapStagger<HTMLDivElement>({
+  const cardsRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 60,
     duration: 0.7,
@@ -133,7 +129,7 @@ export default function CareGuideView() {
     start: 'top 85%' });
 
   // CTA section fade-in
-  const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const ctaRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
 
   // Enhanced parallax for hero background — 0.5x speed + zoom 1→1.1
   // heroBgDivRef (inner div with backgroundImage) is the animation target.

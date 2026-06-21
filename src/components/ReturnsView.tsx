@@ -1,6 +1,6 @@
 'use client';
 
-import { useGsapFadeIn, useGsapStagger } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal } from '@/hooks/useAnimations';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import { RotateCcw, CheckCircle, MessageCircle, XCircle, CreditCard, AlertTriangle, ArrowRight } from 'lucide-react';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -57,10 +57,10 @@ const nonReturnableItems = [
 ];
 
 /* ═══════════════════════════════════════════════════════════
-   AnimatedSection — uses useGsapStagger for children reveal
+   AnimatedSection — uses useStaggerReveal for children reveal
    ═══════════════════════════════════════════════════════════ */
 function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useGsapStagger<HTMLDivElement>({
+  const ref = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.12,
@@ -74,29 +74,29 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
 export default function ReturnsView() {
 
   // GSAP refs
-  const heroRef = useGsapStagger<HTMLDivElement>({
+  const heroRef = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
     start: 'top 90%' });
 
-  const policyRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
-  const returnStepsRef = useGsapStagger<HTMLDivElement>({
+  const policyRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const returnStepsRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 60,
     duration: 0.7,
     stagger: 0.08,
     ease: 'power3.out',
     start: 'top 85%' });
-  const exchangeStepsRef = useGsapStagger<HTMLDivElement>({
+  const exchangeStepsRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 60,
     duration: 0.7,
     stagger: 0.08,
     ease: 'power3.out',
     start: 'top 85%' });
-  const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
+  const ctaRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7, delay: 0.2 });
 
   return (
     <div className="w-full page-transition" >

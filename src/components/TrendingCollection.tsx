@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 import { GoldDivider } from '@/components/SVGDecorations';
-import { useGsapFadeIn, useGsapBlurText } from '@/hooks/useGsap';
+import { useScrollReveal, useTextReveal } from '@/hooks/useAnimations';;
 import PremiumButton from '@/components/ui/PremiumButton';
 
 export default function TrendingCollection() {
@@ -14,12 +14,12 @@ export default function TrendingCollection() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   // GSAP animations
-  const headingRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
-  const tagRef = useGsapFadeIn<HTMLSpanElement>({ y: 20, duration: 0.5, delay: 0 });
-  const dividerWrapperRef = useGsapFadeIn<HTMLDivElement>({ y: 0, duration: 0.4, delay: 0.2 });
-  const descRef = useGsapFadeIn<HTMLParagraphElement>({ y: 20, duration: 0.5, delay: 0.3 });
-  const btnWrapperRef = useGsapFadeIn<HTMLDivElement>({ y: 20, duration: 0.5, delay: 0.4 });
-  const imageRef = useGsapFadeIn<HTMLDivElement>({ y: 40, duration: 0.6, delay: 0.1 });
+  const headingRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
+  const tagRef = useScrollReveal<HTMLSpanElement>({ y: 20, duration: 0.5, delay: 0 });
+  const dividerWrapperRef = useScrollReveal<HTMLDivElement>({ y: 0, duration: 0.4, delay: 0.2 });
+  const descRef = useScrollReveal<HTMLParagraphElement>({ y: 20, duration: 0.5, delay: 0.3 });
+  const btnWrapperRef = useScrollReveal<HTMLDivElement>({ y: 20, duration: 0.5, delay: 0.4 });
+  const imageRef = useScrollReveal<HTMLDivElement>({ y: 40, duration: 0.6, delay: 0.1 });
 
   // Scale-in on scroll
   useEffect(() => {

@@ -2,15 +2,14 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import {
-  useGsapFadeIn,
-  useGsapStagger,
-  
-  gsap,
-  ScrollTrigger } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal } from '@/hooks/useAnimations';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';;
 import { GoldDivider, FloatingOrb } from '@/components/SVGDecorations';
 import { Leaf, Hammer, Heart, ArrowRight, Sparkles, Package, Users, Truck, Store, Globe, Rocket, type LucideIcon } from 'lucide-react';
 import PremiumButton from '@/components/ui/PremiumButton';
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 const values = [
@@ -729,8 +728,8 @@ function ScrollProgressIndicator() {
 export default function AboutView() {
   const heroBgRef = useRef<HTMLDivElement>(null);
 
-  // Hero entrance with useGsapStagger
-  const heroRef = useGsapStagger<HTMLDivElement>({
+  // Hero entrance with useStaggerReveal
+  const heroRef = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.15,
@@ -738,7 +737,7 @@ export default function AboutView() {
     start: 'top 90%' });
 
   // CTA section fade-in
-  const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const ctaRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
 
   // Parallax for hero background image - more dramatic
   useEffect(() => {
@@ -793,7 +792,7 @@ export default function AboutView() {
   }, []);
 
   // Chapter 1 text reveal
-  const chapter1TextRef = useGsapStagger<HTMLDivElement>({
+  const chapter1TextRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > *',
     y: 30,
     duration: 0.6,
@@ -802,7 +801,7 @@ export default function AboutView() {
     start: 'top 80%' });
 
   // Chapter 2 text reveal
-  const chapter2TextRef = useGsapStagger<HTMLDivElement>({
+  const chapter2TextRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > *',
     y: 30,
     duration: 0.6,

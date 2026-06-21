@@ -2,12 +2,8 @@
 
 import { useMemo, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import {
-  useGsapFadeIn,
-  useGsapStagger,
-  useGsapBlurText,
-  useGsapScaleIn,
-  gsap } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal, useTextReveal, useScaleIn } from '@/hooks/useAnimations';
+import gsap from 'gsap';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
   Sparkles,
@@ -24,10 +20,10 @@ import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 /* ═══════════════════════════════════════════════════════════
-   AnimatedSection — uses useGsapStagger for children reveal
+   AnimatedSection — uses useStaggerReveal for children reveal
    ═══════════════════════════════════════════════════════════ */
 function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useGsapStagger<HTMLDivElement>({
+  const ref = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.12,
@@ -74,20 +70,20 @@ export default function NewArrivalsView() {
     []
   );
 
-  // Hero entrance with useGsapStagger
-  const heroRef = useGsapStagger<HTMLDivElement>({
+  // Hero entrance with useStaggerReveal
+  const heroRef = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.15,
     ease: 'power3.out',
     start: 'top 90%' });
   // Hero heading blur text
-  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.8, stagger: 0.05, start: 'top 90%' });
+  const heroTitleRef = useTextReveal<HTMLHeadingElement>({ duration: 0.8, stagger: 0.05, start: 'top 90%' });
   // GoldDivider scale-in
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
+  const dividerRef = useScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   // Grid stagger — enhanced y:60 stagger:0.08
-  const gridRef = useGsapStagger<HTMLDivElement>({
+  const gridRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 60,
     duration: 0.7,
@@ -96,7 +92,7 @@ export default function NewArrivalsView() {
     start: 'top 85%' });
 
   // CTA section fade-in
-  const ctaRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const ctaRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
 
   // Enhanced parallax for hero section — 0.5x speed + zoom 1→1.1
   useEffect(() => {

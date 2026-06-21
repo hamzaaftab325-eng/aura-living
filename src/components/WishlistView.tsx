@@ -2,12 +2,8 @@
 
 import { useMemo, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import {
-  useGsapFadeIn,
-  useGsapStagger,
-  useGsapBlurText,
-  useGsapScaleIn,
-  gsap } from '@/hooks/useGsap';
+import { useScrollReveal, useStaggerReveal, useTextReveal, useScaleIn } from '@/hooks/useAnimations';
+import gsap from 'gsap';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import { Heart, ShoppingCart, Star, ShoppingBag } from 'lucide-react';
 import { useStore, badgeColors } from '@/store/useStore';
@@ -19,10 +15,10 @@ import Breadcrumb from '@/components/ui/Breadcrumb';
 
 
 /* ═══════════════════════════════════════════════════════════
-   AnimatedSection — uses useGsapStagger for children reveal
+   AnimatedSection — uses useStaggerReveal for children reveal
    ═══════════════════════════════════════════════════════════ */
 function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useGsapStagger<HTMLDivElement>({
+  const ref = useStaggerReveal<HTMLDivElement>({
     y: 40,
     duration: 0.7,
     stagger: 0.12,
@@ -65,14 +61,14 @@ export default function WishlistView() {
   );
 
   // GSAP fade-in for header
-  const headerRef = useGsapFadeIn<HTMLDivElement>({ y: 30, duration: 0.7 });
+  const headerRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
   // Hero heading blur text
-  const heroTitleRef = useGsapBlurText<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
+  const heroTitleRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
   // GoldDivider scale-in
-  const dividerRef = useGsapScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
+  const dividerRef = useScaleIn<HTMLDivElement>({ duration: 0.6, delay: 0.2 });
 
   // Grid stagger — enhanced y:60 stagger:0.08
-  const gridRef = useGsapStagger<HTMLDivElement>({
+  const gridRef = useStaggerReveal<HTMLDivElement>({
     selector: ':scope > div',
     y: 60,
     duration: 0.7,
