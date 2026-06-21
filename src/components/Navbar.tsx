@@ -831,8 +831,7 @@ export default function Navbar() {
                 style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(232,213,163,0.12) 100%)' }}
               >
                 <p
-                  className="text-[11px] uppercase tracking-[3px] font-semibold mb-1.5"
-                  
+                  className="text-[11px] uppercase tracking-[3px] font-semibold mb-1.5 aura-text-gold"
                 >
                   New Collection 2026
                 </p>
@@ -877,7 +876,7 @@ export default function Navbar() {
           >
             <div className="mx-auto max-w-2xl">
               <div className="flex items-center gap-3">
-                <Search className="h-5 w-5 shrink-0"  />
+                <Search className="h-5 w-5 shrink-0 aura-text-gold" />
                 <input
                   ref={searchInputRef}
                   type="text"
@@ -899,7 +898,7 @@ export default function Navbar() {
                 />
                 <button
                   onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
-                  className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                  className="p-2 rounded-full hover:bg-white/10 transition-colors aura-text-white-85"
                   aria-label="Close search"
                 >
                   <X className="h-5 w-5" />
@@ -939,8 +938,7 @@ export default function Navbar() {
                             {p.name}
                           </p>
                           <p
-                            className="text-xs"
-                            
+                            className="text-xs aura-text-gold"
                           >
                             {formatPKR(p.price)}
                           </p>
@@ -952,7 +950,7 @@ export default function Navbar() {
                     p.category.toLowerCase().includes(searchQuery.toLowerCase())
                   ).length === 0 && (
                     <p
-                      className="text-sm py-4 text-center"
+                      className="text-sm py-4 text-center aura-text-white-70"
                     >
                       No products found for &quot;{searchQuery}&quot;
                     </p>

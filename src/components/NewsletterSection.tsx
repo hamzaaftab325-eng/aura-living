@@ -157,7 +157,7 @@ export default function NewsletterSection() {
                   aria-required="true"
                   aria-invalid={submitted ? 'false' : 'false'}
                   aria-label="Email address for newsletter signup"
-                  className="w-full px-4 py-3.5 rounded-lg text-sm outline-none transition-all duration-300"
+                  className="w-full px-4 py-3.5 rounded-lg text-sm outline-none transition-all duration-300 aura-text-white placeholder:aura-text-white-40"
                   style={{ border: isFocused
                       ? '2px solid var(--color-gold)'
                       : '1.5px solid rgba(212, 175, 55, 0.2)',

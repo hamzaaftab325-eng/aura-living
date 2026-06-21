@@ -301,7 +301,7 @@ export default function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     onFocus={() => setFocused(true)}
                     onBlur={() => setFocused(false)}
-                    className="h-11 w-full rounded-lg px-4 text-sm outline-none transition-all duration-500 placeholder:aura-text-muted"
+                    className="h-11 w-full rounded-lg px-4 text-sm outline-none transition-all duration-500 aura-text-white placeholder:aura-text-white-50 aura-bg-cream-tint-08"
                     style={{ border: focused ? '1px solid rgba(212,175,55,0.6)' : '1px solid rgba(212,175,55,0.18)',
                       
                       boxShadow: focused
@@ -318,7 +318,7 @@ export default function Footer() {
                 </div>
                 <button
                   type="submit"
-                  className="group flex h-11 items-center justify-center gap-2 rounded-lg px-5 text-sm font-medium transition-all duration-500 hover:brightness-110 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] active:scale-[0.98]"
+                  className="group flex h-11 items-center justify-center gap-2 rounded-lg px-5 text-sm font-medium transition-all duration-500 hover:brightness-110 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] active:scale-[0.98] aura-bg-gold aura-text-white"
                 >
                   <Send size={14} />
                   <span>Subscribe</span>
@@ -327,7 +327,7 @@ export default function Footer() {
               </form>
               {subscribed && (
                 <p
-                  className="text-xs mt-3 transition-opacity duration-500"
+                  className="text-xs mt-3 transition-opacity duration-500 aura-text-gold"
                   
                 >
                   Thank you for subscribing!
@@ -346,19 +346,19 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="relative z-20 mx-auto max-w-7xl px-5 pb-6 sm:px-6 sm:pb-8 lg:px-8">
         <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
-          <p className="text-xs" style={{ color: 'var(--color-gold-soft)' }}>
+          <p className="text-xs aura-text-gold-bright">
             &copy; {new Date().getFullYear()} Aura Living. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/terms" className="text-xs transition-colors duration-300 hover:aura-text-gold cursor-pointer" style={{ color: 'var(--color-gold-soft)' }}>Terms of Service</Link>
-            <Link href="/privacy" className="text-xs transition-colors duration-300 hover:aura-text-gold cursor-pointer" style={{ color: 'var(--color-gold-soft)' }}>Privacy Policy</Link>
+            <Link href="/terms" className="text-xs transition-colors duration-300 hover:aura-text-gold cursor-pointer aura-text-gold-bright">Terms of Service</Link>
+            <Link href="/privacy" className="text-xs transition-colors duration-300 hover:aura-text-gold cursor-pointer aura-text-gold-bright">Privacy Policy</Link>
           </div>
           <div className="flex items-center gap-2 flex-wrap justify-center">
-            <span className="text-xs" style={{ color: 'var(--color-gold-soft)' }}>We accept:</span>
+            <span className="text-xs aura-text-gold-bright">We accept:</span>
             {paymentMethods.map((method, i) => (
               <span key={method} className="flex items-center gap-2">
                 <span
-                  className="text-xs font-medium transition-colors duration-300 hover:aura-text-gold"
+                  className="text-xs font-medium transition-colors duration-300 hover:aura-text-gold aura-text-gold-bright"
                 >
                   {method}
                 </span>
