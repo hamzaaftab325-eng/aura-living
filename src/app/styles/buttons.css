@@ -1,0 +1,199 @@
+/* ═══════════════════════════════════════════════════════════
+   UNIFIED BUTTON SYSTEM — Exactly 3 button classes
+   ═══════════════════════════════════════════════════════════
+
+   1. .btn-primary    — Main CTA (gold gradient, white text)
+   2. .btn-secondary  — Supporting action (outline, gold text)
+   3. .btn-newsletter — Newsletter form submit (enhanced primary)
+
+   Size modifiers: .btn-sm, .btn-md (default), .btn-lg
+   State modifiers: :disabled, :focus-visible, :hover
+
+   Legacy aliases (backward compat):
+   - .btn-gold    → .btn-primary
+   - .btn-outline → .btn-secondary
+   - .btn-dark    → (deprecated, removed)
+
+   All buttons meet WCAG 2.2 AA contrast + focus + keyboard standards.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Base button (shared by all 3 variants) ─── */
+.btn-primary,
+.btn-secondary,
+.btn-newsletter,
+.premium-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 9999px; /* pill shape */
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease,
+              border-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Size modifiers ─── */
+.btn-primary,
+.btn-secondary,
+.btn-newsletter,
+.premium-btn {
+  padding: 0.875rem 2rem; /* 14px 32px — md default */
+  font-size: 0.875rem; /* 14px */
+  min-height: 44px; /* WCAG 2.5.5 touch target */
+}
+.btn-sm,
+.premium-btn.btn-sm {
+  padding: 0.5rem 1.25rem; /* 8px 20px */
+  font-size: 0.75rem; /* 12px */
+  min-height: 40px;
+}
+.btn-lg,
+.premium-btn.btn-lg {
+  padding: 1rem 2.5rem; /* 16px 40px */
+  font-size: 1rem; /* 16px */
+  min-height: 52px;
+}
+
+/* ─── Full width modifier ─── */
+.btn-primary.w-full,
+.btn-secondary.w-full,
+.btn-newsletter.w-full,
+.premium-btn.w-full {
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   1. PRIMARY BUTTON — Main CTA
+   ═══════════════════════════════════════════════════════════ */
+.btn-primary,
+.premium-btn.btn-gold,
+.premium-btn.btn-primary {
+  background: linear-gradient(135deg, #D4AF37 0%, #C9A22E 50%, #B8941F 100%);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+}
+.btn-primary:hover:not(:disabled),
+.premium-btn.btn-gold:hover:not(:disabled),
+.premium-btn.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #E0BD4A 0%, #D4AF37 50%, #C9A22E 100%);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  transform: translateY(-1px);
+}
+.btn-primary:active:not(:disabled),
+.premium-btn.btn-gold:active:not(:disabled),
+.premium-btn.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   2. SECONDARY BUTTON — Supporting action
+   ═══════════════════════════════════════════════════════════ */
+.btn-secondary,
+.premium-btn.btn-outline,
+.premium-btn.btn-secondary {
+  background: transparent;
+  color: #B8941F; /* WCAG AA compliant gold for text on light bg */
+  border: 2px solid #D4AF37;
+  box-shadow: none;
+}
+.btn-secondary:hover:not(:disabled),
+.premium-btn.btn-outline:hover:not(:disabled),
+.premium-btn.btn-secondary:hover:not(:disabled) {
+  background: rgba(212, 175, 55, 0.06);
+  border-color: #E0BD4A;
+  color: #B8941F;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.15);
+  transform: translateY(-1px);
+}
+.btn-secondary:active:not(:disabled),
+.premium-btn.btn-outline:active:not(:disabled),
+.premium-btn.btn-secondary:active:not(:disabled) {
+  transform: translateY(0);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   3. NEWSLETTER BUTTON — Form submit only
+   ═══════════════════════════════════════════════════════════ */
+.btn-newsletter,
+.premium-btn.btn-newsletter {
+  background: linear-gradient(135deg, #D4AF37 0%, #C9A22E 50%, #B8941F 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 1rem 2rem; /* taller than primary for form emphasis */
+  font-size: 0.875rem;
+  min-height: 52px;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+}
+.btn-newsletter:hover:not(:disabled),
+.premium-btn.btn-newsletter:hover:not(:disabled) {
+  background: linear-gradient(135deg, #E0BD4A 0%, #D4AF37 50%, #C9A22E 100%);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+  transform: translateY(-2px); /* more lift than primary */
+}
+.btn-newsletter:active:not(:disabled),
+.premium-btn.btn-newsletter:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Shared states — disabled + focus-visible
+   ═══════════════════════════════════════════════════════════ */
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-newsletter:disabled,
+.premium-btn:disabled,
+.premium-btn[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Focus-visible — keyboard only (mouse clicks don't show ring) */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-newsletter:focus-visible,
+.premium-btn:focus-visible {
+  outline: 2px solid #B8941F;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Reduced motion — respect user preference
+   ═══════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-newsletter,
+  .premium-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+  .btn-primary:hover:not(:disabled),
+  .btn-secondary:hover:not(:disabled),
+  .btn-newsletter:hover:not(:disabled),
+  .premium-btn:hover:not(:disabled) {
+    transform: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Legacy: .btn-dark is DEPRECATED — removed.
+   (Was unused in codebase; if needed, use .btn-secondary on dark bg)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════

@@ -1,0 +1,113 @@
+.aura-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out);
+}
+@media (min-width: 640px) {
+  .aura-card { padding: 24px; }
+}
+@media (min-width: 1024px) {
+  .aura-card { padding: 32px; }
+}
+.aura-card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-gold);
+}
+
+/* Flat card variant — no shadow, used in admin tables, dense lists */
+.aura-card-flat {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+/* ── Badge — NEW/SALE/BESTSELLER ── */
+.aura-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+/* ── Input field — standard form input ── */
+.aura-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-default);
+  background-color: rgba(255, 255, 255, 0.7);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+.aura-input:focus {
+  border-color: var(--cta-bg);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2), 0 0 40px rgba(212, 175, 55, 0.08);
+  background-color: rgba(255, 255, 255, 1);
+}
+.aura-input::placeholder {
+  color: var(--color-taupe);
+}
+
+/* ── Icon circle — gold icon background container ── */
+.aura-icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background-color: rgba(212, 175, 55, 0.1);
+  flex-shrink: 0;
+}
+
+/* ── Divider line — gold gradient ── */
+.aura-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+}
+
+/* Gold Divider — elegant single diamond between lines */
+.gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.gold-divider-line {
+  flex: 1;
+  max-width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #D4AF37);
+}
+
+.gold-divider-line.right {
+  background: linear-gradient(90deg, #D4AF37, transparent);
+}
+
+.gold-divider-diamond {
+  width: 10px;
+  height: 10px;
+  background: #D4AF37;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(212,175,55,0.4);
+}
+
+/* Float Animation (used by floating-orb) — GPU-accelerated */

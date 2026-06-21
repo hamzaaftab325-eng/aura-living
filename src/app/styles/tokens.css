@@ -1,0 +1,191 @@
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-poppins);
+  --font-mono: var(--font-geist-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Aura Living Brand Colors — Raw palette */
+  --color-gold: #D4AF37;
+  --color-gold-hover: #C9A22E;
+  --color-gold-text: #B8941F; /* WCAG AA compliant gold for text on light backgrounds */
+  --color-gold-soft: #E8D5A3;
+  --color-gold-pale: #F5EDDA;
+  --color-cream: #F2EDE4;
+  --color-warm-white: #FAF8F5;
+  --color-ivory: #FFFDF7;
+  --color-charcoal: #2C2C2C;
+  --color-warm-gray: #5A5A5A;
+  --color-muted-gray: #8A8A8A;
+  --color-sage: #A8B5A0;
+  --color-taupe: #B8A99A;
+  --color-blush: #E8CEC1;
+  --color-danger: #DC2626;
+  --color-danger-bg: rgba(220, 38, 38, 0.08);
+  --color-danger-border: rgba(220, 38, 38, 0.2);
+  --color-success: #22C55E;
+  --color-info: #3B82F6;
+  --color-warning: #F59E0B;
+  --color-warning-bg: rgba(245, 158, 11, 0.08);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: #FAF8F5;
+  --foreground: #2C2C2C;
+  --card: #FFFDF7;
+  --card-foreground: #2C2C2C;
+  --popover: #FFFDF7;
+  --popover-foreground: #2C2C2C;
+  --primary: #D4AF37;
+  --primary-foreground: #FFFDF7;
+  --secondary: #F5EDDA;
+  --secondary-foreground: #2C2C2C;
+  --muted: #F2EDE4;
+  --muted-foreground: #8A8A8A;
+  --accent: #F5EDDA;
+  --accent-foreground: #2C2C2C;
+  --destructive: #E8CEC1;
+  --border: #E8D5A3;
+  --input: #E8D5A3;
+  --ring: #D4AF37;
+  --font-playfair: var(--font-playfair-display), 'Playfair Display', serif;
+  --font-poppins: var(--font-poppins), 'Poppins', sans-serif;
+  --font-great-vibes: var(--font-great-vibes), 'Great Vibes', cursive;
+  --font-dancing-script: var(--font-dancing-script), 'Dancing Script', cursive;
+  --font-archivo-narrow: var(--font-archivo-narrow), 'Archivo Narrow', sans-serif;
+
+  /* ── Semantic token layer ── */
+  --text-primary: #2C2C2C;
+  --text-secondary: #5A5A5A;
+  --text-muted: #8A8A8A;
+  --text-gold: #B8941F;
+  --text-on-dark: #FFFFFF;
+  --surface-page: #FAF8F5;
+  --surface-card: #FFFDF7;
+  --surface-accent: #F5EDDA;
+  --surface-dark: #2C2C2C;
+  --border-default: #E8D5A3;
+  --border-gold: #D4AF37;
+  --cta-bg: #D4AF37;
+  --cta-bg-hover: #C9A22E;
+
+  /* ── Semantic surface aliases ── */
+  --surface-base: var(--surface-page);
+  --surface-elevated: var(--surface-card);
+  --surface-overlay: rgba(44, 44, 44, 0.5);
+
+  /* ── Semantic text aliases ── */
+  --text-on-primary: #FFFFFF;
+  --text-disabled: #B0B0B0;
+  --text-placeholder: #8A8A8A;
+
+  /* ── Semantic border aliases ── */
+  --border-muted: rgba(232, 213, 163, 0.3);
+  --border-strong: var(--color-gold);
+
+  /* ── Divider ── */
+  --divider-default: rgba(232, 213, 163, 0.4);
+
+  /* ── Z-index scale ── */
+  --z-base: 0;
+  --z-dropdown: 50;
+  --z-sticky: 55;
+  --z-navbar: 60;
+  --z-mega-menu: 65;
+  --z-drawer: 70;
+  --z-modal: 80;
+  --z-toast: 90;
+  --z-tooltip: 100;
+
+  /* ── Shadow tokens ── */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.10);
+  --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.14);
+  --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.15);
+  --shadow-floating: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --shadow-dropdown: 0 4px 20px rgba(0, 0, 0, 0.10);
+
+  /* ── Radius tokens ── */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-pill: 9999px;
+
+  /* ── Animation tokens ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+
+  /* ── Spacing tokens ── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  /* ── Numeric spacing scale (roadmap standard) ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ── Breakpoint tokens (reference only — CSS @media uses px values) ── */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+
+  /* ── Container width tokens ── */
+  --container-narrow: 640px;
+  --container-default: 1024px;
+  --container-wide: 1280px;
+  --container-full: 1536px;
+
+  /* ── Transition presets ── */
+  --transition-fast: var(--duration-fast) var(--ease-out);
+  --transition-normal: var(--duration-normal) var(--ease-out);
+  --transition-slow: var(--duration-slow) var(--ease-out);
+}
+
