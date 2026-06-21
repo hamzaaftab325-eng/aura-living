@@ -130,7 +130,6 @@ function FilterSidebar({
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value as SortOption)}
             className="w-full h-10 px-3 rounded-sm text-sm outline-none appearance-none cursor-pointer transition-all duration-300 focus:ring-2 focus:ring-[var(--color-gold)]/50"
-            style={{ backgroundColor: 'rgba(255,253,247,0.8)' }}
           >
             {sortOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -558,12 +557,12 @@ function ShopViewInner() {
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
-          style={{ filter: 'blur(60px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
-          style={{ filter: 'blur(70px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
         />
 
@@ -597,12 +596,11 @@ function ShopViewInner() {
           <button
             onClick={() => setMobileFiltersOpen(true)}
             className="flex items-center gap-2 px-5 py-3 rounded-sm text-sm font-medium transition-all duration-300 hover:bg-[var(--color-gold-pale)]"
-            style={{ border: '1px solid var(--color-gold)' }}
           >
             <SlidersHorizontal size={16} />
             Filters
             {hasActiveFilters && (
-              <span className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style={{ backgroundColor: 'var(--color-gold)' }}>!</span>
+              <span className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white">!</span>
             )}
           </button>
         </div>
@@ -685,7 +683,6 @@ function ShopViewInner() {
                 <button
                   onClick={clearFilters}
                   className="px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors duration-300 hover:bg-[var(--color-gold-hover)]"
-                  style={{ backgroundColor: 'var(--color-gold)' }}
                 >
                   Clear Filters
                 </button>
@@ -738,7 +735,6 @@ function ShopViewInner() {
             <button
               onClick={() => setMobileFiltersOpen(false)}
               className="w-full py-3 rounded-sm text-white font-semibold uppercase tracking-wider text-sm transition-colors duration-300 hover:bg-[var(--color-gold-hover)]"
-              style={{ backgroundColor: 'var(--color-gold)' }}
             >
               Apply Filters
             </button>

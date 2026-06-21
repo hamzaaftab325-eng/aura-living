@@ -55,7 +55,8 @@ const mockOrders = [
     total: 'PKR 12,498',
     statusColor: 'var(--color-success)',
     statusBg: 'rgba(34, 197, 94, 0.1)',
-    statusIcon: CheckCircle },
+    statusIcon: CheckCircle,
+  },
   {
     id: 'AL-2026-002',
     date: 'Feb 28, 2026',
@@ -63,7 +64,8 @@ const mockOrders = [
     total: 'PKR 8,999',
     statusColor: 'var(--color-info)',
     statusBg: 'rgba(59, 130, 246, 0.1)',
-    statusIcon: Truck },
+    statusIcon: Truck,
+  },
   {
     id: 'AL-2026-003',
     date: 'Mar 10, 2026',
@@ -71,7 +73,8 @@ const mockOrders = [
     total: 'PKR 5,499',
     statusColor: 'var(--color-gold)',
     statusBg: 'rgba(212, 175, 55, 0.1)',
-    statusIcon: Clock },
+    statusIcon: Clock,
+  },
 ];
 
 export default function AccountView() {
@@ -257,12 +260,12 @@ export default function AccountView() {
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 right-20 w-36 h-36 rounded-full"
-          style={{ filter: 'blur(60px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-10 left-10 w-40 h-40 rounded-full"
-          style={{ filter: 'blur(70px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
         />
 
@@ -339,7 +342,6 @@ export default function AccountView() {
                     <div className="flex items-center gap-2 mt-1">
                       <div
                         className="w-2 h-2 rounded-full"
-                        style={{ backgroundColor: 'var(--color-success)' }}
                       />
                       <span
                         className="text-xs tracking-wide"

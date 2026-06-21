@@ -158,7 +158,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
                 onFocus={() => setHoveredRating(i)}
                 onBlur={() => setHoveredRating(0)}
                 className="p-1 transition-transform duration-150 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)]/40 rounded"
-                style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
+                style={{   cursor: 'pointer' }}
               >
                 <Star
                   size={28}

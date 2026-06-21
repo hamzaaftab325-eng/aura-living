@@ -239,7 +239,6 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
               />
               <div
                 className="flex-1 h-2 rounded-full overflow-hidden"
-                style={{ backgroundColor: 'var(--color-gold-pale)' }}
                 role="progressbar"
                 aria-valuenow={Math.round(row.percentage)}
                 aria-valuemin={0}
@@ -249,8 +248,7 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
                 <div
                   className="h-full rounded-full transition-all duration-500"
                   style={{
-                    width: `${row.percentage}%`,
-                    backgroundColor: 'var(--color-gold)' }}
+                    width: `${row.percentage}%` }}
                 />
               </div>
               <span
@@ -314,8 +312,6 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
             type="button"
             onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-sm text-xs font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-pale)] active:scale-[0.97]"
-            style={{
-              border: '1px solid var(--color-gold)' }}
           >
             Show more reviews
             <span >

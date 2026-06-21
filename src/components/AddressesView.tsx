@@ -227,7 +227,6 @@ export default function AddressesView() {
               <Link
                 href="/auth/signup"
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                style={{ background: 'none' }}
               >
                 Create a free account
               </Link>
@@ -318,7 +317,6 @@ export default function AddressesView() {
               <form
                 onSubmit={handleSave}
                 className="rounded-xl p-5 sm:p-7 mb-8 sm:mb-10"
-                style={{ border: '1.5px solid var(--color-gold)' }}
               >
                 <div className="flex items-center justify-between mb-5">
                   <h3 className="text-lg sm:text-xl font-semibold" >
@@ -488,7 +486,6 @@ export default function AddressesView() {
                     type="button"
                     onClick={resetForm}
                     className="text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                    style={{ background: 'none' }}
                   >
                     Cancel
                   </button>
@@ -544,7 +541,6 @@ export default function AddressesView() {
                     <button
                       onClick={() => handleOpenEdit(addr)}
                       className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                      style={{ background: 'none' }}
                     >
                       <Edit2 className="w-3 h-3" />
                       Edit
@@ -555,7 +551,6 @@ export default function AddressesView() {
                         <button
                           onClick={() => handleSetDefault(addr.id)}
                           className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                          style={{ background: 'none' }}
                         >
                           <Check className="w-3 h-3" />
                           Set Default
@@ -566,7 +561,6 @@ export default function AddressesView() {
                     <button
                       onClick={() => handleDelete(addr.id)}
                       className="inline-flex items-center gap-1 text-xs font-medium transition-colors duration-200 hover:text-red-600 cursor-pointer ml-auto"
-                      style={{ background: 'none' }}
                     >
                       <Trash2 className="w-3 h-3" />
                       Delete
@@ -596,7 +590,6 @@ export default function AddressesView() {
               href="/account"
               onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-              style={{ background: 'none' }}
             >
               <ChevronRight className="w-3.5 h-3.5 rotate-180" />
               Back to My Account

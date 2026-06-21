@@ -321,7 +321,7 @@ export default function AdminDashboard() {
                 <p className="aura-body-small text-muted-gray">{products.length} products · {products.filter(p => p.inStock).length} in stock</p>
               </div>
               <div className="flex items-center gap-2">
-                <div className="flex items-center rounded-md" style={{ border: '1.5px solid var(--color-gold-soft)' }}>
+                <div className="flex items-center rounded-md">
                   <Search className="w-4 h-4 ml-3 text-muted-gray" />
                   <input
                     type="text"
@@ -531,8 +531,8 @@ export default function AdminDashboard() {
                         <span className="text-sm" >{cat.name}</span>
                         <span className="text-sm font-semibold" >{count} ({percent}%)</span>
                       </div>
-                      <div className="w-full h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
-                        <div className="h-full rounded-full" style={{ width: `${percent}%`, backgroundColor: 'var(--color-gold)' }} />
+                      <div className="w-full h-2 rounded-full overflow-hidden">
+                        <div className="h-full rounded-full" style={{ width: `${percent}%` }} />
                       </div>
                     </div>
                   );
@@ -604,22 +604,22 @@ export default function AdminDashboard() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" >Store Name</label>
-                  <input type="text" defaultValue="Aura Living" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid var(--color-gold-soft)' }} />
+                  <input type="text" defaultValue="Aura Living" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" />
                 </div>
                 <div>
                   <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" >Currency</label>
-                  <select className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid var(--color-gold-soft)' }}>
+                  <select className="w-full px-3 py-2.5 rounded-md text-sm outline-none">
                     <option>PKR — Pakistani Rupee</option>
                     <option>USD — US Dollar</option>
                   </select>
                 </div>
                 <div>
                   <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" >Free Shipping Threshold</label>
-                  <input type="text" defaultValue="2999" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid var(--color-gold-soft)' }} />
+                  <input type="text" defaultValue="2999" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" />
                 </div>
                 <div>
                   <label className="text-xs uppercase tracking-wide font-medium block mb-1.5" >Tax Rate (%)</label>
-                  <input type="text" defaultValue="0" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" style={{ border: '1.5px solid var(--color-gold-soft)' }} />
+                  <input type="text" defaultValue="0" className="w-full px-3 py-2.5 rounded-md text-sm outline-none" />
                 </div>
               </div>
               <PremiumButton variant="primary" className="mt-4">
@@ -633,7 +633,7 @@ export default function AdminDashboard() {
                 Reset all store data, clear cache, or delete the store entirely. These actions are irreversible.
               </p>
               <div className="flex flex-wrap gap-3">
-                <button className="px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ backgroundColor: 'var(--color-danger)' }}>
+                <button className="px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer">
                   Reset Store Data
                 </button>
                 <button className="px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider cursor-pointer" style={{ border: '1px solid var(--color-danger)' }}>

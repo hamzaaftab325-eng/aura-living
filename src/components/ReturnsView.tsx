@@ -115,7 +115,7 @@ export default function ReturnsView() {
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
+          <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5">
             <RotateCcw className="w-8 h-8"  />
           </div>
           <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
@@ -144,7 +144,7 @@ export default function ReturnsView() {
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div ref={policyRef} className="max-w-4xl mx-auto text-center">
           <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" >
-            <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+            <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5">
               <RotateCcw className="w-6 h-6"  />
             </div>
             <h2 className="aura-text-primary aura-h2 mb-3" >
@@ -164,7 +164,7 @@ export default function ReturnsView() {
       </section>
 
       {/* How to Return - Steps */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
@@ -183,11 +183,11 @@ export default function ReturnsView() {
                   
                 >
                   <div className="flex flex-col items-center shrink-0">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center">
                       <CheckCircle className="w-5 h-5 sm:w-5.5 sm:h-5.5"  />
                     </div>
                     {step.step < returnSteps.length && (
-                      <div className="w-px h-4 sm:h-6 mt-1" style={{ backgroundColor: 'var(--color-gold-soft)' }} />
+                      <div className="w-px h-4 sm:h-6 mt-1" />
                     )}
                   </div>
                   <div className="flex flex-col">
@@ -233,11 +233,11 @@ export default function ReturnsView() {
                   
                 >
                   <div className="flex flex-col items-center shrink-0">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center">
                       <CheckCircle className="w-5 h-5 sm:w-5.5 sm:h-5.5"  />
                     </div>
                     {step.step < exchangeSteps.length && (
-                      <div className="w-px h-4 sm:h-6 mt-1" style={{ backgroundColor: 'var(--color-gold-soft)' }} />
+                      <div className="w-px h-4 sm:h-6 mt-1" />
                     )}
                   </div>
                   <div className="flex flex-col">
@@ -261,7 +261,7 @@ export default function ReturnsView() {
       </section>
 
       {/* Non-Returnable Items */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
@@ -314,7 +314,7 @@ export default function ReturnsView() {
                 className="rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
                 
               >
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4">
                   <CreditCard className="w-5 h-5"  />
                 </div>
                 <h3 className="aura-text-primary text-lg sm:text-xl font-semibold mb-2" >
@@ -329,7 +329,7 @@ export default function ReturnsView() {
                 className="rounded-xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
                 
               >
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4">
                   <CreditCard className="w-5 h-5"  />
                 </div>
                 <h3 className="aura-text-primary text-lg sm:text-xl font-semibold mb-2" >
@@ -345,7 +345,7 @@ export default function ReturnsView() {
       </section>
 
       {/* Damaged or Defective Items */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="rounded-xl p-5 sm:p-6 lg:p-8" >

@@ -220,7 +220,6 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           {product.originalPrice && (
             <span
               className="text-xs line-through"
-              style={{ color: 'var(--color-taupe)' }}
             >
               {formatPKR(product.originalPrice)}
             </span>

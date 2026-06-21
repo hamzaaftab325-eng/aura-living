@@ -290,7 +290,7 @@ export default function ProductDetailView({ product }: { product: Product }) {
                 {formatPKR(product.price)}
               </span>
               {product.originalPrice && (
-                <span className="text-base line-through" style={{ color: 'var(--color-taupe)' }}>
+                <span className="text-base line-through">
                   {formatPKR(product.originalPrice)}
                 </span>
               )}

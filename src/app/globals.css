@@ -1307,3 +1307,98 @@ body {
     display: none !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   REMAINING UTILITY CLASSES — Final inline style replacement
+   ═══════════════════════════════════════════════════════════ */
+
+/* More background colors */
+.aura-bg-gold                 { background-color: var(--color-gold); }
+.aura-bg-gold-hover           { background-color: var(--color-gold-hover); }
+.aura-bg-gold-pale            { background-color: var(--color-gold-pale); }
+.aura-bg-gold-soft            { background-color: var(--color-gold-soft); }
+.aura-bg-success              { background-color: var(--color-success); }
+.aura-bg-danger               { background-color: var(--color-danger); }
+.aura-bg-charcoal             { background-color: var(--surface-dark); }
+.aura-bg-cream                { background-color: var(--surface-page); }
+.aura-bg-ivory                { background-color: var(--surface-card); }
+.aura-bg-accent               { background-color: var(--surface-accent); }
+
+/* More background tints */
+.aura-bg-gold-tint-12         { background-color: rgba(212,175,55,0.12); }
+.aura-bg-gold-tint-20         { background-color: rgba(212,175,55,0.2); }
+.aura-bg-gold-tint-25         { background-color: rgba(212,175,55,0.25); }
+.aura-bg-gold-tint-30         { background-color: rgba(212,175,55,0.3); }
+.aura-bg-gold-tint-50         { background-color: rgba(212,175,55,0.5); }
+.aura-bg-gold-tint-60         { background-color: rgba(212,175,55,0.6); }
+.aura-bg-gold-tint-85         { background-color: rgba(212,175,55,0.85); }
+.aura-bg-gold-tint-90         { background-color: rgba(212,175,55,0.9); }
+.aura-bg-white-tint-10        { background-color: rgba(255,255,255,0.1); }
+.aura-bg-white-tint-20        { background-color: rgba(255,255,255,0.2); }
+.aura-bg-white-tint-30        { background-color: rgba(255,255,255,0.3); }
+.aura-bg-white-tint-50        { background-color: rgba(255,255,255,0.5); }
+.aura-bg-white-tint-60        { background-color: rgba(255,255,255,0.6); }
+.aura-bg-white-tint-80        { background-color: rgba(255,255,255,0.8); }
+.aura-bg-cream-tint-08        { background-color: rgba(250,248,245,0.08); }
+.aura-bg-cream-tint-10        { background-color: rgba(250,248,245,0.1); }
+.aura-bg-cream-tint-20        { background-color: rgba(250,248,245,0.2); }
+.aura-bg-cream-tint-40        { background-color: rgba(250,248,245,0.4); }
+.aura-bg-cream-tint-60        { background-color: rgba(250,248,245,0.6); }
+.aura-bg-cream-tint-80        { background-color: rgba(250,248,245,0.8); }
+.aura-bg-cream-tint-90        { background-color: rgba(250,248,245,0.9); }
+.aura-bg-dark-tint-08         { background-color: rgba(44,44,44,0.08); }
+.aura-bg-dark-tint-15         { background-color: rgba(44,44,44,0.15); }
+.aura-bg-dark-tint-20         { background-color: rgba(44,44,44,0.2); }
+.aura-bg-dark-tint-30         { background-color: rgba(44,44,44,0.3); }
+.aura-bg-dark-tint-40         { background-color: rgba(44,44,44,0.4); }
+.aura-bg-dark-tint-70         { background-color: rgba(44,44,44,0.7); }
+.aura-bg-dark-tint-80         { background-color: rgba(44,44,44,0.8); }
+.aura-bg-dark-tint-90         { background-color: rgba(44,44,44,0.9); }
+.aura-bg-dark-tint-97         { background-color: rgba(20,20,20,0.97); }
+
+/* More text colors */
+.aura-text-white              { color: #FFFFFF; }
+.aura-text-danger             { color: var(--color-danger); }
+.aura-text-success            { color: var(--color-success); }
+.aura-text-info               { color: var(--color-info); }
+.aura-text-taupe              { color: var(--color-taupe); }
+.aura-text-gold-bright        { color: var(--color-gold); }
+.aura-text-cream              { color: var(--surface-page); }
+.aura-text-ivory              { color: var(--surface-card); }
+
+/* Text opacity */
+.aura-text-white-40           { color: rgba(255,255,255,0.4); }
+.aura-text-white-50           { color: rgba(255,255,255,0.5); }
+.aura-text-white-60           { color: rgba(255,255,255,0.6); }
+.aura-text-white-70           { color: rgba(255,255,255,0.7); }
+.aura-text-white-80           { color: rgba(255,255,255,0.8); }
+.aura-text-white-85           { color: rgba(255,255,255,0.85); }
+.aura-text-white-90           { color: rgba(255,255,255,0.9); }
+
+/* More gradients */
+.aura-gradient-gold-vertical  { background: linear-gradient(180deg, var(--color-gold) 0%, var(--color-gold-hover) 100%); }
+.aura-gradient-gold-diagonal  { background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hover) 100%); }
+.aura-gradient-gold-3stop     { background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hover) 50%, var(--color-gold-text) 100%); }
+.aura-gradient-gold-soft      { background: linear-gradient(90deg, var(--color-gold), var(--color-gold-soft)); }
+.aura-gradient-dark-3stop     { background: linear-gradient(135deg, var(--surface-dark) 0%, #3A3A3A 50%, var(--surface-dark) 100%); }
+.aura-gradient-danger         { background: linear-gradient(135deg, var(--color-danger) 0%, #B91C1C 100%); }
+.aura-gradient-cream          { background: linear-gradient(180deg, var(--surface-card) 0%, var(--surface-page) 100%); }
+
+/* More borders */
+.aura-border-1-5-gold-soft    { border: 1.5px solid var(--color-gold-soft); }
+.aura-border-1-5-gold         { border: 1.5px solid var(--color-gold); }
+.aura-border-bottom-gold      { border-bottom: 2px solid var(--color-gold); }
+.aura-border-bottom-2-gold    { border-bottom: 2px solid var(--color-gold); }
+.aura-border-none             { border: none; }
+
+/* Background none */
+.aura-bg-none                 { background: none; }
+
+/* Filter blur */
+.aura-filter-blur-60          { filter: blur(60px); }
+.aura-filter-blur-70          { filter: blur(70px); }
+
+/* Shadows */
+.aura-shadow-xs               { box-shadow: var(--shadow-xs); }
+.aura-shadow-xl               { box-shadow: var(--shadow-xl); }
+.aura-shadow-none             { box-shadow: none; }

@@ -192,7 +192,6 @@ export default function SettingsView() {
               <Link
                 href="/auth/signup"
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                style={{ background: 'none' }}
               >
                 Create a free account
               </Link>
@@ -331,7 +330,6 @@ export default function SettingsView() {
                       type="button"
                       onClick={() => setEditingProfile(false)}
                       className="text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                      style={{ background: 'none' }}
                     >
                       Cancel
                     </button>
@@ -512,7 +510,6 @@ export default function SettingsView() {
                 <button
                   onClick={handleDeleteAccount}
                   className="px-4 py-2 rounded-sm text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer"
-                  style={{ backgroundColor: 'var(--color-danger)' }}
                 >
                   Request Account Deletion
                 </button>
@@ -531,7 +528,6 @@ export default function SettingsView() {
                 href="/account"
                 onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                style={{ background: 'none' }}
               >
                 Back to Account
               </Link>

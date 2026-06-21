@@ -117,7 +117,7 @@ export default function TermsView() {
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
+          <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5">
             <FileText className="w-8 h-8"  />
           </div>
           <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
@@ -155,7 +155,7 @@ export default function TermsView() {
       </section>
 
       {/* Sections */}
-      <section className="py-4 sm:py-8 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
+      <section className="py-4 sm:py-8 px-4 sm:px-6 lg:px-8">
         <div ref={contentRef} className="max-w-4xl mx-auto flex flex-col gap-6">
           {sections.map((section) => {
             const SectionIcon = section.icon;
@@ -167,7 +167,7 @@ export default function TermsView() {
               >
                 <div className="flex items-start gap-4 sm:gap-5">
                   <div className="flex flex-col items-center shrink-0">
-                    <div className="w-11 h-11 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+                    <div className="w-11 h-11 rounded-full flex items-center justify-center">
                       <SectionIcon className="w-5 h-5"  />
                     </div>
                   </div>
@@ -190,7 +190,6 @@ export default function TermsView() {
                       <Link
                         href={section.linkHref}
                         className="text-sm font-semibold transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer mt-1 self-start"
-                        style={{ background: 'none' }}
                       >
                         {section.linkText} →
                       </Link>

@@ -29,8 +29,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             aria-invalid={error ? 'true' : 'false'}
             aria-describedby={error ? errorId : undefined}
             className="mt-0.5 w-4 h-4 rounded cursor-pointer focus:ring-2"
-            style={{
-              accentColor: 'var(--color-gold)' }}
             {...props}
           />
           <label

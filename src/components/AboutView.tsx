@@ -141,7 +141,6 @@ function ChapterLabel({ number }: { number: string }) {
       </span>
       <div
         className="chapter-line w-16 sm:w-24 h-px"
-        style={{ backgroundColor: 'var(--color-gold)' }}
       />
     </div>
   );
@@ -326,15 +325,12 @@ function DecorativeGoldLine() {
       <div className="w-8 sm:w-16 h-px bg-[var(--color-gold)]/40" />
       <div
         className="deco-line w-16 sm:w-32 h-px"
-        style={{ backgroundColor: 'var(--color-gold)' }}
       />
       <div
         className="deco-dot w-1.5 h-1.5 rounded-full"
-        style={{ backgroundColor: 'var(--color-gold)' }}
       />
       <div
         className="deco-line w-16 sm:w-32 h-px"
-        style={{ backgroundColor: 'var(--color-gold)' }}
       />
       <div className="w-8 sm:w-16 h-px bg-[var(--color-gold)]/40" />
     </div>
@@ -375,7 +371,6 @@ function FloatingDots() {
         <div
           key={i}
           className="float-dot w-1 h-1 rounded-full"
-          style={{ backgroundColor: 'var(--color-gold)', opacity: 0.6 }}
         />
       ))}
     </div>
@@ -525,12 +520,10 @@ function ValueCard({
       <div
         ref={borderRef}
         className="absolute top-0 left-0 w-1 h-full"
-        style={{ backgroundColor: 'var(--color-gold)' }}
       />
       <div
         ref={iconRef}
         className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-5"
-        style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
       >
         <Icon className="w-7 h-7"  />
       </div>
@@ -659,7 +652,6 @@ function TimelineItem({
           {item.isFuture && (
             <span
               className="text-[9px] uppercase tracking-[2px] font-semibold px-2 py-0.5 rounded-full"
-              style={{ backgroundColor: 'rgba(212,175,55,0.12)' }}
             >
               Upcoming
             </span>
@@ -726,7 +718,6 @@ function ScrollProgressIndicator() {
       <div
         ref={lineRef}
         className="h-full w-full"
-        style={{ backgroundColor: 'var(--color-gold)' }}
       />
     </div>
   );
@@ -978,11 +969,9 @@ export default function AboutView() {
           <div ref={chapter1ImgSlideRef} className="relative flex items-center justify-center">
             <div
               className="absolute -inset-3 sm:-inset-4 rounded-sm"
-              style={{ opacity: 0.4 }}
             />
             <div
               className="absolute -inset-1.5 sm:-inset-2 rounded-sm"
-              style={{ border: '1px solid var(--color-gold)', opacity: 0.2 }}
             />
             <div className="relative w-full aspect-[4/5] overflow-hidden rounded-sm">
               <div ref={chapter1ImgRef} className="w-full h-full">
@@ -1010,11 +999,9 @@ export default function AboutView() {
           >
             <div
               className="absolute -inset-3 sm:-inset-4 rounded-sm"
-              style={{ opacity: 0.4 }}
             />
             <div
               className="absolute -inset-1.5 sm:-inset-2 rounded-sm"
-              style={{ border: '1px solid var(--color-gold)', opacity: 0.2 }}
             />
             <div className="relative w-full aspect-[4/5] overflow-hidden rounded-sm">
               <div ref={chapter2ImgRef} className="w-full h-full">
@@ -1066,7 +1053,6 @@ export default function AboutView() {
       {/* ═══════════════════ VALUES SECTION ═══════════════════ */}
       <section
         className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8"
-        style={{ backgroundColor: 'var(--color-gold-pale)' }}
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
@@ -1183,7 +1169,6 @@ export default function AboutView() {
       {/* ═══════════════════ CTA SECTION ═══════════════════ */}
       <section
         className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8"
-        style={{ backgroundColor: 'var(--color-gold-pale)' }}
       >
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <h2

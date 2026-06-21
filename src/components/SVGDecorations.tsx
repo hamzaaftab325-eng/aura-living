@@ -75,7 +75,7 @@ export function FloatingOrb({ size, top, left, delay = 0 }: { size: number; top:
         top,
         left,
         animationDelay: `${delay}s`,
-        filter: 'blur(60px)',
+        
         background: 'radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 40%, transparent 70%)' }}
     />
   );

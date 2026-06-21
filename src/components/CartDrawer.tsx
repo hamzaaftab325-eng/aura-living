@@ -287,7 +287,6 @@ export default function CartDrawer() {
           {/* ═══ Cart Content — scrollable ═══ */}
           <div
             className="flex-1 overflow-y-auto"
-            style={{ scrollbarWidth: 'thin' }}
           >
             {cart.length === 0 ? (
               /* ═══ Empty State — premium illustration ═══ */

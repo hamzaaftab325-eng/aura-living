@@ -156,7 +156,7 @@ export default function CartView() {
                 <span className="font-semibold">You&apos;ve unlocked FREE shipping!</span>
               </p>
             )}
-            <div className="w-full h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
+            <div className="w-full h-2 rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-500"
                 style={{
@@ -226,7 +226,7 @@ export default function CartView() {
 
                   {/* Quantity + Price */}
                   <div className="flex items-end justify-between mt-auto pt-3 gap-3">
-                    <div className="flex items-center rounded-full" style={{ border: '1.5px solid var(--color-gold-soft)' }}>
+                    <div className="flex items-center rounded-full">
                       <button
                         onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
                         className="flex items-center justify-center w-9 h-9 rounded-full transition-colors hover:bg-gold/10"
@@ -316,17 +316,15 @@ export default function CartView() {
                     onChange={(e) => setCouponCode(e.target.value)}
                     placeholder="Enter code"
                     className="flex-1 px-3 py-2.5 rounded-md text-sm outline-none"
-                    style={{ border: '1.5px solid var(--color-gold-soft)' }}
                   />
                   <button
                     onClick={handleApplyCoupon}
                     className="px-4 py-2.5 rounded-md text-xs font-semibold uppercase tracking-wider transition-all hover:bg-gold/80 cursor-pointer"
-                    style={{ backgroundColor: 'var(--color-gold)' }}
                   >
                     Apply
                   </button>
                 </div>
-                <p className="text-[11px] mt-1.5" style={{ color: 'var(--color-taupe)' }}>
+                <p className="text-[11px] mt-1.5">
                   Try: AURA15 or WELCOME10
                 </p>
               </div>
@@ -368,7 +366,7 @@ export default function CartView() {
               </div>
 
               {/* Divider */}
-              <div className="h-px my-3" style={{ backgroundColor: 'var(--color-gold-soft)' }} />
+              <div className="h-px my-3" />
 
               {/* Total */}
               <div className="flex items-center justify-between mb-6">

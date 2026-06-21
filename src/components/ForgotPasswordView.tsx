@@ -52,7 +52,7 @@ export default function ForgotPasswordView() {
         {/* Card */}
         <div
           className="w-full rounded-2xl p-8 sm:p-10"
-          style={{ backgroundColor: 'rgba(255,253,247,0.9)',
+          style={{ 
             boxShadow: '0 8px 40px rgba(212,175,55,0.06), 0 2px 12px rgba(0,0,0,0.04)' }}
         >
           {!submitted ? (
@@ -62,7 +62,6 @@ export default function ForgotPasswordView() {
                 <div className="flex items-center justify-center mb-5">
                   <div
                     className="w-14 h-14 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
                   >
                     <Lock className="w-6 h-6"  />
                   </div>
@@ -167,7 +166,6 @@ export default function ForgotPasswordView() {
                 <Link
                   href="/auth/login"
                   className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                  style={{ background: 'none' }}
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                   Back to Sign In
@@ -181,7 +179,6 @@ export default function ForgotPasswordView() {
                 <div className="flex items-center justify-center mb-5">
                   <div
                     className="w-16 h-16 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
                   >
                     <Mail className="w-7 h-7"  />
                   </div>
@@ -210,7 +207,6 @@ export default function ForgotPasswordView() {
                     setEmailError('');
                   }}
                   className="text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                  style={{ background: 'none' }}
                 >
                   Didn&apos;t receive the email? Resend
                 </button>
@@ -219,7 +215,6 @@ export default function ForgotPasswordView() {
                   <Link
                     href="/auth/login"
                     className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                    style={{ background: 'none' }}
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
                     Back to Sign In
@@ -233,13 +228,11 @@ export default function ForgotPasswordView() {
         {/* Bottom info */}
         <p
           className="text-center text-[11px] mt-6 max-w-xs mx-auto leading-relaxed"
-          style={{ color: 'var(--color-taupe)' }}
         >
           Remember your password?{' '}
           <Link
             href="/auth/login"
             className="font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-            style={{ background: 'none' }}
           >
             Sign in instead
           </Link>

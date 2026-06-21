@@ -82,7 +82,7 @@ export default function Error({
           <button
             onClick={() => reset()}
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-[var(--color-gold-hover)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.35)] active:scale-[0.97] cursor-pointer"
-            style={{ backgroundColor: 'var(--color-gold)', fontFamily: "'Poppins', sans-serif" }}
+            style={{  fontFamily: "'Poppins', sans-serif" }}
           >
             <RotateCcw className="w-4 h-4" />
             Try Again

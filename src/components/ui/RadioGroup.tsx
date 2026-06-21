@@ -82,7 +82,6 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
                   disabled={opt.disabled}
                   onChange={() => onChange(opt.value)}
                   className="mt-0.5 w-4 h-4 cursor-pointer focus:ring-2"
-                  style={{ accentColor: 'var(--color-gold)' }}
                 />
                 <div className="flex flex-col">
                   <span

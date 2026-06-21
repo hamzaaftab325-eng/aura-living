@@ -619,7 +619,6 @@ export default function CheckoutView() {
                   {/* Cart Items Preview */}
                   <div
                     className="flex flex-col gap-4 mb-6 max-h-72 overflow-y-auto pr-1"
-                    style={{ scrollbarWidth: 'thin' }}
                   >
                     {cart.map((item) => (
                       <div
@@ -639,7 +638,6 @@ export default function CheckoutView() {
                           />
                           <div
                             className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
-                            style={{ backgroundColor: 'var(--color-gold)' }}
                           >
                             {item.quantity}
                           </div>
@@ -668,7 +666,7 @@ export default function CheckoutView() {
                     ))}
                   </div>
 
-                  <div className="h-px" style={{ backgroundColor: 'rgba(212,175,55,0.3)' }} />
+                  <div className="h-px" />
 
                   {/* Summary Lines */}
                   <div className="flex flex-col gap-3 mt-5">
@@ -732,7 +730,7 @@ export default function CheckoutView() {
                     )}
                   </div>
 
-                  <div className="h-px my-5" style={{ backgroundColor: 'rgba(212,175,55,0.3)' }} />
+                  <div className="h-px my-5" />
 
                   <div className="flex items-center justify-between mb-6">
                     <span

@@ -301,7 +301,6 @@ export default function Navbar() {
           ═══════════════════════════════════════════════════════════ */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        style={{ background: 'transparent' }}
       >
         <div
           className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-6 transition-all duration-300"
@@ -382,7 +381,7 @@ export default function Navbar() {
                           aria-haspopup="menu"
                           aria-expanded={megaMenuOpen}
                           className="block uppercase font-medium"
-                          style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'inherit' }}
+                          style={{  cursor: 'pointer', padding: 0, color: 'inherit' }}
                         >
                           {labelContent}
                         </button>
@@ -404,7 +403,7 @@ export default function Navbar() {
                 <li
                   className="absolute z-0 h-7 rounded-full transition-all duration-200 ease-out"
                   style={{
-                    backgroundColor: 'rgba(212, 175, 55, 0.25)',
+                    
                     top: '50%',
                     transform: `translateY(-50%) translateX(${cursorPos.left}px)`,
                     width: `${cursorPos.width}px`,
@@ -417,7 +416,7 @@ export default function Navbar() {
             <div className="flex items-center gap-1 sm:gap-1.5">
               <button
                 className="rounded-full transition-all duration-300 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '8px' : '12px' }}
+                style={{  padding: scrolled ? '8px' : '12px' }}
                 aria-label="Search"
                 onClick={() => setSearchOpen(true)}
               >
@@ -427,7 +426,7 @@ export default function Navbar() {
               <Link
                 href="/wishlist"
                 className="relative hidden sm:flex rounded-full transition-all duration-300 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '6px' : '8px' }}
+                style={{  padding: scrolled ? '6px' : '8px' }}
                 aria-label="Wishlist"
                 onClick={closeMenusAndScroll}
               >
@@ -441,7 +440,7 @@ export default function Navbar() {
 
               <button
                 className="relative rounded-full transition-all duration-300 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '6px' : '8px' }}
+                style={{  padding: scrolled ? '6px' : '8px' }}
                 aria-label={`Cart, ${cartCount} ${cartCount === 1 ? 'item' : 'items'}`}
                 onClick={() => setCartOpen(true)}
               >
@@ -465,7 +464,7 @@ export default function Navbar() {
               <Link
                 href="/account"
                 className="hidden sm:flex rounded-full transition-all duration-300 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '6px' : '8px' }}
+                style={{  padding: scrolled ? '6px' : '8px' }}
                 aria-label="Account"
                 onClick={closeMenusAndScroll}
               >
@@ -474,7 +473,7 @@ export default function Navbar() {
 
               <button
                 className="lg:hidden rounded-full transition-all duration-300 hover:bg-white/10"
-                style={{ color: 'rgba(255, 255, 255, 0.85)', padding: scrolled ? '6px' : '8px' }}
+                style={{  padding: scrolled ? '6px' : '8px' }}
                 aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
               >
@@ -534,14 +533,13 @@ export default function Navbar() {
                             >
                               {item.label}
                               {itemActive && (
-                                <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm" style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)' }}>
+                                <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm">
                                   Current
                                 </span>
                               )}
                             </p>
                             <p
                               className="text-xs mt-0.5"
-                              style={{ color: 'rgba(255, 255, 255, 0.6)' }}
                             >
                               {item.description}
                             </p>
@@ -589,7 +587,6 @@ export default function Navbar() {
                           href={activePreview.href}
                           onClick={closeMenusAndScroll}
                           className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:gap-2.5 cursor-pointer group"
-                          style={{ background: 'none' }}
                         >
                           {activePreview.preview.cta}
                           <ChevronRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5"  />
@@ -611,7 +608,6 @@ export default function Navbar() {
         <div
           ref={mobileMenuRef}
           className="fixed inset-0 z-[52] flex flex-col"
-          style={{ backgroundColor: 'rgba(20, 20, 20, 0.97)' }}
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation menu"
@@ -640,7 +636,7 @@ export default function Navbar() {
           {/* Content — custom thin scrollbar styling for dark menu */}
           <div
             className="flex flex-col py-5 px-5 flex-1 overflow-y-auto"
-            style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(212, 175, 55, 0.3) transparent' }}
+            style={{  scrollbarColor: 'rgba(212, 175, 55, 0.3) transparent' }}
           >
             <style>{`
               .mobile-menu-scroll::-webkit-scrollbar { width: 4px; }
@@ -677,7 +673,7 @@ export default function Navbar() {
                         className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
                         style={{ color: isActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.95)',
                           backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
-                          background: 'none',
+                          
                           cursor: 'pointer' }}
                         onClick={() => setMobileShopExpanded((prev) => !prev)}
                         aria-expanded={mobileShopExpanded}
@@ -741,7 +737,6 @@ export default function Navbar() {
                                       {itemActive && (
                                         <span
                                           className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm"
-                                          style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)' }}
                                         >
                                           Current
                                         </span>
@@ -808,7 +803,7 @@ export default function Navbar() {
                 );
                 const baseClass =
                   'mobile-quick-item flex items-center gap-3 py-3 px-3 text-left transition-colors duration-200 hover:bg-white/10 rounded-xl w-full';
-                const baseStyle = { color: 'rgba(255, 255, 255, 0.9)' } as const;
+                const baseStyle = { } as const;
                 const handleClick = () => {
                   closeMobileMenu();
                   if (item.label === 'Cart') { setCartOpen(true); return; }
@@ -823,7 +818,7 @@ export default function Navbar() {
                   );
                 }
                 return (
-                  <button key={item.label} type="button" onClick={handleClick} className={baseClass} style={{ ...baseStyle, background: 'none', cursor: 'pointer' }}>
+                  <button key={item.label} type="button" onClick={handleClick} className={baseClass} style={{ ...baseStyle,  cursor: 'pointer' }}>
                     {inner}
                   </button>
                 );
@@ -906,7 +901,6 @@ export default function Navbar() {
                 <button
                   onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
                   className="p-2 rounded-full hover:bg-white/10 transition-colors"
-                  style={{ color: 'rgba(255, 255, 255, 0.7)' }}
                   aria-label="Close search"
                 >
                   <X className="h-5 w-5" />
@@ -914,7 +908,7 @@ export default function Navbar() {
               </div>
 
               {searchQuery.trim().length > 1 && (
-                <div className="mt-4 max-h-64 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+                <div className="mt-4 max-h-64 overflow-y-auto">
                   {products
                     .filter((p) =>
                       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -960,7 +954,6 @@ export default function Navbar() {
                   ).length === 0 && (
                     <p
                       className="text-sm py-4 text-center"
-                      style={{ color: 'rgba(255, 255, 255, 0.5)' }}
                     >
                       No products found for &quot;{searchQuery}&quot;
                     </p>

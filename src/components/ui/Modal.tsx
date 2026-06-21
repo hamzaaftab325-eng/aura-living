@@ -136,7 +136,6 @@ export default function Modal({
             <h2
               id={titleId}
               className="text-lg font-bold"
-              style={{ fontFamily: 'var(--font-playfair)' }}
             >
               {title}
             </h2>

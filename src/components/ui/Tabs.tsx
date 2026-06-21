@@ -76,7 +76,6 @@ export default function Tabs({ tabs, activeTab, onTabChange, className = '', bad
             {badgeCount !== undefined && badgeCount > 0 && (
               <span
                 className="ml-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full"
-                style={{ backgroundColor: 'var(--color-danger)', color: 'white' }}
               >
                 {badgeCount}
               </span>

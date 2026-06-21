@@ -69,7 +69,6 @@ export default function Breadcrumb({ items, productName, productId }: Breadcrumb
               {idx > 0 && (
                 <ChevronRight
                   className="w-3.5 h-3.5"
-                  style={{ color: 'var(--color-taupe)' }}
                   aria-hidden="true"
                 />
               )}
@@ -95,7 +94,6 @@ export default function Breadcrumb({ items, productName, productId }: Breadcrumb
                   type="button"
                   onClick={item.onClick}
                   className="text-sm transition-colors duration-200 hover:opacity-80 cursor-pointer"
-                  style={{ background: 'none' }}
                 >
                   {item.label}
                 </button>

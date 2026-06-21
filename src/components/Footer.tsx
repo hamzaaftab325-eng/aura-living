@@ -38,7 +38,7 @@ function FooterLink({
 }) {
   const className =
     'group relative inline-block text-sm transition-all duration-500 hover:aura-text-gold hover:translate-x-1.5 hover:drop-shadow-[0_0_6px_rgba(212,175,55,0.3)]';
-  const style = { color: 'var(--surface-page)' } as const;
+  const style = { } as const;
   const inner = (
     <>
       <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[var(--color-gold)] transition-all duration-500 group-hover:w-full" />
@@ -59,7 +59,7 @@ function FooterLink({
       type="button"
       onClick={onClick}
       className={className}
-      style={{ ...style, background: 'none', cursor: 'pointer', padding: 0, textAlign: 'left' as const }}
+      style={{ ...style,  cursor: 'pointer', padding: 0, textAlign: 'left' as const }}
     >
       {inner}
     </button>
@@ -285,7 +285,7 @@ export default function Footer() {
                   ? '0 0 30px rgba(212,175,55,0.1), inset 0 0 30px rgba(212,175,55,0.03)'
                   : '0 0 0 rgba(212,175,55,0)' }}
             >
-              <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--surface-page)', opacity: 0.9 }}>
+              <p className="text-sm mb-4 leading-relaxed">
                 Get <span style={{ fontWeight: 600 }}>15% off</span> your first order
               </p>
               <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
@@ -304,7 +304,7 @@ export default function Footer() {
                     onBlur={() => setFocused(false)}
                     className="h-11 w-full rounded-lg px-4 text-sm outline-none transition-all duration-500 placeholder:aura-text-muted"
                     style={{ border: focused ? '1px solid rgba(212,175,55,0.6)' : '1px solid rgba(212,175,55,0.18)',
-                      color: 'var(--surface-page)',
+                      
                       boxShadow: focused
                         ? '0 0 20px rgba(212,175,55,0.15), 0 0 40px rgba(212,175,55,0.05)'
                         : 'none' }}
@@ -320,7 +320,6 @@ export default function Footer() {
                 <button
                   type="submit"
                   className="group flex h-11 items-center justify-center gap-2 rounded-lg px-5 text-sm font-medium transition-all duration-500 hover:brightness-110 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] active:scale-[0.98]"
-                  style={{ backgroundColor: 'var(--color-gold)' }}
                 >
                   <Send size={14} />
                   <span>Subscribe</span>
@@ -348,20 +347,19 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="relative z-20 mx-auto max-w-7xl px-5 pb-6 sm:px-6 sm:pb-8 lg:px-8">
         <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
-          <p className="text-xs" style={{ color: 'var(--color-gold-soft)', opacity: 0.7 }}>
+          <p className="text-xs" style={{ color: 'var(--color-gold-soft)' }}>
             &copy; {new Date().getFullYear()} Aura Living. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/terms" className="text-xs transition-colors duration-300 hover:aura-text-gold cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7 }}>Terms of Service</Link>
-            <Link href="/privacy" className="text-xs transition-colors duration-300 hover:aura-text-gold cursor-pointer" style={{ color: 'var(--color-gold-soft)', opacity: 0.7 }}>Privacy Policy</Link>
+            <Link href="/terms" className="text-xs transition-colors duration-300 hover:aura-text-gold cursor-pointer" style={{ color: 'var(--color-gold-soft)' }}>Terms of Service</Link>
+            <Link href="/privacy" className="text-xs transition-colors duration-300 hover:aura-text-gold cursor-pointer" style={{ color: 'var(--color-gold-soft)' }}>Privacy Policy</Link>
           </div>
           <div className="flex items-center gap-2 flex-wrap justify-center">
-            <span className="text-xs" style={{ color: 'var(--color-gold-soft)', opacity: 0.5 }}>We accept:</span>
+            <span className="text-xs" style={{ color: 'var(--color-gold-soft)' }}>We accept:</span>
             {paymentMethods.map((method, i) => (
               <span key={method} className="flex items-center gap-2">
                 <span
                   className="text-xs font-medium transition-colors duration-300 hover:aura-text-gold"
-                  style={{ color: 'var(--surface-page)', opacity: 0.8 }}
                 >
                   {method}
                 </span>

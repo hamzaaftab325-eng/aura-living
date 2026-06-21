@@ -86,7 +86,7 @@ export default function ShippingView() {
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
+          <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5">
             <Truck className="w-8 h-8"  />
           </div>
           <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
@@ -115,7 +115,7 @@ export default function ShippingView() {
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div ref={overviewRef} className="max-w-4xl mx-auto text-center">
           <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" >
-            <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+            <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5">
               <Truck className="w-6 h-6"  />
             </div>
             <h2 className="aura-text-primary aura-h2 mb-3" >
@@ -132,7 +132,7 @@ export default function ShippingView() {
       </section>
 
       {/* Shipping Rates */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
@@ -150,7 +150,7 @@ export default function ShippingView() {
                   className="rounded-xl p-5 sm:p-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:border-[var(--color-gold)]"
                   
                 >
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                     <rate.icon className="w-5 h-5"  />
                   </div>
                   <h3 className="aura-text-primary text-lg sm:text-xl font-semibold mb-1" >
@@ -178,7 +178,7 @@ export default function ShippingView() {
           <AnimatedSection>
             <div className="rounded-xl p-5 sm:p-6 lg:p-8" >
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+                <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5"  />
                 </div>
                 <div>
@@ -212,14 +212,14 @@ export default function ShippingView() {
       </section>
 
       {/* Order Tracking, Packaging, International Shipping */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="grid grid-cols-1 gap-4 sm:gap-6">
               {/* Order Tracking */}
               <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0">
                     <Clock className="w-5 h-5"  />
                   </div>
                   <div>
@@ -236,7 +236,7 @@ export default function ShippingView() {
               {/* Packaging */}
               <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0">
                     <Gift className="w-5 h-5"  />
                   </div>
                   <div>
@@ -259,7 +259,7 @@ export default function ShippingView() {
               {/* International Shipping */}
               <div className="rounded-xl p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.1)]" >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0">
                     <Globe className="w-5 h-5"  />
                   </div>
                   <div>

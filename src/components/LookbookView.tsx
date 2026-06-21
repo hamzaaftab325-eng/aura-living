@@ -96,7 +96,7 @@ export default function LookbookView() {
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ backgroundColor: 'rgba(212, 175, 55, 0.2)' }}>
+          <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5">
             <Camera className="w-8 h-8"  />
           </div>
           <span className="aura-text-gold text-xs sm:text-sm tracking-[4px] uppercase font-medium mb-4" >
@@ -151,7 +151,7 @@ export default function LookbookView() {
               {index > 0 && (
                 <div className="py-6 px-4 sm:px-6 lg:px-8">
                   <div className="max-w-7xl mx-auto flex justify-center">
-                    <div className="w-full max-w-xs h-px" style={{ backgroundColor: 'var(--color-gold)' }} />
+                    <div className="w-full max-w-xs h-px" />
                   </div>
                 </div>
               )}

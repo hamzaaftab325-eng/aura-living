@@ -68,7 +68,6 @@ function ArticleImage({
           />
           <p
             className="font-serif text-lg sm:text-xl leading-snug"
-            style={{ fontFamily: 'var(--font-playfair)' }}
           >
             {title}
           </p>
@@ -173,7 +172,6 @@ function ArticleBody({ body }: { body: string }) {
           {section.heading && (
             <h2
               className="text-2xl sm:text-3xl font-bold mt-4 first:mt-0"
-              style={{ fontFamily: 'var(--font-playfair)' }}
             >
               {section.heading}
             </h2>
@@ -374,14 +372,11 @@ export default function ArticleView({ article }: { article: Article }) {
         <div className="max-w-3xl mx-auto text-center">
           <span
             className="inline-block text-xs sm:text-sm font-medium uppercase tracking-[3px] mb-4 px-3 py-1.5 rounded-sm"
-            style={{
-              backgroundColor: 'var(--color-gold-pale)' }}
           >
             {categoryLabels[article.category]}
           </span>
           <h1
             className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6"
-            style={{ fontFamily: 'var(--font-playfair)' }}
           >
             {article.title}
           </h1>
@@ -512,7 +507,6 @@ export default function ArticleView({ article }: { article: Article }) {
               </span>
               <h2
                 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 mb-4"
-                style={{ fontFamily: 'var(--font-playfair)' }}
               >
                 Continue Your Journey
               </h2>
@@ -555,7 +549,6 @@ export default function ArticleView({ article }: { article: Article }) {
                       <div className="flex flex-col flex-1 p-5">
                         <h3
                           className="text-lg font-bold leading-snug mb-2"
-                          style={{ fontFamily: 'var(--font-playfair)' }}
                         >
                           {rel.title}
                         </h3>

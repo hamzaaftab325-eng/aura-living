@@ -111,7 +111,6 @@ function InputField({
           type="button"
           onClick={onToggle}
           className="pr-4 cursor-pointer transition-colors duration-200 hover:aura-text-gold"
-          style={{ color: 'var(--color-taupe)', background: 'none' }}
           aria-label={isVisible ? 'Hide password' : 'Show password'}
         >
           {isVisible ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -360,7 +359,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
         {/* Form Card */}
         <div
           className="w-full max-w-md rounded-2xl p-8 sm:p-10"
-          style={{ backgroundColor: 'rgba(255,253,247,0.8)',
+          style={{ 
             boxShadow: '0 8px 40px rgba(212,175,55,0.06), 0 2px 12px rgba(0,0,0,0.04)' }}
         >
           {/* Title with blur animation */}
@@ -416,7 +415,7 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
           {/* Divider */}
           <div className="flex items-center gap-4 mb-6">
             <div className="flex-1 h-px bg-[var(--color-gold-soft)]" />
-            <span className="text-[11px] uppercase tracking-wider" style={{ color: 'var(--color-taupe)' }}>
+            <span className="text-[11px] uppercase tracking-wider">
               or
             </span>
             <div className="flex-1 h-px bg-[var(--color-gold-soft)]" />
@@ -496,7 +495,6 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
                   href="/auth/forgot-password"
                   onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="text-xs font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                  style={{ background: 'none' }}
                 >
                   Forgot Password?
                 </Link>
@@ -568,7 +566,6 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 className="font-semibold transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                style={{ background: 'none' }}
               >
                 {mode === 'login' ? 'Sign Up' : 'Sign In'}
               </Link>
@@ -579,7 +576,6 @@ export default function AuthView({ mode: modeProp = 'login' }: { mode?: 'login' 
         {/* Bottom info */}
         <p
           className="text-center text-[11px] mt-6 max-w-xs leading-relaxed"
-          style={{ color: 'var(--color-taupe)' }}
         >
           By continuing, you agree to Aura Living&apos;s Terms of Service and acknowledge our Privacy Policy.
         </p>

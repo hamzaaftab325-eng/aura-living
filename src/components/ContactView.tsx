@@ -98,12 +98,12 @@ export default function ContactView() {
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
-          style={{ filter: 'blur(60px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
-          style={{ filter: 'blur(70px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
         />
 
@@ -217,7 +217,6 @@ export default function ContactView() {
                       type="submit"
                       disabled={isSubmitting}
                       className="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm sm:text-base font-semibold tracking-wider uppercase rounded-sm cursor-pointer transition-all duration-300 hover:bg-[var(--color-gold-hover)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.35)] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed mt-2"
-                      style={{ backgroundColor: 'var(--color-gold)' }}
                     >
                       {isSubmitting ? (
                         <>
@@ -249,7 +248,7 @@ export default function ContactView() {
                   <div className="flex flex-col gap-5">
                     {contactInfo.map((info) => (
                       <div key={info.label} className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}>
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0">
                           <info.icon className="w-4.5 h-4.5"  />
                         </div>
                         <div className="flex flex-col">
@@ -283,16 +282,16 @@ export default function ContactView() {
                 <div className="rounded-sm overflow-hidden" >
                   <div
                     className="relative w-full aspect-video flex items-center justify-center"
-                    style={{ backgroundColor: 'var(--color-gold-soft)',
+                    style={{ 
                       backgroundImage: 'radial-gradient(circle at 30% 40%, rgba(212,175,55,0.1) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(168,181,160,0.15) 0%, transparent 50%), linear-gradient(135deg, var(--color-gold-pale) 25%, var(--color-gold-soft) 50%, var(--color-gold-pale) 75%)' }}
                   >
                     <div className="absolute inset-0 opacity-10">
-                      <div className="absolute top-1/4 left-0 right-0 h-px" style={{ backgroundColor: 'var(--color-muted-gray)' }} />
-                      <div className="absolute top-2/4 left-0 right-0 h-px" style={{ backgroundColor: 'var(--color-muted-gray)' }} />
-                      <div className="absolute top-3/4 left-0 right-0 h-px" style={{ backgroundColor: 'var(--color-muted-gray)' }} />
-                      <div className="absolute left-1/4 top-0 bottom-0 w-px" style={{ backgroundColor: 'var(--color-muted-gray)' }} />
-                      <div className="absolute left-2/4 top-0 bottom-0 w-px" style={{ backgroundColor: 'var(--color-muted-gray)' }} />
-                      <div className="absolute left-3/4 top-0 bottom-0 w-px" style={{ backgroundColor: 'var(--color-muted-gray)' }} />
+                      <div className="absolute top-1/4 left-0 right-0 h-px aura-bg-gold-tint" />
+                      <div className="absolute top-2/4 left-0 right-0 h-px aura-bg-gold-tint" />
+                      <div className="absolute top-3/4 left-0 right-0 h-px aura-bg-gold-tint" />
+                      <div className="absolute left-1/4 top-0 bottom-0 w-px aura-bg-gold-tint" />
+                      <div className="absolute left-2/4 top-0 bottom-0 w-px aura-bg-gold-tint" />
+                      <div className="absolute left-3/4 top-0 bottom-0 w-px aura-bg-gold-tint" />
                     </div>
                     <div className="flex flex-col items-center gap-3 relative z-10">
                       <MapPin className="w-8 h-8"  />
@@ -301,7 +300,6 @@ export default function ContactView() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-200 hover:bg-[var(--color-gold-hover)]"
-                        style={{ backgroundColor: 'var(--color-gold)' }}
                       >
                         View on Google Maps
                         <ChevronRight className="w-3.5 h-3.5" />

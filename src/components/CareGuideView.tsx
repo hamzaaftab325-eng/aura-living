@@ -190,12 +190,12 @@ export default function CareGuideView() {
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
-          style={{ filter: 'blur(60px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
-          style={{ filter: 'blur(70px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
         />
 
@@ -268,7 +268,6 @@ export default function CareGuideView() {
                   <div className="flex items-start gap-4 mb-5">
                     <div
                       className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
                     >
                       <category.icon className="w-5 h-5"  />
                     </div>
@@ -290,7 +289,7 @@ export default function CareGuideView() {
 
                   {/* Divider */}
                   <div className="mb-5">
-                    <div className="w-full h-px" style={{ backgroundColor: 'var(--color-gold-soft)' }} />
+                    <div className="w-full h-px" />
                   </div>
 
                   {/* Tips */}
@@ -299,7 +298,6 @@ export default function CareGuideView() {
                       <li key={idx} className="flex items-start gap-3">
                         <div
                           className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2"
-                          style={{ backgroundColor: 'var(--color-gold)' }}
                         />
                         <span
                           className="aura-text-secondary text-sm sm:text-base leading-relaxed"
@@ -318,7 +316,7 @@ export default function CareGuideView() {
       </section>
 
       {/* Need More Help CTA */}
-      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-gold-pale)' }}>
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={ctaRef} className="max-w-3xl mx-auto text-center">
           <div className="mb-6">
             <GoldDivider />

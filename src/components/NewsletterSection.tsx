@@ -77,7 +77,7 @@ export default function NewsletterSection() {
                 ref={eyebrowRef}
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5"
                 style={{
-                  backgroundColor: 'rgba(212, 175, 55, 0.12)',
+                  
                   border: '1px solid rgba(212, 175, 55, 0.25)' }}
               >
                 <Gift className="w-3.5 h-3.5 text-gold" />

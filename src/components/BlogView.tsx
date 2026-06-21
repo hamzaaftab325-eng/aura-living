@@ -71,7 +71,6 @@ function ArticleImage({
           />
           <p
             className="font-serif text-base sm:text-lg leading-snug"
-            style={{ fontFamily: 'var(--font-playfair)' }}
           >
             {title}
           </p>
@@ -143,7 +142,6 @@ function ArticleCard({
       <div className="flex flex-col flex-1 p-5">
         <h3
           className="text-lg sm:text-xl font-bold leading-snug mb-2 transition-colors duration-200"
-          style={{ fontFamily: 'var(--font-playfair)' }}
         >
           {article.title}
         </h3>
@@ -266,7 +264,6 @@ export default function BlogView() {
           </span>
           <h1
             className="text-4xl sm:text-5xl md:text-6xl font-bold mt-3 mb-5"
-            style={{ fontFamily: 'var(--font-playfair)' }}
           >
             The Journal
           </h1>
@@ -278,9 +275,9 @@ export default function BlogView() {
             people who design, make, and live with our pieces every day.
           </p>
           <div className="flex items-center justify-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px" style={{ backgroundColor: 'var(--color-gold)' }} />
-            <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--color-gold)' }} />
-            <div className="w-10 sm:w-14 h-px" style={{ backgroundColor: 'var(--color-gold)' }} />
+            <div className="w-10 sm:w-14 h-px" />
+            <div className="w-1.5 h-1.5 rounded-full" />
+            <div className="w-10 sm:w-14 h-px" />
           </div>
         </div>
       </section>
@@ -320,9 +317,6 @@ export default function BlogView() {
               />
               <div
                 className="absolute top-4 left-4 text-[10px] uppercase tracking-[2px] font-medium px-3 py-1.5 rounded-sm"
-                style={{
-                  backgroundColor: 'var(--color-gold)',
-                  color: '#FFFFFF' }}
               >
                 Featured
               </div>
@@ -338,7 +332,6 @@ export default function BlogView() {
               </span>
               <h2
                 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
-                style={{ fontFamily: 'var(--font-playfair)' }}
               >
                 {featured.title}
               </h2>
@@ -437,7 +430,6 @@ export default function BlogView() {
         <div className="max-w-3xl mx-auto text-center">
           <h2
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-            style={{ fontFamily: 'var(--font-playfair)' }}
           >
             Bring the Journal Home
           </h2>

@@ -206,7 +206,6 @@ export default function TrackOrdersView() {
               <Link
                 href="/auth/signup"
                 className="text-xs sm:text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-                style={{ background: 'none' }}
               >
                 Create a free account
               </Link>
@@ -277,9 +276,8 @@ export default function TrackOrdersView() {
               <div className="flex flex-col sm:flex-row items-stretch gap-3">
                 <div
                   className="flex items-center rounded-sm flex-1"
-                  style={{ border: '1.5px solid var(--color-gold-soft)' }}
                 >
-                  <div className="flex items-center justify-center pl-4" style={{ color: 'var(--color-taupe)' }}>
+                  <div className="flex items-center justify-center pl-4">
                     <Search className="w-4 h-4" />
                   </div>
                   <input
@@ -436,7 +434,6 @@ export default function TrackOrdersView() {
               href="/account"
               onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--color-gold-hover)] cursor-pointer"
-              style={{ background: 'none' }}
             >
               <ChevronRight className="w-3.5 h-3.5 rotate-180" />
               Back to My Account

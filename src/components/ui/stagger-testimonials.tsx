@@ -222,7 +222,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         className="absolute left-0 top-0 bottom-0 rounded-l-sm transition-all duration-400 z-20"
         style={{
           width: isHovered ? '4px' : '0px',
-          backgroundColor: 'var(--color-gold)',
+          
           boxShadow: isHovered ? '0 0 8px rgba(212,175,55,0.5)' : 'none',
           transformOrigin: 'bottom' }}
       />

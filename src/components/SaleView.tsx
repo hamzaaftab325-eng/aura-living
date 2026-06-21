@@ -276,7 +276,6 @@ export default function SaleView() {
               <button
                 onClick={() => setShowUrgencyPopup(false)}
                 className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors hover:bg-white/20 cursor-pointer"
-                style={{ color: 'rgba(255,255,255,0.7)' }}
                 aria-label="Dismiss"
               >
                 <X className="w-3.5 h-3.5" />
@@ -317,12 +316,12 @@ export default function SaleView() {
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
-          style={{ filter: 'blur(60px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
-          style={{ filter: 'blur(70px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%)' }}
         />
 
@@ -445,7 +444,6 @@ export default function SaleView() {
                       <Link
                         href={`/product/${product.slug}`}
                         className="relative w-full aspect-[3/4] overflow-hidden block"
-                        style={{ backgroundColor: 'var(--color-gold-pale)' }}
                         onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                         aria-label={`View ${product.name} details`}
                       >
@@ -469,7 +467,6 @@ export default function SaleView() {
                         {product.originalPrice && (
                           <div
                             className="absolute bottom-3 left-3 px-2 py-1 rounded-sm text-xs font-bold"
-                            style={{ backgroundColor: 'var(--color-gold)' }}
                           >
                             -{savingsPercent}%
                           </div>

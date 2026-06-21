@@ -137,12 +137,12 @@ export default function WishlistView() {
         {/* Decorative floating orbs */}
         <div
           className="absolute top-10 left-10 w-32 h-32 rounded-full"
-          style={{ filter: 'blur(60px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-10 right-10 w-40 h-40 rounded-full"
-          style={{ filter: 'blur(70px)',
+          style={{ 
             background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
         />
 
@@ -250,7 +250,6 @@ export default function WishlistView() {
                     <Link
                       href={`/product/${product.slug}`}
                       className="relative w-full aspect-[3/4] overflow-hidden block"
-                      style={{ backgroundColor: 'var(--color-gold-pale)' }}
                       onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                       aria-label={`View ${product.name} details`}
                     >
@@ -329,7 +328,6 @@ export default function WishlistView() {
                         {product.originalPrice && (
                           <span
                             className="text-xs font-semibold px-1.5 py-0.5 rounded-sm"
-                            style={{ backgroundColor: 'rgba(212, 175, 55, 0.12)' }}
                           >
                             {product.originalPrice ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0}% OFF
                           </span>
