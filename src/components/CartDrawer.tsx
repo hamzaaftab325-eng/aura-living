@@ -52,7 +52,6 @@ export default function CartDrawer() {
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
-  const isOpenRef = useRef(false);
 
   const handleClose = useCallback(() => setCartOpen(false), [setCartOpen]);
 
@@ -92,43 +91,16 @@ export default function CartDrawer() {
     toast({ title: 'Coupon removed' });
   };
 
-  // Slide-in animation (right-side drawer)
+  // Body scroll lock when cart is open
   useEffect(() => {
-    const overlay = overlayRef.current;
-    const drawer = drawerRef.current;
-    if (!overlay || !drawer) return;
-
-    if (cartOpen && !isOpenRef.current) {
-      isOpenRef.current = true;
+    if (cartOpen) {
       document.body.style.overflow = 'hidden';
-      // Overlay fade in
-      overlay.style.opacity = '0';
-      requestAnimationFrame(() => {
-        overlay.style.transition = 'opacity 250ms ease-out';
-        overlay.style.opacity = '1';
-      });
-      // Drawer slide in from right
-      drawer.style.transform = 'translateX(100%)';
-      drawer.style.opacity = '0';
-      requestAnimationFrame(() => {
-        drawer.style.transition = 'transform 350ms cubic-bezier(0.16, 1, 0.3, 1), opacity 250ms ease-out';
-        drawer.style.transform = 'translateX(0)';
-        drawer.style.opacity = '1';
-      });
-    } else if (!cartOpen && isOpenRef.current) {
-      isOpenRef.current = false;
-      drawer.style.transition = 'transform 250ms cubic-bezier(0.65, 0, 0.35, 1), opacity 200ms ease-in';
-      drawer.style.transform = 'translateX(100%)';
-      drawer.style.opacity = '0';
-      overlay.style.transition = 'opacity 200ms ease-in';
-      overlay.style.opacity = '0';
-      const t = setTimeout(() => {
-        document.body.style.overflow = '';
-      }, 270);
-      return () => clearTimeout(t);
+    } else {
+      document.body.style.overflow = '';
     }
-
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [cartOpen]);
 
   // Escape + focus trap + restore focus
@@ -153,8 +125,9 @@ export default function CartDrawer() {
     };
   }, [cartOpen, setCartOpen]);
 
-  if (!cartOpen) return null;
-
+  // Always render the DOM, but hide when not open.
+  // This ensures refs are available when the animation effect runs.
+  // Using pointer-events-none + visibility to prevent interaction when closed.
   return (
     <>
       {/* Overlay — premium gradient + blur */}
@@ -163,22 +136,33 @@ export default function CartDrawer() {
         className="fixed inset-0 z-[70]"
         style={{
           background: 'linear-gradient(135deg, rgba(44,44,44,0.6) 0%, rgba(28,28,28,0.5) 100%)',
-          opacity: 0 }}
+          opacity: cartOpen ? 1 : 0,
+          pointerEvents: cartOpen ? 'auto' : 'none',
+          visibility: cartOpen ? 'visible' : 'hidden',
+          transition: 'opacity 250ms ease-out',
+        }}
         onClick={handleClose}
         aria-hidden="true"
       />
 
       {/* Drawer — right slide-in, premium design */}
-      <div className="fixed inset-0 z-[80] flex justify-end pointer-events-none" role="presentation">
+      <div
+        className="fixed inset-0 z-[80] flex justify-end pointer-events-none"
+        role="presentation"
+        style={{ pointerEvents: cartOpen ? 'auto' : 'none' }}
+      >
         <aside
           ref={drawerRef}
           role="dialog"
           aria-modal="true"
           aria-labelledby="cart-drawer-title"
           className="relative h-full w-full max-w-[440px] flex flex-col pointer-events-auto aura-gradient-card-vertical"
-          style={{ boxShadow: '-20px 0 60px rgba(0,0,0,0.15), -1px 0 0 rgba(212,175,55,0.1)',
-            transform: 'translateX(100%)',
-            opacity: 0 }}
+          style={{
+            boxShadow: '-20px 0 60px rgba(0,0,0,0.15), -1px 0 0 rgba(212,175,55,0.1)',
+            transform: cartOpen ? 'translateX(0)' : 'translateX(100%)',
+            opacity: cartOpen ? 1 : 0,
+            transition: 'transform 350ms cubic-bezier(0.16, 1, 0.3, 1), opacity 250ms ease-out',
+          }}
         >
           {/* ═══ Premium gold top accent with gradient ═══ */}
           <div

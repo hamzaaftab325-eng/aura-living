@@ -158,10 +158,22 @@ export const useStore = create<StoreState>()(
       name: 'aura-living-storage',
       storage: createJSONStorage(() => localStorage),
       // Only persist cart + wishlist (auth state removed — comes from Better Auth)
+      // UI state (cartOpen) is NOT persisted — always starts as false
       partialize: (state) => ({
         cart: state.cart,
         wishlist: state.wishlist,
       }),
+      // Merge persisted state with initial state — ensures cartOpen + functions
+      // are never overwritten by the persisted partial state
+      merge: (persisted, current) => {
+        const persistedState = persisted as Partial<StoreState>;
+        return {
+          ...current,
+          ...persistedState,
+          // Always reset UI state on load
+          cartOpen: false,
+        };
+      },
     }
   )
 );
