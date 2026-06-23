@@ -14,6 +14,7 @@ import {
   Check,
   X } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import { useAuth } from '@/hooks/use-auth';
 import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
@@ -91,8 +92,7 @@ const emptyForm: Omit<Address, 'id' | 'isDefault'> = {
   postal: '' };
 
 export default function AddressesView() {
-  const user = useStore((state) => state.user);
-  const logout = useStore((state) => state.logout);
+  const { user, logout } = useAuth();
   const { toast } = useToast();
 
   // Hydration guard

@@ -4,11 +4,11 @@
 /* Dark mode: intentionally disabled for v1 — light-only by design.
    To enable later, add: @custom-variant dark (&:is(.dark *)); */
 
-/* ═══════════════════════════════════════════════════════════
+/* ===========================================================
    CSS ARCHITECTURE — Modular imports
    Each category lives in its own file for maintainability.
    Order matters: tokens → typography → components → utilities
-   ═══════════════════════════════════════════════════════════ */
+   =========================================================== */
 
 @import "./styles/tokens.css";
 @import "./styles/typography.css";
@@ -19,9 +19,9 @@
 @import "./styles/utilities.css";
 @import "./styles/responsive.css";
 
-/* ═══════════════════════════════════════════════════════════
+/* ===========================================================
    BASE LAYER — Reset, body, focus, skip link, reduced motion
-   ═══════════════════════════════════════════════════════════ */
+   =========================================================== */
 @layer base {
   * {
     @apply border-border outline-ring/50;

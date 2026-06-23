@@ -1,5 +1,6 @@
+/* ==========================================================================
    Mobile Responsiveness — Critical Fixes
-   ═══════════════════════════════════════════════════════════ */
+   ========================================================================== */
 
 /* Use 100% instead of 100vw on body to avoid scrollbar-width miscalculation on desktop.
    Keep overflow-x: hidden only on body (not html) so it acts as a safety net without
@@ -97,9 +98,9 @@ body {
   border: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════
+/* ===========================================================
    PRINT STYLES — clean printing for product pages, order confirmations
-   ═══════════════════════════════════════════════════════════ */
+   =========================================================== */
 @media print {
   /* Hide navigation, footer, cart drawer, back-to-top, decorative elements */
   nav,
@@ -191,9 +192,9 @@ body {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════
+/* ===========================================================
    REMAINING UTILITY CLASSES — Final inline style replacement
-   ═══════════════════════════════════════════════════════════ */
+   =========================================================== */
 
 /* More background colors */
 .aura-bg-gold                 { background-color: var(--color-gold); }

@@ -18,6 +18,7 @@ import {
   Clock,
   CheckCircle } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import { useAuth } from '@/hooks/use-auth';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
 import Breadcrumb from '@/components/ui/Breadcrumb';
@@ -76,8 +77,7 @@ export default function AccountView() {
   const router = useRouter();
   const cart = useStore((state) => state.cart);
   const wishlist = useStore((state) => state.wishlist);
-  const user = useStore((state) => state.user);
-  const logout = useStore((state) => state.logout);
+  const { user, logout } = useAuth();
   
   const { toast } = useToast();
 

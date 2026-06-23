@@ -12,11 +12,11 @@
   .aura-breadcrumb { padding: 1rem 2rem; }
 }
 
-/* ═══════════════════════════════════════════════════════════
+/* ===========================================================
    CARD DESIGN SYSTEM
    Radius: 12px (var(--radius-lg))
    Shadow: subtle (var(--shadow-sm) resting, var(--shadow-lg) hover)
    Padding: 20px mobile, 24px tablet, 32px desktop
    Hover: lift -6px + shadow-lg + gold border
-   ═══════════════════════════════════════════════════════════ */
+   =========================================================== */
 

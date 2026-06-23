@@ -5,6 +5,15 @@ import type { Product, CartItem, User } from '@/types';
 // Re-export types for backward compatibility with existing imports
 export type { Product, CartItem, User } from '@/types';
 
+// ============================================================================
+// IMPORTANT: Auth state is NO LONGER in Zustand.
+// Use the `useSession` hook from `@/lib/auth-client` instead:
+//   import { authClient } from '@/lib/auth-client';
+//   const { data: session } = authClient.useSession();
+// The `User` type is re-exported above only for backward compat with
+// components that still import it.
+// ============================================================================
+
 // Shared badge color mapping — used by ProductDetailView, ShopView, WishlistView, FeaturedProducts
 export const badgeColors: Record<string, { bg: string; text: string }> = {
   NEW: { bg: '#A8B5A0', text: '#FFFFFF' },
@@ -38,12 +47,6 @@ interface StoreState {
   wishlist: string[];
   toggleWishlist: (productId: string) => WishlistToggleResult;
   isInWishlist: (productId: string) => boolean;
-
-  // User / Auth
-  user: User | null;
-  login: (email: string) => void;
-  signup: (name: string, email: string) => void;
-  logout: () => void;
 
   // UI State (cart drawer visibility is the only SPA UI state we need;
   // all other "page state" is now derived from the URL via App Router)
@@ -147,31 +150,6 @@ export const useStore = create<StoreState>()(
         return get().wishlist.includes(productId);
       },
 
-      // User / Auth (frontend-only simulation)
-      user: null,
-      login: (email) => {
-        const name = email.split('@')[0].replace(/[._-]/g, ' ');
-        set({
-          user: {
-            name: name.charAt(0).toUpperCase() + name.slice(1),
-            email,
-            memberSince: new Date().getFullYear().toString(),
-            rewardsPoints: 450,
-          },
-        });
-      },
-      signup: (name, email) => {
-        set({
-          user: {
-            name,
-            email,
-            memberSince: new Date().getFullYear().toString(),
-            rewardsPoints: 100, // welcome bonus
-          },
-        });
-      },
-      logout: () => set({ user: null }),
-
       // UI State
       cartOpen: false,
       setCartOpen: (open) => set({ cartOpen: open }),
@@ -179,11 +157,10 @@ export const useStore = create<StoreState>()(
     {
       name: 'aura-living-storage',
       storage: createJSONStorage(() => localStorage),
-      // Only persist cart, wishlist, and user — UI state is ephemeral
+      // Only persist cart + wishlist (auth state removed — comes from Better Auth)
       partialize: (state) => ({
         cart: state.cart,
         wishlist: state.wishlist,
-        user: state.user,
       }),
     }
   )

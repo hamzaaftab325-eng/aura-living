@@ -14,6 +14,7 @@ import {
   Search,
   Box } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import { useAuth } from '@/hooks/use-auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -107,8 +108,7 @@ const statusConfig: Record<TrackedOrder['status'], { color: string; bg: string; 
 
 export default function TrackOrdersView() {
   const router = useRouter();
-  const user = useStore((state) => state.user);
-  const logout = useStore((state) => state.logout);
+  const { user, logout } = useAuth();
   const { toast } = useToast();
 
   // Hydration guard

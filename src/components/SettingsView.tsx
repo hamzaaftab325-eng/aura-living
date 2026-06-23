@@ -14,6 +14,7 @@ import {
   Mail,
   Check } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import { useAuth } from '@/hooks/use-auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -65,8 +66,7 @@ function Toggle({
 
 export default function SettingsView() {
   const router = useRouter();
-  const user = useStore((state) => state.user);
-  const logout = useStore((state) => state.logout);
+  const { user, logout } = useAuth();
   
   const { toast } = useToast();
 

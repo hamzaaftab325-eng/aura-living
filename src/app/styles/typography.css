@@ -1,4 +1,4 @@
-/* ═══════════════════════════════════════════════════════════
+/* ===========================================================
    TYPOGRAPHY & CONTENT HIERARCHY DESIGN SYSTEM
    H1 (hero only, 36-72px), H2 (sections, 28-44px),
    H3 (cards, 20-28px), H4 (supporting, 18-22px)
@@ -9,7 +9,7 @@
    Color is always controlled by Tailwind utilities (text-white,
    text-charcoal, text-gold, etc.) so the same class works on
    both dark and light backgrounds.
-   ═══════════════════════════════════════════════════════════ */
+   =========================================================== */
 
 /* ── H1: Hero title — one per page, hero section only ── */
 .aura-h1 {

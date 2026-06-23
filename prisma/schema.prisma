@@ -66,24 +66,22 @@ enum UserRole {
 model Account {
   id                    String    @id @default(cuid())
   userId                String
-  type                  String
-  provider              String
-  providerAccountId     String
+  providerId            String
+  accountId             String
   refreshToken          String?
   accessToken           String?
-  expiresAt             Int?
-  tokenType             String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
   scope                 String?
   idToken               String?
-  sessionState          String?
-  refreshTokenExpiresAt DateTime?
+  password              String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([provider, providerAccountId])
+  @@unique([providerId, accountId])
   @@index([userId])
 }
 
