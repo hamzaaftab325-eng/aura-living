@@ -50,31 +50,6 @@ interface Address {
   isDefault: boolean;
 }
 
-const initialAddresses: Address[] = [
-  {
-    id: 'addr-1',
-    label: 'Home',
-    name: 'Ayesha Khan',
-    phone: '+92 300 1234567',
-    line1: 'House 24, Block C, Model Town',
-    line2: 'Near Central Park',
-    city: 'Lahore',
-    province: 'Punjab',
-    postal: '54000',
-    isDefault: true },
-  {
-    id: 'addr-2',
-    label: 'Work',
-    name: 'Ayesha Khan',
-    phone: '+92 300 1234567',
-    line1: 'Office 7B, Arfa Software Technology Park',
-    line2: 'Ferozepur Road',
-    city: 'Lahore',
-    province: 'Punjab',
-    postal: '54000',
-    isDefault: false },
-];
-
 const labelConfig: Record<Address['label'], { icon: typeof Home; color: string; bg: string }> = {
   Home: { icon: Home, color: 'var(--color-gold)', bg: 'rgba(212, 175, 55, 0.1)' },
   Work: { icon: Briefcase, color: 'var(--color-info)', bg: 'rgba(59, 130, 246, 0.1)' },

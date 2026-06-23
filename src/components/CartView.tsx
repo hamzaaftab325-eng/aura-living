@@ -39,7 +39,7 @@ export default function CartView() {
 
   const cartCount = getCartCount();
   const subtotal = getCartTotal();
-  const FREE_SHIPPING_THRESHOLD = 2999;
+  const FREE_SHIPPING_THRESHOLD = 10000; // Rs. 10,000 (matches server-side lib/shipping.ts)
   const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 250;
   const estimatedTotal = subtotal + shipping;
   const amountToFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);

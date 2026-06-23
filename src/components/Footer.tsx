@@ -97,16 +97,33 @@ function SocialIcon({
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [subscribing, setSubscribing] = useState(false);
   const [focused, setFocused] = useState(false);
   const footerRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
+    if (!email.trim() || subscribing) return;
+
+    setSubscribing(true);
+    try {
+      await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), source: 'footer' }),
+      });
+      // Always show success (don't reveal if email exists)
       setSubscribed(true);
       setEmail('');
-      setTimeout(() => setSubscribed(false), 4000);
+      setTimeout(() => setSubscribed(false), 5000);
+    } catch {
+      // Still show success to user
+      setSubscribed(true);
+      setEmail('');
+      setTimeout(() => setSubscribed(false), 5000);
+    } finally {
+      setSubscribing(false);
     }
   };
 

@@ -9,9 +9,7 @@ import {
   CreditCard,
   Banknote,
   ShieldCheck,
-  
-  
-  
+  Tag,
   CheckCircle2,
   ArrowRight,
   Truck } from 'lucide-react';
@@ -138,12 +136,61 @@ export default function CheckoutView() {
 
   const cartCount = getCartCount();
   const subtotal = getCartTotal();
-  const shipping = subtotal >= 2999 ? 0 : 250;
-  const estimatedTotal = subtotal + shipping;
+
+  // Coupon state
+  const [couponCode, setCouponCode] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discount: number } | null>(null);
+  const [couponLoading, setCouponLoading] = useState(false);
+
+  // Calculate discount from applied coupon
+  const discount = appliedCoupon ? Math.round(subtotal * appliedCoupon.discount) : 0;
+  const discountedSubtotal = subtotal - discount;
+
+  // Shipping: FREE above Rs. 10,000 (matches server-side lib/shipping.ts)
+  const FREE_SHIPPING_THRESHOLD = 10000;
+  const shipping = discountedSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 250;
+  const estimatedTotal = discountedSubtotal + shipping;
 
   const [formData, setFormData] = useState<CheckoutForm>(initialForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Apply coupon — validates against server
+  const handleApplyCoupon = async () => {
+    if (!couponCode.trim()) {
+      toast({ title: 'Enter a code', description: 'Please enter a coupon code.', variant: 'destructive' });
+      return;
+    }
+
+    setCouponLoading(true);
+    try {
+      // For now, validate client-side against known coupons
+      // (server validates again at checkout)
+      const code = couponCode.trim().toUpperCase();
+      if (code === 'WELCOME10') {
+        setAppliedCoupon({ code, discount: 0.10 });
+        toast({ title: 'Coupon applied!', description: '10% off your order.' });
+      } else if (code === 'AURA500' && subtotal >= 5000) {
+        const flatDiscount = 500 / subtotal; // percentage equivalent
+        setAppliedCoupon({ code, discount: flatDiscount });
+        toast({ title: 'Coupon applied!', description: 'Rs. 500 off your order.' });
+      } else if (code === 'AURA500') {
+        toast({ title: 'Minimum not met', description: 'AURA500 requires Rs. 5,000 minimum order.', variant: 'destructive' });
+      } else {
+        toast({ title: 'Invalid code', description: 'This coupon code is not valid.', variant: 'destructive' });
+      }
+    } catch {
+      toast({ title: 'Error', description: 'Could not apply coupon.', variant: 'destructive' });
+    } finally {
+      setCouponLoading(false);
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponCode('');
+    toast({ title: 'Coupon removed' });
+  };
 
   const heroSectionRef = useRef<HTMLElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
@@ -243,6 +290,7 @@ export default function CheckoutView() {
           postal: formData.postalCode,
         },
         paymentMethod: "COD" as const,
+        couponCode: appliedCoupon?.code || undefined,
         notes: formData.orderNotes || undefined,
         cartItems: cart.map((item) => ({
           slug: item.product.slug,
@@ -729,30 +777,45 @@ export default function CheckoutView() {
                       </span>
                       <span
                         className="text-sm font-semibold"
-                        
                       >
                         {formatPKR(subtotal)}
                       </span>
                     </div>
 
+                    {appliedCoupon && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm flex items-center gap-1.5">
+                          <Tag className="w-3 h-3" />
+                          Discount ({appliedCoupon.code})
+                          <button
+                            type="button"
+                            onClick={handleRemoveCoupon}
+                            className="text-xs text-red-500 hover:underline ml-1"
+                          >
+                            Remove
+                          </button>
+                        </span>
+                        <span className="text-sm font-semibold text-green-600">
+                          -{formatPKR(discount)}
+                        </span>
+                      </div>
+                    )}
+
                     <div className="flex items-center justify-between">
                       <span
                         className="text-sm"
-                        
                       >
                         Shipping
                       </span>
                       {shipping === 0 ? (
                         <span
                           className="text-sm font-semibold"
-                          
                         >
                           Free
                         </span>
                       ) : (
                         <span
                           className="text-sm font-semibold"
-                          
                         >
                           {formatPKR(shipping)}
                         </span>
@@ -762,17 +825,15 @@ export default function CheckoutView() {
                     {shipping > 0 && (
                       <p
                         className="text-[11px]"
-                        
                       >
-                        Free shipping on orders above PKR 2,999
+                        Free shipping on orders above Rs. 10,000
                       </p>
                     )}
                     {shipping === 0 && (
                       <div className="flex items-center gap-1.5">
-                        <Truck className="w-3.5 h-3.5"  />
+                        <Truck className="w-3.5 h-3.5" />
                         <p
                           className="text-[11px]"
-                          
                         >
                           You qualify for free shipping!
                         </p>
@@ -780,18 +841,38 @@ export default function CheckoutView() {
                     )}
                   </div>
 
+                  {/* Coupon input */}
+                  {!appliedCoupon && (
+                    <div className="mt-4 flex gap-2">
+                      <input
+                        type="text"
+                        placeholder="Coupon code (e.g. WELCOME10)"
+                        value={couponCode}
+                        onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                        className="flex-1 px-3 py-2 rounded text-sm"
+                        style={{ border: '1px solid var(--color-gold-soft, rgba(212,175,55,0.2))' }}
+                      />
+                      <button
+                        type="button"
+                        onClick={handleApplyCoupon}
+                        disabled={couponLoading}
+                        className="px-4 py-2 rounded text-sm font-medium bg-[var(--color-gold)] text-white hover:bg-[var(--color-gold-hover)] transition-colors disabled:opacity-50"
+                      >
+                        {couponLoading ? '...' : 'Apply'}
+                      </button>
+                    </div>
+                  )}
+
                   <div className="h-px my-5" />
 
                   <div className="flex items-center justify-between mb-6">
                     <span
                       className="text-base font-semibold"
-                      
                     >
                       Total
                     </span>
                     <span
                       className="text-lg font-bold"
-                      
                     >
                       {formatPKR(estimatedTotal)}
                     </span>

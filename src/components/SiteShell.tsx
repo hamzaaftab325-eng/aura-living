@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
@@ -9,21 +9,15 @@ import { GoldDivider, CornerOrnament, FloatingOrb } from '@/components/SVGDecora
 import { useLenis } from '@/hooks/useLenis';
 import gsap from 'gsap';;
 import { useStore } from '@/store/useStore';
-import { getProductById } from '@/data/products';
-import { getArticleBySlug } from '@/data/articles';
 
 /**
  * Client-side site shell — wraps every page with Navbar, Footer, CartDrawer,
  * BackToTop, Lenis smooth scroll, GSAP page transitions, and decorative orbs.
  *
  * Lives in the root layout so these elements appear on every route.
- *
- * Also handles legacy hash URL redirects (#product/1 → /product/<slug>) since
- * the hash fragment is not sent to the server.
  */
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -35,65 +29,6 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
-
-  // Legacy hash URL redirects — runs once on mount
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const hash = window.location.hash.replace('#', '');
-    if (!hash) return;
-
-    // #product/<id> → /product/<slug>
-    if (hash.startsWith('product/')) {
-      const productId = hash.split('/')[1];
-      const product = getProductById(productId);
-      if (product) {
-        router.replace('/product/' + product.slug);
-        return;
-      }
-    }
-
-    // #article/<slug> → /blog/<slug>
-    if (hash.startsWith('article/')) {
-      const slug = hash.split('/')[1];
-      if (slug && getArticleBySlug(slug)) {
-        router.replace('/blog/' + slug);
-        return;
-      }
-    }
-
-    // #shop, #cart, #about, etc. → /shop, /cart, /about
-    const pageRedirects: Record<string, string> = {
-      home: '/',
-      shop: '/shop',
-      cart: '/cart',
-      checkout: '/checkout',
-      wishlist: '/wishlist',
-      account: '/account',
-      about: '/about',
-      contact: '/contact',
-      faq: '/faq',
-      shipping: '/shipping',
-      returns: '/returns',
-      'care-guide': '/care-guide',
-      'new-arrivals': '/new-arrivals',
-      sale: '/sale',
-      lookbook: '/lookbook',
-      terms: '/terms',
-      privacy: '/privacy',
-      'forgot-password': '/auth/forgot-password',
-      'track-orders': '/account/orders',
-      addresses: '/account/addresses',
-      settings: '/account/settings',
-      admin: '/admin',
-      login: '/auth/login',
-      signup: '/auth/signup',
-      blog: '/blog' };
-
-    if (pageRedirects[hash]) {
-      router.replace(pageRedirects[hash]);
-      return;
-    }
-  }, [router]);
 
   // Scroll-to-top + GSAP fade-in on route change
   useEffect(() => {

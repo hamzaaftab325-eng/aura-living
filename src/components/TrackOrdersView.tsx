@@ -55,51 +55,6 @@ interface TrackedOrder {
   stages: TrackingStage[];
 }
 
-const trackedOrders: TrackedOrder[] = [
-  {
-    id: 'AL-2026-001',
-    date: 'Jan 15, 2026',
-    status: 'Delivered',
-    total: 'PKR 12,498',
-    items: 3,
-    eta: 'Delivered on Jan 19, 2026',
-    stages: [
-      { label: 'Order Placed', date: 'Jan 15, 10:32 AM', done: true, icon: CheckCircle },
-      { label: 'Packed', date: 'Jan 15, 04:18 PM', done: true, icon: Box },
-      { label: 'Shipped', date: 'Jan 16, 09:45 AM', done: true, icon: Truck },
-      { label: 'Out for Delivery', date: 'Jan 19, 11:20 AM', done: true, icon: MapPin },
-      { label: 'Delivered', date: 'Jan 19, 03:48 PM', done: true, icon: CheckCircle },
-    ] },
-  {
-    id: 'AL-2026-002',
-    date: 'Feb 28, 2026',
-    status: 'Shipped',
-    total: 'PKR 8,999',
-    items: 2,
-    eta: 'Arriving Mar 04, 2026',
-    stages: [
-      { label: 'Order Placed', date: 'Feb 28, 02:14 PM', done: true, icon: CheckCircle },
-      { label: 'Packed', date: 'Feb 28, 06:42 PM', done: true, icon: Box },
-      { label: 'Shipped', date: 'Mar 01, 08:30 AM', done: true, icon: Truck },
-      { label: 'Out for Delivery', date: 'Pending', done: false, icon: MapPin },
-      { label: 'Delivered', date: 'Pending', done: false, icon: CheckCircle },
-    ] },
-  {
-    id: 'AL-2026-003',
-    date: 'Mar 10, 2026',
-    status: 'Processing',
-    total: 'PKR 5,499',
-    items: 1,
-    eta: 'Ships by Mar 12, 2026',
-    stages: [
-      { label: 'Order Placed', date: 'Mar 10, 11:08 AM', done: true, icon: CheckCircle },
-      { label: 'Packed', date: 'In progress', done: false, icon: Box },
-      { label: 'Shipped', date: 'Pending', done: false, icon: Truck },
-      { label: 'Out for Delivery', date: 'Pending', done: false, icon: MapPin },
-      { label: 'Delivered', date: 'Pending', done: false, icon: CheckCircle },
-    ] },
-];
-
 const statusConfig: Record<TrackedOrder['status'], { color: string; bg: string; icon: typeof CheckCircle }> = {
   Delivered: { color: 'var(--color-success)', bg: 'rgba(34, 197, 94, 0.1)', icon: CheckCircle },
   Shipped: { color: 'var(--color-info)', bg: 'rgba(59, 130, 246, 0.1)', icon: Truck },

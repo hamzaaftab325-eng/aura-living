@@ -42,7 +42,7 @@ export default function CartDrawer() {
   const [couponInput, setCouponInput] = useState('');
   const [appliedCoupon, setAppliedCoupon] = useState<CouponCode | null>(null);
 
-  const FREE_SHIPPING_THRESHOLD = 2999;
+  const FREE_SHIPPING_THRESHOLD = 10000; // Rs. 10,000 (matches server-side lib/shipping.ts)
   const discount = appliedCoupon ? Math.round(subtotal * VALID_COUPONS[appliedCoupon].discount) : 0;
   const discountedSubtotal = subtotal - discount;
   const shipping = discountedSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 250;

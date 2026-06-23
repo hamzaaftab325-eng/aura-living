@@ -40,39 +40,6 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
   return <div ref={ref} className={className}>{children}</div>;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   Mock Data
-   ═══════════════════════════════════════════════════════════ */
-const mockOrders = [
-  {
-    id: 'AL-2026-001',
-    date: 'Jan 15, 2026',
-    status: 'Delivered',
-    total: 'PKR 12,498',
-    statusColor: 'var(--color-success)',
-    statusBg: 'rgba(34, 197, 94, 0.1)',
-    statusIcon: CheckCircle,
-  },
-  {
-    id: 'AL-2026-002',
-    date: 'Feb 28, 2026',
-    status: 'Shipped',
-    total: 'PKR 8,999',
-    statusColor: 'var(--color-info)',
-    statusBg: 'rgba(59, 130, 246, 0.1)',
-    statusIcon: Truck,
-  },
-  {
-    id: 'AL-2026-003',
-    date: 'Mar 10, 2026',
-    status: 'Processing',
-    total: 'PKR 5,499',
-    statusColor: 'var(--color-gold)',
-    statusBg: 'rgba(212, 175, 55, 0.1)',
-    statusIcon: Clock,
-  },
-];
-
 export default function AccountView() {
   const router = useRouter();
   const cart = useStore((state) => state.cart);
