@@ -58,33 +58,15 @@ export const auth = betterAuth({
     enabled: true,
     // Require email verification before user can log in
     requireEmailVerification: true,
-    // Send verification email on signup
-    sendVerificationEmail: async ({ user, url, token }) => {
-      const verificationUrl = `${process.env.AUTH_URL ?? process.env.NEXT_PUBLIC_APP_URL}/auth/verify-email?token=${token}&email=${encodeURIComponent(user.email)}`;
-
-      try {
-        await resend.emails.send({
-          from: process.env.EMAIL_FROM ?? "Aura Living <noreply@auraliving.pk>",
-          to: user.email,
-          subject: "Verify your email — Aura Living",
-          react: VerifyEmailEmail({
-            name: user.name,
-            verificationUrl,
-          }),
-        });
-      } catch (error) {
-        console.error("Failed to send verification email:", error);
-        // Don't throw — we still want signup to succeed so user can request
-        // a new verification email from the verify-email page.
-      }
-    },
     // Send password reset email
     sendResetPassword: async ({ user, url, token }) => {
       const resetUrl = `${process.env.AUTH_URL ?? process.env.NEXT_PUBLIC_APP_URL}/auth/reset-password?token=${token}&email=${encodeURIComponent(user.email)}`;
 
+      console.log(`[auth] Sending password reset email to ${user.email}...`);
+
       try {
-        await resend.emails.send({
-          from: process.env.EMAIL_FROM ?? "Aura Living <noreply@auraliving.pk>",
+        const result = await resend.emails.send({
+          from: process.env.EMAIL_FROM ?? "Aura Living <onboarding@resend.dev>",
           to: user.email,
           subject: "Reset your password — Aura Living",
           react: ResetPasswordEmail({
@@ -92,12 +74,52 @@ export const auth = betterAuth({
             resetUrl,
           }),
         });
+
+        if (result.error) {
+          console.error("[auth] Password reset email error from Resend:", result.error);
+        } else {
+          console.log(`[auth] ✅ Password reset email sent! Email ID: ${result.data?.id}`);
+        }
       } catch (error) {
-        console.error("Failed to send password reset email:", error);
+        console.error("[auth] Failed to send password reset email:", error);
       }
     },
     // Reset password redirect URL (after successful reset)
     resetPasswordCallbackUrl: "/auth/login",
+  },
+
+  // Email verification config (Better Auth 1.6+ moved this OUT of emailAndPassword)
+  emailVerification: {
+    // Send a verification email automatically after sign up
+    sendOnSignUp: true,
+    // Send verification email callback
+    sendVerificationEmail: async ({ user, url, token }) => {
+      const verificationUrl = `${process.env.AUTH_URL ?? process.env.NEXT_PUBLIC_APP_URL}/auth/verify-email?token=${token}&email=${encodeURIComponent(user.email)}`;
+
+      console.log(`[auth] Sending verification email to ${user.email}...`);
+
+      try {
+        const result = await resend.emails.send({
+          from: process.env.EMAIL_FROM ?? "Aura Living <onboarding@resend.dev>",
+          to: user.email,
+          subject: "Verify your email — Aura Living",
+          react: VerifyEmailEmail({
+            name: user.name,
+            verificationUrl,
+          }),
+        });
+
+        if (result.error) {
+          console.error("[auth] Verification email error from Resend:", result.error);
+        } else {
+          console.log(`[auth] ✅ Verification email sent! Email ID: ${result.data?.id}`);
+        }
+      } catch (error) {
+        console.error("[auth] Failed to send verification email:", error);
+        // Don't throw — we still want signup to succeed so user can request
+        // a new verification email from the verify-email page.
+      }
+    },
   },
 
   // Session config
