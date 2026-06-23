@@ -17,7 +17,8 @@ import {
   X } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
-import { products, formatPKR } from '@/data/products';
+import { formatPKR } from '@/data/products';
+import type { Product } from '@/store/useStore';
 import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
@@ -142,7 +143,7 @@ function SaleCountdown() {
   );
 }
 
-export default function SaleView() {
+export default function SaleView({ initialProducts }: { initialProducts?: Product[] } = {}) {
   const { handleAddToCart: addToCart, handleToggleWishlist: toggleWishlist } = useCartActions();
   // Subscribe to wishlist array so component re-renders when wishlist changes.
   // (isInWishlist is a stable function reference and won't trigger re-render on its own.)
@@ -152,11 +153,8 @@ export default function SaleView() {
   const heroBgRef = useRef<HTMLElement>(null);
   const heroBgDivRef = useRef<HTMLDivElement>(null);
 
-  // Filter SALE products
-  const saleProducts = useMemo(
-    () => products.filter((p) => p.badge === 'SALE'),
-    []
-  );
+  // Use DB-fetched products if provided, otherwise empty array
+  const saleProducts = initialProducts ?? [];
 
   // Urgency popup state — appears after mount, auto-hides after 5 seconds
   const [showUrgencyPopup, setShowUrgencyPopup] = useState(false);
@@ -223,7 +221,7 @@ export default function SaleView() {
     return () => ctx.revert();
   }, []);
 
-  const handleAddToCart = (product: typeof products[0]) => {
+  const handleAddToCart = (product: Product) => {
     addToCart(product, { openCart: true });
   };
 

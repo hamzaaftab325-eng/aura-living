@@ -6,6 +6,7 @@ import TrendingCollection from '@/components/TrendingCollection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import NewsletterSection from '@/components/NewsletterSection';
 import { FloatingGoldDots } from '@/components/SVGDecorations';
+import { getFeaturedProducts, getCategories } from '@/lib/products';
 
 export const metadata: Metadata = {
   title: 'Aura Living | Premium Home Decor Pakistan — Where Comfort Meets Style',
@@ -45,16 +46,25 @@ export const metadata: Metadata = {
       'Where Comfort Meets Style — Shop handcrafted home decor online in Pakistan',
     images: ['/og/home.png'] } };
 
-export default function HomePage() {
+// Revalidate every hour (ISR)
+export const revalidate = 3600;
+
+export default async function HomePage() {
+  // Fetch featured products + categories from DB (server-side)
+  const [featuredProducts, categories] = await Promise.all([
+    getFeaturedProducts(8),
+    getCategories(),
+  ]);
+
   return (
     <>
       {/* Preload hero image — only on home page where it's actually used */}
       <link rel="preload" as="image" href="/images/hero/hero-slide-1.webp" />
       <HeroSection />
       <FloatingGoldDots />
-      <CategoriesSection />
+      <CategoriesSection initialCategories={categories} />
       <FloatingGoldDots />
-      <FeaturedProducts />
+      <FeaturedProducts initialProducts={featuredProducts} />
       <FloatingGoldDots />
       <TrendingCollection />
       <FloatingGoldDots />

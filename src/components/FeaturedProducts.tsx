@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Eye, Heart, ShoppingCart, Star, ArrowRight } from 'lucide-react';
-import { products, formatPKR } from '@/data/products';
+import { formatPKR } from '@/data/products';
 import { useStore, badgeColors } from '@/store/useStore';
 import type { Product } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
@@ -240,7 +240,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 /* ═══════════════════════════════════════════════════════════════
    FeaturedProducts — main section with enhanced animations
    ═══════════════════════════════════════════════════════════════ */
-export default function FeaturedProducts() {
+export default function FeaturedProducts({ initialProducts }: { initialProducts?: Product[] } = {}) {
   // GSAP blur text for section heading
   const headingRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 
@@ -258,15 +258,9 @@ export default function FeaturedProducts() {
   // Scale on scroll effect — uses useScaleIn hook from useAnimations
   const sectionContentRef = useScaleIn<HTMLDivElement>({ duration: 1, start: 'top 90%' });
 
-  // Pick 4 featured
-  const featuredProducts = [...products]
-    .sort((a, b) => {
-      const aScore = a.badge ? (a.badge === 'BESTSELLER' ? 3 : a.badge === 'SALE' ? 2 : 1) : 0;
-      const bScore = b.badge ? (b.badge === 'BESTSELLER' ? 3 : b.badge === 'SALE' ? 2 : 1) : 0;
-      if (bScore !== aScore) return bScore - aScore;
-      return b.rating - a.rating;
-    })
-    .slice(0, 4);
+  // Use DB-fetched products if provided, otherwise empty array
+  // (page.tsx passes featured products from getFeaturedProducts())
+  const featuredProducts = (initialProducts ?? []).slice(0, 4);
 
   return (
     <section

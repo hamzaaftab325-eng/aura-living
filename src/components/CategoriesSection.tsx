@@ -9,8 +9,15 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
-import { categories } from '@/data/products';
 import { GoldDivider } from '@/components/SVGDecorations';
+
+// Category type (matches FrontendCategory from lib/products.ts)
+interface Category {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+}
 
 /* ═══════════════════════════════════════════════════════════
    Category Card — Enhanced hover effects:
@@ -138,7 +145,9 @@ function CategoryCard({
 /* ═══════════════════════════════════════════════════════════
    Main CategoriesSection Component
    ═══════════════════════════════════════════════════════════ */
-export default function CategoriesSection() {
+export default function CategoriesSection({ initialCategories }: { initialCategories?: Category[] } = {}) {
+  // Use DB-fetched categories if provided, otherwise empty array
+  const categories = initialCategories ?? [];
   // GSAP blur text for section heading
   const headingRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03 });
 

@@ -13,7 +13,8 @@ import {
   ShoppingBag } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
-import { products, formatPKR } from '@/data/products';
+import { formatPKR } from '@/data/products';
+import type { Product } from '@/store/useStore';
 import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
@@ -52,7 +53,7 @@ function RatingStars({ rating }: { rating: number }) {
   );
 }
 
-export default function NewArrivalsView() {
+export default function NewArrivalsView({ initialProducts }: { initialProducts?: Product[] } = {}) {
   const { handleAddToCart: addToCart, handleToggleWishlist: toggleWishlist } = useCartActions();
   // Subscribe to wishlist array so component re-renders when wishlist changes.
   const wishlist = useStore((state) => state.wishlist);
@@ -61,14 +62,8 @@ export default function NewArrivalsView() {
   const heroBgRef = useRef<HTMLElement>(null);
   const heroBgDivRef = useRef<HTMLDivElement>(null);
 
-  // Filter NEW products and sort by rating (highest first)
-  const newProducts = useMemo(
-    () =>
-      products
-        .filter((p) => p.badge === 'NEW')
-        .sort((a, b) => b.rating - a.rating),
-    []
-  );
+  // Use DB-fetched products if provided, otherwise empty array
+  const newProducts = initialProducts ?? [];
 
   // Hero entrance with useStaggerReveal
   const heroRef = useStaggerReveal<HTMLDivElement>({
@@ -121,7 +116,7 @@ export default function NewArrivalsView() {
     return () => ctx.revert();
   }, []);
 
-  const handleAddToCart = (product: typeof products[0]) => {
+  const handleAddToCart = (product: Product) => {
     addToCart(product, { openCart: true });
   };
 

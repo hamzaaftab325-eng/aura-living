@@ -351,11 +351,13 @@ export async function getAllProductSlugs(): Promise<string[]> {
 
 /**
  * Get featured products (for homepage).
+ * Falls back to top-rated products if no products have featured: true.
  */
 export async function getFeaturedProducts(
   count = 8,
 ): Promise<FrontendProduct[]> {
-  const rows = await prisma.product.findMany({
+  // Try featured products first
+  let rows = await prisma.product.findMany({
     where: { isActive: true, deletedAt: null, featured: true },
     include: {
       images: { orderBy: [{ sortOrder: "asc" }] },
@@ -364,6 +366,19 @@ export async function getFeaturedProducts(
     take: count,
     orderBy: [{ sortOrder: "asc" }],
   });
+
+  // Fall back to top-rated + bestseller + NEW products if no featured ones
+  if (rows.length === 0) {
+    rows = await prisma.product.findMany({
+      where: { isActive: true, deletedAt: null },
+      include: {
+        images: { orderBy: [{ sortOrder: "asc" }] },
+        category: { select: { slug: true } },
+      },
+      take: count,
+      orderBy: [{ rating: "desc" }, { reviewCount: "desc" }],
+    });
+  }
 
   return rows.map((p) => {
     const frontend = toFrontendProduct(p);

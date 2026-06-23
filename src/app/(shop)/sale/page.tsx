@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import SaleView from '@/components/SaleView';
+import { getSaleProducts } from '@/lib/products';
 
 export const metadata: Metadata = {
   title: 'Sale | Aura Living',
@@ -16,6 +18,15 @@ export const metadata: Metadata = {
     description: 'Limited-time prices on selected pieces — shop the sale before it ends.',
     images: ['/og/sale.png'] } };
 
-export default function SalePage() {
-  return <SaleView />;
+// Revalidate every hour (ISR)
+export const revalidate = 3600;
+
+export default async function SalePage() {
+  const saleProducts = await getSaleProducts(24);
+
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-pulse">Loading sale...</div></div>}>
+      <SaleView initialProducts={saleProducts} />
+    </Suspense>
+  );
 }
