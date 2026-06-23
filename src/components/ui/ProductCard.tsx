@@ -6,7 +6,7 @@ import { Heart, ShoppingCart, Eye } from 'lucide-react';
 import type { Product } from '@/types';
 import { useStore, badgeColors } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
-import { formatPKR } from '@/data/products';
+import { formatRupees as formatPKR } from '@/lib/currency-display';
 import Badge from './Badge';
 import RatingStars from './RatingStars';
 

@@ -18,7 +18,7 @@ import {
   PenLine } from 'lucide-react';
 import { useStore, badgeColors, type Product } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
-import { products, categories, formatPKR } from '@/data/products';
+import { formatRupees as formatPKR } from '@/lib/currency-display';
 import { getReviewsForProduct, getAverageRating } from '@/data/reviews';
 import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -174,25 +174,21 @@ export default function ProductDetailView({
   };
 
   // Use product images array. When fewer than 4 images are available,
-  // pad with the category hero image (if available) so each thumbnail is unique.
-  const productCategory = categories.find((c) => c.id === product.category);
+  // repeat the main image to fill the gallery.
   const galleryImages = (() => {
     const main = product.image;
     const extras = (product.images && product.images.length > 0 ? product.images : [main]);
     const uniqueExtras = Array.from(new Set([main, ...extras]));
-    const fillerImage = productCategory?.image;
-    const filler = fillerImage && !uniqueExtras.includes(fillerImage) ? [fillerImage] : [];
-    const combined = [...uniqueExtras, ...filler];
+    const combined = [...uniqueExtras];
     while (combined.length < 4 && combined.length > 0) {
-      // Last resort: reuse the main image only if we truly have nothing else
       if (combined[combined.length - 1] === main && combined.length > 1) break;
       combined.push(main);
     }
     return combined.slice(0, 4);
   })();
 
-  // Related products — use prop if provided (from DB), else fall back to mock data
-  const relatedProducts = relatedProductsProp ?? products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+  // Related products — use prop if provided (from DB), else empty array
+  const relatedProducts = relatedProductsProp ?? [];
 
   return (
     <div className="w-full pt-28 sm:pt-32" >
@@ -201,7 +197,7 @@ export default function ProductDetailView({
         items={[
           { label: 'Home', href: '/' },
           { label: 'Shop', href: '/shop' },
-          ...(productCategory ? [{ label: productCategory.name, href: '/shop' }] : []),
+          ...(product.category ? [{ label: product.category, href: '/shop' }] : []),
           { label: product.name },
         ]}
         productName={product.name}
@@ -268,9 +264,9 @@ export default function ProductDetailView({
           {/* Right: Product Details */}
           <div className="flex flex-col">
             {/* Category Tag */}
-            {productCategory && (
+            {product.category && (
               <span className="text-xs font-semibold uppercase tracking-widest mb-3" >
-                {productCategory.name}
+                {product.category}
               </span>
             )}
 
@@ -477,7 +473,7 @@ export default function ProductDetailView({
               '@type': 'Brand',
               name: 'Aura Living' },
             material: product.material,
-            category: productCategory?.name || product.category,
+            category: product.category,
             aggregateRating: {
               '@type': 'AggregateRating',
               ratingValue: product.rating,

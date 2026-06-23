@@ -22,7 +22,7 @@ import {
 import { useStore } from '@/store/useStore';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { formatPKR } from '@/data/products';
+import { formatRupees as formatPKR } from '@/lib/currency-display';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { useToast } from '@/hooks/use-toast';
 

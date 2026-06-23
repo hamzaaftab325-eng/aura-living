@@ -17,7 +17,7 @@ import {
   X } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
-import { formatPKR } from '@/data/products';
+import { formatRupees as formatPKR } from '@/lib/currency-display';
 import type { Product } from '@/store/useStore';
 import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';

@@ -1,4 +1,4 @@
-import { formatPKR } from '@/data/products';
+import { formatRupees as formatPKR } from '@/lib/currency-display';
 
 /**
  * PriceDisplay — Product price with optional original price and discount badge.

@@ -16,7 +16,7 @@ import {
   X } from 'lucide-react';
 import { useStore, Product, badgeColors } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
-import { formatPKR } from '@/data/products';
+import { formatRupees as formatPKR } from '@/lib/currency-display';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 
 // Types for props (from server component)

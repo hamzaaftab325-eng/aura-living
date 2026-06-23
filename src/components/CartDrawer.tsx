@@ -7,7 +7,7 @@ import {
   X, Minus, Plus, Trash2, ShoppingBag, ArrowRight, CreditCard,
   Truck, Shield, CheckCircle, Tag, Lock, Sparkles, ShoppingBagIcon } from 'lucide-react';
 import { useStore } from '@/store/useStore';
-import { formatPKR } from '@/data/products';
+import { formatRupees as formatPKR } from '@/lib/currency-display';
 import { trapFocus, focusFirst } from '@/lib/focusTrap';
 import { useToast } from '@/hooks/use-toast';
 import PremiumButton from '@/components/ui/PremiumButton';

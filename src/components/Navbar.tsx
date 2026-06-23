@@ -19,7 +19,7 @@ import {
   Tag,
   Camera } from 'lucide-react';
 import { useStore } from '@/store/useStore';
-import { products, formatPKR } from '@/data/products';
+import { formatRupees as formatPKR } from '@/lib/currency-display';
 import { trapFocus, focusFirst } from '@/lib/focusTrap';
 
 interface NavLink {
@@ -114,6 +114,10 @@ export default function Navbar() {
   const [mobileShopExpanded, setMobileShopExpanded] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<Array<{
+    id: string; name: string; slug: string; price: number; image: string;
+  }>>([]);
+  const [searchLoading, setSearchLoading] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [previewItem, setPreviewItem] = useState<MegaMenuItem | null>(null);
   const [cursorPos, setCursorPos] = useState({ left: 0, width: 0, opacity: 0 });
@@ -169,6 +173,34 @@ export default function Navbar() {
       searchInputRef.current.focus();
     }
   }, [searchOpen]);
+
+  // Debounced search — fetches from /api/products/search
+  useEffect(() => {
+    if (!searchQuery.trim() || searchQuery.trim().length < 2) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSearchResults([]);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSearchLoading(false);
+      return;
+    }
+
+    setSearchLoading(true);
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/products/search?q=${encodeURIComponent(searchQuery.trim())}`);
+        const data = await res.json();
+        if (data.ok) {
+          setSearchResults(data.results);
+        }
+      } catch {
+        setSearchResults([]);
+      } finally {
+        setSearchLoading(false);
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
   // Mobile menu entrance animation — fast and snappy
   useEffect(() => {
@@ -907,48 +939,44 @@ export default function Navbar() {
 
               {searchQuery.trim().length > 1 && (
                 <div className="mt-4 max-h-64 overflow-y-auto">
-                  {products
-                    .filter((p) =>
-                      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                      p.category.toLowerCase().includes(searchQuery.toLowerCase())
-                    )
-                    .slice(0, 5)
-                    .map((p) => (
-                      <button
-                        key={p.id}
-                        className="w-full flex items-center gap-3 py-3 px-2 text-left rounded-lg transition-colors hover:bg-white/10"
-                        onClick={() => {
-                          setSearchOpen(false);
-                          setSearchQuery('');
-                          router.push(`/product/${p.slug}`);
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
+                  {searchLoading && (
+                    <p className="text-sm py-4 text-center aura-text-white-70">
+                      Searching...
+                    </p>
+                  )}
+                  {!searchLoading && searchResults.map((p) => (
+                    <button
+                      key={p.id}
+                      className="w-full flex items-center gap-3 py-3 px-2 text-left rounded-lg transition-colors hover:bg-white/10"
+                      onClick={() => {
+                        setSearchOpen(false);
+                        setSearchQuery('');
+                        router.push(`/product/${p.slug}`);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                    >
+                      <div
+                        className="w-10 h-10 rounded-md overflow-hidden shrink-0 relative"
+                        style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
                       >
-                        <div
-                          className="w-10 h-10 rounded-md overflow-hidden shrink-0 relative"
-                          style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+                        <Image src={p.image} alt={p.name} fill className="w-full h-full object-contain" sizes="40px" />
+                      </div>
+                      <div className="min-w-0">
+                        <p
+                          className="text-sm font-medium truncate"
+                          style={{ color: 'rgba(255, 255, 255, 0.95)' }}
                         >
-                          <Image src={p.image} alt={p.name} fill className="w-full h-full object-contain" sizes="40px" />
-                        </div>
-                        <div className="min-w-0">
-                          <p
-                            className="text-sm font-medium truncate"
-                            style={{ color: 'rgba(255, 255, 255, 0.95)' }}
-                          >
-                            {p.name}
-                          </p>
-                          <p
-                            className="text-xs aura-text-gold"
-                          >
-                            {formatPKR(p.price)}
-                          </p>
-                        </div>
-                      </button>
-                    ))}
-                  {products.filter((p) =>
-                    p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    p.category.toLowerCase().includes(searchQuery.toLowerCase())
-                  ).length === 0 && (
+                          {p.name}
+                        </p>
+                        <p
+                          className="text-xs aura-text-gold"
+                        >
+                          {formatPKR(p.price)}
+                        </p>
+                      </div>
+                    </button>
+                  ))}
+                  {!searchLoading && searchResults.length === 0 && (
                     <p
                       className="text-sm py-4 text-center aura-text-white-70"
                     >

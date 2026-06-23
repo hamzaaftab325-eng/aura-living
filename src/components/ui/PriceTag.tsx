@@ -1,6 +1,6 @@
 'use client';
 
-import { formatPKR } from '@/data/products';
+import { formatRupees as formatPKR } from '@/lib/currency-display';
 import type { Product } from '@/types';
 
 interface PriceTagProps {

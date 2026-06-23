@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Eye, Heart, ShoppingCart, Star, ArrowRight } from 'lucide-react';
-import { formatPKR } from '@/data/products';
+import { formatRupees as formatPKR } from '@/lib/currency-display';
 import { useStore, badgeColors } from '@/store/useStore';
 import type { Product } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';

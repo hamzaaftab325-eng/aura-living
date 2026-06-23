@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useScrollReveal, useStaggerReveal, useTextReveal, useScaleIn } from '@/hooks/useAnimations';
 import gsap from 'gsap';;
@@ -8,7 +8,9 @@ import { GoldDivider } from '@/components/SVGDecorations';
 import { Heart, ShoppingCart, Star, ShoppingBag } from 'lucide-react';
 import { useStore, badgeColors } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
-import { products, formatPKR } from '@/data/products';
+import { useAuth } from '@/hooks/use-auth';
+import { formatRupees as formatPKR } from '@/lib/currency-display';
+import type { Product } from '@/store/useStore';
 import Link from 'next/link';
 import PremiumButton from '@/components/ui/PremiumButton';
 import Breadcrumb from '@/components/ui/Breadcrumb';
@@ -49,16 +51,89 @@ function RatingStars({ rating }: { rating: number }) {
 
 export default function WishlistView() {
   const wishlist = useStore((state) => state.wishlist);
+  const toggleWishlistStore = useStore((state) => state.toggleWishlist);
   const { handleToggleWishlist: toggleWishlist, handleAddToCart: addToCart } = useCartActions();
+  const { user } = useAuth();
 
   const headerSectionRef = useRef<HTMLElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
 
-  // Filter products to only wishlist items
-  const wishlistProducts = useMemo(
-    () => products.filter((p) => wishlist.includes(p.id)),
-    [wishlist]
-  );
+  // State for DB-fetched wishlist products
+  const [wishlistProducts, setWishlistProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch wishlist products from API
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchWishlist() {
+      if (user) {
+        // Logged-in user: fetch from /api/wishlist (DB-backed)
+        try {
+          const res = await fetch('/api/wishlist');
+          const data = await res.json();
+          if (cancelled) return;
+          if (data.ok && data.items) {
+            // Convert API response to Product type
+            const products: Product[] = data.items.map((item: {
+              product: {
+                id: string; name: string; slug: string; price: string;
+                originalPrice: string | null; image: string; inStock: boolean;
+                badge: string | null;
+              };
+            }) => ({
+              id: item.product.id,
+              slug: item.product.slug,
+              name: item.product.name,
+              price: Number(item.product.price) / 100,
+              originalPrice: item.product.originalPrice ? Number(item.product.originalPrice) / 100 : undefined,
+              image: item.product.image,
+              images: [item.product.image],
+              category: '',
+              rating: 0,
+              reviews: 0,
+              badge: item.product.badge as 'NEW' | 'SALE' | 'BESTSELLER' | undefined,
+              description: '',
+              material: '',
+              inStock: item.product.inStock,
+            }));
+            setWishlistProducts(products);
+          }
+        } catch {
+          if (!cancelled) setWishlistProducts([]);
+        } finally {
+          if (!cancelled) setLoading(false);
+        }
+      } else {
+        // Guest: fetch product details for localStorage wishlist IDs
+        if (wishlist.length === 0) {
+          setWishlistProducts([]);
+          setLoading(false);
+          return;
+        }
+
+        try {
+          const res = await fetch('/api/products/batch', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ids: wishlist }),
+          });
+          const data = await res.json();
+          if (cancelled) return;
+          if (data.ok && data.products) {
+            setWishlistProducts(data.products);
+          }
+        } catch {
+          if (!cancelled) setWishlistProducts([]);
+        } finally {
+          if (!cancelled) setLoading(false);
+        }
+      }
+    }
+
+    fetchWishlist();
+    return () => { cancelled = true; };
+  }, [user, wishlist]);
 
   // GSAP fade-in for header
   const headerRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
@@ -103,7 +178,7 @@ export default function WishlistView() {
     return () => ctx.revert();
   }, []);
 
-  const handleAddToCart = (product: typeof products[0]) => {
+  const handleAddToCart = (product: Product) => {
     addToCart(product, { openCart: true });
   };
 
@@ -179,7 +254,14 @@ export default function WishlistView() {
       {/* Wishlist Content */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {wishlistProducts.length === 0 ? (
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-16 sm:py-24">
+              <div className="animate-pulse">
+                <Heart className="w-16 h-16 mb-4 opacity-30" />
+                <p className="text-sm aura-text-secondary">Loading your wishlist...</p>
+              </div>
+            </div>
+          ) : wishlistProducts.length === 0 ? (
             /* ── Empty State ── */
             <AnimatedSection>
               <div className="flex flex-col items-center justify-center py-16 sm:py-24">
