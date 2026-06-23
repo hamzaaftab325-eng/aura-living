@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useScrollReveal, useStaggerReveal, useTextReveal } from '@/hooks/useAnimations';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
@@ -100,10 +100,29 @@ export default function AddressesView() {
   useState(() => { Promise.resolve().then(() => setHydrated(true)); });
   const safeUser = user;
 
-  const [addresses, setAddresses] = useState<Address[]>(initialAddresses);
+  const [addresses, setAddresses] = useState<Address[]>([]);
+  const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<Omit<Address, 'id' | 'isDefault'>>(emptyForm);
+  const [saving, setSaving] = useState(false);
+
+  // Fetch addresses from API on mount
+  useEffect(() => {
+    if (!safeUser) return;
+    let cancelled = false;
+    fetch('/api/addresses')
+      .then((res) => res.json())
+      .then((data) => {
+        if (cancelled) return;
+        if (data.ok && data.addresses) {
+          setAddresses(data.addresses);
+        }
+      })
+      .catch(() => {})
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [safeUser]);
 
   // GSAP refs
   const headerRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
@@ -142,41 +161,92 @@ export default function AddressesView() {
     setShowForm(true);
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.phone.trim() || !form.line1.trim() || !form.city.trim() || !form.postal.trim()) {
       toast({ title: 'Missing fields', description: 'Please fill all required fields.', variant: 'destructive' });
       return;
     }
-    if (editingId) {
-      // Edit existing
-      setAddresses((prev) => prev.map((a) => (a.id === editingId ? { ...a, ...form } : a)));
-      toast({ title: 'Address updated', description: 'Your changes have been saved.' });
-    } else {
-      // Add new
-      const newAddr: Address = {
-        ...form,
-        id: `addr-${Date.now()}`,
-        isDefault: addresses.length === 0, // first address becomes default
-      };
-      setAddresses((prev) => [...prev, newAddr]);
-      toast({ title: 'Address added', description: 'New address has been saved successfully.' });
+
+    setSaving(true);
+    try {
+      if (editingId) {
+        // Update existing via API
+        const res = await fetch(`/api/addresses/${editingId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error ?? 'Failed to update');
+
+        setAddresses((prev) => prev.map((a) => (a.id === editingId ? { ...a, ...form } : a)));
+        toast({ title: 'Address updated', description: 'Your changes have been saved.' });
+      } else {
+        // Add new via API
+        const res = await fetch('/api/addresses', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error ?? 'Failed to add');
+
+        setAddresses((prev) => [...prev, data.address]);
+        toast({ title: 'Address added', description: 'New address has been saved successfully.' });
+      }
+      resetForm();
+    } catch (err) {
+      toast({
+        title: 'Save failed',
+        description: err instanceof Error ? err.message : 'Something went wrong',
+        variant: 'destructive',
+      });
+    } finally {
+      setSaving(false);
     }
-    resetForm();
   };
 
-  const handleSetDefault = (id: string) => {
-    setAddresses((prev) => prev.map((a) => ({ ...a, isDefault: a.id === id })));
-    toast({
-      title: 'Default address updated',
-      description: 'Future orders will ship to this address by default.' });
+  const handleSetDefault = async (id: string) => {
+    try {
+      const res = await fetch(`/api/addresses/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ setDefault: true }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error ?? 'Failed');
+
+      setAddresses((prev) => prev.map((a) => ({ ...a, isDefault: a.id === id })));
+      toast({
+        title: 'Default address updated',
+        description: 'Future orders will ship to this address by default.' });
+    } catch (err) {
+      toast({
+        title: 'Update failed',
+        description: err instanceof Error ? err.message : 'Something went wrong',
+        variant: 'destructive',
+      });
+    }
   };
 
-  const handleDelete = (id: string) => {
-    setAddresses((prev) => prev.filter((a) => a.id !== id));
-    toast({
-      title: 'Address removed',
-      description: 'The saved address has been deleted.' });
+  const handleDelete = async (id: string) => {
+    try {
+      const res = await fetch(`/api/addresses/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error ?? 'Failed');
+
+      setAddresses((prev) => prev.filter((a) => a.id !== id));
+      toast({
+        title: 'Address removed',
+        description: 'The saved address has been deleted.' });
+    } catch (err) {
+      toast({
+        title: 'Delete failed',
+        description: err instanceof Error ? err.message : 'Something went wrong',
+        variant: 'destructive',
+      });
+    }
   };
 
   // Not-signed-in gate

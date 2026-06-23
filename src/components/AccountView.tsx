@@ -78,7 +78,7 @@ export default function AccountView() {
   const cart = useStore((state) => state.cart);
   const wishlist = useStore((state) => state.wishlist);
   const { user, logout } = useAuth();
-  
+
   const { toast } = useToast();
 
   // Avoid hydration mismatch: persisted cart/wishlist/user read from localStorage on client only.
@@ -87,6 +87,67 @@ export default function AccountView() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setHydrated(true);
   }, []);
+
+  // Fetch recent orders from API
+  const [recentOrders, setRecentOrders] = useState<Array<{
+    id: string;
+    orderNumber: string;
+    date: string;
+    status: string;
+    total: string;
+    statusColor: string;
+    statusBg: string;
+    statusIcon: typeof CheckCircle;
+  }>>([]);
+
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    fetch('/api/orders?perPage=3')
+      .then((res) => res.json())
+      .then((data) => {
+        if (cancelled) return;
+        if (data.ok && data.orders) {
+          const mapped = data.orders.map((o: {
+            orderNumber: string;
+            status: string;
+            total: string;
+            createdAt: string;
+          }) => {
+            const statusLabel = o.status === 'DELIVERED' ? 'Delivered'
+                              : o.status === 'SHIPPED' ? 'Shipped'
+                              : o.status === 'CANCELLED' ? 'Cancelled'
+                              : 'Processing';
+            const statusColor = o.status === 'DELIVERED' ? 'var(--color-success)'
+                              : o.status === 'SHIPPED' ? 'var(--color-info)'
+                              : o.status === 'CANCELLED' ? '#ef4444'
+                              : 'var(--color-gold)';
+            const statusBg = o.status === 'DELIVERED' ? 'rgba(34, 197, 94, 0.1)'
+                           : o.status === 'SHIPPED' ? 'rgba(59, 130, 246, 0.1)'
+                           : o.status === 'CANCELLED' ? 'rgba(239, 68, 68, 0.1)'
+                           : 'rgba(212, 175, 55, 0.1)';
+            const statusIcon = o.status === 'DELIVERED' ? CheckCircle
+                             : o.status === 'SHIPPED' ? Truck
+                             : o.status === 'CANCELLED' ? Clock
+                             : Clock;
+            return {
+              id: o.orderNumber,
+              orderNumber: o.orderNumber,
+              date: new Date(o.createdAt).toLocaleDateString('en-PK', { month: 'short', day: 'numeric', year: 'numeric' }),
+              status: statusLabel,
+              total: `Rs. ${Number(o.total) / 100}`,
+              statusColor,
+              statusBg,
+              statusIcon,
+            };
+          });
+          setRecentOrders(mapped);
+        }
+      })
+      .catch(() => {})
+      .finally(() => {});
+    return () => { cancelled = true; };
+  }, [user]);
   const safeCart = hydrated ? cart : [];
   const safeWishlist = hydrated ? wishlist : [];
   const safeUser = user;
@@ -481,7 +542,7 @@ export default function AccountView() {
                     </tr>
                   </thead>
                   <tbody>
-                    {mockOrders.map((order) => (
+                    {recentOrders.map((order) => (
                       <tr
                         key={order.id}
                         className="transition-colors duration-200 hover:bg-[var(--surface-page)] cursor-pointer"
@@ -520,7 +581,7 @@ export default function AccountView() {
 
               {/* Orders Cards - Mobile */}
               <div ref={ordersRef} className="md:hidden flex flex-col gap-4">
-                {mockOrders.map((order) => (
+                {recentOrders.map((order) => (
                   <div
                     key={order.id}
                     className="rounded-sm p-4 transition-colors duration-200 cursor-pointer"

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useScrollReveal, useStaggerReveal, useTextReveal, useScaleIn } from '@/hooks/useAnimations';;
 import { GoldDivider } from '@/components/SVGDecorations';
 import {
@@ -106,6 +106,38 @@ const statusConfig: Record<TrackedOrder['status'], { color: string; bg: string; 
   Processing: { color: 'var(--color-gold)', bg: 'rgba(212, 175, 55, 0.1)', icon: Clock },
 };
 
+// Build tracking stages based on order status
+function buildStages(status: string, created: Date): TrackingStage[] {
+  const placed = created;
+  const next = new Date(placed.getTime() + 24 * 60 * 60 * 1000);
+  const shipped = new Date(placed.getTime() + 48 * 60 * 60 * 1000);
+  const delivered = new Date(placed.getTime() + 5 * 24 * 60 * 60 * 1000);
+
+  const isShipped = ['SHIPPED', 'DELIVERED'].includes(status);
+  const isDelivered = status === 'DELIVERED';
+
+  return [
+    { label: 'Order Placed', date: placed.toLocaleString('en-PK', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }), done: true, icon: CheckCircle },
+    { label: 'Packed', date: isShipped ? next.toLocaleString('en-PK', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Pending', done: isShipped, icon: Box },
+    { label: 'Shipped', date: isShipped ? shipped.toLocaleString('en-PK', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Pending', done: isShipped, icon: Truck },
+    { label: 'Out for Delivery', date: isDelivered ? delivered.toLocaleString('en-PK', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Pending', done: isDelivered, icon: MapPin },
+    { label: 'Delivered', date: isDelivered ? delivered.toLocaleString('en-PK', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Pending', done: isDelivered, icon: CheckCircle },
+  ];
+}
+
+function getEta(status: string, created: Date): string {
+  if (status === 'DELIVERED') {
+    const d = new Date(created.getTime() + 5 * 24 * 60 * 60 * 1000);
+    return `Delivered on ${d.toLocaleDateString('en-PK', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+  }
+  if (status === 'SHIPPED') {
+    const d = new Date(created.getTime() + 5 * 24 * 60 * 60 * 1000);
+    return `Arriving ${d.toLocaleDateString('en-PK', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+  }
+  const d = new Date(created.getTime() + 2 * 24 * 60 * 60 * 1000);
+  return `Ships by ${d.toLocaleDateString('en-PK', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+}
+
 export default function TrackOrdersView() {
   const router = useRouter();
   const { user, logout } = useAuth();
@@ -116,8 +148,54 @@ export default function TrackOrdersView() {
   useState(() => { Promise.resolve().then(() => setHydrated(true)); });
   const safeUser = user;
 
+  const [orders, setOrders] = useState<TrackedOrder[]>([]);
+  const [loading, setLoading] = useState(true);
   const [searchId, setSearchId] = useState('');
-  const [expandedId, setExpandedId] = useState<string | null>(trackedOrders[0]?.id ?? null);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  // Fetch real orders from API
+  useEffect(() => {
+    if (!safeUser) return;
+    let cancelled = false;
+    fetch('/api/orders?perPage=20')
+      .then((res) => res.json())
+      .then((data) => {
+        if (cancelled) return;
+        if (data.ok && data.orders) {
+          // Map API response to TrackedOrder shape
+          const mapped: TrackedOrder[] = data.orders.map((o: {
+            id: string;
+            orderNumber: string;
+            status: string;
+            total: string;
+            itemCount: number;
+            createdAt: string;
+            firstItemImage: string | null;
+          }) => {
+            const status = o.status === 'DELIVERED' ? 'Delivered'
+                          : o.status === 'SHIPPED' ? 'Shipped'
+                          : 'Processing';
+            const created = new Date(o.createdAt);
+            const dateStr = created.toLocaleDateString('en-PK', { year: 'numeric', month: 'short', day: 'numeric' });
+            const stages = buildStages(o.status, created);
+            return {
+              id: o.orderNumber,
+              date: dateStr,
+              status: status as 'Delivered' | 'Shipped' | 'Processing',
+              total: `Rs. ${Number(o.total) / 100}`,
+              items: o.itemCount,
+              eta: getEta(o.status, created),
+              stages,
+            };
+          });
+          setOrders(mapped);
+          setExpandedId(mapped[0]?.id ?? null);
+        }
+      })
+      .catch(() => {})
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [safeUser]);
 
   // GSAP refs
   const headerRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
@@ -135,10 +213,10 @@ export default function TrackOrdersView() {
     if (!searchId.trim()) {
       toast({
         title: 'Enter an order ID',
-        description: 'Please type your order number (e.g. AL-2026-001) to track it.' });
+        description: 'Please type your order number (e.g. AURA-2026-0001) to track it.' });
       return;
     }
-    const found = trackedOrders.find((o) => o.id.toLowerCase() === searchId.trim().toLowerCase());
+    const found = orders.find((o) => o.id.toLowerCase() === searchId.trim().toLowerCase());
     if (found) {
       setExpandedId(found.id);
       toast({
@@ -154,8 +232,8 @@ export default function TrackOrdersView() {
   };
 
   const filteredOrders = searchId.trim()
-    ? trackedOrders.filter((o) => o.id.toLowerCase().includes(searchId.trim().toLowerCase()))
-    : trackedOrders;
+    ? orders.filter((o) => o.id.toLowerCase().includes(searchId.trim().toLowerCase()))
+    : orders;
 
   // Not-signed-in gate
   if (!safeUser) {
@@ -296,7 +374,14 @@ export default function TrackOrdersView() {
 
           {/* Orders list */}
           <div ref={ordersRef} className="flex flex-col gap-5 sm:gap-6">
-            {filteredOrders.length === 0 ? (
+            {loading ? (
+              <div className="rounded-xl p-10 text-center">
+                <div className="animate-pulse">
+                  <Package className="w-10 h-10 mx-auto mb-3 opacity-30" />
+                  <p className="text-sm aura-text-secondary">Loading your orders...</p>
+                </div>
+              </div>
+            ) : filteredOrders.length === 0 ? (
               <div
                 className="rounded-xl p-10 text-center"
                 

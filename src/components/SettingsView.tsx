@@ -12,6 +12,7 @@ import {
   CreditCard,
   User as UserIcon,
   Mail,
+  Lock,
   Check } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { useAuth } from '@/hooks/use-auth';
@@ -94,6 +95,11 @@ export default function SettingsView() {
   const [profileName, setProfileName] = useState(safeUser?.name ?? '');
   const [profileEmail, setProfileEmail] = useState(safeUser?.email ?? '');
 
+  // Password change state
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   // GSAP refs
   const headerRef = useScrollReveal<HTMLDivElement>({ y: 30, duration: 0.7 });
   const heroTitleRef = useTextReveal<HTMLHeadingElement>({ duration: 0.5, stagger: 0.03, start: 'top 90%' });
@@ -111,7 +117,7 @@ export default function SettingsView() {
       description: 'Your preferences have been updated successfully.' });
   };
 
-  const handleSaveProfile = (e: React.FormEvent) => {
+  const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!profileName.trim() || !profileEmail.trim()) {
       toast({ title: 'Missing fields', description: 'Name and email are required.', variant: 'destructive' });
@@ -121,11 +127,67 @@ export default function SettingsView() {
       toast({ title: 'Invalid email', description: 'Please enter a valid email address.', variant: 'destructive' });
       return;
     }
-    // Note: full profile update requires backend. We acknowledge and close form.
-    toast({
-      title: 'Profile updated (demo)',
-      description: 'In production this would update your account on the server.' });
-    setEditingProfile(false);
+
+    try {
+      const res = await fetch('/api/auth/update-user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: profileName.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.message ?? data.error ?? 'Failed to update');
+
+      toast({
+        title: 'Profile updated',
+        description: 'Your name has been updated successfully.' });
+      setEditingProfile(false);
+      // Reload to refresh session
+      window.location.reload();
+    } catch (err) {
+      toast({
+        title: 'Update failed',
+        description: err instanceof Error ? err.message : 'Something went wrong',
+        variant: 'destructive' });
+    }
+  };
+
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newPassword || newPassword.length < 8) {
+      toast({ title: 'Password too short', description: 'Password must be at least 8 characters.', variant: 'destructive' });
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      toast({ title: 'Passwords do not match', description: 'Please make sure both passwords are identical.', variant: 'destructive' });
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/auth/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          newPassword,
+          currentPassword: currentPassword || undefined,
+          revokeOtherSessions: true,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.message ?? data.error ?? 'Failed to change password');
+
+      toast({
+        title: 'Password changed',
+        description: 'Your password has been updated. Please log in again.' });
+      // Logout after password change
+      setTimeout(() => {
+        logout();
+      }, 2000);
+    } catch (err) {
+      toast({
+        title: 'Change failed',
+        description: err instanceof Error ? err.message : 'Something went wrong',
+        variant: 'destructive' });
+    }
   };
 
   const handleDeleteAccount = () => {
@@ -488,6 +550,56 @@ export default function SettingsView() {
                   Add Payment Method
                 </PremiumButton>
               </div>
+            </div>
+
+            {/* Change Password */}
+            <div className="rounded-xl p-5 sm:p-7" >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" >
+                  <Lock className="w-5 h-5"  />
+                </div>
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-semibold" >
+                    Change Password
+                  </h3>
+                  <p className="text-xs sm:text-sm" >
+                    Update your password. You&apos;ll be logged out after changing.
+                  </p>
+                </div>
+              </div>
+              <div className="my-4"><GoldDivider /></div>
+              <form onSubmit={handleChangePassword} className="flex flex-col gap-3 max-w-md">
+                <input
+                  type="password"
+                  placeholder="Current password"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  className="px-4 py-3 rounded-sm text-sm"
+                  style={{ border: '1px solid var(--color-gold-soft)' }}
+                  autoComplete="current-password"
+                />
+                <input
+                  type="password"
+                  placeholder="New password (min 8 characters)"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="px-4 py-3 rounded-sm text-sm"
+                  style={{ border: '1px solid var(--color-gold-soft)' }}
+                  autoComplete="new-password"
+                />
+                <input
+                  type="password"
+                  placeholder="Confirm new password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="px-4 py-3 rounded-sm text-sm"
+                  style={{ border: '1px solid var(--color-gold-soft)' }}
+                  autoComplete="new-password"
+                />
+                <PremiumButton type="submit" variant="primary" size="sm">
+                  Update Password
+                </PremiumButton>
+              </form>
             </div>
 
             {/* Danger zone */}
