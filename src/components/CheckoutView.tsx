@@ -221,22 +221,71 @@ export default function CheckoutView() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    // Simulate order processing
-    setTimeout(() => {
-      setIsSubmitting(false);
+
+    try {
+      // Build the request payload from cart + form
+      // Include cart items so the server can sync them to the user's DB cart
+      // (handles case where user is logged in but cart is in localStorage)
+      const payload = {
+        shippingAddress: {
+          fullName: formData.fullName,
+          phone: formData.phone,
+          email: formData.email,
+          line1: formData.address1,
+          line2: formData.address2 || undefined,
+          city: formData.city,
+          province: formData.province,
+          postal: formData.postalCode,
+        },
+        paymentMethod: "COD" as const,
+        notes: formData.orderNotes || undefined,
+        cartItems: cart.map((item) => ({
+          slug: item.product.slug,
+          quantity: item.quantity,
+        })),
+      };
+
+      // Map cart items to the format expected by the API.
+      // For logged-in users, the server reads from DB cart.
+      // For guests, we send the cart items explicitly.
+      // The API currently requires a logged-in user (auth check).
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error ?? "Failed to place order");
+      }
+
+      // Success — clear cart and redirect to success page
       clearCart();
       toast({
-        title: 'Order Placed Successfully!',
-        description: 'Thank you for your order. You will receive a confirmation email shortly.',
-        duration: 5000 });
-      router.push('/account/orders');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 2000);
+        title: "Order Placed Successfully!",
+        description: `Your order ${data.orderNumber} has been confirmed.`,
+        duration: 5000,
+      });
+      router.push(`/checkout/success?orderId=${data.orderId}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Something went wrong";
+      toast({
+        title: "Checkout Failed",
+        description: message,
+        variant: "destructive",
+        duration: 5000,
+      });
+      setIsSubmitting(false);
+    }
   };
 
   /* ─────────────── Empty Cart Redirect State ─────────────── */
