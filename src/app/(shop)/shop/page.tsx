@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import { getProducts, getCategories } from '@/lib/products';
 import ShopView from '@/components/ShopView';
 
 export const metadata: Metadata = {
@@ -17,6 +19,19 @@ export const metadata: Metadata = {
     description: 'Handcrafted lamps, vases, candles, planters, wall art & tableware — delivered across Pakistan.',
     images: ['/og/shop.png'] } };
 
-export default function ShopPage() {
-  return <ShopView />;
+// Revalidate every hour (ISR)
+export const revalidate = 3600;
+
+export default async function ShopPage() {
+  // Fetch all products + categories from DB (server-side)
+  const [{ products }, categories] = await Promise.all([
+    getProducts({ perPage: 100 }), // Get all products for client-side filtering
+    getCategories(),
+  ]);
+
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-pulse">Loading shop...</div></div>}>
+      <ShopView initialProducts={products} initialCategories={categories} />
+    </Suspense>
+  );
 }

@@ -108,7 +108,7 @@ function toFrontendCategory(c: Category): FrontendCategory {
 export async function getCategories(): Promise<FrontendCategory[]> {
   const cats = await prisma.category.findMany({
     where: { isActive: true },
-    orderBy: { sortOrder: "asc" },
+    orderBy: [{ sortOrder: "asc" }],
   });
   return cats.map(toFrontendCategory);
 }
@@ -225,25 +225,24 @@ export async function getProducts({
     ];
   }
 
-  // Build the orderBy clause
-  const orderBy: Record<string, "asc" | "desc"> = {};
+  // Build the orderBy clause (Prisma 7 requires array format)
+  let orderBy: Array<Record<string, "asc" | "desc">>;
   switch (sort) {
     case "price-asc":
-      orderBy.price = "asc";
+      orderBy = [{ price: "asc" }];
       break;
     case "price-desc":
-      orderBy.price = "desc";
+      orderBy = [{ price: "desc" }];
       break;
     case "newest":
-      orderBy.createdAt = "desc";
+      orderBy = [{ createdAt: "desc" }];
       break;
     case "best-selling":
-      orderBy.reviewCount = "desc";
+      orderBy = [{ reviewCount: "desc" }];
       break;
     case "featured":
     default:
-      orderBy.sortOrder = "asc";
-      orderBy.featured = "desc";
+      orderBy = [{ sortOrder: "asc" }, { featured: "desc" }];
       break;
   }
 
@@ -255,7 +254,7 @@ export async function getProducts({
     prisma.product.findMany({
       where,
       include: {
-        images: { orderBy: { sortOrder: "asc" } },
+        images: { orderBy: [{ sortOrder: "asc" }] },
         category: { select: { slug: true } },
       },
       orderBy,
@@ -290,7 +289,7 @@ export async function getProductBySlug(
   const p = await prisma.product.findUnique({
     where: { slug, isActive: true, deletedAt: null },
     include: {
-      images: { orderBy: { sortOrder: "asc" } },
+      images: { orderBy: [{ sortOrder: "asc" }] },
       category: { select: { slug: true } },
     },
   });
@@ -325,11 +324,11 @@ export async function getRelatedProducts(
       deletedAt: null,
     },
     include: {
-      images: { orderBy: { sortOrder: "asc" } },
+      images: { orderBy: [{ sortOrder: "asc" }] },
       category: { select: { slug: true } },
     },
     take: count,
-    orderBy: { featured: "desc" },
+    orderBy: [{ featured: "desc" }],
   });
 
   return rows.map((p) => {
@@ -359,11 +358,11 @@ export async function getFeaturedProducts(
   const rows = await prisma.product.findMany({
     where: { isActive: true, deletedAt: null, featured: true },
     include: {
-      images: { orderBy: { sortOrder: "asc" } },
+      images: { orderBy: [{ sortOrder: "asc" }] },
       category: { select: { slug: true } },
     },
     take: count,
-    orderBy: { sortOrder: "asc" },
+    orderBy: [{ sortOrder: "asc" }],
   });
 
   return rows.map((p) => {
@@ -382,11 +381,11 @@ export async function getNewArrivals(
   const rows = await prisma.product.findMany({
     where: { isActive: true, deletedAt: null },
     include: {
-      images: { orderBy: { sortOrder: "asc" } },
+      images: { orderBy: [{ sortOrder: "asc" }] },
       category: { select: { slug: true } },
     },
     take: count,
-    orderBy: { createdAt: "desc" },
+    orderBy: [{ createdAt: "desc" }],
   });
 
   return rows.map((p) => {
@@ -409,11 +408,11 @@ export async function getSaleProducts(
       originalPrice: { not: null },
     },
     include: {
-      images: { orderBy: { sortOrder: "asc" } },
+      images: { orderBy: [{ sortOrder: "asc" }] },
       category: { select: { slug: true } },
     },
     take: count,
-    orderBy: { sortOrder: "asc" },
+    orderBy: [{ sortOrder: "asc" }],
   });
 
   return rows.map((p) => {

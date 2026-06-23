@@ -1,55 +1,41 @@
 ---
-Task ID: phase-6
+Task ID: phase-7
 Agent: Super Z (main)
-Task: Build Phase 6 (Admin Dashboard) — product CRUD with Cloudinary image upload, order management (status updates), customer list, coupon management. All admin-protected with role checks.
+Task: Build Phase 7 (Production Hardening) — newsletter DB, shop page migration, wishlist sync, rate limiting, SEO, loading skeletons, Vercel deployment plan. No custom domain (user will buy later).
 
 Work Log:
-- Explored existing admin: AdminDashboard.tsx (649 lines, all mock data), /admin/page.tsx (client-only).
-- Installed cloudinary@2.10.0 + next-cloudinary@6.17.5.
-- Created src/lib/cloudinary.ts — server-side image upload to Cloudinary (uploadImageBuffer, deleteImage, extractPublicIdFromUrl, isCloudinaryConfigured). Uses signed uploads (API secret never exposed to browser). 25 GB free storage vs 1 GB for Vercel Blob.
-- Created src/lib/admin.ts — admin server functions with requireAdmin() role check (throws AdminAuthError if not admin). Functions: getAdminStats (revenue, orders, products, customers, low stock, recent orders, top products), adminGetProducts, adminGetProductById, adminGetOrders, adminUpdateOrderStatus, adminGetCustomers (with order count + total spent), adminGetCoupons.
-- Created 8 admin API routes (all require ADMIN role):
-  - POST /api/admin/upload — Cloudinary image upload (multipart form data, max 10 MB, validates image type)
-  - GET/POST /api/admin/products — list + create (Zod validated, slug auto-generated, SKU/slug uniqueness checks)
-  - PUT/DELETE /api/admin/products/[id] — update + soft delete (sets deletedAt + isActive=false)
-  - GET /api/admin/orders — paginated list with status filter + search
-  - PATCH /api/admin/orders/[id] — update status (creates OrderStatusEvent, sets shippedAt/deliveredAt/cancelledAt timestamps)
-  - GET /api/admin/customers — list with order count + total spent (BigInt serialized as string)
-  - GET/POST /api/admin/coupons — list + create (Zod validated, code uniqueness, rupees→paisa conversion)
-  - PUT/DELETE /api/admin/coupons/[id] — update + delete
-- Refactored /admin/page.tsx to server component — fetches stats via getAdminStats(), passes to client component. Shows "Admin Access Required" if not logged in, "Access Denied" if not admin.
-- Created AdminDashboardClient.tsx — dashboard UI: 4 stat cards (revenue, orders, products, customers), low stock alert, 4 navigation cards (products/orders/customers/coupons), recent orders table, top products by sales, quick action buttons.
-- Created AdminProductsClient.tsx — product list with search, pagination, edit/delete actions. Shows stock with low-stock warning, active/inactive status, units sold count.
-- Created AdminProductForm.tsx — create/edit form with:
-  - Cloudinary image upload (drag-drop UI, multiple files, preview grid, MAIN badge on first image, remove button)
-  - Basic info (name, SKU, slug, description, category, badge)
-  - Pricing & inventory (price, original price for sales, stock, inStock, featured, isActive checkboxes)
-  - Product details (material, dimensions, weight, origin, care instructions, warranty)
-- Created /admin/products/new/page.tsx — server component fetches categories, renders AdminProductForm.
-- Created /admin/products/[id]/edit/page.tsx — server component fetches product + categories, renders AdminProductForm with existing data.
-- Created AdminOrdersClient.tsx — order list with search + status filter. Expandable rows showing customer contact + payment info. Status update dropdown (PENDING → CONFIRMED → PROCESSING → SHIPPED → DELIVERED → CANCELLED).
-- Created AdminCustomersClient.tsx — customer list with search. Shows name, email, email verified badge, order count, total spent, join date.
-- Created AdminCouponsClient.tsx — coupon management: list (card grid showing code, discount, usage, status), create form (code, type PERCENTAGE/FLAT, value, min order, max discount, usage limit, per user limit), delete button.
-- Created page.tsx files for /admin/orders, /admin/customers, /admin/coupons.
+- Added NewsletterSubscriber model to Prisma schema (id, email, name, isActive, source, userId, confirmationToken, confirmedAt, unsubscribedAt, timestamps). Added back-relation on User. Applied via prisma db push.
+- Created src/app/api/newsletter/route.ts — POST (subscribe, idempotent upsert, reactivates unsubscribed) + DELETE (unsubscribe). Rate limited: 3 signups/hour/IP.
+- Updated src/components/NewsletterSection.tsx — handleSubmit now calls /api/newsletter API (was setTimeout mock). Added submitting state + loading indicator on button.
+- Refactored src/app/(shop)/shop/page.tsx — now a server component that fetches products + categories from DB via getProducts() + getCategories(). Passes to ShopView as initialProducts + initialCategories props. ISR: revalidate every 1 hour.
+- Updated src/components/ShopView.tsx — accepts initialProducts + initialCategories props. Uses DB data instead of mock data. Added categories to FilterSidebar props. Falls back to empty array if no props (backward compat).
+- Created src/app/api/wishlist/merge/route.ts — POST endpoint to merge guest wishlist (productIds) into user's DB wishlist. Skips duplicates, verifies products exist.
+- Updated src/components/AuthView.tsx — on successful login, fires fetch to /api/wishlist/merge with guest wishlist productIds from localStorage. Non-blocking (fire-and-forget).
+- Created src/lib/rate-limit.ts — in-memory rate limiter (Map-based, auto-cleanup every 5 min). Functions: rateLimit(identifier, options), getClientIP(request), RATE_LIMITS config object. Works without Upstash (single-instance). Will upgrade to Upstash Redis later for multi-instance.
+- Applied rate limiting to /api/checkout (3 req/min per IP) and /api/newsletter (3 req/hour per IP).
+- Updated src/app/robots.ts — disallows /api/, /admin/, /account/, /auth/, /checkout/, /cart/, /wishlist/, /_next/. Added host directive.
+- Created loading skeletons:
+  - src/app/admin/loading.tsx — dashboard skeleton (stat cards)
+  - src/app/account/loading.tsx — account page skeleton
+  - src/app/(shop)/shop/loading.tsx — shop grid skeleton
+- Fixed Prisma 7 orderBy issue — changed from object format `{ sortOrder: "asc" }` to array format `[{ sortOrder: "asc" }]` in src/lib/products.ts (required by Prisma 7 for top-level orderBy).
 
-VERIFICATION (live API tests with curl as admin):
-- ✅ All 6 admin pages return 200: /admin, /admin/products, /admin/products/new, /admin/orders, /admin/customers, /admin/coupons
-- ✅ GET /api/admin/products — returns 45 products
-- ✅ GET /api/admin/orders — returns orders with items + user
-- ✅ GET /api/admin/customers — returns customers with order count + total spent
-- ✅ GET /api/admin/coupons — returns WELCOME10 + AURA500 coupons
-- ✅ POST /api/admin/upload — returns clear error when Cloudinary not configured (expected)
+VERIFICATION:
 - ✅ npm run typecheck — 0 errors
 - ✅ npm run lint — 0 errors (7 pre-existing warnings)
-- ✅ npm run build — succeeds, all admin pages compile
+- ✅ npm run build — succeeds, all pages compile
+- ✅ Dev server: Homepage 200, Shop 200 (now from DB), Product detail 200, Admin 307 (redirect to login), Robots.txt 200
+- ✅ Newsletter API: POST saves subscriber to DB (verified in Supabase)
+- ✅ Cleaned up test newsletter subscriber after verification
 
 Stage Summary:
-- ✅ Phase 6 COMPLETE and verified.
-- Admin dashboard live: stats, recent orders, top products, low stock alerts.
-- Product management: full CRUD with Cloudinary image upload (requires Cloudinary credentials to be added).
-- Order management: list, filter, search, update status (with timeline events).
-- Customer management: list with order count + total spent.
-- Coupon management: list, create, delete (full CRUD via API).
-- All admin routes protected by role check (requireAdmin throws AdminAuthError if not admin).
-- ⚠️ Cloudinary credentials needed for image upload: user must create free Cloudinary account and add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET to .env.local. Without these, product creation works but image upload returns an error.
-- Awaiting user verification + approval before Phase 7 (Production Hardening).
+- ✅ Phase 7 COMPLETE.
+- Newsletter form saves to DB (NewsletterSubscriber table).
+- Shop page now fetches from DB (was mock data) — all 45 products load from Supabase.
+- Wishlist syncs from localStorage to DB on login (fire-and-forget merge).
+- Rate limiting on /api/checkout (3/min) + /api/newsletter (3/hour).
+- robots.txt disallows sensitive paths.
+- Loading skeletons for /admin, /account, /shop.
+- Created comprehensive Vercel deployment plan at /home/z/my-project/download/VERCEL_DEPLOYMENT_PLAN.md (9-step guide with all env vars, troubleshooting, post-deployment security).
+- All 7 phases of backend development COMPLETE.
+- Ready for Vercel deployment.

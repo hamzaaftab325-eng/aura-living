@@ -13,6 +13,7 @@ import PremiumButton from '@/components/ui/PremiumButton';
 export default function NewsletterSection() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
   // GSAP animations
@@ -44,12 +45,36 @@ export default function NewsletterSection() {
     { scope: sectionContentRef }
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
+    if (!email.trim() || submitting) return;
+
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const data = await res.json();
+
+      if (res.ok && data.ok) {
+        setSubmitted(true);
+        setEmail('');
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        // Even on error, show success message (don't reveal if email exists)
+        setSubmitted(true);
+        setEmail('');
+        setTimeout(() => setSubmitted(false), 5000);
+      }
+    } catch {
+      // Network error — still show success to user
       setSubmitted(true);
       setEmail('');
-      setTimeout(() => setSubmitted(false), 4000);
+      setTimeout(() => setSubmitted(false), 5000);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -180,9 +205,9 @@ export default function NewsletterSection() {
                 />
               </div>
 
-              <PremiumButton variant="newsletter" fullWidth type="submit">
+              <PremiumButton variant="newsletter" fullWidth type="submit" loading={submitting}>
                 <Send className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                Claim My 15% Off
+                {submitting ? 'Subscribing...' : 'Claim My 15% Off'}
               </PremiumButton>
             </form>
 

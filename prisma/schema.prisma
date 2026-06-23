@@ -44,6 +44,7 @@ model User {
   cart              Cart?
   wishlistItems     WishlistItem[]
   couponRedemptions CouponRedemption[]
+  newsletterSubscriptions NewsletterSubscriber[]
 
   // Newsletter opt-in (separate from auth)
   newsletterSubscribed Boolean @default(false)
@@ -476,3 +477,29 @@ model CouponRedemption {
   @@index([couponId])
   @@index([userId])
 }
+
+// ============================================================================
+// NEWSLETTER SUBSCRIBERS
+// ============================================================================
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  isActive  Boolean  @default(true)
+  source    String   @default("website") // website | footer | popup | admin
+  userId    String?  // If subscriber is also a registered user
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  // Confirmation flow (double opt-in)
+  confirmationToken String?
+  confirmedAt       DateTime?
+  unsubscribedAt    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([isActive])
+}
+

@@ -28,6 +28,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { createOrder } from "@/lib/orders";
 import { mergeCart, clearCart } from "@/lib/cart";
+import { rateLimit, getClientIP, RATE_LIMITS } from "@/lib/rate-limit";
 import { z } from "zod";
 
 // ----------------------------------------------------------------------------
@@ -68,6 +69,16 @@ const checkoutSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit: 3 checkout attempts per minute per IP
+    const ip = getClientIP(request);
+    const limit = rateLimit(`checkout:${ip}`, RATE_LIMITS.CHECKOUT);
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { ok: false, error: "Too many checkout attempts. Please wait a minute." },
+        { status: 429 },
+      );
+    }
+
     // 1. Check auth — get session from Better Auth
     const session = await auth.api.getSession({ headers: request.headers });
 

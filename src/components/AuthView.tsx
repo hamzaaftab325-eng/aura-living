@@ -20,6 +20,7 @@ import { useTextReveal } from '@/hooks/useAnimations';
 import { GoldDivider, FloatingOrb } from '@/components/SVGDecorations';
 import { Mail, Lock, User, Eye, EyeOff, ArrowRight, Sparkles } from 'lucide-react';
 import { authClient } from '@/lib/auth-client';
+import { useStore } from '@/store/useStore';
 import { useToast } from '@/hooks/use-toast';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -106,7 +107,21 @@ function AuthForm({ mode: modeProp = 'login' }: { mode?: 'login' | 'signup' }) {
         return;
       }
 
-      // Success
+      // Success — merge guest cart + wishlist to user's DB account
+      try {
+        const guestWishlist = useStore.getState().wishlist;
+        if (guestWishlist.length > 0) {
+          // Send wishlist product IDs to merge endpoint (fire-and-forget)
+          fetch('/api/wishlist/merge', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ productIds: guestWishlist }),
+          }).catch(() => {});
+        }
+      } catch {
+        // Non-critical — don't block login
+      }
+
       toast({
         title: 'Welcome back!',
         description: 'You have successfully signed in.',

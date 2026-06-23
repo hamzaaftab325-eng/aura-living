@@ -16,8 +16,21 @@ import {
   X } from 'lucide-react';
 import { useStore, Product, badgeColors } from '@/store/useStore';
 import { useCartActions } from '@/hooks/useCartActions';
-import { products, categories, formatPKR } from '@/data/products';
+import { formatPKR } from '@/data/products';
 import Breadcrumb from '@/components/ui/Breadcrumb';
+
+// Types for props (from server component)
+interface ShopCategory {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+}
+
+interface ShopViewProps {
+  initialProducts?: Product[];
+  initialCategories?: ShopCategory[];
+}
 
 
 type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'newest' | 'best-selling';
@@ -44,6 +57,7 @@ interface FilterSidebarProps {
   onPriceMaxChange: (v: string) => void;
   hasActiveFilters: boolean;
   onClearFilters: () => void;
+  categories: ShopCategory[];
 }
 
 function FilterSidebar({
@@ -56,7 +70,8 @@ function FilterSidebar({
   onPriceMinChange,
   onPriceMaxChange,
   hasActiveFilters,
-  onClearFilters }: FilterSidebarProps) {
+  onClearFilters,
+  categories }: FilterSidebarProps) {
   return (
     <div className="space-y-8">
       <div>
@@ -334,10 +349,10 @@ function ProductCard({
 /* ═══════════════════════════════════════════════════════════
    Main ShopView
    ═══════════════════════════════════════════════════════════ */
-export default function ShopView() {
+export default function ShopView({ initialProducts, initialCategories }: ShopViewProps = {}) {
   return (
     <Suspense fallback={null}>
-      <ShopViewInner />
+      <ShopViewInner initialProducts={initialProducts} initialCategories={initialCategories} />
     </Suspense>
   );
 }
@@ -346,7 +361,7 @@ export default function ShopView() {
    ShopViewInner — actual implementation (wrapped in <Suspense> so
    that `useSearchParams` works during static generation)
    ═══════════════════════════════════════════════════════════ */
-function ShopViewInner() {
+function ShopViewInner({ initialProducts, initialCategories }: ShopViewProps = {}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedCategory = searchParams.get('category') || 'all';
@@ -354,6 +369,10 @@ function ShopViewInner() {
   const { isInWishlist } = useStore();
   const { handleAddToCart, handleToggleWishlist } = useCartActions();
   const [sortBy, setSortBy] = useState<SortOption>('featured');
+
+  // Use DB-fetched products if provided, otherwise fall back to mock data
+  const products = initialProducts ?? [];
+  const categories = initialCategories ?? [];
   const [priceMin, setPriceMin] = useState('');
   const [priceMax, setPriceMax] = useState('');
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -527,7 +546,8 @@ function ShopViewInner() {
     onPriceMinChange: setPriceMin,
     onPriceMaxChange: setPriceMax,
     hasActiveFilters,
-    onClearFilters: clearFilters };
+    onClearFilters: clearFilters,
+    categories };
 
   return (
     <div className="w-full page-transition" >
