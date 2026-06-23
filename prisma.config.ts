@@ -14,7 +14,13 @@
 // - DATABASE_URL (port 6543) is used for app runtime (pooled via PgBouncer)
 // ============================================================================
 
-import { defineConfig } from "prisma/config";
+import { defineConfig, env } from "prisma/config";
+import { config } from "dotenv";
+
+// Load .env and .env.local explicitly (Prisma 7 doesn't auto-load these
+// for prisma.config.ts evaluation).
+config({ path: ".env" });
+config({ path: ".env.local", override: true });
 
 export default defineConfig({
   schema: "prisma/schema.prisma",

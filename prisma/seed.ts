@@ -18,20 +18,30 @@
  *   Running multiple times is safe — uses upsert pattern.
  */
 
+import { config } from "dotenv";
 import { PrismaClient } from "@prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
+
+// Load env vars BEFORE importing mock data (which may trigger other imports)
+config({ path: ".env" });
+config({ path: ".env.local", override: true });
 
 // Import existing mock data — we don't want to duplicate 1000+ lines
 import { categories as mockCategories } from "../src/data/products";
 import { products as mockProducts } from "../src/data/products";
 
 // ----------------------------------------------------------------------------
-// Prisma client (same setup as src/lib/db.ts but standalone for the script)
+// Prisma client for seed script
+// In Prisma 7 with a driver adapter, the adapter MUST be passed to the
+// PrismaClient constructor. We use DIRECT_URL (port 5432) for the seed
+// script because it's a long-running process with many sequential writes
+// (the pooled connection + PgBouncer transaction mode doesn't play well
+// with multi-statement transactions in a script context).
 // ----------------------------------------------------------------------------
 
-const connectionString = process.env.DATABASE_URL;
+const connectionString = process.env.DIRECT_URL ?? process.env.DATABASE_URL;
 if (!connectionString) {
-  console.error("❌ DATABASE_URL is not set. Add it to .env.local first.");
+  console.error("❌ DIRECT_URL or DATABASE_URL is not set. Add to .env.local.");
   process.exit(1);
 }
 
