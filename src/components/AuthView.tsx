@@ -191,13 +191,15 @@ function AuthForm({ mode: modeProp = 'login' }: { mode?: 'login' | 'signup' }) {
         return;
       }
 
-      // Success — Better Auth sends verification email automatically.
+      // Success — account created. Email verification is disabled for now
+      // (will re-enable when we have a verified email domain on Resend).
+      // Users can log in immediately after signup.
       toast({
         title: 'Account created!',
-        description: 'Please check your email to verify your account.',
+        description: 'Welcome to Aura Living. You can now sign in.',
       });
-      // Redirect to verify-email page so user knows what to do next
-      router.push(`/auth/verify-email?email=${encodeURIComponent(signupEmail.trim())}`);
+      // Redirect to login page so they can sign in immediately
+      router.push(`/auth/login?from=${encodeURIComponent(fromPath)}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       console.error('Signup error:', err);

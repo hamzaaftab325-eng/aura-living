@@ -56,8 +56,10 @@ export const auth = betterAuth({
   // Email/password auth config
   emailAndPassword: {
     enabled: true,
-    // Require email verification before user can log in
-    requireEmailVerification: true,
+    // TEMPORARILY DISABLED: Require email verification before user can log in.
+    // We'll re-enable this once we have a verified email domain on Resend.
+    // For now, users can sign up and log in immediately without verifying.
+    requireEmailVerification: false,
     // Send password reset email
     sendResetPassword: async ({ user, url, token }) => {
       const resetUrl = `${process.env.AUTH_URL ?? process.env.NEXT_PUBLIC_APP_URL}/auth/reset-password?token=${token}&email=${encodeURIComponent(user.email)}`;
