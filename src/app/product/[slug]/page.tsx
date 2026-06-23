@@ -1,29 +1,41 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { products, getProductBySlug } from '@/data/products';
-import ProductDetailView from '@/components/ProductDetailView';
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import {
+  getProductBySlug,
+  getRelatedProducts,
+  getAllProductSlugs,
+} from "@/lib/products";
+import ProductDetailView from "@/components/ProductDetailView";
 
-// Revalidate every 1 hours
+// Revalidate every 1 hour (ISR — incremental static regeneration)
 export const revalidate = 3600;
 
-
-// Pre-render all product pages at build time
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
+/**
+ * Pre-render the top product pages at build time.
+ * The rest will be generated on-demand (ISR).
+ */
+export async function generateStaticParams() {
+  const slugs = await getAllProductSlugs();
+  // Pre-render all products (we have 45, which is manageable)
+  return slugs.map((slug) => ({ slug }));
 }
 
-// Per-product metadata for SEO
+/**
+ * Per-product metadata for SEO.
+ */
 export async function generateMetadata({
-  params }: {
+  params,
+}: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     return {
-      title: 'Product Not Found | Aura Living',
-      robots: { index: false, follow: true } };
+      title: "Product Not Found | Aura Living",
+      robots: { index: false, follow: true },
+    };
   }
 
   const title = `${product.name} | Aura Living`;
@@ -35,7 +47,7 @@ export async function generateMetadata({
     description,
     alternates: { canonical },
     openGraph: {
-      type: 'website',
+      type: "website",
       title,
       description,
       url: canonical,
@@ -44,25 +56,33 @@ export async function generateMetadata({
           url: product.image,
           width: 1200,
           height: 1200,
-          alt: product.name },
-      ] },
+          alt: product.name,
+        },
+      ],
+    },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title,
       description,
-      images: [product.image] } };
+      images: [product.image],
+    },
+  };
 }
 
 export default async function ProductPage({
-  params }: {
+  params,
+}: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
   }
 
-  return <ProductDetailView product={product} />;
+  // Fetch related products (same category, excluding current)
+  const related = await getRelatedProducts(product.id, 4);
+
+  return <ProductDetailView product={product} relatedProducts={related} />;
 }

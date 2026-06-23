@@ -128,7 +128,13 @@ function AccordionItem({
 /* ═══════════════════════════════════════════════════════════
    Main ProductDetailView
    ═══════════════════════════════════════════════════════════ */
-export default function ProductDetailView({ product }: { product: Product }) {
+export default function ProductDetailView({
+  product,
+  relatedProducts: relatedProductsProp,
+}: {
+  product: Product;
+  relatedProducts?: Product[];
+}) {
   const { isInWishlist } = useStore();
   const { handleAddToCartWithQuantity, handleToggleWishlist } = useCartActions();
   const [quantity, setQuantity] = useState(1);
@@ -185,8 +191,8 @@ export default function ProductDetailView({ product }: { product: Product }) {
     return combined.slice(0, 4);
   })();
 
-  // Related products from same category
-  const relatedProducts = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+  // Related products — use prop if provided (from DB), else fall back to mock data
+  const relatedProducts = relatedProductsProp ?? products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   return (
     <div className="w-full pt-28 sm:pt-32" >
