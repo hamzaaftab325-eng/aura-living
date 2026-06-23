@@ -1,4 +1,5 @@
 'use client';
+import { useAuth } from '@/hooks/useAuth';
 
 import { useState } from 'react';
 import { useScrollReveal, useStaggerReveal, useTextReveal } from '@/hooks/useAnimations';;
@@ -65,14 +66,14 @@ function Toggle({
 
 export default function SettingsView() {
   const router = useRouter();
-  const user = useStore((state) => state.user);
-  const logout = useStore((state) => state.logout);
+  const { user, signOut } = useAuth();
+  
   const { toast } = useToast();
 
   // Hydration guard
   const [hydrated, setHydrated] = useState(false);
   useState(() => { Promise.resolve().then(() => setHydrated(true)); });
-  const safeUser = hydrated ? user : null;
+  const safeUser = user;
 
   // Notification preferences
   const [emailOrders, setEmailOrders] = useState(true);
@@ -90,7 +91,7 @@ export default function SettingsView() {
 
   // Profile edit form
   const [editingProfile, setEditingProfile] = useState(false);
-  const [profileName, setProfileName] = useState(safeUser?.name ?? '');
+  const [profileName, setProfileName] = useState(safeUser?.user_metadata?.full_name ?? '');
   const [profileEmail, setProfileEmail] = useState(safeUser?.email ?? '');
 
   // GSAP refs
@@ -135,7 +136,7 @@ export default function SettingsView() {
   };
 
   const handleLogout = () => {
-    logout();
+    await signOut();
     toast({
       title: 'Signed out',
       description: 'You have been successfully signed out.' });
@@ -144,7 +145,7 @@ export default function SettingsView() {
   };
 
   // Not-signed-in gate
-  if (hydrated && !safeUser) {
+  if (!safeUser) {
     return (
       <div className="w-full page-transition" >
         <section className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center">
@@ -339,12 +340,12 @@ export default function SettingsView() {
                     style={{ boxShadow: '0 4px 14px rgba(212, 175, 55, 0.3)', border: '2px solid rgba(255,255,255,0.4)' }}
                   >
                     <span className="text-lg font-bold text-white" >
-                      {safeUser?.name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()}
+                      {safeUser?.user_metadata?.full_name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()}
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm sm:text-base font-semibold truncate" >
-                      {safeUser?.name}
+                      {safeUser?.user_metadata?.full_name}
                     </p>
                     <p className="text-xs sm:text-sm truncate" >
                       {safeUser?.email}
@@ -354,7 +355,7 @@ export default function SettingsView() {
                     variant="secondary"
                     size="sm"
                     onClick={() => {
-                      setProfileName(safeUser?.name ?? '');
+                      setProfileName(safeUser?.user_metadata?.full_name ?? '');
                       setProfileEmail(safeUser?.email ?? '');
                       setEditingProfile(true);
                     }}

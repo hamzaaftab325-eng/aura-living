@@ -1,4 +1,5 @@
 'use client';
+import { useAuth } from '@/hooks/useAuth';
 
 import { useState } from 'react';
 import { useScrollReveal, useStaggerReveal, useTextReveal, useScaleIn } from '@/hooks/useAnimations';;
@@ -107,13 +108,13 @@ const statusConfig: Record<TrackedOrder['status'], { color: string; bg: string; 
 
 export default function TrackOrdersView() {
   const router = useRouter();
-  const user = useStore((state) => state.user);
+  const { user, signOut } = useAuth();
   const { toast } = useToast();
 
   // Hydration guard
   const [hydrated, setHydrated] = useState(false);
   useState(() => { Promise.resolve().then(() => setHydrated(true)); });
-  const safeUser = hydrated ? user : null;
+  const safeUser = user;
 
   const [searchId, setSearchId] = useState('');
   const [expandedId, setExpandedId] = useState<string | null>(trackedOrders[0]?.id ?? null);
@@ -157,7 +158,7 @@ export default function TrackOrdersView() {
     : trackedOrders;
 
   // Not-signed-in gate
-  if (hydrated && !safeUser) {
+  if (!safeUser) {
     return (
       <div className="w-full page-transition" >
         <section className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center">
