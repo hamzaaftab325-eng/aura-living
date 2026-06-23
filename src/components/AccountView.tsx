@@ -1,5 +1,4 @@
 'use client';
-import { useAuth } from '@/hooks/useAuth';
 
 import { useEffect, useRef, useState } from 'react';
 import { useScrollReveal, useStaggerReveal, useTextReveal, useScaleIn, useCountUp } from '@/hooks/useAnimations';
@@ -77,7 +76,8 @@ export default function AccountView() {
   const router = useRouter();
   const cart = useStore((state) => state.cart);
   const wishlist = useStore((state) => state.wishlist);
-  const { user, signOut } = useAuth();
+  const user = useStore((state) => state.user);
+  const logout = useStore((state) => state.logout);
   
   const { toast } = useToast();
 
@@ -194,7 +194,7 @@ export default function AccountView() {
       label: 'Sign Out',
       description: 'Sign out of account',
       onClick: async () => {
-        await signOut();
+        logout();
         toast({
           title: 'Signed out',
           description: 'You have been successfully signed out.' });
@@ -317,7 +317,7 @@ export default function AccountView() {
                       className="aura-h2 text-white"
                       
                     >
-                      {safeUser?.user_metadata?.full_name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
+                      {safeUser?.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
                     </span>
                   </div>
 
@@ -327,7 +327,7 @@ export default function AccountView() {
                       className="aura-text-primary aura-h2 mb-2"
                       
                     >
-                      {safeUser?.user_metadata?.full_name}
+                      {safeUser?.name}
                     </h2>
                     <p
                       className="aura-text-secondary text-sm sm:text-base mb-1"
@@ -343,7 +343,7 @@ export default function AccountView() {
                         className="text-xs tracking-wide"
                         
                       >
-                        Member Since {safeUser?.created_at ? new Date(safeUser.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : '2026'}
+                        Member Since {safeUser?.memberSince ?? "2026"}
                       </span>
                     </div>
                   </div>

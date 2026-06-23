@@ -1,5 +1,4 @@
 'use client';
-import { useAuth } from '@/hooks/useAuth';
 
 import { useState } from 'react';
 import { useScrollReveal, useStaggerReveal, useTextReveal } from '@/hooks/useAnimations';;
@@ -92,7 +91,8 @@ const emptyForm: Omit<Address, 'id' | 'isDefault'> = {
   postal: '' };
 
 export default function AddressesView() {
-  const { user, signOut } = useAuth();
+  const user = useStore((state) => state.user);
+  const logout = useStore((state) => state.logout);
   const { toast } = useToast();
 
   // Hydration guard

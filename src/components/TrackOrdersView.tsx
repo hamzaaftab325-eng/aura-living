@@ -1,5 +1,4 @@
 'use client';
-import { useAuth } from '@/hooks/useAuth';
 
 import { useState } from 'react';
 import { useScrollReveal, useStaggerReveal, useTextReveal, useScaleIn } from '@/hooks/useAnimations';;
@@ -108,7 +107,8 @@ const statusConfig: Record<TrackedOrder['status'], { color: string; bg: string; 
 
 export default function TrackOrdersView() {
   const router = useRouter();
-  const { user, signOut } = useAuth();
+  const user = useStore((state) => state.user);
+  const logout = useStore((state) => state.logout);
   const { toast } = useToast();
 
   // Hydration guard

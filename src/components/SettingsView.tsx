@@ -1,5 +1,4 @@
 'use client';
-import { useAuth } from '@/hooks/useAuth';
 
 import { useState } from 'react';
 import { useScrollReveal, useStaggerReveal, useTextReveal } from '@/hooks/useAnimations';;
@@ -66,7 +65,8 @@ function Toggle({
 
 export default function SettingsView() {
   const router = useRouter();
-  const { user, signOut } = useAuth();
+  const user = useStore((state) => state.user);
+  const logout = useStore((state) => state.logout);
   
   const { toast } = useToast();
 
@@ -91,7 +91,7 @@ export default function SettingsView() {
 
   // Profile edit form
   const [editingProfile, setEditingProfile] = useState(false);
-  const [profileName, setProfileName] = useState(safeUser?.user_metadata?.full_name ?? '');
+  const [profileName, setProfileName] = useState(safeUser?.name ?? '');
   const [profileEmail, setProfileEmail] = useState(safeUser?.email ?? '');
 
   // GSAP refs
@@ -136,7 +136,7 @@ export default function SettingsView() {
   };
 
   const handleLogout = () => {
-    await signOut();
+    logout();
     toast({
       title: 'Signed out',
       description: 'You have been successfully signed out.' });
@@ -340,12 +340,12 @@ export default function SettingsView() {
                     style={{ boxShadow: '0 4px 14px rgba(212, 175, 55, 0.3)', border: '2px solid rgba(255,255,255,0.4)' }}
                   >
                     <span className="text-lg font-bold text-white" >
-                      {safeUser?.user_metadata?.full_name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()}
+                      {safeUser?.name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()}
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm sm:text-base font-semibold truncate" >
-                      {safeUser?.user_metadata?.full_name}
+                      {safeUser?.name}
                     </p>
                     <p className="text-xs sm:text-sm truncate" >
                       {safeUser?.email}
@@ -355,7 +355,7 @@ export default function SettingsView() {
                     variant="secondary"
                     size="sm"
                     onClick={() => {
-                      setProfileName(safeUser?.user_metadata?.full_name ?? '');
+                      setProfileName(safeUser?.name ?? '');
                       setProfileEmail(safeUser?.email ?? '');
                       setEditingProfile(true);
                     }}
