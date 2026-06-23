@@ -3,6 +3,7 @@ import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import SiteShell from "@/components/SiteShell";
+import GsapInitializer from "@/components/GsapInitializer";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
@@ -136,7 +137,10 @@ export default function RootLayout({
               sameAs: ['https://instagram.com/auraliving', 'https://facebook.com/auraliving'] }) }}
         />
 
-        <SiteShell>{children}</SiteShell>
+        <SiteShell>
+          <GsapInitializer />
+          {children}
+        </SiteShell>
 
         <Toaster />
         <Analytics /> {/* Vercel Web Analytics — page views + visitor metrics */}

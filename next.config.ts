@@ -28,7 +28,7 @@ const nextConfig: NextConfig = {
         value: 'max-age=31536000; includeSubDomains; preload',
       },
       // CSP — permissive enough for Vercel analytics + Next.js inline scripts
-      // Tighten in production after auditing all third-party scripts
+      // + Cloudinary (images + videos)
       {
         key: 'Content-Security-Policy',
         value: [
@@ -37,7 +37,10 @@ const nextConfig: NextConfig = {
           "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
           "font-src 'self' data:",
           "img-src 'self' data: blob: https:",
-          "connect-src 'self' https://vitals.vercel-insights.com https://plausible.io",
+          // Cloudinary videos (hero background) + self for any local media
+          "media-src 'self' https://res.cloudinary.com",
+          // Cloudinary API (for image uploads) + Vercel analytics
+          "connect-src 'self' https://vitals.vercel-insights.com https://plausible.io https://res.cloudinary.com https://api.cloudinary.com",
           "frame-ancestors 'none'",
           "base-uri 'self'",
           "form-action 'self'",
