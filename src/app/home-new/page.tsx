@@ -4,9 +4,45 @@ import HomeNew from '@/components/HomeNew';
 import { getFeaturedProducts, getNewArrivals, getCategories } from '@/lib/products';
 
 export const metadata: Metadata = {
-  title: 'Aura Living | Premium Home Decor Pakistan',
-  description: 'Handcrafted home decor for the modern Pakistani home.',
+  title: 'Aura Living | Premium Home Decor Pakistan — Where Comfort Meets Style',
+  description:
+    'Discover handcrafted home decor, elegant lamps, indoor plants, ceramic vases, candles & more. Premium quality home decoration items delivered across Pakistan. Shop PKR.',
   alternates: { canonical: '/home-new' },
+  keywords: [
+    'home decor Pakistan',
+    'luxury home decoration',
+    'lamps online Pakistan',
+    'indoor plants Karachi',
+    'ceramic vases',
+    'candles',
+    'wall art',
+    'Aura Living',
+    'home accessories PKR',
+  ],
+  openGraph: {
+    title: 'Aura Living | Premium Home Decor Pakistan',
+    description:
+      'Where Comfort Meets Style — Handcrafted home decor, lamps, plants, vases & more. Shop online in Pakistan.',
+    url: '/home-new',
+    siteName: 'Aura Living',
+    type: 'website',
+    locale: 'en_PK',
+    images: [
+      {
+        url: '/og/home-new.png',
+        width: 1344,
+        height: 768,
+        alt: 'Aura Living — Where Comfort Meets Style',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Aura Living | Premium Home Decor Pakistan',
+    description:
+      'Where Comfort Meets Style — Shop handcrafted home decor online in Pakistan',
+    images: ['/og/home-new.png'],
+  },
   robots: { index: false, follow: true },
 };
 
