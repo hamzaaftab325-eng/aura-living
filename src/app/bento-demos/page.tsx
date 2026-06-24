@@ -977,6 +977,168 @@ function Nav4() {
 }
 
 // ═══════════════════════════════════════════════════════════
+// NAV DEMOS (5-8) — Premium variants round 2
+// ═══════════════════════════════════════════════════════════
+
+function Nav5() {
+  // Aurora Centered — morphing gradient bg, centered glass pill nav, big brand above
+  const ref = useRef<HTMLDivElement>(null);
+  useGSAP(() => {
+    // Animate gradient position via CSS variable
+    let raf = 0;
+    const tick = () => {
+      if (ref.current) {
+        const t = Date.now() / 4000;
+        const x = 50 + Math.sin(t) * 25;
+        const y = 50 + Math.cos(t * 0.8) * 20;
+        ref.current.style.setProperty('--demo-nav5-x', x + '%');
+        ref.current.style.setProperty('--demo-nav5-y', y + '%');
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, { scope: ref });
+  return (
+    <div ref={ref} className="demo-nav5">
+      <div className="demo-nav5-pill">
+        <Link href="/" className="demo-nav5-logo">
+          <span className="demo-nav5-logo-mark">A</span>
+          <span className="demo-nav5-logo-text">Aura Living</span>
+        </Link>
+        <nav className="demo-nav5-links">
+          {navLinks.map((l, i) => (
+            <Link key={l.href} href={l.href} className={`demo-nav5-link ${i === 0 ? 'demo-nav5-link-active' : ''}`}>
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="demo-nav5-actions">
+          <button className="demo-nav5-icon-btn" aria-label="Search"><Search className="demo-nav5-icon" /></button>
+          <button className="demo-nav5-icon-btn" aria-label="Cart">
+            <ShoppingBag className="demo-nav5-icon" />
+            <span className="demo-nav5-count">3</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Nav6() {
+  // Brutalist Bold — heavy condensed type, asymmetric, monochrome on cream
+  return (
+    <div className="demo-nav6">
+      <div className="demo-nav6-inner">
+        <Link href="/" className="demo-nav6-logo">AURA<br />LIVING.</Link>
+        <nav className="demo-nav6-links">
+          {navLinks.map((l, i) => (
+            <Link key={l.href} href={l.href} className={`demo-nav6-link ${i === 0 ? 'demo-nav6-link-active' : ''}`}>
+              <span className="demo-nav6-link-num">{String(i + 1).padStart(2, '0')}</span>
+              <span className="demo-nav6-link-text">{l.label}</span>
+            </Link>
+          ))}
+        </nav>
+        <div className="demo-nav6-actions">
+          <button className="demo-nav6-cart" aria-label="Cart">
+            <ShoppingBag className="demo-nav6-cart-icon" />
+            <span className="demo-nav6-cart-num">03</span>
+            <span className="demo-nav6-cart-label">Cart</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Nav7() {
+  // Sidebar Vertical — fixed left vertical nav with rotated logo + vertical links
+  return (
+    <div className="demo-nav7">
+      <aside className="demo-nav7-side">
+        <Link href="/" className="demo-nav7-logo">
+          <span className="demo-nav7-logo-aura">Aura</span>
+          <span className="demo-nav7-logo-dot">.</span>
+        </Link>
+        <div className="demo-nav7-divider" />
+        <nav className="demo-nav7-links">
+          {navLinks.map((l, i) => (
+            <Link key={l.href} href={l.href} className={`demo-nav7-link ${i === 0 ? 'demo-nav7-link-active' : ''}`}>
+              <span className="demo-nav7-link-num">0{i + 1}</span>
+              <span className="demo-nav7-link-text">{l.label}</span>
+            </Link>
+          ))}
+        </nav>
+        <div className="demo-nav7-foot">
+          <button className="demo-nav7-icon-btn" aria-label="Search"><Search className="demo-nav7-icon" /></button>
+          <button className="demo-nav7-icon-btn" aria-label="Cart">
+            <ShoppingBag className="demo-nav7-icon" />
+            <span className="demo-nav7-count">3</span>
+          </button>
+          <div className="demo-nav7-socials">
+            <Instagram className="demo-nav7-social" />
+            <Facebook className="demo-nav7-social" />
+          </div>
+        </div>
+      </aside>
+      <div className="demo-nav7-main">
+        <div className="demo-nav7-main-eyebrow">
+          <Sparkles className="demo-nav7-spark" /> Featured Collection
+        </div>
+        <h3 className="demo-nav7-main-title">Handcrafted Lighting 2026</h3>
+        <p className="demo-nav7-main-sub">Premium lamps, pendants & sconces — made in Lahore.</p>
+        <Link href="/shop" className="demo-nav7-main-cta">Explore <ArrowRight className="demo-nav7-main-arrow" /></Link>
+      </div>
+    </div>
+  );
+}
+
+function Nav8() {
+  // Promo + Bar Combo — top thin promo marquee strip + main nav below
+  return (
+    <div className="demo-nav8">
+      <div className="demo-nav8-promo">
+        <div className="demo-nav8-promo-track">
+          {Array.from({ length: 2 }).map((_, k) => (
+            <div key={k} className="demo-nav8-promo-group">
+              {['Free Shipping over Rs. 10,000', 'COD Available Nationwide', '7-Day Easy Returns', 'Handcrafted in Pakistan'].map((t, i) => (
+                <span key={i} className="demo-nav8-promo-item">
+                  <Sparkles className="demo-nav8-promo-spark" /> {t}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="demo-nav8-bar">
+        <div className="demo-nav8-bar-inner">
+          <Link href="/" className="demo-nav8-logo">
+            <span className="demo-nav8-logo-aura">Aura</span>
+            <span className="demo-nav8-logo-dot">.</span>
+            <span className="demo-nav8-logo-sub">Living</span>
+          </Link>
+          <nav className="demo-nav8-links">
+            {navLinks.map((l, i) => (
+              <Link key={l.href} href={l.href} className={`demo-nav8-link ${i === 0 ? 'demo-nav8-link-active' : ''}`}>
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="demo-nav8-actions">
+            <button className="demo-nav8-icon-btn" aria-label="Search"><Search className="demo-nav8-icon" /></button>
+            <button className="demo-nav8-icon-btn" aria-label="Account"><User className="demo-nav8-icon" /></button>
+            <button className="demo-nav8-icon-btn demo-nav8-cart" aria-label="Cart">
+              <ShoppingBag className="demo-nav8-icon" />
+              <span className="demo-nav8-count">3</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
 // FOOTER DEMOS (4) — Premium 10/10 designs (SSENSE / MR PORTER / Aesop / COS inspired)
 // ═══════════════════════════════════════════════════════════
 
@@ -1257,18 +1419,273 @@ function Footer4() {
   );
 }
 
+// ═══════════════════════════════════════════════════════════
+// FOOTER DEMOS (5-8) — Premium variants round 2
+// ═══════════════════════════════════════════════════════════
+
+function Footer5() {
+  // Newsletter Hero — newsletter as full hero with massive headline, links condensed below
+  return (
+    <footer className="demo-footer5">
+      <div className="demo-footer5-glow" />
+      <div className="demo-footer5-inner">
+        <div className="demo-footer5-hero">
+          <span className="demo-footer5-eyebrow">
+            <span className="demo-footer5-line" /> Newsletter <span className="demo-footer5-line" />
+          </span>
+          <h2 className="demo-footer5-title">
+            Be the first<br /><span className="demo-footer5-title-accent">to know.</span>
+          </h2>
+          <p className="demo-footer5-sub">New arrivals, sales, and styling tips. 10% off your first order.</p>
+          <form className="demo-footer5-form" onSubmit={(e) => e.preventDefault()}>
+            <input type="email" placeholder="your@email.com" required className="demo-footer5-input" />
+            <button type="submit" className="demo-footer5-btn">Subscribe <ArrowRight className="demo-footer5-arrow" /></button>
+          </form>
+        </div>
+        <div className="demo-footer5-links">
+          {[
+            { h: 'Shop', items: ['All Products', 'New Arrivals', 'Sale'] },
+            { h: 'Company', items: ['About', 'Journal', 'Contact'] },
+            { h: 'Help', items: ['Shipping', 'Returns', 'FAQ'] },
+            { h: 'Legal', items: ['Privacy', 'Terms'] },
+          ].map((col) => (
+            <div key={col.h} className="demo-footer5-col">
+              <span className="demo-footer5-h">{col.h}</span>
+              {col.items.map((it) => (
+                <Link key={it} href="/" className="demo-footer5-link">{it}</Link>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="demo-footer5-bottom">
+          <Link href="/" className="demo-footer5-logo">
+            <span className="demo-footer5-logo-aura">Aura</span>
+            <span className="demo-footer5-logo-dot">.</span>
+            <span className="demo-footer5-logo-sub">Living</span>
+          </Link>
+          <span className="demo-footer5-copy">© 2026 Aura Living — Handcrafted in Pakistan</span>
+          <div className="demo-footer5-socials">
+            <Instagram className="demo-footer5-social" />
+            <Facebook className="demo-footer5-social" />
+            <Twitter className="demo-footer5-social" />
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function Footer6() {
+  // Color Block — top dark section (newsletter + brand), bottom cream section (links + social)
+  return (
+    <footer className="demo-footer6">
+      <div className="demo-footer6-top">
+        <div className="demo-footer6-top-inner">
+          <div className="demo-footer6-brand">
+            <Link href="/" className="demo-footer6-logo">
+              <span className="demo-footer6-logo-aura">Aura</span>
+              <span className="demo-footer6-logo-dot">.</span>
+              <span className="demo-footer6-logo-sub">Living</span>
+            </Link>
+            <p className="demo-footer6-tag">Handcrafted decor for the modern Pakistani home. Made with love in Lahore.</p>
+            <div className="demo-footer6-socials">
+              <Instagram className="demo-footer6-social" />
+              <Facebook className="demo-footer6-social" />
+              <Twitter className="demo-footer6-social" />
+            </div>
+          </div>
+          <form className="demo-footer6-form" onSubmit={(e) => e.preventDefault()}>
+            <span className="demo-footer6-form-h">Stay in the loop</span>
+            <p className="demo-footer6-form-sub">10% off your first order + early access to new arrivals.</p>
+            <div className="demo-footer6-form-row">
+              <input type="email" placeholder="your@email.com" required className="demo-footer6-input" />
+              <button type="submit" className="demo-footer6-btn">Subscribe <ArrowRight className="demo-footer6-arrow" /></button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div className="demo-footer6-bottom">
+        <div className="demo-footer6-bottom-inner">
+          <div className="demo-footer6-cols">
+            {[
+              { h: 'Shop', items: ['All Products', 'New Arrivals', 'Bestsellers', 'Sale'] },
+              { h: 'Company', items: ['About', 'Journal', 'Care Guide', 'Contact'] },
+              { h: 'Help', items: ['Shipping', 'Returns', 'FAQ', 'Track Order'] },
+              { h: 'Legal', items: ['Privacy', 'Terms', 'Cookies'] },
+            ].map((col) => (
+              <div key={col.h} className="demo-footer6-col">
+                <span className="demo-footer6-h">{col.h}</span>
+                {col.items.map((it) => (
+                  <Link key={it} href="/" className="demo-footer6-link">{it}</Link>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="demo-footer6-strip">
+            <span className="demo-footer6-copy">© 2026 Aura Living — Lahore, Pakistan</span>
+            <div className="demo-footer6-pay">
+              <span className="demo-footer6-pay-chip">COD</span>
+              <span className="demo-footer6-pay-chip">VISA</span>
+              <span className="demo-footer6-pay-chip">MC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function Footer7() {
+  // Magazine Spread — image column left, text + link cols right
+  return (
+    <footer className="demo-footer7">
+      <div className="demo-footer7-inner">
+        <div className="demo-footer7-image-col">
+          <Image
+            src="/images/about-workshop.webp"
+            alt="Aura Living workshop"
+            fill
+            className="demo-footer7-img"
+          />
+          <div className="demo-footer7-img-overlay" />
+          <div className="demo-footer7-img-content">
+            <span className="demo-footer7-img-eyebrow">Our Workshop</span>
+            <p className="demo-footer7-img-quote">"Every piece tells a story of Pakistani craftsmanship."</p>
+            <span className="demo-footer7-img-loc">Lahore, Pakistan</span>
+          </div>
+        </div>
+        <div className="demo-footer7-content-col">
+          <Link href="/" className="demo-footer7-logo">
+            <span className="demo-footer7-logo-aura">Aura</span>
+            <span className="demo-footer7-logo-dot">.</span>
+            <span className="demo-footer7-logo-sub">Living</span>
+          </Link>
+          <p className="demo-footer7-tag">Handcrafted decor for the modern Pakistani home.</p>
+          <div className="demo-footer7-cols">
+            <div className="demo-footer7-col">
+              <span className="demo-footer7-h">Shop</span>
+              <Link href="/shop">All Products</Link>
+              <Link href="/new-arrivals">New Arrivals</Link>
+              <Link href="/sale">Sale</Link>
+            </div>
+            <div className="demo-footer7-col">
+              <span className="demo-footer7-h">Company</span>
+              <Link href="/about">Our Story</Link>
+              <Link href="/blog">Journal</Link>
+              <Link href="/contact">Contact</Link>
+            </div>
+            <div className="demo-footer7-col">
+              <span className="demo-footer7-h">Help</span>
+              <Link href="/shipping">Shipping</Link>
+              <Link href="/returns">Returns</Link>
+              <Link href="/faq">FAQ</Link>
+            </div>
+          </div>
+          <form className="demo-footer7-form" onSubmit={(e) => e.preventDefault()}>
+            <span className="demo-footer7-form-h">10% off your first order</span>
+            <div className="demo-footer7-form-row">
+              <input type="email" placeholder="your@email.com" required className="demo-footer7-input" />
+              <button type="submit" className="demo-footer7-btn" aria-label="Subscribe">
+                <ArrowRight className="demo-footer7-arrow" />
+              </button>
+            </div>
+          </form>
+          <div className="demo-footer7-bottom">
+            <span className="demo-footer7-copy">© 2026 Aura Living</span>
+            <div className="demo-footer7-socials">
+              <Instagram className="demo-footer7-social" />
+              <Facebook className="demo-footer7-social" />
+              <Twitter className="demo-footer7-social" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function Footer8() {
+  // Brutalist Type — massive condensed uppercase AURA LIVING filling top, link cols in a row below, monochrome
+  return (
+    <footer className="demo-footer8">
+      <div className="demo-footer8-inner">
+        <div className="demo-footer8-mega-row">
+          <span className="demo-footer8-eyebrow">Handcrafted · Made in Pakistan · 2026</span>
+          <h2 className="demo-footer8-mega" aria-label="Aura Living">AURA LIVING.</h2>
+        </div>
+        <div className="demo-footer8-grid">
+          <div className="demo-footer8-col">
+            <span className="demo-footer8-h">Shop</span>
+            <Link href="/shop">All</Link>
+            <Link href="/new-arrivals">New</Link>
+            <Link href="/sale">Sale</Link>
+            <Link href="/lookbook">Lookbook</Link>
+          </div>
+          <div className="demo-footer8-col">
+            <span className="demo-footer8-h">Company</span>
+            <Link href="/about">About</Link>
+            <Link href="/blog">Journal</Link>
+            <Link href="/care-guide">Care</Link>
+            <Link href="/contact">Contact</Link>
+          </div>
+          <div className="demo-footer8-col">
+            <span className="demo-footer8-h">Help</span>
+            <Link href="/shipping">Shipping</Link>
+            <Link href="/returns">Returns</Link>
+            <Link href="/faq">FAQ</Link>
+            <Link href="/terms">Terms</Link>
+          </div>
+          <div className="demo-footer8-col">
+            <span className="demo-footer8-h">Follow</span>
+            <a href="#" className="demo-footer8-social-link">Instagram</a>
+            <a href="#" className="demo-footer8-social-link">Facebook</a>
+            <a href="#" className="demo-footer8-social-link">Twitter</a>
+            <a href="#" className="demo-footer8-social-link">Pinterest</a>
+          </div>
+          <div className="demo-footer8-col demo-footer8-col-news">
+            <span className="demo-footer8-h">Newsletter</span>
+            <p className="demo-footer8-news-sub">10% off your first order.</p>
+            <form className="demo-footer8-form" onSubmit={(e) => e.preventDefault()}>
+              <input type="email" placeholder="Email" required className="demo-footer8-input" />
+              <button type="submit" className="demo-footer8-btn" aria-label="Subscribe">
+                <ArrowRight className="demo-footer8-arrow" />
+              </button>
+            </form>
+          </div>
+        </div>
+        <div className="demo-footer8-bottom">
+          <span>© 2026 AURA LIVING</span>
+          <span className="demo-footer8-bottom-mid">LAHORE · KARACHI · ISLAMABAD</span>
+          <div className="demo-footer8-pay">
+            <span className="demo-footer8-pay-chip">COD</span>
+            <span className="demo-footer8-pay-chip">VISA</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 const sections = [
   { type: 'nav', label: 'Nav', tabs: [
     { id: 0, label: 'Editorial Split', desc: 'Aesop-style · logo centered · links split L/R · gold baseline scroll anim · cart count badge' },
     { id: 1, label: 'Glass Mega', desc: 'Apple-style · floating frosted glass bar · 2-col mega dropdown with featured product' },
     { id: 2, label: 'Full Takeover', desc: 'SSENSE-style · minimal bar · full-screen menu · 8vw editorial type · staggered GSAP reveal' },
     { id: 3, label: 'Sticky Mega Grid', desc: 'MR PORTER-style · 3-col mega menu · categories + featured + new arrivals mini-list' },
+    { id: 4, label: 'Aurora Centered', desc: 'Morphing gradient bg · centered glass pill nav · gold "A" logo mark · animated radial glow' },
+    { id: 5, label: 'Brutalist Bold', desc: 'Heavy condensed type · all caps · asymmetric · monochrome on cream · big cart counter' },
+    { id: 6, label: 'Sidebar Vertical', desc: 'Fixed left vertical nav · numbered links · search + cart + socials at bottom · featured panel right' },
+    { id: 7, label: 'Promo + Bar', desc: 'Top thin gold promo marquee strip · main nav bar below · clean & informative' },
   ]},
   { type: 'footer', label: 'Footer', tabs: [
     { id: 0, label: 'Big Type', desc: 'SSENSE-style · massive AURA LIVING wordmark · gold gradient text · 4 cols + newsletter' },
     { id: 1, label: 'Magazine Split', desc: 'Aesop-style · 60/40 split · big brand mark · 3 cols · cream→gold gradient bg' },
     { id: 2, label: 'CTA Dark', desc: 'Apple-style · massive "Be the first to know" CTA · floating gold orbs · 3 cols + brand' },
     { id: 3, label: 'Minimal Light', desc: 'COS-style · cream bg · asymmetric grid · minimal newsletter · lots of whitespace' },
+    { id: 4, label: 'Newsletter Hero', desc: 'Newsletter as full hero · massive "Be the first to know" headline · condensed link row below' },
+    { id: 5, label: 'Color Block', desc: 'Two horizontal sections · top dark (brand + newsletter) · bottom cream (link cols + pay)' },
+    { id: 6, label: 'Magazine Spread', desc: 'Image column left (workshop photo with quote) · text + link cols right · editorial' },
+    { id: 7, label: 'Brutalist Type', desc: 'Massive condensed uppercase AURA LIVING · 5-col grid · monochrome · editorial brutalist' },
   ]},
   { type: 'bento', label: 'Categories', tabs: [
     { id: 0, label: 'Classic Bento', desc: '1 tall + 1 wide + 4 standard · asymmetric grid' },
@@ -1324,8 +1741,8 @@ export default function BentoDemosPage() {
   // function merges its hooks into THIS component's context, and switching
   // between demos with different hook counts triggers React error #300.
   const demoMap: Record<string, React.ComponentType[]> = {
-    nav: [Nav1, Nav2, Nav3, Nav4],
-    footer: [Footer1, Footer2, Footer3, Footer4],
+    nav: [Nav1, Nav2, Nav3, Nav4, Nav5, Nav6, Nav7, Nav8],
+    footer: [Footer1, Footer2, Footer3, Footer4, Footer5, Footer6, Footer7, Footer8],
     bento: [Bento1, Bento2, Bento3, Bento4],
     story: [Story1, Story2, Story3, Story4, Story5],
     products: [Products1, Products2, Products3, Products4, Products5],
