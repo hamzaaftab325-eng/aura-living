@@ -55,7 +55,7 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
     return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = (ev: React.FormEvent) => {
+  const handleSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault();
     if (!validate()) {
       toast({
@@ -65,11 +65,26 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
       return;
     }
 
-    // In a real app this would POST to an API. For now we simulate a brief
-    // submission delay so the loading state on PremiumButton is visible.
     setSubmitting(true);
-    window.setTimeout(() => {
-      setSubmitting(false);
+    try {
+      const res = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productId,
+          name: name.trim(),
+          email: location.trim(), // 'location' field is used as email
+          rating,
+          title: title.trim() || undefined,
+          body: body.trim(),
+        }),
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error ?? 'Failed to submit review');
+      }
+
       toast({
         title: 'Review submitted!',
         description: 'Thank you for your feedback on ' + productName + '.' });
@@ -81,10 +96,15 @@ export default function ReviewForm({ productId, productName, onSubmitted }: Revi
       setLocation('');
       setErrors({});
       onSubmitted?.();
-      // productId is part of the eventual API payload — referenced here so
-      // it is not flagged as unused by the linter when the POST is wired in.
-      void productId;
-    }, 600);
+    } catch (err) {
+      toast({
+        title: 'Submission failed',
+        description: err instanceof Error ? err.message : 'Something went wrong',
+        variant: 'destructive',
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   // Keyboard support for the star rating radiogroup.

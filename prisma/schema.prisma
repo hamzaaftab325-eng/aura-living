@@ -45,6 +45,7 @@ model User {
   wishlistItems     WishlistItem[]
   couponRedemptions CouponRedemption[]
   newsletterSubscriptions NewsletterSubscriber[]
+  reviews           Review[]
 
   // Newsletter opt-in (separate from auth)
   newsletterSubscribed Boolean @default(false)
@@ -178,6 +179,7 @@ model Product {
   cartItems     CartItem[]
   orderItems    OrderItem[]
   wishlistItems WishlistItem[]
+  reviews       Review[]
 
   // Soft delete
   deletedAt DateTime?
@@ -503,3 +505,44 @@ model NewsletterSubscriber {
   @@index([isActive])
 }
 
+
+// ============================================================================
+// REVIEWS
+// ============================================================================
+
+model Review {
+  id         String   @id @default(cuid())
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  name       String
+  email      String
+  rating     Int      // 1-5
+  title      String?
+  body       String
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([productId, isApproved])
+  @@index([userId])
+}
+
+// ============================================================================
+// CONTACT MESSAGES
+// ============================================================================
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([isRead])
+  @@index([createdAt])
+}

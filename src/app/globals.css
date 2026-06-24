@@ -18,6 +18,7 @@
 @import "./styles/animations.css";
 @import "./styles/utilities.css";
 @import "./styles/responsive.css";
+@import "./styles/modern.css";
 
 /* ===========================================================
    BASE LAYER — Reset, body, focus, skip link, reduced motion
@@ -45,6 +46,10 @@
     font-variant-ligatures: common-ligatures contextual;
     line-height: 1.6;
     letter-spacing: -0.01em;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 175, 55, 0.04), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(168, 181, 160, 0.03), transparent);
+    background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-playfair), 'Playfair Display', Georgia, 'Times New Roman', serif;

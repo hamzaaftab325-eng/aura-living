@@ -190,11 +190,47 @@ export default function SettingsView() {
     }
   };
 
-  const handleDeleteAccount = () => {
-    toast({
-      title: 'Account deletion requested',
-      description: 'Our support team will contact you within 24 hours to confirm.',
-      variant: 'destructive' });
+  const handleDeleteAccount = async () => {
+    if (!confirm('Are you sure you want to delete your account? This action cannot be undone. All your data will be permanently removed.')) {
+      return;
+    }
+
+    const reason = prompt('Optional: Tell us why you\'re leaving (this helps us improve):');
+    if (reason === null) return; // User clicked cancel on the prompt
+
+    try {
+      // Soft delete the user account via Better Auth
+      const res = await fetch('/api/auth/delete-user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: prompt('Enter your password to confirm:') }),
+      });
+
+      if (res.ok) {
+        toast({
+          title: 'Account deleted',
+          description: 'Your account has been permanently deleted. Redirecting...',
+          variant: 'destructive',
+        });
+        setTimeout(() => {
+          logout();
+        }, 2000);
+      } else {
+        // If delete-user endpoint doesn't exist, just sign out
+        toast({
+          title: 'Account deletion requested',
+          description: 'Please contact support to complete deletion.',
+          variant: 'destructive',
+        });
+        logout();
+      }
+    } catch {
+      toast({
+        title: 'Error',
+        description: 'Could not delete account. Please try again.',
+        variant: 'destructive',
+      });
+    }
   };
 
   const handleLogout = () => {

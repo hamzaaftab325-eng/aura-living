@@ -1,0 +1,401 @@
+/* ==========================================================================
+   MODERN UI ENHANCEMENTS — Aura Living
+   ==========================================================================
+   This file adds modern design patterns: glassmorphism, soft shadows,
+   smooth micro-interactions, and utility classes that replace inline styles.
+   ========================================================================== */
+
+/* ── Enhanced Shadow System (softer, more layered) ── */
+:root {
+  --shadow-modern-sm: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-modern-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-modern-lg: 0 12px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+  --shadow-modern-xl: 0 20px 40px rgba(0, 0, 0, 0.10), 0 8px 16px rgba(0, 0, 0, 0.04);
+  --shadow-modern-2xl: 0 32px 64px rgba(0, 0, 0, 0.12), 0 16px 32px rgba(0, 0, 0, 0.06);
+  --shadow-gold-glow: 0 0 0 1px rgba(212, 175, 55, 0.1), 0 8px 24px rgba(212, 175, 55, 0.12);
+  --shadow-gold-glow-hover: 0 0 0 1px rgba(212, 175, 55, 0.2), 0 12px 32px rgba(212, 175, 55, 0.18);
+  --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* ── Glassmorphism ── */
+.aura-glass {
+  background: rgba(255, 253, 247, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.aura-glass-dark {
+  background: rgba(44, 44, 44, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.aura-glass-gold {
+  background: rgba(245, 237, 218, 0.6);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+/* ── Modern Card System ── */
+.aura-card-modern {
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-modern-md);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  overflow: hidden;
+}
+
+.aura-card-modern:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-modern-xl);
+}
+
+.aura-card-glass {
+  background: rgba(255, 253, 247, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-modern-md);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.aura-card-glass:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-modern-xl);
+}
+
+/* ── Modern Button Effects ── */
+.aura-btn-modern {
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--transition-normal);
+}
+
+.aura-btn-modern::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.aura-btn-modern:hover::after {
+  opacity: 1;
+}
+
+.aura-btn-modern:active {
+  transform: scale(0.97);
+}
+
+/* ── Modern Input Fields ── */
+.aura-input-modern {
+  background: rgba(255, 253, 247, 0.8);
+  border: 1.5px solid rgba(232, 213, 163, 0.4);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.aura-input-modern:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+  background: var(--surface-card);
+  outline: none;
+}
+
+.aura-input-modern::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* ── Modern Badge / Chip ── */
+.aura-badge-modern {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.aura-badge-modern:hover {
+  transform: scale(1.05);
+}
+
+.aura-badge-gold {
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hover) 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.25);
+}
+
+.aura-badge-success {
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--color-success);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.aura-badge-danger {
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--color-danger);
+  border: 1px solid rgba(220, 38, 38, 0.15);
+}
+
+/* ─ Modern Section Spacing ─ */
+.aura-section-modern {
+  padding: 80px 0;
+}
+
+@media (min-width: 768px) {
+  .aura-section-modern {
+    padding: 120px 0;
+  }
+}
+
+/* ─ Modern Gradient Text ─ */
+.aura-text-gradient-gold {
+  background: linear-gradient(135deg, var(--color-gold) 0%, #E8C547 50%, var(--color-gold-hover) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.aura-text-gradient-dark {
+  background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 50%, #2C2C2C 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ─ Modern Hover Lift ─ */
+.aura-hover-lift {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.aura-hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-modern-lg);
+}
+
+/* ─ Modern Image Zoom Container ─ */
+.aura-img-zoom {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.aura-img-zoom img {
+  transition: transform 600ms var(--ease-out);
+}
+
+.aura-img-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* ─ Modern Skeleton Loading ─ */
+.aura-skeleton {
+  background: linear-gradient(90deg, #F2EDE4 25%, #FAF8F5 50%, #F2EDE4 75%);
+  background-size: 200% 100%;
+  animation: aura-skeleton-shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes aura-skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─ Modern Fade-in Animation (CSS-only, no JS needed) ─ */
+@keyframes aura-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aura-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes aura-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.aura-animate-fade-in-up {
+  animation: aura-fade-in-up 0.6s var(--ease-out) both;
+}
+
+.aura-animate-fade-in {
+  animation: aura-fade-in 0.5s var(--ease-out) both;
+}
+
+.aura-animate-scale-in {
+  animation: aura-scale-in 0.4s var(--ease-out) both;
+}
+
+/* ─ Stagger Delays ─ */
+.aura-delay-1 { animation-delay: 0.1s; }
+.aura-delay-2 { animation-delay: 0.2s; }
+.aura-delay-3 { animation-delay: 0.3s; }
+.aura-delay-4 { animation-delay: 0.4s; }
+.aura-delay-5 { animation-delay: 0.5s; }
+
+/* ─ Modern Divider with Gradient ─ */
+.aura-divider-modern {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.3) 50%, transparent 100%);
+  border: none;
+  margin: 32px 0;
+}
+
+/* ─ Modern Scrollbar ─ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-page);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--surface-page);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.5);
+}
+
+/* ─ Modern Selection ─ */
+::selection {
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--text-primary);
+}
+
+/* ─ Modern Focus Ring ─ */
+.aura-focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+}
+
+/* ─ Modern Surface Variants ─ */
+.aura-surface-glass {
+  background: rgba(255, 253, 247, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.aura-surface-elevated-modern {
+  background: var(--surface-card);
+  box-shadow: var(--shadow-modern-md);
+  border-radius: var(--radius-xl);
+}
+
+/* ─ Modern Container ─ */
+.aura-container-modern {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (min-width: 768px) {
+  .aura-container-modern {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .aura-container-modern {
+    padding: 0 48px;
+  }
+}
+
+/* ─ Modern Grid Gap ─ */
+.aura-grid-modern {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .aura-grid-modern {
+    gap: 32px;
+  }
+}
+
+/* ─ Modern Text Balance ─ */
+.aura-text-balance {
+  text-wrap: balance;
+}
+
+/* ─ Modern Gradient Borders ─ */
+.aura-border-gradient-gold {
+  position: relative;
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+}
+
+.aura-border-gradient-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.4) 0%, rgba(212, 175, 55, 0.1) 50%, rgba(212, 175, 55, 0.3) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ─ Smooth Page Transition ─ */
+.aura-page-transition-modern {
+  animation: aura-fade-in-up 0.4s var(--ease-out) both;
+}
+
+/* ─ Modern Tooltip ─ */
+.aura-tooltip-modern {
+  position: relative;
+}
+
+.aura-tooltip-modern[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--surface-dark);
+  color: white;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+  z-index: var(--z-tooltip);
+}
+
+.aura-tooltip-modern[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
