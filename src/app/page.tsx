@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import HeroSection from '@/components/HeroSection';
+import HeroSlider from '@/components/HeroSlider';
 import CategoriesSection from '@/components/CategoriesSection';
 import FeaturedProducts from '@/components/FeaturedProducts';
-import TrendingCollection from '@/components/TrendingCollection';
+import BrandStory from '@/components/BrandStory';
+import WhyChooseUs from '@/components/WhyChooseUs';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import NewsletterSection from '@/components/NewsletterSection';
 import { FloatingGoldDots } from '@/components/SVGDecorations';
@@ -58,17 +59,30 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Preload hero image — only on home page where it's actually used */}
-      <link rel="preload" as="image" href="/images/hero/hero-slide-1.webp" />
-      <HeroSection />
+      {/* Cinematic Hero Slider */}
+      <HeroSlider />
+
+      {/* Categories Grid */}
       <FloatingGoldDots />
       <CategoriesSection initialCategories={categories} />
+
+      {/* Brand Story with Parallax + Counters */}
+      <FloatingGoldDots />
+      <BrandStory />
+
+      {/* Featured Products */}
       <FloatingGoldDots />
       <FeaturedProducts initialProducts={featuredProducts} />
+
+      {/* Why Choose Us */}
       <FloatingGoldDots />
-      <TrendingCollection />
+      <WhyChooseUs />
+
+      {/* Testimonials */}
       <FloatingGoldDots />
       <TestimonialsSection />
+
+      {/* Newsletter */}
       <FloatingGoldDots />
       <NewsletterSection />
     </>

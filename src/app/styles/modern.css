@@ -551,3 +551,252 @@
   border-color: var(--color-gold);
   background-color: rgba(245, 237, 218, 0.12);
 }
+
+/* ==========================================================================
+   PREMIUM HOMEPAGE — Stacking + Cinematic Effects
+   ========================================================================== */
+
+/* ─ Stacking Cards Effect ─ */
+.aura-stack-container {
+  position: relative;
+}
+
+.aura-stack-card {
+  position: sticky;
+  top: 100px;
+  transition: transform 0.5s var(--ease-out), opacity 0.5s var(--ease-out);
+}
+
+/* ─ Cinematic Hero Slider ─ */
+.aura-hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-in-out);
+}
+
+.aura-hero-slide.active {
+  opacity: 1;
+}
+
+.aura-hero-slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.1);
+  transition: transform 6s var(--ease-out);
+}
+
+.aura-hero-slide.active .aura-hero-slide-bg {
+  transform: scale(1);
+}
+
+.aura-hero-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.aura-hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: width 0.4s var(--ease-out), background-color 0.4s var(--ease-out);
+  padding: 0;
+}
+
+.aura-hero-dot.active {
+  width: 32px;
+  background: var(--color-gold);
+}
+
+/* ─ Parallax layers ─ */
+.aura-parallax-layer {
+  will-change: transform;
+}
+
+/* ─ Animated Counter ─ */
+.aura-counter {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-gold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─ Premium Product Card Hover ─ */
+.aura-product-card-premium {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-modern-sm);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+
+.aura-product-card-premium:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-modern-xl);
+}
+
+.aura-product-card-premium .aura-product-img-wrap {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.aura-product-card-premium .aura-product-img-wrap img {
+  transition: transform 0.7s var(--ease-out);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aura-product-card-premium:hover .aura-product-img-wrap img {
+  transform: scale(1.1);
+}
+
+.aura-product-quick-add {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  padding: 10px 16px;
+  background: var(--color-gold);
+  color: white;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+  cursor: pointer;
+  border: none;
+}
+
+.aura-product-card-premium:hover .aura-product-quick-add {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─ Section reveal (CSS-only fallback) ─ */
+.aura-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+.aura-reveal.aura-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─ Stagger children ─ */
+.aura-stagger > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.aura-stagger.aura-revealed > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+.aura-stagger.aura-revealed > *:nth-child(2) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+.aura-stagger.aura-revealed > *:nth-child(3) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+.aura-stagger.aura-revealed > *:nth-child(4) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+.aura-stagger.aura-revealed > *:nth-child(5) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+.aura-stagger.aura-revealed > *:nth-child(6) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+.aura-stagger.aura-revealed > *:nth-child(7) { transition-delay: 0.35s; opacity: 1; transform: translateY(0); }
+.aura-stagger.aura-revealed > *:nth-child(8) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+
+/* ─ Cinematic overlay text ─ */
+.aura-cinematic-text {
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ─ Brand story parallax image ─ */
+.aura-parallax-img {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border-radius: var(--radius-xl);
+}
+
+@media (max-width: 768px) {
+  .aura-parallax-img {
+    background-attachment: scroll;
+  }
+}
+
+/* ─ Trust badge circle ─ */
+.aura-trust-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 32px 16px;
+  border-radius: var(--radius-xl);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-modern-sm);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+
+.aura-trust-badge:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-modern-lg);
+}
+
+.aura-trust-icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-pill);
+  background: var(--aura-bg-gold-tint, rgba(212, 175, 55, 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ─ Testimonial card premium ─ */
+.aura-testimonial-card {
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  padding: 40px 32px;
+  box-shadow: var(--shadow-modern-md);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+  position: relative;
+}
+
+.aura-testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-modern-lg);
+}
+
+.aura-testimonial-quote-mark {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--color-gold);
+  opacity: 0.15;
+}
+
+/* ─ Scroll progress indicator ─ */
+.aura-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-gold-hover) 100%);
+  z-index: 100;
+  transition: width 0.1s linear;
+}
