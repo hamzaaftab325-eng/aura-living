@@ -7239,3 +7239,217 @@
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   HERO ARTICLE — Article.com-inspired full-bleed hero for Aura Living
+   Full-bleed lifestyle image + centered content + dark gradient overlay.
+   ========================================================================== */
+
+.aura-hero-article {
+  position: relative;
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Full-bleed background image */
+.aura-hero-article-bg {
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Subtle dark gradient overlay for text legibility */
+.aura-hero-article-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 20, 0.35) 0%,
+    rgba(20, 20, 20, 0.25) 40%,
+    rgba(20, 20, 20, 0.55) 100%
+  );
+}
+
+/* Centered content */
+.aura-hero-article-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 44rem;
+  padding: 5rem 1.5rem 4rem;
+}
+
+/* Eyebrow badge */
+.aura-hero-article-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: #D4AF37;
+  margin-bottom: 1.75rem;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.aura-hero-article-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #D4AF37;
+  box-shadow: 0 0 8px #D4AF37;
+  animation: aura-hero-article-pulse 2s ease-in-out infinite;
+}
+@keyframes aura-hero-article-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+
+/* Headline */
+.aura-hero-article-title {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin: 0 0 1.5rem;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+.aura-hero-article-title-accent {
+  font-style: italic;
+  background: linear-gradient(135deg, #D4AF37, #E8C547);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtitle */
+.aura-hero-article-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 32rem;
+  margin: 0 auto 2.5rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* CTA row */
+.aura-hero-article-cta-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Primary CTA — white pill (Article.com style) */
+.aura-hero-article-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.25rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #2C2C2C;
+  background: #FFFFFF;
+  text-decoration: none;
+  transition: all 0.3s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.aura-hero-article-cta-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.7s var(--ease-out);
+  z-index: 0;
+}
+.aura-hero-article-cta-primary:hover::before {
+  left: 140%;
+}
+.aura-hero-article-cta-primary:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #D4AF37, #B8941F);
+  color: #FFFFFF;
+  box-shadow: 0 12px 28px rgba(212, 175, 55, 0.45);
+}
+.aura-hero-article-cta-primary > * {
+  position: relative;
+  z-index: 1;
+}
+.aura-hero-article-cta-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s var(--ease-out);
+}
+.aura-hero-article-cta-primary:hover .aura-hero-article-cta-icon {
+  transform: translateX(4px);
+}
+
+/* Secondary CTA — ghost outline */
+.aura-hero-article-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-decoration: none;
+  transition: all 0.3s var(--ease-out);
+}
+.aura-hero-article-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Bottom fade into next section */
+.aura-hero-article-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, #FAF8F5);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .aura-hero-article-eyebrow-dot {
+    animation: none !important;
+  }
+  .aura-hero-article-cta-primary,
+  .aura-hero-article-cta-primary::before,
+  .aura-hero-article-cta-secondary {
+    transition: none !important;
+  }
+}
