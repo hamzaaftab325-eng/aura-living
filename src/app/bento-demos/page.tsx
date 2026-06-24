@@ -6,7 +6,7 @@
  * Visit /bento-demos
  */
 
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, ArrowUpRight, Hammer, Heart, Award, Leaf, Sparkles, Star, Truck, Banknote, ShieldCheck, Play, Search, ShoppingCart, User, ChevronDown, Instagram, Facebook, Twitter } from 'lucide-react';
@@ -1117,19 +1117,22 @@ export default function BentoDemosPage() {
   const [activeTab, setActiveTab] = useState(0);
   const current = sections[sectionIdx];
 
-  const renderDemo = () => {
-    const t = current.type;
-    const i = activeTab;
-    if (t === 'nav') return [Nav1, Nav2, Nav3, Nav4][i]?.();
-    if (t === 'footer') return [Footer1, Footer2, Footer3, Footer4][i]?.();
-    if (t === 'bento') return [Bento1, Bento2, Bento3, Bento4][i]?.();
-    if (t === 'story') return [Story1, Story2, Story3, Story4, Story5][i]?.();
-    if (t === 'products') return [Products1, Products2, Products3, Products4, Products5][i]?.();
-    if (t === 'cta') return [CTA1, CTA2, CTA3, CTA4, CTA5][i]?.();
-    if (t === 'trust') return [Trust1, Trust2, Trust3, Trust4, Trust5][i]?.();
-    if (t === 'newsletter') return [Newsletter1, Newsletter2, Newsletter3, Newsletter4, Newsletter5][i]?.();
-    return null;
+  // Map section type → array of demo components.
+  // IMPORTANT: we render <Demo /> as a JSX element (not call Demo() as a function)
+  // so each demo gets its own React hooks context. Calling a component as a
+  // function merges its hooks into THIS component's context, and switching
+  // between demos with different hook counts triggers React error #300.
+  const demoMap: Record<string, React.ComponentType[]> = {
+    nav: [Nav1, Nav2, Nav3, Nav4],
+    footer: [Footer1, Footer2, Footer3, Footer4],
+    bento: [Bento1, Bento2, Bento3, Bento4],
+    story: [Story1, Story2, Story3, Story4, Story5],
+    products: [Products1, Products2, Products3, Products4, Products5],
+    cta: [CTA1, CTA2, CTA3, CTA4, CTA5],
+    trust: [Trust1, Trust2, Trust3, Trust4, Trust5],
+    newsletter: [Newsletter1, Newsletter2, Newsletter3, Newsletter4, Newsletter5],
   };
+  const Demo = demoMap[current.type]?.[activeTab];
 
   return (
     <div className="w-full">
@@ -1176,9 +1179,10 @@ export default function BentoDemosPage() {
         </div>
       </header>
 
-      {/* Active demo — mounted fresh per switch (keyed) */}
+      {/* Active demo — mounted fresh per switch (keyed).
+          Rendered as <Demo /> (not Demo()) so hooks stay isolated. */}
       <div key={`${current.type}-${activeTab}`} className="demo-chrome-stage">
-        {renderDemo()}
+        {Demo ? <Demo /> : null}
       </div>
 
       {/* Info bar — what you're viewing + reply prompt */}
