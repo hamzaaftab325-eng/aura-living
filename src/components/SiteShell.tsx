@@ -22,7 +22,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   // Pages that should NOT show Navbar/Footer/chrome (full-bleed demo pages)
-  const isFullBleed = pathname === '/hero-demos' || pathname === '/home-new';
+  const isFullBleed = pathname === '/hero-demos' || pathname === '/home-new' || pathname === '/bento-demos';
 
   // Smooth scroll (desktop only — Lenis hook handles the mobile check)
   useLenis();
