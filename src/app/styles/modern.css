@@ -1094,3 +1094,284 @@
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
+
+/* ==========================================================================
+   HERO 1 — Cinematic Video + Split Letter Stagger
+   The chosen hero design. All classes here — zero inline styles.
+   ========================================================================== */
+
+/* ─ Container ─ */
+.aura-hero-cinematic {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─ Video background ─ */
+.aura-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* ─ Overlay (strong, cinematic) ─ */
+.aura-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(15,15,20,0.85) 0%, rgba(15,15,20,0.6) 50%, rgba(15,15,20,0.75) 100%);
+}
+
+/* ─ Film grain ─ */
+.aura-hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.04;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' /%3E%3C/svg%3E");
+}
+
+/* ─ Content wrapper ─ */
+.aura-hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 0 1rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+/* ─ Eyebrow row ─ */
+.aura-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.aura-hero-eyebrow-line-left {
+  width: 4rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #D4AF37);
+}
+
+.aura-hero-eyebrow-line-right {
+  width: 4rem;
+  height: 1px;
+  background: linear-gradient(90deg, #D4AF37, transparent);
+}
+
+.aura-hero-eyebrow-text {
+  font-size: 0.75rem;
+  letter-spacing: 0.375rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #E8C547;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* ─ Title ─ */
+.aura-hero-title-main {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.5rem, 9vw, 7rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.6), 0 2px 10px rgba(0,0,0,0.4);
+  display: block;
+}
+
+.aura-hero-title-accent {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.5rem, 9vw, 7rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-style: italic;
+  color: #E8C547;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.6), 0 2px 10px rgba(0,0,0,0.4);
+  display: block;
+}
+
+.aura-hero-title-wrapper {
+  margin-bottom: 2rem;
+}
+
+/* ─ Subtitle ─ */
+.aura-hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: rgba(255,255,255,0.65);
+  max-width: 36rem;
+  margin: 0 auto 3rem;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5), 0 1px 5px rgba(0,0,0,0.3);
+}
+
+/* ─ CTA row ─ */
+.aura-hero-cta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .aura-hero-cta-row {
+    flex-direction: row;
+  }
+}
+
+/* ─ Magnetic gold button ─ */
+.aura-hero-btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  text-decoration: none;
+  background: linear-gradient(135deg, #D4AF37 0%, #C9A22E 50%, #B8941F 100%);
+  box-shadow: 0 8px 32px rgba(212,175,55,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: transform 0.2s ease;
+  will-change: transform;
+  cursor: pointer;
+  border: none;
+}
+
+.aura-hero-btn-gold:hover {
+  transform: scale(1.02);
+}
+
+.aura-hero-btn-gold-arrow {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.aura-hero-btn-gold:hover .aura-hero-btn-gold-arrow {
+  transform: translateX(4px);
+}
+
+/* ─ Ghost button ─ */
+.aura-hero-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.aura-hero-btn-ghost:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* ─ Slide navigation dots ─ */
+.aura-hero-dots-wrapper {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.aura-hero-dot-btn {
+  border-radius: 9999px;
+  height: 0.625rem;
+  border: none;
+  cursor: pointer;
+  transition: width 0.5s var(--ease-out), background 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+  padding: 0;
+  background: rgba(255,255,255,0.2);
+  width: 0.625rem;
+}
+
+.aura-hero-dot-btn-active {
+  width: 2.5rem;
+  background: linear-gradient(90deg, #D4AF37, #F4D76E);
+  box-shadow: 0 0 12px rgba(212,175,55,0.4);
+}
+
+/* ─ Slide counter ─ */
+.aura-hero-counter {
+  position: absolute;
+  bottom: 3rem;
+  right: 2rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.aura-hero-counter-text {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1875rem;
+  color: rgba(255,255,255,0.3);
+}
+
+.aura-hero-counter-line {
+  width: 2rem;
+  height: 1px;
+  background: rgba(255,255,255,0.2);
+}
+
+/* ─ Parallax bg layer (for GSAP) ─ */
+.aura-hero-parallax-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  will-change: transform;
+}
+
+/* ─ Video poster fallback ─ */
+.aura-hero-video-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* ─ Split letter spans (set by JS, styled here) ─ */
+.aura-hero-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(60px) rotateZ(15deg);
+  filter: blur(8px);
+}
+
+.aura-hero-letter-space {
+  display: inline-block;
+  white-space: pre;
+}

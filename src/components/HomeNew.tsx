@@ -18,7 +18,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ArrowUpRight, Truck, Banknote, ShieldCheck, Sparkles, Star } from 'lucide-react';
+import { ArrowRight, Truck, Banknote, ShieldCheck, Sparkles, Star } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -125,94 +125,6 @@ export default function HomeNew({ featuredProducts, categories }: HomeNewProps) 
 
   return (
     <div ref={containerRef} className="w-full overflow-hidden">
-      {/* ═══════════════════════════════════════════════════════════
-          1. SPLIT HERO — Asymmetric, editorial, no centered text
-          ═══════════════════════════════════════════════════════════ */}
-      <section className="aura-split-hero">
-        {/* Left: Content */}
-        <div className="aura-split-hero-left">
-          <div className="max-w-lg">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="aura-gold-line" />
-              <span className="text-xs font-bold uppercase tracking-[0.2em] aura-text-gold">
-                Est. 2026 · Pakistan
-              </span>
-            </div>
-
-            <h1 className="aura-mega-text mb-6">
-              Where<br />
-              <span className="aura-text-gradient-gold">Comfort</span><br />
-              Meets Style
-            </h1>
-
-            <p className="text-lg leading-relaxed aura-text-secondary mb-10 max-w-md">
-              Handcrafted home decor for the modern Pakistani home. Lamps, vases,
-              plants & more — designed in-house, made by artisans.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <PremiumButton variant="primary" size="lg" href="/shop" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                Shop Collection
-              </PremiumButton>
-              <PremiumButton variant="secondary" size="lg" href="/about">
-                Our Story
-              </PremiumButton>
-            </div>
-
-            {/* Mini stats */}
-            <div className="flex gap-8 pt-8 border-t border-[var(--color-gold-soft)]/30">
-              <div>
-                <div className="aura-inline-counter mb-1">
-                  <span className="aura-counter-value" data-target="5000" data-decimals="0">0</span>+
-                </div>
-                <p className="text-xs uppercase tracking-wider aura-text-secondary">Happy Homes</p>
-              </div>
-              <div>
-                <div className="aura-inline-counter mb-1">
-                  <span className="aura-counter-value" data-target="200" data-decimals="0">0</span>+
-                </div>
-                <p className="text-xs uppercase tracking-wider aura-text-secondary">Artisans</p>
-              </div>
-              <div>
-                <div className="aura-inline-counter mb-1">
-                  <span className="aura-counter-value" data-target="4.8" data-decimals="1">0</span>
-                </div>
-                <p className="text-xs uppercase tracking-wider aura-text-secondary">Rating</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right: Visual */}
-        <div className="aura-split-hero-right">
-          <div className="aura-hero-parallax absolute inset-0">
-            <Image
-              src="/images/hero/hero-slide-1.webp"
-              alt="Aura Living premium home decor"
-              fill
-              priority
-              className="object-cover"
-              sizes="50vw"
-            />
-          </div>
-          {/* Floating product card */}
-          <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:w-72 p-5 rounded-xl aura-glass-gold z-10">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
-                <Image src="/images/products/hammered-brass-table-lamp-1.webp" alt="Featured" width={48} height={48} className="w-full h-full object-cover" />
-              </div>
-              <div>
-                <p className="text-xs font-semibold">Hammered Brass Lamp</p>
-                <p className="text-sm font-bold aura-text-gold">Rs. 9,999</p>
-              </div>
-            </div>
-            <Link href="/product/hammered-brass-table-lamp" className="text-xs font-medium flex items-center gap-1 aura-text-gold hover:underline">
-              View Product <ArrowUpRight className="w-3 h-3" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* ═══════════════════════════════════════════════════════════
           2. MARQUEE TRUST STRIP
           ═══════════════════════════════════════════════════════════ */}

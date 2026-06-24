@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import HeroCinematic from '@/components/HeroCinematic';
 import HomeNew from '@/components/HomeNew';
 import { getFeaturedProducts, getCategories } from '@/lib/products';
 
@@ -17,5 +18,13 @@ export default async function HomeNewPage() {
     getCategories(),
   ]);
 
-  return <HomeNew featuredProducts={featuredProducts} categories={categories} />;
+  return (
+    <>
+      {/* Chosen hero: Demo 1 — Cinematic Video + Split Letter Stagger */}
+      <HeroCinematic />
+
+      {/* Rest of homepage sections */}
+      <HomeNew featuredProducts={featuredProducts} categories={categories} />
+    </>
+  );
 }
