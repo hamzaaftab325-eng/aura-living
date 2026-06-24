@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import HeroSanctuary from '@/components/HeroSanctuary';
+import HeroCinematic from '@/components/HeroCinematic';
 import HomeNew from '@/components/HomeNew';
 import { getFeaturedProducts, getNewArrivals, getCategories } from '@/lib/products';
 
@@ -57,9 +57,8 @@ export default async function HomeNewPage() {
 
   return (
     <>
-      {/* Chosen hero: "The Immersive Sanctuary" — premium editorial hero
-          with full-bleed cinematic bg + glassmorphic purchase card. */}
-      <HeroSanctuary />
+      {/* Hero: Cinematic Video + Split Letter Stagger */}
+      <HeroCinematic />
 
       {/* Rest of homepage sections */}
       <HomeNew
