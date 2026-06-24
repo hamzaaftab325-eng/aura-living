@@ -1,29 +1,27 @@
 'use client';
 
 /**
- * HomeNew — Award-winning homepage design.
+ * HomeNew — Aura Living homepage sections.
  *
- * Design approach (senior UI/UX perspective):
- * - Asymmetric split hero (no centered text — left content, right visual)
- * - Bento grid categories (not uniform cards — varied sizes creating visual rhythm)
- * - Scroll-driven brand story (sticky stacking cards with parallax)
- * - Editorial product showcase (magazine-style layout, not generic grid)
- * - Infinite marquee trust strip (movement = premium feel)
- * - Full-screen parallax CTA (dramatic, immersive)
- * - Minimal newsletter (not a heavy dark card — clean, airy)
+ * Section order:
+ * 1. Categories — Hover Reveal (bento-style category cards)
+ * 2. Brand Story — Quote-driven with masked word reveal
+ * 3. Featured Products — 8 products using the shop ProductCard (cart + wishlist wired)
+ * 4. New Arrivals — 4 fresh products
+ * 5. Testimonials — customer reviews with stagger animation
+ * 6. Newsletter — Cinematic Dark with parallax bg
  *
  * All using existing design tokens. Zero inline styles (except dynamic image URLs).
  */
 
 import { useRef } from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CategoriesHoverReveal from '@/components/CategoriesHoverReveal';
 import StoryQuote from '@/components/StoryQuote';
-import CTAGoldBanner from '@/components/CTAGoldBanner';
-import TrustMarquee from '@/components/TrustMarquee';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import NewsletterCinematic from '@/components/NewsletterCinematic';
 import PremiumButton from '@/components/ui/PremiumButton';
 import ProductCard from '@/components/ui/ProductCard';
@@ -83,41 +81,6 @@ export default function HomeNew({ featuredProducts, newArrivals, categories }: H
           }
         );
       });
-
-      // Parallax on hero image
-      gsap.to('.aura-hero-parallax', {
-        yPercent: 15,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.aura-split-hero',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      });
-
-      // Animated counters
-      gsap.utils.toArray<HTMLElement>('.aura-counter-value').forEach((counter) => {
-        const target = parseFloat(counter.dataset.target || '0');
-        const decimals = parseInt(counter.dataset.decimals || '0');
-        gsap.to(counter, {
-          textContent: target,
-          duration: 2,
-          ease: 'power2.out',
-          snap: { textContent: decimals === 0 ? 1 : 0.1 },
-          onUpdate: function () {
-            const val = parseFloat(counter.textContent || '0');
-            counter.textContent = decimals > 0
-              ? val.toFixed(decimals)
-              : Math.round(val).toLocaleString('en-PK');
-          },
-          scrollTrigger: {
-            trigger: counter,
-            start: 'top 85%',
-            once: true,
-          },
-        });
-      });
     },
     { scope: containerRef }
   );
@@ -128,41 +91,17 @@ export default function HomeNew({ featuredProducts, newArrivals, categories }: H
   return (
     <div ref={containerRef} className="w-full overflow-hidden">
       {/* ═══════════════════════════════════════════════════════════
-          2. MARQUEE TRUST STRIP
-          ═══════════════════════════════════════════════════════════ */}
-      <div className="py-8 border-y border-[var(--color-gold-soft)]/20 bg-[var(--surface-card)] overflow-hidden">
-        <div className="aura-marquee">
-          <div className="aura-marquee-track">
-            {['Handcrafted', 'Artisan Made', 'Premium Quality', 'COD Available', 'Free Shipping*', 'Made in Pakistan', 'Sustainable', '7-Day Returns'].map((item, i) => (
-              <div key={i} className="aura-marquee-item">
-                {item}
-                <Sparkles className="w-5 h-5 aura-text-gold" />
-              </div>
-            ))}
-          </div>
-          <div className="aura-marquee-track" aria-hidden="true">
-            {['Handcrafted', 'Artisan Made', 'Premium Quality', 'COD Available', 'Free Shipping*', 'Made in Pakistan', 'Sustainable', '7-Day Returns'].map((item, i) => (
-              <div key={i} className="aura-marquee-item">
-                {item}
-                <Sparkles className="w-5 h-5 aura-text-gold" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════════
-          3. CATEGORIES — Hover Reveal (Demo 2 chosen design)
+          1. CATEGORIES — Hover Reveal
           ═══════════════════════════════════════════════════════════ */}
       <CategoriesHoverReveal categories={categories} />
 
       {/* ═══════════════════════════════════════════════════════════
-          4. BRAND STORY — Quote-driven (Demo 5 chosen design)
+          2. BRAND STORY — Quote-driven
           ═══════════════════════════════════════════════════════════ */}
       <StoryQuote />
 
       {/* ═══════════════════════════════════════════════════════════
-          5. FEATURED PRODUCTS — using the shop ProductCard (cart + wishlist wired)
+          3. FEATURED PRODUCTS — using the shop ProductCard (cart + wishlist wired)
           ═══════════════════════════════════════════════════════════ */}
       <section className="py-16 sm:py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -198,7 +137,7 @@ export default function HomeNew({ featuredProducts, newArrivals, categories }: H
       </section>
 
       {/* ═══════════════════════════════════════════════════════════
-          5b. NEW ARRIVALS — fresh from the workshop (4 products)
+          4. NEW ARRIVALS — fresh from the workshop (4 products)
           ═══════════════════════════════════════════════════════════ */}
       {newProducts.length > 0 && (
         <section className="py-16 sm:py-20 md:py-24 bg-[var(--surface-card)]/40">
@@ -236,17 +175,12 @@ export default function HomeNew({ featuredProducts, newArrivals, categories }: H
       )}
 
       {/* ═══════════════════════════════════════════════════════════
-          6. CTA — Gold Banner (Demo 2 chosen design)
+          5. TESTIMONIALS — customer reviews with stagger animation
           ═══════════════════════════════════════════════════════════ */}
-      <CTAGoldBanner />
+      <TestimonialsSection />
 
       {/* ═══════════════════════════════════════════════════════════
-          7. TRUST — Dark Marquee (Demo 5 chosen design)
-          ═══════════════════════════════════════════════════════════ */}
-      <TrustMarquee />
-
-      {/* ═══════════════════════════════════════════════════════════
-          8. NEWSLETTER — Cinematic Dark (Demo 5 chosen design)
+          6. NEWSLETTER — Cinematic Dark with parallax bg
           ═══════════════════════════════════════════════════════════ */}
       <NewsletterCinematic />
     </div>
