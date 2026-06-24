@@ -25,6 +25,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useScrollReveal } from '@/hooks/useAnimations';
 import { GoldDivider } from '@/components/SVGDecorations';
 import CategoriesHoverReveal from '@/components/CategoriesHoverReveal';
+import StoryQuote from '@/components/StoryQuote';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { formatRupees } from '@/lib/currency-display';
 import type { Product, Category } from '@/types';
@@ -156,57 +157,9 @@ export default function HomeNew({ featuredProducts, categories }: HomeNewProps) 
       <CategoriesHoverReveal categories={categories} />
 
       {/* ═══════════════════════════════════════════════════════════
-          4. BRAND STORY — Editorial split with parallax
+          4. BRAND STORY — Quote-driven (Demo 5 chosen design)
           ═══════════════════════════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 md:py-24 bg-[var(--surface-accent)]/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Image */}
-            <div data-reveal className="relative">
-              <div className="rounded-xl overflow-hidden aspect-[4/5] sm:aspect-[5/4]">
-                <Image
-                  src="/images/about-workshop.webp"
-                  alt="Aura Living artisan workshop"
-                  fill
-                  className="object-cover"
-                  sizes="50vw"
-                />
-              </div>
-              {/* Floating stat card */}
-              <div className="absolute -bottom-6 -right-6 p-6 rounded-xl aura-glass shadow-lg max-w-[200px] hidden sm:block">
-                <p className="aura-inline-counter mb-1">
-                  <span className="aura-counter-value" data-target="100" data-decimals="0">0</span>%
-                </p>
-                <p className="text-xs aura-text-secondary">Handcrafted by skilled artisans across Pakistan</p>
-              </div>
-            </div>
-
-            {/* Text */}
-            <div data-reveal className="aura-editorial">
-              <div className="aura-editorial-eyebrow">
-                <div className="aura-gold-line" />
-                Our Story
-              </div>
-              <h2 className="aura-editorial-title">
-                Not factory-made.<br />
-                <span className="aura-text-gradient-gold">Hand-made.</span>
-              </h2>
-              <p className="aura-editorial-body">
-                We work directly with artisans across Pakistan — brass-workers in Lahore,
-                ceramicists in Sindh, weavers in Punjab. Every lamp, vase, and planter tells
-                a story of traditional craftsmanship meeting modern design.
-              </p>
-              <p className="aura-editorial-body">
-                No mass production. No middlemen. Just beautiful, lasting pieces made with
-                pride — delivered to your doorstep.
-              </p>
-              <PremiumButton variant="secondary" href="/about" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                Read Our Full Story
-              </PremiumButton>
-            </div>
-          </div>
-        </div>
-      </section>
+      <StoryQuote />
 
       {/* ═══════════════════════════════════════════════════════════
           5. PRODUCT SHOWCASE — Editorial magazine-style layout
