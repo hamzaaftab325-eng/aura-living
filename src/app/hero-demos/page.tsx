@@ -1,145 +1,81 @@
 'use client';
 
 /**
- * Hero Demos v5 — 5 Professional Shopify-style hero sections.
+ * Hero Demos v6 — 5 MODERN hero sections.
  *
- * Each demo is a complete, production-ready hero design inspired by
- * award-winning e-commerce sites (Brooklinen, Burrow, The Citizenry, etc.).
+ * Inspired by the most cutting-edge 2025/2026 sites (Linear, Vercel, Stripe,
+ * Arc, Framer). Each demo uses a distinct modern design language:
  *
- * Demos:
- * 1. Split Product Showcase — Left: product image + floating badges. Right: headline + CTA + trust
- * 2. Full-Bleed Lifestyle — Full-screen lifestyle image + overlay text + centered CTA
- * 3. Multi-Slide Carousel — Auto-rotating 3-slide carousel with arrows + dots
- * 4. Asymmetric Magazine — Editorial split, big product image, magazine typography
- * 5. Video Background + Floating Cards — Video bg + floating product cards on right
+ * 1. Aurora Mesh Gradient — animated mesh gradient bg + glass content card
+ * 2. Spotlight Cursor — dark bg with cursor-following radial spotlight
+ * 3. Bento Grid — asymmetric bento grid of category cards + headline
+ * 4. Kinetic Marquee — giant scrolling marquee text + product cards row
+ * 5. Split Glass — left: glass card with content. Right: floating product orbs
  *
  * Visit /hero-demos to preview all 5.
  *
- * All styling via CSS classes (.aura-hero-v5-*). Zero inline styles except
+ * All styling via CSS classes (.aura-hero-v6-*). Zero inline styles except
  * dynamic image URLs.
  */
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ArrowLeft, Star, Truck, ShieldCheck, Banknote, Sparkles, ShoppingBag } from 'lucide-react';
-
-// ── Shared slide data ──
-
-interface Slide {
-  eyebrow: string;
-  title: string;
-  titleAccent: string;
-  subtitle: string;
-  ctaLabel: string;
-  ctaHref: string;
-  image: string;
-}
-
-const slides: Slide[] = [
-  {
-    eyebrow: 'New Collection 2026',
-    title: 'Where Comfort',
-    titleAccent: 'Meets Style',
-    subtitle: 'Handcrafted decor for the modern Pakistani home. Premium quality, delivered nationwide.',
-    ctaLabel: 'Shop Collection',
-    ctaHref: '/shop',
-    image: '/images/hero/hero-slide-1.webp',
-  },
-  {
-    eyebrow: 'Artisan Crafted',
-    title: 'Made by Hand,',
-    titleAccent: 'Made with Heart',
-    subtitle: 'Every piece tells a story of Pakistani craftsmanship — from brass to ceramic.',
-    ctaLabel: 'Explore Lighting',
-    ctaHref: '/shop?category=lighting',
-    image: '/images/hero/hero-slide-2.webp',
-  },
-  {
-    eyebrow: 'Limited Edition',
-    title: 'Bring Nature',
-    titleAccent: 'Indoors',
-    subtitle: 'Curated plants, planters & botanical accents that breathe life into your space.',
-    ctaLabel: 'Shop Plants & Pots',
-    ctaHref: '/shop?category=plants',
-    image: '/images/hero/hero-slide-3.webp',
-  },
-];
-
-const VIDEO_URL = 'https://res.cloudinary.com/diometfe9/video/upload/v1781723540/Working_on_ecommerce_store_backg__202606180012_pm2rtf.mp4';
+import { ArrowRight, ArrowUpRight, Sparkles, Star } from 'lucide-react';
 
 // ═══════════════════════════════════════════════════════════
-// DEMO 1 — Split Product Showcase
-// Left: product image with floating badges. Right: headline + CTA + trust.
+// DEMO 1 — Aurora Mesh Gradient
+// Animated mesh gradient background + glass content card centered.
 // ═══════════════════════════════════════════════════════════
 
 function Hero1() {
   return (
-    <section className="aura-hero-v5-1">
-      <div className="aura-hero-v5-1-inner">
-        {/* Left: product image */}
-        <div className="aura-hero-v5-1-image-wrap">
-          <Image
-            src="/images/hero/hero-slide-1.webp"
-            alt="Aura Living product"
-            fill
-            className="aura-hero-v5-1-image"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            priority
-          />
-          {/* Floating badge: rating */}
-          <div className="aura-hero-v5-1-badge aura-hero-v5-1-badge-rating">
-            <div className="aura-hero-v5-1-badge-stars">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="aura-hero-v5-1-star aura-hero-v5-1-star-filled" />
-              ))}
-            </div>
-            <span className="aura-hero-v5-1-badge-text">4.8/5 · 2,000+ reviews</span>
-          </div>
-          {/* Floating badge: COD */}
-          <div className="aura-hero-v5-1-badge aura-hero-v5-1-badge-cod">
-            <Banknote className="aura-hero-v5-1-badge-icon" />
-            <span className="aura-hero-v5-1-badge-label">COD Available</span>
-          </div>
-        </div>
+    <section className="aura-hero-v6-1">
+      {/* Animated mesh gradient blobs */}
+      <div className="aura-hero-v6-1-blob aura-hero-v6-1-blob-1" />
+      <div className="aura-hero-v6-1-blob aura-hero-v6-1-blob-2" />
+      <div className="aura-hero-v6-1-blob aura-hero-v6-1-blob-3" />
+      {/* Grain texture */}
+      <div className="aura-hero-v6-1-grain" />
 
-        {/* Right: content */}
-        <div className="aura-hero-v5-1-content">
-          <div className="aura-hero-v5-1-eyebrow">
-            <Sparkles className="aura-hero-v5-1-eyebrow-icon" />
-            <span>New Collection 2026</span>
-          </div>
-          <h1 className="aura-hero-v5-1-title">
+      <div className="aura-hero-v6-1-content">
+        <div className="aura-hero-v6-1-card">
+          <span className="aura-hero-v6-1-badge">
+            <span className="aura-hero-v6-1-badge-dot" />
+            New Collection 2026
+          </span>
+          <h1 className="aura-hero-v6-1-title">
             Where Comfort<br />
-            <span className="aura-hero-v5-1-title-accent">Meets Style</span>
+            <span className="aura-hero-v6-1-title-accent">Meets Style</span>
           </h1>
-          <p className="aura-hero-v5-1-subtitle">
+          <p className="aura-hero-v6-1-subtitle">
             Handcrafted decor for the modern Pakistani home. Premium quality, delivered nationwide.
           </p>
-          <div className="aura-hero-v5-1-cta-row">
-            <Link href="/shop" className="aura-hero-v5-1-cta-primary">
+          <div className="aura-hero-v6-1-cta-row">
+            <Link href="/shop" className="aura-hero-v6-1-cta-primary">
               Shop Collection
-              <ArrowRight className="aura-hero-v5-1-cta-icon" />
+              <ArrowRight className="aura-hero-v6-1-cta-icon" />
             </Link>
-            <Link href="/about" className="aura-hero-v5-1-cta-secondary">
-              Our Story
+            <Link href="/lookbook" className="aura-hero-v6-1-cta-secondary">
+              Lookbook
+              <ArrowUpRight className="aura-hero-v6-1-cta-icon-sm" />
             </Link>
           </div>
-          {/* Trust row */}
-          <div className="aura-hero-v5-1-trust">
-            <div className="aura-hero-v5-1-trust-item">
-              <Truck className="aura-hero-v5-1-trust-icon" />
-              <span>Free Shipping<br />over Rs. 10,000</span>
+          {/* Mini stats */}
+          <div className="aura-hero-v6-1-stats">
+            <div className="aura-hero-v6-1-stat">
+              <span className="aura-hero-v6-1-stat-num">5K+</span>
+              <span className="aura-hero-v6-1-stat-label">Homes</span>
             </div>
-            <div className="aura-hero-v5-1-trust-divider" />
-            <div className="aura-hero-v5-1-trust-item">
-              <ShieldCheck className="aura-hero-v5-1-trust-icon" />
-              <span>7-Day<br />Easy Returns</span>
+            <div className="aura-hero-v6-1-stat-sep" />
+            <div className="aura-hero-v6-1-stat">
+              <span className="aura-hero-v6-1-stat-num">4.8</span>
+              <span className="aura-hero-v6-1-stat-label">Rating</span>
             </div>
-            <div className="aura-hero-v5-1-trust-divider" />
-            <div className="aura-hero-v5-1-trust-item">
-              <Banknote className="aura-hero-v5-1-trust-icon" />
-              <span>Cash on<br />Delivery</span>
+            <div className="aura-hero-v6-1-stat-sep" />
+            <div className="aura-hero-v6-1-stat">
+              <span className="aura-hero-v6-1-stat-num">45+</span>
+              <span className="aura-hero-v6-1-stat-label">Products</span>
             </div>
           </div>
         </div>
@@ -149,51 +85,64 @@ function Hero1() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// DEMO 2 — Full-Bleed Lifestyle
-// Full-screen lifestyle image with overlay text + centered CTA.
+// DEMO 2 — Spotlight Cursor
+// Dark bg with cursor-following radial spotlight + bold typography.
 // ═══════════════════════════════════════════════════════════
 
 function Hero2() {
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      el.style.setProperty('--aura-hero-v6-2-x', `${x}%`);
+      el.style.setProperty('--aura-hero-v6-2-y', `${y}%`);
+    };
+    el.addEventListener('mousemove', onMove);
+    return () => el.removeEventListener('mousemove', onMove);
+  }, []);
+
   return (
-    <section className="aura-hero-v5-2">
-      <Image
-        src="/images/hero/hero-slide-3.webp"
-        alt="Aura Living lifestyle"
-        fill
-        className="aura-hero-v5-2-bg"
-        sizes="100vw"
-        priority
-      />
-      <div className="aura-hero-v5-2-overlay" />
-      <div className="aura-hero-v5-2-content">
-        <span className="aura-hero-v5-2-eyebrow">Handcrafted in Pakistan</span>
-        <h1 className="aura-hero-v5-2-title">
-          Bring Nature<br />
-          <span className="aura-hero-v5-2-title-accent">Indoors</span>
+    <section ref={ref} className="aura-hero-v6-2">
+      <div className="aura-hero-v6-2-spotlight" />
+      <div className="aura-hero-v6-2-grid" />
+
+      <div className="aura-hero-v6-2-content">
+        <span className="aura-hero-v6-2-eyebrow">
+          <Sparkles className="aura-hero-v6-2-eyebrow-icon" />
+          Handcrafted in Pakistan
+        </span>
+        <h1 className="aura-hero-v6-2-title">
+          Bring Nature
+          <br />
+          <span className="aura-hero-v6-2-title-accent">Indoors</span>
         </h1>
-        <p className="aura-hero-v5-2-subtitle">
+        <p className="aura-hero-v6-2-subtitle">
           Curated plants, planters & botanical accents that breathe life into your space.
         </p>
-        <div className="aura-hero-v5-2-cta-row">
-          <Link href="/shop?category=plants" className="aura-hero-v5-2-cta">
-            Shop Plants & Pots
-            <ArrowRight className="aura-hero-v5-2-cta-icon" />
+        <div className="aura-hero-v6-2-cta-row">
+          <Link href="/shop?category=plants" className="aura-hero-v6-2-cta">
+            Shop Plants
+            <ArrowRight className="aura-hero-v6-2-cta-icon" />
+          </Link>
+          <Link href="/shop" className="aura-hero-v6-2-cta-ghost">
+            Explore All
           </Link>
         </div>
-        {/* Trust badges row */}
-        <div className="aura-hero-v5-2-trust">
-          <div className="aura-hero-v5-2-trust-item">
-            <Truck className="aura-hero-v5-2-trust-icon" />
-            <span>Nationwide Shipping</span>
-          </div>
-          <div className="aura-hero-v5-2-trust-item">
-            <Banknote className="aura-hero-v5-2-trust-icon" />
-            <span>COD Available</span>
-          </div>
-          <div className="aura-hero-v5-2-trust-item">
-            <ShieldCheck className="aura-hero-v5-2-trust-icon" />
-            <span>7-Day Returns</span>
-          </div>
+      </div>
+
+      {/* Bottom marquee */}
+      <div className="aura-hero-v6-2-marquee">
+        <div className="aura-hero-v6-2-marquee-track">
+          {['Free Shipping', 'COD Available', '7-Day Returns', 'Handcrafted', 'Made in Pakistan', 'Premium Quality', 'Free Shipping', 'COD Available', '7-Day Returns', 'Handcrafted', 'Made in Pakistan', 'Premium Quality'].map((t, i) => (
+            <span key={i} className="aura-hero-v6-2-marquee-item">
+              {t}
+              <span className="aura-hero-v6-2-marquee-dot" />
+            </span>
+          ))}
         </div>
       </div>
     </section>
@@ -201,225 +150,208 @@ function Hero2() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// DEMO 3 — Multi-Slide Carousel
-// Auto-rotating 3-slide carousel with arrows + dots.
+// DEMO 3 — Bento Grid
+// Asymmetric bento grid of category cards + headline block.
 // ═══════════════════════════════════════════════════════════
 
 function Hero3() {
-  const [active, setActive] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  useEffect(() => {
-    timerRef.current = setInterval(() => {
-      setActive((prev) => (prev + 1) % slides.length);
-    }, 6000);
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, []);
-
-  const goNext = () => setActive((prev) => (prev + 1) % slides.length);
-  const goPrev = () => setActive((prev) => (prev - 1 + slides.length) % slides.length);
-
-  const slide = slides[active];
-
-  return (
-    <section className="aura-hero-v5-3">
-      {/* Background images — all stacked, only active visible */}
-      {slides.map((s, i) => (
-        <Image
-          key={i}
-          src={s.image}
-          alt={s.title}
-          fill
-          className={`aura-hero-v5-3-bg ${i === active ? 'aura-hero-v5-3-bg-active' : ''}`}
-          sizes="100vw"
-          priority={i === 0}
-        />
-      ))}
-      <div className="aura-hero-v5-3-overlay" />
-
-      {/* Content */}
-      <div className="aura-hero-v5-3-content" key={active}>
-        <span className="aura-hero-v5-3-eyebrow">{slide.eyebrow}</span>
-        <h1 className="aura-hero-v5-3-title">
-          {slide.title}<br />
-          <span className="aura-hero-v5-3-title-accent">{slide.titleAccent}</span>
-        </h1>
-        <p className="aura-hero-v5-3-subtitle">{slide.subtitle}</p>
-        <Link href={slide.ctaHref} className="aura-hero-v5-3-cta">
-          {slide.ctaLabel}
-          <ArrowRight className="aura-hero-v5-3-cta-icon" />
-        </Link>
-      </div>
-
-      {/* Arrows */}
-      <button
-        onClick={goPrev}
-        className="aura-hero-v5-3-arrow aura-hero-v5-3-arrow-prev"
-        aria-label="Previous slide"
-      >
-        <ArrowLeft className="aura-hero-v5-3-arrow-icon" />
-      </button>
-      <button
-        onClick={goNext}
-        className="aura-hero-v5-3-arrow aura-hero-v5-3-arrow-next"
-        aria-label="Next slide"
-      >
-        <ArrowRight className="aura-hero-v5-3-arrow-icon" />
-      </button>
-
-      {/* Dots + counter */}
-      <div className="aura-hero-v5-3-nav">
-        <div className="aura-hero-v5-3-dots">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              className={`aura-hero-v5-3-dot ${i === active ? 'aura-hero-v5-3-dot-active' : ''}`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
-        <span className="aura-hero-v5-3-counter">
-          0{active + 1} <span className="aura-hero-v5-3-counter-sep">/</span> 0{slides.length}
-        </span>
-      </div>
-    </section>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════
-// DEMO 4 — Asymmetric Magazine
-// Editorial split: big product image (left, 60%) + magazine typography (right, 40%).
-// ═══════════════════════════════════════════════════════════
-
-function Hero4() {
-  return (
-    <section className="aura-hero-v5-4">
-      <div className="aura-hero-v5-4-image-wrap">
-        <Image
-          src="/images/hero/hero-slide-2.webp"
-          alt="Aura Living editorial"
-          fill
-          className="aura-hero-v5-4-image"
-          sizes="(max-width: 1024px) 100vw, 60vw"
-          priority
-        />
-        {/* Floating issue number */}
-        <div className="aura-hero-v5-4-issue">
-          <span className="aura-hero-v5-4-issue-num">01</span>
-          <span className="aura-hero-v5-4-issue-label">The Lighting Edit</span>
-        </div>
-      </div>
-      <div className="aura-hero-v5-4-content">
-        <div className="aura-hero-v5-4-eyebrow-row">
-          <span className="aura-hero-v5-4-eyebrow-line" />
-          <span className="aura-hero-v5-4-eyebrow">Featured Collection</span>
-        </div>
-        <h1 className="aura-hero-v5-4-title">
-          Made by Hand,<br />
-          <span className="aura-hero-v5-4-title-accent">Made with Heart</span>
-        </h1>
-        <p className="aura-hero-v5-4-subtitle">
-          Every piece tells a story of Pakistani craftsmanship — from brass to ceramic, lamp to vase.
-        </p>
-        <Link href="/shop?category=lighting" className="aura-hero-v5-4-cta">
-          Explore Lighting
-          <ArrowRight className="aura-hero-v5-4-cta-icon" />
-        </Link>
-        {/* Editorial stats */}
-        <div className="aura-hero-v5-4-stats">
-          <div className="aura-hero-v5-4-stat">
-            <span className="aura-hero-v5-4-stat-num">45+</span>
-            <span className="aura-hero-v5-4-stat-label">Handcrafted Pieces</span>
-          </div>
-          <div className="aura-hero-v5-4-stat-divider" />
-          <div className="aura-hero-v5-4-stat">
-            <span className="aura-hero-v5-4-stat-num">6</span>
-            <span className="aura-hero-v5-4-stat-label">Curated Categories</span>
-          </div>
-          <div className="aura-hero-v5-4-stat-divider" />
-          <div className="aura-hero-v5-4-stat">
-            <span className="aura-hero-v5-4-stat-num">5K+</span>
-            <span className="aura-hero-v5-4-stat-label">Happy Homes</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════
-// DEMO 5 — Video Background + Floating Cards
-// Video bg (left/center) + floating product cards on right.
-// ═══════════════════════════════════════════════════════════
-
-function Hero5() {
-  const products = [
-    { name: 'Brass Table Lamp', price: 'Rs. 9,999', image: '/images/products/hammered-brass-table-lamp-1.webp', href: '/product/hammered-brass-table-lamp' },
-    { name: 'Smoked Glass Pendant', price: 'Rs. 14,499', image: '/images/products/smoked-glass-pendant-light-1.webp', href: '/product/smoked-glass-pendant-light' },
-    { name: 'Terracotta Herb Pot', price: 'Rs. 2,499', image: '/images/products/terracotta-herb-pot-set-1.webp', href: '/product/terracotta-herb-pot-set' },
+  const cats = [
+    { name: 'Lighting', img: '/images/categories/lighting-category.webp', span: 'tall' },
+    { name: 'Plants & Pots', img: '/images/categories/plants-category.webp', span: 'wide' },
+    { name: 'Vases', img: '/images/categories/vases-category.webp', span: 'small' },
+    { name: 'Candles', img: '/images/categories/candles-category.webp', span: 'small' },
+    { name: 'Wall Art', img: '/images/categories/wallart-category.webp', span: 'small' },
   ];
 
   return (
-    <section className="aura-hero-v5-5">
-      {/* Video background */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="aura-hero-v5-5-video"
-        poster="/images/hero/hero-slide-1.webp"
-      >
-        <source src={VIDEO_URL} type="video/mp4" />
-      </video>
-      <div className="aura-hero-v5-5-overlay" />
+    <section className="aura-hero-v6-3">
+      <div className="aura-hero-v6-3-inner">
+        {/* Left: headline block */}
+        <div className="aura-hero-v6-3-headline-block">
+          <span className="aura-hero-v6-3-eyebrow">New Collection 2026</span>
+          <h1 className="aura-hero-v6-3-title">
+            Where Comfort<br />
+            <span className="aura-hero-v6-3-title-accent">Meets Style</span>
+          </h1>
+          <p className="aura-hero-v6-3-subtitle">
+            Handcrafted decor for the modern Pakistani home.
+          </p>
+          <Link href="/shop" className="aura-hero-v6-3-cta">
+            Shop Collection
+            <ArrowRight className="aura-hero-v6-3-cta-icon" />
+          </Link>
+        </div>
 
-      {/* Content */}
-      <div className="aura-hero-v5-5-content">
-        <span className="aura-hero-v5-5-eyebrow">
-          <Sparkles className="aura-hero-v5-5-eyebrow-icon" />
-          New Collection 2026
-        </span>
-        <h1 className="aura-hero-v5-5-title">
-          Where Comfort<br />
-          <span className="aura-hero-v5-5-title-accent">Meets Style</span>
+        {/* Right: bento grid */}
+        <div className="aura-hero-v6-3-bento">
+          {cats.map((c, i) => (
+            <Link
+              key={c.name}
+              href={`/shop?category=${c.name.toLowerCase().split(' ')[0]}`}
+              className={`aura-hero-v6-3-cell aura-hero-v6-3-cell-${c.span}`}
+            >
+              <Image
+                src={c.img}
+                alt={c.name}
+                fill
+                className="aura-hero-v6-3-cell-img"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+              <div className="aura-hero-v6-3-cell-overlay" />
+              <div className="aura-hero-v6-3-cell-content">
+                <span className="aura-hero-v6-3-cell-name">{c.name}</span>
+                <ArrowUpRight className="aura-hero-v6-3-cell-arrow" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// DEMO 4 — Kinetic Marquee
+// Giant scrolling marquee text + product cards row below.
+// ═══════════════════════════════════════════════════════════
+
+function Hero4() {
+  const products = [
+    { name: 'Brass Table Lamp', price: 'Rs. 9,999', image: '/images/products/hammered-brass-table-lamp-1.webp', href: '/product/hammered-brass-table-lamp' },
+    { name: 'Glass Pendant', price: 'Rs. 14,499', image: '/images/products/smoked-glass-pendant-light-1.webp', href: '/product/smoked-glass-pendant-light' },
+    { name: 'Terracotta Pot', price: 'Rs. 2,499', image: '/images/products/terracotta-herb-pot-set-1.webp', href: '/product/terracotta-herb-pot-set' },
+    { name: 'Marble Vase', price: 'Rs. 5,999', image: '/images/products/marble-vase-1.webp', href: '/product/marble-vase' },
+  ];
+
+  return (
+    <section className="aura-hero-v6-4">
+      {/* Top: giant kinetic marquee */}
+      <div className="aura-hero-v6-4-marquee">
+        <div className="aura-hero-v6-4-marquee-track">
+          {['Handcrafted', 'Premium', 'Artisan', 'Made in Pakistan'].map((word, i) => (
+            <span key={i} className="aura-hero-v6-4-marquee-word">
+              {word}
+              <span className="aura-hero-v6-4-marquee-star">✦</span>
+            </span>
+          ))}
+          {['Handcrafted', 'Premium', 'Artisan', 'Made in Pakistan'].map((word, i) => (
+            <span key={`d-${i}`} className="aura-hero-v6-4-marquee-word" aria-hidden="true">
+              {word}
+              <span className="aura-hero-v6-4-marquee-star">✦</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Middle: content */}
+      <div className="aura-hero-v6-4-content">
+        <span className="aura-hero-v6-4-eyebrow">New Collection 2026</span>
+        <h1 className="aura-hero-v6-4-title">
+          Made by Hand,<br />
+          <span className="aura-hero-v6-4-title-accent">Made with Heart</span>
         </h1>
-        <p className="aura-hero-v5-5-subtitle">
-          Handcrafted decor for the modern Pakistani home.
-        </p>
-        <Link href="/shop" className="aura-hero-v5-5-cta">
-          <ShoppingBag className="aura-hero-v5-5-cta-icon" />
+        <Link href="/shop" className="aura-hero-v6-4-cta">
           Shop Collection
+          <ArrowRight className="aura-hero-v6-4-cta-icon" />
         </Link>
       </div>
 
-      {/* Floating product cards */}
-      <div className="aura-hero-v5-5-cards">
-        {products.map((p, i) => (
-          <Link
-            key={p.name}
-            href={p.href}
-            className={`aura-hero-v5-5-card aura-hero-v5-5-card-${i + 1}`}
-          >
-            <div className="aura-hero-v5-5-card-img-wrap">
+      {/* Bottom: product cards row */}
+      <div className="aura-hero-v6-4-products">
+        {products.map((p) => (
+          <Link key={p.name} href={p.href} className="aura-hero-v6-4-product">
+            <div className="aura-hero-v6-4-product-img-wrap">
               <Image
                 src={p.image}
                 alt={p.name}
                 fill
-                className="aura-hero-v5-5-card-img"
-                sizes="120px"
+                className="aura-hero-v6-4-product-img"
+                sizes="(max-width: 768px) 50vw, 20vw"
               />
             </div>
-            <div className="aura-hero-v5-5-card-info">
-              <p className="aura-hero-v5-5-card-name">{p.name}</p>
-              <p className="aura-hero-v5-5-card-price">{p.price}</p>
+            <div className="aura-hero-v6-4-product-info">
+              <span className="aura-hero-v6-4-product-name">{p.name}</span>
+              <span className="aura-hero-v6-4-product-price">{p.price}</span>
             </div>
-            <ArrowRight className="aura-hero-v5-5-card-arrow" />
           </Link>
         ))}
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// DEMO 5 — Split Glass
+// Left: glass card with content. Right: floating product orbs.
+// ═══════════════════════════════════════════════════════════
+
+function Hero5() {
+  const orbs = [
+    { name: 'Brass Lamp', price: 'Rs. 9,999', image: '/images/products/hammered-brass-table-lamp-1.webp', href: '/product/hammered-brass-table-lamp', pos: 1 },
+    { name: 'Glass Pendant', price: 'Rs. 14,499', image: '/images/products/smoked-glass-pendant-light-1.webp', href: '/product/smoked-glass-pendant-light', pos: 2 },
+    { name: 'Terracotta', price: 'Rs. 2,499', image: '/images/products/terracotta-herb-pot-set-1.webp', href: '/product/terracotta-herb-pot-set', pos: 3 },
+  ];
+
+  return (
+    <section className="aura-hero-v6-5">
+      {/* Background gradient mesh */}
+      <div className="aura-hero-v6-5-mesh" />
+
+      <div className="aura-hero-v6-5-inner">
+        {/* Left: glass content card */}
+        <div className="aura-hero-v6-5-glass">
+          <span className="aura-hero-v6-5-badge">
+            <span className="aura-hero-v6-5-badge-dot" />
+            New Collection 2026
+          </span>
+          <h1 className="aura-hero-v6-5-title">
+            Where Comfort<br />
+            <span className="aura-hero-v6-5-title-accent">Meets Style</span>
+          </h1>
+          <p className="aura-hero-v6-5-subtitle">
+            Handcrafted decor for the modern Pakistani home. Premium quality, delivered nationwide.
+          </p>
+          <div className="aura-hero-v6-5-cta-row">
+            <Link href="/shop" className="aura-hero-v6-5-cta">
+              Shop Collection
+              <ArrowRight className="aura-hero-v6-5-cta-icon" />
+            </Link>
+          </div>
+          {/* Rating row */}
+          <div className="aura-hero-v6-5-rating">
+            <div className="aura-hero-v6-5-stars">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="aura-hero-v6-5-star" />
+              ))}
+            </div>
+            <span className="aura-hero-v6-5-rating-text">4.8/5 · 2,000+ reviews</span>
+          </div>
+        </div>
+
+        {/* Right: floating product orbs */}
+        <div className="aura-hero-v6-5-orbs">
+          {orbs.map((o) => (
+            <Link
+              key={o.name}
+              href={o.href}
+              className={`aura-hero-v6-5-orb aura-hero-v6-5-orb-${o.pos}`}
+            >
+              <div className="aura-hero-v6-5-orb-img-wrap">
+                <Image
+                  src={o.image}
+                  alt={o.name}
+                  fill
+                  className="aura-hero-v6-5-orb-img"
+                  sizes="200px"
+                />
+              </div>
+              <div className="aura-hero-v6-5-orb-info">
+                <span className="aura-hero-v6-5-orb-name">{o.name}</span>
+                <span className="aura-hero-v6-5-orb-price">{o.price}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -430,11 +362,11 @@ function Hero5() {
 // ═══════════════════════════════════════════════════════════
 
 const tabs = [
-  { id: 0, label: 'Split Product', desc: 'Left: product image + floating badges. Right: headline + CTA + trust signals.', inspir: 'Brooklinen, Burrow' },
-  { id: 1, label: 'Full-Bleed', desc: 'Full-screen lifestyle image with overlay text + centered CTA + trust row.', inspir: 'The Citizenry, West Elm' },
-  { id: 2, label: 'Carousel', desc: 'Auto-rotating 3-slide carousel with arrows + dots + counter.', inspir: 'Apple, Nike' },
-  { id: 3, label: 'Magazine', desc: 'Editorial split: big product image (60%) + magazine typography (40%) + stats.', inspir: 'MR PORTER, SSENSE' },
-  { id: 4, label: 'Video + Cards', desc: 'Video background + floating product cards on right with prices.', inspir: 'Aesop, COS' },
+  { id: 0, label: 'Aurora Mesh', desc: 'Animated mesh gradient blobs + glass content card + mini stats.', inspir: 'Linear, Vercel' },
+  { id: 1, label: 'Spotlight Cursor', desc: 'Dark bg with cursor-following radial spotlight + bottom marquee.', inspir: 'Stripe, Arc' },
+  { id: 2, label: 'Bento Grid', desc: 'Asymmetric bento grid of category cards + headline block.', inspir: 'Apple, Framer' },
+  { id: 3, label: 'Kinetic Marquee', desc: 'Giant scrolling marquee text + product cards row.', inspir: 'Awwwards sites' },
+  { id: 4, label: 'Split Glass', desc: 'Left: glass card with content. Right: floating product orbs.', inspir: 'Framer, Linear' },
 ];
 
 export default function HeroDemosPage() {
