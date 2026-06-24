@@ -1686,3 +1686,288 @@
   width: 1rem;
   height: 1rem;
 }
+
+/* ==========================================================================
+   CTA — Gold Banner (Demo 2)
+   Gold gradient full-width banner with masked word reveal.
+   ========================================================================== */
+
+.aura-cta-gold {
+  padding: 5rem 1rem;
+  background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .aura-cta-gold { padding: 5rem 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .aura-cta-gold { padding: 5rem 2rem; }
+}
+
+.aura-cta-gold-inner {
+  max-width: 56rem;
+  margin: 0 auto;
+  text-align: center;
+  perspective: 800px;
+}
+
+.aura-cta-gold-title {
+  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #FFFFFF;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.aura-cta-gold-word {
+  display: inline-block;
+  margin-right: 0.75rem;
+  will-change: transform, opacity;
+}
+
+.aura-cta-gold-sub {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2.5rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.aura-cta-gold-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #D4AF37;
+  background: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+}
+
+.aura-cta-gold-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+}
+
+.aura-cta-gold-btn-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ==========================================================================
+   TRUST — Marquee Dark (Demo 5)
+   Dark background, infinite horizontal marquee of trust badges.
+   ========================================================================== */
+
+.aura-trust-marquee {
+  padding: 2.5rem 0;
+  background: #141414;
+  overflow: hidden;
+  position: relative;
+}
+
+.aura-trust-marquee-track {
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+  width: max-content;
+  will-change: transform;
+}
+
+.aura-trust-marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.aura-trust-marquee-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #D4AF37;
+}
+
+.aura-trust-marquee-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.aura-trust-marquee-dot {
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0 0.25rem;
+}
+
+/* ==========================================================================
+   NEWSLETTER — Cinematic Dark (Demo 5)
+   Dark with subtle parallax background image and masked text reveal.
+   ========================================================================== */
+
+.aura-news-cinema {
+  position: relative;
+  padding: 5rem 1rem;
+  overflow: hidden;
+  background: #141414;
+}
+
+@media (min-width: 640px) {
+  .aura-news-cinema { padding: 5rem 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .aura-news-cinema { padding: 5rem 2rem; }
+}
+
+.aura-news-cinema-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-size: cover;
+  background-position: center;
+  height: 130%;
+  will-change: transform;
+}
+
+.aura-news-cinema-inner {
+  position: relative;
+  z-index: 10;
+  max-width: 36rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.aura-news-cinema-eyebrow-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.aura-news-cinema-eyebrow-line {
+  width: 2rem;
+  height: 1px;
+  background: #D4AF37;
+}
+
+.aura-news-cinema-eyebrow-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: #D4AF37;
+}
+
+.aura-news-cinema-maskwrap {
+  display: block;
+  overflow: hidden;
+}
+
+.aura-news-cinema-mask {
+  display: block;
+  will-change: transform;
+}
+
+.aura-news-cinema-title {
+  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 1rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.aura-news-cinema-title-gold {
+  color: #D4AF37;
+}
+
+.aura-news-cinema-sub {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.aura-news-cinema-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .aura-news-cinema-form {
+    flex-direction: row;
+  }
+}
+
+.aura-news-cinema-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  outline: none;
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.aura-news-cinema-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.aura-news-cinema-input:focus {
+  border-color: rgba(212, 175, 55, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.aura-news-cinema-btn {
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #D4AF37, #B8941F);
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  border: 0;
+  white-space: nowrap;
+}
+
+.aura-news-cinema-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+}
+
+.aura-news-cinema-fineprint {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 1rem;
+}
+
+.aura-news-cinema-success {
+  font-size: 0.875rem;
+  color: #D4AF37;
+  margin-top: 1rem;
+  font-weight: 500;
+}

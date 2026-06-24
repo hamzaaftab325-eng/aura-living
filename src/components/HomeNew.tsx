@@ -15,17 +15,18 @@
  * All using existing design tokens. Zero inline styles (except dynamic image URLs).
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Truck, Banknote, ShieldCheck, Sparkles, Star } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useScrollReveal } from '@/hooks/useAnimations';
-import { GoldDivider } from '@/components/SVGDecorations';
 import CategoriesHoverReveal from '@/components/CategoriesHoverReveal';
 import StoryQuote from '@/components/StoryQuote';
+import CTAGoldBanner from '@/components/CTAGoldBanner';
+import TrustMarquee from '@/components/TrustMarquee';
+import NewsletterCinematic from '@/components/NewsletterCinematic';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { formatRupees } from '@/lib/currency-display';
 import type { Product, Category } from '@/types';
@@ -39,7 +40,6 @@ interface HomeNewProps {
 
 export default function HomeNew({ featuredProducts, categories }: HomeNewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeCategory, setActiveCategory] = useState(0);
 
   // Scroll-triggered reveals for all [data-reveal] elements
   useGSAP(
@@ -226,104 +226,19 @@ export default function HomeNew({ featuredProducts, categories }: HomeNewProps) 
       </section>
 
       {/* ═══════════════════════════════════════════════════════════
-          6. FULL-SCREEN PARALLAX CTA
+          6. CTA — Gold Banner (Demo 2 chosen design)
           ═══════════════════════════════════════════════════════════ */}
-      <section className="aura-cta-fullscreen">
-        <div
-          className="aura-cta-bg"
-          style={{ backgroundImage: 'url(/images/hero/hero-slide-3.webp)' }}
-        />
-        <div className="aura-cta-overlay" />
-        <div data-reveal className="relative z-10 text-center px-4 max-w-2xl">
-          <Sparkles className="w-8 h-8 aura-text-gold mx-auto mb-6" />
-          <h2 className="aura-mega-text text-white mb-6 aura-cinematic-text" style={{ fontSize: 'clamp(2rem, 6vw, 4rem)' }}>
-            Ready to Transform Your Home?
-          </h2>
-          <p className="text-lg text-white/70 mb-10 max-w-md mx-auto">
-            Join 5,000+ Pakistani homes that chose Aura Living for their decor.
-          </p>
-          <PremiumButton variant="primary" size="lg" href="/shop" rightIcon={<ArrowRight className="w-4 h-4" />}>
-            Start Shopping
-          </PremiumButton>
-        </div>
-      </section>
+      <CTAGoldBanner />
 
       {/* ═══════════════════════════════════════════════════════════
-          7. TRUST BADGES — Minimal, clean
+          7. TRUST — Dark Marquee (Demo 5 chosen design)
           ═══════════════════════════════════════════════════════════ */}
-      <section className="py-16 sm:py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div data-stagger className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: Truck, title: 'Free Shipping', desc: 'Orders above Rs. 10,000' },
-              { icon: Banknote, title: 'Cash on Delivery', desc: 'Pay when it arrives' },
-              { icon: ShieldCheck, title: '7-Day Returns', desc: 'Easy & hassle-free' },
-              { icon: Star, title: '4.8/5 Rating', desc: 'From 2,000+ reviews' },
-            ].map((badge) => {
-              const Icon = badge.icon;
-              return (
-                <div key={badge.title} className="text-center">
-                  <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 aura-bg-gold-tint">
-                    <Icon className="w-6 h-6 aura-text-gold" />
-                  </div>
-                  <h3 className="text-sm font-semibold mb-1">{badge.title}</h3>
-                  <p className="text-xs aura-text-secondary">{badge.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <TrustMarquee />
 
       {/* ═══════════════════════════════════════════════════════════
-          8. NEWSLETTER — Minimal, airy, not heavy dark card
+          8. NEWSLETTER — Cinematic Dark (Demo 5 chosen design)
           ═══════════════════════════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 md:py-24 bg-[var(--surface-accent)]/20">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <div data-reveal>
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="aura-gold-line" />
-              <span className="text-xs font-bold uppercase tracking-[0.2em] aura-text-gold">Stay Connected</span>
-              <div className="aura-gold-line" />
-            </div>
-            <h2 className="aura-mega-text mb-4" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
-              Join the <span className="aura-text-gradient-gold">Aura Family</span>
-            </h2>
-            <p className="text-base aura-text-secondary mb-8 max-w-md mx-auto">
-              Get 10% off your first order, plus early access to new arrivals and exclusive offers.
-            </p>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                const input = e.currentTarget.querySelector('input');
-                if (input?.value) {
-                  fetch('/api/newsletter', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: input.value, source: 'homepage-new' }),
-                  });
-                  input.value = '';
-                  alert('Welcome to the family! Check your email for your discount code.');
-                }
-              }}
-              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-            >
-              <input
-                type="email"
-                placeholder="your@email.com"
-                required
-                className="aura-input-modern flex-1 px-4 py-3"
-              />
-              <PremiumButton type="submit" variant="primary" size="lg">
-                Subscribe
-              </PremiumButton>
-            </form>
-            <p className="text-xs aura-text-secondary mt-4">
-              No spam, unsubscribe anytime. We respect your privacy.
-            </p>
-          </div>
-        </div>
-      </section>
+      <NewsletterCinematic />
     </div>
   );
 }
