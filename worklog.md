@@ -39,3 +39,33 @@ Stage Summary:
 - Created comprehensive Vercel deployment plan at /home/z/my-project/download/VERCEL_DEPLOYMENT_PLAN.md (9-step guide with all env vars, troubleshooting, post-deployment security).
 - All 7 phases of backend development COMPLETE.
 - Ready for Vercel deployment.
+
+---
+Task ID: home-new-sections-final
+Agent: Super Z (main)
+Task: Apply user's chosen CTA (Demo 2), Trust (Demo 5), Newsletter (Demo 5) designs to /home-new; keep Products section unchanged; push to GitHub.
+
+Work Log:
+- Added 3 new CSS class groups to src/app/styles/modern.css:
+  - .aura-cta-gold-* (gold gradient banner with masked word reveal)
+  - .aura-trust-marquee-* (dark infinite marquee, 8 badges)
+  - .aura-news-cinema-* (dark cinematic with parallax bg, masked headline, inline form)
+- Created 3 new components:
+  - src/components/CTAGoldBanner.tsx — CTA Demo 2 (gold gradient, "Your Dream Home Starts Here", white pill button)
+  - src/components/TrustMarquee.tsx — Trust Demo 5 (dark band, infinite horizontal scroll of 8 trust badges with icons)
+  - src/components/NewsletterCinematic.tsx — Newsletter Demo 5 (dark with parallax hero-slide-4.webp bg, masked "Stay in the Loop" reveal, posts to /api/newsletter with inline success state)
+- Refactored src/components/HomeNew.tsx:
+  - Replaced inline CTA section with <CTAGoldBanner />
+  - Replaced inline Trust badges grid with <TrustMarquee />
+  - Replaced inline Newsletter card with <NewsletterCinematic />
+  - Removed unused imports (Truck, Banknote, ShieldCheck, Star, useEffect, useState, useScrollReveal, GoldDivider)
+  - Products section untouched per user request
+- All 3 new components use CSS classes only — zero inline styles (only dynamic bg image url on NewsletterCinematic, which is allowed by project rules)
+
+Stage Summary:
+- ✅ TypeScript typecheck: 0 errors
+- ✅ ESLint: 0 errors (8 pre-existing warnings, none in new code)
+- ⚠ Build: TypeScript compile + page data collection succeed; only failure is pre-existing DB-unreachable-from-build-sandbox issue on /product/[slug] ISR (unrelated to this commit — Vercel build will succeed where DB env vars are set)
+- ✅ Committed as 065457d, pushed to origin/main (d81a98f..065457d)
+- /home-new now has all 6 chosen homepage sections applied: Hero (Demo 1) → Marquee → Categories (Demo 2) → Story (Demo 5) → Products (unchanged) → CTA (Demo 2) → Trust (Demo 5) → Newsletter (Demo 5)
+- Vercel auto-deploy will trigger from the push.
