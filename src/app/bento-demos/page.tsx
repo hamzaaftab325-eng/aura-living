@@ -9,7 +9,7 @@
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ArrowUpRight, Hammer, Heart, Award, Leaf, Sparkles, Star, Truck, Banknote, ShieldCheck, Play } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Hammer, Heart, Award, Leaf, Sparkles, Star, Truck, Banknote, ShieldCheck, Play, Search, ShoppingCart, User, ChevronDown, Instagram, Facebook, Twitter } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -690,10 +690,385 @@ function Newsletter5() {
 }
 
 // ═══════════════════════════════════════════════════════════
+// NAV DEMOS (4) — 10/10 navigation designs
+// ═══════════════════════════════════════════════════════════
+
+const navLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'Shop', href: '/shop' },
+  { label: 'Journal', href: '/blog' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
+
+function Nav1() {
+  // Minimal sticky — transparent → solid on scroll, thin gold underline indicator
+  const ref = useRef<HTMLDivElement>(null);
+  useGSAP(() => {
+    const onScroll = () => {
+      if (!ref.current) return;
+      if (window.scrollY > 30) {
+        ref.current.classList.add('demo-nav1-scrolled');
+      } else {
+        ref.current.classList.remove('demo-nav1-scrolled');
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, { scope: ref });
+  return (
+    <div ref={ref} className="demo-nav1 sticky top-0 z-40">
+      <div className="demo-nav1-inner">
+        <Link href="/" className="demo-nav1-logo">
+          Aura<span className="demo-nav1-logo-dot">.</span>
+        </Link>
+        <nav className="demo-nav1-links">
+          {navLinks.map((l, i) => (
+            <Link key={l.href} href={l.href} className={`demo-nav1-link ${i === 0 ? 'demo-nav1-link-active' : ''}`}>
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="demo-nav1-icons">
+          <Search className="demo-nav1-icon" />
+          <Heart className="demo-nav1-icon" />
+          <ShoppingCart className="demo-nav1-icon" />
+          <User className="demo-nav1-icon" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Nav2() {
+  // Glass Pill — floating glassmorphic pill, frosted blur, gold ring on hover
+  return (
+    <div className="demo-nav2-wrap">
+      <div className="demo-nav2-pill">
+        <Link href="/" className="demo-nav2-logo">Aura<span className="demo-nav2-logo-dot">.</span></Link>
+        <nav className="demo-nav2-links">
+          {navLinks.map((l, i) => (
+            <Link key={l.href} href={l.href} className={`demo-nav2-link ${i === 0 ? 'demo-nav2-link-active' : ''}`}>
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="demo-nav2-icons">
+          <Search className="demo-nav2-icon" />
+          <Heart className="demo-nav2-icon" />
+          <ShoppingCart className="demo-nav2-icon" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Nav3() {
+  // Mega Menu Split — top bar with split mega menu (left categories + right featured preview)
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="demo-nav3-wrap">
+      <div className="demo-nav3-inner">
+        <Link href="/" className="demo-nav3-logo">Aura<span className="demo-nav3-logo-dot">.</span></Link>
+        <nav className="demo-nav3-links">
+          {navLinks.map((l, i) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className={`demo-nav3-link ${i === 1 ? 'demo-nav3-link-active' : ''}`}
+              onMouseEnter={() => setOpen(i === 1)}
+              onMouseLeave={() => setOpen(false)}
+            >
+              {l.label}
+              {i === 1 && <ChevronDown className="demo-nav3-chev" />}
+            </Link>
+          ))}
+        </nav>
+        <div className="demo-nav3-icons">
+          <Search className="demo-nav3-icon" />
+          <ShoppingCart className="demo-nav3-icon" />
+          <button className="demo-nav3-cta">Sign In</button>
+        </div>
+      </div>
+      {open && (
+        <div
+          className="demo-nav3-mega"
+          onMouseEnter={() => setOpen(true)}
+          onMouseLeave={() => setOpen(false)}
+        >
+          <div className="demo-nav3-mega-left">
+            <span className="demo-nav3-mega-eyebrow">Shop by Category</span>
+            {['Lighting', 'Plants & Pots', 'Vases & Decor', 'Candles & Fragrance', 'Wall Art & Mirrors', 'Kitchen & Dining'].map((c) => (
+              <Link key={c} href="/shop" className="demo-nav3-mega-link">
+                <span>{c}</span>
+                <ArrowRight className="demo-nav3-mega-arrow" />
+              </Link>
+            ))}
+          </div>
+          <div className="demo-nav3-mega-right">
+            <Image
+              src="/images/categories/lighting-category.webp"
+              alt="Featured"
+              fill
+              className="demo-nav3-mega-img"
+            />
+            <div className="demo-nav3-mega-overlay" />
+            <div className="demo-nav3-mega-content">
+              <span className="demo-nav3-mega-eyebrow">Featured</span>
+              <p className="demo-nav3-mega-title">New Lighting Collection</p>
+              <Link href="/shop" className="demo-nav3-mega-cta">Discover <ArrowRight className="demo-nav3-mega-arrow" /></Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Nav4() {
+  // Side Slide — minimal top bar with hamburger that slides a full-height drawer from right
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useGSAP(() => {
+    if (!ref.current) return;
+    const links = ref.current.querySelectorAll('.demo-nav4-drawer-link');
+    if (open) {
+      gsap.fromTo(links, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5, stagger: 0.07, ease: 'power3.out' });
+    }
+  }, { scope: ref, dependencies: [open] });
+  return (
+    <div ref={ref} className="demo-nav4-wrap">
+      <div className="demo-nav4-bar">
+        <Link href="/" className="demo-nav4-logo">Aura<span className="demo-nav4-logo-dot">.</span></Link>
+        <div className="demo-nav4-bar-icons">
+          <Search className="demo-nav4-icon" />
+          <ShoppingCart className="demo-nav4-icon" />
+          <button className="demo-nav4-burger" onClick={() => setOpen(!open)} aria-label="Menu">
+            <span className={`demo-nav4-burger-line ${open ? 'demo-nav4-burger-line-1' : ''}`} />
+            <span className={`demo-nav4-burger-line ${open ? 'demo-nav4-burger-line-2' : ''}`} />
+            <span className={`demo-nav4-burger-line ${open ? 'demo-nav4-burger-line-3' : ''}`} />
+          </button>
+        </div>
+      </div>
+      {open && (
+        <>
+          <div className="demo-nav4-backdrop" onClick={() => setOpen(false)} />
+          <aside className="demo-nav4-drawer">
+            <span className="demo-nav4-drawer-eyebrow">Menu</span>
+            {navLinks.map((l, i) => (
+              <Link key={l.href} href={l.href} className="demo-nav4-drawer-link" onClick={() => setOpen(false)}>
+                <span className="demo-nav4-drawer-num">0{i + 1}</span>
+                <span className="demo-nav4-drawer-label">{l.label}</span>
+                <ArrowRight className="demo-nav4-drawer-arrow" />
+              </Link>
+            ))}
+            <div className="demo-nav4-drawer-foot">
+              <Instagram className="demo-nav4-drawer-social" />
+              <Facebook className="demo-nav4-drawer-social" />
+              <Twitter className="demo-nav4-drawer-social" />
+            </div>
+          </aside>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// FOOTER DEMOS (4) — 10/10 footer designs
+// ═══════════════════════════════════════════════════════════
+
+function Footer1() {
+  // Classic Multi-Column — 4 columns + logo + inline newsletter + payment row
+  return (
+    <footer className="demo-footer1">
+      <div className="demo-footer1-inner">
+        <div className="demo-footer1-top">
+          <div className="demo-footer1-brand">
+            <span className="demo-footer1-logo">Aura<span className="demo-footer1-dot">.</span></span>
+            <p className="demo-footer1-tag">Handcrafted decor for the modern Pakistani home.</p>
+            <div className="demo-footer1-socials">
+              <Instagram className="demo-footer1-social" />
+              <Facebook className="demo-footer1-social" />
+              <Twitter className="demo-footer1-social" />
+            </div>
+          </div>
+          <div className="demo-footer1-cols">
+            <div className="demo-footer1-col">
+              <span className="demo-footer1-col-h">Shop</span>
+              <Link href="/shop">All Products</Link>
+              <Link href="/shop?category=lighting">Lighting</Link>
+              <Link href="/shop?category=plants">Plants & Pots</Link>
+              <Link href="/shop?category=vases">Vases & Decor</Link>
+            </div>
+            <div className="demo-footer1-col">
+              <span className="demo-footer1-col-h">Company</span>
+              <Link href="/about">About Us</Link>
+              <Link href="/blog">Journal</Link>
+              <Link href="/contact">Contact</Link>
+              <Link href="/care-guide">Care Guide</Link>
+            </div>
+            <div className="demo-footer1-col">
+              <span className="demo-footer1-col-h">Support</span>
+              <Link href="/shipping">Shipping</Link>
+              <Link href="/returns">Returns</Link>
+              <Link href="/faq">FAQ</Link>
+              <Link href="/terms">Terms</Link>
+            </div>
+          </div>
+        </div>
+        <div className="demo-footer1-news">
+          <div>
+            <span className="demo-footer1-news-h">Stay in the loop</span>
+            <p className="demo-footer1-news-sub">Get 10% off your first order.</p>
+          </div>
+          <form className="demo-footer1-news-form" onSubmit={(e) => e.preventDefault()}>
+            <input type="email" placeholder="your@email.com" required className="demo-footer1-news-input" />
+            <button type="submit" className="demo-footer1-news-btn">Subscribe <ArrowRight className="demo-footer1-news-arrow" /></button>
+          </form>
+        </div>
+        <div className="demo-footer1-bottom">
+          <span>© 2026 Aura Living. All rights reserved.</span>
+          <div className="demo-footer1-pay">
+            <span className="demo-footer1-pay-chip">COD</span>
+            <span className="demo-footer1-pay-chip">VISA</span>
+            <span className="demo-footer1-pay-chip">Mastercard</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function Footer2() {
+  // Big Brand CTA — huge brand wordmark + tagline + single newsletter + minimal links
+  return (
+    <footer className="demo-footer2">
+      <div className="demo-footer2-inner">
+        <div className="demo-footer2-eyebrow">
+          <span className="demo-footer2-line" />
+          <span className="demo-footer2-eyebrow-text">Stay Connected</span>
+          <span className="demo-footer2-line" />
+        </div>
+        <h2 className="demo-footer2-mega">AURA LIVING</h2>
+        <p className="demo-footer2-tag">Handcrafted decor for the modern Pakistani home. Made with love in Lahore.</p>
+        <form className="demo-footer2-form" onSubmit={(e) => e.preventDefault()}>
+          <input type="email" placeholder="your@email.com" required className="demo-footer2-input" />
+          <button type="submit" className="demo-footer2-btn">Join the Family</button>
+        </form>
+        <div className="demo-footer2-links">
+          {['Shop', 'About', 'Journal', 'Contact', 'Shipping', 'Returns'].map((l) => (
+            <Link key={l} href="/" className="demo-footer2-link">{l}</Link>
+          ))}
+        </div>
+        <div className="demo-footer2-bottom">
+          <span>© 2026 Aura Living</span>
+          <div className="demo-footer2-socials">
+            <Instagram className="demo-footer2-social" />
+            <Facebook className="demo-footer2-social" />
+            <Twitter className="demo-footer2-social" />
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function Footer3() {
+  // Dark Editorial — magazine-style with large quote, big social circles, gold dividers
+  return (
+    <footer className="demo-footer3">
+      <div className="demo-footer3-inner">
+        <div className="demo-footer3-quote-block">
+          <span className="demo-footer3-quote-mark">"</span>
+          <p className="demo-footer3-quote">We don&apos;t just sell decor — we share the soul of Pakistani craftsmanship.</p>
+          <span className="demo-footer3-quote-author">— Aura Living Team, Lahore</span>
+        </div>
+        <div className="demo-footer3-divider" />
+        <div className="demo-footer3-grid">
+          <div className="demo-footer3-brand-col">
+            <span className="demo-footer3-logo">Aura<span className="demo-footer3-dot">.</span></span>
+            <p className="demo-footer3-tag">Made with love in Lahore, Pakistan.</p>
+            <div className="demo-footer3-socials">
+              {[Instagram, Facebook, Twitter].map((Icon, i) => (
+                <a key={i} href="#" className="demo-footer3-social"><Icon /></a>
+              ))}
+            </div>
+          </div>
+          <div className="demo-footer3-cols">
+            {[
+              { h: 'Shop', items: ['All Products', 'New Arrivals', 'Bestsellers', 'Sale'] },
+              { h: 'Help', items: ['Shipping', 'Returns', 'FAQ', 'Contact'] },
+              { h: 'Company', items: ['About', 'Journal', 'Care Guide', 'Privacy'] },
+            ].map((col) => (
+              <div key={col.h} className="demo-footer3-col">
+                <span className="demo-footer3-col-h">{col.h}</span>
+                {col.items.map((item) => (
+                  <Link key={item} href="/" className="demo-footer3-col-link">{item}</Link>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="demo-footer3-bottom">
+          <span>© 2026 Aura Living — Handcrafted in Pakistan</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function Footer4() {
+  // Minimal Light — cream bg, simple horizontal link row, copyright, gold divider on top
+  return (
+    <footer className="demo-footer4">
+      <div className="demo-footer4-inner">
+        <div className="demo-footer4-top">
+          <Link href="/" className="demo-footer4-logo">Aura<span className="demo-footer4-dot">.</span></Link>
+          <nav className="demo-footer4-nav">
+            {['Shop', 'About', 'Journal', 'Contact', 'Shipping', 'Returns'].map((l) => (
+              <Link key={l} href="/" className="demo-footer4-nav-link">{l}</Link>
+            ))}
+          </nav>
+        </div>
+        <div className="demo-footer4-mid">
+          <p className="demo-footer4-tag">Handcrafted decor · Made in Pakistan</p>
+          <div className="demo-footer4-socials">
+            <Instagram className="demo-footer4-social" />
+            <Facebook className="demo-footer4-social" />
+            <Twitter className="demo-footer4-social" />
+          </div>
+        </div>
+        <div className="demo-footer4-bottom">
+          <span>© 2026 Aura Living</span>
+          <span className="demo-footer4-sep">·</span>
+          <Link href="/privacy">Privacy</Link>
+          <span className="demo-footer4-sep">·</span>
+          <Link href="/terms">Terms</Link>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
 // MAIN PAGE
 // ═══════════════════════════════════════════════════════════
 
 const sections = [
+  { type: 'nav', label: 'Nav', tabs: [
+    { id: 0, label: 'Minimal Sticky', desc: 'Transparent → solid on scroll · gold underline · icons right' },
+    { id: 1, label: 'Glass Pill', desc: 'Floating glassmorphic pill · frosted blur · gold ring' },
+    { id: 2, label: 'Mega Menu', desc: 'Split mega menu · categories + featured product' },
+    { id: 3, label: 'Side Drawer', desc: 'Hamburger · full-height right drawer · staggered links' },
+  ]},
+  { type: 'footer', label: 'Footer', tabs: [
+    { id: 0, label: 'Classic', desc: '4 columns + brand + inline newsletter + payment chips' },
+    { id: 1, label: 'Big Brand', desc: 'Huge wordmark + tagline + centered newsletter + minimal links' },
+    { id: 2, label: 'Dark Editorial', desc: 'Magazine-style · big quote · gold dividers · 3 cols' },
+    { id: 3, label: 'Minimal Light', desc: 'Cream bg · horizontal link row · gold top accent' },
+  ]},
   { type: 'bento', label: 'Categories', tabs: [
     { id: 0, label: 'Classic Bento', desc: '1 tall + 1 wide + 4 standard · asymmetric grid' },
     { id: 1, label: 'Hover Reveal', desc: 'Panel slides up on hover · dark theme' },
@@ -738,13 +1113,15 @@ const sections = [
 ];
 
 export default function BentoDemosPage() {
-  const [sectionIdx, setSectionIdx] = useState(2); // Start on Products
+  const [sectionIdx, setSectionIdx] = useState(0); // Start on Nav
   const [activeTab, setActiveTab] = useState(0);
   const current = sections[sectionIdx];
 
   const renderDemo = () => {
     const t = current.type;
     const i = activeTab;
+    if (t === 'nav') return [Nav1, Nav2, Nav3, Nav4][i]?.();
+    if (t === 'footer') return [Footer1, Footer2, Footer3, Footer4][i]?.();
     if (t === 'bento') return [Bento1, Bento2, Bento3, Bento4][i]?.();
     if (t === 'story') return [Story1, Story2, Story3, Story4, Story5][i]?.();
     if (t === 'products') return [Products1, Products2, Products3, Products4, Products5][i]?.();
@@ -756,33 +1133,70 @@ export default function BentoDemosPage() {
 
   return (
     <div className="w-full">
-      {/* Top section selector */}
-      <div className="sticky top-0 z-50 backdrop-blur-xl" style={{ background: 'rgba(14,14,14,0.92)', borderBottom: '1px solid rgba(212,175,55,0.15)' }}>
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center justify-center gap-2 py-2 border-b" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
-            {sections.map((s, i) => (
-              <button key={s.type} onClick={() => { setSectionIdx(i); setActiveTab(0); }} className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all" style={{ background: sectionIdx === i ? 'linear-gradient(135deg, #D4AF37, #C9A22E)' : 'transparent', color: sectionIdx === i ? '#fff' : 'rgba(255,255,255,0.4)' }}>{s.label}</button>
-            ))}
+      {/* Top demo selector — clean two-row chrome */}
+      <header className="demo-chrome">
+        <div className="demo-chrome-inner">
+          {/* Row 1: brand + section pill row */}
+          <div className="demo-chrome-row1">
+            <span className="demo-chrome-brand">
+              Aura<span className="demo-chrome-brand-dot">.</span>
+              <span className="demo-chrome-brand-sub">Design Lab</span>
+            </span>
+            <div className="demo-chrome-sections">
+              {sections.map((s, i) => (
+                <button
+                  key={s.type}
+                  onClick={() => { setSectionIdx(i); setActiveTab(0); }}
+                  className={`demo-chrome-section ${sectionIdx === i ? 'demo-chrome-section-active' : ''}`}
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="flex items-center justify-center gap-2 py-3 overflow-x-auto">
-            {current.tabs.map(tab => (
-              <button key={tab.id} onClick={() => setActiveTab(tab.id)} className="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 whitespace-nowrap" style={{ background: activeTab === tab.id ? 'rgba(212,175,55,0.15)' : 'transparent', color: activeTab === tab.id ? '#D4AF37' : 'rgba(255,255,255,0.4)', border: activeTab === tab.id ? '1px solid rgba(212,175,55,0.3)' : '1px solid rgba(255,255,255,0.05)' }}>{tab.id + 1}. {tab.label}</button>
-            ))}
+
+          {/* Row 2: variant tabs for the selected section */}
+          <div className="demo-chrome-row2">
+            <span className="demo-chrome-row2-label">
+              {current.label} — choose a variant
+            </span>
+            <div className="demo-chrome-tabs">
+              {current.tabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`demo-chrome-tab ${activeTab === tab.id ? 'demo-chrome-tab-active' : ''}`}
+                >
+                  <span className="demo-chrome-tab-num">0{tab.id + 1}</span>
+                  <span className="demo-chrome-tab-label">{tab.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
+      </header>
+
+      {/* Active demo — mounted fresh per switch (keyed) */}
+      <div key={`${current.type}-${activeTab}`} className="demo-chrome-stage">
+        {renderDemo()}
       </div>
 
-      {/* Active demo */}
-      <div key={`${current.type}-${activeTab}`}>{renderDemo()}</div>
-
-      {/* Info bar */}
-      <div className="py-12 px-4 text-center" style={{ background: '#0e0e0e' }}>
-        <p className="text-sm text-white/40 mb-2">{current.tabs[activeTab]?.desc}</p>
-        <p className="text-xs text-white/30">Viewing {current.label} Demo {activeTab + 1} of {current.tabs.length}</p>
-        <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full" style={{ background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.2)' }}>
-          <span className="text-xs font-semibold" style={{ color: '#D4AF37' }}>Reply with number {activeTab + 1} if you like this one</span>
+      {/* Info bar — what you're viewing + reply prompt */}
+      <footer className="demo-chrome-info">
+        <div className="demo-chrome-info-inner">
+          <span className="demo-chrome-info-section">{current.label}</span>
+          <span className="demo-chrome-info-sep">·</span>
+          <span className="demo-chrome-info-variant">
+            Demo {activeTab + 1} of {current.tabs.length} — {current.tabs[activeTab]?.label}
+          </span>
+          <p className="demo-chrome-info-desc">{current.tabs[activeTab]?.desc}</p>
+          <div className="demo-chrome-info-pill">
+            <span className="demo-chrome-info-pill-text">
+              Reply with number {activeTab + 1} if you like this {current.label.toLowerCase()} design
+            </span>
+          </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }
