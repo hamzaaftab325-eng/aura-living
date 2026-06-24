@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import HeroCinematic from '@/components/HeroCinematic';
+import HeroBento from '@/components/HeroBento';
 import HomeNew from '@/components/HomeNew';
 import { getFeaturedProducts, getNewArrivals, getCategories } from '@/lib/products';
 
@@ -57,8 +57,10 @@ export default async function HomeNewPage() {
 
   return (
     <>
-      {/* Chosen hero: Demo 1 — Cinematic Video + Split Letter Stagger */}
-      <HeroCinematic />
+      {/* Chosen hero: Bento Grid — polished, with GSAP scroll animations
+          matching the home-new section pattern. Categories are dynamic
+          from the DB (falls back to static if empty). */}
+      <HeroBento categories={categories} />
 
       {/* Rest of homepage sections */}
       <HomeNew
