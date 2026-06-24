@@ -1694,9 +1694,18 @@
 
 .aura-cta-gold {
   padding: 5rem 1rem;
-  background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+  background:
+    linear-gradient(135deg, #D4AF37 0%, #B8941F 50%, #D4AF37 100%);
+  background-size: 200% 200%;
+  animation: aura-cta-gold-shift 8s ease-in-out infinite;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+}
+
+@keyframes aura-cta-gold-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 @media (min-width: 640px) {
@@ -1711,6 +1720,8 @@
   margin: 0 auto;
   text-align: center;
   perspective: 800px;
+  position: relative;
+  z-index: 1;
 }
 
 .aura-cta-gold-title {
@@ -1721,22 +1732,39 @@
   color: #FFFFFF;
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* Per-word masked wrapper (overflow hidden) */
+.aura-cta-gold-word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding: 0 0.05em 0.15em;
+  margin-right: 0.4rem;
 }
 
 .aura-cta-gold-word {
   display: inline-block;
-  margin-right: 0.75rem;
   will-change: transform, opacity;
+  transition: transform 0.4s var(--ease-out), text-shadow 0.4s var(--ease-out);
+  cursor: default;
+}
+
+.aura-cta-gold-word:hover {
+  transform: translateY(-4px);
+  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
 }
 
 .aura-cta-gold-sub {
   font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.78);
   margin-bottom: 2.5rem;
   max-width: 28rem;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
 }
 
 .aura-cta-gold-btn {
@@ -1751,19 +1779,40 @@
   letter-spacing: 0.05em;
   color: #D4AF37;
   background: #FFFFFF;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.15),
+    0 0 0 0 rgba(212, 175, 55, 0.4);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.4s ease;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.aura-cta-gold-btn-label {
+  position: relative;
+  z-index: 1;
 }
 
 .aura-cta-gold-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.22),
+    0 0 0 6px rgba(212, 175, 55, 0.18);
 }
 
 .aura-cta-gold-btn-icon {
   width: 1rem;
   height: 1rem;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.aura-cta-gold-btn:hover .aura-cta-gold-btn-icon {
+  transform: translateX(6px);
 }
 
 /* ==========================================================================
@@ -1772,10 +1821,36 @@
    ========================================================================== */
 
 .aura-trust-marquee {
-  padding: 2.5rem 0;
+  padding: 1.5rem 0;
   background: #141414;
   overflow: hidden;
   position: relative;
+  perspective: 1000px;
+}
+
+/* Top + bottom thin gold accent borders for premium framing */
+.aura-trust-marquee::before,
+.aura-trust-marquee::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.4) 20%,
+    rgba(212, 175, 55, 0.7) 50%,
+    rgba(212, 175, 55, 0.4) 80%,
+    transparent 100%
+  );
+  z-index: 2;
+}
+.aura-trust-marquee::before {
+  top: 0;
+}
+.aura-trust-marquee::after {
+  bottom: 0;
 }
 
 .aura-trust-marquee-track {
@@ -2643,45 +2718,58 @@
 }
 
 /* ==========================================================================
-   7. TRUST MARQUEE — gradient edge masks, hover pause, icon spin-on-hover
+   7. TRUST MARQUEE — gradient edge masks ON TRACK ONLY (not the dark
+   section bg, otherwise the page's light bg bleeds through and creates
+   "white in corners"). Hover pause, icon spin-on-hover, dramatic entrance.
    ========================================================================== */
 
+/* Section background stays solid — NO mask on the section itself */
 .aura-trust-marquee {
+  /* Mask is applied to the track below */
+}
+
+/* Track fades at edges — but the section's #141414 bg stays solid */
+.aura-trust-marquee-track {
   -webkit-mask-image: linear-gradient(
     to right,
     transparent,
-    #000 6%,
-    #000 94%,
+    #000 5%,
+    #000 95%,
     transparent
   );
   mask-image: linear-gradient(
     to right,
     transparent,
-    #000 6%,
-    #000 94%,
+    #000 5%,
+    #000 95%,
     transparent
   );
 }
 
 .aura-trust-marquee-item {
-  transition: transform 0.3s var(--ease-out);
+  transition:
+    transform 0.45s var(--ease-out),
+    filter 0.45s var(--ease-out);
   cursor: default;
+  will-change: transform;
 }
 .aura-trust-marquee-item:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px) scale(1.06);
+  filter: drop-shadow(0 6px 18px rgba(212, 175, 55, 0.35));
 }
 .aura-trust-marquee-item:hover .aura-trust-marquee-label {
-  color: rgba(255, 255, 255, 0.95);
+  color: #FFFFFF;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.45);
 }
 .aura-trust-marquee-label {
-  transition: color 0.3s var(--ease-out);
+  transition: color 0.35s var(--ease-out), text-shadow 0.35s var(--ease-out);
 }
 .aura-trust-marquee-icon {
-  transition: transform 0.5s var(--ease-out);
-  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.4));
+  transition: transform 0.55s var(--ease-out);
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
 }
 .aura-trust-marquee-item:hover .aura-trust-marquee-icon {
-  transform: rotate(180deg) scale(1.2);
+  transform: rotate(360deg) scale(1.3);
 }
 
 /* Pause marquee when user hovers any item */
@@ -2726,14 +2814,9 @@
   50% { transform: translate(-50px, -40px) scale(0.9); }
 }
 
-/* Eyebrow lines — draw-in animation when section enters viewport */
+/* Eyebrow lines — keep static (entrance is driven by GSAP on the parent row) */
 .aura-news-cinema-eyebrow-line {
-  transform: scaleX(0);
-  transform-origin: center;
-  animation: aura-news-line-draw 0.8s var(--ease-out) 0.2s forwards;
-}
-@keyframes aura-news-line-draw {
-  to { transform: scaleX(1); }
+  /* no entrance animation here — GSAP animates the whole row instead */
 }
 
 /* Input — glow ring on focus, gold border brightens */
@@ -2796,9 +2879,9 @@
   .aura-hero-scroll-cue-line::after,
   .aura-author-avatar::after,
   .aura-cta-gold::before,
+  .aura-cta-gold,
   .aura-news-cinema::before,
-  .aura-news-cinema::after,
-  .aura-news-cinema-eyebrow-line {
+  .aura-news-cinema::after {
     animation: none !important;
   }
 }
