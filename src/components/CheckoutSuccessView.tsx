@@ -138,8 +138,7 @@ function CheckoutSuccessForm() {
 
         {/* Order number */}
         <div
-          className="text-center py-4 mb-6 rounded-lg"
-          style={{ backgroundColor: "rgba(212, 175, 55, 0.08)" }}
+          className="text-center py-4 mb-6 rounded-lg aura-bg-gold-tint"
         >
           <p className="text-[11px] uppercase tracking-wider text-gray-500 mb-1">
             Order Number
@@ -180,8 +179,7 @@ function CheckoutSuccessForm() {
 
         {/* Shipping info */}
         <div
-          className="p-4 rounded-lg mb-6"
-          style={{ backgroundColor: "rgba(212, 175, 55, 0.05)" }}
+          className="p-4 rounded-lg mb-6 aura-bg-gold-tint-5"
         >
           <div className="flex items-center gap-2 mb-2">
             <Truck className="w-4 h-4 aura-text-gold" />

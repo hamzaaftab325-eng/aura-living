@@ -84,7 +84,7 @@ export default function AdminCustomersClient() {
         ) : (
           <div className="overflow-x-auto rounded-xl" style={{ border: "1px solid var(--color-gold-soft, rgba(212,175,55,0.2))" }}>
             <table className="w-full text-sm">
-              <thead style={{ backgroundColor: "rgba(212,175,55,0.05)" }}>
+              <thead className="aura-bg-gold-tint-5">
                 <tr className="text-left text-xs uppercase tracking-wider aura-text-secondary">
                   <th className="p-3">Customer</th>
                   <th className="p-3">Email</th>

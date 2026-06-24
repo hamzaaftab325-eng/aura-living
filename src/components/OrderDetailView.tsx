@@ -262,7 +262,7 @@ export default function OrderDetailView({ order }: OrderDetailViewProps) {
 
         {/* Tracking */}
         {order.trackingNumber && (
-          <div className="mb-8 p-4 rounded-lg" style={{ backgroundColor: "rgba(59, 130, 246, 0.05)" }}>
+          <div className="mb-8 p-4 rounded-lg aura-bg-blue-tint">
             <h3 className="text-sm font-semibold mb-2">Tracking Information</h3>
             <p className="text-sm">
               <span className="aura-text-secondary">Carrier:</span>{" "}

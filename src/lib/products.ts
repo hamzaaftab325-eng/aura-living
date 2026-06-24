@@ -16,53 +16,19 @@
  */
 
 import { prisma } from "@/lib/db";
-import type { Product, Category } from "@prisma/client";
+import type { Product as PrismaProduct, Category as PrismaCategory } from "@prisma/client";
+import type { Product, Category } from "@/types";
 
-// ----------------------------------------------------------------------------
-// Types — these match what the frontend expects (from src/types/product.ts)
-// ----------------------------------------------------------------------------
-
-/**
- * The shape frontend components expect. Converted from Prisma's BigInt-paisa
- * model to the rupees-number model so existing UI works unchanged.
- */
-export interface FrontendProduct {
-  id: string;
-  slug: string;
-  name: string;
-  price: number; // Rupees (not paisa) — for frontend display
-  originalPrice?: number;
-  image: string;
-  images: string[];
-  category: string; // category slug
-  rating: number;
-  reviews: number;
-  badge?: "NEW" | "SALE" | "BESTSELLER";
-  description: string;
-  material: string;
-  inStock: boolean;
-  sku?: string;
-  dimensions?: string;
-  weight?: string;
-  careInstructions?: string;
-  warranty?: string;
-  origin?: string;
-}
-
-export interface FrontendCategory {
-  id: string; // slug (frontend uses slug as id)
-  name: string;
-  image: string;
-  description: string;
-}
+// Types Product and Category are now imported from @/types (canonical source).
+// PrismaProduct/PrismaCategory are the DB row types (BigInt for price, etc.).
 
 // ----------------------------------------------------------------------------
 // Conversion helpers — Prisma row → Frontend shape
 // ----------------------------------------------------------------------------
 
-function toFrontendProduct(
-  p: Product & { images: { url: string; altText: string | null }[] },
-): FrontendProduct {
+function toProduct(
+  p: PrismaProduct & { images: { url: string; altText: string | null }[] },
+): Product {
   return {
     id: p.id,
     slug: p.slug,
@@ -89,7 +55,7 @@ function toFrontendProduct(
   };
 }
 
-function toFrontendCategory(c: Category): FrontendCategory {
+function toCategory(c: PrismaCategory): Category {
   return {
     id: c.slug,
     name: c.name,
@@ -105,12 +71,12 @@ function toFrontendCategory(c: Category): FrontendCategory {
 /**
  * Get all active categories.
  */
-export async function getCategories(): Promise<FrontendCategory[]> {
+export async function getCategories(): Promise<Category[]> {
   const cats = await prisma.category.findMany({
     where: { isActive: true },
     orderBy: [{ sortOrder: "asc" }],
   });
-  return cats.map(toFrontendCategory);
+  return cats.map(toCategory);
 }
 
 /**
@@ -118,11 +84,11 @@ export async function getCategories(): Promise<FrontendCategory[]> {
  */
 export async function getCategoryBySlug(
   slug: string,
-): Promise<FrontendCategory | null> {
+): Promise<Category | null> {
   const cat = await prisma.category.findUnique({
     where: { slug },
   });
-  return cat ? toFrontendCategory(cat) : null;
+  return cat ? toCategory(cat) : null;
 }
 
 /**
@@ -161,7 +127,7 @@ export async function getProducts({
   onSaleOnly?: boolean;
   includeOutOfStock?: boolean;
 }): Promise<{
-  products: FrontendProduct[];
+  products: Product[];
   total: number;
   totalPages: number;
   currentPage: number;
@@ -265,8 +231,8 @@ export async function getProducts({
   ]);
 
   // Convert to frontend shape (fill in category slug)
-  const products: FrontendProduct[] = rows.map((p) => {
-    const frontend = toFrontendProduct(p);
+  const products: Product[] = rows.map((p) => {
+    const frontend = toProduct(p);
     frontend.category = p.category.slug;
     return frontend;
   });
@@ -285,7 +251,7 @@ export async function getProducts({
  */
 export async function getProductBySlug(
   slug: string,
-): Promise<FrontendProduct | null> {
+): Promise<Product | null> {
   const p = await prisma.product.findUnique({
     where: { slug, isActive: true, deletedAt: null },
     include: {
@@ -296,7 +262,7 @@ export async function getProductBySlug(
 
   if (!p) return null;
 
-  const frontend = toFrontendProduct(p);
+  const frontend = toProduct(p);
   frontend.category = p.category.slug;
   return frontend;
 }
@@ -307,7 +273,7 @@ export async function getProductBySlug(
 export async function getRelatedProducts(
   productId: string,
   count = 4,
-): Promise<FrontendProduct[]> {
+): Promise<Product[]> {
   // First, get the current product to find its category
   const current = await prisma.product.findUnique({
     where: { id: productId },
@@ -332,7 +298,7 @@ export async function getRelatedProducts(
   });
 
   return rows.map((p) => {
-    const frontend = toFrontendProduct(p);
+    const frontend = toProduct(p);
     frontend.category = p.category.slug;
     return frontend;
   });
@@ -355,7 +321,7 @@ export async function getAllProductSlugs(): Promise<string[]> {
  */
 export async function getFeaturedProducts(
   count = 8,
-): Promise<FrontendProduct[]> {
+): Promise<Product[]> {
   // Try featured products first
   let rows = await prisma.product.findMany({
     where: { isActive: true, deletedAt: null, featured: true },
@@ -381,7 +347,7 @@ export async function getFeaturedProducts(
   }
 
   return rows.map((p) => {
-    const frontend = toFrontendProduct(p);
+    const frontend = toProduct(p);
     frontend.category = p.category.slug;
     return frontend;
   });
@@ -392,7 +358,7 @@ export async function getFeaturedProducts(
  */
 export async function getNewArrivals(
   count = 8,
-): Promise<FrontendProduct[]> {
+): Promise<Product[]> {
   const rows = await prisma.product.findMany({
     where: { isActive: true, deletedAt: null },
     include: {
@@ -404,7 +370,7 @@ export async function getNewArrivals(
   });
 
   return rows.map((p) => {
-    const frontend = toFrontendProduct(p);
+    const frontend = toProduct(p);
     frontend.category = p.category.slug;
     return frontend;
   });
@@ -415,7 +381,7 @@ export async function getNewArrivals(
  */
 export async function getSaleProducts(
   count = 12,
-): Promise<FrontendProduct[]> {
+): Promise<Product[]> {
   const rows = await prisma.product.findMany({
     where: {
       isActive: true,
@@ -431,7 +397,7 @@ export async function getSaleProducts(
   });
 
   return rows.map((p) => {
-    const frontend = toFrontendProduct(p);
+    const frontend = toProduct(p);
     frontend.category = p.category.slug;
     return frontend;
   });

@@ -8,4 +8,3 @@
 export type { Product, CartItem, Category } from './product';
 export type { User, Address, Order, OrderItem, TrackedOrder } from './user';
 export type { Article, ArticleAuthor } from './blog';
-export type { Review } from './review';

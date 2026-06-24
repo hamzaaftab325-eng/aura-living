@@ -676,8 +676,7 @@ function TimelineItem({
         {/* Highlight stat badge */}
         {item.highlight && (
           <div
-            className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-sm"
-            style={{ backgroundColor: 'rgba(212,175,55,0.08)' }}
+            className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-sm aura-bg-gold-tint"
           >
             <Icon className="w-3 h-3" />
             {item.highlight}

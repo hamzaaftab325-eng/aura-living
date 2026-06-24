@@ -195,8 +195,7 @@ export default function ShippingView() {
                 {deliveryCities.map((city) => (
                   <div
                     key={city}
-                    className="flex items-center gap-2 px-3 py-2.5 rounded-sm"
-                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.08)' }}
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-sm aura-bg-gold-tint"
                   >
                     <MapPin className="w-3.5 h-3.5 shrink-0"  />
                     <span className="text-sm font-medium" >{city}</span>

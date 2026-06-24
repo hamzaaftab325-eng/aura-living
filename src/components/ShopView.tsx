@@ -641,7 +641,7 @@ function ShopViewInner({ initialProducts, initialCategories }: ShopViewProps = {
           <div className="flex-1">
             {/* Search active banner */}
             {searchQuery.trim() && (
-              <div className="flex flex-wrap items-center gap-2 mb-6 p-3 rounded-lg" style={{ backgroundColor: 'rgba(212,175,55,0.08)' }}>
+              <div className="flex flex-wrap items-center gap-2 mb-6 p-3 rounded-lg aura-bg-gold-tint">
                 <span className="text-sm" >
                   Showing results for <strong >&ldquo;{searchQuery.trim()}&rdquo;</strong>
                 </span>

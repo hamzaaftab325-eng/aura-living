@@ -561,7 +561,7 @@ export default function SettingsView() {
               </div>
               <div className="my-4"><GoldDivider /></div>
               <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between p-3 rounded-sm" style={{ backgroundColor: 'rgba(212,175,55,0.05)' }}>
+                <div className="flex items-center justify-between p-3 rounded-sm aura-bg-gold-tint-5">
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-md flex items-center justify-center" >
                       <CreditCard className="w-4 h-4"  />
@@ -610,8 +610,7 @@ export default function SettingsView() {
                   placeholder="Current password"
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
-                  className="px-4 py-3 rounded-sm text-sm"
-                  style={{ border: '1px solid var(--color-gold-soft)' }}
+                  className="px-4 py-3 rounded-sm text-sm aura-border-gold-soft"
                   autoComplete="current-password"
                 />
                 <input
@@ -619,8 +618,7 @@ export default function SettingsView() {
                   placeholder="New password (min 8 characters)"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="px-4 py-3 rounded-sm text-sm"
-                  style={{ border: '1px solid var(--color-gold-soft)' }}
+                  className="px-4 py-3 rounded-sm text-sm aura-border-gold-soft"
                   autoComplete="new-password"
                 />
                 <input
@@ -628,8 +626,7 @@ export default function SettingsView() {
                   placeholder="Confirm new password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="px-4 py-3 rounded-sm text-sm"
-                  style={{ border: '1px solid var(--color-gold-soft)' }}
+                  className="px-4 py-3 rounded-sm text-sm aura-border-gold-soft"
                   autoComplete="new-password"
                 />
                 <PremiumButton type="submit" variant="primary" size="sm">

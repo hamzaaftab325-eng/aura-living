@@ -1,16 +1,5 @@
-export interface Article {
-  slug: string;
-  title: string;
-  excerpt: string; // 1-2 sentence summary
-  body: string; // markdown-style content with ## headings and paragraphs
-  category: 'styling' | 'care' | 'trends' | 'lifestyle' | 'behind-the-scenes';
-  tags: string[];
-  author: { name: string; role: string };
-  date: string; // ISO date
-  readingTime: number; // minutes
-  coverImage: string; // path like /images/blog/article-1.webp
-  featured?: boolean;
-}
+import type { Article } from '@/types/blog';
+export type { Article };
 
 export const articles: Article[] = [
   {
