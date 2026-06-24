@@ -1,0 +1,486 @@
+/* ===========================================================
+   FOOTER — Aura Living footer (refactored, CSS-class driven)
+   ===========================================================
+
+   Structure:
+   - .aura-footer                outer <footer> container
+     - .aura-footer-top-line     gold accent line at top
+     - .aura-footer-gradient-fade cream-to-charcoal fade
+     - .aura-footer-pattern      subtle brand pattern overlay
+     - .aura-footer-main         main content wrapper
+       - .aura-footer-grid       4-column grid
+         - .aura-footer-brand    col 1 (logo + tagline + socials)
+         - .aura-footer-col      col 2-4 (heading + links)
+         - .aura-footer-news     newsletter card (col 4)
+     - .aura-footer-divider-wrap gold divider
+     - .aura-footer-bottom-wrap  bottom bar (copyright + legal + pay)
+     - .aura-footer-bottom-line  gold accent line at bottom
+
+   Modifiers:
+   - --focused                   newsletter input is focused
+   =========================================================== */
+
+/* ── Footer container ── */
+.aura-footer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--surface-dark);
+}
+
+/* ── Top gold accent line ── */
+.aura-footer-top-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 33%;
+  height: 2px;
+  z-index: 10;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.4) 30%,
+    var(--color-gold) 50%,
+    rgba(212, 175, 55, 0.4) 70%,
+    transparent 100%
+  );
+}
+
+/* ── Gradient fade from page cream to footer charcoal ── */
+.aura-footer-gradient-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(250, 248, 245, 0.08), transparent);
+}
+
+/* ── Brand pattern overlay (subtle gold plus signs) ── */
+.aura-footer-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ── Main content ── */
+.aura-footer-main {
+  position: relative;
+  z-index: 20;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 56px 20px 32px;
+}
+@media (min-width: 640px) {
+  .aura-footer-main {
+    padding: 80px 24px 40px;
+  }
+}
+@media (min-width: 1024px) {
+  .aura-footer-main { padding: 80px 32px 40px; }
+}
+
+/* ── 4-column grid ── */
+.aura-footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+@media (min-width: 640px) {
+  .aura-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+@media (min-width: 1024px) {
+  .aura-footer-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+/* ===========================================================
+   BRAND COLUMN (col 1)
+   =========================================================== */
+
+.aura-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+@media (min-width: 640px) {
+  .aura-footer-brand { gap: 24px; }
+}
+
+.aura-footer-logo-wrap {
+  position: relative;
+}
+.aura-footer-logo-wrap:hover .aura-footer-logo {
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.4));
+}
+.aura-footer-logo {
+  height: 64px;
+  width: auto;
+  transition: filter 0.7s var(--ease-out);
+}
+@media (min-width: 640px) {
+  .aura-footer-logo { height: 80px; }
+}
+@media (min-width: 1024px) {
+  .aura-footer-logo { height: 96px; }
+}
+
+.aura-footer-tagline {
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--color-gold-soft);
+}
+
+.aura-footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.aura-footer-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: all 0.5s var(--ease-out);
+}
+.aura-footer-social:hover {
+  border-color: rgba(212, 175, 55, 0.7);
+  transform: scale(1.1) rotate(6deg);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+.aura-footer-social-icon {
+  transition: transform 0.5s var(--ease-out);
+}
+.aura-footer-social:hover .aura-footer-social-icon {
+  transform: scale(1.1);
+}
+
+/* ===========================================================
+   LINK COLUMN (cols 2-4)
+   =========================================================== */
+
+.aura-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.aura-footer-col-h {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-gold);
+  margin: 0;
+  padding-bottom: 6px;
+}
+.aura-footer-col-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 32px;
+  height: 1.5px;
+  background: rgba(212, 175, 55, 0.5);
+}
+
+.aura-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Footer link — with hover gold glow + translateX + underline ── */
+.aura-footer-link {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.5s var(--ease-out);
+}
+.aura-footer-link--btn {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+.aura-footer-link:hover {
+  color: var(--color-gold);
+  transform: translateX(6px);
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.3));
+}
+.aura-footer-link-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width 0.5s var(--ease-out);
+}
+.aura-footer-link:hover .aura-footer-link-underline {
+  width: 100%;
+}
+.aura-footer-link-text {
+  position: relative;
+}
+
+/* ===========================================================
+   NEWSLETTER COLUMN (col 4)
+   =========================================================== */
+
+.aura-footer-news {
+  border-radius: 12px;
+  padding: 20px;
+  background: rgba(212, 175, 55, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  transition: all 0.7s var(--ease-out);
+}
+.aura-footer-news--focused {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow:
+    0 0 30px rgba(212, 175, 55, 0.1),
+    inset 0 0 30px rgba(212, 175, 55, 0.03);
+}
+
+.aura-footer-news-offer {
+  font-size: 14px;
+  margin-bottom: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+.aura-footer-news-offer-bold {
+  font-weight: 600;
+}
+
+.aura-footer-news-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.aura-footer-news-input-wrap {
+  position: relative;
+}
+.aura-footer-news-input {
+  height: 44px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 0 16px;
+  font-size: 14px;
+  outline: none;
+  color: #ffffff;
+  background: rgba(250, 248, 245, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  font-family: inherit;
+  transition: all 0.5s var(--ease-out);
+}
+.aura-footer-news-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.aura-footer-news-input--focused {
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow:
+    0 0 20px rgba(212, 175, 55, 0.15),
+    0 0 40px rgba(212, 175, 55, 0.05);
+}
+
+.aura-footer-news-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  pointer-events: none;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  animation: aura-footer-gold-pulse 2s ease-in-out infinite;
+}
+@keyframes aura-footer-gold-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(212, 175, 55, 0.18); }
+  50% { box-shadow: 0 0 22px rgba(212, 175, 55, 0.32); }
+}
+
+.aura-footer-news-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  border-radius: 8px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #ffffff;
+  background: var(--color-gold);
+  border: 0;
+  cursor: pointer;
+  transition: all 0.5s var(--ease-out);
+}
+.aura-footer-news-btn:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+.aura-footer-news-btn:active {
+  transform: scale(0.98);
+}
+.aura-footer-news-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.aura-footer-news-btn-arrow {
+  transition: transform 0.3s var(--ease-out);
+}
+.aura-footer-news-btn:hover .aura-footer-news-btn-arrow {
+  transform: translateX(2px);
+}
+
+.aura-footer-news-success {
+  font-size: 12px;
+  margin-top: 12px;
+  color: var(--color-gold);
+  transition: opacity 0.5s var(--ease-out);
+}
+
+/* ===========================================================
+   DIVIDER + BOTTOM BAR
+   =========================================================== */
+
+.aura-footer-divider-wrap {
+  position: relative;
+  z-index: 20;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+@media (min-width: 640px) {
+  .aura-footer-divider-wrap { padding: 24px; }
+}
+@media (min-width: 1024px) {
+  .aura-footer-divider-wrap { padding: 24px 32px; }
+}
+
+.aura-footer-bottom-wrap {
+  position: relative;
+  z-index: 20;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 20px 24px;
+}
+@media (min-width: 640px) {
+  .aura-footer-bottom-wrap {
+    padding: 0 24px 32px;
+  }
+}
+@media (min-width: 1024px) {
+  .aura-footer-bottom-wrap { padding: 0 32px 32px; }
+}
+
+.aura-footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+@media (min-width: 640px) {
+  .aura-footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.aura-footer-bottom-copy {
+  font-size: 12px;
+  color: var(--color-gold);
+}
+
+.aura-footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.aura-footer-bottom-link {
+  font-size: 12px;
+  color: var(--color-gold);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s var(--ease-out);
+}
+.aura-footer-bottom-link:hover {
+  color: var(--color-gold-hover);
+}
+
+.aura-footer-pay {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.aura-footer-pay-label {
+  font-size: 12px;
+  color: var(--color-gold);
+}
+.aura-footer-pay-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.aura-footer-pay-chip {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-gold);
+  transition: color 0.3s var(--ease-out);
+}
+.aura-footer-pay-chip:hover {
+  color: var(--color-gold-hover);
+}
+.aura-footer-pay-dot {
+  font-size: 8px;
+  color: rgba(212, 175, 55, 0.4);
+}
+
+/* ── Bottom gold gradient accent ── */
+.aura-footer-bottom-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  pointer-events: none;
+  z-index: 10;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.4) 30%,
+    var(--color-gold) 50%,
+    rgba(212, 175, 55, 0.4) 70%,
+    transparent 100%
+  );
+}

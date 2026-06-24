@@ -1,5 +1,908 @@
+/* ===========================================================
+   NAVIGATION — Aura Living navbar (refactored, CSS-class driven)
+   ===========================================================
 
-/* Breadcrumb strip — below hero, gold-pale bg */
+   Structure:
+   - .aura-nav-shell              outer <nav> (fixed, top, z-50)
+   - .aura-nav-pill-wrap          padding wrapper (shrinks on scroll)
+   - .aura-nav-pill               the pill container (dark glass + gold border)
+     - .aura-nav-logo             logo link
+     - .aura-nav-links-wrap       desktop nav links container
+     - .aura-nav-links            the <ul>
+     - .aura-nav-link             individual <li>
+     - .aura-nav-cursor           animated cursor pill
+     - .aura-nav-actions          right-side action icons
+   - .aura-nav-mega               mega menu dropdown
+   - .aura-nav-mobile             full-screen mobile menu
+   - .aura-nav-search             top-sheet search modal
+
+   Modifiers:
+   - --scrolled                   navbar has been scrolled (shrinks)
+   - --active                     link is current page
+   - --open                       mega menu / mobile menu is open
+   - --focused                    input is focused
+   - --previewing                 mega menu item is being hovered
+   =========================================================== */
+
+/* ── Shell ── */
+.aura-nav-shell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: all 0.3s var(--ease-out);
+}
+
+/* ── Pill wrap — controls outer padding (shrinks on scroll) ── */
+.aura-nav-pill-wrap {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 14px 12px 8px;
+  transition: padding 0.3s var(--ease-out);
+}
+@media (min-width: 640px) {
+  .aura-nav-pill-wrap { padding-left: 16px; padding-right: 16px; }
+}
+@media (min-width: 1024px) {
+  .aura-nav-pill-wrap { padding-left: 24px; padding-right: 24px; }
+}
+.aura-nav-pill-wrap--scrolled {
+  padding-top: 8px;
+  padding-bottom: 4px;
+}
+
+/* ── Pill container — dark glass + gold border ── */
+.aura-nav-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 9999px;
+  padding: 10px 16px;
+  background-color: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  transition: all 0.3s var(--ease-out);
+}
+.aura-nav-pill--scrolled {
+  padding: 8px 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Logo ── */
+.aura-nav-logo {
+  cursor: pointer;
+  flex-shrink: 0;
+  outline: none;
+  transition: all 0.3s var(--ease-out);
+  text-decoration: none;
+  display: block;
+}
+.aura-nav-logo-inner {
+  display: block;
+}
+.aura-nav-logo-img {
+  height: clamp(46px, 7vw, 64px);
+  width: auto;
+  object-fit: contain;
+  transition: height 0.3s var(--ease-out);
+}
+.aura-nav-logo-img--scrolled {
+  height: clamp(38px, 6vw, 52px);
+}
+
+/* ── Desktop nav links ── */
+.aura-nav-links-wrap {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .aura-nav-links-wrap { display: flex; align-items: center; }
+}
+
+.aura-nav-links {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 4px;
+  border-radius: 9999px;
+  list-style: none;
+}
+
+.aura-nav-link {
+  position: relative;
+  z-index: 1;
+  display: block;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 500;
+  user-select: none;
+  padding: 12px 24px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.3s var(--ease-out);
+}
+.aura-nav-link--scrolled {
+  padding: 8px 20px;
+  font-size: 13px;
+}
+.aura-nav-link--active {
+  color: var(--color-gold);
+}
+
+.aura-nav-link-btn {
+  display: block;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.aura-nav-chev {
+  display: inline-block;
+  margin-left: 4px;
+  width: 12px;
+  height: 12px;
+  transition: transform 0.3s var(--ease-out);
+}
+.aura-nav-chev--open {
+  transform: rotate(180deg);
+}
+
+/* ── Animated cursor pill — follows hovered link ── */
+.aura-nav-cursor {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 0;
+  height: 28px;
+  width: var(--aura-nav-cursor-w, 0px);
+  border-radius: 9999px;
+  background: rgba(212, 175, 55, 0.12);
+  transform: translateY(-50%) translateX(var(--aura-nav-cursor-x, 0px));
+  opacity: var(--aura-nav-cursor-opacity, 0);
+  transition: all 0.2s var(--ease-out);
+  pointer-events: none;
+}
+
+/* ── Actions (icons) ── */
+.aura-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+@media (min-width: 640px) {
+  .aura-nav-actions { gap: 6px; }
+}
+
+.aura-nav-icon-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+  text-decoration: none;
+}
+.aura-nav-icon-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.aura-nav-icon-btn--default { padding: 12px; }
+.aura-nav-icon-btn--scrolled { padding: 8px; }
+.aura-nav-icon-btn--hide-mobile { display: none; }
+@media (min-width: 640px) {
+  .aura-nav-icon-btn--hide-mobile { display: flex; }
+}
+.aura-nav-icon-btn--mobile-only { display: flex; }
+@media (min-width: 1024px) {
+  .aura-nav-icon-btn--mobile-only { display: none; }
+}
+
+.aura-nav-icon {
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.85);
+}
+.aura-nav-icon--lg {
+  width: 20px;
+  height: 20px;
+}
+
+.aura-nav-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 9999px;
+  background: var(--color-gold);
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ===========================================================
+   MEGA MENU — desktop dropdown panel
+   =========================================================== */
+
+.aura-nav-mega {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  padding-top: 12px;
+  z-index: 60;
+}
+
+.aura-nav-mega-panel {
+  display: flex;
+  overflow: hidden;
+  border-radius: 16px;
+  width: min(720px, calc(100vw - 32px));
+  background-color: rgba(28, 28, 28, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 16px 50px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(212, 175, 55, 0.1);
+}
+
+.aura-nav-mega-col {
+  display: flex;
+  flex-direction: column;
+}
+.aura-nav-mega-col--list {
+  flex: 1;
+  padding: 16px 0;
+  border-right: 1px solid rgba(212, 175, 55, 0.12);
+}
+.aura-nav-mega-col--preview {
+  flex-shrink: 0;
+  width: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.aura-nav-mega-eyebrow {
+  padding: 0 20px 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+.aura-nav-mega-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  background-color: transparent;
+  transition: background-color 0.2s var(--ease-out);
+}
+.aura-nav-mega-item--previewing,
+.aura-nav-mega-item--active {
+  background-color: rgba(212, 175, 55, 0.12);
+  border-left-color: var(--color-gold);
+}
+
+.aura-nav-mega-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background-color: rgba(232, 213, 163, 0.08);
+  color: var(--text-on-dark);
+  transition: all 0.3s var(--ease-out);
+}
+.aura-nav-mega-item--previewing .aura-nav-mega-icon,
+.aura-nav-mega-item--active .aura-nav-mega-icon {
+  background-color: rgba(212, 175, 55, 0.22);
+  color: var(--color-gold);
+}
+.aura-nav-mega-icon-svg {
+  width: 20px;
+  height: 20px;
+}
+
+.aura-nav-mega-text {
+  min-width: 0;
+  flex: 1;
+}
+.aura-nav-mega-label {
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-on-dark);
+  transition: color 0.2s var(--ease-out);
+}
+.aura-nav-mega-item--previewing .aura-nav-mega-label,
+.aura-nav-mega-item--active .aura-nav-mega-label {
+  color: var(--color-gold);
+}
+.aura-nav-mega-current {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  background: rgba(212, 175, 55, 0.18);
+  color: var(--color-gold);
+}
+.aura-nav-mega-desc {
+  font-size: 12px;
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.aura-nav-mega-arrow {
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  color: var(--color-gold);
+  transition: opacity 0.2s var(--ease-out);
+  flex-shrink: 0;
+}
+.aura-nav-mega-arrow--show {
+  opacity: 1;
+}
+
+/* ── Mega menu preview panel (right column) ── */
+.aura-nav-mega-preview {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.aura-nav-mega-preview-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.3s var(--ease-out);
+}
+.aura-nav-mega-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(44, 44, 44, 0.35) 0%,
+    rgba(44, 44, 44, 0.85) 60%,
+    rgba(44, 44, 44, 0.95) 100%
+  );
+}
+.aura-nav-mega-preview-corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+}
+.aura-nav-mega-preview-corner--tl {
+  top: 16px;
+  left: 16px;
+  border-top: 1px solid rgba(212, 175, 55, 0.5);
+  border-left: 1px solid rgba(212, 175, 55, 0.5);
+}
+.aura-nav-mega-preview-corner--br {
+  bottom: 16px;
+  right: 16px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+  border-right: 1px solid rgba(212, 175, 55, 0.5);
+}
+.aura-nav-mega-preview-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+.aura-nav-mega-preview-eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--color-gold);
+}
+.aura-nav-mega-preview-title {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 16px;
+}
+.aura-nav-mega-preview-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: gap 0.3s var(--ease-out);
+}
+.aura-nav-mega-preview-cta:hover {
+  gap: 10px;
+}
+.aura-nav-mega-preview-cta-arrow {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.3s var(--ease-out);
+}
+.aura-nav-mega-preview-cta:hover .aura-nav-mega-preview-cta-arrow {
+  transform: translateX(2px);
+}
+
+/* ===========================================================
+   MOBILE MENU — full-screen slide-in
+   =========================================================== */
+
+.aura-nav-mobile {
+  position: fixed;
+  inset: 0;
+  z-index: 52;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(20, 20, 20, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ── Mobile menu header ── */
+.aura-nav-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 72px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+.aura-nav-mobile-logo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+.aura-nav-mobile-close {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: transparent;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+.aura-nav-mobile-close:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.aura-nav-mobile-close-icon {
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Mobile menu content ── */
+.aura-nav-mobile-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
+}
+.aura-nav-mobile-content::-webkit-scrollbar { width: 4px; }
+.aura-nav-mobile-content::-webkit-scrollbar-track { background: transparent; }
+.aura-nav-mobile-content::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 2px;
+}
+
+.aura-nav-mobile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.aura-nav-mobile-section-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 500;
+  padding: 0 12px;
+  margin-bottom: 12px;
+  color: var(--color-gold);
+}
+
+/* ── Mobile nav item (main link) ── */
+.aura-nav-mobile-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 12px;
+  text-align: left;
+  border-radius: 12px;
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.2s var(--ease-out);
+  text-decoration: none;
+  font-family: inherit;
+}
+.aura-nav-mobile-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.aura-nav-mobile-item--active {
+  background-color: rgba(212, 175, 55, 0.08);
+}
+.aura-nav-mobile-item-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-on-dark-primary);
+}
+.aura-nav-mobile-item--active .aura-nav-mobile-item-text {
+  color: var(--color-gold);
+}
+.aura-nav-mobile-chev {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s var(--ease-out);
+  color: rgba(255, 255, 255, 0.85);
+}
+.aura-nav-mobile-chev--open {
+  transform: rotate(180deg);
+}
+
+/* ── Mobile submenu (Shop expansion) ── */
+.aura-nav-mobile-submenu {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.3s var(--ease-out), opacity 0.3s var(--ease-out);
+}
+.aura-nav-mobile-submenu--open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.aura-nav-mobile-submenu-inner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 12px 4px 4px;
+}
+.aura-nav-mobile-submenu-divider {
+  margin: 4px 0 4px 12px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.25), transparent);
+}
+.aura-nav-mobile-submenu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  text-align: left;
+  border-radius: 12px;
+  text-decoration: none;
+  background-color: transparent;
+  transition: background-color 0.2s var(--ease-out);
+}
+.aura-nav-mobile-submenu-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.aura-nav-mobile-submenu-item--active {
+  background-color: rgba(212, 175, 55, 0.08);
+}
+.aura-nav-mobile-submenu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background-color: rgba(212, 175, 55, 0.12);
+  color: var(--color-gold);
+  transition: background-color 0.2s var(--ease-out);
+}
+.aura-nav-mobile-submenu-item--active .aura-nav-mobile-submenu-icon {
+  background-color: rgba(212, 175, 55, 0.22);
+}
+.aura-nav-mobile-submenu-icon svg {
+  width: 18px;
+  height: 18px;
+}
+.aura-nav-mobile-submenu-text {
+  min-width: 0;
+  flex: 1;
+}
+.aura-nav-mobile-submenu-label {
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-on-dark-secondary);
+}
+.aura-nav-mobile-submenu-item--active .aura-nav-mobile-submenu-label {
+  color: var(--color-gold);
+}
+.aura-nav-mobile-current {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  background: rgba(212, 175, 55, 0.18);
+  color: var(--color-gold);
+}
+.aura-nav-mobile-submenu-desc {
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-on-dark-faint);
+}
+.aura-nav-mobile-submenu-arrow {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: rgba(212, 175, 55, 0.5);
+}
+
+/* ── Mobile divider ── */
+.aura-nav-mobile-divider {
+  margin: 16px 0;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+}
+
+/* ── Mobile quick actions ── */
+.aura-nav-mobile-quick {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px;
+  text-align: left;
+  border-radius: 12px;
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  transition: background-color 0.2s var(--ease-out);
+}
+.aura-nav-mobile-quick:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.aura-nav-mobile-quick-iconwrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  color: var(--color-gold);
+}
+.aura-nav-mobile-quick-icon {
+  width: 20px;
+  height: 20px;
+}
+.aura-nav-mobile-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 9999px;
+  background: var(--color-gold);
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+}
+.aura-nav-mobile-quick-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-on-dark-primary);
+}
+
+/* ── Mobile CTA card ── */
+.aura-nav-mobile-cta-wrap {
+  margin-top: auto;
+  padding-top: 20px;
+}
+.aura-nav-mobile-cta {
+  border-radius: 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(232, 213, 163, 0.12) 100%);
+}
+.aura-nav-mobile-cta-eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--color-gold);
+}
+.aura-nav-mobile-cta-text {
+  font-size: 12px;
+  margin-bottom: 16px;
+  line-height: 1.6;
+  color: var(--text-on-dark-muted);
+}
+.aura-nav-mobile-cta-btn {
+  width: 100%;
+}
+
+/* ===========================================================
+   SEARCH MODAL — top sheet
+   =========================================================== */
+
+.aura-nav-search-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(0, 0, 0, 0.3);
+}
+.aura-nav-search {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 56;
+  padding: 24px 16px;
+  background-color: rgba(20, 20, 20, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+@media (min-width: 640px) {
+  .aura-nav-search { padding: 24px; }
+}
+.aura-nav-search-inner {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+.aura-nav-search-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.aura-nav-search-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-gold);
+}
+.aura-nav-search-input {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-size: 16px;
+  color: var(--text-on-dark-primary);
+  font-family: inherit;
+}
+.aura-nav-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.aura-nav-search-close {
+  padding: 8px;
+  border-radius: 9999px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.85);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+.aura-nav-search-close:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.aura-nav-search-close-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.aura-nav-search-results {
+  margin-top: 16px;
+  max-height: 256px;
+  overflow-y: auto;
+}
+.aura-nav-search-status {
+  font-size: 14px;
+  padding: 16px 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+.aura-nav-search-result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 8px;
+  text-align: left;
+  border-radius: 8px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+.aura-nav-search-result:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.aura-nav-search-result-img {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+.aura-nav-search-result-img-inner {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.aura-nav-search-result-text {
+  min-width: 0;
+}
+.aura-nav-search-result-name {
+  font-size: 14px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-on-dark-primary);
+}
+.aura-nav-search-result-price {
+  font-size: 12px;
+  color: var(--color-gold);
+}
+
+/* ===========================================================
+   BREADCRUMB STRIP — below hero, gold-pale bg (existing)
+   =========================================================== */
+
 .aura-breadcrumb {
   padding: 1rem 1rem;
   background-color: var(--surface-accent);
@@ -13,10 +916,17 @@
 }
 
 /* ===========================================================
-   CARD DESIGN SYSTEM
-   Radius: 12px (var(--radius-lg))
-   Shadow: subtle (var(--shadow-sm) resting, var(--shadow-lg) hover)
-   Padding: 20px mobile, 24px tablet, 32px desktop
-   Hover: lift -6px + shadow-lg + gold border
+   SCREEN READER ONLY — utility
    =========================================================== */
 
+.aura-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
