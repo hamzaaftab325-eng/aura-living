@@ -60,7 +60,7 @@
   justify-content: space-between;
   border-radius: 9999px;
   padding: 10px 16px;
-  background-color: rgba(20, 20, 20, 0.85);
+  background-color: var(--surface-dark);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(212, 175, 55, 0.3);
@@ -255,7 +255,7 @@
   overflow: hidden;
   border-radius: 16px;
   width: min(720px, calc(100vw - 32px));
-  background-color: rgba(28, 28, 28, 0.94);
+  background-color: var(--surface-dark);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow:
@@ -470,7 +470,7 @@
   z-index: 52;
   display: flex;
   flex-direction: column;
-  background-color: rgba(20, 20, 20, 0.97);
+  background-color: var(--surface-dark);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -788,7 +788,7 @@
   right: 0;
   z-index: 56;
   padding: 24px 16px;
-  background-color: rgba(20, 20, 20, 0.97);
+  background-color: var(--surface-dark);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(212, 175, 55, 0.2);
