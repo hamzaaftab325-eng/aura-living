@@ -80,7 +80,6 @@ export default function NavLinks({
               key={link.label}
               ref={(el) => {
                 registerRef(link.label, el);
-                if (el) onLinkHover(link.label, el);
               }}
               className={`aura-nav-link ${isActive ? 'aura-nav-link--active' : ''} ${
                 scrolled ? 'aura-nav-link--scrolled' : ''
