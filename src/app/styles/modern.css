@@ -1971,3 +1971,849 @@
   margin-top: 1rem;
   font-weight: 500;
 }
+
+/* ==========================================================================
+   POLISH PASS — Beautiful transitions, hover effects, ambient details.
+   All classes below enrich the existing /home-new sections.
+   Zero inline styles — purely CSS-driven.
+   ========================================================================== */
+
+/* ---------- Global: smooth-scroll fade-in for any [data-reveal] ---------- */
+[data-reveal] {
+  will-change: opacity, transform;
+}
+
+/* ---------- Global: cursor-tracking glow (decorative, optional) ---------- */
+.aura-glow-hover {
+  position: relative;
+  isolation: isolate;
+}
+.aura-glow-hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(212, 175, 55, 0.18),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+  pointer-events: none;
+  z-index: 1;
+}
+.aura-glow-hover:hover::after {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   1. HERO — Refined ambient glows, scroll cue, smoother button shimmer
+   ========================================================================== */
+
+.aura-hero-cinematic::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(to top, rgba(20, 20, 20, 0.85), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Animated gold ring on the eyebrow sparkles icon */
+.aura-hero-eyebrow svg {
+  filter: drop-shadow(0 0 6px rgba(232, 197, 71, 0.6));
+  animation: aura-hero-spark-pulse 2.4s ease-in-out infinite;
+}
+@keyframes aura-hero-spark-pulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.18) rotate(12deg); opacity: 0.85; }
+}
+
+/* Magnetic gold button — shimmer sweep + glow */
+.aura-hero-btn-gold {
+  position: relative;
+  overflow: hidden;
+}
+.aura-hero-btn-gold::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 0.7s var(--ease-out);
+  pointer-events: none;
+  z-index: 1;
+}
+.aura-hero-btn-gold:hover::before {
+  left: 140%;
+}
+.aura-hero-btn-gold:hover {
+  box-shadow:
+    0 12px 36px rgba(212, 175, 55, 0.45),
+    0 0 0 4px rgba(212, 175, 55, 0.12);
+}
+
+/* Ghost button — sliding underline */
+.aura-hero-btn-ghost {
+  position: relative;
+}
+.aura-hero-btn-ghost::after {
+  content: '';
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 0.85rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.aura-hero-btn-ghost:hover::after {
+  transform: scaleX(1);
+}
+
+/* Slide dots — refined expansion + glow ring */
+.aura-hero-dot-btn {
+  transition: all 0.4s var(--ease-out);
+}
+.aura-hero-dot-btn:hover {
+  background: rgba(212, 175, 55, 0.5);
+  transform: scale(1.15);
+}
+.aura-hero-dot-btn-active {
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.18);
+}
+
+/* Animated scroll cue at bottom of hero */
+.aura-hero-scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: aura-hero-cue-in 1s var(--ease-out) 2s forwards;
+}
+@keyframes aura-hero-cue-in {
+  to { opacity: 0.7; }
+}
+.aura-hero-scroll-cue-text {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+.aura-hero-scroll-cue-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(212, 175, 55, 0.8), transparent);
+  position: relative;
+  overflow: hidden;
+}
+.aura-hero-scroll-cue-line::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: rgba(232, 197, 71, 0.95);
+  animation: aura-hero-cue-drop 2.4s ease-in-out infinite;
+}
+@keyframes aura-hero-cue-drop {
+  0% { top: -50%; }
+  100% { top: 100%; }
+}
+
+/* ==========================================================================
+   2. MARQUEE STRIP — gradient edge masks, hover lift, sparkle spin
+   ========================================================================== */
+
+.aura-marquee {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+.aura-marquee-track {
+  animation-duration: 38s;
+}
+.aura-marquee-item {
+  transition: color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+  cursor: default;
+}
+.aura-marquee-item:hover {
+  color: var(--color-gold);
+  transform: translateY(-2px);
+}
+.aura-marquee-item svg,
+.aura-marquee-star {
+  transition: transform 0.6s var(--ease-out);
+}
+.aura-marquee-item:hover svg,
+.aura-marquee-item:hover .aura-marquee-star {
+  transform: rotate(180deg) scale(1.15);
+}
+
+/* ==========================================================================
+   3. CATEGORIES — image zoom, gold ring on hover, refined panel slide
+   ========================================================================== */
+
+.aura-cat-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.6s var(--ease-out),
+    box-shadow 0.6s var(--ease-out);
+}
+.aura-cat-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(212, 175, 55, 0);
+  pointer-events: none;
+  transition: border-color 0.5s var(--ease-out);
+  z-index: 3;
+}
+.aura-cat-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(212, 175, 55, 0.15);
+}
+.aura-cat-card:hover::after {
+  border-color: rgba(212, 175, 55, 0.45);
+}
+.aura-cat-card-img {
+  transition: transform 0.9s var(--ease-out), filter 0.6s var(--ease-out);
+}
+.aura-cat-card:hover .aura-cat-card-img {
+  transform: scale(1.12);
+  filter: brightness(0.85) saturate(1.1);
+}
+
+/* Refined initial overlay — gold gradient grows from bottom */
+.aura-cat-card-initial {
+  background: linear-gradient(
+    to top,
+    rgba(20, 20, 20, 0.92) 0%,
+    rgba(20, 20, 20, 0.4) 50%,
+    transparent 100%
+  );
+  transition: opacity 0.5s var(--ease-out);
+}
+.aura-cat-card-name {
+  position: relative;
+  display: inline-block;
+}
+.aura-cat-card-name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 32px;
+  height: 2px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out);
+}
+.aura-cat-card:hover .aura-cat-card-name::after {
+  transform: scaleX(1);
+}
+
+/* Panel CTA arrow — slides right on hover */
+.aura-cat-card-panel-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.aura-cat-card-panel-cta-icon {
+  transition: transform 0.4s var(--ease-out);
+}
+.aura-cat-card:hover .aura-cat-card-panel-cta-icon {
+  transform: translate(4px, -4px) rotate(0deg);
+}
+
+/* ==========================================================================
+   4. STORY QUOTE — quote mark glow, value icon ring on hover, CTA shimmer
+   ========================================================================== */
+
+.aura-story-quote-mark {
+  text-shadow:
+    0 0 60px rgba(212, 175, 55, 0.35),
+    0 0 120px rgba(212, 175, 55, 0.15);
+}
+
+/* Word reveal — subtle gold underline on accent word */
+.aura-story-quote-accent {
+  position: relative;
+}
+.aura-story-quote-accent::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.05em;
+  height: 0.12em;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+  border-radius: 2px;
+}
+
+/* Value cards — lift + gold ring on hover */
+.aura-story-value {
+  position: relative;
+  transition:
+    transform 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
+  cursor: default;
+}
+.aura-story-value:hover {
+  transform: translateY(-4px);
+}
+.aura-story-value-icon {
+  position: relative;
+  transition: all 0.4s var(--ease-out);
+}
+.aura-story-value-icon::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0);
+  transition: border-color 0.4s var(--ease-out), inset 0.4s var(--ease-out);
+}
+.aura-story-value:hover .aura-story-value-icon {
+  background: rgba(212, 175, 55, 0.15);
+  transform: scale(1.08);
+}
+.aura-story-value:hover .aura-story-value-icon::before {
+  border-color: rgba(212, 175, 55, 0.5);
+  inset: -6px;
+}
+.aura-story-value-title {
+  transition: color 0.3s var(--ease-out);
+}
+.aura-story-value:hover .aura-story-value-title {
+  color: var(--color-gold);
+}
+
+/* Author avatar — rotating gold ring */
+.aura-story-author-avatar {
+  position: relative;
+  transition: transform 0.4s var(--ease-out);
+}
+.aura-story-author-avatar::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #D4AF37,
+    transparent 30%,
+    #D4AF37 60%,
+    transparent 90%,
+    #D4AF37
+  );
+  opacity: 0.5;
+  z-index: -1;
+  animation: aura-avatar-ring 8s linear infinite;
+}
+@keyframes aura-avatar-ring {
+  to { transform: rotate(360deg); }
+}
+
+/* Story CTA — shimmer sweep */
+.aura-story-cta {
+  position: relative;
+  overflow: hidden;
+}
+.aura-story-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 0.8s var(--ease-out);
+}
+.aura-story-cta:hover::before {
+  left: 140%;
+}
+.aura-story-cta-icon {
+  transition: transform 0.4s var(--ease-out);
+}
+.aura-story-cta:hover .aura-story-cta-icon {
+  transform: translateX(6px);
+}
+
+/* ==========================================================================
+   5. PRODUCTS — card lift, image zoom, badge shimmer, price slide-in,
+      quick-add overlay, gold border sheen
+   ========================================================================== */
+
+.aura-showcase-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.55s var(--ease-out),
+    box-shadow 0.55s var(--ease-out);
+}
+.aura-showcase-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0) 0%,
+    rgba(212, 175, 55, 0.45) 50%,
+    rgba(212, 175, 55, 0) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out);
+  pointer-events: none;
+  z-index: 4;
+}
+.aura-showcase-card:hover {
+  transform: translateY(-10px);
+}
+.aura-showcase-card:hover::before {
+  opacity: 1;
+}
+
+.aura-showcase-img {
+  position: relative;
+}
+.aura-showcase-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(20, 20, 20, 0.4) 0%,
+    transparent 35%
+  );
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out);
+  pointer-events: none;
+}
+.aura-showcase-card:hover .aura-showcase-img::after {
+  opacity: 1;
+}
+.aura-showcase-card:hover .aura-showcase-img img {
+  transform: scale(1.08);
+}
+
+/* Badge — shimmer + slight rotation on hover */
+.aura-showcase-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: white;
+  z-index: 3;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-out);
+}
+.aura-showcase-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 0.7s var(--ease-out);
+}
+.aura-showcase-card:hover .aura-showcase-badge {
+  transform: translateY(2px) scale(1.04);
+}
+.aura-showcase-card:hover .aura-showcase-badge::after {
+  left: 130%;
+}
+.aura-showcase-badge-gold {
+  background: linear-gradient(135deg, #D4AF37, #B8941F);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+}
+.aura-showcase-badge-dark {
+  background: rgba(20, 20, 20, 0.92);
+  color: var(--color-gold);
+  backdrop-filter: blur(6px);
+}
+
+/* Quick-view hint that slides in on hover */
+.aura-showcase-quickview {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-gold);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.4s var(--ease-out),
+    transform 0.4s var(--ease-out);
+  z-index: 3;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+.aura-showcase-card:hover .aura-showcase-quickview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Info block — slide-up on hover */
+.aura-showcase-info {
+  position: relative;
+  transition: transform 0.4s var(--ease-out);
+}
+.aura-showcase-card:hover .aura-showcase-info {
+  transform: translateY(-2px);
+}
+.aura-showcase-name {
+  transition: color 0.3s var(--ease-out);
+}
+.aura-showcase-card:hover .aura-showcase-name {
+  color: var(--color-gold);
+}
+.aura-showcase-price {
+  transition: transform 0.4s var(--ease-out);
+}
+.aura-showcase-card:hover .aura-showcase-price {
+  transform: scale(1.05);
+  transform-origin: left center;
+}
+
+/* ==========================================================================
+   6. CTA GOLD BANNER — animated sheen sweep, button glow ripple
+   ========================================================================== */
+
+.aura-cta-gold {
+  position: relative;
+  isolation: isolate;
+}
+/* Diagonal sheen that sweeps across the banner slowly */
+.aura-cta-gold::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+  transform: skewX(-18deg);
+  animation: aura-cta-sheen 6s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+@keyframes aura-cta-sheen {
+  0%, 30% { left: -50%; }
+  60%, 100% { left: 150%; }
+}
+/* Subtle vignette on the top + bottom for depth */
+.aura-cta-gold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.12) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+.aura-cta-gold-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Heading words — gentle floating hover */
+.aura-cta-gold-word {
+  transition: transform 0.4s var(--ease-out), text-shadow 0.4s var(--ease-out);
+  cursor: default;
+}
+.aura-cta-gold-word:hover {
+  transform: translateY(-4px);
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* White pill button — sweep + scale + deeper shadow on hover */
+.aura-cta-gold-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.aura-cta-gold-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(212, 175, 55, 0.35),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 0.7s var(--ease-out);
+  z-index: 0;
+}
+.aura-cta-gold-btn:hover::before {
+  left: 140%;
+}
+.aura-cta-gold-btn > * {
+  position: relative;
+  z-index: 1;
+}
+.aura-cta-gold-btn-icon {
+  transition: transform 0.4s var(--ease-out);
+}
+.aura-cta-gold-btn:hover .aura-cta-gold-btn-icon {
+  transform: translateX(6px);
+}
+
+/* ==========================================================================
+   7. TRUST MARQUEE — gradient edge masks, hover pause, icon spin-on-hover
+   ========================================================================== */
+
+.aura-trust-marquee {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
+.aura-trust-marquee-item {
+  transition: transform 0.3s var(--ease-out);
+  cursor: default;
+}
+.aura-trust-marquee-item:hover {
+  transform: translateY(-3px);
+}
+.aura-trust-marquee-item:hover .aura-trust-marquee-label {
+  color: rgba(255, 255, 255, 0.95);
+}
+.aura-trust-marquee-label {
+  transition: color 0.3s var(--ease-out);
+}
+.aura-trust-marquee-icon {
+  transition: transform 0.5s var(--ease-out);
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.4));
+}
+.aura-trust-marquee-item:hover .aura-trust-marquee-icon {
+  transform: rotate(180deg) scale(1.2);
+}
+
+/* Pause marquee when user hovers any item */
+.aura-trust-marquee:hover .aura-trust-marquee-track {
+  animation-play-state: paused;
+}
+
+/* ==========================================================================
+   8. NEWSLETTER CINEMATIC — input focus glow, button shimmer, ambient float
+   ========================================================================== */
+
+/* Floating ambient gold orbs in background */
+.aura-news-cinema::before,
+.aura-news-cinema::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.18), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.aura-news-cinema::before {
+  top: 10%;
+  left: 5%;
+  width: 280px;
+  height: 280px;
+  animation: aura-news-float-a 14s ease-in-out infinite;
+}
+.aura-news-cinema::after {
+  bottom: 10%;
+  right: 5%;
+  width: 340px;
+  height: 340px;
+  animation: aura-news-float-b 18s ease-in-out infinite;
+}
+@keyframes aura-news-float-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, 30px) scale(1.15); }
+}
+@keyframes aura-news-float-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-50px, -40px) scale(0.9); }
+}
+
+/* Eyebrow lines — draw-in animation when section enters viewport */
+.aura-news-cinema-eyebrow-line {
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: aura-news-line-draw 0.8s var(--ease-out) 0.2s forwards;
+}
+@keyframes aura-news-line-draw {
+  to { transform: scaleX(1); }
+}
+
+/* Input — glow ring on focus, gold border brightens */
+.aura-news-cinema-input {
+  transition:
+    border-color 0.3s var(--ease-out),
+    background 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
+}
+.aura-news-cinema-input:focus {
+  border-color: rgba(212, 175, 55, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 0 4px rgba(212, 175, 55, 0.12),
+    0 4px 16px rgba(212, 175, 55, 0.15);
+}
+
+/* Submit button — shimmer sweep + icon slide */
+.aura-news-cinema-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.aura-news-cinema-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 0.7s var(--ease-out);
+  z-index: 0;
+}
+.aura-news-cinema-btn:hover::before {
+  left: 140%;
+}
+
+/* Success state — gentle gold glow + scale-in */
+.aura-news-cinema-success {
+  animation: aura-news-success-in 0.5s var(--ease-out) forwards;
+}
+@keyframes aura-news-success-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ==========================================================================
+   REDUCED MOTION — disable all decorative animations
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .aura-hero-eyebrow svg,
+  .aura-hero-scroll-cue,
+  .aura-hero-scroll-cue-line::after,
+  .aura-author-avatar::after,
+  .aura-cta-gold::before,
+  .aura-news-cinema::before,
+  .aura-news-cinema::after,
+  .aura-news-cinema-eyebrow-line {
+    animation: none !important;
+  }
+}
+
+/* Hero eyebrow sparkles — gold color (replaces inline style) */
+.aura-hero-eyebrow-spark {
+  color: #E8C547;
+}
+
+/* Reusable responsive headings (replaces inline fontSize on home-new) */
+.aura-heading-featured {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}

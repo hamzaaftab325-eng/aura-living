@@ -228,7 +228,7 @@ export default function HeroCinematic() {
         {/* Eyebrow */}
         <div className="aura-hero-eyebrow">
           <div className="aura-hero-eyebrow-line-left" />
-          <Sparkles className="w-4 h-4" style={{ color: '#E8C547' }} />
+          <Sparkles className="aura-hero-eyebrow-spark w-4 h-4" />
           <span className="aura-hero-eyebrow-text">{slide.eyebrow}</span>
           <div className="aura-hero-eyebrow-line-right" />
         </div>
@@ -282,6 +282,12 @@ export default function HeroCinematic() {
         <span className="aura-hero-counter-text">
           0{slides.length}
         </span>
+      </div>
+
+      {/* Animated scroll cue */}
+      <div className="aura-hero-scroll-cue" aria-hidden="true">
+        <span className="aura-hero-scroll-cue-text">Scroll</span>
+        <div className="aura-hero-scroll-cue-line" />
       </div>
     </section>
   );

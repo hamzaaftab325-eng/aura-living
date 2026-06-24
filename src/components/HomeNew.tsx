@@ -173,7 +173,7 @@ export default function HomeNew({ featuredProducts, categories }: HomeNewProps) 
               <span className="text-xs font-bold uppercase tracking-[0.2em] aura-text-gold">Featured</span>
               <div className="aura-gold-line" />
             </div>
-            <h2 className="aura-mega-text mb-4" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
+            <h2 className="aura-mega-text aura-heading-featured mb-4">
               Curated <span className="aura-text-gradient-gold">Favorites</span>
             </h2>
             <p className="text-base aura-text-secondary max-w-lg mx-auto">
@@ -212,6 +212,7 @@ export default function HomeNew({ featuredProducts, categories }: HomeNewProps) 
                     )}
                   </div>
                 </div>
+                <span className="aura-showcase-quickview">View Details</span>
               </Link>
             ))}
           </div>
