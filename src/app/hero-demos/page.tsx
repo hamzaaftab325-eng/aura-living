@@ -122,21 +122,21 @@ function Hero1({ play }: { play: boolean }) {
         <source src="https://res.cloudinary.com/diometfe9/video/upload/v1781723540/Working_on_ecommerce_store_backg__202606180012_pm2rtf.mp4" type="video/mp4" />
       </video>
       {/* Cinematic color grading */}
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(20,25,35,0.75) 0%, rgba(20,25,35,0.35) 50%, rgba(180,140,40,0.12) 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,15,20,0.85) 0%, rgba(15,15,20,0.6) 50%, rgba(15,15,20,0.75) 100%)' }} />
       <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 /%3E%3C/filter%3E%3Crect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 /%3E%3C/svg%3E")' }} />
 
       <div className="relative z-10 text-center px-4 max-w-4xl">
         <div className="h1-fade flex items-center justify-center gap-4 mb-8">
           <div className="w-16 h-px" style={{ background: 'linear-gradient(90deg, transparent, #D4AF37)' }} />
           <Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} />
-          <span className="text-xs tracking-[6px] uppercase font-bold" style={{ color: '#D4AF37' }}>Aura Living · Est. 2026</span>
+          <span className="text-xs tracking-[6px] uppercase font-bold" style={{ color: '#E8C547', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>Aura Living · Est. 2026</span>
           <div className="w-16 h-px" style={{ background: 'linear-gradient(90deg, #D4AF37, transparent)' }} />
         </div>
-        <h1 className="text-white font-bold mb-8" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(3rem, 9vw, 7rem)', lineHeight: 1, letterSpacing: '-0.03em', textShadow: '0 8px 40px rgba(0,0,0,0.5)' }}>
+        <h1 className="text-white font-bold mb-8" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(3rem, 9vw, 7rem)', lineHeight: 1, letterSpacing: '-0.03em', textShadow: '0 4px 30px rgba(0,0,0,0.6), 0 2px 10px rgba(0,0,0,0.4)' }}>
           <span data-split-title className="block">Where Comfort</span>
-          <span data-split-accent className="block italic" style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #F4D76E 50%, #D4AF37 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Meets Style</span>
+          <span data-split-accent className="block italic" style={{ color: '#E8C547' }}>Meets Style</span>
         </h1>
-        <p className="h1-fade text-white/65 text-lg sm:text-xl max-w-xl mx-auto mb-12" style={{ textShadow: '0 2px 15px rgba(0,0,0,0.3)' }}>Handcrafted decor for the modern Pakistani home. Premium quality, delivered nationwide.</p>
+        <p className="h1-fade text-white/65 text-lg sm:text-xl max-w-xl mx-auto mb-12" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5), 0 1px 5px rgba(0,0,0,0.3)' }}>Handcrafted decor for the modern Pakistani home. Premium quality, delivered nationwide.</p>
         <div className="h1-fade flex flex-col sm:flex-row gap-4 justify-center">
           <GoldButton href="/shop" magneticRef={btnRef}>Shop Collection</GoldButton>
           <GhostButton href="/about">Our Story</GhostButton>
@@ -170,13 +170,13 @@ function Hero2({ play }: { play: boolean }) {
       <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" poster="/images/hero/hero-slide-3.webp">
         <source src="https://res.cloudinary.com/diometfe9/video/upload/v1781723540/Working_on_ecommerce_store_backg__202606180012_pm2rtf.mp4" type="video/mp4" />
       </video>
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,15,20,0.8) 0%, rgba(15,15,20,0.3) 50%, rgba(212,175,55,0.08) 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,15,20,0.85) 0%, rgba(15,15,20,0.55) 50%, rgba(15,15,20,0.75) 100%)' }} />
       <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 /%3E%3C/filter%3E%3Crect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 /%3E%3C/svg%3E")' }} />
       <div className="h2-content relative z-10 text-center px-4 max-w-4xl">
-        <div className="h2-fade flex items-center justify-center gap-3 mb-8"><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /><span className="text-xs tracking-[6px] uppercase font-bold" style={{ color: '#D4AF37' }}>Aura Living · Est. 2026</span><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /></div>
-        <h1 className="text-white font-bold mb-8" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(3rem, 10vw, 7.5rem)', lineHeight: 0.95, letterSpacing: '-0.04em', textShadow: '0 8px 40px rgba(0,0,0,0.5)' }}>
+        <div className="h2-fade flex items-center justify-center gap-3 mb-8"><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /><span className="text-xs tracking-[6px] uppercase font-bold" style={{ color: '#E8C547', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>Aura Living · Est. 2026</span><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /></div>
+        <h1 className="text-white font-bold mb-8" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(3rem, 10vw, 7.5rem)', lineHeight: 0.95, letterSpacing: '-0.04em', textShadow: '0 4px 30px rgba(0,0,0,0.6), 0 2px 10px rgba(0,0,0,0.4)' }}>
           <span className="block overflow-hidden"><span className="h2-mask-inner block">Beauty in</span></span>
-          <span className="block overflow-hidden"><span className="h2-mask-inner block italic" style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #F4D76E 50%, #D4AF37 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Every Detail</span></span>
+          <span className="block overflow-hidden"><span className="h2-mask-inner block italic" style={{ color: '#E8C547' }}>Every Detail</span></span>
         </h1>
         <p className="h2-fade text-white/60 text-lg sm:text-xl max-w-xl mx-auto mb-12">Discover handcrafted decor that transforms houses into homes.</p>
         <div className="h2-fade flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -290,10 +290,10 @@ function Hero4({ play }: { play: boolean }) {
       <div className="h4-particles absolute inset-0 pointer-events-none" />
       <div className="absolute" style={{ width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', filter: 'blur(40px)' }} />
       <div className="relative z-10 text-center px-4 max-w-3xl">
-        <div className="h4-fade flex items-center justify-center gap-3 mb-8"><div className="w-8 h-px" style={{ background: '#D4AF37' }} /><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /><span className="text-xs tracking-[6px] uppercase font-bold" style={{ color: '#D4AF37' }}>Aura Living</span><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /><div className="w-8 h-px" style={{ background: '#D4AF37' }} /></div>
+        <div className="h4-fade flex items-center justify-center gap-3 mb-8"><div className="w-8 h-px" style={{ background: '#D4AF37' }} /><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /><span className="text-xs tracking-[6px] uppercase font-bold" style={{ color: '#E8C547', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>Aura Living</span><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /><div className="w-8 h-px" style={{ background: '#D4AF37' }} /></div>
         <h1 className="text-white font-bold mb-8" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(3rem, 10vw, 7rem)', lineHeight: 0.95, letterSpacing: '-0.04em' }}>
           <span className="h4-clip-l block">Decor That</span>
-          <span className="h4-clip-r block italic" style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #F4D76E 50%, #D4AF37 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Tells a Story</span>
+          <span className="h4-clip-r block italic" style={{ color: '#E8C547' }}>Tells a Story</span>
         </h1>
         <p className="h4-fade text-white/50 text-lg max-w-xl mx-auto mb-12">Each piece handcrafted by Pakistani artisans — warmth, character & timeless beauty.</p>
         <div className="h4-fade flex flex-col sm:flex-row gap-4 justify-center">
@@ -360,7 +360,7 @@ function Hero5({ play }: { play: boolean }) {
   return (
     <div ref={ref} className="relative w-full h-screen min-h-[600px] overflow-hidden">
       <div className="h5-bg absolute inset-0" style={{ backgroundImage: 'url(/images/hero/hero-slide-5.webp)', backgroundSize: 'cover', backgroundPosition: 'center', height: '130%' }} />
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(14,14,14,0.92) 0%, rgba(14,14,14,0.3) 50%, rgba(14,14,14,0.6) 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,10,12,0.92) 0%, rgba(10,10,12,0.5) 50%, rgba(10,10,12,0.75) 100%)' }} />
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 /%3E%3C/filter%3E%3Crect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 /%3E%3C/svg%3E")' }} />
       <div className="h5-top absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-6 sm:px-12 py-6">
         <span className="text-white font-bold tracking-wider" style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.25rem', textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>AURA LIVING</span>
@@ -370,9 +370,9 @@ function Hero5({ play }: { play: boolean }) {
         <div className="max-w-3xl">
           <div className="h5-line w-20 h-0.5 mb-6 origin-left" style={{ background: 'linear-gradient(90deg, #D4AF37, transparent)' }} />
           <div className="flex items-center gap-3 mb-4"><span className="text-xs tracking-[4px] uppercase font-bold" style={{ color: '#D4AF37' }}>Handcrafted in Pakistan</span></div>
-          <h1 className="text-white font-bold mb-8" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', lineHeight: 0.95, letterSpacing: '-0.03em', textShadow: '0 8px 30px rgba(0,0,0,0.5)' }}>
+          <h1 className="text-white font-bold mb-8" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', lineHeight: 0.95, letterSpacing: '-0.03em', textShadow: '0 4px 20px rgba(0,0,0,0.6), 0 2px 10px rgba(0,0,0,0.4)' }}>
             <span ref={titleRef} className="block"></span>
-            <span ref={accentRef} className="block italic" style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #F4D76E 50%, #D4AF37 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}></span>
+            <span ref={accentRef} className="block italic" style={{ color: '#E8C547' }}></span>
           </h1>
           <p className="h5-fade text-white/60 text-lg mb-10 max-w-lg">Premium lamps, vases, plants & decor — delivered to your door across Pakistan.</p>
           <div className="h5-fade flex flex-col sm:flex-row gap-4">
