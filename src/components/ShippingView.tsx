@@ -112,7 +112,7 @@ export default function ShippingView() {
       />
 
       {/* Shipping Overview */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={overviewRef} className="max-w-4xl mx-auto text-center">
           <div className="rounded-xl p-5 sm:p-6 lg:p-8 md:p-10" >
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5">
@@ -132,7 +132,7 @@ export default function ShippingView() {
       </section>
 
       {/* Shipping Rates */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-10">
@@ -173,7 +173,7 @@ export default function ShippingView() {
       </section>
 
       {/* Delivery Areas */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="rounded-xl p-5 sm:p-6 lg:p-8" >
@@ -211,7 +211,7 @@ export default function ShippingView() {
       </section>
 
       {/* Order Tracking, Packaging, International Shipping */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="grid grid-cols-1 gap-4 sm:gap-6">

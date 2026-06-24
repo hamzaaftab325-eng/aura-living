@@ -96,7 +96,7 @@ export default function AdminCustomersClient() {
               </thead>
               <tbody>
                 {customers.map((c) => (
-                  <tr key={c.id} className="border-t hover:bg-gray-50">
+                  <tr key={c.id} className="border-t hover:aura-bg-cream-tint">
                     <td className="p-3 font-medium">{c.name}</td>
                     <td className="p-3">
                       <span className="flex items-center gap-1.5 aura-text-secondary">

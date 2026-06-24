@@ -205,12 +205,12 @@ export default function ProductDetailView({
       />
 
       {/* Product Content */}
-      <div ref={contentRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div ref={contentRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
           {/* Left: Image Gallery */}
           <div className="flex flex-col gap-4">
             {/* Main Image — CSS transition for switching */}
-            <div className="relative rounded-lg overflow-hidden" style={{ aspectRatio: '3/4' }}>
+            <div className="relative rounded-xl overflow-hidden" style={{ aspectRatio: '3/4' }}>
               <Image
                 key={selectedImage}
                 src={galleryImages[selectedImage]}
@@ -400,7 +400,7 @@ export default function ProductDetailView({
       </div>
 
       {/* Customer Reviews */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24">
         <div className="max-w-3xl mx-auto">
           <ReviewList reviews={productReviews} averageRating={reviewAverage} />
 
@@ -441,7 +441,7 @@ export default function ProductDetailView({
                   key={rp.id}
                   href={`/product/${rp.slug}`}
                   onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)]/40 block"
+                  className="cursor-pointer rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)]/40 block"
                   
                 >
                   <div className="relative aspect-square overflow-hidden" >

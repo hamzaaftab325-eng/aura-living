@@ -136,7 +136,7 @@ export default function CartView() {
           {safeCart.length > 0 && (
             <button
               onClick={handleClearCart}
-              className="text-sm font-medium transition-colors hover:text-red-500 cursor-pointer text-muted-gray"
+              className="text-sm font-medium transition-colors hover:aura-text-red-500 cursor-pointer text-muted-gray"
             >
               Clear all
             </button>
@@ -145,7 +145,7 @@ export default function CartView() {
 
         {/* Free shipping progress */}
         {safeSubtotal > 0 && (
-          <div className="mb-8 rounded-lg p-4" >
+          <div className="mb-8 rounded-xl p-4" >
             {amountToFreeShipping > 0 ? (
               <p className="text-sm mb-2 text-center" >
                 Add <span className="font-semibold text-gold-text">{formatPKR(amountToFreeShipping)}</span> more for{' '}
@@ -177,13 +177,13 @@ export default function CartView() {
             {safeCart.map((item, index) => (
               <div
                 key={`${item.product.id}-${index}`}
-                className="rounded-lg p-4 sm:p-5 flex gap-4 sm:gap-6 transition-all duration-300"
+                className="rounded-xl p-4 sm:p-5 flex gap-4 sm:gap-6 transition-all duration-300"
                 
               >
                 {/* Image */}
                 <Link
                   href={`/product/${item.product.slug}`}
-                  className="shrink-0 relative w-20 h-20 sm:w-28 sm:h-28 rounded-lg overflow-hidden"
+                  className="shrink-0 relative w-20 h-20 sm:w-28 sm:h-28 rounded-xl overflow-hidden"
                   
                   onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 >
@@ -217,7 +217,7 @@ export default function CartView() {
                         removeFromCart(item.product.id);
                         toast({ title: 'Removed', description: `${item.product.name} removed from cart.` });
                       }}
-                      className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-red-50 hover:text-red-500 cursor-pointer"
+                      className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:aura-bg-red-tint-5 hover:aura-text-red-500 cursor-pointer"
                       style={{ color: '#B0B0B0' }}
                       aria-label={`Remove ${item.product.name}`}
                     >

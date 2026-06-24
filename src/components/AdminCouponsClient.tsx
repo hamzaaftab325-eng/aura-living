@@ -292,7 +292,7 @@ export default function AdminCouponsClient() {
                   </div>
                   <button
                     onClick={() => handleDelete(c.id, c.code)}
-                    className="p-1.5 rounded hover:bg-red-50 text-red-500 transition-colors"
+                    className="p-1.5 rounded hover:aura-bg-red-tint-5 aura-text-red-500 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -337,7 +337,7 @@ export default function AdminCouponsClient() {
                     <span
                       className="font-medium"
                       style={{
-                        color: c.isActive ? "var(--color-success)" : "#ef4444",
+                        color: c.isActive ? "var(--color-success)" : "var(--color-danger)",
                       }}
                     >
                       {c.isActive ? "Active" : "Inactive"}

@@ -423,7 +423,7 @@ export default function WishlistView() {
                         </button>
                         <button
                           onClick={() => toggleWishlist(product.id, product.name)}
-                          className="w-11 h-11 rounded-sm flex items-center justify-center transition-all duration-200 hover:bg-red-50 cursor-pointer"
+                          className="w-11 h-11 rounded-sm flex items-center justify-center transition-all duration-200 hover:aura-bg-red-tint-5 cursor-pointer"
                           
                           aria-label="Remove from wishlist"
                         >

@@ -93,7 +93,7 @@ export default function LookbookView() {
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.78) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.18) 100%)' }}
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
@@ -126,7 +126,7 @@ export default function LookbookView() {
       />
 
       {/* Intro */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <span className="aura-text-gold text-xs sm:text-sm tracking-[3px] uppercase font-medium" >
             Editorial Spaces
@@ -158,7 +158,7 @@ export default function LookbookView() {
               )}
 
               <section
-                className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
+                className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8"
                 style={{ backgroundColor: index % 2 === 0 ? 'var(--surface-page)' : 'var(--color-gold-pale)' }}
               >
                 <div className="max-w-7xl mx-auto">

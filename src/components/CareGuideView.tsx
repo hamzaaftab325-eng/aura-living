@@ -180,7 +180,7 @@ export default function CareGuideView() {
         <div
           className="absolute inset-0"
           style={{ background:
-              'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
+              'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
 
         {/* Decorative floating orbs */}
@@ -231,7 +231,7 @@ export default function CareGuideView() {
       />
 
       {/* Intro Text */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedSection>
             <p

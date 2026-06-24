@@ -284,7 +284,7 @@ export default function SaleView({ initialProducts }: { initialProducts?: Produc
       {/* Hero Banner — cleaner overlay so busy background doesn't fight the text */}
       <section
         ref={heroBgRef}
-        className="relative w-full min-h-[80vh] sm:min-h-[85vh] md:min-h-[90vh] overflow-hidden flex items-center justify-center pt-24 pb-16"
+        className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center"
       >
         {/* Background image */}
         <div
@@ -299,7 +299,7 @@ export default function SaleView({ initialProducts }: { initialProducts?: Produc
         <div
           className="absolute inset-0"
           style={{ background:
-              'linear-gradient(180deg, rgba(20,20,20,0.85) 0%, rgba(20,20,20,0.75) 50%, rgba(20,20,20,0.9) 100%)' }}
+              'linear-gradient(180deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
         {/* Subtle gold tint to make it feel premium */}
         <div

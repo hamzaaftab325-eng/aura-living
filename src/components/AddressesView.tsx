@@ -228,7 +228,7 @@ export default function AddressesView() {
   if (!safeUser) {
     return (
       <div className="w-full page-transition" >
-        <section className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center">
+        <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
           <div
             className="absolute inset-0"
             style={{ backgroundImage: 'url(/images/pages/account-hero.webp)',
@@ -237,7 +237,7 @@ export default function AddressesView() {
           />
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
+            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
           />
           <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4">
             <h1
@@ -254,7 +254,7 @@ export default function AddressesView() {
             </div>
           </div>
         </section>
-        <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+        <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md mx-auto text-center rounded-xl p-8 sm:p-10" >
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ border: '1px dashed rgba(212,175,55,0.4)' }}>
               <MapPin className="w-8 h-8"  />
@@ -292,17 +292,17 @@ export default function AddressesView() {
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
 
         <div ref={headerRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-          <h2
+          <h1
             ref={heroTitleRef}
             className="aura-hero-title text-white"
             
           >
             Saved Addresses
-          </h2>
+          </h1>
 
           <div className="flex items-center gap-3 mt-6">
             <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
@@ -328,7 +328,7 @@ export default function AddressesView() {
       />
 
       {/* Addresses */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           {/* Add new address CTA */}
           <AnimatedSection>

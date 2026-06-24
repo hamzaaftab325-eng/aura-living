@@ -343,7 +343,7 @@ export default function CheckoutView() {
         {/* Hero */}
         <section
           ref={heroSectionRef}
-          className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center"
+          className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center"
         >
           {/* Background Image */}
           <div
@@ -357,7 +357,7 @@ export default function CheckoutView() {
           {/* Gradient Overlay */}
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)' }}
+            style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
           />
           <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
             <span
@@ -421,7 +421,7 @@ export default function CheckoutView() {
       {/* Hero */}
       <section
         ref={heroSectionRef}
-        className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center"
+        className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center"
       >
         {/* Background Image */}
         <div
@@ -435,7 +435,7 @@ export default function CheckoutView() {
         {/* Gradient Overlay */}
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.85) 0%, rgba(44,44,44,0.6) 50%, rgba(212,175,55,0.2) 100%)' }}
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
 
@@ -467,7 +467,7 @@ export default function CheckoutView() {
       />
 
       {/* Checkout Content */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={contentRef} className="max-w-7xl mx-auto">
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
@@ -724,7 +724,7 @@ export default function CheckoutView() {
                         className="flex items-center gap-3"
                       >
                         <div
-                          className="shrink-0 w-14 h-14 rounded-lg overflow-hidden relative"
+                          className="shrink-0 w-14 h-14 rounded-xl overflow-hidden relative"
                           
                         >
                           <Image
@@ -790,7 +790,7 @@ export default function CheckoutView() {
                           <button
                             type="button"
                             onClick={handleRemoveCoupon}
-                            className="text-xs text-red-500 hover:underline ml-1"
+                            className="text-xs aura-text-red-500 hover:underline ml-1"
                           >
                             Remove
                           </button>

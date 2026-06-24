@@ -146,7 +146,7 @@ export default function TermsView() {
       />
 
       {/* Intro */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <p className="aura-text-secondary text-base sm:text-lg leading-relaxed" >
             Please read these Terms of Service carefully before using the Aura Living website. By accessing or using our site, you agree to be bound by these terms.
@@ -155,7 +155,7 @@ export default function TermsView() {
       </section>
 
       {/* Sections */}
-      <section className="py-4 sm:py-8 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={contentRef} className="max-w-4xl mx-auto flex flex-col gap-6">
           {sections.map((section) => {
             const SectionIcon = section.icon;

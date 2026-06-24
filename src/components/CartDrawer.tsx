@@ -351,7 +351,7 @@ export default function CartDrawer() {
                               title: 'Removed',
                               description: `${item.product.name} removed from cart.` });
                           }}
-                          className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all hover:bg-red-50"
+                          className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all hover:aura-bg-red-tint-5"
                           
                           aria-label={`Remove ${item.product.name} from cart`}
                         >

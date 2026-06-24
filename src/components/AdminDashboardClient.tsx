@@ -114,7 +114,7 @@ export default function AdminDashboardClient({ initialStats }: Props) {
             className="rounded-lg p-4 mb-8 flex items-center gap-3"
             style={{ backgroundColor: "rgba(239, 68, 68, 0.05)", border: "1px solid rgba(239, 68, 68, 0.2)" }}
           >
-            <AlertTriangle className="w-5 h-5 text-red-500" />
+            <AlertTriangle className="w-5 h-5 aura-text-red-500" />
             <div className="flex-1">
               <p className="text-sm font-medium text-red-700">
                 {stats.lowStockCount} product{stats.lowStockCount !== 1 ? "s" : ""} with low stock
@@ -203,7 +203,7 @@ export default function AdminDashboardClient({ initialStats }: Props) {
                                 : order.status === "SHIPPED"
                                   ? "var(--color-info)"
                                   : order.status === "CANCELLED"
-                                    ? "#ef4444"
+                                    ? "var(--color-danger)"
                                     : "var(--color-gold)",
                           }}
                         >

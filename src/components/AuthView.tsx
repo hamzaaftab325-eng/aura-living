@@ -230,7 +230,7 @@ function AuthForm({ mode: modeProp = 'login' }: { mode?: 'login' | 'signup' }) {
         <img src="/logo/default-monochrome-gold-black.svg" alt="" aria-hidden="true" className="h-[44px] w-auto object-contain" />
       </div>
 
-      <div className="w-full max-w-md rounded-2xl p-8 sm:p-10 aura-surface-card aura-shadow-md">
+      <div className="w-full max-w-md rounded-xl p-8 sm:p-10 aura-surface-card aura-shadow-md">
         <div className="text-center mb-2">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Sparkles className="w-4 h-4 aura-text-gold" />
@@ -280,7 +280,7 @@ export default function AuthView({ mode = 'login' }: { mode?: 'login' | 'signup'
     <div className="w-full min-h-screen flex">
       <div className="hidden lg:flex w-[45%] xl:w-[50%] relative overflow-hidden flex-col items-center justify-center aura-surface-dark">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/images/hero/hero-slide-1.webp)' }} />
-        <div className="absolute inset-0 bg-gradient-to-br from-[rgba(44,44,44,0.8)] via-[rgba(44,44,44,0.5)] to-[rgba(212,175,55,0.2)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[rgba(44,44,44,0.75)] via-[rgba(44,44,44,0.5)] to-[rgba(212,175,55,0.15)]" />
         <FloatingOrb size={180} top="8%" left="65%" delay={0} />
         <FloatingOrb size={120} top="78%" left="-3%" delay={1.2} />
         <div className="relative z-10 flex flex-col items-center text-center px-12">

@@ -202,7 +202,7 @@ export default function FAQView() {
       />
 
       {/* Category Tabs */}
-      <section className="py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={contentRef} className="max-w-4xl mx-auto">
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-10">
             {categories.map((cat) => (

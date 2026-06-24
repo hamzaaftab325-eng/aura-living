@@ -31,8 +31,8 @@ const statusColors: Record<string, { color: string; bg: string }> = {
   PROCESSING: { color: "var(--color-gold)", bg: "rgba(212,175,55,0.1)" },
   SHIPPED: { color: "var(--color-info)", bg: "rgba(59,130,246,0.1)" },
   DELIVERED: { color: "var(--color-success)", bg: "rgba(34,197,94,0.1)" },
-  CANCELLED: { color: "#ef4444", bg: "rgba(239,68,68,0.1)" },
-  RETURNED: { color: "#ef4444", bg: "rgba(239,68,68,0.1)" },
+  CANCELLED: { color: "var(--color-danger)", bg: "rgba(239,68,68,0.1)" },
+  RETURNED: { color: "var(--color-danger)", bg: "rgba(239,68,68,0.1)" },
 };
 
 export default function AdminOrdersClient() {
@@ -159,7 +159,7 @@ export default function AdminOrdersClient() {
                   {/* Order row (clickable) */}
                   <button
                     onClick={() => setExpandedId(isExpanded ? null : order.id)}
-                    className="w-full p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors text-left"
+                    className="w-full p-4 flex items-center gap-4 hover:aura-bg-cream-tint transition-colors text-left"
                   >
                     {isExpanded ? (
                       <ChevronDown className="w-4 h-4 flex-shrink-0" />

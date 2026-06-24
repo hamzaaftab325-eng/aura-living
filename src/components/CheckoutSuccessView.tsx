@@ -84,7 +84,7 @@ function CheckoutSuccessForm() {
 
   if (loading) {
     return (
-      <div className="w-full max-w-md rounded-2xl p-8 sm:p-10 aura-surface-card aura-shadow-md text-center">
+      <div className="w-full max-w-md rounded-xl p-8 sm:p-10 aura-surface-card aura-shadow-md text-center">
         <div className="animate-pulse">
           <div className="w-14 h-14 rounded-full mx-auto mb-5 aura-bg-gold-tint" />
           <div className="h-6 bg-gray-200 rounded mb-4 w-3/4 mx-auto" />
@@ -96,7 +96,7 @@ function CheckoutSuccessForm() {
 
   if (error || !order) {
     return (
-      <div className="w-full max-w-md rounded-2xl p-8 sm:p-10 aura-surface-card aura-shadow-md text-center">
+      <div className="w-full max-w-md rounded-xl p-8 sm:p-10 aura-surface-card aura-shadow-md text-center">
         <h1 className="aura-h2 mb-3">Order Not Found</h1>
         <p className="text-sm aura-text-secondary mb-6">
           {error ?? "We couldn't find this order. Please check your order history."}
@@ -118,7 +118,7 @@ function CheckoutSuccessForm() {
         ]}
       />
 
-      <div className="rounded-2xl p-8 sm:p-10 aura-surface-card aura-shadow-md">
+      <div className="rounded-xl p-8 sm:p-10 aura-surface-card aura-shadow-md">
         {/* Success header */}
         <div className="text-center mb-6">
           <div className="flex items-center justify-center mb-5">

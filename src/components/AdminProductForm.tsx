@@ -247,7 +247,7 @@ export default function AdminProductForm({ categories, product }: Props) {
                     <button
                       type="button"
                       onClick={() => removeImage(i)}
-                      className="absolute top-1 right-1 p-1 rounded bg-red-500 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute top-1 right-1 p-1 rounded aura-bg-red-tint-50 text-white opacity-0 group-hover:opacity-100 transition-opacity"
                     >
                       <X className="w-3 h-3" />
                     </button>
@@ -258,7 +258,7 @@ export default function AdminProductForm({ categories, product }: Props) {
 
             {/* Upload button */}
             <label
-              className="flex flex-col items-center justify-center w-full h-32 rounded-lg border-2 border-dashed cursor-pointer hover:bg-gray-50 transition-colors"
+              className="flex flex-col items-center justify-center w-full h-32 rounded-lg border-2 border-dashed cursor-pointer hover:aura-bg-cream-tint transition-colors"
               style={{ borderColor: "var(--color-gold-soft, rgba(212,175,55,0.3))" }}
             >
               <input
@@ -290,7 +290,7 @@ export default function AdminProductForm({ categories, product }: Props) {
 
             <div>
               <label className="block text-sm font-medium mb-1">
-                Product Name <span className="text-red-500">*</span>
+                Product Name <span className="aura-text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -305,7 +305,7 @@ export default function AdminProductForm({ categories, product }: Props) {
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-sm font-medium mb-1">
-                  SKU <span className="text-red-500">*</span>
+                  SKU <span className="aura-text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -331,7 +331,7 @@ export default function AdminProductForm({ categories, product }: Props) {
 
             <div>
               <label className="block text-sm font-medium mb-1">
-                Description <span className="text-red-500">*</span>
+                Description <span className="aura-text-red-500">*</span>
               </label>
               <textarea
                 value={description}
@@ -382,7 +382,7 @@ export default function AdminProductForm({ categories, product }: Props) {
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-sm font-medium mb-1">
-                  Price (Rs.) <span className="text-red-500">*</span>
+                  Price (Rs.) <span className="aura-text-red-500">*</span>
                 </label>
                 <input
                   type="number"

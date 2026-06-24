@@ -119,7 +119,7 @@ function VerifyEmailForm() {
   };
 
   return (
-    <div className="w-full max-w-md rounded-2xl p-8 sm:p-10 aura-surface-card aura-shadow-md">
+    <div className="w-full max-w-md rounded-xl p-8 sm:p-10 aura-surface-card aura-shadow-md">
       {status === 'verifying' && (
         <div className="text-center">
           <div className="flex items-center justify-center mb-5">
@@ -157,8 +157,8 @@ function VerifyEmailForm() {
       {status === 'error' && (
         <div className="text-center">
           <div className="flex items-center justify-center mb-5">
-            <div className="w-14 h-14 rounded-full flex items-center justify-center bg-red-50">
-              <XCircle className="w-6 h-6 text-red-500" />
+            <div className="w-14 h-14 rounded-full flex items-center justify-center aura-bg-red-tint-5">
+              <XCircle className="w-6 h-6 aura-text-red-500" />
             </div>
           </div>
           <h1 className="aura-h2 mb-3">Verification Failed</h1>

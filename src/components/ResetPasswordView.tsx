@@ -55,7 +55,7 @@ function ResetPasswordForm() {
 
   if (!token) {
     return (
-      <div className="w-full max-w-md rounded-2xl p-8 sm:p-10 aura-surface-card aura-shadow-md text-center">
+      <div className="w-full max-w-md rounded-xl p-8 sm:p-10 aura-surface-card aura-shadow-md text-center">
         <h1 className="aura-h2 mb-3">Invalid Reset Link</h1>
         <p className="text-sm aura-text-secondary mb-6">
           This password reset link is missing a token. Please request a new reset link.
@@ -123,7 +123,7 @@ function ResetPasswordForm() {
 
   if (success) {
     return (
-      <div className="w-full max-w-md rounded-2xl p-8 sm:p-10 aura-surface-card aura-shadow-md text-center">
+      <div className="w-full max-w-md rounded-xl p-8 sm:p-10 aura-surface-card aura-shadow-md text-center">
         <div className="flex items-center justify-center mb-5">
           <div className="w-14 h-14 rounded-full flex items-center justify-center aura-bg-gold-tint">
             <CheckCircle className="w-6 h-6 aura-text-gold" />
@@ -146,7 +146,7 @@ function ResetPasswordForm() {
   }
 
   return (
-    <div className="w-full max-w-md rounded-2xl p-8 sm:p-10 aura-surface-card aura-shadow-md">
+    <div className="w-full max-w-md rounded-xl p-8 sm:p-10 aura-surface-card aura-shadow-md">
       <div className="text-center mb-2">
         <div className="flex items-center justify-center mb-5">
           <div className="w-14 h-14 rounded-full flex items-center justify-center aura-bg-gold-tint">

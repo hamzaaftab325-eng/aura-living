@@ -151,7 +151,7 @@ export default function AdminProductsClient() {
               </thead>
               <tbody>
                 {products.map((p) => (
-                  <tr key={p.id} className="border-t hover:bg-gray-50">
+                  <tr key={p.id} className="border-t hover:aura-bg-cream-tint">
                     <td className="p-3">
                       <div className="flex items-center gap-3">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -194,14 +194,14 @@ export default function AdminProductsClient() {
                       <div className="flex justify-end gap-2">
                         <Link
                           href={`/admin/products/${p.id}/edit`}
-                          className="p-1.5 rounded hover:bg-gray-100 transition-colors"
+                          className="p-1.5 rounded hover:aura-bg-gold-tint-5 transition-colors"
                           title="Edit"
                         >
                           <Edit2 className="w-4 h-4" />
                         </Link>
                         <button
                           onClick={() => handleDelete(p.id, p.name)}
-                          className="p-1.5 rounded hover:bg-red-50 text-red-500 transition-colors"
+                          className="p-1.5 rounded hover:aura-bg-red-tint-5 aura-text-red-500 transition-colors"
                           title="Delete"
                         >
                           <Trash2 className="w-4 h-4" />

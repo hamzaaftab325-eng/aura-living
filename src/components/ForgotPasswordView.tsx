@@ -64,7 +64,7 @@ function ForgotPasswordForm() {
 
   return (
     <div ref={cardRef} className="relative z-10 w-full max-w-md">
-      <div className="w-full rounded-2xl p-8 sm:p-10 aura-surface-card aura-shadow-md">
+      <div className="w-full rounded-xl p-8 sm:p-10 aura-surface-card aura-shadow-md">
         {!submitted ? (
           <>
             <div className="text-center mb-2">

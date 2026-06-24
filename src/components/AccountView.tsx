@@ -87,7 +87,7 @@ export default function AccountView() {
                               : 'Processing';
             const statusColor = o.status === 'DELIVERED' ? 'var(--color-success)'
                               : o.status === 'SHIPPED' ? 'var(--color-info)'
-                              : o.status === 'CANCELLED' ? '#ef4444'
+                              : o.status === 'CANCELLED' ? 'var(--color-danger)'
                               : 'var(--color-gold)';
             const statusBg = o.status === 'DELIVERED' ? 'rgba(34, 197, 94, 0.1)'
                            : o.status === 'SHIPPED' ? 'rgba(59, 130, 246, 0.1)'
@@ -278,7 +278,7 @@ export default function AccountView() {
         <div
           className="absolute inset-0"
           style={{ background:
-              'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
+              'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
 
         {/* Decorative floating orbs */}
@@ -326,7 +326,7 @@ export default function AccountView() {
       />
 
       {/* Account Content */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Profile Card */}
           <AnimatedSection>

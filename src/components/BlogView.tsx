@@ -242,42 +242,30 @@ export default function BlogView() {
   return (
     <div className="w-full page-transition" >
       {/* Hero */}
-      <section className="relative w-full py-20 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(/images/pages/lookbook-hero.webp)' }}
+        />
         <div
           className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(180deg, var(--color-gold-pale) 0%, var(--surface-page) 100%)' }}
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
-        <div ref={heroRef} className="relative z-10 max-w-3xl mx-auto text-center">
-          <div
-            className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
-            
-          >
-            <BookOpen className="w-8 h-8"  aria-hidden="true" />
-          </div>
-          <span
-            className="text-xs sm:text-sm tracking-[4px] uppercase font-medium"
-            
-          >
+        <div ref={heroRef} className="relative z-10 max-w-3xl mx-auto text-center px-4">
+          <span className="text-xs sm:text-sm tracking-[4px] uppercase font-medium text-white/70">
             Aura Living
           </span>
-          <h1
-            className="text-4xl sm:text-5xl md:text-6xl font-bold mt-3 mb-5"
-          >
+          <h1 className="aura-hero-title text-white mt-3 mb-5">
             The Journal
           </h1>
-          <p
-            className="text-base sm:text-lg leading-relaxed max-w-xl mx-auto"
-            
-          >
+          <p className="text-base sm:text-lg leading-relaxed max-w-xl mx-auto text-white/70">
             Stories, styling notes, and care guides from the Aura Living studio — written by the
             people who design, make, and live with our pieces every day.
           </p>
           <div className="flex items-center justify-center gap-3 mt-6">
-            <div className="w-10 sm:w-14 h-px" />
-            <div className="w-1.5 h-1.5 rounded-full" />
-            <div className="w-10 sm:w-14 h-px" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
           </div>
         </div>
       </section>
@@ -291,7 +279,7 @@ export default function BlogView() {
       />
 
       {/* Featured article */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={featuredRef} className="max-w-7xl mx-auto">
           <span
             className="text-xs sm:text-sm tracking-[3px] uppercase font-medium block mb-6 text-center"
@@ -306,7 +294,7 @@ export default function BlogView() {
             aria-label={`Read featured article: ${featured.title}`}
           >
             {/* Image */}
-            <div className="relative w-full aspect-[16/10] rounded-sm overflow-hidden">
+            <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden">
               <ArticleImage
                 src={featured.coverImage}
                 alt={featured.title}
@@ -402,7 +390,7 @@ export default function BlogView() {
       </section>
 
       {/* Article grid */}
-      <section className="py-10 sm:py-12 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={gridRef} className="max-w-7xl mx-auto">
           {visibleArticles.length === 0 ? (
             <p

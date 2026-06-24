@@ -136,7 +136,7 @@ export default function PrivacyView() {
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.55) 50%, rgba(212,175,55,0.15) 100%)' }}
+          style={{ background: 'linear-gradient(135deg, rgba(44,44,44,0.75) 0%, rgba(44,44,44,0.5) 50%, rgba(212,175,55,0.15) 100%)' }}
         />
 
         <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
@@ -169,7 +169,7 @@ export default function PrivacyView() {
       />
 
       {/* Intro */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <p className="aura-text-secondary text-base sm:text-lg leading-relaxed" >
             At Aura Living, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you visit our website.
@@ -178,7 +178,7 @@ export default function PrivacyView() {
       </section>
 
       {/* Sections */}
-      <section className="py-4 sm:py-8 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div ref={contentRef} className="max-w-4xl mx-auto flex flex-col gap-6">
           {sections.map((section) => {
             const SectionIcon = section.icon;

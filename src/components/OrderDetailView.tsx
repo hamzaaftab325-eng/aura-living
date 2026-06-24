@@ -31,8 +31,8 @@ const statusConfig: Record<
   PROCESSING: { label: "Processing", icon: Package, color: "var(--color-gold)", bg: "rgba(212, 175, 55, 0.1)" },
   SHIPPED: { label: "Shipped", icon: Truck, color: "var(--color-info)", bg: "rgba(59, 130, 246, 0.1)" },
   DELIVERED: { label: "Delivered", icon: CheckCircle, color: "var(--color-success)", bg: "rgba(34, 197, 94, 0.1)" },
-  CANCELLED: { label: "Cancelled", icon: XCircle, color: "#ef4444", bg: "rgba(239, 68, 68, 0.1)" },
-  RETURNED: { label: "Returned", icon: XCircle, color: "#ef4444", bg: "rgba(239, 68, 68, 0.1)" },
+  CANCELLED: { label: "Cancelled", icon: XCircle, color: "var(--color-danger)", bg: "rgba(239, 68, 68, 0.1)" },
+  RETURNED: { label: "Returned", icon: XCircle, color: "var(--color-danger)", bg: "rgba(239, 68, 68, 0.1)" },
 };
 
 // Status flow order (for timeline display)
@@ -76,7 +76,7 @@ export default function OrderDetailView({ order }: OrderDetailViewProps) {
 
         {/* Status banner */}
         <div
-          className="rounded-lg p-4 mb-8 flex items-center gap-3"
+          className="rounded-xl p-4 mb-8 flex items-center gap-3"
           style={{ backgroundColor: config.bg }}
         >
           <config.icon className="w-5 h-5" style={{ color: config.color }} />
