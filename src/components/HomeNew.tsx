@@ -24,6 +24,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useScrollReveal } from '@/hooks/useAnimations';
 import { GoldDivider } from '@/components/SVGDecorations';
+import CategoriesHoverReveal from '@/components/CategoriesHoverReveal';
 import PremiumButton from '@/components/ui/PremiumButton';
 import { formatRupees } from '@/lib/currency-display';
 import type { Product, Category } from '@/types';
@@ -150,60 +151,9 @@ export default function HomeNew({ featuredProducts, categories }: HomeNewProps) 
       </div>
 
       {/* ═══════════════════════════════════════════════════════════
-          3. BENTO CATEGORIES — Asymmetric grid, not uniform cards
+          3. CATEGORIES — Hover Reveal (Demo 2 chosen design)
           ═══════════════════════════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section header */}
-          <div data-reveal className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="aura-gold-line" />
-                <span className="text-xs font-bold uppercase tracking-[0.2em] aura-text-gold">Explore</span>
-              </div>
-              <h2 className="aura-mega-text" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
-                Shop by <span className="aura-text-gradient-gold">Category</span>
-              </h2>
-            </div>
-            <Link href="/shop" className="text-sm font-medium flex items-center gap-1 aura-text-gold hover:underline whitespace-nowrap">
-              View All <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          {/* Bento grid */}
-          <div data-stagger className="aura-bento">
-            {categories.slice(0, 6).map((cat, i) => {
-              const sizes = [
-                'aura-bento-tall',
-                '',
-                'aura-bento-wide',
-                '',
-                '',
-                '',
-              ];
-              return (
-                <Link
-                  key={cat.id}
-                  href={`/shop?category=${cat.id}`}
-                  className={`aura-bento-item ${sizes[i] || ''} ${i === 0 ? 'min-h-[300px] sm:min-h-[400px]' : 'min-h-[180px] sm:min-h-[200px]'}`}
-                >
-                  <Image
-                    src={cat.image}
-                    alt={cat.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                  />
-                  <div className="aura-bento-overlay">
-                    <h3 className="text-lg font-bold text-white mb-1">{cat.name}</h3>
-                    <p className="text-xs text-white/60">{cat.description}</p>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <CategoriesHoverReveal categories={categories} />
 
       {/* ═══════════════════════════════════════════════════════════
           4. BRAND STORY — Editorial split with parallax
