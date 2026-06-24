@@ -267,28 +267,35 @@ function Story5() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// PRODUCT SHOWCASE DEMOS (5)
+// PRODUCT SHOWCASE DEMOS (5) — 10/10 with advanced animations
 // ═══════════════════════════════════════════════════════════
 
 function Products1() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.p1-card', { opacity: 0, y: 60, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.08, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 75%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 75%' } });
+    tl.fromTo('.p1-header', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+    tl.fromTo('.p1-card', { opacity: 0, y: 80, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.08, ease: 'power3.out' }, '-=0.3');
+    tl.fromTo('.p1-card-img', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.8, stagger: 0.08, ease: 'power4.out' }, '-=0.5');
+    tl.fromTo('.p1-cta', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, '-=0.2');
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: '#FAF8F5' }}>
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12"><div className="inline-flex items-center gap-3 mb-3"><div style={{ width: 32, height: 1, background: '#D4AF37' }} /><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Featured</span><div style={{ width: 32, height: 1, background: '#D4AF37' }} /></div><h2 className="text-4xl font-bold mb-3" style={{ fontFamily: 'Playfair Display, serif', color: '#2C2C2C' }}>Curated <span style={{ color: '#D4AF37' }}>Favorites</span></h2><p className="text-sm" style={{ color: '#5A5A5A' }}>Our most-loved pieces, handpicked for your home</p></div>
+        <div className="p1-header text-center mb-12"><div className="inline-flex items-center gap-3 mb-3"><div style={{ width: 32, height: 1, background: '#D4AF37' }} /><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Featured</span><div style={{ width: 32, height: 1, background: '#D4AF37' }} /></div><h2 className="text-4xl font-bold mb-3" style={{ fontFamily: 'Playfair Display, serif', color: '#2C2C2C' }}>Curated <span style={{ color: '#D4AF37' }}>Favorites</span></h2><p className="text-sm" style={{ color: '#5A5A5A' }}>Our most-loved pieces, handpicked for your home</p></div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {products.slice(0, 8).map((p) => (
             <Link key={p.name} href="/shop" className="p1-card group relative overflow-hidden rounded-2xl" style={{ background: '#FFFDF7', boxShadow: '0 4px 12px rgba(0,0,0,0.06)', transition: 'transform 0.5s ease, box-shadow 0.5s ease' }}>
               <div className="relative overflow-hidden rounded-t-2xl" style={{ aspectRatio: '4/5' }}>
-                <Image src={p.image} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="25vw" />
-                {p.badge && <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide text-white" style={{ background: p.badge === 'SALE' ? '#D4AF37' : '#2C2C2C', color: p.badge === 'SALE' ? '#fff' : '#D4AF37' }}>{p.badge}</span>}
+                <div className="p1-card-img absolute inset-0"><Image src={p.image} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="25vw" /></div>
+                {p.badge && <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide text-white z-10" style={{ background: p.badge === 'SALE' ? '#D4AF37' : '#2C2C2C', color: p.badge === 'SALE' ? '#fff' : '#D4AF37' }}>{p.badge}</span>}
+                <div className="absolute bottom-3 left-3 right-3 py-2 px-4 rounded-full text-center text-xs font-semibold text-white opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400" style={{ background: 'rgba(212,175,55,0.95)', backdropFilter: 'blur(4px)' }}>Quick Add</div>
               </div>
               <div className="p-4 sm:p-5"><p className="text-sm font-medium mb-1 truncate" style={{ color: '#2C2C2C' }}>{p.name}</p><div><span className="text-base font-bold" style={{ color: '#D4AF37' }}>{fmt(p.price)}</span>{p.originalPrice && <span className="text-xs ml-2 line-through" style={{ color: '#8A8A8A' }}>{fmt(p.originalPrice)}</span>}</div></div>
             </Link>
           ))}
         </div>
-        <div className="text-center mt-12"><Link href="/shop" className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', color: '#fff', boxShadow: '0 8px 24px rgba(212,175,55,0.3)' }}>View All Products <ArrowRight className="w-4 h-4" /></Link></div>
+        <div className="p1-cta text-center mt-12"><Link href="/shop" className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', color: '#fff', boxShadow: '0 8px 24px rgba(212,175,55,0.3)' }}>View All Products <ArrowRight className="w-4 h-4" /></Link></div>
       </div>
     </div>
   );
@@ -296,20 +303,25 @@ function Products1() {
 
 function Products2() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.p2-card', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 75%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 75%' } });
+    tl.fromTo('.p2-header', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+    tl.fromTo('.p2-card', { opacity: 0, y: 60, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.1, ease: 'back.out(1.1)' }, '-=0.3');
+    tl.fromTo('.p2-cta', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, '-=0.2');
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: '#141414' }}>
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12"><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Featured</span><h2 className="text-4xl font-bold text-white mt-3 mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>Curated <span style={{ color: '#D4AF37' }}>Favorites</span></h2><p className="text-sm text-white/40">Our most-loved pieces, handpicked for your home</p></div>
+        <div className="p2-header text-center mb-12"><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Featured</span><h2 className="text-4xl font-bold text-white mt-3 mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>Curated <span style={{ color: '#D4AF37' }}>Favorites</span></h2><p className="text-sm text-white/40">Our most-loved pieces, handpicked for your home</p></div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {products.slice(0, 8).map((p) => (
-            <Link key={p.name} href="/shop" className="p2-card group relative overflow-hidden rounded-2xl" style={{ background: '#1a1a1a', border: '1px solid rgba(212,175,55,0.1)' }}>
-              <div className="relative overflow-hidden rounded-t-2xl" style={{ aspectRatio: '4/5' }}><Image src={p.image} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="25vw" />{p.badge && <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide text-white" style={{ background: '#D4AF37' }}>{p.badge}</span>}<div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%)' }} /></div>
+            <Link key={p.name} href="/shop" className="p2-card group relative overflow-hidden rounded-2xl" style={{ background: '#1a1a1a', border: '1px solid rgba(212,175,55,0.1)', transition: 'transform 0.4s ease, border-color 0.4s ease' }}>
+              <div className="relative overflow-hidden rounded-t-2xl" style={{ aspectRatio: '4/5' }}><Image src={p.image} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="25vw" />{p.badge && <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide text-white z-10" style={{ background: '#D4AF37' }}>{p.badge}</span>}<div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%)' }} /></div>
               <div className="p-4 sm:p-5"><p className="text-sm font-medium text-white mb-1 truncate">{p.name}</p><div><span className="text-base font-bold" style={{ color: '#D4AF37' }}>{fmt(p.price)}</span>{p.originalPrice && <span className="text-xs ml-2 line-through" style={{ color: 'rgba(255,255,255,0.3)' }}>{fmt(p.originalPrice)}</span>}</div></div>
             </Link>
           ))}
         </div>
-        <div className="text-center mt-12"><Link href="/shop" className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105 text-white" style={{ border: '1px solid #D4AF37', color: '#D4AF37' }}>View All Products <ArrowRight className="w-4 h-4" /></Link></div>
+        <div className="p2-cta text-center mt-12"><Link href="/shop" className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ border: '1px solid #D4AF37', color: '#D4AF37' }}>View All Products <ArrowRight className="w-4 h-4" /></Link></div>
       </div>
     </div>
   );
@@ -317,13 +329,17 @@ function Products2() {
 
 function Products3() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.p3-card', { opacity: 0, scale: 0.9, rotation: 2 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 75%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 75%' } });
+    tl.fromTo('.p3-header', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+    tl.fromTo('.p3-card', { opacity: 0, y: 60, rotateX: -20 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out' }, '-=0.3');
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: 'linear-gradient(180deg, #FAF8F5 0%, #F5EDDA 100%)' }}>
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-end justify-between mb-12"><div><div className="flex items-center gap-3 mb-3"><div style={{ width: 48, height: 2, background: '#D4AF37' }} /><span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: '#D4AF37' }}>Featured</span></div><h2 className="text-4xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#2C2C2C' }}>Curated <span style={{ color: '#D4AF37' }}>Favorites</span></h2></div><Link href="/shop" className="text-sm font-medium flex items-center gap-1" style={{ color: '#D4AF37' }}>View All <ArrowRight className="w-4 h-4" /></Link></div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.slice(0, 8).map((p, i) => (
+        <div className="p3-header flex items-end justify-between mb-12"><div><div className="flex items-center gap-3 mb-3"><div style={{ width: 48, height: 2, background: '#D4AF37' }} /><span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: '#D4AF37' }}>Featured</span></div><h2 className="text-4xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#2C2C2C' }}>Curated <span style={{ color: '#D4AF37' }}>Favorites</span></h2></div><Link href="/shop" className="text-sm font-medium flex items-center gap-1" style={{ color: '#D4AF37' }}>View All <ArrowRight className="w-4 h-4" /></Link></div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6" style={{ perspective: '1000px' }}>
+          {products.slice(0, 8).map((p) => (
             <Link key={p.name} href="/shop" className="p3-card group" style={{ transition: 'transform 0.3s ease' }}>
               <div className="relative overflow-hidden rounded-2xl mb-4" style={{ aspectRatio: '1', boxShadow: '0 8px 24px rgba(0,0,0,0.08)' }}><Image src={p.image} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="25vw" />{p.badge && <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide text-white" style={{ background: p.badge === 'SALE' ? '#D4AF37' : '#2C2C2C', color: p.badge === 'SALE' ? '#fff' : '#D4AF37' }}>{p.badge}</span>}</div>
               <p className="text-sm font-medium mb-1 truncate" style={{ color: '#2C2C2C' }}>{p.name}</p><div><span className="text-lg font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#D4AF37' }}>{fmt(p.price)}</span>{p.originalPrice && <span className="text-xs ml-2 line-through" style={{ color: '#8A8A8A' }}>{fmt(p.originalPrice)}</span>}</div>
@@ -337,11 +353,15 @@ function Products3() {
 
 function Products4() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.p4-card', { opacity: 0, y: 80, clipPath: 'inset(100% 0% 0% 0%)' }, { opacity: 1, y: 0, clipPath: 'inset(0% 0% 0% 0%)', duration: 0.8, stagger: 0.12, ease: 'power4.out', scrollTrigger: { trigger: ref.current, start: 'top 75%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 75%' } });
+    tl.fromTo('.p4-header', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+    tl.fromTo('.p4-card', { opacity: 0, y: 80, clipPath: 'inset(100% 0% 0% 0%)' }, { opacity: 1, y: 0, clipPath: 'inset(0% 0% 0% 0%)', duration: 0.8, stagger: 0.12, ease: 'power4.out' }, '-=0.3');
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: '#FAF8F5' }}>
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12"><div className="inline-flex items-center gap-3 mb-3"><div style={{ width: 32, height: 1, background: '#D4AF37' }} /><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Featured</span><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /><div style={{ width: 32, height: 1, background: '#D4AF37' }} /></div><h2 className="text-4xl font-bold mb-3" style={{ fontFamily: 'Playfair Display, serif', color: '#2C2C2C' }}>Curated <span style={{ color: '#D4AF37' }}>Favorites</span></h2></div>
+        <div className="p4-header text-center mb-12"><div className="inline-flex items-center gap-3 mb-3"><div style={{ width: 32, height: 1, background: '#D4AF37' }} /><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Featured</span><Sparkles className="w-4 h-4" style={{ color: '#D4AF37' }} /><div style={{ width: 32, height: 1, background: '#D4AF37' }} /></div><h2 className="text-4xl font-bold mb-3" style={{ fontFamily: 'Playfair Display, serif', color: '#2C2C2C' }}>Curated <span style={{ color: '#D4AF37' }}>Favorites</span></h2></div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {products.slice(0, 8).map((p) => (
             <Link key={p.name} href="/shop" className="p4-card group relative overflow-hidden rounded-2xl" style={{ background: '#FFFDF7', boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}>
@@ -357,14 +377,18 @@ function Products4() {
 
 function Products5() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.p5-card', { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 75%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 75%' } });
+    tl.fromTo('.p5-header', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+    tl.fromTo('.p5-card', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, '-=0.3');
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: '#141414' }}>
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12"><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Featured</span><h2 className="text-4xl font-bold text-white mt-3" style={{ fontFamily: 'Playfair Display, serif' }}>Curated <span style={{ color: '#D4AF37' }}>Favorites</span></h2></div>
+        <div className="p5-header text-center mb-12"><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Featured</span><h2 className="text-4xl font-bold text-white mt-3" style={{ fontFamily: 'Playfair Display, serif' }}>Curated <span style={{ color: '#D4AF37' }}>Favorites</span></h2></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.slice(0, 4).map((p) => (
-            <Link key={p.name} href="/shop" className="p5-card group flex gap-4 p-4 rounded-2xl" style={{ background: '#1a1a1a', border: '1px solid rgba(212,175,55,0.08)' }}>
+            <Link key={p.name} href="/shop" className="p5-card group flex gap-4 p-4 rounded-2xl" style={{ background: '#1a1a1a', border: '1px solid rgba(212,175,55,0.08)', transition: 'border-color 0.3s ease' }}>
               <div className="relative w-20 h-20 rounded-xl overflow-hidden flex-shrink-0"><Image src={p.image} alt={p.name} fill className="object-cover" sizes="80px" /></div>
               <div className="flex-1 min-w-0"><p className="text-sm font-medium text-white mb-1 truncate">{p.name}</p>{p.badge && <span className="text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wide text-white" style={{ background: '#D4AF37' }}>{p.badge}</span>}<p className="text-lg font-bold mt-1" style={{ color: '#D4AF37', fontFamily: 'Playfair Display, serif' }}>{fmt(p.price)}</p></div>
             </Link>
@@ -376,21 +400,27 @@ function Products5() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// CTA DEMOS (5)
+// CTA DEMOS (5) — 10/10 with parallax, masks, particles
 // ═══════════════════════════════════════════════════════════
 
 function CTA1() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.c1-content', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 70%' } }); gsap.to('.c1-bg', { yPercent: 20, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 1 } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 70%' } });
+    tl.fromTo('.c1-icon', { scale: 0, rotation: -180 }, { scale: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.5)' });
+    tl.fromTo('.c1-mask', { yPercent: 110 }, { yPercent: 0, duration: 1.2, stagger: 0.1, ease: 'power4.out' }, '-=0.3');
+    tl.fromTo('.c1-fade', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out' }, '-=0.5');
+    gsap.to('.c1-bg', { yPercent: 20, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 1 } });
+  }, { scope: ref });
   return (
     <div ref={ref} className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
       <div className="c1-bg absolute inset-0" style={{ backgroundImage: 'url(/images/hero/hero-slide-3.webp)', backgroundSize: 'cover', backgroundPosition: 'center', height: '130%' }} />
       <div className="absolute inset-0" style={{ background: 'rgba(10,10,12,0.82)' }} />
-      <div className="c1-content relative z-10 text-center px-4 max-w-2xl">
-        <Sparkles className="w-8 h-8 mx-auto mb-6" style={{ color: '#D4AF37' }} />
-        <h2 className="font-bold text-white mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 6vw, 4rem)', lineHeight: 1, textShadow: '0 4px 30px rgba(0,0,0,0.6)' }}>Ready to Transform<br />Your Home?</h2>
-        <p className="text-lg text-white/60 mb-10 max-w-md mx-auto">Join 5,000+ Pakistani homes that chose Aura Living for their decor.</p>
-        <Link href="/shop" className="inline-flex items-center gap-2 px-10 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', color: '#fff', boxShadow: '0 8px 32px rgba(212,175,55,0.35)' }}>Start Shopping <ArrowRight className="w-4 h-4" /></Link>
+      <div className="relative z-10 text-center px-4 max-w-2xl">
+        <div className="c1-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(212,175,55,0.15)', backdropFilter: 'blur(8px)' }}><Sparkles className="w-8 h-8" style={{ color: '#D4AF37' }} /></div>
+        <h2 className="font-bold text-white mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 6vw, 4rem)', lineHeight: 1, textShadow: '0 4px 30px rgba(0,0,0,0.6)' }}><span className="block overflow-hidden"><span className="c1-mask block">Ready to Transform</span></span><span className="block overflow-hidden"><span className="c1-mask block italic" style={{ color: '#E8C547' }}>Your Home?</span></span></h2>
+        <p className="c1-fade text-lg text-white/60 mb-10 max-w-md mx-auto">Join 5,000+ Pakistani homes that chose Aura Living for their decor.</p>
+        <Link href="/shop" className="c1-fade inline-flex items-center gap-2 px-10 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', color: '#fff', boxShadow: '0 8px 32px rgba(212,175,55,0.35)' }}>Start Shopping <ArrowRight className="w-4 h-4" /></Link>
       </div>
     </div>
   );
@@ -398,13 +428,18 @@ function CTA1() {
 
 function CTA2() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.c2-reveal', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 70%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 70%' } });
+    tl.fromTo('.c2-word', { opacity: 0, y: 50, rotateX: -80 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' });
+    tl.fromTo('.c2-fade', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: 'power3.out' }, '-=0.3');
+  }, { scope: ref });
+  const words = ['Your', 'Dream', 'Home', 'Starts', 'Here'];
   return (
     <div ref={ref} className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #B8941F 100%)' }}>
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="c2-reveal font-bold text-white mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>Your Dream Home<br />Starts Here</h2>
-        <p className="c2-reveal text-lg text-white/70 mb-10 max-w-md mx-auto">Explore our full collection of handcrafted decor, delivered to your door.</p>
-        <Link href="/shop" className="c2-reveal inline-flex items-center gap-2 px-10 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ background: '#fff', color: '#D4AF37', boxShadow: '0 8px 24px rgba(0,0,0,0.15)' }}>Browse Collection <ArrowRight className="w-4 h-4" /></Link>
+      <div className="max-w-4xl mx-auto text-center" style={{ perspective: '800px' }}>
+        <h2 className="font-bold text-white mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>{words.map((w, i) => <span key={i} className="c2-word inline-block mr-3">{w}</span>)}</h2>
+        <p className="c2-fade text-lg text-white/70 mb-10 max-w-md mx-auto">Explore our full collection of handcrafted decor, delivered to your door.</p>
+        <Link href="/shop" className="c2-fade inline-flex items-center gap-2 px-10 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ background: '#fff', color: '#D4AF37', boxShadow: '0 8px 24px rgba(0,0,0,0.15)' }}>Browse Collection <ArrowRight className="w-4 h-4" /></Link>
       </div>
     </div>
   );
@@ -412,14 +447,18 @@ function CTA2() {
 
 function CTA3() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.c3-reveal', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 70%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 70%' } });
+    tl.fromTo('.c3-left', { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' });
+    tl.fromTo('.c3-img', { opacity: 0, scale: 0.9, clipPath: 'inset(0% 0% 0% 100%)' }, { opacity: 1, scale: 1, clipPath: 'inset(0% 0% 0% 0%)', duration: 0.8, stagger: 0.1, ease: 'power4.out' }, '-=0.4');
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: '#141414' }}>
       <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div><span className="c3-reveal text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Ready?</span><h2 className="c3-reveal font-bold text-white mt-3 mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>Let&apos;s Find Your<br /><span style={{ color: '#D4AF37' }}>Perfect Piece</span></h2><p className="c3-reveal text-white/50 mb-8">Browse 45+ handcrafted products across 6 categories. Free shipping above Rs. 10,000.</p><Link href="/shop" className="c3-reveal inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', color: '#fff' }}>Shop Now <ArrowRight className="w-4 h-4" /></Link></div>
-          <div className="c3-reveal grid grid-cols-2 gap-4">
-            {products.slice(0, 4).map((p) => (<div key={p.name} className="relative rounded-xl overflow-hidden" style={{ aspectRatio: '1' }}><Image src={p.image} alt={p.name} fill className="object-cover" sizes="25vw" /><div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent 50%)' }} /><p className="absolute bottom-2 left-2 text-xs font-medium text-white truncate max-w-[90%]">{p.name}</p></div>))}
+          <div className="c3-left"><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Ready?</span><h2 className="font-bold text-white mt-3 mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>Let&apos;s Find Your<br /><span style={{ color: '#D4AF37' }}>Perfect Piece</span></h2><p className="text-white/50 mb-8">Browse 45+ handcrafted products across 6 categories. Free shipping above Rs. 10,000.</p><Link href="/shop" className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', color: '#fff' }}>Shop Now <ArrowRight className="w-4 h-4" /></Link></div>
+          <div className="grid grid-cols-2 gap-4">
+            {products.slice(0, 4).map((p) => (<div key={p.name} className="c3-img relative rounded-xl overflow-hidden" style={{ aspectRatio: '1' }}><Image src={p.image} alt={p.name} fill className="object-cover" sizes="25vw" /><div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent 50%)' }} /><p className="absolute bottom-2 left-2 text-xs font-medium text-white truncate max-w-[90%]">{p.name}</p></div>))}
           </div>
         </div>
       </div>
@@ -429,12 +468,16 @@ function CTA3() {
 
 function CTA4() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 70%' } }); tl.fromTo('.c4-word', { opacity: 0, y: 50, rotateX: -80 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' }); tl.fromTo('.c4-fade', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3'); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 70%' } });
+    tl.fromTo('.c4-word', { opacity: 0, y: 50, rotateX: -80 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' });
+    tl.fromTo('.c4-fade', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3');
+  }, { scope: ref });
   const words = ['Transform', 'Your', 'Space.'];
   return (
     <div ref={ref} className="py-24 px-4 sm:px-6 lg:px-8 text-center" style={{ background: 'linear-gradient(180deg, #FAF8F5 0%, #F5EDDA 50%, #FAF8F5 100%)' }}>
-      <div className="max-w-3xl mx-auto">
-        <h2 className="font-bold mb-8" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 8vw, 5rem)', lineHeight: 1, color: '#2C2C2C', perspective: '800px' }}>{words.map((w, i) => <span key={i} className="c4-word inline-block mr-3" style={{ color: i === 2 ? '#D4AF37' : '#2C2C2C' }}>{w}</span>)}</h2>
+      <div className="max-w-3xl mx-auto" style={{ perspective: '800px' }}>
+        <h2 className="font-bold mb-8" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 8vw, 5rem)', lineHeight: 1, color: '#2C2C2C' }}>{words.map((w, i) => <span key={i} className="c4-word inline-block mr-3" style={{ color: i === 2 ? '#D4AF37' : '#2C2C2C' }}>{w}</span>)}</h2>
         <p className="c4-fade text-lg mb-10" style={{ color: '#5A5A5A' }}>Premium handcrafted decor, delivered across Pakistan.</p>
         <Link href="/shop" className="c4-fade inline-flex items-center gap-2 px-10 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', color: '#fff', boxShadow: '0 8px 32px rgba(212,175,55,0.35)' }}>Explore Collection <ArrowRight className="w-4 h-4" /></Link>
       </div>
@@ -444,21 +487,26 @@ function CTA4() {
 
 function CTA5() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.c5-reveal', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.8, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 70%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 70%' } });
+    tl.fromTo('.c5-icon', { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(1.5)' });
+    tl.fromTo('.c5-mask', { yPercent: 110 }, { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' }, '-=0.3');
+    tl.fromTo('.c5-fade', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, '-=0.3');
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: '#FAF8F5' }}>
       <div className="max-w-4xl mx-auto text-center p-12 rounded-3xl" style={{ background: '#FFFDF7', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', border: '1px solid rgba(212,175,55,0.15)' }}>
-        <div className="c5-reveal w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(212,175,55,0.1)' }}><Sparkles className="w-8 h-8" style={{ color: '#D4AF37' }} /></div>
-        <h2 className="c5-reveal font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#2C2C2C' }}>Begin Your <span style={{ color: '#D4AF37' }}>Decor Journey</span></h2>
-        <p className="c5-reveal text-base mb-8 max-w-md mx-auto" style={{ color: '#5A5A5A' }}>Discover handcrafted pieces that tell your story. Free shipping on orders above Rs. 10,000.</p>
-        <div className="c5-reveal flex flex-col sm:flex-row gap-3 justify-center"><Link href="/shop" className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', color: '#fff', boxShadow: '0 8px 24px rgba(212,175,55,0.3)' }}>Shop Now <ArrowRight className="w-4 h-4" /></Link><Link href="/about" className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:bg-[#D4AF37]/10 border" style={{ borderColor: '#D4AF37', color: '#B8941F' }}>Learn More</Link></div>
+        <div className="c5-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(212,175,55,0.1)' }}><Sparkles className="w-8 h-8" style={{ color: '#D4AF37' }} /></div>
+        <h2 className="font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#2C2C2C' }}><span className="block overflow-hidden"><span className="c5-mask block">Begin Your</span></span><span className="block overflow-hidden"><span className="c5-mask block" style={{ color: '#D4AF37' }}>Decor Journey</span></span></h2>
+        <p className="c5-fade text-base mb-8 max-w-md mx-auto" style={{ color: '#5A5A5A' }}>Discover handcrafted pieces that tell your story. Free shipping on orders above Rs. 10,000.</p>
+        <div className="c5-fade flex flex-col sm:flex-row gap-3 justify-center"><Link href="/shop" className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', color: '#fff', boxShadow: '0 8px 24px rgba(212,175,55,0.3)' }}>Shop Now <ArrowRight className="w-4 h-4" /></Link><Link href="/about" className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold uppercase tracking-wider text-sm transition-all hover:bg-[#D4AF37]/10 border" style={{ borderColor: '#D4AF37', color: '#B8941F' }}>Learn More</Link></div>
       </div>
     </div>
   );
 }
 
 // ═══════════════════════════════════════════════════════════
-// TRUST BADGES DEMOS (5)
+// TRUST BADGES DEMOS (5) — 10/10 with stagger, glow, back ease
 // ═══════════════════════════════════════════════════════════
 
 const badges = [
@@ -470,27 +518,32 @@ const badges = [
 
 function Trust1() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.t1-badge', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 80%' } }); }, { scope: ref });
+  useGSAP(() => {
+    gsap.fromTo('.t1-badge', { opacity: 0, y: 40, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.1, ease: 'back.out(1.4)', scrollTrigger: { trigger: ref.current, start: 'top 80%' } });
+    gsap.utils.toArray<HTMLElement>('.t1-icon').forEach((el) => {
+      gsap.to(el, { boxShadow: '0 0 20px rgba(212,175,55,0.2)', duration: 2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1 });
+    });
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: '#FAF8F5' }}>
-      <div className="max-w-5xl mx-auto"><div className="grid grid-cols-2 lg:grid-cols-4 gap-8">{badges.map((b) => { const Icon = b.icon; return (<div key={b.title} className="t1-badge text-center"><div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: 'rgba(212,175,55,0.1)' }}><Icon className="w-6 h-6" style={{ color: '#D4AF37' }} /></div><h3 className="text-sm font-semibold mb-1" style={{ color: '#2C2C2C' }}>{b.title}</h3><p className="text-xs" style={{ color: '#5A5A5A' }}>{b.desc}</p></div>); })}</div></div>
+      <div className="max-w-5xl mx-auto"><div className="grid grid-cols-2 lg:grid-cols-4 gap-8">{badges.map((b) => { const Icon = b.icon; return (<div key={b.title} className="t1-badge text-center"><div className="t1-icon w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: 'rgba(212,175,55,0.1)' }}><Icon className="w-6 h-6" style={{ color: '#D4AF37' }} /></div><h3 className="text-sm font-semibold mb-1" style={{ color: '#2C2C2C' }}>{b.title}</h3><p className="text-xs" style={{ color: '#5A5A5A' }}>{b.desc}</p></div>); })}</div></div>
     </div>
   );
 }
 
 function Trust2() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.t2-badge', { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.5)', scrollTrigger: { trigger: ref.current, start: 'top 80%' } }); }, { scope: ref });
+  useGSAP(() => { gsap.fromTo('.t2-badge', { opacity: 0, scale: 0.8, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'back.out(1.5)', scrollTrigger: { trigger: ref.current, start: 'top 80%' } }); }, { scope: ref });
   return (
     <div ref={ref} className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: '#141414' }}>
-      <div className="max-w-5xl mx-auto"><div className="grid grid-cols-2 lg:grid-cols-4 gap-6">{badges.map((b) => { const Icon = b.icon; return (<div key={b.title} className="t2-badge p-6 rounded-2xl text-center" style={{ background: '#1a1a1a', border: '1px solid rgba(212,175,55,0.1)' }}><div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3" style={{ background: 'rgba(212,175,55,0.1)' }}><Icon className="w-5 h-5" style={{ color: '#D4AF37' }} /></div><h3 className="text-sm font-semibold text-white mb-1">{b.title}</h3><p className="text-xs text-white/40">{b.desc}</p></div>); })}</div></div>
+      <div className="max-w-5xl mx-auto"><div className="grid grid-cols-2 lg:grid-cols-4 gap-6">{badges.map((b) => { const Icon = b.icon; return (<div key={b.title} className="t2-badge p-6 rounded-2xl text-center" style={{ background: '#1a1a1a', border: '1px solid rgba(212,175,55,0.1)', transition: 'border-color 0.3s ease' }}><div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3" style={{ background: 'rgba(212,175,55,0.1)' }}><Icon className="w-5 h-5" style={{ color: '#D4AF37' }} /></div><h3 className="text-sm font-semibold text-white mb-1">{b.title}</h3><p className="text-xs text-white/40">{b.desc}</p></div>); })}</div></div>
     </div>
   );
 }
 
 function Trust3() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.t3-badge', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 80%' } }); }, { scope: ref });
+  useGSAP(() => { gsap.fromTo('.t3-badge', { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.5, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 80%' } }); }, { scope: ref });
   return (
     <div ref={ref} className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: 'linear-gradient(135deg, #FAF8F5 0%, #F5EDDA 100%)' }}>
       <div className="max-w-4xl mx-auto space-y-4">{badges.map((b) => { const Icon = b.icon; return (<div key={b.title} className="t3-badge flex items-center gap-4 p-5 rounded-2xl" style={{ background: '#FFFDF7', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}><div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(212,175,55,0.1)' }}><Icon className="w-5 h-5" style={{ color: '#D4AF37' }} /></div><div><h3 className="text-sm font-semibold" style={{ color: '#2C2C2C' }}>{b.title}</h3><p className="text-xs" style={{ color: '#5A5A5A' }}>{b.desc}</p></div><div className="ml-auto w-8 h-px" style={{ background: '#D4AF37' }} /></div>); })}</div>
@@ -500,7 +553,7 @@ function Trust3() {
 
 function Trust4() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.t4-badge', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 80%' } }); }, { scope: ref });
+  useGSAP(() => { gsap.fromTo('.t4-badge', { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.3)', scrollTrigger: { trigger: ref.current, start: 'top 80%' } }); }, { scope: ref });
   return (
     <div ref={ref} className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: '#FAF8F5' }}>
       <div className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4">{badges.map((b) => { const Icon = b.icon; return (<div key={b.title} className="t4-badge p-6 rounded-2xl text-center transition-all hover:-translate-y-1" style={{ background: '#FFFDF7', boxShadow: '0 4px 12px rgba(0,0,0,0.04)', border: '1px solid rgba(212,175,55,0.08)' }}><Icon className="w-7 h-7 mx-auto mb-3" style={{ color: '#D4AF37' }} /><h3 className="text-sm font-semibold mb-1" style={{ color: '#2C2C2C' }}>{b.title}</h3><p className="text-xs" style={{ color: '#5A5A5A' }}>{b.desc}</p></div>); })}</div>
@@ -509,30 +562,48 @@ function Trust4() {
 }
 
 function Trust5() {
+  const ref = useRef<HTMLDivElement>(null);
+  useGSAP(() => {
+    const track = ref.current?.querySelector('.t5-track');
+    if (track) { gsap.to(track, { x: '-50%', duration: 20, repeat: -1, ease: 'none' }); }
+    gsap.fromTo('.t5-item', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 85%' } });
+  }, { scope: ref });
+  const items = [...badges, ...badges, ...badges];
   return (
-    <div className="py-8 overflow-hidden" style={{ background: '#141414' }}>
-      <div className="flex gap-8 animate-[scroll_20s_linear_infinite] whitespace-nowrap">
-        {[...badges, ...badges, ...badges].map((b, i) => { const Icon = b.icon; return (<div key={i} className="flex items-center gap-3 flex-shrink-0"><Icon className="w-5 h-5" style={{ color: '#D4AF37' }} /><span className="text-sm font-medium text-white/70">{b.title}</span><span className="text-white/20">·</span></div>); })}
+    <div ref={ref} className="py-10 overflow-hidden" style={{ background: '#141414' }}>
+      <div className="t5-track flex gap-8 whitespace-nowrap" style={{ width: 'max-content' }}>
+        {items.map((b, i) => { const Icon = b.icon; return (
+          <div key={i} className="t5-item flex items-center gap-3 flex-shrink-0">
+            <Icon className="w-5 h-5" style={{ color: '#D4AF37' }} />
+            <span className="text-sm font-medium text-white/70">{b.title}</span>
+            <span className="text-white/20">·</span>
+          </div>
+        ); })}
       </div>
     </div>
   );
 }
 
 // ═══════════════════════════════════════════════════════════
-// NEWSLETTER DEMOS (5)
+// NEWSLETTER DEMOS (5) — 10/10 with text reveals, glassmorphism
 // ═══════════════════════════════════════════════════════════
 
 function Newsletter1() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.n1-reveal', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 75%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 75%' } });
+    tl.fromTo('.n1-line', { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'power3.out' });
+    tl.fromTo('.n1-mask', { yPercent: 110 }, { yPercent: 0, duration: 1, stagger: 0.08, ease: 'power4.out' }, '-=0.3');
+    tl.fromTo('.n1-fade', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: 'power3.out' }, '-=0.3');
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: 'linear-gradient(180deg, #FAF8F5 0%, #F5EDDA 100%)' }}>
       <div className="max-w-2xl mx-auto text-center">
-        <div className="n1-reveal flex items-center justify-center gap-3 mb-4"><div style={{ width: 32, height: 1, background: '#D4AF37' }} /><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Stay Connected</span><div style={{ width: 32, height: 1, background: '#D4AF37' }} /></div>
-        <h2 className="n1-reveal font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#2C2C2C' }}>Join the <span style={{ color: '#D4AF37' }}>Aura Family</span></h2>
-        <p className="n1-reveal text-base mb-8 max-w-md mx-auto" style={{ color: '#5A5A5A' }}>Get 10% off your first order, plus early access to new arrivals.</p>
-        <form className="n1-reveal flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}><input type="email" placeholder="your@email.com" required className="flex-1 px-4 py-3 rounded-full text-sm outline-none" style={{ border: '1.5px solid rgba(212,175,55,0.2)', background: '#FFFDF7' }} /><button type="submit" className="px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-white transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', boxShadow: '0 4px 12px rgba(212,175,55,0.3)' }}>Subscribe</button></form>
-        <p className="n1-reveal text-xs mt-4" style={{ color: '#8A8A8A' }}>No spam, unsubscribe anytime.</p>
+        <div className="flex items-center justify-center gap-3 mb-4"><div className="n1-line w-8 h-px origin-left" style={{ background: '#D4AF37' }} /><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Stay Connected</span><div className="n1-line w-8 h-px origin-right" style={{ background: '#D4AF37' }} /></div>
+        <h2 className="font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#2C2C2C' }}><span className="block overflow-hidden"><span className="n1-mask block">Join the</span></span><span className="block overflow-hidden"><span className="n1-mask block" style={{ color: '#D4AF37' }}>Aura Family</span></span></h2>
+        <p className="n1-fade text-base mb-8 max-w-md mx-auto" style={{ color: '#5A5A5A' }}>Get 10% off your first order, plus early access to new arrivals.</p>
+        <form className="n1-fade flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}><input type="email" placeholder="your@email.com" required className="flex-1 px-4 py-3 rounded-full text-sm outline-none" style={{ border: '1.5px solid rgba(212,175,55,0.2)', background: '#FFFDF7' }} /><button type="submit" className="px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-white transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', boxShadow: '0 4px 12px rgba(212,175,55,0.3)' }}>Subscribe</button></form>
+        <p className="n1-fade text-xs mt-4" style={{ color: '#8A8A8A' }}>No spam, unsubscribe anytime.</p>
       </div>
     </div>
   );
@@ -540,14 +611,19 @@ function Newsletter1() {
 
 function Newsletter2() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.n2-reveal', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 75%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 75%' } });
+    tl.fromTo('.n2-icon', { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(1.5)' });
+    tl.fromTo('.n2-mask', { yPercent: 110 }, { yPercent: 0, duration: 1, stagger: 0.08, ease: 'power4.out' }, '-=0.3');
+    tl.fromTo('.n2-fade', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: 'power3.out' }, '-=0.3');
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: '#141414' }}>
       <div className="max-w-2xl mx-auto text-center">
-        <Sparkles className="n2-reveal w-8 h-8 mx-auto mb-6" style={{ color: '#D4AF37' }} />
-        <h2 className="n2-reveal font-bold text-white mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 3rem)' }}>Get <span style={{ color: '#D4AF37' }}>10% Off</span></h2>
-        <p className="n2-reveal text-white/50 mb-8 max-w-md mx-auto">Subscribe to our newsletter for exclusive offers and new arrivals.</p>
-        <form className="n2-reveal flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}><input type="email" placeholder="your@email.com" required className="flex-1 px-4 py-3 rounded-full text-sm outline-none text-white" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,175,55,0.15)', color: '#fff' }} /><button type="submit" className="px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-white transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)' }}>Subscribe</button></form>
+        <div className="n2-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(212,175,55,0.1)' }}><Sparkles className="w-8 h-8" style={{ color: '#D4AF37' }} /></div>
+        <h2 className="font-bold text-white mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 3rem)' }}><span className="block overflow-hidden"><span className="n2-mask block">Get</span></span><span className="block overflow-hidden"><span className="n2-mask block" style={{ color: '#D4AF37' }}>10% Off</span></span></h2>
+        <p className="n2-fade text-white/50 mb-8 max-w-md mx-auto">Subscribe to our newsletter for exclusive offers and new arrivals.</p>
+        <form className="n2-fade flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}><input type="email" placeholder="your@email.com" required className="flex-1 px-4 py-3 rounded-full text-sm outline-none" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,175,55,0.15)', color: '#fff' }} /><button type="submit" className="px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-white transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)' }}>Subscribe</button></form>
       </div>
     </div>
   );
@@ -555,14 +631,20 @@ function Newsletter2() {
 
 function Newsletter3() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.n3-reveal', { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 75%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 75%' } });
+    tl.fromTo('.n3-card', { opacity: 0, scale: 0.9, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'back.out(1.2)' });
+    tl.fromTo('.n3-icon', { scale: 0, rotation: -180 }, { scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(1.5)' }, '-=0.3');
+    tl.fromTo('.n3-mask', { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: 'power4.out' }, '-=0.2');
+    tl.fromTo('.n3-fade', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, '-=0.2');
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: '#FAF8F5' }}>
-      <div className="max-w-3xl mx-auto p-12 rounded-3xl text-center" style={{ background: '#FFFDF7', boxShadow: '0 20px 60px rgba(0,0,0,0.06)', border: '1px solid rgba(212,175,55,0.1)' }}>
-        <div className="n3-reveal w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(212,175,55,0.1)' }}><Sparkles className="w-7 h-7" style={{ color: '#D4AF37' }} /></div>
-        <h2 className="n3-reveal font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: '#2C2C2C' }}>Join the Aura Family</h2>
-        <p className="n3-reveal text-sm mb-8 max-w-md mx-auto" style={{ color: '#5A5A5A' }}>Get 10% off your first order, plus early access to new arrivals and exclusive offers.</p>
-        <form className="n3-reveal flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}><input type="email" placeholder="your@email.com" required className="flex-1 px-4 py-3 rounded-full text-sm outline-none" style={{ border: '1.5px solid rgba(212,175,55,0.2)', background: '#FAF8F5' }} /><button type="submit" className="px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-white transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', boxShadow: '0 4px 12px rgba(212,175,55,0.3)' }}>Subscribe</button></form>
+      <div className="n3-card max-w-3xl mx-auto p-12 rounded-3xl text-center" style={{ background: '#FFFDF7', boxShadow: '0 20px 60px rgba(0,0,0,0.06)', border: '1px solid rgba(212,175,55,0.1)' }}>
+        <div className="n3-icon w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(212,175,55,0.1)' }}><Sparkles className="w-7 h-7" style={{ color: '#D4AF37' }} /></div>
+        <h2 className="font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: '#2C2C2C' }}><span className="block overflow-hidden"><span className="n3-mask block">Join the Aura Family</span></span></h2>
+        <p className="n3-fade text-sm mb-8 max-w-md mx-auto" style={{ color: '#5A5A5A' }}>Get 10% off your first order, plus early access to new arrivals and exclusive offers.</p>
+        <form className="n3-fade flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}><input type="email" placeholder="your@email.com" required className="flex-1 px-4 py-3 rounded-full text-sm outline-none" style={{ border: '1.5px solid rgba(212,175,55,0.2)', background: '#FAF8F5' }} /><button type="submit" className="px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-white transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', boxShadow: '0 4px 12px rgba(212,175,55,0.3)' }}>Subscribe</button></form>
       </div>
     </div>
   );
@@ -570,12 +652,16 @@ function Newsletter3() {
 
 function Newsletter4() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.n4-reveal', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 75%' } }); }, { scope: ref });
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 75%' } });
+    tl.fromTo('.n4-left', { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' });
+    tl.fromTo('.n4-right', { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6');
+  }, { scope: ref });
   return (
     <div ref={ref} className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #B8941F 100%)' }}>
       <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-        <div><h2 className="n4-reveal font-bold text-white mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', lineHeight: 1.1 }}>Never Miss a<br />New Arrival</h2><p className="n4-reveal text-white/70 mb-6">Subscribe and get 10% off your first order.</p><div className="n4-reveal flex gap-6">{[{ num: '5K+', label: 'Subscribers' }, { num: '10%', label: 'First Order' }].map(s => (<div key={s.label}><p className="text-2xl font-bold text-white" style={{ fontFamily: 'Playfair Display, serif' }}>{s.num}</p><p className="text-xs text-white/50 uppercase tracking-wider">{s.label}</p></div>))}</div></div>
-        <form className="n4-reveal space-y-3" onSubmit={(e) => e.preventDefault()}><input type="email" placeholder="your@email.com" required className="w-full px-4 py-3 rounded-full text-sm outline-none" style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', backdropFilter: 'blur(4px)' }} /><button type="submit" className="w-full px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition-all hover:scale-[1.02]" style={{ background: '#fff', color: '#D4AF37' }}>Subscribe Now</button></form>
+        <div className="n4-left"><h2 className="font-bold text-white mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', lineHeight: 1.1 }}>Never Miss a<br />New Arrival</h2><p className="text-white/70 mb-6">Subscribe and get 10% off your first order.</p><div className="flex gap-6">{[{ num: '5K+', label: 'Subscribers' }, { num: '10%', label: 'First Order' }].map(s => (<div key={s.label}><p className="text-2xl font-bold text-white" style={{ fontFamily: 'Playfair Display, serif' }}>{s.num}</p><p className="text-xs text-white/50 uppercase tracking-wider">{s.label}</p></div>))}</div></div>
+        <form className="n4-right space-y-3" onSubmit={(e) => e.preventDefault()}><input type="email" placeholder="your@email.com" required className="w-full px-4 py-3 rounded-full text-sm outline-none" style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', backdropFilter: 'blur(4px)' }} /><button type="submit" className="w-full px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition-all hover:scale-[1.02]" style={{ background: '#fff', color: '#D4AF37' }}>Subscribe Now</button></form>
       </div>
     </div>
   );
@@ -583,16 +669,21 @@ function Newsletter4() {
 
 function Newsletter5() {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(() => { gsap.fromTo('.n5-reveal', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 75%' } }); }, { scope: ref });
+  useGSAP(() => {
+    gsap.to('.n5-bg', { yPercent: 15, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 1 } });
+    const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: 'top 75%' } });
+    tl.fromTo('.n5-mask', { yPercent: 110 }, { yPercent: 0, duration: 1, stagger: 0.08, ease: 'power4.out' });
+    tl.fromTo('.n5-fade', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: 'power3.out' }, '-=0.3');
+  }, { scope: ref });
   return (
     <div ref={ref} className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden" style={{ background: '#141414' }}>
-      <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'url(/images/hero/hero-slide-4.webp)', backgroundSize: 'cover', backgroundPosition: 'center' }} />
+      <div className="n5-bg absolute inset-0 opacity-5" style={{ backgroundImage: 'url(/images/hero/hero-slide-4.webp)', backgroundSize: 'cover', backgroundPosition: 'center', height: '130%' }} />
       <div className="relative z-10 max-w-xl mx-auto text-center">
-        <div className="n5-reveal flex items-center justify-center gap-3 mb-4"><div style={{ width: 32, height: 1, background: '#D4AF37' }} /><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Newsletter</span><div style={{ width: 32, height: 1, background: '#D4AF37' }} /></div>
-        <h2 className="n5-reveal font-bold text-white mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 3rem)' }}>Stay in the <span style={{ color: '#D4AF37' }}>Loop</span></h2>
-        <p className="n5-reveal text-white/50 mb-8 max-w-md mx-auto">Be the first to know about new arrivals, sales, and styling tips.</p>
-        <form className="n5-reveal flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}><input type="email" placeholder="your@email.com" required className="flex-1 px-4 py-3 rounded-full text-sm outline-none text-white" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,175,55,0.15)', color: '#fff' }} /><button type="submit" className="px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-white transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', boxShadow: '0 4px 16px rgba(212,175,55,0.3)' }}>Subscribe</button></form>
-        <p className="n5-reveal text-xs text-white/30 mt-4">No spam. Unsubscribe anytime.</p>
+        <div className="n5-fade flex items-center justify-center gap-3 mb-4"><div style={{ width: 32, height: 1, background: '#D4AF37' }} /><span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#D4AF37' }}>Newsletter</span><div style={{ width: 32, height: 1, background: '#D4AF37' }} /></div>
+        <h2 className="font-bold text-white mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 3rem)' }}><span className="block overflow-hidden"><span className="n5-mask block">Stay in the</span></span><span className="block overflow-hidden"><span className="n5-mask block" style={{ color: '#D4AF37' }}>Loop</span></span></h2>
+        <p className="n5-fade text-white/50 mb-8 max-w-md mx-auto">Be the first to know about new arrivals, sales, and styling tips.</p>
+        <form className="n5-fade flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}><input type="email" placeholder="your@email.com" required className="flex-1 px-4 py-3 rounded-full text-sm outline-none text-white" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,175,55,0.15)', color: '#fff' }} /><button type="submit" className="px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-white transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #D4AF37, #B8941F)', boxShadow: '0 4px 16px rgba(212,175,55,0.3)' }}>Subscribe</button></form>
+        <p className="n5-fade text-xs text-white/30 mt-4">No spam. Unsubscribe anytime.</p>
       </div>
     </div>
   );
