@@ -21,6 +21,9 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
 
+  // Pages that should NOT show Navbar/Footer/chrome (full-bleed demo pages)
+  const isFullBleed = pathname === '/hero-demos' || pathname === '/home-new';
+
   // Smooth scroll (desktop only — Lenis hook handles the mobile check)
   useLenis();
 
@@ -45,36 +48,44 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <FloatingOrb size={90} top="15%" left="3%" delay={0} />
-      <FloatingOrb size={70} top="55%" left="88%" delay={1.0} />
-      <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />
+      {!isFullBleed && (
+        <>
+          <FloatingOrb size={90} top="15%" left="3%" delay={0} />
+          <FloatingOrb size={70} top="55%" left="88%" delay={1.0} />
+          <FloatingOrb size={80} top="80%" left="8%" delay={2.0} />
+        </>
+      )}
 
-      <Navbar />
+      {!isFullBleed && <Navbar />}
 
       <main ref={contentRef} id="main-content" className="flex-1 w-full">
         {children}
       </main>
 
-      <div className="flex justify-center py-8 px-4 sm:px-6 w-full">
-        <div className="w-full max-w-xs sm:max-w-sm">
-          <GoldDivider />
-        </div>
-      </div>
+      {!isFullBleed && (
+        <>
+          <div className="flex justify-center py-8 px-4 sm:px-6 w-full">
+            <div className="w-full max-w-xs sm:max-w-sm">
+              <GoldDivider />
+            </div>
+          </div>
 
-      <Footer />
+          <Footer />
 
-      <CartDrawer />
+          <CartDrawer />
 
-      <BackToTop />
+          <BackToTop />
 
-      {/* Decorative corner ornaments — only on home */}
-      {pathname === '/' && (
-        <div className="hidden md:block fixed inset-0 pointer-events-none z-[5]">
-          <CornerOrnament position="top-left" size={80} />
-          <CornerOrnament position="top-right" size={80} />
-          <CornerOrnament position="bottom-left" size={80} />
-          <CornerOrnament position="bottom-right" size={80} />
-        </div>
+          {/* Decorative corner ornaments — only on home */}
+          {pathname === '/' && (
+            <div className="hidden md:block fixed inset-0 pointer-events-none z-[5]">
+              <CornerOrnament position="top-left" size={80} />
+              <CornerOrnament position="top-right" size={80} />
+              <CornerOrnament position="bottom-left" size={80} />
+              <CornerOrnament position="bottom-right" size={80} />
+            </div>
+          )}
+        </>
       )}
     </>
   );
