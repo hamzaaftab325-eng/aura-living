@@ -78,8 +78,8 @@ export default function CategoriesMagazine({ categories }: CategoriesMagazinePro
         <div className="aura-cat-mag-head">
           <span className="aura-cat-mag-eyebrow">02 — Categories</span>
           <h2 className="aura-cat-mag-title">
-            Four worlds,<br />
-            <span className="aura-cat-mag-title-accent">one craft.</span>
+            Not rooms.<br />
+            <span className="aura-cat-mag-title-accent">Rituals.</span>
           </h2>
         </div>
 

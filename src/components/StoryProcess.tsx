@@ -101,11 +101,12 @@ export default function StoryProcess() {
         <div className="aura-story-proc-head">
           <span className="aura-story-proc-eyebrow">03 — The Craft</span>
           <h2 className="aura-story-proc-title">
-            Four steps,<br />
-            <span className="aura-story-proc-title-accent">forty hours.</span>
+            From forest<br />
+            <span className="aura-story-proc-title-accent">to your floor.</span>
           </h2>
           <p className="aura-story-proc-sub">
-            Every Aura Living piece passes through four hands before it reaches yours.
+            Four hands. Four signatures. Forty hours between a raw plank and the
+            piece that arrives at your door.
           </p>
         </div>
 

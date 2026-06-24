@@ -63,18 +63,18 @@ export default function HeroEditorial() {
           </span>
 
           <h1 className="aura-hero-ed-title">
-            Made by hand.<br />
-            <span className="aura-hero-ed-title-accent">Made for you.</span>
+            Forty hours.<br />
+            <span className="aura-hero-ed-title-accent">One piece.</span>
           </h1>
 
           <p className="aura-hero-ed-story">
-            Sheesham wood, raw brass, hand-thrown clay. Each piece is shaped by
-            third-generation artisans in Lahore — signed, dated, and made to
-            outlive trends.
+            Sheesham wood from Punjab. Brass from Lahore foundries. Clay from
+            Multan. Each piece is shaped by third-generation artisans — signed,
+            dated, and made to outlive the room it lives in.
           </p>
 
           <Link href="/shop" className="aura-hero-ed-cta">
-            <span>Explore the collection</span>
+            <span>See the forty-hour pieces</span>
             <ArrowRight className="aura-hero-ed-cta-icon" />
           </Link>
         </div>

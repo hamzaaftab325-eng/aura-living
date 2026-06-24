@@ -3098,9 +3098,12 @@
 .aura-hero-ed-accent {
   position: absolute; top: -8%; right: -8%;
   width: 50%; height: 50%; z-index: 0;
-  background: linear-gradient(135deg, #C07A65, #D4AF37);
+  background:
+    linear-gradient(135deg, #C07A65 0%, #D4AF37 100%),
+    repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.04) 8px, rgba(255,255,255,0.04) 9px);
   border-radius: 1rem;
-  opacity: 0.85;
+  opacity: 0.9;
+  box-shadow: 0 16px 40px rgba(192, 122, 101, 0.25);
 }
 
 .aura-hero-ed-image-wrap {
@@ -3114,8 +3117,9 @@
   position: absolute; bottom: -1.5rem; left: -1.5rem; z-index: 2;
   padding: 1.5rem; border-radius: 1rem;
   background: #FFFFFF;
-  box-shadow: 0 16px 40px rgba(28, 27, 25, 0.12);
+  box-shadow: 0 20px 48px rgba(28, 27, 25, 0.14), 0 1px 0 rgba(255,255,255,0.8) inset;
   border: 1px solid rgba(28, 27, 25, 0.06);
+  border-top: 2px solid #C07A65;
   min-width: 16rem;
   display: flex; flex-direction: column; gap: 0.65rem;
 }
@@ -3139,9 +3143,10 @@
   display: inline-flex; align-items: center; gap: 0.4rem;
   font-size: 0.6875rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.12em; color: #C07A65; text-decoration: none;
-  margin-top: 0.5rem; transition: gap 0.3s var(--ease-out);
+  margin-top: 0.5rem; padding-top: 0.65rem; border-top: 1px solid rgba(28, 27, 25, 0.08);
+  transition: gap 0.3s var(--ease-out), color 0.3s var(--ease-out);
 }
-.aura-hero-ed-spec-link:hover { gap: 0.6rem; }
+.aura-hero-ed-spec-link:hover { gap: 0.6rem; color: #1C1B19; }
 .aura-hero-ed-spec-link-icon { width: 12px; height: 12px; }
 
 
