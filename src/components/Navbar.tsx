@@ -390,8 +390,8 @@ export default function Navbar() {
                     <li
                       key={link.label}
                       ref={(el) => { if (el) navItemRefs.current.set(link.label, el); }}
-                      className="relative z-10 block cursor-pointer uppercase font-medium transition-all duration-300 select-none"
-                      style={{ color: isActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.85)',
+                      className={`relative z-10 block cursor-pointer uppercase font-medium transition-all duration-300 select-none ${isActive ? 'aura-accent-gold' : 'aura-text-white-85'}`}
+                      style={{
                         paddingLeft: scrolled ? '20px' : '24px',
                         paddingRight: scrolled ? '20px' : '24px',
                         paddingTop: scrolled ? '8px' : '12px',
@@ -446,7 +446,7 @@ export default function Navbar() {
             {/* Action icons — inside pill */}
             <div className="flex items-center gap-1 sm:gap-1.5">
               <button
-                className="rounded-full transition-all duration-300 hover:bg-white/10"
+                className="rounded-full transition-all duration-300 aura-hover-dark"
                 style={{  padding: scrolled ? '8px' : '12px' }}
                 aria-label="Search"
                 onClick={() => setSearchOpen(true)}
@@ -456,7 +456,7 @@ export default function Navbar() {
 
               <Link
                 href="/wishlist"
-                className="relative hidden sm:flex rounded-full transition-all duration-300 hover:bg-white/10 aura-text-white-85"
+                className="relative hidden sm:flex rounded-full transition-all duration-300 aura-hover-dark aura-text-white-85"
                 style={{  padding: scrolled ? '6px' : '8px' }}
                 aria-label="Wishlist"
                 onClick={closeMenusAndScroll}
@@ -470,7 +470,7 @@ export default function Navbar() {
               </Link>
 
               <button
-                className="relative rounded-full transition-all duration-300 hover:bg-white/10 aura-text-white-85"
+                className="relative rounded-full transition-all duration-300 aura-hover-dark aura-text-white-85"
                 style={{  padding: scrolled ? '6px' : '8px' }}
                 aria-label={`Cart, ${cartCount} ${cartCount === 1 ? 'item' : 'items'}`}
                 onClick={() => setCartOpen(true)}
@@ -494,7 +494,7 @@ export default function Navbar() {
 
               <Link
                 href="/account"
-                className="hidden sm:flex rounded-full transition-all duration-300 hover:bg-white/10"
+                className="hidden sm:flex rounded-full transition-all duration-300 aura-hover-dark"
                 style={{  padding: scrolled ? '6px' : '8px' }}
                 aria-label="Account"
                 onClick={closeMenusAndScroll}
@@ -503,7 +503,7 @@ export default function Navbar() {
               </Link>
 
               <button
-                className="lg:hidden rounded-full transition-all duration-300 hover:bg-white/10"
+                className="lg:hidden rounded-full transition-all duration-300 aura-hover-dark"
                 style={{  padding: scrolled ? '6px' : '8px' }}
                 aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
@@ -595,7 +595,7 @@ export default function Navbar() {
                       />
                       <div
                         className="absolute inset-0"
-                        style={{ background: 'linear-gradient(180deg, rgba(28,28,28,0.35) 0%, rgba(28,28,28,0.85) 60%, rgba(28,28,28,0.95) 100%)' }}
+                        style={{ background: 'linear-gradient(180deg, rgba(44,44,44,0.35) 0%, rgba(44,44,44,0.85) 60%, rgba(44,44,44,0.95) 100%)' }}
                       />
                       <div
                         className="absolute top-4 right-4 w-10 h-10"
@@ -655,7 +655,7 @@ export default function Navbar() {
               style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
             />
             <button
-              className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/10"
+              className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 aura-hover-dark"
               style={{ border: '1px solid rgba(212, 175, 55, 0.2)' }}
               onClick={closeMobileMenu}
               aria-label="Close menu"
@@ -701,10 +701,9 @@ export default function Navbar() {
                     {link.hasMegaMenu ? (
                       <button
                         type="button"
-                        className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
-                        style={{ color: isActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.95)',
+                        className={`mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full ${isActive ? 'aura-accent-gold' : 'aura-text-on-dark-primary'}`}
+                        style={{
                           backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent',
-                          
                           cursor: 'pointer' }}
                         onClick={() => setMobileShopExpanded((prev) => !prev)}
                         aria-expanded={mobileShopExpanded}
@@ -718,9 +717,8 @@ export default function Navbar() {
                           closeMobileMenu();
                           window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
-                        className="mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full"
-                        style={{ color: isActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.95)',
-                          backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent' }}
+                        className={`mobile-nav-item flex items-center justify-between py-3.5 text-left transition-colors duration-200 rounded-xl px-3 w-full ${isActive ? 'aura-accent-gold' : 'aura-text-on-dark-primary'}`}
+                        style={{ backgroundColor: isActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent' }}
                       >
                         {labelInner}
                       </Link>
@@ -752,9 +750,8 @@ export default function Navbar() {
                                     closeMobileMenu();
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
                                   }}
-                                  className="flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 hover:bg-white/10"
-                                  style={{ color: itemActive ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.9)',
-                                    backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent' }}
+                                  className={`flex items-center gap-3 py-2.5 px-3 text-left rounded-xl transition-all duration-200 aura-hover-dark ${itemActive ? 'aura-accent-gold' : 'aura-text-on-dark-secondary'}`}
+                                  style={{ backgroundColor: itemActive ? 'rgba(212, 175, 55, 0.08)' : 'transparent' }}
                                 >
                                   <div
                                     className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-200"
@@ -773,10 +770,7 @@ export default function Navbar() {
                                         </span>
                                       )}
                                     </p>
-                                    <p
-                                      className="text-[11px] truncate"
-                                      style={{ color: 'rgba(255, 255, 255, 0.55)' }}
-                                    >
+                                    <p className="text-[11px] truncate aura-text-on-dark-faint">
                                       {item.description}
                                     </p>
                                   </div>
@@ -833,7 +827,7 @@ export default function Navbar() {
                   </>
                 );
                 const baseClass =
-                  'mobile-quick-item flex items-center gap-3 py-3 px-3 text-left transition-colors duration-200 hover:bg-white/10 rounded-xl w-full';
+                  'mobile-quick-item flex items-center gap-3 py-3 px-3 text-left transition-colors duration-200 aura-hover-dark rounded-xl w-full';
                 const baseStyle = { } as const;
                 const handleClick = () => {
                   closeMobileMenu();
@@ -867,10 +861,7 @@ export default function Navbar() {
                 >
                   New Collection 2026
                 </p>
-                <p
-                  className="text-xs mb-4 leading-relaxed"
-                  style={{ color: 'rgba(255, 255, 255, 0.75)' }}
-                >
+                <p className="text-xs mb-4 leading-relaxed aura-text-on-dark-muted">
                   Explore our latest arrivals and handcrafted luxury pieces
                 </p>
                 <Link
@@ -899,12 +890,10 @@ export default function Navbar() {
             onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
           />
           <div
-            className="fixed top-0 left-0 right-0 z-[56] py-6 px-4 sm:px-6"
-            style={{ backgroundColor: 'rgba(44, 44, 44, 0.95)',
+            className="fixed top-0 left-0 right-0 z-[56] py-6 px-4 sm:px-6 aura-nav-bg"
+            style={{
               borderBottom: '1px solid rgba(212,175,55,0.2)',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)' }}
+              boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}
           >
             <div className="mx-auto max-w-2xl">
               <div className="flex items-center gap-3">
@@ -915,8 +904,7 @@ export default function Navbar() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search products..."
-                  className="flex-1 bg-transparent outline-none text-base"
-                  style={{ color: 'rgba(255, 255, 255, 0.95)' }}
+                  className="flex-1 bg-transparent outline-none text-base aura-text-on-dark-primary"
                   onKeyDown={(e) => {
                     if (e.key === 'Escape') { setSearchOpen(false); setSearchQuery(''); }
                     if (e.key === 'Enter' && searchQuery.trim()) {
@@ -930,7 +918,7 @@ export default function Navbar() {
                 />
                 <button
                   onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
-                  className="p-2 rounded-full hover:bg-white/10 transition-colors aura-text-white-85"
+                  className="p-2 rounded-full aura-hover-dark transition-colors aura-text-white-85"
                   aria-label="Close search"
                 >
                   <X className="h-5 w-5" />
@@ -947,7 +935,7 @@ export default function Navbar() {
                   {!searchLoading && searchResults.map((p) => (
                     <button
                       key={p.id}
-                      className="w-full flex items-center gap-3 py-3 px-2 text-left rounded-lg transition-colors hover:bg-white/10"
+                      className="w-full flex items-center gap-3 py-3 px-2 text-left rounded-lg transition-colors aura-hover-dark"
                       onClick={() => {
                         setSearchOpen(false);
                         setSearchQuery('');
@@ -956,16 +944,12 @@ export default function Navbar() {
                       }}
                     >
                       <div
-                        className="w-10 h-10 rounded-md overflow-hidden shrink-0 relative"
-                        style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+                        className="w-10 h-10 rounded-md overflow-hidden shrink-0 relative aura-bg-white-5 aura-accent-gold-border"
                       >
                         <Image src={p.image} alt={p.name} fill className="w-full h-full object-contain" sizes="40px" />
                       </div>
                       <div className="min-w-0">
-                        <p
-                          className="text-sm font-medium truncate"
-                          style={{ color: 'rgba(255, 255, 255, 0.95)' }}
-                        >
+                        <p className="text-sm font-medium truncate aura-text-on-dark-primary">
                           {p.name}
                         </p>
                         <p

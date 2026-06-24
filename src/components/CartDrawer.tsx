@@ -135,7 +135,7 @@ export default function CartDrawer() {
         ref={overlayRef}
         className="fixed inset-0 z-[70]"
         style={{
-          background: 'linear-gradient(135deg, rgba(44,44,44,0.6) 0%, rgba(28,28,28,0.5) 100%)',
+          background: 'linear-gradient(135deg, rgba(44,44,44,0.6) 0%, rgba(44,44,44,0.5) 100%)',
           opacity: cartOpen ? 1 : 0,
           pointerEvents: cartOpen ? 'auto' : 'none',
           visibility: cartOpen ? 'visible' : 'hidden',
