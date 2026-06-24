@@ -4,12 +4,15 @@
  * HomeNew — Aura Living homepage sections.
  *
  * Section order:
- * 1. Categories — Hover Reveal (bento-style category cards)
- * 2. Brand Story — Quote-driven with masked word reveal
+ * 1. Categories — Asymmetric Magazine Spread (1 hero + 3 side, numbered)
+ * 2. Brand Story — Process Timeline (4 craftsmanship steps, alternating)
  * 3. Featured Products — 8 products using the shop ProductCard (cart + wishlist wired)
  * 4. New Arrivals — 4 fresh products
  * 5. Testimonials — customer reviews with stagger animation
  * 6. Newsletter — Cinematic Dark with parallax bg
+ *
+ * Design philosophy: Editorial composition, intentional asymmetry, layered depth,
+ * typography-led hierarchy. Zero AI tells — every section has its own visual identity.
  *
  * All using existing design tokens. Zero inline styles (except dynamic image URLs).
  */
@@ -19,8 +22,8 @@ import { ArrowRight } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import CategoriesHoverReveal from '@/components/CategoriesHoverReveal';
-import StoryQuote from '@/components/StoryQuote';
+import CategoriesMagazine from '@/components/CategoriesMagazine';
+import StoryProcess from '@/components/StoryProcess';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import NewsletterCinematic from '@/components/NewsletterCinematic';
 import PremiumButton from '@/components/ui/PremiumButton';
@@ -91,14 +94,16 @@ export default function HomeNew({ featuredProducts, newArrivals, categories }: H
   return (
     <div ref={containerRef} className="w-full overflow-hidden">
       {/* ═══════════════════════════════════════════════════════════
-          1. CATEGORIES — Hover Reveal
+          1. CATEGORIES — Asymmetric Magazine Spread
+          Editorial composition: 1 hero category + 3 side, numbered.
           ═══════════════════════════════════════════════════════════ */}
-      <CategoriesHoverReveal categories={categories} />
+      <CategoriesMagazine categories={categories} />
 
       {/* ═══════════════════════════════════════════════════════════
-          2. BRAND STORY — Quote-driven
+          2. BRAND STORY — Process Timeline
+          4 craftsmanship steps, alternating left/right, gold connector.
           ═══════════════════════════════════════════════════════════ */}
-      <StoryQuote />
+      <StoryProcess />
 
       {/* ═══════════════════════════════════════════════════════════
           3. FEATURED PRODUCTS — using the shop ProductCard (cart + wishlist wired)

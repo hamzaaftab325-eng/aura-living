@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import HeroCinematic from '@/components/HeroCinematic';
+import HeroEditorial from '@/components/HeroEditorial';
 import HomeNew from '@/components/HomeNew';
 import { getFeaturedProducts, getNewArrivals, getCategories } from '@/lib/products';
 
@@ -57,8 +57,9 @@ export default async function HomeNewPage() {
 
   return (
     <>
-      {/* Hero: Cinematic Video + Split Letter Stagger */}
-      <HeroCinematic />
+      {/* Hero: Editorial Split — left-aligned headline, asymmetric 7/5,
+          layered product image + floating spec card. No AI tells. */}
+      <HeroEditorial />
 
       {/* Rest of homepage sections */}
       <HomeNew
