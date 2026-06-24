@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import HeroCinematic from '@/components/HeroCinematic';
 import HomeNew from '@/components/HomeNew';
-import { getFeaturedProducts, getCategories } from '@/lib/products';
+import { getFeaturedProducts, getNewArrivals, getCategories } from '@/lib/products';
 
 export const metadata: Metadata = {
   title: 'Aura Living | Premium Home Decor Pakistan',
@@ -13,8 +13,9 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function HomeNewPage() {
-  const [featuredProducts, categories] = await Promise.all([
+  const [featuredProducts, newArrivals, categories] = await Promise.all([
     getFeaturedProducts(8),
+    getNewArrivals(4),
     getCategories(),
   ]);
 
@@ -24,7 +25,11 @@ export default async function HomeNewPage() {
       <HeroCinematic />
 
       {/* Rest of homepage sections */}
-      <HomeNew featuredProducts={featuredProducts} categories={categories} />
+      <HomeNew
+        featuredProducts={featuredProducts}
+        newArrivals={newArrivals}
+        categories={categories}
+      />
     </>
   );
 }

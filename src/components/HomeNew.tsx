@@ -16,8 +16,6 @@
  */
 
 import { useRef } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -28,17 +26,18 @@ import CTAGoldBanner from '@/components/CTAGoldBanner';
 import TrustMarquee from '@/components/TrustMarquee';
 import NewsletterCinematic from '@/components/NewsletterCinematic';
 import PremiumButton from '@/components/ui/PremiumButton';
-import { formatRupees } from '@/lib/currency-display';
+import ProductCard from '@/components/ui/ProductCard';
 import type { Product, Category } from '@/types';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 interface HomeNewProps {
   featuredProducts: Product[];
+  newArrivals: Product[];
   categories: Category[];
 }
 
-export default function HomeNew({ featuredProducts, categories }: HomeNewProps) {
+export default function HomeNew({ featuredProducts, newArrivals, categories }: HomeNewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Scroll-triggered reveals for all [data-reveal] elements
@@ -124,6 +123,7 @@ export default function HomeNew({ featuredProducts, categories }: HomeNewProps) 
   );
 
   const products = featuredProducts.slice(0, 8);
+  const newProducts = newArrivals.slice(0, 4);
 
   return (
     <div ref={containerRef} className="w-full overflow-hidden">
@@ -162,7 +162,7 @@ export default function HomeNew({ featuredProducts, categories }: HomeNewProps) 
       <StoryQuote />
 
       {/* ═══════════════════════════════════════════════════════════
-          5. PRODUCT SHOWCASE — Editorial magazine-style layout
+          5. FEATURED PRODUCTS — using the shop ProductCard (cart + wishlist wired)
           ═══════════════════════════════════════════════════════════ */}
       <section className="py-16 sm:py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -181,39 +181,10 @@ export default function HomeNew({ featuredProducts, categories }: HomeNewProps) 
             </p>
           </div>
 
-          {/* Product grid — first 4 large, next 4 smaller */}
+          {/* Product grid — uses the same ProductCard as the shop page */}
           <div data-stagger className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {products.map((product) => (
-              <Link
-                key={product.id}
-                href={`/product/${product.slug}`}
-                className="aura-showcase-card group"
-              >
-                {product.badge && (
-                  <span className={`aura-showcase-badge ${product.badge === 'SALE' ? 'aura-showcase-badge-gold' : 'aura-showcase-badge-dark'}`}>
-                    {product.badge}
-                  </span>
-                )}
-                <div className="aura-showcase-img">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                  />
-                </div>
-                <div className="aura-showcase-info">
-                  <p className="aura-showcase-name">{product.name}</p>
-                  <div>
-                    <span className="aura-showcase-price">{formatRupees(product.price)}</span>
-                    {product.originalPrice && (
-                      <span className="aura-showcase-original">{formatRupees(product.originalPrice)}</span>
-                    )}
-                  </div>
-                </div>
-                <span className="aura-showcase-quickview">View Details</span>
-              </Link>
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
 
@@ -225,6 +196,44 @@ export default function HomeNew({ featuredProducts, categories }: HomeNewProps) 
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          5b. NEW ARRIVALS — fresh from the workshop (4 products)
+          ═══════════════════════════════════════════════════════════ */}
+      {newProducts.length > 0 && (
+        <section className="py-16 sm:py-20 md:py-24 bg-[var(--surface-card)]/40">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Header */}
+            <div data-reveal className="text-center mb-12">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className="aura-gold-line" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em] aura-text-gold">Just Landed</span>
+                <div className="aura-gold-line" />
+              </div>
+              <h2 className="aura-mega-text aura-heading-featured mb-4">
+                New <span className="aura-text-gradient-gold">Arrivals</span>
+              </h2>
+              <p className="text-base aura-text-secondary max-w-lg mx-auto">
+                Fresh pieces, just added to the collection
+              </p>
+            </div>
+
+            {/* New arrivals grid */}
+            <div data-stagger className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {newProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+
+            {/* View all CTA */}
+            <div data-reveal className="text-center mt-12">
+              <PremiumButton variant="secondary" size="lg" href="/new-arrivals" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                See All New Arrivals
+              </PremiumButton>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ═══════════════════════════════════════════════════════════
           6. CTA — Gold Banner (Demo 2 chosen design)
