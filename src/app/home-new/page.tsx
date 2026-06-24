@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import HeroArticle from '@/components/HeroArticle';
+import HeroSanctuary from '@/components/HeroSanctuary';
 import HomeNew from '@/components/HomeNew';
 import { getFeaturedProducts, getNewArrivals, getCategories } from '@/lib/products';
 
@@ -57,9 +57,9 @@ export default async function HomeNewPage() {
 
   return (
     <>
-      {/* Chosen hero: Article.com-inspired full-bleed lifestyle image
-          with centered content + dark gradient overlay. */}
-      <HeroArticle />
+      {/* Chosen hero: "The Immersive Sanctuary" — premium editorial hero
+          with full-bleed cinematic bg + glassmorphic purchase card. */}
+      <HeroSanctuary />
 
       {/* Rest of homepage sections */}
       <HomeNew

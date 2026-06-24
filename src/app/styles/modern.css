@@ -7453,3 +7453,488 @@
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   HERO SANCTUARY — "The Immersive Sanctuary" premium editorial hero
+   Light theme, warm-minimalist palette:
+   - Off-white #FAF9F6
+   - Soft charcoal #1C1B19
+   - Warm terracotta accent #C07A65
+   ========================================================================== */
+
+.aura-hero-sanctuary {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background: #FAF9F6;
+}
+
+/* Full-bleed background image */
+.aura-hero-sanctuary-bg {
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Soft radial glaze — warm light from top-left */
+.aura-hero-sanctuary-glaze {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    ellipse 80% 70% at 25% 30%,
+    rgba(250, 249, 246, 0.65) 0%,
+    rgba(250, 249, 246, 0.25) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Warm vignette — darkens edges for text legibility */
+.aura-hero-sanctuary-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(28, 27, 25, 0.12) 0%, transparent 30%, transparent 70%, rgba(28, 27, 25, 0.25) 100%),
+    linear-gradient(90deg, rgba(250, 249, 246, 0.4) 0%, transparent 30%, transparent 70%, rgba(28, 27, 25, 0.15) 100%);
+  pointer-events: none;
+}
+
+/* 12-column grid container */
+.aura-hero-sanctuary-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+  min-height: 100vh;
+}
+@media (min-width: 1024px) {
+  .aura-hero-sanctuary-inner {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+    padding: 6rem 2rem 5rem;
+  }
+}
+
+/* ── LEFT COLUMN (6 cols) ── */
+.aura-hero-sanctuary-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.75rem;
+}
+@media (min-width: 1024px) {
+  .aura-hero-sanctuary-left {
+    grid-column: 1 / 7;
+  }
+}
+
+/* Pill badge */
+.aura-hero-sanctuary-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #1C1B19;
+  background: rgba(250, 249, 246, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(28, 27, 25, 0.1);
+  box-shadow: 0 4px 16px rgba(28, 27, 25, 0.06);
+}
+.aura-hero-sanctuary-badge-icon {
+  width: 14px;
+  height: 14px;
+  color: #C07A65;
+}
+
+/* Huge editorial heading */
+.aura-hero-sanctuary-title {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: #1C1B19;
+  margin: 0;
+}
+.aura-hero-sanctuary-title-accent {
+  font-style: italic;
+  color: #C07A65;
+}
+
+/* Emotional storytelling */
+.aura-hero-sanctuary-story {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(28, 27, 25, 0.75);
+  max-width: 28rem;
+  margin: 0;
+}
+
+/* Micro-scroller indicator */
+.aura-hero-sanctuary-scroller {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.aura-hero-sanctuary-scroller-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #C07A65;
+  box-shadow: 0 0 0 0 rgba(192, 122, 101, 0.5);
+  animation: aura-hero-sanctuary-pulse 2s ease-in-out infinite;
+}
+@keyframes aura-hero-sanctuary-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(192, 122, 101, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(192, 122, 101, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(192, 122, 101, 0); }
+}
+.aura-hero-sanctuary-scroller-line {
+  width: 2.5rem;
+  height: 1px;
+  background: rgba(28, 27, 25, 0.3);
+}
+.aura-hero-sanctuary-scroller-text {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: rgba(28, 27, 25, 0.5);
+}
+
+/* ── RIGHT COLUMN (5 cols, right-aligned) ── */
+.aura-hero-sanctuary-right {
+  display: flex;
+  justify-content: flex-end;
+}
+@media (min-width: 1024px) {
+  .aura-hero-sanctuary-right {
+    grid-column: 8 / 13;
+  }
+}
+
+/* Floating glassmorphic purchase card */
+.aura-hero-sanctuary-card {
+  width: 100%;
+  max-width: 24rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 24px 60px rgba(28, 27, 25, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Product detail zoom thumbnail */
+.aura-hero-sanctuary-thumb-wrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #FAF9F6;
+}
+.aura-hero-sanctuary-thumb {
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+.aura-hero-sanctuary-card:hover .aura-hero-sanctuary-thumb {
+  transform: scale(1.05);
+}
+.aura-hero-sanctuary-thumb-tag {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #FAF9F6;
+  background: rgba(28, 27, 25, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.aura-hero-sanctuary-thumb-indicator {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #C07A65;
+  box-shadow: 0 0 0 0 rgba(192, 122, 101, 0.5);
+  animation: aura-hero-sanctuary-pulse 2s ease-in-out infinite;
+}
+
+/* Product name + price */
+.aura-hero-sanctuary-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.aura-hero-sanctuary-card-name {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1C1B19;
+  margin: 0;
+  line-height: 1.2;
+}
+.aura-hero-sanctuary-card-sku {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(28, 27, 25, 0.5);
+  margin: 0.25rem 0 0;
+}
+.aura-hero-sanctuary-card-price {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #C07A65;
+  margin: 0;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tab system */
+.aura-hero-sanctuary-tabs {
+  position: relative;
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 1px solid rgba(28, 27, 25, 0.1);
+  padding-bottom: 0.5rem;
+}
+.aura-hero-sanctuary-tab {
+  padding: 0.5rem 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(28, 27, 25, 0.5);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color 0.3s var(--ease-out);
+  font-family: inherit;
+}
+.aura-hero-sanctuary-tab:hover {
+  color: rgba(28, 27, 25, 0.8);
+}
+.aura-hero-sanctuary-tab-active {
+  color: #1C1B19;
+}
+.aura-hero-sanctuary-tab-underbar {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  background: #C07A65;
+  transition: transform 0.4s var(--ease-out);
+}
+.aura-hero-sanctuary-tab-underbar-right {
+  transform: translateX(calc(100% + 1.5rem));
+}
+
+/* Tab content */
+.aura-hero-sanctuary-tab-content {
+  min-height: 5rem;
+}
+.aura-hero-sanctuary-tab-text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(28, 27, 25, 0.7);
+  margin: 0;
+}
+
+/* Blueprint specs list */
+.aura-hero-sanctuary-specs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.aura-hero-sanctuary-spec {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(28, 27, 25, 0.06);
+}
+.aura-hero-sanctuary-spec:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.aura-hero-sanctuary-spec-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(28, 27, 25, 0.5);
+}
+.aura-hero-sanctuary-spec-value {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #1C1B19;
+}
+
+/* Acquire Article drawer trigger */
+.aura-hero-sanctuary-acquire {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #FAF9F6;
+  background: #1C1B19;
+  border: 0;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+  font-family: inherit;
+}
+.aura-hero-sanctuary-acquire:hover {
+  background: #C07A65;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(192, 122, 101, 0.35);
+}
+.aura-hero-sanctuary-acquire-chevron {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s var(--ease-out);
+}
+.aura-hero-sanctuary-acquire-chevron-open {
+  transform: rotate(90deg);
+}
+
+/* COD drawer */
+.aura-hero-sanctuary-drawer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s var(--ease-out), opacity 0.3s var(--ease-out);
+}
+.aura-hero-sanctuary-drawer-open {
+  max-height: 500px;
+  opacity: 1;
+}
+.aura-hero-sanctuary-drawer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding-top: 0.5rem;
+}
+.aura-hero-sanctuary-drawer-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background: rgba(250, 249, 246, 0.6);
+  border: 1px solid rgba(28, 27, 25, 0.06);
+}
+.aura-hero-sanctuary-drawer-icon {
+  width: 18px;
+  height: 18px;
+  color: #C07A65;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.aura-hero-sanctuary-drawer-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #1C1B19;
+  margin: 0;
+}
+.aura-hero-sanctuary-drawer-sub {
+  font-size: 0.6875rem;
+  color: rgba(28, 27, 25, 0.6);
+  margin: 0.15rem 0 0;
+}
+.aura-hero-sanctuary-drawer-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #FAF9F6;
+  background: #C07A65;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  transition: all 0.3s var(--ease-out);
+}
+.aura-hero-sanctuary-drawer-cta:hover {
+  background: #1C1B19;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(28, 27, 25, 0.25);
+}
+.aura-hero-sanctuary-drawer-cta-icon {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s var(--ease-out);
+}
+.aura-hero-sanctuary-drawer-cta:hover .aura-hero-sanctuary-drawer-cta-icon {
+  transform: translateX(3px);
+}
+
+/* Bottom fade into next section */
+.aura-hero-sanctuary-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, #FAF9F6);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .aura-hero-sanctuary-scroller-dot,
+  .aura-hero-sanctuary-thumb-indicator {
+    animation: none !important;
+  }
+  .aura-hero-sanctuary-card,
+  .aura-hero-sanctuary-acquire,
+  .aura-hero-sanctuary-drawer,
+  .aura-hero-sanctuary-drawer-cta {
+    transition: none !important;
+  }
+}
