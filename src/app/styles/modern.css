@@ -800,3 +800,297 @@
   z-index: 100;
   transition: width 0.1s linear;
 }
+
+/* ==========================================================================
+   AWARD-WINNING HOMEPAGE — home-new
+   ========================================================================== */
+
+/* ─ Bento Grid ─ */
+.aura-bento {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .aura-bento {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+.aura-bento-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+}
+.aura-bento-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease-out);
+}
+.aura-bento-item:hover img {
+  transform: scale(1.08);
+}
+.aura-bento-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(44,44,44,0.8) 0%, rgba(44,44,44,0.1) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  transition: background 0.5s var(--ease-out);
+}
+.aura-bento-item:hover .aura-bento-overlay {
+  background: linear-gradient(to top, rgba(44,44,44,0.9) 0%, rgba(44,44,44,0.3) 60%, rgba(212,175,55,0.05) 100%);
+}
+.aura-bento-tall { grid-row: span 2; }
+.aura-bento-wide { grid-column: span 2; }
+
+/* ─ Marquee ─ */
+.aura-marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 0;
+}
+.aura-marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 48px;
+  padding-right: 48px;
+  animation: aura-marquee-scroll 30s linear infinite;
+}
+@keyframes aura-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.aura-marquee:hover .aura-marquee-track {
+  animation-play-state: paused;
+}
+.aura-marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-family: var(--font-playfair), serif;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+.aura-marquee-star {
+  color: var(--color-gold);
+  font-size: 1.5rem;
+}
+
+/* ─ Sticky stacking cards ─ */
+.aura-sticky-stack {
+  position: relative;
+}
+.aura-sticky-card {
+  position: sticky;
+  top: 80px;
+  margin-bottom: 40px;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-modern-xl);
+  transition: transform 0.6s var(--ease-out);
+}
+
+/* ─ Split hero ─ */
+.aura-split-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+@media (min-width: 1024px) {
+  .aura-split-hero {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.aura-split-hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 24px;
+  background: var(--surface-page);
+}
+@media (min-width: 768px) {
+  .aura-split-hero-left {
+    padding: 80px 48px;
+  }
+}
+.aura-split-hero-right {
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+}
+.aura-split-hero-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─ Mega text ─ */
+.aura-mega-text {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+/* ─ Gold line accent ─ */
+.aura-gold-line {
+  width: 48px;
+  height: 2px;
+  background: var(--color-gold);
+  border-radius: 1px;
+}
+
+/* ─ Scroll-driven section ─ */
+.aura-scroll-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─ Editorial text block ─ */
+.aura-editorial {
+  max-width: 560px;
+}
+.aura-editorial-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gold);
+  margin-bottom: 20px;
+}
+.aura-editorial-title {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+.aura-editorial-body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+/* ─ Product showcase card ─ */
+.aura-showcase-card {
+  position: relative;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  background: var(--surface-card);
+  box-shadow: var(--shadow-modern-md);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+.aura-showcase-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-modern-2xl);
+}
+.aura-showcase-img {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.aura-showcase-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease-out);
+}
+.aura-showcase-card:hover .aura-showcase-img img {
+  transform: scale(1.06);
+}
+.aura-showcase-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: white;
+  z-index: 2;
+}
+.aura-showcase-badge-gold {
+  background: var(--color-gold);
+}
+.aura-showcase-badge-dark {
+  background: var(--surface-dark);
+  color: var(--color-gold);
+}
+.aura-showcase-info {
+  padding: 20px 24px;
+}
+.aura-showcase-name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+.aura-showcase-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-gold);
+  font-variant-numeric: tabular-nums;
+}
+.aura-showcase-original {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  margin-left: 8px;
+}
+
+/* ─ Full-screen CTA ─ */
+.aura-cta-fullscreen {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.aura-cta-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+@media (max-width: 768px) {
+  .aura-cta-bg {
+    background-attachment: scroll;
+  }
+}
+.aura-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 44, 44, 0.75);
+}
+
+/* ─ Inline counter (small) ─ */
+.aura-inline-counter {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--color-gold);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
