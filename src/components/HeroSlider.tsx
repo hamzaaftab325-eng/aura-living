@@ -188,9 +188,6 @@ export default function HeroSlider() {
           0{active + 1}<span className="aura-hero-slider-counter-sep"> / </span>0{SLIDES.length}
         </span>
       </div>
-
-      {/* Bottom fade into next section */}
-      <div className="aura-hero-slider-fade" />
     </section>
   );
 }
