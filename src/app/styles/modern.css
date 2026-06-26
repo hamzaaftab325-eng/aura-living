@@ -3019,7 +3019,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .aura-hero-ed {
-  background: #FAF9F6;
+  background: var(--surface-page);
   padding: 7rem 1.5rem 5rem;
   position: relative;
   overflow: hidden;
@@ -3048,22 +3048,22 @@
 .aura-hero-ed-issue-num {
   font-family: var(--font-playfair), serif;
   font-size: 0.875rem; font-weight: 700; font-style: italic;
-  color: #C07A65;
+  color: var(--color-gold);
 }
-.aura-hero-ed-issue-sep { width: 2rem; height: 1px; background: #C07A65; }
+.aura-hero-ed-issue-sep { width: 2rem; height: 1px; background: var(--color-gold); }
 .aura-hero-ed-issue-label {
   font-size: 0.625rem; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.3em; color: #1C1B19;
+  letter-spacing: 0.3em; color: var(--text-primary);
 }
 
 .aura-hero-ed-title {
   font-family: var(--font-playfair), serif;
   font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 700; line-height: 0.98; letter-spacing: -0.045em;
-  color: #1C1B19; margin: 0;
+  color: var(--text-primary); margin: 0;
 }
 .aura-hero-ed-title-accent {
-  font-style: italic; color: #C07A65;
+  font-style: italic; color: var(--color-gold);
 }
 
 .aura-hero-ed-story {
@@ -3074,17 +3074,17 @@
 .aura-hero-ed-cta {
   display: inline-flex; align-items: center; gap: 0.6rem;
   font-size: 0.8125rem; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.12em; color: #1C1B19; text-decoration: none;
+  letter-spacing: 0.12em; color: var(--text-primary); text-decoration: none;
   padding: 0.85rem 0; position: relative;
   transition: color 0.3s var(--ease-out);
 }
 .aura-hero-ed-cta::after {
   content: ''; position: absolute; left: 0; bottom: 0.5rem;
-  width: 100%; height: 1px; background: #1C1B19;
+  width: 100%; height: 1px; background: var(--text-primary);
   transform-origin: left; transition: transform 0.4s var(--ease-out);
 }
-.aura-hero-ed-cta:hover { color: #C07A65; }
-.aura-hero-ed-cta:hover::after { background: #C07A65; transform: scaleX(0.7); }
+.aura-hero-ed-cta:hover { color: var(--color-gold); }
+.aura-hero-ed-cta:hover::after { background: var(--color-gold); transform: scaleX(0.7); }
 .aura-hero-ed-cta-icon { width: 14px; height: 14px; transition: transform 0.3s var(--ease-out); }
 .aura-hero-ed-cta:hover .aura-hero-ed-cta-icon { transform: translateX(4px); }
 
@@ -3099,7 +3099,7 @@
   position: absolute; top: -8%; right: -8%;
   width: 50%; height: 50%; z-index: 0;
   background:
-    linear-gradient(135deg, #C07A65 0%, #D4AF37 100%),
+    linear-gradient(135deg, var(--color-gold) 0%, #D4AF37 100%),
     repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.04) 8px, rgba(255,255,255,0.04) 9px);
   border-radius: 1rem;
   opacity: 0.9;
@@ -3119,7 +3119,7 @@
   background: #FFFFFF;
   box-shadow: 0 20px 48px rgba(28, 27, 25, 0.14), 0 1px 0 rgba(255,255,255,0.8) inset;
   border: 1px solid rgba(28, 27, 25, 0.06);
-  border-top: 2px solid #C07A65;
+  border-top: 2px solid var(--color-gold);
   min-width: 16rem;
   display: flex; flex-direction: column; gap: 0.65rem;
 }
@@ -3135,18 +3135,18 @@
   letter-spacing: 0.2em; color: rgba(28, 27, 25, 0.5);
 }
 .aura-hero-ed-spec-value {
-  font-size: 0.8125rem; font-weight: 600; color: #1C1B19;
+  font-size: 0.8125rem; font-weight: 600; color: var(--text-primary);
 }
 .aura-hero-ed-spec-divider { height: 1px; background: rgba(28, 27, 25, 0.06); }
 
 .aura-hero-ed-spec-link {
   display: inline-flex; align-items: center; gap: 0.4rem;
   font-size: 0.6875rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.12em; color: #C07A65; text-decoration: none;
+  letter-spacing: 0.12em; color: var(--color-gold); text-decoration: none;
   margin-top: 0.5rem; padding-top: 0.65rem; border-top: 1px solid rgba(28, 27, 25, 0.08);
   transition: gap 0.3s var(--ease-out), color 0.3s var(--ease-out);
 }
-.aura-hero-ed-spec-link:hover { gap: 0.6rem; color: #1C1B19; }
+.aura-hero-ed-spec-link:hover { gap: 0.6rem; color: var(--text-primary); }
 .aura-hero-ed-spec-link-icon { width: 12px; height: 12px; }
 
 
@@ -3155,7 +3155,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .aura-cat-mag {
-  background: #FAF9F6;
+  background: var(--surface-page);
   padding: 6rem 1.5rem;
   border-top: 1px solid rgba(28, 27, 25, 0.06);
 }
@@ -3166,14 +3166,14 @@
 .aura-cat-mag-head { margin-bottom: 4rem; }
 .aura-cat-mag-eyebrow {
   display: block; font-size: 0.625rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.3em; color: #C07A65; margin-bottom: 1rem;
+  letter-spacing: 0.3em; color: var(--color-gold); margin-bottom: 1rem;
 }
 .aura-cat-mag-title {
   font-family: var(--font-playfair), serif;
   font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700;
-  line-height: 1; letter-spacing: -0.035em; color: #1C1B19; margin: 0;
+  line-height: 1; letter-spacing: -0.035em; color: var(--text-primary); margin: 0;
 }
-.aura-cat-mag-title-accent { font-style: italic; color: #C07A65; }
+.aura-cat-mag-title-accent { font-style: italic; color: var(--color-gold); }
 
 .aura-cat-mag-grid {
   display: grid; grid-template-columns: 1fr; gap: 1.5rem;
@@ -3205,7 +3205,7 @@
 .aura-cat-mag-num {
   font-family: var(--font-playfair), serif;
   font-size: 1.5rem; font-weight: 700; font-style: italic;
-  color: #C07A65;
+  color: var(--color-gold);
 }
 .aura-cat-mag-num-sm { font-size: 1rem; }
 .aura-cat-mag-hero-text { flex: 1; }
@@ -3226,7 +3226,7 @@
 
 .aura-cat-mag-line {
   position: absolute; left: 2rem; right: 2rem; bottom: 0;
-  height: 2px; background: #C07A65;
+  height: 2px; background: var(--color-gold);
   transform: scaleX(0); transform-origin: left;
   transition: transform 0.5s var(--ease-out);
 }
@@ -3264,7 +3264,7 @@
   font-size: 0.75rem; color: rgba(255, 255, 255, 0.7); margin: 0.25rem 0 0;
 }
 .aura-cat-mag-side-arrow {
-  width: 18px; height: 18px; color: #C07A65; flex-shrink: 0; margin-left: auto;
+  width: 18px; height: 18px; color: var(--color-gold); flex-shrink: 0; margin-left: auto;
   opacity: 0; transform: translateX(-6px);
   transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
 }
@@ -3276,7 +3276,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .aura-story-proc {
-  background: #F5F2EC;
+  background: var(--color-gold-pale);
   padding: 6rem 1.5rem;
   border-top: 1px solid rgba(28, 27, 25, 0.06);
 }
@@ -3287,14 +3287,14 @@
 .aura-story-proc-head { margin-bottom: 5rem; text-align: left; }
 .aura-story-proc-eyebrow {
   display: block; font-size: 0.625rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.3em; color: #C07A65; margin-bottom: 1rem;
+  letter-spacing: 0.3em; color: var(--color-gold); margin-bottom: 1rem;
 }
 .aura-story-proc-title {
   font-family: var(--font-playfair), serif;
   font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700;
-  line-height: 1; letter-spacing: -0.035em; color: #1C1B19; margin: 0;
+  line-height: 1; letter-spacing: -0.035em; color: var(--text-primary); margin: 0;
 }
-.aura-story-proc-title-accent { font-style: italic; color: #C07A65; }
+.aura-story-proc-title-accent { font-style: italic; color: var(--color-gold); }
 .aura-story-proc-sub {
   font-size: 1.0625rem; line-height: 1.6;
   color: rgba(28, 27, 25, 0.65); max-width: 30rem; margin: 1.5rem 0 0;
@@ -3306,7 +3306,7 @@
 
 .aura-story-proc-line {
   position: absolute; left: 1.5rem; top: 0; bottom: 0;
-  width: 2px; background: linear-gradient(to bottom, #C07A65, #D4AF37, transparent);
+  width: 2px; background: linear-gradient(to bottom, var(--color-gold), #D4AF37, transparent);
   z-index: 0;
 }
 @media (min-width: 768px) {
@@ -3331,7 +3331,7 @@
 .aura-story-proc-node {
   position: absolute; left: 1.5rem; top: 50%; transform: translate(-50%, -50%);
   width: 3rem; height: 3rem; border-radius: 9999px;
-  background: #FAF9F6; border: 2px solid #C07A65;
+  background: var(--surface-page); border: 2px solid var(--color-gold);
   display: flex; align-items: center; justify-content: center;
   z-index: 2;
   box-shadow: 0 0 0 6px rgba(192, 122, 101, 0.08);
@@ -3342,7 +3342,7 @@
 .aura-story-proc-node-num {
   font-family: var(--font-playfair), serif;
   font-size: 0.875rem; font-weight: 700; font-style: italic;
-  color: #C07A65;
+  color: var(--color-gold);
 }
 
 .aura-story-proc-card {
@@ -3362,14 +3362,14 @@
 .aura-story-proc-card-img-wrap {
   position: relative; width: 5rem; height: 5rem;
   border-radius: 0.75rem; overflow: hidden; flex-shrink: 0;
-  background: #F5F2EC;
+  background: var(--color-gold-pale);
 }
 .aura-story-proc-card-img { object-fit: cover; }
 
 .aura-story-proc-card-text { flex: 1; min-width: 0; }
 .aura-story-proc-card-title {
   font-family: var(--font-playfair), serif;
-  font-size: 1.25rem; font-weight: 700; color: #1C1B19; margin: 0 0 0.4rem;
+  font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin: 0 0 0.4rem;
   letter-spacing: -0.01em;
 }
 .aura-story-proc-card-desc {
@@ -3386,7 +3386,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .aura-prod-ed {
-  background: #FAF9F6;
+  background: var(--surface-page);
   padding: 6rem 1.5rem;
   border-top: 1px solid rgba(28, 27, 25, 0.06);
 }
@@ -3397,14 +3397,14 @@
 .aura-prod-ed-head { margin-bottom: 4rem; }
 .aura-prod-ed-eyebrow {
   display: block; font-size: 0.625rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.3em; color: #C07A65; margin-bottom: 1rem;
+  letter-spacing: 0.3em; color: var(--color-gold); margin-bottom: 1rem;
 }
 .aura-prod-ed-title {
   font-family: var(--font-playfair), serif;
   font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700;
-  line-height: 1; letter-spacing: -0.035em; color: #1C1B19; margin: 0;
+  line-height: 1; letter-spacing: -0.035em; color: var(--text-primary); margin: 0;
 }
-.aura-prod-ed-title-accent { font-style: italic; color: #C07A65; }
+.aura-prod-ed-title-accent { font-style: italic; color: var(--color-gold); }
 .aura-prod-ed-sub {
   font-size: 1.0625rem; line-height: 1.6; color: rgba(28, 27, 25, 0.65);
   max-width: 28rem; margin: 1.25rem 0 0;
@@ -3423,7 +3423,7 @@
 .aura-prod-ed-hero-img-wrap {
   position: relative; display: block; text-decoration: none;
   aspect-ratio: 3 / 4; border-radius: 1.5rem; overflow: hidden;
-  background: #F5F2EC; transition: transform 0.4s var(--ease-out);
+  background: var(--color-gold-pale); transition: transform 0.4s var(--ease-out);
 }
 .aura-prod-ed-hero-img-wrap:hover { transform: translateY(-4px); }
 .aura-prod-ed-hero-img { object-fit: cover; transition: transform 0.8s var(--ease-out); }
@@ -3445,8 +3445,8 @@
   transition: all 0.3s var(--ease-out);
 }
 .aura-prod-ed-hero-wish:hover { background: #FFFFFF; transform: scale(1.1); }
-.aura-prod-ed-hero-wish-icon { width: 18px; height: 18px; color: #1C1B19; }
-.aura-prod-ed-hero-wish-active .aura-prod-ed-hero-wish-icon { color: #C07A65; fill: #C07A65; }
+.aura-prod-ed-hero-wish-icon { width: 18px; height: 18px; color: var(--text-primary); }
+.aura-prod-ed-hero-wish-active .aura-prod-ed-hero-wish-icon { color: var(--color-gold); fill: var(--color-gold); }
 
 .aura-prod-ed-hero-info { display: flex; flex-direction: column; gap: 0.65rem; }
 
@@ -3460,7 +3460,7 @@
 .aura-prod-ed-hero-name {
   font-family: var(--font-playfair), serif;
   font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 700;
-  color: #1C1B19; margin: 0; line-height: 1.15; letter-spacing: -0.02em;
+  color: var(--text-primary); margin: 0; line-height: 1.15; letter-spacing: -0.02em;
 }
 
 .aura-prod-ed-hero-story {
@@ -3474,7 +3474,7 @@
 .aura-prod-ed-hero-price-row { display: flex; align-items: baseline; gap: 0.5rem; }
 .aura-prod-ed-hero-price {
   font-family: var(--font-playfair), serif;
-  font-size: 1.5rem; font-weight: 700; color: #1C1B19;
+  font-size: 1.5rem; font-weight: 700; color: var(--text-primary);
 }
 .aura-prod-ed-hero-original {
   font-size: 0.875rem; color: rgba(28, 27, 25, 0.4); text-decoration: line-through;
@@ -3483,10 +3483,10 @@
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.75rem 1.25rem; border-radius: 9999px;
   font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.08em; color: #FFFFFF; background: #1C1B19;
+  letter-spacing: 0.08em; color: #FFFFFF; background: var(--text-primary);
   border: 0; cursor: pointer; transition: all 0.3s var(--ease-out);
 }
-.aura-prod-ed-hero-cart:hover { background: #C07A65; transform: translateY(-1px); }
+.aura-prod-ed-hero-cart:hover { background: var(--color-gold); transform: translateY(-1px); }
 .aura-prod-ed-hero-cart-icon { width: 14px; height: 14px; }
 
 /* ── Side products (right, 2x2 grid) ── */
@@ -3502,7 +3502,7 @@
 
 .aura-prod-ed-side-img-wrap {
   position: relative; aspect-ratio: 1; border-radius: 1rem; overflow: hidden;
-  background: #F5F2EC;
+  background: var(--color-gold-pale);
 }
 .aura-prod-ed-side-img { object-fit: cover; transition: transform 0.6s var(--ease-out); }
 .aura-prod-ed-side:hover .aura-prod-ed-side-img { transform: scale(1.06); }
@@ -3517,7 +3517,7 @@
 
 .aura-prod-ed-side-info { display: flex; flex-direction: column; gap: 0.25rem; }
 .aura-prod-ed-side-name {
-  font-size: 0.8125rem; font-weight: 600; color: #1C1B19; margin: 0;
+  font-size: 0.8125rem; font-weight: 600; color: var(--text-primary); margin: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .aura-prod-ed-side-bottom {
@@ -3525,30 +3525,30 @@
 }
 .aura-prod-ed-side-price {
   font-family: var(--font-playfair), serif;
-  font-size: 0.9375rem; font-weight: 700; color: #C07A65;
+  font-size: 0.9375rem; font-weight: 700; color: var(--color-gold);
 }
 .aura-prod-ed-side-arrow {
   width: 14px; height: 14px; color: rgba(28, 27, 25, 0.3);
   transition: all 0.3s var(--ease-out);
 }
-.aura-prod-ed-side:hover .aura-prod-ed-side-arrow { color: #C07A65; transform: translate(2px, -2px); }
+.aura-prod-ed-side:hover .aura-prod-ed-side-arrow { color: var(--color-gold); transform: translate(2px, -2px); }
 
 /* ── View all CTA ── */
 .aura-prod-ed-cta-wrap { margin-top: 3rem; text-align: left; }
 .aura-prod-ed-cta {
   display: inline-flex; align-items: center; gap: 0.6rem;
   font-size: 0.8125rem; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.12em; color: #1C1B19; text-decoration: none;
+  letter-spacing: 0.12em; color: var(--text-primary); text-decoration: none;
   padding: 0.85rem 0; position: relative;
   transition: color 0.3s var(--ease-out);
 }
 .aura-prod-ed-cta::after {
   content: ''; position: absolute; left: 0; bottom: 0.5rem;
-  width: 100%; height: 1px; background: #1C1B19;
+  width: 100%; height: 1px; background: var(--text-primary);
   transform-origin: left; transition: transform 0.4s var(--ease-out);
 }
-.aura-prod-ed-cta:hover { color: #C07A65; }
-.aura-prod-ed-cta:hover::after { background: #C07A65; transform: scaleX(0.7); }
+.aura-prod-ed-cta:hover { color: var(--color-gold); }
+.aura-prod-ed-cta:hover::after { background: var(--color-gold); transform: scaleX(0.7); }
 .aura-prod-ed-cta-icon { width: 14px; height: 14px; transition: transform 0.3s var(--ease-out); }
 .aura-prod-ed-cta:hover .aura-prod-ed-cta-icon { transform: translateX(4px); }
 
@@ -3558,7 +3558,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .aura-arr-strip {
-  background: #1C1B19; padding: 6rem 0 6rem;
+  background: var(--text-primary); padding: 6rem 0 6rem;
   overflow: hidden;
 }
 
@@ -3571,14 +3571,14 @@
 }
 .aura-arr-strip-eyebrow {
   display: block; font-size: 0.625rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.3em; color: #C07A65; margin-bottom: 1rem;
+  letter-spacing: 0.3em; color: var(--color-gold); margin-bottom: 1rem;
 }
 .aura-arr-strip-title {
   font-family: var(--font-playfair), serif;
   font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700;
   line-height: 1; letter-spacing: -0.035em; color: #FFFFFF; margin: 0;
 }
-.aura-arr-strip-title-accent { font-style: italic; color: #C07A65; }
+.aura-arr-strip-title-accent { font-style: italic; color: var(--color-gold); }
 
 .aura-arr-strip-arrows { display: flex; gap: 0.5rem; }
 .aura-arr-strip-arrow {
@@ -3587,7 +3587,7 @@
   color: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: all 0.3s var(--ease-out);
 }
-.aura-arr-strip-arrow:hover { background: #C07A65; border-color: transparent; }
+.aura-arr-strip-arrow:hover { background: var(--color-gold); border-color: transparent; }
 .aura-arr-strip-arrow-icon { width: 18px; height: 18px; }
 
 .aura-arr-strip-track {
@@ -3620,8 +3620,8 @@
   position: absolute; top: 0.75rem; left: 0.75rem;
   padding: 0.25rem 0.6rem; border-radius: 9999px;
   font-size: 0.5rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.12em; color: #1C1B19;
-  background: #C07A65;
+  letter-spacing: 0.12em; color: var(--text-primary);
+  background: var(--color-gold);
 }
 
 .aura-arr-strip-card-cart {
@@ -3633,8 +3633,8 @@
   transition: all 0.3s var(--ease-out);
 }
 .aura-arr-strip-card:hover .aura-arr-strip-card-cart { opacity: 1; transform: translateY(0); }
-.aura-arr-strip-card-cart:hover { background: #C07A65; }
-.aura-arr-strip-card-cart-icon { width: 15px; height: 15px; color: #1C1B19; }
+.aura-arr-strip-card-cart:hover { background: var(--color-gold); }
+.aura-arr-strip-card-cart-icon { width: 15px; height: 15px; color: var(--text-primary); }
 .aura-arr-strip-card-cart:hover .aura-arr-strip-card-cart-icon { color: #FFFFFF; }
 
 .aura-arr-strip-card-info { display: flex; flex-direction: column; gap: 0.2rem; }
@@ -3648,7 +3648,7 @@
 }
 .aura-arr-strip-card-price {
   font-family: var(--font-playfair), serif;
-  font-size: 1rem; font-weight: 700; color: #C07A65; margin: 0.15rem 0 0;
+  font-size: 1rem; font-weight: 700; color: var(--color-gold); margin: 0.15rem 0 0;
 }
 
 /* End card — "View all" */
@@ -3659,7 +3659,7 @@
   border: 1px dashed rgba(255, 255, 255, 0.15);
   transition: all 0.3s var(--ease-out);
 }
-.aura-arr-strip-end:hover { border-color: #C07A65; background: rgba(192, 122, 101, 0.05); }
+.aura-arr-strip-end:hover { border-color: var(--color-gold); background: rgba(192, 122, 101, 0.05); }
 .aura-arr-strip-end-text {
   font-family: var(--font-playfair), serif;
   font-size: 1.5rem; font-weight: 700; font-style: italic; color: #FFFFFF;
@@ -3668,7 +3668,7 @@
   font-size: 0.6875rem; font-weight: 600; text-transform: uppercase;
   letter-spacing: 0.15em; color: rgba(255, 255, 255, 0.4);
 }
-.aura-arr-strip-end-icon { width: 18px; height: 18px; color: #C07A65; margin-top: 0.5rem; }
+.aura-arr-strip-end-icon { width: 18px; height: 18px; color: var(--color-gold); margin-top: 0.5rem; }
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -3676,7 +3676,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .aura-test-ed {
-  background: #FAF9F6; padding: 6rem 1.5rem;
+  background: var(--surface-page); padding: 6rem 1.5rem;
   border-top: 1px solid rgba(28, 27, 25, 0.06);
 }
 @media (min-width: 1024px) { .aura-test-ed { padding: 8rem 2rem; } }
@@ -3686,14 +3686,14 @@
 .aura-test-ed-head { margin-bottom: 4rem; }
 .aura-test-ed-eyebrow {
   display: block; font-size: 0.625rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.3em; color: #C07A65; margin-bottom: 1rem;
+  letter-spacing: 0.3em; color: var(--color-gold); margin-bottom: 1rem;
 }
 .aura-test-ed-title {
   font-family: var(--font-playfair), serif;
   font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
-  line-height: 1; letter-spacing: -0.035em; color: #1C1B19; margin: 0;
+  line-height: 1; letter-spacing: -0.035em; color: var(--text-primary); margin: 0;
 }
-.aura-test-ed-title-accent { font-style: italic; color: #C07A65; }
+.aura-test-ed-title-accent { font-style: italic; color: var(--color-gold); }
 
 .aura-test-ed-quote-wrap { margin-bottom: 5rem; }
 
@@ -3705,7 +3705,7 @@
 .aura-test-ed-quote {
   font-family: var(--font-playfair), serif;
   font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.45;
-  color: #1C1B19; margin: 0 0 2.5rem; font-style: italic; letter-spacing: -0.01em;
+  color: var(--text-primary); margin: 0 0 2.5rem; font-style: italic; letter-spacing: -0.01em;
   animation: aura-test-ed-fade 0.6s var(--ease-out);
 }
 @keyframes aura-test-ed-fade {
@@ -3716,11 +3716,11 @@
 .aura-test-ed-author {
   display: flex; align-items: center; justify-content: center; gap: 1.5rem;
 }
-.aura-test-ed-author-line { width: 2.5rem; height: 1px; background: #C07A65; }
+.aura-test-ed-author-line { width: 2.5rem; height: 1px; background: var(--color-gold); }
 .aura-test-ed-author-info { text-align: left; }
 .aura-test-ed-author-name {
   font-family: var(--font-playfair), serif;
-  font-size: 1.125rem; font-weight: 700; color: #1C1B19; margin: 0;
+  font-size: 1.125rem; font-weight: 700; color: var(--text-primary); margin: 0;
 }
 .aura-test-ed-author-loc {
   font-size: 0.8125rem; color: rgba(28, 27, 25, 0.5); margin: 0.2rem 0 0;
@@ -3732,14 +3732,14 @@
 .aura-test-ed-arrow {
   width: 40px; height: 40px; border-radius: 9999px;
   background: transparent; border: 1px solid rgba(28, 27, 25, 0.15);
-  color: #1C1B19; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--text-primary); cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: all 0.3s var(--ease-out);
 }
-.aura-test-ed-arrow:hover { background: #1C1B19; color: #C07A65; border-color: transparent; }
+.aura-test-ed-arrow:hover { background: var(--text-primary); color: var(--color-gold); border-color: transparent; }
 .aura-test-ed-arrow-icon { width: 18px; height: 18px; }
 .aura-test-ed-counter {
   font-family: var(--font-playfair), serif;
-  font-size: 0.875rem; font-weight: 600; color: #1C1B19; letter-spacing: 0.05em;
+  font-size: 0.875rem; font-weight: 600; color: var(--text-primary); letter-spacing: 0.05em;
 }
 .aura-test-ed-counter-sep { margin: 0 0.25rem; color: rgba(28, 27, 25, 0.3); }
 
@@ -3754,10 +3754,83 @@
 .aura-test-ed-stat-num {
   font-family: var(--font-playfair), serif;
   font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 700;
-  color: #1C1B19; margin: 0; line-height: 1; letter-spacing: -0.03em;
+  color: var(--text-primary); margin: 0; line-height: 1; letter-spacing: -0.03em;
 }
-.aura-test-ed-stat-suffix { color: #C07A65; font-style: italic; }
+.aura-test-ed-stat-suffix { color: var(--color-gold); font-style: italic; }
 .aura-test-ed-stat-label {
   font-size: 0.6875rem; font-weight: 600; text-transform: uppercase;
   letter-spacing: 0.2em; color: rgba(28, 27, 25, 0.5); margin: 0.75rem 0 0;
+}
+
+/* ==========================================================================
+   PHASE 3 — Newsletter Inline (minimal, brand colors, NOT a dark block)
+   ========================================================================== */
+
+.aura-news-inline {
+  background: var(--surface-page);
+  padding: 6rem 1.5rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.12);
+  position: relative;
+}
+@media (min-width: 1024px) { .aura-news-inline { padding: 8rem 2rem; } }
+
+.aura-news-inline-accent {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 6rem; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.aura-news-inline-inner { max-width: 36rem; margin: 0 auto; text-align: center; }
+
+.aura-news-inline-content { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+
+.aura-news-inline-eyebrow {
+  display: block; font-size: 0.625rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.3em; color: var(--color-gold);
+}
+
+.aura-news-inline-title {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+  line-height: 1.05; letter-spacing: -0.035em;
+  color: var(--text-primary); margin: 0;
+}
+.aura-news-inline-title-accent { font-style: italic; color: var(--color-gold); }
+
+.aura-news-inline-form {
+  display: flex; align-items: stretch; gap: 0;
+  width: 100%; max-width: 28rem;
+  border-bottom: 1.5px solid var(--text-primary);
+  margin-top: 0.5rem;
+}
+
+.aura-news-inline-input {
+  flex: 1; min-width: 0; padding: 0.85rem 0;
+  font-size: 0.9375rem; color: var(--text-primary);
+  background: transparent; border: 0; outline: none;
+  font-family: inherit;
+}
+.aura-news-inline-input::placeholder { color: var(--text-secondary); opacity: 0.6; }
+
+.aura-news-inline-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--text-primary);
+  background: transparent; border: 0; cursor: pointer;
+  font-family: inherit; white-space: nowrap;
+  transition: color 0.3s var(--ease-out), gap 0.3s var(--ease-out);
+}
+.aura-news-inline-btn:hover { color: var(--color-gold); gap: 0.75rem; }
+.aura-news-inline-btn-icon { width: 15px; height: 15px; }
+
+.aura-news-inline-success {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.125rem; font-style: italic; color: var(--color-gold);
+  padding: 0.85rem 0; margin: 0;
+}
+
+.aura-news-inline-fineprint {
+  font-size: 0.6875rem; color: var(--text-secondary);
+  letter-spacing: 0.05em; margin: 0;
 }

@@ -27,7 +27,7 @@ import StoryProcess from '@/components/StoryProcess';
 import ProductsEditorial from '@/components/ProductsEditorial';
 import NewArrivalsStrip from '@/components/NewArrivalsStrip';
 import TestimonialsEditorial from '@/components/TestimonialsEditorial';
-import NewsletterCinematic from '@/components/NewsletterCinematic';
+import NewsletterInline from '@/components/NewsletterInline';
 import type { Product, Category } from '@/types';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -97,9 +97,10 @@ export default function HomeNew({ featuredProducts, newArrivals, categories }: H
       <TestimonialsEditorial />
 
       {/* ═══════════════════════════════════════════════════════════
-          6. NEWSLETTER — Cinematic Dark with parallax bg
+          6. NEWSLETTER — Minimal Inline
+          Single elegant line + inline form. NOT a dark block.
           ═══════════════════════════════════════════════════════════ */}
-      <NewsletterCinematic />
+      <NewsletterInline />
     </div>
   );
 }
