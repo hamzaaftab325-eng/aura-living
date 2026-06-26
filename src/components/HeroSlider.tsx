@@ -40,7 +40,7 @@ interface Slide {
 const SLIDES: Slide[] = [
   {
     image: '/images/hero/hero-slide-1.webp',
-    eyebrow: '01 — The Collection',
+    eyebrow: 'The Collection',
     title: 'Forty hours.',
     titleAccent: 'One piece.',
     story: 'Sheesham wood from Punjab. Brass from Lahore foundries. Each piece signed, dated, and made to outlive the room it lives in.',
@@ -49,7 +49,7 @@ const SLIDES: Slide[] = [
   },
   {
     image: '/images/hero/hero-slide-2.webp',
-    eyebrow: '02 — Artisan Crafted',
+    eyebrow: 'Artisan Crafted',
     title: 'Made by hand.',
     titleAccent: 'Made with heart.',
     story: 'Third-generation carpenters shape each piece with mortise-and-tenon joinery — no nails, no shortcuts, no compromises.',
@@ -58,7 +58,7 @@ const SLIDES: Slide[] = [
   },
   {
     image: '/images/hero/hero-slide-3.webp',
-    eyebrow: '03 — Bring Nature Indoors',
+    eyebrow: 'Bring Nature Indoors',
     title: 'Greenery that',
     titleAccent: 'breathes.',
     story: 'Curated plants, planters, and botanical accents that turn a room into a living space. Sourced from Punjab nurseries.',

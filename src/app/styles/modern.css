@@ -4086,3 +4086,183 @@
     transform: none !important;
   }
 }
+
+/* ==========================================================================
+   CTA GOLD SECTION — Gold background closing CTA (replaces newsletter)
+   ========================================================================== */
+
+.aura-cta-gold {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hover) 100%);
+  padding: 6rem 1.5rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+@media (min-width: 1024px) { .aura-cta-gold { padding: 8rem 2rem; } }
+
+/* Diagonal sheen — slow sweep across the gold bg */
+.aura-cta-gold-sheen {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: skewX(-18deg);
+  animation: aura-cta-gold-sheen-sweep 8s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+@keyframes aura-cta-gold-sheen-sweep {
+  0%, 30% { left: -50%; }
+  60%, 100% { left: 150%; }
+}
+
+.aura-cta-gold-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 36rem;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.aura-cta-gold-eyebrow {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--text-primary);
+  opacity: 0.6;
+}
+
+.aura-cta-gold-title {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.aura-cta-gold-title-accent {
+  font-style: italic;
+  color: #FFFFFF;
+}
+
+.aura-cta-gold-sub {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(44, 44, 44, 0.7);
+  max-width: 28rem;
+  margin: 0;
+}
+
+.aura-cta-gold-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.aura-cta-gold-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-gold);
+  background: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.3s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.aura-cta-gold-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.7s var(--ease-out);
+  z-index: 0;
+}
+
+.aura-cta-gold-btn-primary:hover::before {
+  left: 140%;
+}
+
+.aura-cta-gold-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(44, 44, 44, 0.3);
+}
+
+.aura-cta-gold-btn-primary > * {
+  position: relative;
+  z-index: 1;
+}
+
+.aura-cta-gold-btn-icon {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.aura-cta-gold-btn-primary:hover .aura-cta-gold-btn-icon {
+  transform: translateX(4px);
+}
+
+.aura-cta-gold-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s var(--ease-out);
+}
+
+.aura-cta-gold-btn-secondary::after {
+  content: '';
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 0.75rem;
+  height: 1px;
+  background: var(--text-primary);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.aura-cta-gold-btn-secondary:hover::after {
+  transform: scaleX(0.6);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .aura-cta-gold-sheen {
+    animation: none !important;
+  }
+  .aura-cta-gold-btn-primary,
+  .aura-cta-gold-btn-primary::before {
+    transition: none !important;
+  }
+}

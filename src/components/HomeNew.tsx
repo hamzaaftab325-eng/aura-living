@@ -27,7 +27,7 @@ import StoryProcess from '@/components/StoryProcess';
 import ProductsEditorial from '@/components/ProductsEditorial';
 import NewArrivalsStrip from '@/components/NewArrivalsStrip';
 import TestimonialsEditorial from '@/components/TestimonialsEditorial';
-import NewsletterInline from '@/components/NewsletterInline';
+import CTAGoldSection from '@/components/CTAGoldSection';
 import type { Product, Category } from '@/types';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -97,10 +97,11 @@ export default function HomeNew({ featuredProducts, newArrivals, categories }: H
       <TestimonialsEditorial />
 
       {/* ═══════════════════════════════════════════════════════════
-          6. NEWSLETTER — Minimal Inline
-          Single elegant line + inline form. NOT a dark block.
+          7. CTA — Gold background closing section
+          Newsletter lives in the footer. This closes the page with a
+          bold gold CTA.
           ═══════════════════════════════════════════════════════════ */}
-      <NewsletterInline />
+      <CTAGoldSection />
     </div>
   );
 }
