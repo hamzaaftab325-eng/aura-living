@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import HeroEditorial from '@/components/HeroEditorial';
+import HeroSlider from '@/components/HeroSlider';
 import HomeNew from '@/components/HomeNew';
 import { getFeaturedProducts, getNewArrivals, getCategories } from '@/lib/products';
 
@@ -57,9 +57,8 @@ export default async function HomeNewPage() {
 
   return (
     <>
-      {/* Hero: Editorial Split — left-aligned headline, asymmetric 7/5,
-          layered product image + floating spec card. No AI tells. */}
-      <HeroEditorial />
+      {/* Hero: Full-bleed background slider with Ken Burns + editorial overlay */}
+      <HeroSlider />
 
       {/* Rest of homepage sections */}
       <HomeNew

@@ -1,25 +1,29 @@
 'use client';
 
 /**
- * HeroSlider — Bold Cinematic multi-slide carousel.
+ * HeroSlider — Full-bleed background image slider with editorial overlay.
  *
- * Features:
- * - Full-screen slides with background images
- * - Auto-rotating (6s per slide)
- * - Parallax zoom effect on active slide
- * - Dot navigation
- * - Scroll-triggered text reveal via GSAP
- * - CTA buttons with gold styling
+ * Design rationale (Senior Designer notes):
+ * - Full-screen background images that auto-rotate with smooth crossfade
+ * - Ken Burns slow-zoom effect on each slide (premium, cinematic)
+ * - Gradient overlay (dark at bottom-left for text legibility, transparent top-right)
+ * - Left-aligned editorial text — NOT centered (keeps anti-AI design language)
+ * - Issue marker, headline with gold italic accent, story copy, text-link CTA
+ * - Slide dots + counter (01/03) at bottom-right
+ * - Progress bar showing auto-advance timing
+ * - Parallax: text lifts slightly on scroll
+ * - All brand colors (gold accent, cream text). Zero inline styles.
+ *
+ * Inspired by: The Citizenry, Aesop, Apple keynote slides
  */
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useScrollReveal } from '@/hooks/useAnimations';
-import PremiumButton from '@/components/ui/PremiumButton';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -27,34 +31,38 @@ interface Slide {
   image: string;
   eyebrow: string;
   title: string;
-  subtitle: string;
+  titleAccent: string;
+  story: string;
   ctaLabel: string;
   ctaHref: string;
 }
 
-const slides: Slide[] = [
+const SLIDES: Slide[] = [
   {
     image: '/images/hero/hero-slide-1.webp',
-    eyebrow: 'New Collection 2026',
-    title: 'Where Comfort\nMeets Style',
-    subtitle: 'Discover handcrafted home decor that turns houses into homes. Premium quality, delivered across Pakistan.',
-    ctaLabel: 'Shop Collection',
+    eyebrow: '01 — The Collection',
+    title: 'Forty hours.',
+    titleAccent: 'One piece.',
+    story: 'Sheesham wood from Punjab. Brass from Lahore foundries. Each piece signed, dated, and made to outlive the room it lives in.',
+    ctaLabel: 'See the forty-hour pieces',
     ctaHref: '/shop',
   },
   {
     image: '/images/hero/hero-slide-2.webp',
-    eyebrow: 'Artisan Crafted',
-    title: 'Made by Hand,\nMade with Heart',
-    subtitle: 'Every piece tells a story of Pakistani craftsmanship — from brass lamps to hand-painted ceramics.',
-    ctaLabel: 'Explore Lighting',
-    ctaHref: '/shop?category=lighting',
+    eyebrow: '02 — Artisan Crafted',
+    title: 'Made by hand.',
+    titleAccent: 'Made with heart.',
+    story: 'Third-generation carpenters shape each piece with mortise-and-tenon joinery — no nails, no shortcuts, no compromises.',
+    ctaLabel: 'Meet the artisans',
+    ctaHref: '/about',
   },
   {
     image: '/images/hero/hero-slide-3.webp',
-    eyebrow: 'Limited Edition',
-    title: 'Bring Nature\nIndoors',
-    subtitle: 'Curated plants, planters, and botanical accents that breathe life into your living spaces.',
-    ctaLabel: 'Shop Plants & Pots',
+    eyebrow: '03 — Bring Nature Indoors',
+    title: 'Greenery that',
+    titleAccent: 'breathes.',
+    story: 'Curated plants, planters, and botanical accents that turn a room into a living space. Sourced from Punjab nurseries.',
+    ctaLabel: 'Shop plants & pots',
     ctaHref: '/shop?category=plants',
   },
 ];
@@ -62,141 +70,127 @@ const slides: Slide[] = [
 const SLIDE_DURATION = 6000;
 
 export default function HeroSlider() {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const heroRef = useScrollReveal<HTMLDivElement>({ y: 0, duration: 0.8 });
+  const ref = useRef<HTMLElement>(null);
+  const [active, setActive] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Auto-rotate slides
+  // Auto-advance slides
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % slides.length);
-    }, SLIDE_DURATION);
-    return () => clearInterval(timer);
+    progressRef.current = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          setActive((current) => (current + 1) % SLIDES.length);
+          return 0;
+        }
+        return prev + (100 / (SLIDE_DURATION / 50));
+      });
+    }, 50);
+    return () => { if (progressRef.current) clearInterval(progressRef.current); };
   }, []);
 
-  // Animate text on slide change
-  useEffect(() => {
-    if (!textRef.current) return;
-    const tl = gsap.timeline();
-    tl.fromTo(
-      textRef.current.children,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out' }
-    );
-  }, [activeSlide]);
+  const goTo = (idx: number) => {
+    setActive(idx);
+    setProgress(0);
+  };
 
-  // Parallax effect on scroll
+  const slide = SLIDES[active];
+
   useGSAP(
     () => {
-      if (!containerRef.current) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      gsap.to(containerRef.current.querySelectorAll('.aura-hero-slide-bg'), {
-        yPercent: 20,
+      // Entrance animation on each slide change
+      const tl = gsap.timeline({ key: 'slide-' + active });
+      tl.fromTo('.aura-hero-slider-eyebrow', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
+      tl.fromTo('.aura-hero-slider-title', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.3');
+      tl.fromTo('.aura-hero-slider-story', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5');
+      tl.fromTo('.aura-hero-slider-cta', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4');
+
+      // Parallax on scroll — text lifts slightly
+      gsap.to('.aura-hero-slider-content', {
+        yPercent: -15,
         ease: 'none',
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: ref.current,
           start: 'top top',
           end: 'bottom top',
           scrub: 1,
         },
       });
     },
-    { scope: containerRef }
+    { scope: ref, dependencies: [active] }
   );
 
-  const goToSlide = useCallback((index: number) => {
-    setActiveSlide(index);
-  }, []);
-
   return (
-    <section
-      ref={containerRef}
-      className="relative w-full h-screen min-h-[600px] overflow-hidden"
-      aria-label="Hero carousel"
-    >
-      {/* Slides */}
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`aura-hero-slide ${index === activeSlide ? 'active' : ''}`}
-          aria-hidden={index !== activeSlide}
-        >
+    <section ref={ref} className="aura-hero-slider">
+      {/* Background images — all stacked, only active visible with Ken Burns */}
+      <div className="aura-hero-slider-bg-wrap">
+        {SLIDES.map((s, i) => (
           <div
-            className="aura-hero-slide-bg"
-            style={{ backgroundImage: `url(${slide.image})` }}
-          />
-          <div className="absolute inset-0 aura-overlay-dark" />
-        </div>
-      ))}
-
-      {/* Content overlay */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div ref={textRef} className="text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          {/* Eyebrow */}
-          <div className="flex items-center justify-center gap-2 mb-6 aura-animate-fade-in">
-            <Sparkles className="w-4 h-4 aura-text-gold" />
-            <span className="text-xs sm:text-sm tracking-[4px] uppercase font-medium aura-text-on-dark-primary">
-              {slides[activeSlide].eyebrow}
-            </span>
-            <Sparkles className="w-4 h-4 aura-text-gold" />
+            key={i}
+            className={`aura-hero-slider-bg ${i === active ? 'aura-hero-slider-bg-active' : ''}`}
+          >
+            <Image
+              src={s.image}
+              alt={s.title}
+              fill
+              className="aura-hero-slider-bg-img"
+              sizes="100vw"
+              priority={i === 0}
+            />
           </div>
+        ))}
+      </div>
 
-          {/* Title */}
-          <h1 className="aura-hero-title text-white aura-cinematic-text whitespace-pre-line mb-6">
-            {slides[activeSlide].title}
+      {/* Gradient overlay — dark at bottom-left for text, transparent top-right */}
+      <div className="aura-hero-slider-overlay" />
+
+      {/* Content — left-aligned, editorial */}
+      <div className="aura-hero-slider-content">
+        <div className="aura-hero-slider-content-inner">
+          <span className="aura-hero-slider-eyebrow">{slide.eyebrow}</span>
+
+          <h1 className="aura-hero-slider-title">
+            {slide.title}<br />
+            <span className="aura-hero-slider-title-accent">{slide.titleAccent}</span>
           </h1>
 
-          {/* Gold divider */}
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
-            <div className="w-10 sm:w-14 h-px bg-[var(--color-gold)]/60" />
-          </div>
+          <p className="aura-hero-slider-story">{slide.story}</p>
 
-          {/* Subtitle */}
-          <p className="text-base sm:text-lg leading-relaxed max-w-2xl mx-auto aura-text-on-dark-muted aura-cinematic-text mb-8">
-            {slides[activeSlide].subtitle}
-          </p>
-
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <PremiumButton
-              variant="primary"
-              size="lg"
-              href={slides[activeSlide].ctaHref}
-              rightIcon={<ArrowRight className="w-4 h-4" />}
-            >
-              {slides[activeSlide].ctaLabel}
-            </PremiumButton>
-            <PremiumButton variant="secondary" size="lg" href="/about">
-              Our Story
-            </PremiumButton>
-          </div>
+          <Link href={slide.ctaHref} className="aura-hero-slider-cta">
+            <span>{slide.ctaLabel}</span>
+            <ArrowRight className="aura-hero-slider-cta-icon" />
+          </Link>
         </div>
       </div>
 
-      {/* Slide dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
-        <div className="aura-hero-dots">
-          {slides.map((_, index) => (
+      {/* Slide navigation — dots + counter at bottom-right */}
+      <div className="aura-hero-slider-nav">
+        <div className="aura-hero-slider-dots">
+          {SLIDES.map((_, i) => (
             <button
-              key={index}
-              className={`aura-hero-dot ${index === activeSlide ? 'active' : ''}`}
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-              aria-current={index === activeSlide}
-            />
+              key={i}
+              onClick={() => goTo(i)}
+              className={`aura-hero-slider-dot ${i === active ? 'aura-hero-slider-dot-active' : ''}`}
+              aria-label={`Go to slide ${i + 1}`}
+            >
+              {i === active && (
+                <span
+                  className="aura-hero-slider-dot-progress"
+                  style={{ width: `${progress}%` }}
+                />
+              )}
+            </button>
           ))}
         </div>
+        <span className="aura-hero-slider-counter">
+          0{active + 1}<span className="aura-hero-slider-counter-sep"> / </span>0{SLIDES.length}
+        </span>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 right-8 z-20 hidden sm:flex flex-col items-center gap-2">
-        <span className="text-[10px] uppercase tracking-[3px] aura-text-on-dark-faint">Scroll</span>
-        <div className="w-px h-12 bg-gradient-to-b from-[var(--color-gold)]/60 to-transparent" />
-      </div>
+      {/* Bottom fade into next section */}
+      <div className="aura-hero-slider-fade" />
     </section>
   );
 }

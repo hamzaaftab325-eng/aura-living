@@ -3834,3 +3834,250 @@
   font-size: 0.6875rem; color: var(--text-secondary);
   letter-spacing: 0.05em; margin: 0;
 }
+
+/* ==========================================================================
+   HERO SLIDER — Full-bleed background image slider with Ken Burns + editorial overlay
+   ========================================================================== */
+
+.aura-hero-slider {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--surface-dark);
+}
+
+/* ── Background images — all stacked, crossfade ── */
+.aura-hero-slider-bg-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.aura-hero-slider-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-out);
+  overflow: hidden;
+}
+
+.aura-hero-slider-bg-active {
+  opacity: 1;
+}
+
+.aura-hero-slider-bg-img {
+  object-fit: cover;
+  animation: aura-hero-slider-kenburns 8s ease-out forwards;
+}
+
+.aura-hero-slider-bg-active .aura-hero-slider-bg-img {
+  animation: aura-hero-slider-kenburns 8s ease-out forwards;
+}
+
+@keyframes aura-hero-slider-kenburns {
+  from { transform: scale(1.0) translate(0, 0); }
+  to { transform: scale(1.12) translate(-1%, -1%); }
+}
+
+/* ── Gradient overlay — dark bottom-left for text, transparent top-right ── */
+.aura-hero-slider-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(135deg, rgba(20, 20, 20, 0.75) 0%, rgba(20, 20, 20, 0.35) 45%, transparent 70%),
+    linear-gradient(to top, rgba(20, 20, 20, 0.6) 0%, transparent 40%);
+}
+
+/* ── Content — left-aligned, editorial ── */
+.aura-hero-slider-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding: 5rem 1.5rem;
+}
+@media (min-width: 1024px) {
+  .aura-hero-slider-content { padding: 5rem 2rem; }
+}
+
+.aura-hero-slider-content-inner {
+  max-width: 36rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.aura-hero-slider-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--color-gold);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.aura-hero-slider-title {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  color: #FFFFFF;
+  margin: 0;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.aura-hero-slider-title-accent {
+  font-style: italic;
+  color: var(--color-gold);
+}
+
+.aura-hero-slider-story {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 28rem;
+  margin: 0.5rem 0 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.aura-hero-slider-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 0.85rem 0;
+  position: relative;
+  transition: color 0.3s var(--ease-out);
+  margin-top: 0.5rem;
+}
+
+.aura-hero-slider-cta::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0.5rem;
+  width: 100%;
+  height: 1px;
+  background: #FFFFFF;
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out), background 0.3s var(--ease-out);
+}
+
+.aura-hero-slider-cta:hover {
+  color: var(--color-gold);
+}
+
+.aura-hero-slider-cta:hover::after {
+  background: var(--color-gold);
+  transform: scaleX(0.7);
+}
+
+.aura-hero-slider-cta-icon {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.aura-hero-slider-cta:hover .aura-hero-slider-cta-icon {
+  transform: translateX(4px);
+}
+
+/* ── Slide navigation — dots + counter at bottom-right ── */
+.aura-hero-slider-nav {
+  position: absolute;
+  bottom: 3rem;
+  right: 2rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+@media (max-width: 768px) {
+  .aura-hero-slider-nav { bottom: 2rem; right: 1.5rem; gap: 1rem; }
+}
+
+.aura-hero-slider-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.aura-hero-slider-dot {
+  position: relative;
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 0;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.3s var(--ease-out);
+  padding: 0;
+}
+
+.aura-hero-slider-dot:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.aura-hero-slider-dot-active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.aura-hero-slider-dot-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--color-gold);
+  border-radius: 2px;
+  transition: width 0.05s linear;
+}
+
+.aura-hero-slider-counter {
+  font-family: var(--font-playfair), serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.05em;
+}
+
+.aura-hero-slider-counter-sep {
+  color: rgba(255, 255, 255, 0.3);
+  margin: 0 0.15rem;
+}
+
+/* ── Bottom fade into next section ── */
+.aura-hero-slider-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, var(--surface-page));
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .aura-hero-slider-bg-img {
+    animation: none !important;
+  }
+  .aura-hero-slider-bg {
+    transition: opacity 0.3s !important;
+  }
+  .aura-hero-slider-content {
+    transform: none !important;
+  }
+}
